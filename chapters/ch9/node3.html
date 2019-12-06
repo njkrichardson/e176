@@ -1,0 +1,1056 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>AdaBoost</TITLE>
+<META NAME="description" CONTENT="AdaBoost">
+<META NAME="keywords" CONTENT="ch9">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch9.css">
+
+<LINK REL="next" HREF="node4.html">
+<LINK REL="previous" HREF="node2.html">
+<LINK REL="next" HREF="node4.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node4.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="ch9.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node2.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node4.html">Support Vector machine</A>
+<B> Up:</B> <A
+ HREF="ch9.html">ch9</A>
+<B> Previous:</B> <A
+ HREF="node2.html">Naive Bayes Classification</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00030000000000000000">
+AdaBoost</A>
+</H1>
+
+<P>
+The <EM>Adaptive boosting (AdaBoost)</EM> is a supervised binary 
+classification algorithm based on a training set 
+<!-- MATH
+ $\{ ({\bf x}_i,\,y_i)\;|\;i=1,\cdots,N\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img156.svg"
+ ALT="$\{ ({\bf x}_i,\,y_i)\;\vert\;i=1,\cdots,N\}$"></SPAN>, where each sample 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img157.svg"
+ ALT="${\bf x}_i$"></SPAN> is labeled by <!-- MATH
+ $y_i\in\{-1,\,+1\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img158.svg"
+ ALT="$y_i\in\{-1,\,+1\}$"></SPAN>, indicating to which 
+of the two classes <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img15.svg"
+ ALT="$C_-$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img14.svg"
+ ALT="$C_+$"></SPAN> it belongs. 
+
+<P>
+AdaBoost is an iterative algorithm. In the t-th iteration, each of 
+the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="$N$"></SPAN> training samples is classified into one of the two classes
+by a <EM>weak classifier</EM> <!-- MATH
+ $h_t({\bf x}_n)\in\{-1,\,+1\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img159.svg"
+ ALT="$h_t({\bf x}_n)\in\{-1,\,+1\}$"></SPAN>, which can
+be considered as a hypothesis. The classifier is weak in the sense 
+that its performance only needs to be better than chance, i.e., the 
+error rate is less than <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.25ex; " SRC="img160.svg"
+ ALT="$50\%$"></SPAN>. If a sample <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img31.svg"
+ ALT="${\bf x}_n$"></SPAN> is correctly 
+classified, <!-- MATH
+ $h_t({\bf x}_n)=y_n=\pm 1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img161.svg"
+ ALT="$h_t({\bf x}_n)=y_n=\pm 1$"></SPAN>, i.e., <!-- MATH
+ $y_n\,h_t({\bf x}_n)=1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img162.svg"
+ ALT="$y_n\,h_t({\bf x}_n)=1$"></SPAN>;
+if it is misclassified, <!-- MATH
+ $h_t({\bf x}_n)=-y_n=\pm 1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img163.svg"
+ ALT="$h_t({\bf x}_n)=-y_n=\pm 1$"></SPAN>, i.e., 
+<!-- MATH
+ $y_n\,h_t({\bf x}_n)=-1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img164.svg"
+ ALT="$y_n\,h_t({\bf x}_n)=-1$"></SPAN>. We need to find the best weak classifier
+that minimizes the weighted error rate defined as:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\varepsilon_t=\frac{\sum_{y_n\,h_t({\bf x}_n)=-1} w_t(n)}{\sum_{n=1}^N w_t(n)}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.74ex; vertical-align: -2.84ex; " SRC="img165.svg"
+ ALT="$\displaystyle \varepsilon_t=\frac{\sum_{y_n\,h_t({\bf x}_n)=-1} w_t(n)}{\sum_{n=1}^N w_t(n)}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">41</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img166.svg"
+ ALT="$w_t(n)$"></SPAN> is the weight of the nth training samples at the t-th 
+iteration. We can also get the correct rate:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+1-\varepsilon_t=1-\frac{\sum_{y_n\,h_t({\bf x}_n)=-1} w_t(n)}{\sum_{n=1}^N w_t(n)}
+  =\frac{\sum_{y_n\,h_t({\bf x}_n)=1} w_t(n)}{\sum_{n=1}^N w_t(n)}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.74ex; vertical-align: -2.84ex; " SRC="img167.svg"
+ ALT="$\displaystyle 1-\varepsilon_t=1-\frac{\sum_{y_n\,h_t({\bf x}_n)=-1} w_t(n)}{\sum_{n=1}^N w_t(n)}
+=\frac{\sum_{y_n\,h_t({\bf x}_n)=1} w_t(n)}{\sum_{n=1}^N w_t(n)}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">42</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+At the initial stage with <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img168.svg"
+ ALT="$t=0$"></SPAN>, all <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="$N$"></SPAN> samples are equally 
+weighted by <!-- MATH
+ $w_0(1)=\cdots=w_0(N)=1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img169.svg"
+ ALT="$w_0(1)=\cdots=w_0(N)=1$"></SPAN>, and the weighted error 
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\varepsilon_0=\frac{1}{N} \sum_{y_n\,h_0({\bf x}_n)=-1} w_0(n)
+  =\frac{\mbox{number of misclassified samples}}
+  {\mbox{total number of samples}}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.97ex; vertical-align: -3.64ex; " SRC="img170.svg"
+ ALT="$\displaystyle \varepsilon_0=\frac{1}{N} \sum_{y_n\,h_0({\bf x}_n)=-1} w_0(n)
+=\frac{\mbox{number of misclassified samples}}
+{\mbox{total number of samples}}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">43</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+is actually the probability for any sample <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> in the training
+set to be misclassified by <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img171.svg"
+ ALT="$h_0$"></SPAN>. For the weak classifier the error 
+rate defined above only needs to be lower than 50 percent, i.e., 
+<!-- MATH
+ $\varepsilon_t<1/2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img172.svg"
+ ALT="$\varepsilon_t&lt;1/2$"></SPAN>. When <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.21ex; " SRC="img173.svg"
+ ALT="$t&gt;0$"></SPAN>, this weight <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img166.svg"
+ ALT="$w_t(n)$"></SPAN> will be modified
+based on whether <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img31.svg"
+ ALT="${\bf x}_n$"></SPAN> is classified correctly in the subsequent
+iterations, as we will see below.
+
+<P>
+At each iteration, a <EM>strong</EM> or <EM>boosted classifier</EM> 
+<!-- MATH
+ $H_t({\bf x}_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img174.svg"
+ ALT="$H_t({\bf x}_n)$"></SPAN> is also constructed based on the linear combination 
+(boosting) of all previous weak classifiers <!-- MATH
+ $h_1({\bf x}_n),\cdots,
+h_t({\bf x}_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img175.svg"
+ ALT="$h_1({\bf x}_n),\cdots,
+h_t({\bf x}_n)$"></SPAN> for all <!-- MATH
+ $n=1,\cdots,N$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img176.svg"
+ ALT="$n=1,\cdots,N$"></SPAN>:
+<BR>
+<DIV CLASS="mathdisplay"><A ID="StrongClassifierF"></A><!-- MATH
+ \begin{eqnarray}
+F_t({\bf x}_n)&=&\alpha_th_t({\bf x}_n)+F_{t-1}({\bf x}_n)
+  =\alpha_th_t({\bf x}_n)+\alpha_{t-1}h_{t-1}({\bf x}_n)+F_{t-2}({\bf x}_n)
+  \nonumber\\
+  &=&\cdots=\sum_{i=1}^t\alpha_ih_i({\bf x}_n)
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img177.svg"
+ ALT="$\displaystyle F_t({\bf x}_n)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img178.svg"
+ ALT="$\displaystyle \alpha_th_t({\bf x}_n)+F_{t-1}({\bf x}_n)
+=\alpha_th_t({\bf x}_n)+\alpha_{t-1}h_{t-1}({\bf x}_n)+F_{t-2}({\bf x}_n)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img179.svg"
+ ALT="$\displaystyle \cdots=\sum_{i=1}^t\alpha_ih_i({\bf x}_n)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">44</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+where the coefficient <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img180.svg"
+ ALT="$\alpha_i$"></SPAN> for the weak classifier 
+<!-- MATH
+ $h_i({\bf x}_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img181.svg"
+ ALT="$h_i({\bf x}_n)$"></SPAN> in the i-th iteration is obtained as discussed 
+below. Taking the sign function of <!-- MATH
+ $F_t({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img182.svg"
+ ALT="$F_t({\bf x})$"></SPAN> we get the strong 
+classifier:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+H_t({\bf x}_n)=sign [F_t({\bf x}_n)]=\left\{\begin{array}{ll}
+  +1 & F_t({\bf x}_n)>0\\-1 & F_t({\bf x}_n)<0\end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img183.svg"
+ ALT="$\displaystyle H_t({\bf x}_n)=sign [F_t({\bf x}_n)]=\left\{\begin{array}{ll}
++1 &amp; F_t({\bf x}_n)&gt;0\\ -1 &amp; F_t({\bf x}_n)&lt;0\end{array}\right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">45</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+which classifies a training sample <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img31.svg"
+ ALT="${\bf x}_n$"></SPAN> into one of the two 
+classes, while the magnitude <!-- MATH
+ $|F_t({\bf x}_n)|$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img184.svg"
+ ALT="$\vert F_t({\bf x}_n)\vert$"></SPAN> represents the confidence 
+of the decision.
+
+<P>
+The weight <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img166.svg"
+ ALT="$w_t(n)$"></SPAN> of <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img31.svg"
+ ALT="${\bf x}_n$"></SPAN> in the t-th iteration <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img185.svg"
+ ALT="$(t&gt;0)$"></SPAN> is
+defined as 
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+w_t(n)=e^{-y_n F_{t-1}({\bf x}_n)}\left\{\begin{array}{ll}
+  >1 & \mbox{if $y_n\,F_{t-1}({\bf x}_n)<0$\  (misclassification)}\\
+  <1 & \mbox{if $y_n\,F_{t-1}({\bf x}_n)>0$\  (correct classification)}
+  \end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img186.svg"
+ ALT="$\displaystyle w_t(n)=e^{-y_n F_{t-1}({\bf x}_n)}\left\{\begin{array}{ll}
+&gt;1 &amp; \...
+...ox{if $y_n\,F_{t-1}({\bf x}_n)&gt;0$\ (correct classification)}
+\end{array}\right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">46</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The weight <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img166.svg"
+ ALT="$w_t(n)$"></SPAN> of the t-th iteration can be obtained recursively 
+from <!-- MATH
+ $w_{t-1}(n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img187.svg"
+ ALT="$w_{t-1}(n)$"></SPAN> of the previous iteration:
+<BR>
+<DIV CLASS="mathdisplay"><A ID="weightupdate"></A><!-- MATH
+ \begin{eqnarray}
+w_t(n)&=&e^{-y_n\,F_{t-1}({\bf x}_n)}
+  =e^{-y_n\,[\alpha_{t-1}h_{t-1}({\bf x}_n)+F_{t-2}({\bf x}_n)]}
+  \nonumber\\
+  &=&e^{-\alpha_{t-1}\,y_nh_{t-1}({\bf x}_n)}\;e^{-y_n\,F_{t-2}({\bf x}_n)}
+  =e^{-\alpha_{t-1}\,y_nh_{t-1}({\bf x}_n)}\;w_{t-1}(n)
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img188.svg"
+ ALT="$\displaystyle w_t(n)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.55ex; vertical-align: -0.12ex; " SRC="img189.svg"
+ ALT="$\displaystyle e^{-y_n\,F_{t-1}({\bf x}_n)}
+=e^{-y_n\,[\alpha_{t-1}h_{t-1}({\bf x}_n)+F_{t-2}({\bf x}_n)]}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img190.svg"
+ ALT="$\displaystyle e^{-\alpha_{t-1}\,y_nh_{t-1}({\bf x}_n)}\;e^{-y_n\,F_{t-2}({\bf x}_n)}
+=e^{-\alpha_{t-1}\,y_nh_{t-1}({\bf x}_n)}\;w_{t-1}(n)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">47</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+and this recursion can be carried out all the way back to the first 
+iteration with <!-- MATH
+ $w_1(k)=e^{-\alpha_0 \,y_nh_0({\bf x}_n)}w_0(n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img191.svg"
+ ALT="$w_1(k)=e^{-\alpha_0 \,y_nh_0({\bf x}_n)}w_0(n)$"></SPAN>. 
+
+<P>
+The performance of the strong classifier can be measured by the 
+<EM>exponential loss</EM>, defined as the sume of all <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="$N$"></SPAN> weights:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+E_{t+1}=\sum_{n=1}^N w_{t+1}(n)=\sum_{n=1}^N e^{-y_n\,F_t({\bf x}_n)}
+  =\sum_{n=1}^N e^{-\alpha_t\,y_n\, h_t({\bf x}_n)} \;w_t(n)
+  \;\;\;\;\;\;(t>1)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img192.svg"
+ ALT="$\displaystyle E_{t+1}=\sum_{n=1}^N w_{t+1}(n)=\sum_{n=1}^N e^{-y_n\,F_t({\bf x}_n)}
+=\sum_{n=1}^N e^{-\alpha_t\,y_n\, h_t({\bf x}_n)} \;w_t(n)
+\;\;\;\;\;\;(t&gt;1)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">48</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+The coefficient <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img193.svg"
+ ALT="$\alpha_t$"></SPAN> in Eq. (<A HREF="#StrongClassifierF">44</A>) can now
+be found as the one that minimizes the exponential loss <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img194.svg"
+ ALT="$E_{t+1}$"></SPAN>. 
+To do so, we first separate the terms in the summation for <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img194.svg"
+ ALT="$E_{t+1}$"></SPAN>
+into two parts, corresponding to the samples that are classified by
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img195.svg"
+ ALT="$h_t$"></SPAN> correctly and incorrectly:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+E_{t+1}=\sum_{n=1}^N w_t(n)e^{-\alpha_t \,y_n\,h_t({\bf x}_n)}
+  =\sum_{y_n h_t({\bf x}_n)=-1} w_t(n)e^{\alpha_t}
+  +\sum_{y_n h_t({\bf x}_n)=1} w_t(n)e^{-\alpha_t}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.13ex; vertical-align: -3.64ex; " SRC="img196.svg"
+ ALT="$\displaystyle E_{t+1}=\sum_{n=1}^N w_t(n)e^{-\alpha_t \,y_n\,h_t({\bf x}_n)}
+=\...
+...f x}_n)=-1} w_t(n)e^{\alpha_t}
++\sum_{y_n h_t({\bf x}_n)=1} w_t(n)e^{-\alpha_t}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">49</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and then set its derivative with respect to <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img193.svg"
+ ALT="$\alpha_t$"></SPAN> to zero:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\frac{dE_{t+1}}{d\alpha_t}
+  =\sum_{y_n h_t({\bf x}_n)=-1} w_t(n) e^{\alpha_t}
+  -\sum_{y_n h_t({\bf x}_n)=1} w_t(n) e^{-\alpha_t}=0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.97ex; vertical-align: -3.64ex; " SRC="img197.svg"
+ ALT="$\displaystyle \frac{dE_{t+1}}{d\alpha_t}
+=\sum_{y_n h_t({\bf x}_n)=-1} w_t(n) e^{\alpha_t}
+-\sum_{y_n h_t({\bf x}_n)=1} w_t(n) e^{-\alpha_t}=0$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">50</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Solving this equation we get <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img193.svg"
+ ALT="$\alpha_t$"></SPAN> as the optimal coefficient 
+that minimizes <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img194.svg"
+ ALT="$E_{t+1}$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\alpha_t=\frac{1}{2}\,\ln \left(
+  \frac{\sum_{y_n h_t({\bf x}_n)=1} w_t(n)}{\sum_{y_n h_t({\bf x}_n)=-1} w_t(n)}\right)
+  =\ln\,\sqrt{\frac{1-\varepsilon_t}{\varepsilon_t}} > 0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.20ex; vertical-align: -3.02ex; " SRC="img198.svg"
+ ALT="$\displaystyle \alpha_t=\frac{1}{2}\,\ln \left(
+\frac{\sum_{y_n h_t({\bf x}_n)=1...
+...x}_n)=-1} w_t(n)}\right)
+=\ln\,\sqrt{\frac{1-\varepsilon_t}{\varepsilon_t}} &gt; 0$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">51</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+which is greater than zero becauses <!-- MATH
+ $\varepsilon_t<1/2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img172.svg"
+ ALT="$\varepsilon_t&lt;1/2$"></SPAN>,
+<!-- MATH
+ $1-\varepsilon_t>1/2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img199.svg"
+ ALT="$1-\varepsilon_t&gt;1/2$"></SPAN>, and 
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+e^{\alpha_t}=\sqrt{\frac{1-\varepsilon_t}{\varepsilon_t}}>1,\;\;\;\;
+  e^{-\alpha_t}=\sqrt{\frac{\varepsilon_t}{1-\varepsilon_t}}<1
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.27ex; vertical-align: -2.37ex; " SRC="img200.svg"
+ ALT="$\displaystyle e^{\alpha_t}=\sqrt{\frac{1-\varepsilon_t}{\varepsilon_t}}&gt;1,\;\;\;\;
+e^{-\alpha_t}=\sqrt{\frac{\varepsilon_t}{1-\varepsilon_t}}&lt;1$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">52</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+We now see that if a weak classifier <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img195.svg"
+ ALT="$h_t$"></SPAN> has a small error 
+<!-- MATH
+ $\varepsilon_t$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img201.svg"
+ ALT="$\varepsilon_t$"></SPAN>, it will be weighted by a large <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img193.svg"
+ ALT="$\alpha_t$"></SPAN> and therefore
+contributes more to the strong classifier <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img202.svg"
+ ALT="$H_t$"></SPAN>; on the other hand, if 
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img195.svg"
+ ALT="$h_t$"></SPAN> has a large error <!-- MATH
+ $\varepsilon_t$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img201.svg"
+ ALT="$\varepsilon_t$"></SPAN>, it will be weighted by a small
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img193.svg"
+ ALT="$\alpha_t$"></SPAN> and contributes less to <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img202.svg"
+ ALT="$H_t$"></SPAN>. As the strong classifier <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img202.svg"
+ ALT="$H_t$"></SPAN> 
+takes advantage of all previous weak classifiers <!-- MATH
+ $h_1,\cdots,h_t$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img203.svg"
+ ALT="$h_1,\cdots,h_t$"></SPAN>, each 
+of which may be more effective in a certain region of the N-D feature 
+space than others, <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img202.svg"
+ ALT="$H_t$"></SPAN> can be expected to be a much more accurate 
+classifier than any of the weak classifiers.
+
+<P>
+Replacing <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img204.svg"
+ ALT="$t$"></SPAN> by <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img205.svg"
+ ALT="$t+1$"></SPAN> in Eq. (<A HREF="#weightupdate">47</A>), we now get
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+w_{t+1}(n)=w_t(n)\,e^{-\alpha_t\,y_nh_t({\bf x}_n)}
+  =\left\{\begin{array}{ll}
+  w_t(n) \sqrt{\frac{\varepsilon_t}{1-\varepsilon_t}}<w_t(n) & 
+  \mbox{if }y_n h_t({\bf x}_n)=1 \\
+  w_t(n) \sqrt{\frac{1-\varepsilon_t}{\varepsilon_t}}>w_t(n) & 
+  \mbox{if }y_n h_t({\bf x}_n)=-1 
+  \end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.83ex; vertical-align: -3.81ex; " SRC="img206.svg"
+ ALT="$\displaystyle w_{t+1}(n)=w_t(n)\,e^{-\alpha_t\,y_nh_t({\bf x}_n)}
+=\left\{\begi...
+..._t}{\varepsilon_t}}&gt;w_t(n) &amp;
+\mbox{if }y_n h_t({\bf x}_n)=-1
+\end{array}\right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">53</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+We see that if <!-- MATH
+ $y_nh_t({\bf x}_n)=1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img207.svg"
+ ALT="$y_nh_t({\bf x}_n)=1$"></SPAN>, i.e., <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img31.svg"
+ ALT="${\bf x}_n$"></SPAN> is classified
+correctly by <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img195.svg"
+ ALT="$h_t$"></SPAN>, it will be weighted more lightly by <!-- MATH
+ $w_{t+1}(n)<w_t(n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img208.svg"
+ ALT="$w_{t+1}(n)&lt;w_t(n)$"></SPAN>
+in the next iteration, but if <!-- MATH
+ $y_nh_t({\bf x}_n)=-1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img209.svg"
+ ALT="$y_nh_t({\bf x}_n)=-1$"></SPAN>, i.e., <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img31.svg"
+ ALT="${\bf x}_n$"></SPAN> 
+is classified incorrectly by <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img195.svg"
+ ALT="$h_t$"></SPAN>, it will be weighted more heavily by 
+<!-- MATH
+ $w_{t+1}(k)>w_t(k)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img210.svg"
+ ALT="$w_{t+1}(k)&gt;w_t(k)$"></SPAN> in the next iteration, thereby it will be emphasized 
+and have a better chance to be corrected to have more accurately 
+classified by <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img211.svg"
+ ALT="$h_{t+1}$"></SPAN> in the next iteration.
+
+<P>
+We further consider the ratio of the exponential losses of two 
+consecutive iterations:
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+\frac{E_{t+1}}{E_t}&=&\frac{\sum_{n=1}^N w_{t+1}(n)}{\sum_{n=1}^N w_t(n)}
+    =\frac{\sum_{n=1}^N w_t(n)e^{-\alpha_t\,y_n\,h_t({\bf x}_n)}}{\sum_{n=1}^N w_t(k)}
+    \nonumber\\
+    &=&\frac{\sum_{y_n h_t({\bf x}_n)=-1} w_t(n)}{\sum_{n=1}^N w_t(n)}e^{\alpha_t}
+    +\frac{\sum_{y_n h_t({\bf x}_n)=1} w_t(n)}{\sum_{n=1}^N w_t(n)}e^{-\alpha_t}
+    \nonumber\\
+    &=&\varepsilon_t\;\sqrt{\frac{1-\varepsilon_t}{\varepsilon_t}}
+    +(1-\varepsilon_t)\;\sqrt{\frac{\varepsilon_t}{1-\varepsilon_t}}
+    =2\sqrt{\varepsilon_t(1-\varepsilon_t)}\le 1
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 5.34ex; vertical-align: -2.06ex; " SRC="img212.svg"
+ ALT="$\displaystyle \frac{E_{t+1}}{E_t}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.97ex; vertical-align: -2.84ex; " SRC="img213.svg"
+ ALT="$\displaystyle \frac{\sum_{n=1}^N w_{t+1}(n)}{\sum_{n=1}^N w_t(n)}
+=\frac{\sum_{n=1}^N w_t(n)e^{-\alpha_t\,y_n\,h_t({\bf x}_n)}}{\sum_{n=1}^N w_t(k)}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.74ex; vertical-align: -2.84ex; " SRC="img214.svg"
+ ALT="$\displaystyle \frac{\sum_{y_n h_t({\bf x}_n)=-1} w_t(n)}{\sum_{n=1}^N w_t(n)}e^...
+...t}
++\frac{\sum_{y_n h_t({\bf x}_n)=1} w_t(n)}{\sum_{n=1}^N w_t(n)}e^{-\alpha_t}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.27ex; vertical-align: -2.37ex; " SRC="img215.svg"
+ ALT="$\displaystyle \varepsilon_t\;\sqrt{\frac{1-\varepsilon_t}{\varepsilon_t}}
++(1-\...
+...c{\varepsilon_t}{1-\varepsilon_t}}
+=2\sqrt{\varepsilon_t(1-\varepsilon_t)}\le 1$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">54</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+This ratio is twice the geometric average 
+<!-- MATH
+ $\sqrt{\varepsilon_t(1-\varepsilon_t)}\le 1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.82ex; " SRC="img216.svg"
+ ALT="$\sqrt{\varepsilon_t(1-\varepsilon_t)}\le 1$"></SPAN> of <!-- MATH
+ $\varepsilon_t$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img201.svg"
+ ALT="$\varepsilon_t$"></SPAN> 
+and <!-- MATH
+ $1-\varepsilon_t$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img217.svg"
+ ALT="$1-\varepsilon_t$"></SPAN>, which reaches its maximum when 
+<!-- MATH
+ $\varepsilon_t=1-\varepsilon_t=1/2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img218.svg"
+ ALT="$\varepsilon_t=1-\varepsilon_t=1/2$"></SPAN>. However, as <!-- MATH
+ $\varepsilon_t<1/2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img172.svg"
+ ALT="$\varepsilon_t&lt;1/2$"></SPAN>, 
+the ratio is always smaller than 1. We see that the exponential cost 
+can be approximated as an exponentially decaying function from its
+initial value <!-- MATH
+ $E_0=\sum_{n=1}^N w_0(n)=N$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.81ex; " SRC="img219.svg"
+ ALT="$E_0=\sum_{n=1}^N w_0(n)=N$"></SPAN> for some <!-- MATH
+ $\varepsilon<1/2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img220.svg"
+ ALT="$\varepsilon&lt;1/2$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\lim_{t\rightarrow\infty}E_t\approx
+  \lim_{t\rightarrow\infty}\left(2\sqrt{\varepsilon(1-\varepsilon)}\right)^t E_0=0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.11ex; vertical-align: -1.74ex; " SRC="img221.svg"
+ ALT="$\displaystyle \lim_{t\rightarrow\infty}E_t\approx
+\lim_{t\rightarrow\infty}\left(2\sqrt{\varepsilon(1-\varepsilon)}\right)^t E_0=0$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">55</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+We can therefore conclude that the exponential loss will always decrease, 
+i.e., the error of AdaBoost will always converge to zero. 
+
+<P>
+The weak classifier used in each iteration is typically implemented
+as a <EM>decision stump</EM>, a binary classifier that partitions the 
+N-D feature space into two regions. Specifically, as a simple example, 
+a coordinate descent method can be used by which all training samples 
+are projected onto the ith dimension of the feature space <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img222.svg"
+ ALT="${\bf d}_i$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+x_n=P_{{\bf d}_i}({\bf x}_n)=\frac{{\bf x}_n^T{\bf d}_i}{||{\bf d}_i||},
+\;\;\;\;\;\;(n=1,\cdots,N)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.29ex; " SRC="img223.svg"
+ ALT="$\displaystyle x_n=P_{{\bf d}_i}({\bf x}_n)=\frac{{\bf x}_n^T{\bf d}_i}{\vert\vert{\bf d}_i\vert\vert},
+\;\;\;\;\;\;(n=1,\cdots,N)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">56</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and then classified into two classes by a threshold <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img224.svg"
+ ALT="$T$"></SPAN> along the 
+direction of <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img222.svg"
+ ALT="${\bf d}_i$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+h(x_n)=\left\{\begin{array}{ll}+1& \mbox{if }x_n<T\\-1 & \mbox{if }x_n>T
+  \end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img225.svg"
+ ALT="$\displaystyle h(x_n)=\left\{\begin{array}{ll}+1&amp; \mbox{if }x_n&lt;T\\ -1 &amp; \mbox{if }x_n&gt;T
+\end{array}\right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">57</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The optimal decision stump is obtained when the following weighted error 
+is minimized with respect to the threshold <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img224.svg"
+ ALT="$T$"></SPAN> along that direction of 
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img222.svg"
+ ALT="${\bf d}_i$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\varepsilon_t=\sum_{n=1}^N w_t(n)\; \delta(h_t(x_n)-y_n)
+  =\sum_{h_t(x_n)\ne y_n} w_t(n)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.13ex; vertical-align: -3.64ex; " SRC="img226.svg"
+ ALT="$\displaystyle \varepsilon_t=\sum_{n=1}^N w_t(n)\; \delta(h_t(x_n)-y_n)
+=\sum_{h_t(x_n)\ne y_n} w_t(n)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">58</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+Alternatively, the weak classifier can also be obtained based on the
+<EM>principal component analysis (PCA)</EM> by partitioning the N-D feature
+space along the directions of the eigenvectors of the between-class 
+scatter matrix
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf S}_b=\frac{1}{N}\left[N_-({\bf m}_{-1}-{\bf m})({\bf m}_{-1}-{\bf m})^T
+    +N_+({\bf m}_{+1}-{\bf m})({\bf m}_{+1}-{\bf m})^T\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img227.svg"
+ ALT="$\displaystyle {\bf S}_b=\frac{1}{N}\left[N_-({\bf m}_{-1}-{\bf m})({\bf m}_{-1}-{\bf m})^T
++N_+({\bf m}_{+1}-{\bf m})({\bf m}_{+1}-{\bf m})^T\right]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">59</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img228.svg"
+ ALT="$N_-$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img229.svg"
+ ALT="$N_+$"></SPAN> are the numbers of samples in the two classes
+<!-- MATH
+ $(N_-+N_+=N)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img230.svg"
+ ALT="$(N_-+N_+=N)$"></SPAN>, and 
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf m}_{\pm}=\frac{1}{N_{\pm}}\sum_{y_n=\pm 1} w(n)\,{\bf x}_n,
+  \;\;\;\;\; {\bf m}=\frac{1}{N}\sum_{n=1}^N w(n)\,{\bf x}_n
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.90ex; vertical-align: -3.38ex; " SRC="img231.svg"
+ ALT="$\displaystyle {\bf m}_{\pm}=\frac{1}{N_{\pm}}\sum_{y_n=\pm 1} w(n)\,{\bf x}_n,
+\;\;\;\;\; {\bf m}=\frac{1}{N}\sum_{n=1}^N w(n)\,{\bf x}_n$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">60</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+are the weighted mean vectors of the two classes and the total 
+weighted mean vector of all <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="$N$"></SPAN> samples in the training set. 
+The training samples are likely to be better separated along these 
+directions of the eigenvectors of <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img232.svg"
+ ALT="${\bf S}_b$"></SPAN>, which measures the 
+separability of the two classes. The eigenequations of <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img232.svg"
+ ALT="${\bf S}_b$"></SPAN>
+is:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf S}_b={\bf\Phi\Lambda\Phi}^{-1}={\bf\Phi\Lambda\Phi}^T
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.46ex; " SRC="img233.svg"
+ ALT="$\displaystyle {\bf S}_b={\bf\Phi\Lambda\Phi}^{-1}={\bf\Phi\Lambda\Phi}^T$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">61</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+As <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img232.svg"
+ ALT="${\bf S}_b$"></SPAN> is symmetric, the eigenvector matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img234.svg"
+ ALT="${\bf\Phi}$"></SPAN>
+is orthonormal and its columns can be used as an orthogonal basis
+that spans the feature space as well as the standard basis. The 
+same binary threshold classification considered above for the weak
+classifiers can be readily applied along these PCA bases.
+
+<P>
+The Matlab code of the main iteration loop of the algorithm is 
+listed below, followed by the essential functions called by the 
+main loop. Here <code>T</code> is the maximum number of iteration, and
+<code>N</code> is the total number of training samples. 
+
+<P>
+The algorithm can be carried out in the feature space based on
+either the PCA basis (columns of the eigenvector matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img234.svg"
+ ALT="${\bf\Phi}$"></SPAN>),
+or the original standard basis (columns of the identity matrix 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img235.svg"
+ ALT="${\bf I}$"></SPAN>). 
+
+<P>
+The <EM>decision stump</EM> is implemented by a binary classifier, 
+which partitions all training samples projected onto a 1-D space 
+into two groups by a threshold value, which needs to be optimal in
+terms of the number of misclassification. A parameter <code>plt</code> is
+used to indicate the polarity of the binary classification, i.e.,
+which of the two class <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img51.svg"
+ ALT="$C_1$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img236.svg"
+ ALT="$C_0$"></SPAN> is on the lower (or higher)
+side of the threshold.
+
+<P>
+<PRE>
+    Plt=[];              % polarity of binary classification
+    Tr=[];               % transformation of basis vectors
+    Th=[];               % threshold of binary classification
+    Alpha=[];            % alpha values 
+    h=zeros(T,N);        % h functions 
+    F=zeros(T,N);        % F functions
+    w=ones(T,N);         % weights for N training samples
+    Er=N;                % error initialized to N
+    t=0;                 % iteration index
+    while t&lt;T  &amp; Er&gt;0                 % the main iteration
+        t=t+1;                        
+        [tr th plt er]=WeakClassifier(X,y,w(t,:),PCA); % weak classifier
+        alpha=log(sqrt((1-er)/er));   % update alpha   
+        Alpha=cat(1,Alpha,alpha);     % record alpha
+        Tr=cat(2,Tr,tr');             % record transform vector
+        Th=cat(1,Th,th);              % record threshold 
+        Plt=cat(1,Plt,plt);           % record polarity
+        x=tr*X;                       % carry out transform
+        c=sqrt(er/(1-er));
+        for n=1:N                     % update weights
+            h(t,n)=h_function(x(n),th,plt);     % find h function
+           if  h(t,n)*y(n)&lt;0
+               w(t+1,n)=w(t,n)/c;     % update weights
+           else
+               w(t+1,n)=w(t,n)*c;
+           end            
+        end      
+        F(t,:)=Alpha(t)*h(t,:);       % get F functions
+        if t&gt;1
+            F(t,:)=F(t,:)+F(t-1,:);
+        end
+        Er=sum(sign(F(t,:).*y)==-1);  % error of strong classifier, number of misclassifications
+        fprintf('%d: %d/%d=%f\n',t,Er,N,Er/N)
+    end
+</PRE>
+
+<P>
+Here are the functions called by the main iteration loop above:
+
+<P>
+<PRE>
+function [Tr,Th Plt Er]=WeakClassifier(X,y,w,pca)
+    % X: N columns each for one of the N training samples
+    % y: labeling of X
+    % w: weights for N training samples
+    % pca: use PCA dimension if pca~=0
+    % Er: minimum error among all D dimensions
+    % Tr: transform vector (standard or PCA basis)
+    % Th: threshold value 
+    % Plt: polarity 
+    [D N]=size(X);
+    n0=sum(y&gt;0);            % number of samples in class C+
+    n1=sum(y&lt;0);            % number of samples in class C-
+    if pca                  % find PCA basis
+        for i=1:D
+            Y(i,:)=w.*X(i,:);
+        end
+        X0=Y(:,find(y&gt;0));  % all samples in class C+
+        X1=Y(:,find(y&lt;0));  % all samples in class C-
+        m0=mean(X0')';      % mean of C+
+        m1=mean(X1')';      % mean of C-
+        mu=(n0*m0+n1*m1)/N; % over all mean
+        Sb=(n0*(m0-mu)*(m0-mu)'+n1*(m1-mu)*(m1-mu)')/N; % between-class scatter matrix
+        [v d]=eig(Sb);      % eigenvector and eigenvalue matrices of Sb
+    else
+        v=eye(N);           % standard basis
+    end  
+    Er=9e9;
+    for i=1:D               % for all D dimensions
+        tr=v(:,i)';         % get transform vector from identity or PCA matrix
+        x=tr*X;             % rotate the vector
+        [th plt er]=BinaryClassifier(x,y,w); % binary classify N samples in 1-D
+        er=0;
+        for n=1:N
+            h(n)=h_function(x(n),th,plt);  % h-function of nth sample 
+            if h(n)*y(n)&lt;0                 % if misclassified
+                er=er+w(n);                % add error
+            end
+        end   
+        er=er/sum(w);                      % total error of dimension d
+        if Er&gt;er                           % record info corresponding to min error
+            Er=er;                         % min error
+            Plt=plt;                       % polarity
+            Th=th;                         % threshold
+            Tr=tr;                         % transform vector
+        end
+    end 
+end
+
+function h=h_function(x, th, plt)
+    if xor(x&gt;th, plt)
+        h=1;
+    else
+        h=-1;
+    end
+end
+
+function [Th Plt Er]=BinaryClassifier(x,y,w)
+    N=length(x); 
+    [x1 i]=sort(x);            % sort 1-D data x
+    y1=y(i);                   % reorder the targets 
+    w1=w(i);                   % reorder the weights 
+    Er=9e9;
+    for n=1:N-1                % for N-1 ways of binary classification       
+        e0=sum(w1(find(y1(1:n)==1)))+sum(w1(n+find(y1(n+1:N)==-1)));
+        e1=sum(w1(find(y1(1:n)~=1)))+sum(w1(n+find(y1(n+1:N)~=-1)));
+        if e1 &gt; e0                 % polarity: left -1, right +1
+            plt=0; er=e0; 
+        else                       % polarity: left +1, right -1
+            plt=1; er=e1;
+        end
+        if Er &gt; er                 % update minimum error for kth dimension
+            Er=er;                 % minimum error
+            Plt=plt;               % polarity
+            Th=(x1(k)+x1(k+1))/2;  % threshold
+        end        
+    end
+end
+</PRE>
+
+<P>
+<B>Example 0</B> This example shows the classification of an XOR data
+set (used previously the test the naive Bayes mehtod), containing two 
+classes of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img237.svg"
+ ALT="$N=200$"></SPAN> simples each in 2-D space, represented by the red 
+and blue dots in the figure below. The intermediate results after 4, 8,
+16 and 32 iterations are shown in to illustrate the progress of the 
+iteration, when the error rate continuously reduces from 134/400, 85/400, 
+81/400, 58/100. 
+
+<P>
+<IMG STYLE="" SRC="../figures/AdaBoostEx0a.png"
+ ALT="AdaBoostEx0a.png">
+
+<P>
+After over 350 iterations the error rate eventually reduced to zero
+(guaranteed by the AdaBoost method). The sequence of binary participation
+Although all training samples are correctly classified eventually, the 
+result suffers the problem of overfitting.
+
+<P>
+<IMG STYLE="" SRC="../figures/AdaBoostEx0.png"
+ ALT="AdaBoostEx0.png">
+
+<P>
+<B>Example 1</B> This example shows the classification of two classes 
+of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img238.svg"
+ ALT="$N=500$"></SPAN> simples in 2-D space, which is partitioned along both the
+standard basis vectors (left) and the PCA directions (right). The PCA 
+method performances significantly better in this example as its error 
+reduces faster and it converges to zero after 61 iterations, while the 
+error of the method based on the standard axes (in vertical and horizontal
+directions) does not go down to zero even after 120 iterations. This 
+faster reduction of error of the PCA method can be easily understood 
+as many different directions are used to partition the space into two
+regions, while in the coordinate descent method the partitioning of the 
+space is limited to either of the two directions.
+
+<P>
+<IMG STYLE="" SRC="../figures/AdaBoostCompare1.png"
+ ALT="AdaBoostCompare1.png">
+
+<P>
+How the AdaBoost is iteratively trained can be seen in the figure below. 
+First, the error rate, the ratio between the number of misclassified 
+samples and the total number of samples, for both the training and 
+testing samples, are plotted as the iteration progresses (top). Also, 
+the weighted error <!-- MATH
+ $\varepsilon_t$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img201.svg"
+ ALT="$\varepsilon_t$"></SPAN>, the exponential costs <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img239.svg"
+ ALT="$E_t$"></SPAN>, and
+the ratio <!-- MATH
+ $E_{t+1}/E_t=2\sqrt{\varepsilon_t(1-\varepsilon_t)}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.82ex; " SRC="img240.svg"
+ ALT="$E_{t+1}/E_t=2\sqrt{\varepsilon_t(1-\varepsilon_t)}$"></SPAN> are all
+plotted (bottom). We see that <!-- MATH
+ $\varepsilon_t<0.5$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img241.svg"
+ ALT="$\varepsilon_t&lt;0.5$"></SPAN> and <!-- MATH
+ $E_{t+1}/E_t<1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img242.svg"
+ ALT="$E_{t+1}/E_t&lt;1$"></SPAN> 
+for all steps, and the exponential cost <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img239.svg"
+ ALT="$E_t$"></SPAN> attenuates exponentially
+towards zero.
+
+<P>
+<IMG STYLE="" SRC="../figures/AdaBoostErrorRate1.png"
+ ALT="AdaBoostErrorRate1.png">
+
+<P>
+<B>Example 2</B> In this dataset, 100 training samples of two classes 
+(50 each) forms four clusters arranged in the 2-D space as an XOR pattern
+as shown figure (top-left), and 100 testing samples of the same distribution
+are classified by the AbaBoost algorithm trained by both the coordinate 
+descent and PCA methods.
+
+<P>
+We see that the coordinate descent method performs very poorly in both
+the slow convergence (more than 400 iterations) during training and high 
+classification error rate (more than 1/3) during testing. The partitioning 
+of the 2-D space is an obvious over fitting of the training set instead of
+reflecting the actual distribution of the two classes (four clusters). On 
+the other hand, the PCA method converges quickly (10 iterations) and 
+classifies the testing samples with very low error rate. The space is 
+clearly partitioned into two regions corresponding to the two classes.
+
+<P>
+<IMG STYLE="" SRC="../figures/AdaBoostEx2b.png"
+ ALT="AdaBoostEx2b.png">
+<IMG STYLE="" SRC="../figures/AdaBoostEx2a.png"
+ ALT="AdaBoostEx2a.png">
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node4.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="ch9.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node2.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node4.html">Support Vector machine</A>
+<B> Up:</B> <A
+ HREF="ch9.html">ch9</A>
+<B> Previous:</B> <A
+ HREF="node2.html">Naive Bayes Classification</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

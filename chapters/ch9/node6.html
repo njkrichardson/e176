@@ -1,0 +1,776 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Kernel Mapping</TITLE>
+<META NAME="description" CONTENT="Kernel Mapping">
+<META NAME="keywords" CONTENT="ch9">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch9.css">
+
+<LINK REL="next" HREF="node7.html">
+<LINK REL="previous" HREF="node5.html">
+<LINK REL="next" HREF="node7.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node7.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node4.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node5.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node7.html">Soft Margin SVM</A>
+<B> Up:</B> <A
+ HREF="node4.html">Support Vector machine</A>
+<B> Previous:</B> <A
+ HREF="node5.html">Maximal Margin and Support</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION00042000000000000000">
+Kernel Mapping</A>
+</H2>
+
+<P>
+The SVM algorithm above converges only if the data points of the
+two classes in the training set are linearly separable. If this is
+not the case, we can use the <EM>kernel method</EM> to map all data 
+points <!-- MATH
+ ${\bf x}=[x_1,\cdots,x_d]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img3.svg"
+ ALT="${\bf x}=[x_1,\cdots,x_d]^T$"></SPAN> from the original d-dimensional 
+space into a feature space of higher dimensions:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf x} \Longrightarrow {\bf z}=\phi({\bf x})
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img350.svg"
+ ALT="$\displaystyle {\bf x} \Longrightarrow {\bf z}=\phi({\bf x})$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">94</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+in which the two classes become linearly separable. This idea is
+illustrated by the following simple examples.
+
+<P>
+<B>Example 1</B> 
+
+<P>
+In 1-D space, classes <!-- MATH
+ $C_-=\{x\big|(\alpha\le x\le\beta)\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.93ex; " SRC="img351.svg"
+ ALT="$C_-=\{x\big\vert(\alpha\le x\le\beta)\}$"></SPAN> 
+and <!-- MATH
+ $C_+=\{x\big|(x\le \alpha)\;\mbox{or}\;(x\ge\beta)\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.93ex; " SRC="img352.svg"
+ ALT="$C_+=\{x\big\vert(x\le \alpha)\;$">or<IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img353.svg"
+ ALT="$\;(x\ge\beta)\}$"></SPAN> are not
+linearly separable. By the following mappping from 1-D space to 2-D 
+space:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf z}=\phi(x)=\left[\begin{array}{l}z_1\\z_2\end{array}\right]
+  =\left[ \begin{array}{c} x \\(x-(\alpha+\beta)/2)^2 \end{array}\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img354.svg"
+ ALT="$\displaystyle {\bf z}=\phi(x)=\left[\begin{array}{l}z_1\\ z_2\end{array}\right]
+=\left[ \begin{array}{c} x \\ (x-(\alpha+\beta)/2)^2 \end{array}\right]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">95</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+the two classes can be separated by a threshold in the second
+dimension of the 2-D space. 
+
+<P>
+<IMG STYLE="" SRC="../figures/KernelExamples.png"
+ ALT="KernelExamples.png">
+
+<P>
+<B>Example 2:</B> 
+
+<P>
+The method above can be generalized to higher dimensional space 
+such as mapping from 2-D to 3-D space. Consider two classes in
+a 2-D space that are not linearly separable:
+<!-- MATH
+ $C_-=\{{\bf x},\; ||{\bf x}||<d\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img355.svg"
+ ALT="$C_-=\{{\bf x},\; \vert\vert{\bf x}\vert\vert&lt;d\}$"></SPAN> and 
+<!-- MATH
+ $C_+=\{{\bf x},\; ||{\bf x}||>d\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img356.svg"
+ ALT="$C_+=\{{\bf x},\; \vert\vert{\bf x}\vert\vert&gt;d\}$"></SPAN>. However, by the 
+following mappping from 2-D space to 3-D space:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf z}=\phi({\bf x})=\left[\begin{array}{l}z_1\\z_2\\z_3\end{array}\right]
+  =\left[\begin{array}{c}x_1\\x_2\\x_1^2+x_2^2\end{array}\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img357.svg"
+ ALT="$\displaystyle {\bf z}=\phi({\bf x})=\left[\begin{array}{l}z_1\\ z_2\\ z_3\end{array}\right]
+=\left[\begin{array}{c}x_1\\ x_2\\ x_1^2+x_2^2\end{array}\right]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">96</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+the two classes can be linearly separated by thresholding in the 
+third dimension of the 3-D space.
+
+<P>
+<B>Example 3:</B>
+
+<P>
+In 2-D space, in the exclusive OR data set, the two classes <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img15.svg"
+ ALT="$C_-$"></SPAN> 
+containing points in quadrants I and III, and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img14.svg"
+ ALT="$C_+$"></SPAN> containing
+points in quadrants II and IV are not linearly separable. By the
+following mapping from 2-D space to 3-D space:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf z}=\phi({\bf x})=\left[\begin{array}{l}z_1\\z_2\\z_3\end{array}\right]
+  =\left[\begin{array}{c}x_1\\x_2\\x_1x_2\end{array}\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img358.svg"
+ ALT="$\displaystyle {\bf z}=\phi({\bf x})=\left[\begin{array}{l}z_1\\ z_2\\ z_3\end{array}\right]
+=\left[\begin{array}{c}x_1\\ x_2\\ x_1x_2\end{array}\right]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">97</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+the two classes can be separated by a threshold in the third 
+dimension of the 3-D space.
+
+<P>
+<B>Definition: </B> A kernel is a function that takes two vectors 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img359.svg"
+ ALT="${\bf x}_m$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img31.svg"
+ ALT="${\bf x}_n$"></SPAN> as arguments and returns the inner product 
+of their images <!-- MATH
+ ${\bf z}_m=\phi({\bf x}_m)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img360.svg"
+ ALT="${\bf z}_m=\phi({\bf x}_m)$"></SPAN> and <!-- MATH
+ ${\bf z}_n=\phi({\bf x}_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img361.svg"
+ ALT="${\bf z}_n=\phi({\bf x}_n)$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+K({\bf x}_m,{\bf x}_n)=\phi({\bf x}_m)^T\phi({\bf x}_n)
+  ={\bf z}_m^T{\bf z}_n
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img362.svg"
+ ALT="$\displaystyle K({\bf x}_m,{\bf x}_n)=\phi({\bf x}_m)^T\phi({\bf x}_n)
+={\bf z}_m^T{\bf z}_n$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">98</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+The kernel function takes as input some two vectors <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img359.svg"
+ ALT="${\bf x}_m$"></SPAN>
+and <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img31.svg"
+ ALT="${\bf x}_n$"></SPAN> in the original feature space, and returns the inner 
+product <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img363.svg"
+ ALT="${\bf z}_m$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img364.svg"
+ ALT="${\bf z}_n$"></SPAN> in the higher dimensional space. 
+If the data points in the original space only appear in the form of 
+inner product, then the kernel function <!-- MATH
+ ${\bf z}=\phi({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img365.svg"
+ ALT="${\bf z}=\phi({\bf x})$"></SPAN>,
+called the kernel-induced <EM>implicit</EM> mapping, does not need to
+be explicitly specified, and the dimension of the new does not even 
+need to be known. 
+
+<P>
+The following is a set of commonly used kernel functions 
+<!-- MATH
+ $K({\bf x},\,{\bf x}')$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img366.svg"
+ ALT="$K({\bf x},\,{\bf x}')$"></SPAN>, which can be represented as an 
+inner product of two vectors <!-- MATH
+ ${\bf z}=\phi({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img365.svg"
+ ALT="${\bf z}=\phi({\bf x})$"></SPAN> and 
+<!-- MATH
+ ${\bf z}'=\phi({\bf x}')$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img367.svg"
+ ALT="${\bf z}'=\phi({\bf x}')$"></SPAN> in a higher dimensional space.
+
+<P>
+
+<UL>
+<LI><B>linear kernel (no kernel mapping)</B>
+
+<P>
+Assume <!-- MATH
+ ${\bf x}=[x_1,\cdots,x_d]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img3.svg"
+ ALT="${\bf x}=[x_1,\cdots,x_d]^T$"></SPAN>, <!-- MATH
+ ${\bf x}'=[x'_1,\cdots,x'_d]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.77ex; " SRC="img368.svg"
+ ALT="${\bf x}'=[x'_1,\cdots,x'_d]^T$"></SPAN>, 
+
+<P>
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+K({\bf x},{\bf x}')={\bf x}^T {\bf x}'=\sum_{i=1}^d x_ix'_i
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.09ex; " SRC="img369.svg"
+ ALT="$\displaystyle K({\bf x},{\bf x}')={\bf x}^T {\bf x}'=\sum_{i=1}^d x_ix'_i$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">99</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+</LI>
+<LI><B>polynomial kernels</B>
+
+<P>
+The binomial theorem states:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+(x+y)^n=\sum_{k=0}^n\left(\begin{array}{c}n\\k\end{array}\right) x^{n-k} y^k
+  =\sum_{k=0}^n \frac{n!}{k!(n-k)!}\; x^{n-k} y^k
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.20ex; vertical-align: -3.14ex; " SRC="img370.svg"
+ ALT="$\displaystyle (x+y)^n=\sum_{k=0}^n\left(\begin{array}{c}n\\ k\end{array}\right) x^{n-k} y^k
+=\sum_{k=0}^n \frac{n!}{k!(n-k)!}\; x^{n-k} y^k$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">100</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where the binomial coefficient
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left(\begin{array}{c}n\\k\end{array}\right)=\frac{n!}{k!(n-k)!}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img371.svg"
+ ALT="$\displaystyle \left(\begin{array}{c}n\\ k\end{array}\right)=\frac{n!}{k!(n-k)!}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">101</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+is the number of ways to distribute <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img372.svg"
+ ALT="$n$"></SPAN> items into two bins (<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img33.svg"
+ ALT="$k$"></SPAN> in one
+  and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img373.svg"
+ ALT="$n-k$"></SPAN> in the other). This result can be generalized to the multinormial
+  case:  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+(x_1+\cdots+x_d)^n=\sum_{\sum_{i=1}^d k_i=n}
+  \left(\begin{array}{c}n\\k_1,\cdots,k_d\end{array}\right)x_1^{k_1}\cdots x_d^{k_d}
+  =\sum_{\sum_{i=1}^d k_i=n}\frac{n!}{k_1!\cdots k_d!}x_1^{k_1}\cdots x_d^{k_d}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.99ex; " SRC="img374.svg"
+ ALT="$\displaystyle (x_1+\cdots+x_d)^n=\sum_{\sum_{i=1}^d k_i=n}
+\left(\begin{array}{...
+...}
+=\sum_{\sum_{i=1}^d k_i=n}\frac{n!}{k_1!\cdots k_d!}x_1^{k_1}\cdots x_d^{k_d}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">102</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where the multinomial coefficient 
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left(\begin{array}{c}n\\k_1,\cdots,k_d\end{array}\right)
+      =\frac{n!}{k_1!\cdots k_d!}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img375.svg"
+ ALT="$\displaystyle \left(\begin{array}{c}n\\ k_1,\cdots,k_d\end{array}\right)
+=\frac{n!}{k_1!\cdots k_d!}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">103</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+is the number of ways to distribute <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img372.svg"
+ ALT="$n$"></SPAN> balls into <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1.svg"
+ ALT="$d$"></SPAN> bins with 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img376.svg"
+ ALT="$k_i$"></SPAN> balls in the ith bin (see <A ID="tex2html11"
+  HREF="https://www.statlect.com/mathematical-tools/partitions">here</A>), and the 
+
+summation is over all possible ways to get <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1.svg"
+ ALT="$d$"></SPAN> non-negative integers 
+  <!-- MATH
+ $k_1,\cdots,k_d$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img377.svg"
+ ALT="$k_1,\cdots,k_d$"></SPAN> that add up to <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img372.svg"
+ ALT="$n$"></SPAN>.
+
+<P>
+Now consider the homogeneous polynomial kernel for d-dimensional vectors 
+  <!-- MATH
+ ${\bf x}=[x_1,\cdots,x_d]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img3.svg"
+ ALT="${\bf x}=[x_1,\cdots,x_d]^T$"></SPAN> defined as
+  <BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+K({\bf x},{\bf x}')&=&({\bf x}^T{\bf x}')^n=(x_1x'_1+\cdots+x_dx'_d)^n
+    \nonumber\\
+    &=&\sum_{\sum_{i=1}^d k_i=n}\frac{n!}{k_1!\cdots k_d!}\;
+    \left( (x_1x'_1)^{k_1}\cdots (x_dx'_d)^{k_d} \right)
+    =\phi({\bf x})^T \phi({\bf x}')={\bf z}^T{\bf z}'
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img378.svg"
+ ALT="$\displaystyle K({\bf x},{\bf x}')$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img379.svg"
+ ALT="$\displaystyle ({\bf x}^T{\bf x}')^n=(x_1x'_1+\cdots+x_dx'_d)^n$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.99ex; " SRC="img380.svg"
+ ALT="$\displaystyle \sum_{\sum_{i=1}^d k_i=n}\frac{n!}{k_1!\cdots k_d!}\;
+\left( (x_1...
+...cdots (x_dx'_d)^{k_d} \right)
+=\phi({\bf x})^T \phi({\bf x}')={\bf z}^T{\bf z}'$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">104</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+  where 
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf z}=\phi({\bf x})=\left[\sqrt{ \frac{n!}{k_1!\cdots k_d!} }
+    \left(x_1^{k_1}\cdots x_d^{k_d}\right),\;\left(k_i\ge 0,\;\sum_{i=1}^d k_i=n\right)\right]^T
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.13ex; vertical-align: -3.09ex; " SRC="img381.svg"
+ ALT="$\displaystyle {\bf z}=\phi({\bf x})=\left[\sqrt{ \frac{n!}{k_1!\cdots k_d!} }
+\...
+...1}\cdots x_d^{k_d}\right),\;\left(k_i\ge 0,\;\sum_{i=1}^d k_i=n\right)\right]^T$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">105</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+In particular, when <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img382.svg"
+ ALT="$d=2$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img383.svg"
+ ALT="$n=2$"></SPAN>, the polynomial kernel defined over
+  2-D vectors <!-- MATH
+ ${\bf x}=[x_1,x_2]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img384.svg"
+ ALT="${\bf x}=[x_1,x_2]^T$"></SPAN> is:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+K({\bf x},{\bf x}')=({\bf x}^T{\bf x}')^2=(x_1x'_1+x_2x'_2)^2
+    =(x_1 x'_1)^2+2x_1 x'_1 x_2 x'_2+(x_2 x'_2)^2=\phi({\bf x})^T \phi({\bf x}')
+    ={\bf z}^T{\bf z}'
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img385.svg"
+ ALT="$\displaystyle K({\bf x},{\bf x}')=({\bf x}^T{\bf x}')^2=(x_1x'_1+x_2x'_2)^2
+=(x...
+..._1 x'_1 x_2 x'_2+(x_2 x'_2)^2=\phi({\bf x})^T \phi({\bf x}')
+={\bf z}^T{\bf z}'$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">106</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <!-- MATH
+ ${\bf z}=\phi({\bf x})=[x_1^2,\,\sqrt{2}x_1x_2,\,x_2^2]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img386.svg"
+ ALT="${\bf z}=\phi({\bf x})=[x_1^2,\,\sqrt{2}x_1x_2,\,x_2^2]$"></SPAN> is a mapping 
+  from <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> in 2-D space to <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img387.svg"
+ ALT="${\bf z}$"></SPAN> in 3-D space.
+
+<P>
+A non-homogeneous polynomial kernel is defined as
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+K({\bf x},{\bf x}')=(1+{\bf x}^T{\bf x}')^n
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img388.svg"
+ ALT="$\displaystyle K({\bf x},{\bf x}')=(1+{\bf x}^T{\bf x}')^n$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">107</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+</LI>
+<LI><B>The radial basis function (RBF) kernel</B>
+
+<P>
+The RBF kernel is defined as
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+K({\bf x},{\bf x}')=e^{-||{\bf x}-{\bf x}'||^2/2\sigma^2}
+    =e^{-\gamma||{\bf x}-{\bf x}'||^2}	
+  
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.70ex; " SRC="img389.svg"
+ ALT="$\displaystyle K({\bf x},{\bf x}')=e^{-\vert\vert{\bf x}-{\bf x}'\vert\vert^2/2\sigma^2}
+=e^{-\gamma\vert\vert{\bf x}-{\bf x}'\vert\vert^2}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">108</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <!-- MATH
+ $\gamma=1/2\sigma^2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img390.svg"
+ ALT="$\gamma=1/2\sigma^2$"></SPAN> is a parameter that can be adjusted to fit
+  each specific dataset. This kernel can be wriiten as the inner product of 
+  two infinite dimensional vectors (for simplicity, we assume <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img391.svg"
+ ALT="$\sigma=1$"></SPAN>):
+  <BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+K({\bf x},\,{\bf x}')&=&e^{-||{\bf x}-{\bf x}'||^2/2}
+    =e^{-||{\bf x}||^2/2}\; e^{-||{\bf x}'||^2/2}\; e^{{\bf x}^T{\bf x}'}
+    =e^{-||{\bf x}||^2/2}\, e^{-||{\bf x}'||^2/2}
+    \sum_{n=0}^\infty \frac{({\bf x}^T{\bf x}')^n}{n!}
+    \nonumber\\
+    &=&e^{-||{\bf x}||^2/2} \; e^{-||{\bf x}'||^2/2}\;\sum_{n=0}^\infty \left[
+    \frac{1}{n!}\sum_{\sum_{i=1}^d k_i=n} \frac{n!}{k_1!\cdots k_d! }
+    \left((x_1x'_1)^{k_1}\cdots (x_dx'_d)^{k_d}\right) \right]
+    \nonumber\\
+    &=&\sum_{n=0}^\infty \sum_{\sum_{i=1}^d k_i=n}
+    \left(e^{-||{\bf x} ||^2/2}\; \frac{x _1^{k_1}\cdots x _d^{k_d}}{\sqrt{k_1!\cdots k_d!}}\right)
+    \left(e^{-||{\bf x}'||^2/2}\; \frac{x_1^{\prime k_1}\cdots x_d^{\prime k_d}}{\sqrt{k_1!\cdots k_d!}}\right)
+    \nonumber\\
+    &=&\phi({\bf x})^T \phi({\bf x}')={\bf z}^T{\bf z}'
+  
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img392.svg"
+ ALT="$\displaystyle K({\bf x},\,{\bf x}')$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.20ex; vertical-align: -3.06ex; " SRC="img393.svg"
+ ALT="$\displaystyle e^{-\vert\vert{\bf x}-{\bf x}'\vert\vert^2/2}
+=e^{-\vert\vert{\bf...
+...\vert{\bf x}'\vert\vert^2/2}
+\sum_{n=0}^\infty \frac{({\bf x}^T{\bf x}')^n}{n!}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 9.06ex; vertical-align: -3.99ex; " SRC="img394.svg"
+ ALT="$\displaystyle e^{-\vert\vert{\bf x}\vert\vert^2/2} \; e^{-\vert\vert{\bf x}'\ve...
+...!}{k_1!\cdots k_d! }
+\left((x_1x'_1)^{k_1}\cdots (x_dx'_d)^{k_d}\right) \right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 8.36ex; vertical-align: -3.99ex; " SRC="img395.svg"
+ ALT="$\displaystyle \sum_{n=0}^\infty \sum_{\sum_{i=1}^d k_i=n}
+\left(e^{-\vert\vert{...
+...; \frac{x_1^{\prime k_1}\cdots x_d^{\prime k_d}}{\sqrt{k_1!\cdots k_d!}}\right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img396.svg"
+ ALT="$\displaystyle \phi({\bf x})^T \phi({\bf x}')={\bf z}^T{\bf z}'$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">109</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+  where
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf z}=\phi({\bf x})=\left[ e^{-||{\bf x}||^2/2}\;\frac{x_1^{k_1}\cdots x_d^{k_d}}{\sqrt{ k_1!\cdots k_d!}},
+      \;\left(n=0,\cdots,\infty,\;\sum_{k=1}^nk_i=n\right) \right]^T
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.90ex; vertical-align: -3.14ex; " SRC="img397.svg"
+ ALT="$\displaystyle {\bf z}=\phi({\bf x})=\left[ e^{-\vert\vert{\bf x}\vert\vert^2/2}...
+...1!\cdots k_d!}},
+\;\left(n=0,\cdots,\infty,\;\sum_{k=1}^nk_i=n\right) \right]^T$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">110</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+is an infinite dimensional vector. In particular, when <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img398.svg"
+ ALT="$d=1$"></SPAN> we have
+  <BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+K(x,\,x')&=&e^{-(x-x')^2/2}=e^{-x^2/2}\, e^{-x'^2/2}\, e^{xx'}
+    =e^{-x^2/2}\, e^{-x'^2/2} \sum_{n=0}^\infty \frac{(xx')^n}{n!}
+    \nonumber\\
+    &=&\sum_{n=0}^\infty (e^{-x^2/2}\,x^n/\sqrt{n!})\;(e^{-x'^2/2}\,x'^n/\sqrt{n!})
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img399.svg"
+ ALT="$\displaystyle K(x,\,x')$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.20ex; vertical-align: -3.06ex; " SRC="img400.svg"
+ ALT="$\displaystyle e^{-(x-x')^2/2}=e^{-x^2/2}\, e^{-x'^2/2}\, e^{xx'}
+=e^{-x^2/2}\, e^{-x'^2/2} \sum_{n=0}^\infty \frac{(xx')^n}{n!}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.20ex; vertical-align: -3.06ex; " SRC="img401.svg"
+ ALT="$\displaystyle \sum_{n=0}^\infty (e^{-x^2/2}\,x^n/\sqrt{n!})\;(e^{-x'^2/2}\,x'^n/\sqrt{n!})$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">111</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+  where <!-- MATH
+ ${\bf z}=\phi(x)=\left[ e^{-x^2/2}\,x^n/\sqrt{n!},\;(n=0,\cdots,\infty)\right]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 5.11ex; vertical-align: -1.63ex; " SRC="img402.svg"
+ ALT="${\bf z}=\phi(x)=\left[ e^{-x^2/2}\,x^n/\sqrt{n!},\;(n=0,\cdots,\infty)\right]^T$"></SPAN>
+  is a mapping from a 1-D space to an infinite dimensional space.
+
+<P>
+</LI>
+</UL>
+
+<P>
+The method of kernel mapping can be applied to the SVM algorithm 
+consider previously as all data points appear in the algorithm are
+in the form of an inner product. Specifically, during the training
+process, we replace the inner product <!-- MATH
+ ${\bf x}_m^T{\bf x}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img403.svg"
+ ALT="${\bf x}_m^T{\bf x}_n$"></SPAN> in both 
+Eq. (<A HREF="node5.html#dualProblem">85</A>) and Eq. (<A HREF="node5.html#FindB">88</A>) by the kernel functioin 
+<!-- MATH
+ $K({\bf x}_m,\,{\bf x}_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img404.svg"
+ ALT="$K({\bf x}_m,\,{\bf x}_n)$"></SPAN> to get
+<BR>
+<DIV CLASS="mathdisplay"><A ID="dualProblemKernel"></A><!-- MATH
+ \begin{eqnarray}
+\mbox{maximize:} \;\;\; && L_d({\bf\alpha})
+  =\sum_{n=1}^N\alpha_n -\frac{1}{2}
+  \sum_{n=1}^N \sum_{m=1}^N \alpha_n \alpha_m y_n y_m K({\bf x}_n,{\bf x}_m)
+  \nonumber \\
+  \mbox{subject to:} \;\;\; && \sum_{n=1}^N \alpha_n y_n
+  ={\bf y}^T{\bf\alpha}=0, \;\;\;\; \alpha_n\ge 0\;\;\;(n=1,\cdots,N)
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">maximize:<IMG STYLE="height: 0.23ex; vertical-align: -0.12ex; " SRC="img274.svg"
+ ALT="$\displaystyle \;\;\;$"></TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img405.svg"
+ ALT="$\displaystyle L_d({\bf\alpha})
+=\sum_{n=1}^N\alpha_n -\frac{1}{2}
+\sum_{n=1}^N \sum_{m=1}^N \alpha_n \alpha_m y_n y_m K({\bf x}_n,{\bf x}_m)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">subject to:<IMG STYLE="height: 0.23ex; vertical-align: -0.12ex; " SRC="img274.svg"
+ ALT="$\displaystyle \;\;\;$"></TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img325.svg"
+ ALT="$\displaystyle \sum_{n=1}^N \alpha_n y_n
+={\bf y}^T{\bf\alpha}=0, \;\;\;\; \alpha_n\ge 0\;\;\;(n=1,\cdots,N)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">112</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+and
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="FindBKernel"></A><!-- MATH
+ \begin{equation}
+b=y_n-\sum_{m \in sv} \alpha_m y_m K({\bf x}_m,{\bf x}_n),\;\;\;\;\;(n\in sv)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -3.14ex; " SRC="img406.svg"
+ ALT="$\displaystyle b=y_n-\sum_{m \in sv} \alpha_m y_m K({\bf x}_m,{\bf x}_n),\;\;\;\;\;(n\in sv)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">113</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+We also replace the inner product <!-- MATH
+ ${\bf x}^T_n{\bf x}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img407.svg"
+ ALT="${\bf x}^T_n{\bf x}$"></SPAN> in 
+Eq. (<A HREF="node5.html#SVMclassification">89</A>) by <!-- MATH
+ $K({\bf x}_n,\,{\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img408.svg"
+ ALT="$K({\bf x}_n,\,{\bf x})$"></SPAN> for the 
+classification of any unlabeled point <!-- MATH
+ ${\bf z}=\phi({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img365.svg"
+ ALT="${\bf z}=\phi({\bf x})$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="SVMclassificationKernel"></A><!-- MATH
+ \begin{equation}
+f({\bf z})={\bf w}^T{\bf z}+b
+  =\sum_{n\in sv}\alpha_ny_n\,({\bf z}_n^T{\bf z})+b
+  =\sum_{n\in sv}\alpha_ny_n\,K({\bf x}_n,{\bf x})+b\;\;\;\;
+  \left\{\begin{array}{ll}>0 & {\bf x}\in C_+\\<0 & {\bf x}\in C_-
+  \end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.74ex; vertical-align: -3.14ex; " SRC="img409.svg"
+ ALT="$\displaystyle f({\bf z})={\bf w}^T{\bf z}+b
+=\sum_{n\in sv}\alpha_ny_n\,({\bf z...
+...\{\begin{array}{ll}&gt;0 &amp; {\bf x}\in C_+\\ &lt;0 &amp; {\bf x}\in C_-
+\end{array}\right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">114</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Again, we note that the normal vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img248.svg"
+ ALT="${\bf w}$"></SPAN> in Eq. (<A HREF="node5.html#FindW">86</A>) 
+never needs to be explicitely calculated. As now both the training
+and classification are carried out in some higher dimensional space 
+<!-- MATH
+ ${\bf z}=\phi({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img365.svg"
+ ALT="${\bf z}=\phi({\bf x})$"></SPAN>, in which the classes are more likely linearly
+separable, the classification can be more effectively. More generally, 
+the kernel method can be applied to any algorithm, so long as the data
+always appear in the form of an inner product.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node7.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node4.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node5.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node7.html">Soft Margin SVM</A>
+<B> Up:</B> <A
+ HREF="node4.html">Support Vector machine</A>
+<B> Previous:</B> <A
+ HREF="node5.html">Maximal Margin and Support</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

@@ -1,0 +1,1375 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Sequential Minimal Optimization (SMO) Algorithm</TITLE>
+<META NAME="description" CONTENT="Sequential Minimal Optimization (SMO) Algorithm">
+<META NAME="keywords" CONTENT="ch9">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch9.css">
+
+<LINK REL="next" HREF="node9.html">
+<LINK REL="previous" HREF="node7.html">
+<LINK REL="next" HREF="node9.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node9.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node4.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node7.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node9.html">Multi-Class Classification</A>
+<B> Up:</B> <A
+ HREF="node4.html">Support Vector machine</A>
+<B> Previous:</B> <A
+ HREF="node7.html">Soft Margin SVM</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION00044000000000000000">
+Sequential Minimal Optimization (SMO) Algorithm</A>
+</H2>
+
+<P>
+The sequential minimal optimization (SMO, due to
+<A ID="tex2html13"
+  HREF="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-98-14.pdf">John Platt 1998</A>, also see notes
+<A ID="tex2html14"
+  HREF="http://web.cs.iastate.edu/~honavar/smo-svm.pdf">here</A>)
+is a more efficient algorithm for solving the SVM problem, compared with the
+generic QP algorithms such as the internal-point method. The SMO algorithm 
+can be considered as a method of decomposition, by which an optimization 
+problem of multiple variables is decomposed into a series of subproblems 
+each optimizing an objective function of a small number of variables,
+typically only one, while all other variables are treated as constants 
+that remain unchanged in the subproblem. For example, the coordinate 
+descent algorithm discussed previously is just such a decomposition method,
+which solves a problem in multi-dimensional space by converting it into a 
+sequence of subproblems each in a one-dimensional space.
+
+<P>
+When applying the decomposition method to the soft margin SVM problem, we
+could consider optimizing only one variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img180.svg"
+ ALT="$\alpha_i$"></SPAN>, while treating all
+remaining variables <!-- MATH
+ $\alpha_1,\cdots,\alpha_{i-1},\alpha_{i+1},\cdots,\alpha_N$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.66ex; " SRC="img454.svg"
+ ALT="$\alpha_1,\cdots,\alpha_{i-1},\alpha_{i+1},\cdots,\alpha_N$"></SPAN>
+as constants. However, due to the constraint <!-- MATH
+ $\sum_{n=1}^N\alpha_ny_n=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.81ex; " SRC="img339.svg"
+ ALT="$\sum_{n=1}^N \alpha_n y_n=0$"></SPAN>, 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img180.svg"
+ ALT="$\alpha_i$"></SPAN> is a linear combination of <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img455.svg"
+ ALT="$N-1$"></SPAN> constants and is therefore 
+also a constant. We therefore need to consider two variables at a time, 
+here assumed to be <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img180.svg"
+ ALT="$\alpha_i$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img456.svg"
+ ALT="$\alpha_j$"></SPAN>, while treating the remaining
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img457.svg"
+ ALT="$N-2$"></SPAN> variables as constants. The objective function of such a subproblem 
+can be obtained by dropping all constant terms independent of the two 
+selected variables <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img180.svg"
+ ALT="$\alpha_i$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img456.svg"
+ ALT="$\alpha_j$"></SPAN> in the original objective
+function in Eq. (<A HREF="node7.html#SVMSM">131</A>):
+<BR>
+<DIV CLASS="mathdisplay"><A ID="objective2"></A><!-- MATH
+ \begin{eqnarray}
+& \mbox{maximize} & L(\alpha_i,\alpha_j)
+  =\alpha_i+\alpha_j-\frac{1}{2}\left(
+    \alpha_i^2{\bf x}_i^T{\bf x}_i+\alpha_j^2{\bf x}_j^T{\bf x}_j
+  +2\alpha_i\alpha_jy_iy_j{\bf x}_i^T{\bf x}_j\right)
+  \nonumber\\
+  &&-\alpha_iy_i\left(\sum_{n\ne i}\alpha_ny_n{\bf x}_n^T\right){\bf x}_i
+    -\alpha_jy_j\left(\sum_{n\ne j}\alpha_ny_n{\bf x}_n^T\right){\bf x}_j
+  \nonumber\\
+  &=&\alpha_i+\alpha_j-\frac{1}{2}\left(\alpha_1^2 K_{ii}+\alpha_2^2K_{jj}
+  +2\alpha_i\alpha_jy_iy_jK_{ij}\right)
+  \nonumber\\
+  &&-\alpha_iy_i\sum_{n\ne i}\alpha_ny_nK_{ni}
+    -\alpha_jy_j\sum_{n\ne j}\alpha_ny_nK_{nj}
+  \nonumber\\
+  & \mbox{subject to} & 0\le\alpha_i,\alpha_j\le C,\;\;\;\;\;\;
+  \sum_{n=1}^N \alpha_ny_n=0
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP>maximize</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img458.svg"
+ ALT="$\displaystyle L(\alpha_i,\alpha_j)
+=\alpha_i+\alpha_j-\frac{1}{2}\left(
+\alpha_...
+...pha_j^2{\bf x}_j^T{\bf x}_j
++2\alpha_i\alpha_jy_iy_j{\bf x}_i^T{\bf x}_j\right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img459.svg"
+ ALT="$\displaystyle -\alpha_iy_i\left(\sum_{n\ne i}\alpha_ny_n{\bf x}_n^T\right){\bf x}_i
+-\alpha_jy_j\left(\sum_{n\ne j}\alpha_ny_n{\bf x}_n^T\right){\bf x}_j$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img460.svg"
+ ALT="$\displaystyle \alpha_i+\alpha_j-\frac{1}{2}\left(\alpha_1^2 K_{ii}+\alpha_2^2K_{jj}
++2\alpha_i\alpha_jy_iy_jK_{ij}\right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.04ex; vertical-align: -3.46ex; " SRC="img461.svg"
+ ALT="$\displaystyle -\alpha_iy_i\sum_{n\ne i}\alpha_ny_nK_{ni}
+-\alpha_jy_j\sum_{n\ne j}\alpha_ny_nK_{nj}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP>subject to</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img462.svg"
+ ALT="$\displaystyle 0\le\alpha_i,\alpha_j\le C,\;\;\;\;\;\;
+\sum_{n=1}^N \alpha_ny_n=0$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">135</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+where all inner products <!-- MATH
+ ${\bf x}_m^T{\bf x}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img403.svg"
+ ALT="${\bf x}_m^T{\bf x}_n$"></SPAN> have been replaced 
+by the corresponding kernel function 
+<!-- MATH
+ $K_{mn}=K({\bf x}_m,{\bf x}_n)={\bf z}_m^T{\bf z}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img463.svg"
+ ALT="$K_{mn}=K({\bf x}_m,{\bf x}_n)={\bf z}_m^T{\bf z}_n$"></SPAN> with
+<!-- MATH
+ ${\bf z}_n=\phi({\bf x}_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img361.svg"
+ ALT="${\bf z}_n=\phi({\bf x}_n)$"></SPAN>, so that the kernel method can be used.
+
+<P>
+This maximization problem can be solved iteratively. Given the 
+previous values <!-- MATH
+ $\alpha_n^{old}\,(n=1,\cdots,N)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img464.svg"
+ ALT="$\alpha_n^{old}\,(n=1,\cdots,N)$"></SPAN>, we update the two
+selected variables by finding the new values <!-- MATH
+ $\alpha_i^{new}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.72ex; " SRC="img465.svg"
+ ALT="$\alpha_i^{new}$"></SPAN> and
+<!-- MATH
+ $\alpha_j^{new}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -1.04ex; " SRC="img466.svg"
+ ALT="$\alpha_j^{new}$"></SPAN> that maximize <!-- MATH
+ $L(\alpha_i,\alpha_j)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img467.svg"
+ ALT="$L(\alpha_i,\alpha_j)$"></SPAN>, subject to 
+the two constraints. 
+
+<P>
+We rewrite the second constraint as
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\alpha_iy_i+\alpha_jy_j=-\sum_{n\ne i,j} \alpha_ny_n
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -3.46ex; " SRC="img468.svg"
+ ALT="$\displaystyle \alpha_iy_i+\alpha_jy_j=-\sum_{n\ne i,j} \alpha_ny_n$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">136</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and multiply both sides by <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img469.svg"
+ ALT="$y_i$"></SPAN> to get
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="2ndConstraint"></A><!-- MATH
+ \begin{equation}
+y_i^2\alpha_i+y_iy_j\alpha_j=\alpha_i+s\alpha_j
+  =\left(-\sum_{n\ne i,j} \alpha_ny_n\right)y_i
+  =\delta,\;\;\;\;\;\mbox{i.e.}\;\;\;\;\;\alpha_i=\delta-s\alpha_j
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img470.svg"
+ ALT="$\displaystyle y_i^2\alpha_i+y_iy_j\alpha_j=\alpha_i+s\alpha_j
+=\left(-\sum_{n\ne i,j} \alpha_ny_n\right)y_i
+=\delta,\;\;\;\;\;$">i.e.<IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img471.svg"
+ ALT="$\displaystyle \;\;\;\;\;\alpha_i=\delta-s\alpha_j$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">137</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where we have defined <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img472.svg"
+ ALT="$s=y_iy_j$"></SPAN> and 
+<!-- MATH
+ $\delta=(-\sum_{n\ne i,j} \alpha_ny_n)y_i$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -1.13ex; " SRC="img473.svg"
+ ALT="$\delta=(-\sum_{n\ne i,j} \alpha_ny_n)y_i$"></SPAN>, which remains the 
+same before and after <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img180.svg"
+ ALT="$\alpha_i$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img456.svg"
+ ALT="$\alpha_j$"></SPAN> are updated:
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="a1a2const"></A><!-- MATH
+ \begin{equation}
+\alpha_i^{new}+s\alpha_j^{new}=\alpha_i^{old}+s\alpha_j^{old}=\delta,
+  \;\;\;\;\;\mbox{i.e.,}\;\;\;\;\;
+  \Delta\alpha_i=\alpha_i^{new}-\alpha_i^{old}
+  =-s(\alpha_j^{new}-\alpha_j^{old})=-s\Delta\alpha_j
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -1.01ex; " SRC="img474.svg"
+ ALT="$\displaystyle \alpha_i^{new}+s\alpha_j^{new}=\alpha_i^{old}+s\alpha_j^{old}=\delta,
+\;\;\;\;\;$">i.e.,<IMG STYLE="height: 3.25ex; vertical-align: -1.01ex; " SRC="img475.svg"
+ ALT="$\displaystyle \;\;\;\;\;
+\Delta\alpha_i=\alpha_i^{new}-\alpha_i^{old}
+=-s(\alpha_j^{new}-\alpha_j^{old})=-s\Delta\alpha_j$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">138</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+We now consider a closed-form solution for updating <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img180.svg"
+ ALT="$\alpha_i$"></SPAN> and
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img456.svg"
+ ALT="$\alpha_j$"></SPAN> in each iteration of this two-variable optimization problem.
+
+<P>
+We rewrite Eq. (<A HREF="node5.html#FindW">86</A>) as
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\sum_{n\ne i,j}\alpha_ny_n{\bf x}_n
+  ={\bf w}-\alpha_iy_i{\bf x}_i-\alpha_jy_j{\bf x}_j
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -3.46ex; " SRC="img476.svg"
+ ALT="$\displaystyle \sum_{n\ne i,j}\alpha_ny_n{\bf x}_n
+={\bf w}-\alpha_iy_i{\bf x}_i-\alpha_jy_j{\bf x}_j$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">139</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+so that the two summations in <!-- MATH
+ $L(\alpha_i,\alpha_j)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img467.svg"
+ ALT="$L(\alpha_i,\alpha_j)$"></SPAN>, now denoted by
+<!-- MATH
+ $v_k\;(k=1,2)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img477.svg"
+ ALT="$v_k\;(k=1,2)$"></SPAN>, can be written as
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+v_k&=&\sum_{n\ne i,j}\alpha_ny_nK_{nk}
+  =\sum_{n\ne i,j}\alpha_ny_nK_{nk}-\alpha_iy_iK_{ik}-\alpha_jy_jK_{jk}
+  \nonumber\\
+  &=&\left(\sum_{n\ne i,j}\alpha_ny_nK_{nk}+b\right)
+  -b-\alpha_iy_iK_{ik}-\alpha_jy_jK_{jk}
+  \nonumber\\
+  &=&u_k-b-\alpha_iy_iK_{ik}-\alpha_jy_jK_{jk}
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img478.svg"
+ ALT="$\displaystyle v_k$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.04ex; vertical-align: -3.46ex; " SRC="img479.svg"
+ ALT="$\displaystyle \sum_{n\ne i,j}\alpha_ny_nK_{nk}
+=\sum_{n\ne i,j}\alpha_ny_nK_{nk}-\alpha_iy_iK_{ik}-\alpha_jy_jK_{jk}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img480.svg"
+ ALT="$\displaystyle \left(\sum_{n\ne i,j}\alpha_ny_nK_{nk}+b\right)
+-b-\alpha_iy_iK_{ik}-\alpha_jy_jK_{jk}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img481.svg"
+ ALT="$\displaystyle u_k-b-\alpha_iy_iK_{ik}-\alpha_jy_jK_{jk}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">140</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+where 
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+u_k=\sum_{n=1}^N\alpha_ny_nK_{nk}+b
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img482.svg"
+ ALT="$\displaystyle u_k=\sum_{n=1}^N\alpha_ny_nK_{nk}+b$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">141</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+is the output (Eq. (<A HREF="node6.html#SVMclassificationKernel">114</A>) corresponding to
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img483.svg"
+ ALT="${\bf x}_k$"></SPAN> as the input. Now the objective function above can be 
+written as:
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+L(\alpha_i,\alpha_j)&=&\alpha_i+\alpha_j-\frac{1}{2}
+  (\alpha_i^2 K_{ii}+\alpha_j^2K_{jj}
+  +2s\alpha_i\alpha_jK_{ij})-\alpha_iy_iv_i-\alpha_jy_jv_j
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img484.svg"
+ ALT="$\displaystyle L(\alpha_i,\alpha_j)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img485.svg"
+ ALT="$\displaystyle \alpha_i+\alpha_j-\frac{1}{2}
+(\alpha_i^2 K_{ii}+\alpha_j^2K_{jj}
++2s\alpha_i\alpha_jK_{ij})-\alpha_iy_iv_i-\alpha_jy_jv_j$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">142</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+Our goal is to find the optimal values <!-- MATH
+ $\alpha_i^{new}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.72ex; " SRC="img465.svg"
+ ALT="$\alpha_i^{new}$"></SPAN> and <!-- MATH
+ $\alpha_j^{new}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -1.04ex; " SRC="img466.svg"
+ ALT="$\alpha_j^{new}$"></SPAN> 
+that maximize the objective function <!-- MATH
+ $L(\alpha_i,\alpha_j)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img467.svg"
+ ALT="$L(\alpha_i,\alpha_j)$"></SPAN>. To do so, 
+we first express it as a function of <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img456.svg"
+ ALT="$\alpha_j$"></SPAN> alone by substituting
+<!-- MATH
+ $\alpha_i=\delta-s\alpha_j$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img486.svg"
+ ALT="$\alpha_i=\delta-s\alpha_j$"></SPAN> (Eq. (<A HREF="#a1a2const">138</A>)):
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+L(\alpha_j)&=&\delta+(1-s)\alpha_j-\frac{1}{2}(\delta-s\alpha_j)^2K_{ii}
+  -\frac{1}{2}\alpha_2^2K_{jj}
+  \nonumber\\
+  &&-s(\delta-s\alpha_2)\alpha_2K_{ij}
+  -(\delta-s\alpha_j)y_iv_i-\alpha_jy_jv_j
+  \nonumber\\
+  &=&\frac{1}{2}(2K_{ij}-K_{ii}-K_{jj})\alpha_j^2
+  +[1-s+s\delta(K_{ii}-K_{ij})+y_j(v_i-v_j)]\alpha_j+c
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img487.svg"
+ ALT="$\displaystyle L(\alpha_j)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img488.svg"
+ ALT="$\displaystyle \delta+(1-s)\alpha_j-\frac{1}{2}(\delta-s\alpha_j)^2K_{ii}
+-\frac{1}{2}\alpha_2^2K_{jj}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img489.svg"
+ ALT="$\displaystyle -s(\delta-s\alpha_2)\alpha_2K_{ij}
+-(\delta-s\alpha_j)y_iv_i-\alpha_jy_jv_j$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img490.svg"
+ ALT="$\displaystyle \frac{1}{2}(2K_{ij}-K_{ii}-K_{jj})\alpha_j^2
++[1-s+s\delta(K_{ii}-K_{ij})+y_j(v_i-v_j)]\alpha_j+c$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">143</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+where scalar <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img491.svg"
+ ALT="$c$"></SPAN> represents all constant terms independent of <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img180.svg"
+ ALT="$\alpha_i$"></SPAN>
+and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img456.svg"
+ ALT="$\alpha_j$"></SPAN> and are therefore dropped. Now the objective function 
+becomes a quadratic function of the single variable <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img456.svg"
+ ALT="$\alpha_j$"></SPAN>. Consider 
+the coefficients of this quadratic function:
+
+<UL>
+<LI>The coefficient of <!-- MATH
+ $\alpha_j^2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -1.04ex; " SRC="img492.svg"
+ ALT="$\alpha_j^2$"></SPAN>:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\frac{1}{2}(2K_{ij}-K_{ii}-K_{jj})=\frac{1}{2}\eta
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img493.svg"
+ ALT="$\displaystyle \frac{1}{2}(2K_{ij}-K_{ii}-K_{jj})=\frac{1}{2}\eta$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">144</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img494.svg"
+ ALT="$\eta$"></SPAN> is defined as
+  <BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+\eta&=&2K_{ij}-K_{ii}-K_{jj}
+    =2{\bf z}_i^T{\bf z}_j-{\bf z}_i^T{\bf z}_i-{\bf z}_j^T{\bf z}_j
+    =-({\bf z}_i-{\bf z}_j)^T({\bf z}_i-{\bf z}_j)
+    \nonumber\\
+    &=&-||{\bf z}_i-{\bf z}_j||^2\le 0
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img495.svg"
+ ALT="$\displaystyle \eta$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.25ex; vertical-align: -1.01ex; " SRC="img496.svg"
+ ALT="$\displaystyle 2K_{ij}-K_{ii}-K_{jj}
+=2{\bf z}_i^T{\bf z}_j-{\bf z}_i^T{\bf z}_i-{\bf z}_j^T{\bf z}_j
+=-({\bf z}_i-{\bf z}_j)^T({\bf z}_i-{\bf z}_j)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img497.svg"
+ ALT="$\displaystyle -\vert\vert{\bf z}_i-{\bf z}_j\vert\vert^2\le 0$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">145</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+</LI>
+<LI>The coefficient of <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img456.svg"
+ ALT="$\alpha_j$"></SPAN>:
+  <BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+&&1-s+s\delta(K_{ii}-K_{ij})+y_j(v_i-v_j)
+    \nonumber\\
+    &=&1-s+(s\alpha_i+\alpha_j)(K_{ii}-K_{ij})
+    \nonumber\\
+    &&+y_j[(u_i-b-\alpha_iy_iK_{ii}-\alpha_jy_jK_{ij})-
+      (u_j-b-\alpha_iy_iK_{ij}-\alpha_jy_jK_{jj})]
+    \nonumber\\
+    &=&1-s+s\alpha_1(K_{ii}-K_{ij})+\alpha_2(K_{ii}-K_{ij})
+    \nonumber\\
+    &&+y_j(u_i-u_j)-\alpha_isK_{ii}-\alpha_jK_{ij}
+    +\alpha_isK_{ij}+\alpha_jK_{jj}
+    \nonumber\\
+    &=&y_j^2-s-\alpha_j(2K_{ij}-K_{ii}-2K_{jj})+y_j(u_i-u_j)
+    \nonumber\\
+    &=&y_j(u_i-y_j-u_j+y_j)-\alpha_j(2K_{ij}-K_{ii}-K_{jj})
+    \nonumber\\
+    &=&y_j(E_i-E_j)-\alpha_j\eta
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img498.svg"
+ ALT="$\displaystyle 1-s+s\delta(K_{ii}-K_{ij})+y_j(v_i-v_j)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img499.svg"
+ ALT="$\displaystyle 1-s+(s\alpha_i+\alpha_j)(K_{ii}-K_{ij})$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img500.svg"
+ ALT="$\displaystyle +y_j[(u_i-b-\alpha_iy_iK_{ii}-\alpha_jy_jK_{ij})-
+(u_j-b-\alpha_iy_iK_{ij}-\alpha_jy_jK_{jj})]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img501.svg"
+ ALT="$\displaystyle 1-s+s\alpha_1(K_{ii}-K_{ij})+\alpha_2(K_{ii}-K_{ij})$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img502.svg"
+ ALT="$\displaystyle +y_j(u_i-u_j)-\alpha_isK_{ii}-\alpha_jK_{ij}
++\alpha_isK_{ij}+\alpha_jK_{jj}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.25ex; vertical-align: -1.01ex; " SRC="img503.svg"
+ ALT="$\displaystyle y_j^2-s-\alpha_j(2K_{ij}-K_{ii}-2K_{jj})+y_j(u_i-u_j)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img504.svg"
+ ALT="$\displaystyle y_j(u_i-y_j-u_j+y_j)-\alpha_j(2K_{ij}-K_{ii}-K_{jj})$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img505.svg"
+ ALT="$\displaystyle y_j(E_i-E_j)-\alpha_j\eta$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">146</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+  where we have defined 
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+E_k=u_k-y_k=\sum_{n=1}^N\alpha^{old}_ny_nK_{nk}+b-y_k
+    \;\;\;\;\;(k=1,2)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img506.svg"
+ ALT="$\displaystyle E_k=u_k-y_k=\sum_{n=1}^N\alpha^{old}_ny_nK_{nk}+b-y_k
+\;\;\;\;\;(k=1,2)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">147</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+as the difference between the desired output <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img507.svg"
+ ALT="$y_k$"></SPAN> and the 
+  actual output based on the previous values of the variables 
+  <!-- MATH
+ $\alpha_n^{old}\;(n=1,\cdots,N)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img508.svg"
+ ALT="$\alpha_n^{old}\;(n=1,\cdots,N)$"></SPAN>.
+</LI>
+</UL>
+Now the quadratic objective function can be rewritten as:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+L(\alpha_j)=\frac{1}{2}\eta\alpha_j^2
+  +\left[y_j(E_i-E_j)-\alpha_j^{old}\eta\right]\alpha_j
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img509.svg"
+ ALT="$\displaystyle L(\alpha_j)=\frac{1}{2}\eta\alpha_j^2
++\left[y_j(E_i-E_j)-\alpha_j^{old}\eta\right]\alpha_j$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">148</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Given the previous values <!-- MATH
+ $\alpha_n^{old}\;(n=1,\cdots,N)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img508.svg"
+ ALT="$\alpha_n^{old}\;(n=1,\cdots,N)$"></SPAN> in 
+the coefficients, we will find <!-- MATH
+ $\alpha_j^{new}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -1.04ex; " SRC="img466.svg"
+ ALT="$\alpha_j^{new}$"></SPAN> that maximizes
+<!-- MATH
+ $L(\alpha_j)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img510.svg"
+ ALT="$L(\alpha_j)$"></SPAN>. Consider its first and second order derivatives:
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+\frac{d}{d\alpha_j}L(\alpha_j)&=&\eta\alpha_j+y_j(E_i-E_j)-\alpha_j^{old}\eta
+  \nonumber\\
+  \frac{d^2}{d\alpha_j^2}L(\alpha_j)&=&\eta\le 0
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 5.81ex; vertical-align: -2.37ex; " SRC="img511.svg"
+ ALT="$\displaystyle \frac{d}{d\alpha_j}L(\alpha_j)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.25ex; vertical-align: -1.01ex; " SRC="img512.svg"
+ ALT="$\displaystyle \eta\alpha_j+y_j(E_i-E_j)-\alpha_j^{old}\eta$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 6.27ex; vertical-align: -2.67ex; " SRC="img513.svg"
+ ALT="$\displaystyle \frac{d^2}{d\alpha_j^2}L(\alpha_j)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img514.svg"
+ ALT="$\displaystyle \eta\le 0$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">149</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+As the second order derivative of <!-- MATH
+ $L(\alpha_j)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img510.svg"
+ ALT="$L(\alpha_j)$"></SPAN> is <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img515.svg"
+ ALT="$\eta\le 0$"></SPAN>, it 
+has a maximum. Solving the equation <!-- MATH
+ $d\,L(\alpha_j)/d\alpha_j=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img516.svg"
+ ALT="$d\,L(\alpha_j)/d\alpha_j=0$"></SPAN>, we 
+get <!-- MATH
+ $\alpha_j^{new}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -1.04ex; " SRC="img466.svg"
+ ALT="$\alpha_j^{new}$"></SPAN> that maximizes <!-- MATH
+ $L(\alpha_j)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img510.svg"
+ ALT="$L(\alpha_j)$"></SPAN> based on the old 
+value <!-- MATH
+ $\alpha_j^{old}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -1.04ex; " SRC="img517.svg"
+ ALT="$\alpha_j^{old}$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\alpha_j^{new}=\alpha_j^{old}+\frac{y_j(E_j-E_i)}{\eta}
+  =\alpha_j^{old}+\Delta\alpha_j,
+  \;\;\;\;\;\;\;\;
+  \Delta\alpha_j=\alpha_j^{new}-\alpha_j^{old}=\frac{y_j(E_j-E_i)}{\eta},
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.57ex; vertical-align: -2.16ex; " SRC="img518.svg"
+ ALT="$\displaystyle \alpha_j^{new}=\alpha_j^{old}+\frac{y_j(E_j-E_i)}{\eta}
+=\alpha_j...
+...;\;\;\;
+\Delta\alpha_j=\alpha_j^{new}-\alpha_j^{old}=\frac{y_j(E_j-E_i)}{\eta},$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">150</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+Note that this is an unconstrained solution, which needs to be modified
+if the constraints in Eq.&nbsp;(<A HREF="#objective2">135</A>) are violated. As shown in
+the figure below, <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img180.svg"
+ ALT="$\alpha_i$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img456.svg"
+ ALT="$\alpha_j$"></SPAN> are inside the square of 
+size <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img416.svg"
+ ALT="$C$"></SPAN>, due to the first constraint <!-- MATH
+ $0\le \alpha_i,\;\alpha_j\le C$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img519.svg"
+ ALT="$0\le \alpha_i,\;\alpha_j\le C$"></SPAN>;
+also, due to the second constraint <!-- MATH
+ $\alpha_i+s\alpha_j=\delta$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img520.svg"
+ ALT="$\alpha_i+s\alpha_j=\delta$"></SPAN>
+(Eq. (<A HREF="#2ndConstraint">137</A>)), they have to be on the diagonal line
+segment inside the square.
+
+<P>
+<IMG STYLE="" SRC="../figures/SMOfig1a.png"
+ ALT="SMOfig1a.png">
+
+<P>
+The four panels correspond to the four possible cases, depending 
+on whether <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img521.svg"
+ ALT="$s=1$"></SPAN> (<!-- MATH
+ $y_i=y_j=\pm 1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img522.svg"
+ ALT="$y_i=y_j=\pm 1$"></SPAN>, panels 1 and 2), or <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img523.svg"
+ ALT="$s=-1$"></SPAN>
+(<!-- MATH
+ $y_i=-y_j=\pm 1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img524.svg"
+ ALT="$y_i=-y_j=\pm 1$"></SPAN>, panels 3 and 4), and whether <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img525.svg"
+ ALT="$\delta&lt;C$"></SPAN> (panels
+1 and 3) or <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img526.svg"
+ ALT="$\delta&gt;C$"></SPAN> (panels 2 and 4), which can be further 
+summarized below in terms of the lower bound <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img527.svg"
+ ALT="$L$"></SPAN> and upper bound 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img528.svg"
+ ALT="$H$"></SPAN> of <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img529.svg"
+ ALT="$\alpha_2$"></SPAN>: 
+
+<UL>
+<LI>If <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img521.svg"
+ ALT="$s=1$"></SPAN>, then   <!-- MATH
+ $\alpha_i+s\alpha_j=\alpha_i+\alpha_j=\delta$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img530.svg"
+ ALT="$\alpha_i+s\alpha_j=\alpha_i+\alpha_j=\delta$"></SPAN>,
+  
+<UL>
+<LI>if <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img525.svg"
+ ALT="$\delta&lt;C$"></SPAN>, then <!-- MATH
+ $\min(\alpha_j)=0,\;\max(\alpha_j)=\delta$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img531.svg"
+ ALT="$\min(\alpha_j)=0,\;\max(\alpha_j)=\delta$"></SPAN> 
+    (first panel)
+</LI>
+<LI>if <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img526.svg"
+ ALT="$\delta&gt;C$"></SPAN>, then <!-- MATH
+ $\min(\alpha_j)=\delta-C,\;\max(\alpha_j)=C$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img532.svg"
+ ALT="$\min(\alpha_j)=\delta-C,\;\max(\alpha_j)=C$"></SPAN>
+    (second panel)
+  
+</LI>
+</UL>
+  Combining these two cases, we have
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left\{\begin{array}{l}
+    L=\max(0,\;\delta-C)=\max(0,\;\alpha_i+\alpha_j-C)\\
+    H=\min(\delta,\;C)=\min(\alpha_i+\alpha_j,\;C)
+    \end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img533.svg"
+ ALT="$\displaystyle \left\{\begin{array}{l}
+L=\max(0,\;\delta-C)=\max(0,\;\alpha_i+\alpha_j-C)\\
+H=\min(\delta,\;C)=\min(\alpha_i+\alpha_j,\;C)
+\end{array}\right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">151</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+</LI>
+<LI>If <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img523.svg"
+ ALT="$s=-1$"></SPAN>, then <!-- MATH
+ $\alpha_i+s\alpha_j=\alpha_i-\alpha_j=\delta$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img534.svg"
+ ALT="$\alpha_i+s\alpha_j=\alpha_i-\alpha_j=\delta$"></SPAN>,
+  
+<UL>
+<LI>if <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img535.svg"
+ ALT="$\delta&gt;0$"></SPAN>, then <!-- MATH
+ $\min(\alpha_j)=0,\;\max(\alpha_j)=C-\delta$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img536.svg"
+ ALT="$\min(\alpha_j)=0,\;\max(\alpha_j)=C-\delta$"></SPAN>
+    (third panel)
+</LI>
+<LI>if <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img537.svg"
+ ALT="$\delta&lt;0$"></SPAN>, then <!-- MATH
+ $\min(\alpha_j)=-\delta,\;\max(\alpha_j)=C$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img538.svg"
+ ALT="$\min(\alpha_j)=-\delta,\;\max(\alpha_j)=C$"></SPAN>
+    (fourth panel)
+  
+</LI>
+</UL>
+  Combining these two cases, we have
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left\{\begin{array}{l}
+    L=\max(0,\;-\delta)=\max(0,\;\alpha_j-\alpha_i)\\
+    H=\min(C-\delta,\;C)=\min(C+\alpha_j-\alpha_i,\;C)
+    \end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img539.svg"
+ ALT="$\displaystyle \left\{\begin{array}{l}
+L=\max(0,\;-\delta)=\max(0,\;\alpha_j-\alpha_i)\\
+H=\min(C-\delta,\;C)=\min(C+\alpha_j-\alpha_i,\;C)
+\end{array}\right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">152</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+</LI>
+</UL>
+
+<P>
+Now we apply the constraints in terms of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img527.svg"
+ ALT="$L$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img528.svg"
+ ALT="$H$"></SPAN> to the optimial
+solution <!-- MATH
+ $\alpha_j^{new}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -1.04ex; " SRC="img466.svg"
+ ALT="$\alpha_j^{new}$"></SPAN> obtained previously to get <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img456.svg"
+ ALT="$\alpha_j$"></SPAN> that 
+is feasible as well as optmal:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\alpha_j^{new}\Longleftarrow \left\{\begin{array}{cl}
+  H & \mbox{if }\alpha_j^{new}\ge H\\
+  \alpha_j^{new} & \mbox{if } L<\alpha_2^{new} < H\\
+  L & \mbox{if } \alpha_j^{new}\le L\end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.83ex; vertical-align: -3.84ex; " SRC="img540.svg"
+ ALT="$\displaystyle \alpha_j^{new}\Longleftarrow \left\{\begin{array}{cl}
+H &amp; \mbox{i...
+... } L&lt;\alpha_2^{new} &lt; H\\
+L &amp; \mbox{if } \alpha_j^{new}\le L\end{array}\right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">153</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+We can further find <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img180.svg"
+ ALT="$\alpha_i$"></SPAN> based on Eq. (<A HREF="#a1a2const">138</A>):
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\alpha_i^{new}=\alpha_i^{old}-s\Delta\alpha_j
+  =\alpha_i^{old}-s(\alpha_j^{new}-\alpha_j^{old})
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -1.01ex; " SRC="img541.svg"
+ ALT="$\displaystyle \alpha_i^{new}=\alpha_i^{old}-s\Delta\alpha_j
+=\alpha_i^{old}-s(\alpha_j^{new}-\alpha_j^{old})$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">154</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and update the weight vector based on Eq. (<A HREF="node7.html#KKT1">118</A>):
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+{\bf w}^{new}&=&\sum_{n\ne i,j} y_n\alpha_n^{old}{\bf x}_n
+  +y_i\alpha_i^{new}{\bf x}_i+y_j\alpha_j^{new}{\bf x}_j
+  \nonumber\\
+  &=&{\bf w}^{old}-y_i\alpha_i^{old}{\bf x}_i-y_j\alpha_j^{old}{\bf x}_j
+  +y_i\alpha_i^{new}{\bf x}_i+y_j\alpha_j^{new}{\bf x}_j
+  \nonumber\\
+  &=&{\bf w}^{old}+y_i\Delta\alpha_i{\bf x}_i+y_j\Delta\alpha_j{\bf x}_j
+  ={\bf w}^{old}+\Delta{\bf w}
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.09ex; vertical-align: -0.12ex; " SRC="img542.svg"
+ ALT="$\displaystyle {\bf w}^{new}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.04ex; vertical-align: -3.46ex; " SRC="img543.svg"
+ ALT="$\displaystyle \sum_{n\ne i,j} y_n\alpha_n^{old}{\bf x}_n
++y_i\alpha_i^{new}{\bf x}_i+y_j\alpha_j^{new}{\bf x}_j$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.25ex; vertical-align: -1.01ex; " SRC="img544.svg"
+ ALT="$\displaystyle {\bf w}^{old}-y_i\alpha_i^{old}{\bf x}_i-y_j\alpha_j^{old}{\bf x}_j
++y_i\alpha_i^{new}{\bf x}_i+y_j\alpha_j^{new}{\bf x}_j$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img545.svg"
+ ALT="$\displaystyle {\bf w}^{old}+y_i\Delta\alpha_i{\bf x}_i+y_j\Delta\alpha_j{\bf x}_j
+={\bf w}^{old}+\Delta{\bf w}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">155</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+where <!-- MATH
+ $\Delta{\bf w}={\bf w}^{new}-{\bf w}^{old}
+=y_i\Delta\alpha_i{\bf x}_i+y_j\Delta\alpha_j{\bf x}_j$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img546.svg"
+ ALT="$\Delta{\bf w}={\bf w}^{new}-{\bf w}^{old}
+=y_i\Delta\alpha_i{\bf x}_i+y_j\Delta\alpha_j{\bf x}_j$"></SPAN>.
+To update <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img249.svg"
+ ALT="$b$"></SPAN>, consider:
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+\Delta E_k&=&E_k^{new}-E_k^{old}=u_k^{new}-u_k^{old}
+  \nonumber\\
+  &=&\sum_{n=1}^N\alpha_n^{new}y_nK_{nk}+b^{new}
+  -\sum_{n=1}^N\alpha_n^{old}y_nK_{nk}-b^{old}
+  \nonumber\\
+  &=&y_i\Delta\alpha_iK_{ik}+y_j\Delta\alpha_jK_{jk}
+  +b^{new}-b^{old} \;\;\;\;\;(k=1,2)
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img547.svg"
+ ALT="$\displaystyle \Delta E_k$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.69ex; " SRC="img548.svg"
+ ALT="$\displaystyle E_k^{new}-E_k^{old}=u_k^{new}-u_k^{old}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img549.svg"
+ ALT="$\displaystyle \sum_{n=1}^N\alpha_n^{new}y_nK_{nk}+b^{new}
+-\sum_{n=1}^N\alpha_n^{old}y_nK_{nk}-b^{old}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img550.svg"
+ ALT="$\displaystyle y_i\Delta\alpha_iK_{ik}+y_j\Delta\alpha_jK_{jk}
++b^{new}-b^{old} \;\;\;\;\;(k=1,2)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">156</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+Consider the following cases:
+
+<UL>
+<LI>If <!-- MATH
+ $0<\alpha_k<C$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img551.svg"
+ ALT="$0&lt;\alpha_k&lt;C$"></SPAN> for either <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img552.svg"
+ ALT="$k=i$"></SPAN> or <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img553.svg"
+ ALT="$k=j$"></SPAN>, then <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img554.svg"
+ ALT="$y_kE_k=0$"></SPAN> 
+  according to Eq. (<A HREF="node7.html#KKTsoftmargin">130</A>). We let <!-- MATH
+ $E_k^{new}=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.77ex; " SRC="img555.svg"
+ ALT="$E_k^{new}=0$"></SPAN> and 
+  solve the equation above to get:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+b^{new}_k=b^{old}_k-(E_k^{old}+y_i\Delta\alpha_iK_{ik}+y_j\Delta\alpha_jK_{jk})
+    \;\;\;\;\;(k=1\;\mbox{or}\;2)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img556.svg"
+ ALT="$\displaystyle b^{new}_k=b^{old}_k-(E_k^{old}+y_i\Delta\alpha_iK_{ik}+y_j\Delta\alpha_jK_{jk})
+\;\;\;\;\;(k=1\;$">or<IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img557.svg"
+ ALT="$\displaystyle \;2)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">157</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+</LI>
+<LI>If <!-- MATH
+ $0<\alpha_k<C$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img551.svg"
+ ALT="$0&lt;\alpha_k&lt;C$"></SPAN> for both <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img552.svg"
+ ALT="$k=i$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img553.svg"
+ ALT="$k=j$"></SPAN>, then <!-- MATH
+ $b_i^{new}=b_j^{new}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -1.04ex; " SRC="img558.svg"
+ ALT="$b_i^{new}=b_j^{new}$"></SPAN>.
+</LI>
+<LI>If <!-- MATH
+ $\alpha_k=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img559.svg"
+ ALT="$\alpha_k=0$"></SPAN> or <!-- MATH
+ $\alpha_k=C$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img560.svg"
+ ALT="$\alpha_k=C$"></SPAN> for both <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img552.svg"
+ ALT="$k=i$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img561.svg"
+ ALT="$k=2$"></SPAN>, 
+  then <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img562.svg"
+ ALT="$E_k\ne 0$"></SPAN>, and <!-- MATH
+ $b^{new}_i\ne b^{new}_j$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -1.04ex; " SRC="img563.svg"
+ ALT="$b^{new}_i\ne b^{new}_j$"></SPAN>, their average 
+  <!-- MATH
+ $b^{new}=(b_i^{new}+b_j^{new})/2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -1.04ex; " SRC="img564.svg"
+ ALT="$b^{new}=(b_i^{new}+b_j^{new})/2$"></SPAN> can be used.
+</LI>
+</UL>
+
+<P>
+The computation above for maximizing <!-- MATH
+ $L(\alpha_i,\alpha_j)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img467.svg"
+ ALT="$L(\alpha_i,\alpha_j)$"></SPAN> is 
+carried out iteratively each time when a pair of variables <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img180.svg"
+ ALT="$\alpha_i$"></SPAN> 
+and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img456.svg"
+ ALT="$\alpha_j$"></SPAN> is selected to be updated. Specifically, we select a
+variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img180.svg"
+ ALT="$\alpha_i$"></SPAN> that violates any of the KKT conditions given in 
+Eq. (<A HREF="node7.html#KKTsoftmargin">130</A>) in the outer loop of the SMO algorithm, 
+and then pick a second variable <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img456.svg"
+ ALT="$\alpha_j$"></SPAN> in the inner loop of the 
+algorithm, both to be optimized. The selection of these variables can 
+be either random (e.g., by following their order), or guided by some 
+heuristics, such as always choosing the variable with maximum step 
+size <!-- MATH
+ $\Delta\alpha_n=\alpha^{new}_n-\alpha^{old}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img565.svg"
+ ALT="$\Delta\alpha_n=\alpha^{new}_n-\alpha^{old}_n$"></SPAN>. This iterative 
+process is repeated until convergence when the KKT conditions are 
+satisfied by all <!-- MATH
+ $\alpha_1,\cdots,\alpha_N$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img306.svg"
+ ALT="$\alpha_1,\cdots,\alpha_N$"></SPAN> variables, i.e., no 
+more variables need to be updated. All data points corresponding to 
+<!-- MATH
+ $\alpha_n\ne 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img430.svg"
+ ALT="$\alpha_n\ne 0$"></SPAN> are the support vectors, based on which we can find 
+the offset <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img249.svg"
+ ALT="$b$"></SPAN> by Eq. (<A HREF="node7.html#FindBkernel">133</A>) and classify any unlabeled 
+point <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> by Eq. (<A HREF="node7.html#ClassifyKernel">134</A>).
+
+<P>
+The Matlab code for the essential part of the SMO algorithm is listed 
+below, based mostly on a <A ID="tex2html15"
+  HREF="http://cs229.stanford.edu/materials/smo.pdf">simplified SMO algorithm</A>
+and the related
+<A ID="tex2html16"
+  HREF="https://www.mathworks.com/matlabcentral/fileexchange/63100-smo-sequential-minimal-optimization-?s_cid=ME_prod_FX">code</A>
+with some modifications. 
+
+<P>
+In particular, the if-statement 
+<PRE> 
+if (alpha(i)&lt;C &amp; yE&lt;-tol) | (alpha(i)&gt;0 &amp; yE&gt;tol)
+</PRE>
+checks the three KKT conditions in Eq. (<A HREF="node7.html#KKTsoftmargin">130</A>), where 
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img566.svg"
+ ALT="$yE=y_nE_n$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img567.svg"
+ ALT="$tol$"></SPAN> is a small constant. The first half checks if
+the first two of the three conditions are violated, while the second
+ half checks if the second two of the three conditions are violated. 
+
+<P>
+<PRE>
+    [X y]=getData;                       % get training data
+    [m n]=size(X);                       % size of data
+    alpha=zeros(1,n);                    % alpha variables
+    bias=0;                              % initial bias
+    it=0;                                % iteration index                
+    while (it&lt;maxit)                     % number of iterations less than maximum
+        it=it+1;
+        changed_alphas=0;                % number of changed alphas
+        N=length(y);                     % number of support vectors
+        for i=1:N                        % for each alpha_i
+            Ei=sum(alpha.*y.*K(X,X(:,i)))+bias-y(i);    
+            yE=Ei*y(i);
+            if (alpha(i)&lt;C &amp; yE&lt;-tol) | (alpha(i)&gt;0 &amp; yE&gt;tol)   % KKT violation
+                for j=[1:i-1,i+1:N]        % for each alpha_j not equal alpha_i
+                    Ej=sum(alpha.*y.*K(X,X(:,j)))+bias-y(j);
+                    ai=alpha(i);         % alpha_i old
+                    aj=alpha(j);         % alpha_j old
+                    if y(i)==y(j)        % s=y_i y_j=1
+                        L=max(0,alpha(i)+alpha(j)-C);
+                        H=min(C,alpha(i)+alpha(j));
+                    else                 % s=y_i y_j=-1
+                        L=max(0,alpha(j)-alpha(i));
+                        H=min(C,C+alpha(j)-alpha(i));
+                    end
+                    if L==H              % skip when L==H
+                        continue
+                    end
+                    eta=2*K(X(:,j),X(:,i))-K(X(:,i),X(:,i))-K(X(:,j),X(:,j));
+                    alpha(j)=alpha(j)+y(j)*(Ej-Ei)/eta;   % update alpha_j
+                    if alpha(j) &gt; H
+                        alpha(j) = H;
+                    elseif alpha(j) &lt; L
+                        alpha(j) = L;
+                    end
+                    if norm(alpha(j)-aj) &lt; tol       % skip if no change
+                        continue
+                    end
+                    alpha(i)=alpha(i)-y(i)*y(j)*(alpha(j)-aj);   % find alpha_i
+                    bi = bias - Ei - y(i)*(alpha(i)-ai)*K(X(:,i),X(:,i))...
+                        -y(j)*(alpha(j)-aj)*K(X(:,j),X(:,i));
+                    bj = bias - Ej - y(i)*(alpha(i)-ai)*K(X(:,i),X(:,j))...
+                        -y(j)*(alpha(j)-aj)*K(X(:,j),X(:,j));   
+                    if 0&lt;alpha(i) &amp; alpha(i)&lt;C
+                        bias=bi;
+                    elseif 0&lt;alpha(j) &amp; alpha(j)&lt;C
+                        bias=bj;
+                    else
+                        bias=(bi+bj)/2;
+                    end
+                    changed_alphas=changed_alphas+1;  % one more alpha changed
+                end
+            end
+        end
+        if changed_alphas==0             % no more changed alpha, quit
+            break
+        end
+        I=find(alpha~=0);                % indecies of non-zero alphas
+        alpha=alpha(I);                  % find non-zero alphas
+        Xsv=X(:,I);                      % find support vectors
+        ysv=y(I);                        % their corresponding indecies
+    end                                  % end of iteration
+    nsv=length(ysv);                     % number of support vectors
+</PRE>
+where <code>K(X,x)</code> is a function that takes an <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.31ex; " SRC="img568.svg"
+ ALT="$m\times n$"></SPAN> matrix 
+<!-- MATH
+ ${\bf X}=[{\bf x}_1,\cdots,{\bf x}_n]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img569.svg"
+ ALT="${\bf X}=[{\bf x}_1,\cdots,{\bf x}_n]$"></SPAN> and an n-D vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> 
+and produces the kernel functions <!-- MATH
+ $K({\bf x}_i,{\bf x}),\;(i=1,\cdots,n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img570.svg"
+ ALT="$K({\bf x}_i,{\bf x}),\;(i=1,\cdots,n)$"></SPAN>
+as output.
+<PRE>
+function ker=K(X,x)
+    global kfunction
+    global gm                               % parameter for Gaussian kernel
+    [m n]=size(X);
+    ker=zeros(1,n);
+    if kfunction=='l'
+        for i=1:n
+            ker(i)=X(:,i).'*x;               % linear kernel
+        end
+    elseif kfunction=='g'
+        for i=1:n
+            ker(i)=exp(-gm*norm(X(:,i)-x)); % Gaussian kernel
+        end
+    elseif kfunction=='p'
+        for i=1:n
+            ker(i)=(X(:,i).'*x).^3;          % polynomial kernel
+        end
+    end
+end
+</PRE>
+Having found all non-zero <!-- MATH
+ $\alpha_n\ne 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img430.svg"
+ ALT="$\alpha_n\ne 0$"></SPAN> and the corresponding
+support vectors, we further find the offset or bias term:
+<PRE>
+     bias=0;
+     for i=1:nsv
+        bias=bias+(ysv(i)-sum(ysv.*alpha.*K(Xsv,Xsv(:,i))));
+    end
+    bias=bias/nsv;
+</PRE>
+Any unlabeled data point <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> is classified into class <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img14.svg"
+ ALT="$C_+$"></SPAN> or 
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img15.svg"
+ ALT="$C_-$"></SPAN>, depending on whether the following expression is greater or 
+smaller than zero:
+<PRE>
+    y=sum(alpha.*ysv.*K(Xsv,x))+bias;
+</PRE>
+
+<P>
+<B>Example 1:</B> The same training set used previously to test the SVM
+with a hard margin is used again to test the SVM with a soft margin.
+Two results are shown below, corresponding to two different values 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img571.svg"
+ ALT="$C=1.2$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img572.svg"
+ ALT="$C=0.05$"></SPAN> for the weight of the error term <!-- MATH
+ $\sum_{n=1}^N\xi_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.81ex; " SRC="img573.svg"
+ ALT="$\sum_{n=1}^N\xi_n$"></SPAN>
+in the objective function. We see that when <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img571.svg"
+ ALT="$C=1.2$"></SPAN> is large, the number
+of support vectors (the four solid dots) is small due to the small errors 
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img412.svg"
+ ALT="$\xi_n$"></SPAN> allowed, and the decision boundary determined by the these support
+vectors independent of the rest of the data set (circles) is mostly
+dictated by the local points close to the boundary, not necessarily a
+good reflection of the global distribution of the data points. This
+result is similar to the previous one generated by the hard-margin SVM. 
+
+<P>
+On the other hand, when <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img574.svg"
+ ALT="$C=0.1$"></SPAN> is small, a greater number of data points 
+become support vectors due to the larger (the 13 solid dots) error <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img412.svg"
+ ALT="$\xi_n$"></SPAN>
+allowed, and the resulting linear decision line determined by these support
+vectors reflects global distribution of the data points, and it better 
+separates the two classes in terms of their mean positions.
+
+<P>
+<IMG STYLE="" SRC="../figures/SVMLinearExample.png"
+ ALT="SVMLinearExample.png">
+
+<P>
+<B>Example 2:</B> The classification results for the XOR data set are
+shown below with <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img571.svg"
+ ALT="$C=1.2$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img572.svg"
+ ALT="$C=0.05$"></SPAN>. As the two classes in the XOR 
+data set are not linearly separable, a Gaussian or radial basis function 
+(RBF) kernel is used to map the data from 2-D space to an infinite
+dimensional space, which is partitionedinto two regions by the hyperplane
+in Eq. (<A HREF="#SVMhyperplane"><IMG  ALT="[*]" SRC="crossref.png"></A>). When <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img571.svg"
+ ALT="$C=1.2$"></SPAN> is large, the decision boundary 
+is dictated by a relatively small number of support vectors (solid dots, 
+with small error <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img412.svg"
+ ALT="$\xi_n$"></SPAN>) and all data points are classified correctly, 
+but it is more prone to the overfitting problem, if some of the small 
+number of support vectors are outliers due to noise.
+
+<P>
+One the other hand, when <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img572.svg"
+ ALT="$C=0.05$"></SPAN> is small, the decision boundary is
+determined by a greater number of support vectors, better reflecting 
+the global distribution of the data points. However, as the local
+points close to the boundary are not relatively deemphasized, some
+miss-classification occurs, some nine red dots are classified into
+the blue region incorrectly.
+
+<P>
+<IMG STYLE="" SRC="../figures/SVMXORexample.png"
+ ALT="SVMXORexample.png">
+
+<P>
+<B>Example 3:</B>
+
+<P>
+<IMG STYLE="" SRC="../figures/SMOExample3.png"
+ ALT="SMOExample3.png">
+
+<P>
+<B>Example 4:</B>
+
+<P>
+<IMG STYLE="" SRC="../figures/SMOExample4.png"
+ ALT="SMOExample4.png">
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node9.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node4.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node7.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node9.html">Multi-Class Classification</A>
+<B> Up:</B> <A
+ HREF="node4.html">Support Vector machine</A>
+<B> Previous:</B> <A
+ HREF="node7.html">Soft Margin SVM</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

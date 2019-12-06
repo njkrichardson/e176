@@ -1,0 +1,1525 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Gaussian mixture model</TITLE>
+<META NAME="description" CONTENT="Gaussian mixture model">
+<META NAME="keywords" CONTENT="ch9">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch9.css">
+
+<LINK REL="next" HREF="node18.html">
+<LINK REL="previous" HREF="node16.html">
+<LINK REL="next" HREF="node18.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node18.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node15.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node16.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node18.html">Mixture of Bernoulli</A>
+<B> Up:</B> <A
+ HREF="node15.html">Clustering Analysis</A>
+<B> Previous:</B> <A
+ HREF="node16.html">K-means clustering</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION00082000000000000000">
+Gaussian mixture model</A>
+</H2>
+
+<P>
+The <EM>Gaussian mixture model (GMM)</EM> models the given dataset 
+<!-- MATH
+ ${\bf X}=[{\bf x}_1,\cdots,{\bf x}_N]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img9.svg"
+ ALT="${\bf X}=[{\bf x}_1,\cdots,{\bf x}_N]$"></SPAN> by a linear combination of 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> Gaussian distributions:
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="GMM"></A><!-- MATH
+ \begin{equation}
+p({\bf x})=\sum_{k=1}^K P_k {\cal N}({\bf x}; {\bf m}_k,{\bf\Sigma}_k)
+  =\sum_{k=1}^K P_k \left[
+  \frac{1}{(2\pi)^{d/2}|{\bf\Sigma}_k|^{1/2}}
+  \exp\left(-\frac{1}{2}({\bf x}-{\bf m}_k)^T
+  {\bf\Sigma}_k^{-1}({\bf x}-{\bf m}_k)\right)\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img954.svg"
+ ALT="$\displaystyle p({\bf x})=\sum_{k=1}^K P_k {\cal N}({\bf x}; {\bf m}_k,{\bf\Sigm...
+...{1}{2}({\bf x}-{\bf m}_k)^T
+{\bf\Sigma}_k^{-1}({\bf x}-{\bf m}_k)\right)\right]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">257</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img72.svg"
+ ALT="$P_k$"></SPAN> is the weight for the kth Gaussian 
+<!-- MATH
+ ${\cal N}({\bf x}; {\bf m}_k,{\bf\Sigma}_k)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img955.svg"
+ ALT="${\cal N}({\bf x}; {\bf m}_k,{\bf\Sigma}_k)$"></SPAN>, satisfying
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\int_{-\infty}^\infty p({\bf x})\,d{\bf x}
+  =\sum_{k=1}^K P_k \int_{-\infty}^\infty
+  {\cal N}({\bf x}; {\bf m}_k,{\bf\Sigma}_k)\,d{\bf x}
+  =\sum_{k=1}^K P_k =1
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img956.svg"
+ ALT="$\displaystyle \int_{-\infty}^\infty p({\bf x})\,d{\bf x}
+=\sum_{k=1}^K P_k \int...
+...infty
+{\cal N}({\bf x}; {\bf m}_k,{\bf\Sigma}_k)\,d{\bf x}
+=\sum_{k=1}^K P_k =1$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">258</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+This GMM model, in combination with the method of 
+<A ID="tex2html32"
+  HREF="https://en.wikipedia.org/wiki/Expectation-maximization_algorithm"><EM>expectation maximization (EM)</EM></A>,
+can be applied to clustering analysis. Specifically, we first 
+model the clusters <!-- MATH
+ $\{C_1,\cdots,C_K\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img5.svg"
+ ALT="$\{C_1,\cdots,C_K\}$"></SPAN> by <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> Gaussians
+<!-- MATH
+ ${\cal N}({\bf x}; {\bf m}_k,{\bf\Sigma}_k),\;(k=1,\cdots,K)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img957.svg"
+ ALT="${\cal N}({\bf x}; {\bf m}_k,{\bf\Sigma}_k),\;(k=1,\cdots,K)$"></SPAN>, 
+then estimate all model parameters denoted by 
+<!-- MATH
+ $\theta =\{P_k,{\bf m}_k,{\bf\Sigma}_k,\;(k=1,\cdots,K)\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img958.svg"
+ ALT="$\theta =\{P_k,{\bf m}_k,{\bf\Sigma}_k,\;(k=1,\cdots,K)\}$"></SPAN> 
+based on the given dataset, and finally obtain the probability 
+<!-- MATH
+ $P_{nk}=P({\bf x}_n\in C_k)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img959.svg"
+ ALT="$P_{nk}=P({\bf x}_n\in C_k)$"></SPAN> for <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img31.svg"
+ ALT="${\bf x}_n$"></SPAN> to belong to <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN> 
+for all <!-- MATH
+ $n=1,\cdots,N$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img176.svg"
+ ALT="$n=1,\cdots,N$"></SPAN> and <!-- MATH
+ $k=1,\cdots,K$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img36.svg"
+ ALT="$k=1,\cdots,K$"></SPAN>, and assign <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img31.svg"
+ ALT="${\bf x}_n$"></SPAN> 
+to <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN> is <!-- MATH
+ $P_{nk}=\max_l P_{nl}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img960.svg"
+ ALT="$P_{nk}=\max_l P_{nl}$"></SPAN>.
+
+<P>
+Note that the GMM model in Eq. (<A HREF="#GMM">257</A>) is actually the same 
+as Eq. (<A HREF="node2.html#pofxNB">11</A>) in the naive Bayes classification. These two
+methods are similar in the sense that each cluster or classe <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN>
+is modeled by a Gaussian <!-- MATH
+ ${\cal N}({\bf x},{\bf m}_k,{\bf\Sigma}_k)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img961.svg"
+ ALT="${\cal N}({\bf x},{\bf m}_k,{\bf\Sigma}_k)$"></SPAN>, 
+weighted by <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img72.svg"
+ ALT="$P_k$"></SPAN>, and the model parameters <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img42.svg"
+ ALT="${\bf m}_k$"></SPAN> and <!-- MATH
+ ${\bf\Sigma}_k$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img43.svg"
+ ALT="${\bf\Sigma}_k$"></SPAN>,
+as well as <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img72.svg"
+ ALT="$P_k$"></SPAN>, need to be estimated based on the given dataset. 
+However, the two methods are different in that the dataset <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img651.svg"
+ ALT="${\bf X}$"></SPAN> 
+in the supervised naive Bayes method is labeled by <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img726.svg"
+ ALT="${\bf y}$"></SPAN>, while
+here in GMM the dataset is not labeled. However, we can introduce a
+latent or hidden variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img387.svg"
+ ALT="${\bf z}$"></SPAN> for the labeling of the samples 
+in the given dataset <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img651.svg"
+ ALT="${\bf X}$"></SPAN>.
+
+<P>
+Specifically, the latent variable <!-- MATH
+ ${\bf z}=[z_1,\cdots,z_K]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img962.svg"
+ ALT="${\bf z}=[z_1,\cdots,z_K]^T$"></SPAN> is a
+binary vector, of which all components are binary random variables 
+<!-- MATH
+ $z_k\in\{0,\,1\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img963.svg"
+ ALT="$z_k\in\{0,\,1\}$"></SPAN>. Only one of these <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> components is 1, e.g., 
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img964.svg"
+ ALT="$z_k=1$"></SPAN>, indicating a sample <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> in the dataset belongs to 
+the kth cluster <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN>, while all others are 0, i.e., these <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> 
+binary variables add up to 1, <!-- MATH
+ $\sum_{k=1}^K z_k=1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.81ex; " SRC="img965.svg"
+ ALT="$\sum_{k=1}^K z_k=1$"></SPAN>. 
+
+<P>
+We further introduce the following probabilities for each of the
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> clusters <!-- MATH
+ $C_k\;\;(k=1,\cdots,K)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img966.svg"
+ ALT="$C_k\;\;(k=1,\cdots,K)$"></SPAN>:
+
+<UL>
+<LI>The <EM>prior probability</EM> for any unobserved data sample 
+  in the dataset to belong to <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN>, represented by <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img964.svg"
+ ALT="$z_k=1$"></SPAN>:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+P(z_k=1)=P_k
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img967.svg"
+ ALT="$\displaystyle P(z_k=1)=P_k$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">259</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+As any sample <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> belongs to one and only one of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> 
+  clusters, the events <!-- MATH
+ ${\bf x}\in C_k,\;(k=1,\cdots,K)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img968.svg"
+ ALT="${\bf x}\in C_k,\;(k=1,\cdots,K)$"></SPAN> are mutually
+  exclusive and complementary, i.e., the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> prior probabilities add
+  up to 1:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\sum_{k=1}^K P_k =1
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img969.svg"
+ ALT="$\displaystyle \sum_{k=1}^K P_k =1$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">260</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+</LI>
+<LI>The probability distribution of all samples in <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN>, assumed 
+  to be a Gaussian:
+  <P></P>
+<DIV CLASS="mathdisplay"><A ID="likelihoodMG"></A><!-- MATH
+ \begin{equation}
+p({\bf x}|z_k=1,\theta)={\cal N}({\bf x};{\bf m}_k,{\bf\Sigma}_k)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img970.svg"
+ ALT="$\displaystyle p({\bf x}\vert z_k=1,\theta)={\cal N}({\bf x};{\bf m}_k,{\bf\Sigma}_k)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">261</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+</LI>
+<LI>The joint probability of any <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img964.svg"
+ ALT="$z_k=1$"></SPAN>:
+  <P></P>
+<DIV CLASS="mathdisplay"><A ID="jointprobMG"></A><!-- MATH
+ \begin{equation}
+p({\bf x},z_k=1|\theta)=p({\bf x}|z_k=1,\theta)\;P(z_k=1)
+    =P_k {\cal N}({\bf x};{\bf m}_k,{\bf\Sigma}_k)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img971.svg"
+ ALT="$\displaystyle p({\bf x},z_k=1\vert\theta)=p({\bf x}\vert z_k=1,\theta)\;P(z_k=1)
+=P_k {\cal N}({\bf x};{\bf m}_k,{\bf\Sigma}_k)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">262</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+</LI>
+</UL>
+Marginalizing this joint probability over the latent variable 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img387.svg"
+ ALT="${\bf z}$"></SPAN>, we get the Gaussian mixture model, the distribution 
+<!-- MATH
+ $p({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img78.svg"
+ ALT="$p({\bf x})$"></SPAN> of any sample <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> regardless to which cluster 
+it belongs:
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="pofxMG"></A><!-- MATH
+ \begin{equation}
+p({\bf x}|\theta)=\sum_{k=1}^K p({\bf x},z_k=1|\theta)
+  =\sum_{k=1}^K p({\bf x}|z_k=1,\theta)\;P(z_k=1)
+  =\sum_{k=1}^K P_k {\cal N}({\bf x}; {\bf m}_k,{\bf\Sigma}_k)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img972.svg"
+ ALT="$\displaystyle p({\bf x}\vert\theta)=\sum_{k=1}^K p({\bf x},z_k=1\vert\theta)
+=\...
+...,\theta)\;P(z_k=1)
+=\sum_{k=1}^K P_k {\cal N}({\bf x}; {\bf m}_k,{\bf\Sigma}_k)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">263</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Note that Eqs. (<A HREF="#likelihoodMG">261</A>), (<A HREF="#jointprobMG">262</A>), and
+(<A HREF="#pofxMG">263</A>) are the same as Eqs. (<A HREF="node2.html#likelihoodNB">9</A>),
+(<A HREF="node2.html#jointprobNB">10</A>), and (<A HREF="node2.html#pofxNB">11</A>) in the naive Bayes 
+classifier, respectively.
+
+<P>
+All such probabilities defined for <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img964.svg"
+ ALT="$z_k=1$"></SPAN> can be generalized to 
+<!-- MATH
+ ${\bf z}=[z_1,\cdots,z_K]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img962.svg"
+ ALT="${\bf z}=[z_1,\cdots,z_K]^T$"></SPAN> for all <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> clusters:
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+p({\bf z}|{\bf\theta})&=&\prod_{k=1}^K P_k^{z_k} \\
+  p({\bf x}|{\bf z},{\bf\theta})&=&
+  \prod_{k=1}^K {\cal N}({\bf x},{\bf m}_k,{\bf\Sigma}_k)^{z_k} \\
+  p({\bf x},{\bf z}|{\bf\theta})&=&p({\bf z})\;p({\bf x}|{\bf z},\theta)
+  =\prod_{k=1}^K \left(P_k {\cal N}({\bf x},{\bf m}_k,{\bf\Sigma}_k)\right)^{z_k}
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img973.svg"
+ ALT="$\displaystyle p({\bf z}\vert{\bf\theta})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img974.svg"
+ ALT="$\displaystyle \prod_{k=1}^K P_k^{z_k}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">264</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img975.svg"
+ ALT="$\displaystyle p({\bf x}\vert{\bf z},{\bf\theta})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img976.svg"
+ ALT="$\displaystyle \prod_{k=1}^K {\cal N}({\bf x},{\bf m}_k,{\bf\Sigma}_k)^{z_k}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">265</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img977.svg"
+ ALT="$\displaystyle p({\bf x},{\bf z}\vert{\bf\theta})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img978.svg"
+ ALT="$\displaystyle p({\bf z})\;p({\bf x}\vert{\bf z},\theta)
+=\prod_{k=1}^K \left(P_k {\cal N}({\bf x},{\bf m}_k,{\bf\Sigma}_k)\right)^{z_k}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">266</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+Given the dataset <!-- MATH
+ ${\bf X}=[{\bf x}_1,\cdots,{\bf x}_N]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img9.svg"
+ ALT="${\bf X}=[{\bf x}_1,\cdots,{\bf x}_N]$"></SPAN> containing
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="$N$"></SPAN> i.i.d. samples, we introduce <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="$N$"></SPAN> corresponding latent variables 
+in <!-- MATH
+ ${\bf Z}=[{\bf z}_1,\cdots,{\bf z}_N]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img979.svg"
+ ALT="${\bf Z}=[{\bf z}_1,\cdots,{\bf z}_N]$"></SPAN>, of which 
+<!-- MATH
+ ${\bf z}_n=[z_{n1},\cdots,z_{nK}]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img980.svg"
+ ALT="${\bf z}_n=[z_{n1},\cdots,z_{nK}]^T$"></SPAN> is the labeling of <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img31.svg"
+ ALT="${\bf x}_n$"></SPAN>,
+i.e., <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img31.svg"
+ ALT="${\bf x}_n$"></SPAN> belongs to <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN> if <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img981.svg"
+ ALT="$z_{nk}=1$"></SPAN> (while <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img982.svg"
+ ALT="$z_{nl}=0$"></SPAN>
+for all <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img828.svg"
+ ALT="$l\ne k$"></SPAN>). Note that here <!-- MATH
+ ${\bf Z}=[{\bf z}_1,\cdots,{\bf z}_N]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img979.svg"
+ ALT="${\bf Z}=[{\bf z}_1,\cdots,{\bf z}_N]$"></SPAN>
+is defined in the same way as <!-- MATH
+ ${\bf Y}=[{\bf y}_1,\cdots,{\bf y}_N]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img983.svg"
+ ALT="${\bf Y}=[{\bf y}_1,\cdots,{\bf y}_N]$"></SPAN> 
+in maxsolft regression, both as the labeling of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img651.svg"
+ ALT="${\bf X}$"></SPAN>, with the 
+only difference that <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img984.svg"
+ ALT="${\bf Y}$"></SPAN> is provided in the training data available
+for a supervised method, but here <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img985.svg"
+ ALT="${\bf Z}$"></SPAN> is a latent variable not part
+of the data provided for unsupervised clustering. Now we have 
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p({\bf x}_n,{\bf z}_n|\theta)=\prod_{k=1}^K
+  \left(P_k {\cal N}({\bf x}_n,{\bf m}_k,{\bf\Sigma}_k)\right)^{z_{nk}},
+       \;\;\;\;\;\;\;\;\;\;\;\;\;\;(n=1,\cdots,N)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img986.svg"
+ ALT="$\displaystyle p({\bf x}_n,{\bf z}_n\vert\theta)=\prod_{k=1}^K
+\left(P_k {\cal N...
+...m}_k,{\bf\Sigma}_k)\right)^{z_{nk}},
+\;\;\;\;\;\;\;\;\;\;\;\;\;\;(n=1,\cdots,N)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">267</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The likelihood function of the GMM model parameters <!-- MATH
+ ${\bf\theta}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img987.svg"
+ ALT="${\bf\theta}$"></SPAN> to 
+be estimated can be expressed as:
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+L(\theta|{\bf X},{\bf Z})&=&p({\bf X},{\bf Z}|\theta)
+  =p([{\bf x}_1,\cdots,{\bf x}_N],[{\bf z}_1,\cdots,{\bf z}_N]\bigg|{\bf m}_k,{\bf\Sigma}_k,P_k(k=1,\cdots,K))
+  \nonumber\\
+  &=&\prod_{n=1}^N p({\bf x}_n,{\bf z}_n|\theta)
+  =\prod_{n=1}^N \prod_{k=1}^K \left(P_k{\cal N}({\bf x}_n,{\bf m}_k,{\bf\Sigma}_k)\right)^{z_{nk}}
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img988.svg"
+ ALT="$\displaystyle L(\theta\vert{\bf X},{\bf Z})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img989.svg"
+ ALT="$\displaystyle p({\bf X},{\bf Z}\vert\theta)
+=p([{\bf x}_1,\cdots,{\bf x}_N],[{\bf z}_1,\cdots,{\bf z}_N]\bigg\vert{\bf m}_k,{\bf\Sigma}_k,P_k(k=1,\cdots,K))$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img990.svg"
+ ALT="$\displaystyle \prod_{n=1}^N p({\bf x}_n,{\bf z}_n\vert\theta)
+=\prod_{n=1}^N \prod_{k=1}^K \left(P_k{\cal N}({\bf x}_n,{\bf m}_k,{\bf\Sigma}_k)\right)^{z_{nk}}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">268</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+and the log likelihood function is:
+<BR>
+<DIV CLASS="mathdisplay"><A ID="logL"></A><!-- MATH
+ \begin{eqnarray}
+\log L(\theta|{\bf X},{\bf Z})&=&\log p({\bf X},{\bf Z}|\theta)
+  =\log \left[ \prod_{n=1}^N \prod_{k=1}^K
+    \left(P_k{\cal N}({\bf x}_n,{\bf m}_k,{\bf\Sigma}_k)\right)^{z_{nk}}\right]
+  \nonumber\\
+  &=& \sum_{n=1}^N \sum_{k=1}^K z_{nk}
+  \left[\log P_k+\log {\cal N}({\bf x}_n,{\bf m}_k,{\bf\Sigma}_k)\right]
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img991.svg"
+ ALT="$\displaystyle \log L(\theta\vert{\bf X},{\bf Z})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img992.svg"
+ ALT="$\displaystyle \log p({\bf X},{\bf Z}\vert\theta)
+=\log \left[ \prod_{n=1}^N \pr...
+...}^K
+\left(P_k{\cal N}({\bf x}_n,{\bf m}_k,{\bf\Sigma}_k)\right)^{z_{nk}}\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img993.svg"
+ ALT="$\displaystyle \sum_{n=1}^N \sum_{k=1}^K z_{nk}
+\left[\log P_k+\log {\cal N}({\bf x}_n,{\bf m}_k,{\bf\Sigma}_k)\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">269</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+Similar to the method of maximum likelihodd estimation (MLE) which 
+finds the model parameters in <!-- MATH
+ ${\bf\theta}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img987.svg"
+ ALT="${\bf\theta}$"></SPAN> as those that maximize 
+the likelihood function <!-- MATH
+ $L({\bf\theta})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img994.svg"
+ ALT="$L({\bf\theta})$"></SPAN> or its log function
+<!-- MATH
+ $\log\;L({\bf\theta})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img995.svg"
+ ALT="$\log\;L({\bf\theta})$"></SPAN>, here we find the model parameters in
+<!-- MATH
+ $\theta =\{P_k,{\bf m}_k,{\bf\Sigma}_k,\;(k=1,\cdots,K)\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img958.svg"
+ ALT="$\theta =\{P_k,{\bf m}_k,{\bf\Sigma}_k,\;(k=1,\cdots,K)\}$"></SPAN> as those 
+that maximize the expectation of the log likelihood function above
+with respect to the latent variables in <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img985.svg"
+ ALT="${\bf Z}$"></SPAN>. This method is 
+therefore called <EM>expectation maximization (EM)</EM>, containing the 
+following two iterative steps:
+
+<UL>
+<LI><B>E-step:</B> Find the expectation of the log likelihood function.
+
+<P>
+We first find the posterior probability for any <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img31.svg"
+ ALT="${\bf x}_n$"></SPAN> to belong 
+  to any <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN> (indicated by <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img981.svg"
+ ALT="$z_{nk}=1$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img982.svg"
+ ALT="$z_{nl}=0$"></SPAN> for all <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img828.svg"
+ ALT="$l\ne k$"></SPAN>) 
+  is modeled by
+  <P></P>
+<DIV CLASS="mathdisplay"><A ID="GMMprob"></A><!-- MATH
+ \begin{equation}
+P_{nk}=P(z_{nk}=1|{\bf x}_n,\theta)
+    =\frac{p({\bf x}_n,z_{nk}=1|\theta)}{p({\bf x}_n|\theta)}
+    =\frac{P_k\,{\cal N}({\bf x}_n;{\bf m}_k{\bf\Sigma}_k)}
+    {\sum_{l=1}^K P_l\,{\cal N}({\bf x}_n;{\bf m}_l{\bf\Sigma}_l)}
+    \;\;\;\;\;\;\;\;(n=1,\cdots,N;\;k=1,\cdots,K)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.27ex; vertical-align: -2.84ex; " SRC="img996.svg"
+ ALT="$\displaystyle P_{nk}=P(z_{nk}=1\vert{\bf x}_n,\theta)
+=\frac{p({\bf x}_n,z_{nk}...
+...\bf x}_n;{\bf m}_l{\bf\Sigma}_l)}
+\;\;\;\;\;\;\;\;(n=1,\cdots,N;\;k=1,\cdots,K)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">270</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+These are the posterior probabilities for <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img981.svg"
+ ALT="$z_{nk}=1$"></SPAN> given an observed
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img31.svg"
+ ALT="${\bf x}_n$"></SPAN>, and they add up to 1, ss the prior probabilities 
+  <!-- MATH
+ $P(z_k=1)=P_k$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img997.svg"
+ ALT="$P(z_k=1)=P_k$"></SPAN>:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\sum_{k=1}^K P(z_k=1)=\sum_{k=1}^K P_k=1,
+    \;\;\;\;\;\;\;\;\;\;\;\;\;\;
+    \sum_{k=1}^K P(z_{nk}=1|{\bf x}_n,\theta)=\sum_{k=1}^K P_{nk}=1
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img998.svg"
+ ALT="$\displaystyle \sum_{k=1}^K P(z_k=1)=\sum_{k=1}^K P_k=1,
+\;\;\;\;\;\;\;\;\;\;\;\;\;\;
+\sum_{k=1}^K P(z_{nk}=1\vert{\bf x}_n,\theta)=\sum_{k=1}^K P_{nk}=1$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">271</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+We note that the definition of <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img999.svg"
+ ALT="$P_{nk}$"></SPAN> is similar to the 
+  <A ID="tex2html33"
+  HREF="../ch7/node15.html">softmax function <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1000.svg"
+ ALT="$s_{nk}$"></SPAN></A>
+with the only difference that here weighted Gaussian functions are 
+  used instead of the logistic functions used in softmax.
+
+<P>
+We also note that the posterior probability <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img999.svg"
+ ALT="$P_{nk}$"></SPAN> defined above 
+  represents a <EM>soft</EM> decision, in the sense that it is possible
+  for a <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img31.svg"
+ ALT="${\bf x}_n$"></SPAN> to belong to each <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN> with probability <!-- MATH
+ $0<P_{nk}<1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img1001.svg"
+ ALT="$0&lt;P_{nk}&lt;1$"></SPAN>
+  for all <!-- MATH
+ $k=1,\cdots,K$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img36.svg"
+ ALT="$k=1,\cdots,K$"></SPAN>, instead of a <EM>hard</EM> decision, in the sense 
+  that <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img31.svg"
+ ALT="${\bf x}_n$"></SPAN> belongs to only one specific <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN> with <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img1002.svg"
+ ALT="$P_{nk}=1$"></SPAN>, 
+  while <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img1003.svg"
+ ALT="$P_{nl}=0$"></SPAN> for all <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img828.svg"
+ ALT="$l\ne k$"></SPAN>, as in the case of K-means clustering.
+
+<P>
+We also find the expectation of the log likelihood with respect to 
+  the latent variables in <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img985.svg"
+ ALT="${\bf Z}$"></SPAN>:
+  <BR>
+<DIV CLASS="mathdisplay"><A ID="expectationoflog"></A><!-- MATH
+ \begin{eqnarray}
+E_{\bf Z}\left( \log L(\theta|{\bf X},{\bf Z}) \right)
+    &=&E_{\bf Z}\left[\sum_{n=1}^N \sum_{k=1}^K z_{nk}
+    \left[\log P_k+\log {\cal N}({\bf x}_n,{\bf m}_k,{\bf\Sigma}_k)\right]\right]
+    \nonumber\\
+    &=&\sum_{n=1}^N \sum_{k=1}^K E(z_{nk})
+    \left[\log P_k+\log {\cal N}({\bf x}_n,{\bf m}_k,{\bf\Sigma}_k)\right]
+    \nonumber\\
+    &=&\sum_{n=1}^N \sum_{k=1}^K P_{nk}
+    \left[\log P_k+\log {\cal N}({\bf x}_n,{\bf m}_k,{\bf\Sigma}_k)\right]
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1004.svg"
+ ALT="$\displaystyle E_{\bf Z}\left( \log L(\theta\vert{\bf X},{\bf Z}) \right)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img1005.svg"
+ ALT="$\displaystyle E_{\bf Z}\left[\sum_{n=1}^N \sum_{k=1}^K z_{nk}
+\left[\log P_k+\log {\cal N}({\bf x}_n,{\bf m}_k,{\bf\Sigma}_k)\right]\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img1006.svg"
+ ALT="$\displaystyle \sum_{n=1}^N \sum_{k=1}^K E(z_{nk})
+\left[\log P_k+\log {\cal N}({\bf x}_n,{\bf m}_k,{\bf\Sigma}_k)\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img1007.svg"
+ ALT="$\displaystyle \sum_{n=1}^N \sum_{k=1}^K P_{nk}
+\left[\log P_k+\log {\cal N}({\bf x}_n,{\bf m}_k,{\bf\Sigma}_k)\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">272</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+  The last equality is due to the following fact:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+E(z_{nk})=1\;P(z_{nk}=1|{\bf x}_n)+0\;P(z_{nk}=0|{\bf x}_n)
+    =P(z_{nk}=1|{\bf x}_n)=P_{nk}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1008.svg"
+ ALT="$\displaystyle E(z_{nk})=1\;P(z_{nk}=1\vert{\bf x}_n)+0\;P(z_{nk}=0\vert{\bf x}_n)
+=P(z_{nk}=1\vert{\bf x}_n)=P_{nk}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">273</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+</LI>
+<LI><B>M-step:</B> Find the optimal model parameters that maximize
+  the expectation of the log likelihood function.
+
+<P>
+We first set to zero the derivatives of the expectation of 
+  the log likelihood with respect to each of the parameters in 
+  <!-- MATH
+ ${\bf\theta}=\{P_k,\;{\bf m}_k\;(k=1,\cdots,K)\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1009.svg"
+ ALT="${\bf\theta}=\{P_k,\;{\bf m}_k\;(k=1,\cdots,K)\}$"></SPAN>, and then solve
+  the resulting equations to get the optimal parameters.
+
+<P>
+
+<UL>
+<LI>Find <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img72.svg"
+ ALT="$P_k$"></SPAN>:
+
+<P>
+Due to the constraint <!-- MATH
+ $\sum_{k=1}^K P_k=1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.81ex; " SRC="img1010.svg"
+ ALT="$\sum_{k=1}^K P_k=1$"></SPAN>, we first construct the
+    Lagrangian function compsed of the log likelihood as the objective 
+    function and an extra term for the constraint:
+    <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+L(\theta,\,\lambda)
+      =\sum_{n=1}^N \sum_{k=1}^K P_{nk}
+      \left[\log P_k+\log {\cal N}({\bf x}_n,{\bf m}_k,{\bf\Sigma}_k)\right]
+      +\lambda\left(\sum_{k=1}^K P_k-1\right)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img1011.svg"
+ ALT="$\displaystyle L(\theta,\,\lambda)
+=\sum_{n=1}^N \sum_{k=1}^K P_{nk}
+\left[\log ...
+...bf x}_n,{\bf m}_k,{\bf\Sigma}_k)\right]
++\lambda\left(\sum_{k=1}^K P_k-1\right)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">274</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and set it derivative with respect to <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img72.svg"
+ ALT="$P_k$"></SPAN> to zero:
+    <BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+\frac{\partial}{\partial P_k} L(\theta,\,\lambda)
+      &=&\frac{\partial}{\partial P_k} \left[
+        \sum_{n=1}^N \sum_{k=1}^K P_{nk}
+        \left[\log P_k+\log {\cal N}({\bf x}_n,{\bf m}_k,{\bf\Sigma}_k)\right]
+        +\lambda\left(\sum_{k=1}^K P_k-1\right) \right]
+      \nonumber\\
+      &=&\sum_{n=1}^N P_{nk}\frac{1}{P_k}+\lambda=0
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 5.34ex; vertical-align: -2.06ex; " SRC="img1012.svg"
+ ALT="$\displaystyle \frac{\partial}{\partial P_k} L(\theta,\,\lambda)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img1013.svg"
+ ALT="$\displaystyle \frac{\partial}{\partial P_k} \left[
+\sum_{n=1}^N \sum_{k=1}^K P_...
+...{\bf m}_k,{\bf\Sigma}_k)\right]
++\lambda\left(\sum_{k=1}^K P_k-1\right) \right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img1014.svg"
+ ALT="$\displaystyle \sum_{n=1}^N P_{nk}\frac{1}{P_k}+\lambda=0$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">275</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+    Multiplying both sides by <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img72.svg"
+ ALT="$P_k$"></SPAN>, we get
+    <P></P>
+<DIV CLASS="mathdisplay"><A ID="equationPik"></A><!-- MATH
+ \begin{equation}
+\sum_{n=1}^N P_{nk}+P_k \lambda=N_k+P_k\lambda=0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img1015.svg"
+ ALT="$\displaystyle \sum_{n=1}^N P_{nk}+P_k \lambda=N_k+P_k\lambda=0$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">276</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where we have defined
+    <P></P>
+<DIV CLASS="mathdisplay"><A ID="priorP_mg"></A><!-- MATH
+ \begin{equation}
+N_k=\sum_{n=1}^N P_{nk}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img1016.svg"
+ ALT="$\displaystyle N_k=\sum_{n=1}^N P_{nk}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">277</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+that satisfies
+    <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\sum_{k=1}^K N_k=\sum_{k=1}^K\left(\sum_{n=1}^N P_{nk}\right)
+      =\sum_{n=1}^N\left(\sum_{k=1}^K P_{nk}\right)=\sum_{n=1}^N 1=N
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img1017.svg"
+ ALT="$\displaystyle \sum_{k=1}^K N_k=\sum_{k=1}^K\left(\sum_{n=1}^N P_{nk}\right)
+=\sum_{n=1}^N\left(\sum_{k=1}^K P_{nk}\right)=\sum_{n=1}^N 1=N$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">278</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Summing Eq. (<A HREF="#equationPik">276</A>) over <!-- MATH
+ $k=1,\cdots,K$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img36.svg"
+ ALT="$k=1,\cdots,K$"></SPAN>, we get
+    <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\sum_{k=1}^K\left(N_k+P_k \lambda\right)
+      =\sum_{k=1}^K N_k+\lambda\left(\sum_{k=1}^K P_k\right)
+      =N+\lambda=0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img1018.svg"
+ ALT="$\displaystyle \sum_{k=1}^K\left(N_k+P_k \lambda\right)
+=\sum_{k=1}^K N_k+\lambda\left(\sum_{k=1}^K P_k\right)
+=N+\lambda=0$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">279</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Substituting <!-- MATH
+ $\lambda=-N$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img1019.svg"
+ ALT="$\lambda=-N$"></SPAN> back into Eq. (<A HREF="#equationPik">276</A>), 
+    we get the expression for the prior
+    <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p(z_k=1)=P_k=\frac{N_k}{N}=\frac{1}{N}\sum_{n=1}^N P_{nk}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img1020.svg"
+ ALT="$\displaystyle p(z_k=1)=P_k=\frac{N_k}{N}=\frac{1}{N}\sum_{n=1}^N P_{nk}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">280</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+This is actually the same as the prior <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img72.svg"
+ ALT="$P_k$"></SPAN> in Eq. (<A HREF="node2.html#priorNB">8</A>)
+    used in the naive Bayes classification, but here <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img21.svg"
+ ALT="$N_k$"></SPAN> defined in 
+    Eq. (<A HREF="#priorP_mg">277</A>) is the sum of the probabilities for all <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="$N$"></SPAN> 
+    data samples to belong to <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN>, instead of the number of data
+    samples in <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN> (unknown in this unsupervised case).
+
+<P>
+</LI>
+<LI>Find <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img42.svg"
+ ALT="${\bf m}_k$"></SPAN>:
+
+<P>
+<BR>
+<DIV CLASS="mathdisplay"><A ID="equationmk"></A><!-- MATH
+ \begin{eqnarray}
+\frac{\partial}{\partial{\bf m}_k} E_{\bf z}(\log L(\theta|{\bf X},{\bf Z}))
+      &=&\frac{\partial}{\partial{\bf m}_k}
+      \left[\sum_{n=1}^N \sum_{k=1}^K P_{nk}
+        \left[\log P_k+\log {\cal N}({\bf x}_n,{\bf m}_k,{\bf\Sigma}_k)\right]\right]
+      \nonumber\\
+      &=&\sum_{n=1}^N P_{nk}\frac{\partial}{\partial{\bf m}_k} 
+      \log {\cal N}({\bf x}_n,{\bf m}_k,{\bf\Sigma}_k)
+      \nonumber\\
+      &=&\sum_{n=1}^N P_{nk}\frac{\partial}{\partial{\bf m}_k} 
+      \left[-\frac{1}{2}({\bf x}_n-{\bf m}_k)^T{\bf\Sigma}_k^{-1}({\bf x}_n-{\bf m}_k)\right]
+      \nonumber\\
+      &=&\frac{1}{2}\sum_{n=1}^N P_{nk}{\bf\Sigma}_k^{-1}({\bf x}_n-{\bf m}_k)={\bf0}
+    
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 5.34ex; vertical-align: -2.06ex; " SRC="img1021.svg"
+ ALT="$\displaystyle \frac{\partial}{\partial{\bf m}_k} E_{\bf z}(\log L(\theta\vert{\bf X},{\bf Z}))$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img1022.svg"
+ ALT="$\displaystyle \frac{\partial}{\partial{\bf m}_k}
+\left[\sum_{n=1}^N \sum_{k=1}^...
+...}
+\left[\log P_k+\log {\cal N}({\bf x}_n,{\bf m}_k,{\bf\Sigma}_k)\right]\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img1023.svg"
+ ALT="$\displaystyle \sum_{n=1}^N P_{nk}\frac{\partial}{\partial{\bf m}_k}
+\log {\cal N}({\bf x}_n,{\bf m}_k,{\bf\Sigma}_k)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img1024.svg"
+ ALT="$\displaystyle \sum_{n=1}^N P_{nk}\frac{\partial}{\partial{\bf m}_k}
+\left[-\frac{1}{2}({\bf x}_n-{\bf m}_k)^T{\bf\Sigma}_k^{-1}({\bf x}_n-{\bf m}_k)\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img1025.svg"
+ ALT="$\displaystyle \frac{1}{2}\sum_{n=1}^N P_{nk}{\bf\Sigma}_k^{-1}({\bf x}_n-{\bf m}_k)={\bf0}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">281</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+    Here we have neglected the constant coefficient 
+    <!-- MATH
+ $(2\pi)^{-d/2}\,|{\bf\Sigma}_k|^{-1/2}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img1026.svg"
+ ALT="$(2\pi)^{-d/2}\,\vert{\bf\Sigma}_k\vert^{-1/2}$"></SPAN> of the Gaussian,
+    independent of <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img42.svg"
+ ALT="${\bf m}_k$"></SPAN>. Multiplying <!-- MATH
+ $2{\bf\Sigma}_k$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img1027.svg"
+ ALT="$2{\bf\Sigma}_k$"></SPAN> on
+    both sides, we get
+    <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\sum_{n=1}^N P_{nk}({\bf x}_n-{\bf m}_k)
+      =\sum_{n=1}^N P_{nk}{\bf x}_n-\sum_{n=1}^N P_{nk}{\bf m}_k
+      =\sum_{n=1}^N P_{nk}{\bf x}_n-N_k{\bf m}_k={\bf0}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img1028.svg"
+ ALT="$\displaystyle \sum_{n=1}^N P_{nk}({\bf x}_n-{\bf m}_k)
+=\sum_{n=1}^N P_{nk}{\bf...
+...-\sum_{n=1}^N P_{nk}{\bf m}_k
+=\sum_{n=1}^N P_{nk}{\bf x}_n-N_k{\bf m}_k={\bf0}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">282</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Solving for <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img42.svg"
+ ALT="${\bf m}_k$"></SPAN> we get
+    <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf m}_k=\frac{1}{N_k}\sum_{n=1}^N P_{nk}{\bf x}_n
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img1029.svg"
+ ALT="$\displaystyle {\bf m}_k=\frac{1}{N_k}\sum_{n=1}^N P_{nk}{\bf x}_n$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">283</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+</LI>
+<LI>Find <!-- MATH
+ ${\bf\Sigma}_k$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img43.svg"
+ ALT="${\bf\Sigma}_k$"></SPAN>:
+
+<P>
+<BR>
+<DIV CLASS="mathdisplay"><A ID="equationsigmak"></A><!-- MATH
+ \begin{eqnarray}
+\frac{\partial}{\partial{\bf m}_k} E_{\bf z}(\log L(\theta|{\bf X},{\bf Z}))
+      &=&\frac{\partial}{\partial{\bf\Sigma}_k}
+      \left[\sum_{n=1}^N \sum_{k=1}^K P_{nk}
+        \left[\log P_k+\log {\cal N}({\bf x}_n,{\bf m}_k,{\bf\Sigma}_k)\right]\right]
+      \nonumber\\
+      &=&\sum_{n=1}^N P_{nk}\frac{\partial}{\partial{\bf\Sigma}_k} 
+      \log {\cal N}({\bf x}_n,{\bf m}_k,{\bf\Sigma}_k)
+      \nonumber\\
+      &=&-\frac{1}{2}\sum_{n=1}^N P_{nk}
+      \left[\frac{\partial}{\partial{\bf\Sigma}_k}\log|{\bf\Sigma}_k|
+        +\frac{\partial}{\partial{\bf\Sigma}_k}({\bf x}_n-{\bf m}_k)^T{\bf\Sigma}_k^{-1}({\bf x}_n-{\bf m}_k)\right]
+      \nonumber\\
+      &=&-\frac{1}{2}\sum_{n=1}^N P_{nk}
+      \left[{\bf\Sigma}_k^{-1}-{\bf\Sigma}_k^{-1}
+        ({\bf x}_n-{\bf m}_k)({\bf x}_n-{\bf m}_k)^T{\bf\Sigma}_k^{-1}\right]={\bf0}
+    
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 5.34ex; vertical-align: -2.06ex; " SRC="img1021.svg"
+ ALT="$\displaystyle \frac{\partial}{\partial{\bf m}_k} E_{\bf z}(\log L(\theta\vert{\bf X},{\bf Z}))$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img1030.svg"
+ ALT="$\displaystyle \frac{\partial}{\partial{\bf\Sigma}_k}
+\left[\sum_{n=1}^N \sum_{k...
+...}
+\left[\log P_k+\log {\cal N}({\bf x}_n,{\bf m}_k,{\bf\Sigma}_k)\right]\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img1031.svg"
+ ALT="$\displaystyle \sum_{n=1}^N P_{nk}\frac{\partial}{\partial{\bf\Sigma}_k}
+\log {\cal N}({\bf x}_n,{\bf m}_k,{\bf\Sigma}_k)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img1032.svg"
+ ALT="$\displaystyle -\frac{1}{2}\sum_{n=1}^N P_{nk}
+\left[\frac{\partial}{\partial{\b...
+...\Sigma}_k}({\bf x}_n-{\bf m}_k)^T{\bf\Sigma}_k^{-1}({\bf x}_n-{\bf m}_k)\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img1033.svg"
+ ALT="$\displaystyle -\frac{1}{2}\sum_{n=1}^N P_{nk}
+\left[{\bf\Sigma}_k^{-1}-{\bf\Sig...
+...1}
+({\bf x}_n-{\bf m}_k)({\bf x}_n-{\bf m}_k)^T{\bf\Sigma}_k^{-1}\right]={\bf0}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">284</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+    Here we have used the following facts
+    (for more details see <A ID="tex2html34"
+  HREF="https://www.math.uwaterloo.ca/~hwolkowi/matrixcookbook.pdf">Matrix Cookbook</A>):
+
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\frac{d}{d{\bf A}}\log|{\bf A}|=({\bf A}^{-1})^T,
+    \;\;\;\;\;\;
+    \frac{d}{d{\bf A}} \left({\bf a}^T{\bf A}^{-1}{\bf b}\right)
+    =-({\bf A}^{-1})^T{\bf a}{\bf b}^T({\bf A}^{-1})^T
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.11ex; vertical-align: -1.71ex; " SRC="img1034.svg"
+ ALT="$\displaystyle \frac{d}{d{\bf A}}\log\vert{\bf A}\vert=({\bf A}^{-1})^T,
+\;\;\;\...
+...^T{\bf A}^{-1}{\bf b}\right)
+=-({\bf A}^{-1})^T{\bf a}{\bf b}^T({\bf A}^{-1})^T$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">285</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Pre and post multiplying <!-- MATH
+ ${\bf\Sigma}_k$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img43.svg"
+ ALT="${\bf\Sigma}_k$"></SPAN> on both sides of the equation above
+    we get
+    <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\sum_{n=1}^N P_{nk}\left({\bf\Sigma}_k-({\bf x}_n-{\bf m}_k)({\bf x}_n-{\bf m}_k)^T\right)={\bf0}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img1035.svg"
+ ALT="$\displaystyle \sum_{n=1}^N P_{nk}\left({\bf\Sigma}_k-({\bf x}_n-{\bf m}_k)({\bf x}_n-{\bf m}_k)^T\right)={\bf0}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">286</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Solving for <!-- MATH
+ ${\bf\Sigma}_k$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img43.svg"
+ ALT="${\bf\Sigma}_k$"></SPAN>, we get
+    <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf\Sigma}_k=\frac{1}{N_k}\sum_{n=1}^N P_{nk}({\bf x}_n-{\bf m}_k)({\bf x}_n-{\bf m}_k)^T
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img1036.svg"
+ ALT="$\displaystyle {\bf\Sigma}_k=\frac{1}{N_k}\sum_{n=1}^N P_{nk}({\bf x}_n-{\bf m}_k)({\bf x}_n-{\bf m}_k)^T$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">287</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+</LI>
+</UL>
+</LI>
+</UL>
+Note that the expectation of log likelihood in Eq. (<A HREF="#expectationoflog">272</A>)
+in the E-step is a function of the model parameters 
+<!-- MATH
+ ${\bf\theta}=\{P_k,{\bf m}_k,{\bf\Sigma}_k,(k=1,\cdots,K)\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1037.svg"
+ ALT="${\bf\theta}=\{P_k,{\bf m}_k,{\bf\Sigma}_k,(k=1,\cdots,K)\}$"></SPAN>, which 
+are to be updated in Eqs. (<A HREF="#equationPik">276</A>), (<A HREF="#equationmk">281</A>), and
+(<A HREF="#equationsigmak">284</A>) in the M-step, i.e., these two steps need to be
+carried out in an alternative and iterative fashion from some initial
+values of the parameters until convergence.
+
+<P>
+In summary, here is the EM clustering algorithm based on Gaussian mixture model:
+
+<OL>
+<LI>Initialize means <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img42.svg"
+ ALT="${\bf m}_k$"></SPAN>, covariance <!-- MATH
+ ${\bf\Sigma}_k$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img43.svg"
+ ALT="${\bf\Sigma}_k$"></SPAN> and coefficient
+  <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img72.svg"
+ ALT="$P_k$"></SPAN>. 
+
+<P>
+</LI>
+<LI>The E-step: 
+
+<P>
+Find the responsibility <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img999.svg"
+ ALT="$P_{nk}$"></SPAN> for all <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="$N$"></SPAN> data points and all 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> clusters and then <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img21.svg"
+ ALT="$N_k$"></SPAN>:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+P_{nk}=P(r_k=1|{\bf x}_n)=\frac{P_k\,{\cal N}({\bf x}_n;{\bf m}_k,{\bf\Sigma}_k)}
+    {\sum_{l=1}^K P_l\,{\cal N}({\bf x}_n;{\bf m}_l,{\bf\Sigma}_l)},
+    \;\;\;\;\;\;\;N_k=\sum_{n=1}^N P_{nk}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img1038.svg"
+ ALT="$\displaystyle P_{nk}=P(r_k=1\vert{\bf x}_n)=\frac{P_k\,{\cal N}({\bf x}_n;{\bf ...
+...l N}({\bf x}_n;{\bf m}_l,{\bf\Sigma}_l)},
+\;\;\;\;\;\;\;N_k=\sum_{n=1}^N P_{nk}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">288</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+</LI>
+<LI>The M-step: 
+
+<P>
+Recalculate the parameters that maximize the likelihood function:
+  <BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+P_k&=&\frac{N_k}{N}
+    \nonumber\\
+    {\bf m}_k&=&\frac{1}{N_k} \sum_{n=1}^N P_{nk}{\bf x}_n
+    \nonumber\\
+    {\bf\Sigma}_k&=&\frac{1}{N_k}\sum_{n=1}^N P_{nk}({\bf x}_n-{\bf m}_k)({\bf x}_n-{\bf m}_k)^T
+  
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img1039.svg"
+ ALT="$\displaystyle P_k$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.11ex; vertical-align: -1.71ex; " SRC="img1040.svg"
+ ALT="$\displaystyle \frac{N_k}{N}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1041.svg"
+ ALT="$\displaystyle {\bf m}_k$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img1042.svg"
+ ALT="$\displaystyle \frac{1}{N_k} \sum_{n=1}^N P_{nk}{\bf x}_n$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img1043.svg"
+ ALT="$\displaystyle {\bf\Sigma}_k$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img1044.svg"
+ ALT="$\displaystyle \frac{1}{N_k}\sum_{n=1}^N P_{nk}({\bf x}_n-{\bf m}_k)({\bf x}_n-{\bf m}_k)^T$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">289</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+</LI>
+<LI>If the parameters or the log likelihood function have not 
+  converged, go back to step 2.  Otherwise terminate the iteration. 
+  The probability for each sample <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img31.svg"
+ ALT="${\bf x}_n$"></SPAN> to belong to cluster 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img1045.svg"
+ ALT="$C_l$"></SPAN> is <!-- MATH
+ $p_{nl}=P(z_{nl}=1|{\bf x}_n,\theta)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1046.svg"
+ ALT="$p_{nl}=P(z_{nl}=1\vert{\bf x}_n,\theta)$"></SPAN>, and it is therefore
+  assigned to <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN> if <!-- MATH
+ $P_{nk}=\max_l p_{nl}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img1047.svg"
+ ALT="$P_{nk}=\max_l p_{nl}$"></SPAN>.
+
+<P>
+</LI>
+</OL>
+
+<P>
+We can show that the K-means algorithm is actually a special case 
+of the EM algorithm, when all covariance matrices are the same
+<!-- MATH
+ ${\bf\Sigma}_k=\varepsilon{\bf I}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img1048.svg"
+ ALT="${\bf\Sigma}_k=\varepsilon{\bf I}$"></SPAN>, where <!-- MATH
+ $\varepsilon$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img1049.svg"
+ ALT="$\varepsilon$"></SPAN> is a 
+scaling factor which appraoches to zero. In this case we have:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p({\bf x}|z_k=1,\theta)={\cal N}({\bf x}|{\bf m}_k,\varepsilon{\bf I})
+  =\frac{1}{(2\pi)^{d/2}\varepsilon^{1/2}}
+  \exp\left(-\frac{1}{2\varepsilon}||{\bf x}-{\bf m}_k||^2\right)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.33ex; " SRC="img1050.svg"
+ ALT="$\displaystyle p({\bf x}\vert z_k=1,\theta)={\cal N}({\bf x}\vert{\bf m}_k,\vare...
+...\exp\left(-\frac{1}{2\varepsilon}\vert\vert{\bf x}-{\bf m}_k\vert\vert^2\right)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">290</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and the probability for any <!-- MATH
+ ${\bf x}_n\in{\bf X}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img1051.svg"
+ ALT="${\bf x}_n\in{\bf X}$"></SPAN> to belong to cluster 
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN> is:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+P_{nk}=P(z_k=1|{\bf x}_n,\theta)
+  =\frac{P_k{\cal N}({\bf x}_n;{\bf m}_l{\bf\Sigma}_l)}
+  {\sum_{l=1}^K P_l {\cal N}({\bf x}_n;{\bf m}_l{\bf\Sigma}_l)}
+  =\frac{P_k\exp(-||{\bf x}_n-{\bf m}_k||^2/2\varepsilon)}
+  {\sum_{l=1}^K P_l\exp(-||{\bf x}_n-{\bf m}_l||^2/2\varepsilon)}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.50ex; vertical-align: -2.84ex; " SRC="img1052.svg"
+ ALT="$\displaystyle P_{nk}=P(z_k=1\vert{\bf x}_n,\theta)
+=\frac{P_k{\cal N}({\bf x}_n...
+...{\sum_{l=1}^K P_l\exp(-\vert\vert{\bf x}_n-{\bf m}_l\vert\vert^2/2\varepsilon)}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">291</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+When <!-- MATH
+ $\varepsilon\rightarrow 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1053.svg"
+ ALT="$\varepsilon\rightarrow 0$"></SPAN>, all terms in the denominator approach
+to zero, but the one with minimum <!-- MATH
+ $||{\bf x}-{\bf m}_k||$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1054.svg"
+ ALT="$\vert\vert{\bf x}-{\bf m}_k\vert\vert$"></SPAN> approaches 
+to zero most slowly, and becomes the dominant term of the denominator.
+If the numerator happens to be this term as well, then <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img1002.svg"
+ ALT="$P_{nk}=1$"></SPAN>,
+otherwise the numerator approaches zero and <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img1055.svg"
+ ALT="$P_{nk}=0$"></SPAN>. Now <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img999.svg"
+ ALT="$P_{nk}$"></SPAN> 
+defined above becomes:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\lim\limits_{\varepsilon\rightarrow 0} P_{nk}=\lim\limits_{\varepsilon\rightarrow 0}
+  \frac{P_k\exp(-||{\bf x}_n-{\bf m}_k||^2/2\varepsilon)}
+  {\sum_{l=1}^K P_l\exp(-||{\bf x}_n-{\bf m}_l||^2/2\varepsilon)}
+  =\left\{\begin{array}{ll}
+  1 & \mbox{if $||{\bf x}_n-{\bf m_k}||=\min_l ||{\bf x}_n-{\bf m_l}|$}|\\
+  0 & \mbox{otherwise}\end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.50ex; vertical-align: -2.84ex; " SRC="img1056.svg"
+ ALT="$\displaystyle \lim\limits_{\varepsilon\rightarrow 0} P_{nk}=\lim\limits_{\varep...
+...t\vert{\bf x}_n-{\bf m_l}\vert$}\vert\\
+0 &amp; \mbox{otherwise}\end{array}\right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">292</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Now the posterior probability <!-- MATH
+ $0<P_{nk}<1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img1001.svg"
+ ALT="$0&lt;P_{nk}&lt;1$"></SPAN> defined in Eq. 
+(<A HREF="#GMMprob">270</A>) for a soft decision becomes a binary value 
+<!-- MATH
+ $P_{nk}\in\{0,\;1\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1057.svg"
+ ALT="$P_{nk}\in\{0,\;1\}$"></SPAN> for a hard binary decision to assign 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img31.svg"
+ ALT="${\bf x}_n$"></SPAN> to <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN> with the smallest distance. Also 
+<!-- MATH
+ $N_k=\sum_{n=1}^N P_{nk}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.81ex; " SRC="img927.svg"
+ ALT="$N_k=\sum_{n=1}^N P_{nk}$"></SPAN> defined in Eq. (<A HREF="#priorP_mg">277</A>)
+as the sum of the posterior probabilities for all <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="$N$"></SPAN> data 
+points to belong to <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN> becomes <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img21.svg"
+ ALT="$N_k$"></SPAN> as the number of 
+data samples assigned only to <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN>. In other words, now 
+the probabilistic EM method based on both <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img1058.svg"
+ ALT="${\bf m}$"></SPAN> and 
+<!-- MATH
+ ${\bf\Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1059.svg"
+ ALT="${\bf\Sigma}$"></SPAN> becomes the deterministic K-means method based 
+on <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img1058.svg"
+ ALT="${\bf m}$"></SPAN> only.
+
+<P>
+We can also make a comparison between the GMM method for 
+unsupervised clustering and the softmax regression for 
+supervised classification. First, the latent variables 
+<!-- MATH
+ ${\bf Z}=[{\bf z}_1,\cdots,{\bf z}_N]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img979.svg"
+ ALT="${\bf Z}=[{\bf z}_1,\cdots,{\bf z}_N]$"></SPAN> in GMM play a similar 
+role as the labeling <!-- MATH
+ ${\bf Y}=[{\bf y}_1,\cdots,{\bf y}_N]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img983.svg"
+ ALT="${\bf Y}=[{\bf y}_1,\cdots,{\bf y}_N]$"></SPAN> in 
+<A ID="tex2html35"
+  HREF="../ch7/node14.html">softmax regression</A>
+for
+multi-class classificatioin. However, the difference is that 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img984.svg"
+ ALT="${\bf Y}$"></SPAN> is explicitely given in the training set for a supervised 
+classification, while <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img985.svg"
+ ALT="${\bf Z}$"></SPAN> is hidden for an unsupervised 
+cllustering analysis. Second, we note that the probability 
+<!-- MATH
+ $P_{nk}=p(z_{nk}=1|{\bf x}_n,\theta)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1060.svg"
+ ALT="$P_{nk}=p(z_{nk}=1\vert{\bf x}_n,\theta)$"></SPAN> given in Eq. (<A HREF="#GMMprob">270</A>) 
+is similar to the softmax function <!-- MATH
+ $\phi_{nk}=P(y'=k|{\bf x}_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1061.svg"
+ ALT="$\phi_{nk}=P(y'=k\vert{\bf x}_n)$"></SPAN> 
+in the softmax method in terms of their form, with the only 
+difference that the Gaussian function is used for GMM while the
+exponential function is used for solfmax.
+
+<P>
+<B>Examples</B> 
+
+<P>
+The same dataset is used to test both the K-means and EM clustering 
+methods. The first panel shows 10 iterations of the K-means method,
+while the second panel shows 16 iterations of the EM method. In both
+cases, the iteration converges to the last plot. Comparing the two 
+clustering results, we see that the K-means method cannot separate 
+the red and green data points from two different clusters, both normally 
+distributed with similar means but very different covariance matrices, 
+while the blue data points all in the same cluster are separated into 
+two clusters. But the EM method based on the Gaussian mixture model 
+can correctly identified all three clusters.
+
+<P>
+<IMG STYLE="" SRC="../figures/ClusteringKmeans.png"
+ ALT="ClusteringKmeans.png">
+<IMG STYLE="" SRC="../figures/clusteringEM.png"
+ ALT="clusteringEM.png">
+
+<P>
+The two clustering methods are also applied to the Iris dataset,
+which has three classes each of 50 4-dimensional sample vectors.
+The PCA method is used to visualize the first two principal 
+compnents, as shown below. Also, as can be seen from their c
+onfussion matrices, the error rate of the K-means method is 18/150,
+while that of the EM method is 5/150.
+
+<P>
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{tabular}{r|r|r}
+\multicolumn{3}{c}{K-means}\\\hline\hline
+0 & 0 & 50\\\hline 50 & 0 & 0\\\hline18 & 32 & 0\\\hline\hline
+  \end{tabular}
+\;\;\;\;\;\;\;\;\;\;
+\begin{tabular}{r|r|r}
+\multicolumn{3}{c}{EM}\\\hline\hline
+0 & 0 & 50\\\hline45 & 5 & 0\\\hline0 & 50 & 0\\\hline\hline
+\end{tabular}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 12.77ex; vertical-align: -5.76ex; " SRC="img1062.svg"
+ ALT="$\displaystyle \begin{tabular}{r\vert r\vert r}
+\multicolumn{3}{c}{K-means}\\ \h...
+...e
+0 &amp; 0 &amp; 50\\ \hline45 &amp; 5 &amp; 0\\ \hline0 &amp; 50 &amp; 0\\ \hline\hline
+\end{tabular}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">293</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+<IMG STYLE="" SRC="../figures/IrisKmeans.png"
+ ALT="IrisKmeans.png">
+<IMG STYLE="" SRC="../figures/IrisEM.png"
+ ALT="IrisEM.png">
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node18.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node15.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node16.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node18.html">Mixture of Bernoulli</A>
+<B> Up:</B> <A
+ HREF="node15.html">Clustering Analysis</A>
+<B> Previous:</B> <A
+ HREF="node16.html">K-means clustering</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

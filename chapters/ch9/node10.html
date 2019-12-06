@@ -1,0 +1,1100 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Kernelized Bayes classifier</TITLE>
+<META NAME="description" CONTENT="Kernelized Bayes classifier">
+<META NAME="keywords" CONTENT="ch9">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch9.css">
+
+<LINK REL="next" HREF="node11.html">
+<LINK REL="previous" HREF="node4.html">
+<LINK REL="next" HREF="node11.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node11.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="ch9.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node9.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node11.html">Gaussian Process Classification (GPC)</A>
+<B> Up:</B> <A
+ HREF="ch9.html">ch9</A>
+<B> Previous:</B> <A
+ HREF="node9.html">Multi-Class Classification</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00050000000000000000">
+Kernelized Bayes classifier</A>
+</H1>
+
+<P>
+The <A ID="tex2html17"
+  HREF="node2.html">naive Bayes (maximum likelihood) classification</A>
+is based on a quadratic decision function and is therefore 
+unable to classify data that are not quadratically separable. However,
+as shown below, the Bayes method can be reformulated so that all data 
+points appear in the form of an inner product, and the kernel method 
+can be used to map the original space into a higher dimensional space 
+in which all groups can be separated even though they are not 
+quadratically separable in the original space.
+
+<P>
+Consider a binary Bayes classifier by which any sample <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> is 
+classified into either of the two classes <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img14.svg"
+ ALT="$C_+$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img15.svg"
+ ALT="$C_-$"></SPAN> depending on
+whether <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> is on the positive or negative side of the quadratic
+decision surface (Eq. (<A HREF="node2.html#MLdiscriminant">22</A>)):
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f({\bf x})={\bf x}^T{\bf W}{\bf x}+{\bf w}^T{\bf x}+w
+  \left\{\begin{array}{ll}>0, & {\bf x}\in C_+\\<0, &
+      {\bf x}\in C_-\end{array}
+  \right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img593.svg"
+ ALT="$\displaystyle f({\bf x})={\bf x}^T{\bf W}{\bf x}+{\bf w}^T{\bf x}+w
+\left\{\begin{array}{ll}&gt;0, &amp; {\bf x}\in C_+\\ &lt;0, &amp;
+{\bf x}\in C_-\end{array}\right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">163</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+As show in Eq. (<A HREF="node2.html#Www2">21</A>), here
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+{\bf W}&=&-\frac{1}{2}({\bf\Sigma}_+^{-1}-{\bf\Sigma}_-^{-1})
+  \nonumber\\
+  {\bf w}&=&{\bf\Sigma}_+^{-1}{\bf m}_+-{\bf\Sigma}_-^{-1}{\bf m}_-
+  \nonumber\\
+  w&=&-\frac{1}{2}({\bf m}_+^T{\bf\Sigma}_+^{-1}{\bf m}_+
+  -{\bf m}_-^T{\bf\Sigma}_-^{-1}{\bf m}_-)
+  -\frac{1}{2}\log\,\frac{|{\bf\Sigma}_+|}{|{\bf\Sigma}_-|}
+  +\log\,\frac{P(C_+)}{P(C_-)}
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img113.svg"
+ ALT="$\displaystyle {\bf W}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img594.svg"
+ ALT="$\displaystyle -\frac{1}{2}({\bf\Sigma}_+^{-1}-{\bf\Sigma}_-^{-1})$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img115.svg"
+ ALT="$\displaystyle {\bf w}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.25ex; vertical-align: -0.89ex; " SRC="img595.svg"
+ ALT="$\displaystyle {\bf\Sigma}_+^{-1}{\bf m}_+-{\bf\Sigma}_-^{-1}{\bf m}_-$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img117.svg"
+ ALT="$\displaystyle w$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.81ex; vertical-align: -2.29ex; " SRC="img596.svg"
+ ALT="$\displaystyle -\frac{1}{2}({\bf m}_+^T{\bf\Sigma}_+^{-1}{\bf m}_+
+-{\bf m}_-^T{...
+...{\vert{\bf\Sigma}_+\vert}{\vert{\bf\Sigma}_-\vert}
++\log\,\frac{P(C_+)}{P(C_-)}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">164</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+where <!-- MATH
+ ${\bf\Sigma}_+$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img597.svg"
+ ALT="${\bf\Sigma}_+$"></SPAN> and <!-- MATH
+ ${\bf\Sigma}_-$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img598.svg"
+ ALT="${\bf\Sigma}_-$"></SPAN> are respectively the 
+covariance matrices of the samples in <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img14.svg"
+ ALT="$C_+$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img15.svg"
+ ALT="$C_-$"></SPAN>,
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf m}_+=\frac{1}{N_+}\sum_{x\in C_+}{\bf x},\;\;\;\;\;
+  {\bf m}_-=\frac{1}{N_-}\sum_{x\in C_-}{\bf x}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.74ex; vertical-align: -3.55ex; " SRC="img599.svg"
+ ALT="$\displaystyle {\bf m}_+=\frac{1}{N_+}\sum_{x\in C_+}{\bf x},\;\;\;\;\;
+{\bf m}_-=\frac{1}{N_-}\sum_{x\in C_-}{\bf x}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">165</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+are their mean vectors, and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img600.svg"
+ ALT="$P_+=N_+/N$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img601.svg"
+ ALT="$P_-=N_-/N$"></SPAN> are their prior
+probabilities. Specially if <!-- MATH
+ ${\bf\Sigma}_+={\bf\Sigma}_-={\bf\Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img602.svg"
+ ALT="${\bf\Sigma}_+={\bf\Sigma}_-={\bf\Sigma}$"></SPAN> 
+and therefore <!-- MATH
+ ${\bf W}={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img603.svg"
+ ALT="${\bf W}={\bf0}$"></SPAN>, the quadratic decision surface becomes 
+a linear decision plane discribed by 
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f({\bf x})={\bf w}^T{\bf x}+w
+  =\left[{\bf\Sigma}^{-1}({\bf m}_+-{\bf m}_-)\right]^T{\bf x}+w=0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.72ex; vertical-align: -0.93ex; " SRC="img604.svg"
+ ALT="$\displaystyle f({\bf x})={\bf w}^T{\bf x}+w
+=\left[{\bf\Sigma}^{-1}({\bf m}_+-{\bf m}_-)\right]^T{\bf x}+w=0$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">166</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+in the same form as the decision equation for the support vector machine.
+An unlabeled sample <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> is classified into either of the two classes 
+depending on on which side of a threshold <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.31ex; " SRC="img605.svg"
+ ALT="$-w$"></SPAN> its projection onto the 
+normal direction <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img248.svg"
+ ALT="${\bf w}$"></SPAN> of the decision plane lies.
+
+<P>
+As matrices <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img592.svg"
+ ALT="${\bf W}$"></SPAN>, <!-- MATH
+ ${\bf\Sigma}_+^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.89ex; " SRC="img606.svg"
+ ALT="${\bf\Sigma}_+^{-1}$"></SPAN>, and <!-- MATH
+ ${\bf\Sigma}_-^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.89ex; " SRC="img607.svg"
+ ALT="${\bf\Sigma}_-^{-1}$"></SPAN> 
+are all symmetric, they can be written in the following
+<A ID="tex2html18"
+  HREF="../algebra/node8.html">eigendecomposition</A>
+form:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf W}={\bf V}{\bf\Lambda}{\bf V}^T={\bf U}{\bf U}^T, \;\;\;\;
+  {\bf\Sigma}_+^{-1}={\bf V}_+{\bf\Lambda}_+{\bf V}_+^T={\bf U}_+{\bf U}_+^T,
+  \;\;\;\;
+  {\bf\Sigma}_-^{-1}={\bf V}_-{\bf\Lambda}_-{\bf V}_-^T={\bf U}_-{\bf U}_-^T
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.89ex; " SRC="img608.svg"
+ ALT="$\displaystyle {\bf W}={\bf V}{\bf\Lambda}{\bf V}^T={\bf U}{\bf U}^T, \;\;\;\;
+{...
+...\;\;
+{\bf\Sigma}_-^{-1}={\bf V}_-{\bf\Lambda}_-{\bf V}_-^T={\bf U}_-{\bf U}_-^T$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">167</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <!-- MATH
+ ${\bf U}={\bf V\Lambda}^{1/2},\;{\bf U}_+={\bf V}_+{\bf\Lambda}_+^{1/2}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.48ex; vertical-align: -0.89ex; " SRC="img609.svg"
+ ALT="${\bf U}={\bf V\Lambda}^{1/2},\;{\bf U}_+={\bf V}_+{\bf\Lambda}_+^{1/2}$"></SPAN>
+and <!-- MATH
+ ${\bf U}_-={\bf V}_-{\bf\Lambda}_-^{1/2}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.48ex; vertical-align: -0.89ex; " SRC="img610.svg"
+ ALT="${\bf U}_-={\bf V}_-{\bf\Lambda}_-^{1/2}$"></SPAN>. We can write vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img248.svg"
+ ALT="${\bf w}$"></SPAN> 
+as:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf w}={\bf\Sigma}_+^{-1}{\bf m}_+-{\bf\Sigma}_-^{-1}{\bf m}_-
+  ={\bf U}_+{\bf U}_+^T\frac{1}{N_+}\sum_{{\bf x}_+\in C_+}{\bf x}_+
+  -{\bf U}_-{\bf U}_-^T\frac{1}{N_-}\sum_{{\bf x}_-\in C_-}{\bf x}_-
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.74ex; vertical-align: -3.55ex; " SRC="img611.svg"
+ ALT="$\displaystyle {\bf w}={\bf\Sigma}_+^{-1}{\bf m}_+-{\bf\Sigma}_-^{-1}{\bf m}_-
+=...
+..._+}{\bf x}_+
+-{\bf U}_-{\bf U}_-^T\frac{1}{N_-}\sum_{{\bf x}_-\in C_-}{\bf x}_-$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">168</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Any unlabeled sample <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> can now be classified into either 
+of the two classes based on its decision function:
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+f({\bf x})&=&{\bf x}^T{\bf W}{\bf x}+{\bf w}^T{\bf x}+w
+  \nonumber\\
+  &=&{\bf x}^T{\bf UU}^T{\bf x}
+  +\left(\frac{1}{N_+}\sum_{{\bf x}_+}{\bf x}_+^T{\bf U}_+{\bf U}_+^T\right){\bf x}
+  -\left(\frac{1}{N_-}\sum_{{\bf x}_-}{\bf x}_-^T{\bf U}_-{\bf U}_-^T\right){\bf x}
+  +w
+  \nonumber\\
+  &=&{\bf z}^T{\bf z}
+  +\frac{1}{N_+}\sum_{{\bf z}_{++}}\left({\bf z}_{++}^T{\bf z}_+\right)
+  -\frac{1}{N_-}\sum_{{\bf z}_{- -}}\left({\bf z}_{- -}^T{\bf z}_-\right)+w
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img612.svg"
+ ALT="$\displaystyle f({\bf x})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.55ex; vertical-align: -0.31ex; " SRC="img613.svg"
+ ALT="$\displaystyle {\bf x}^T{\bf W}{\bf x}+{\bf w}^T{\bf x}+w$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img614.svg"
+ ALT="$\displaystyle {\bf x}^T{\bf UU}^T{\bf x}
++\left(\frac{1}{N_+}\sum_{{\bf x}_+}{\...
+...t(\frac{1}{N_-}\sum_{{\bf x}_-}{\bf x}_-^T{\bf U}_-{\bf U}_-^T\right){\bf x}
++w$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.74ex; vertical-align: -3.45ex; " SRC="img615.svg"
+ ALT="$\displaystyle {\bf z}^T{\bf z}
++\frac{1}{N_+}\sum_{{\bf z}_{++}}\left({\bf z}_{...
+...\right)
+-\frac{1}{N_-}\sum_{{\bf z}_{--}}\left({\bf z}_{--}^T{\bf z}_-\right)+w$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">169</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+where 
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left\{\begin{array}{l}{\bf z}_{++}={\bf U}_+^T{\bf x}_+\;\;({\bf x}_+\in C_+)\\
+  {\bf z}_{- -}={\bf U}_-^T{\bf x}_-\;\;({\bf x}_-\in C_-)\end{array}\right.,
+  \;\;\;\;\;
+  \left\{\begin{array}{l}
+           {\bf z}={\bf U}^T{\bf x}\\
+           {\bf z}_+={\bf U}_+^T{\bf x}\\
+           {\bf z}_-={\bf U}_-^T{\bf x}
+  \end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img616.svg"
+ ALT="$\displaystyle \left\{\begin{array}{l}{\bf z}_{++}={\bf U}_+^T{\bf x}_+\;\;({\bf...
+...{\bf z}_+={\bf U}_+^T{\bf x}\\
+{\bf z}_-={\bf U}_-^T{\bf x}
+\end{array}\right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">170</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+As all data points appear in the form of an inner product, the kernel 
+method can be used by replacing all inner products in the decision
+function by the corresponding kernel functions:
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="TypeIII"></A><!-- MATH
+ \begin{equation}
+f({\bf x})=K({\bf z},{\bf z})
+  +\frac{1}{N_+}\sum_{{\bf z}_{++}}K({\bf z}_{++},{\bf z}_+)
+  -\frac{1}{N_-}\sum_{{\bf z}_{- -}}K({\bf z}_{- -},{\bf z}_-)+b
+  =p({\bf x})+b
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.74ex; vertical-align: -3.45ex; " SRC="img617.svg"
+ ALT="$\displaystyle f({\bf x})=K({\bf z},{\bf z})
++\frac{1}{N_+}\sum_{{\bf z}_{++}}K(...
+...}_+)
+-\frac{1}{N_-}\sum_{{\bf z}_{--}}K({\bf z}_{--},{\bf z}_-)+b
+=p({\bf x})+b$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">171</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+This is the decision function in the new higher dimensional space,
+where <!-- MATH
+ $p({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img78.svg"
+ ALT="$p({\bf x})$"></SPAN> is defined as a function composed of all terms 
+in <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img578.svg"
+ ALT="$f({\bf x})$"></SPAN> except the last offset term <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img249.svg"
+ ALT="$b$"></SPAN>, which is to replace 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img618.svg"
+ ALT="$w$"></SPAN> in the original space. To find this <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img249.svg"
+ ALT="$b$"></SPAN>, we first map all 
+training samples into a 1-D space <!-- MATH
+ $x_n=p({\bf x}_n),\;(n=1,\cdots,N)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img619.svg"
+ ALT="$x_n=p({\bf x}_n),\;(n=1,\cdots,N)$"></SPAN>
+and sort them together with their corresponding labelings 
+<!-- MATH
+ $y_1,\cdots,y_N$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img344.svg"
+ ALT="$y_1,\cdots,y_N$"></SPAN>, and then search through all <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img455.svg"
+ ALT="$N-1$"></SPAN> possible 
+ways to partition them into two groups indexed respectively by 
+<!-- MATH
+ $1,\cdots,k$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img620.svg"
+ ALT="$1,\cdots,k$"></SPAN> and <!-- MATH
+ $k+1,\cdots,N$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img621.svg"
+ ALT="$k+1,\cdots,N$"></SPAN> to find the optimal <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img33.svg"
+ ALT="$k$"></SPAN> corresponding 
+to the maximum labeling consistency measured by
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="LabelingConsistency"></A><!-- MATH
+ \begin{equation}
+\bigg|\sum_{n=1}^k y_n\bigg|+\bigg|\sum_{n=k+1}^N y_n\bigg|,
+  \;\;\;\;\;\;(k=1,\cdots,N-1)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.90ex; vertical-align: -3.34ex; " SRC="img622.svg"
+ ALT="$\displaystyle \bigg\vert\sum_{n=1}^k y_n\bigg\vert+\bigg\vert\sum_{n=k+1}^N y_n\bigg\vert,
+\;\;\;\;\;\;(k=1,\cdots,N-1)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">172</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The middle point <!-- MATH
+ $(x_k+x_{k+1})/2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img623.svg"
+ ALT="$(x_k+x_{k+1})/2$"></SPAN> between <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img624.svg"
+ ALT="$x_k$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.66ex; " SRC="img625.svg"
+ ALT="$x_{k+1}$"></SPAN> is used
+as the optimal threshold to separate the training samples into two 
+classes in the 1-D space, i.e., the offset is <!-- MATH
+ $b=-(x_k+x_{k+1})/2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img626.svg"
+ ALT="$b=-(x_k+x_{k+1})/2$"></SPAN>. 
+Now the unlabeled point <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> can be classified into either of 
+the two classes <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img14.svg"
+ ALT="$C_+$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img15.svg"
+ ALT="$C_-$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p({\bf x})+b\;\left\{\begin{array}{ll}>0, & {\bf x}\in C_+\\
+    <0, & {\bf x}\in C_-\end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img627.svg"
+ ALT="$\displaystyle p({\bf x})+b\;\left\{\begin{array}{ll}&gt;0, &amp; {\bf x}\in C_+\\
+&lt;0, &amp; {\bf x}\in C_-\end{array}\right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">173</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+In general, when all data points are kernel mapped to a higher 
+dimensional space, the two classes can be more easily separated, 
+even by a hyperplane based on the linear part of the decision
+function without the second order term. This allows the assumption
+that the two classes have the same covariance matrix so that
+<!-- MATH
+ ${\bf W}=-({\bf\Sigma}_+-{\bf\Sigma}_-)/2={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img628.svg"
+ ALT="${\bf W}=-({\bf\Sigma}_+-{\bf\Sigma}_-)/2={\bf0}$"></SPAN> and the second 
+order term is dropped. This is the justification for the following
+two special cases:
+
+<UL>
+<LI>If we approximate both <!-- MATH
+ ${\bf\Sigma}_+$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img597.svg"
+ ALT="${\bf\Sigma}_+$"></SPAN> and <!-- MATH
+ ${\bf\Sigma}_-$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img598.svg"
+ ALT="${\bf\Sigma}_-$"></SPAN>
+  by their average <!-- MATH
+ ${\bf\Sigma}=({\bf\Sigma}_++{\bf\Sigma}_-)/2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img629.svg"
+ ALT="${\bf\Sigma}=({\bf\Sigma}_++{\bf\Sigma}_-)/2$"></SPAN>,
+  then <!-- MATH
+ ${\bf W}={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img603.svg"
+ ALT="${\bf W}={\bf0}$"></SPAN> and the decision function of any <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> 
+  becomes
+  <BR>
+<DIV CLASS="mathdisplay"><A ID="TypeII"></A><!-- MATH
+ \begin{eqnarray}
+f({\bf x})&=&{\bf w}^T{\bf x}+w
+    =\left[{\bf\Sigma}^{-1}({\bf m}_+-{\bf m}_-)\right]^T{\bf x}+w
+    \nonumber\\
+    &=&\left[{\bf UU}^T\left(\frac{1}{N_+}\sum_{{\bf x}_+}{\bf x}_+
+      -\frac{1}{N_-}\sum_{{\bf x}_-}{\bf x}_-\right)\right]^T{\bf x}+w
+    \nonumber\\
+    &=&\frac{1}{N_+}\sum_{{\bf x}_+}{\bf x}_+^T{\bf UU}^T{\bf x}
+      -\frac{1}{N_-}\sum_{{\bf x}_-}{\bf x}_-^T{\bf UU}^T{\bf x}+w
+    \nonumber\\
+    &=&\frac{1}{N_+}\sum_{{\bf z}_+}{\bf z}_+^T{\bf z}
+    -\frac{1}{N_-}\sum_{{\bf z}_-}{\bf z}_-^T{\bf z}+w
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img612.svg"
+ ALT="$\displaystyle f({\bf x})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.72ex; vertical-align: -0.93ex; " SRC="img630.svg"
+ ALT="$\displaystyle {\bf w}^T{\bf x}+w
+=\left[{\bf\Sigma}^{-1}({\bf m}_+-{\bf m}_-)\right]^T{\bf x}+w$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 9.29ex; vertical-align: -3.72ex; " SRC="img631.svg"
+ ALT="$\displaystyle \left[{\bf UU}^T\left(\frac{1}{N_+}\sum_{{\bf x}_+}{\bf x}_+
+-\frac{1}{N_-}\sum_{{\bf x}_-}{\bf x}_-\right)\right]^T{\bf x}+w$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.74ex; vertical-align: -3.45ex; " SRC="img632.svg"
+ ALT="$\displaystyle \frac{1}{N_+}\sum_{{\bf x}_+}{\bf x}_+^T{\bf UU}^T{\bf x}
+-\frac{1}{N_-}\sum_{{\bf x}_-}{\bf x}_-^T{\bf UU}^T{\bf x}+w$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.74ex; vertical-align: -3.45ex; " SRC="img633.svg"
+ ALT="$\displaystyle \frac{1}{N_+}\sum_{{\bf z}_+}{\bf z}_+^T{\bf z}
+-\frac{1}{N_-}\sum_{{\bf z}_-}{\bf z}_-^T{\bf z}+w$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">174</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+  where <!-- MATH
+ ${\bf UU}^T={\bf\Sigma}^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.12ex; " SRC="img634.svg"
+ ALT="${\bf UU}^T={\bf\Sigma}^{-1}$"></SPAN>, <!-- MATH
+ ${\bf z}_+={\bf U}^T{\bf x}_+$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.66ex; " SRC="img635.svg"
+ ALT="${\bf z}_+={\bf U}^T{\bf x}_+$"></SPAN>,
+  <!-- MATH
+ ${\bf z}_-={\bf U}^T{\bf x}_-$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.66ex; " SRC="img636.svg"
+ ALT="${\bf z}_-={\bf U}^T{\bf x}_-$"></SPAN>, and <!-- MATH
+ ${\bf z}={\bf U}^T{\bf x}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img637.svg"
+ ALT="${\bf z}={\bf U}^T{\bf x}$"></SPAN>. 
+  This decision function can be converted to the following if the 
+  kernel method is used:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f({\bf x})=\frac{1}{N_+}\sum_{{\bf z}_+}K({\bf z}_+,{\bf z})
+    -\frac{1}{N_-}\sum_{{\bf z}_-}K({\bf z}_-,{\bf z})+b
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.74ex; vertical-align: -3.45ex; " SRC="img638.svg"
+ ALT="$\displaystyle f({\bf x})=\frac{1}{N_+}\sum_{{\bf z}_+}K({\bf z}_+,{\bf z})
+-\frac{1}{N_-}\sum_{{\bf z}_-}K({\bf z}_-,{\bf z})+b$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">175</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>  
+
+<P>
+</LI>
+<LI>More specially, if <!-- MATH
+ ${\bf\Sigma}_+={\bf\Sigma}_-={\bf I}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img639.svg"
+ ALT="${\bf\Sigma}_+={\bf\Sigma}_-={\bf I}$"></SPAN>, then 
+  the decision function above becomes
+  <BR>
+<DIV CLASS="mathdisplay"><A ID="TypeI1"></A><!-- MATH
+ \begin{eqnarray}
+f({\bf x})&=&{\bf w}^T{\bf x}+w
+    =\left( {\bf m}_+-{\bf m}_- \right)^T {\bf x}+w
+    \nonumber\\
+    &=&\frac{1}{N_+}\sum_{{\bf x}_+}{\bf x}_+^T{\bf x}
+    -\frac{1}{N_-}\sum_{{\bf x}_-}{\bf x}_-^T{\bf x}+w
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img612.svg"
+ ALT="$\displaystyle f({\bf x})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.25ex; vertical-align: -0.70ex; " SRC="img640.svg"
+ ALT="$\displaystyle {\bf w}^T{\bf x}+w
+=\left( {\bf m}_+-{\bf m}_- \right)^T {\bf x}+w$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.74ex; vertical-align: -3.45ex; " SRC="img641.svg"
+ ALT="$\displaystyle \frac{1}{N_+}\sum_{{\bf x}_+}{\bf x}_+^T{\bf x}
+-\frac{1}{N_-}\sum_{{\bf x}_-}{\bf x}_-^T{\bf x}+w$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">176</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+  which can be converted to the following if the kernel method is used:
+  <P></P>
+<DIV CLASS="mathdisplay"><A ID="TypeI2"></A><!-- MATH
+ \begin{equation}
+f({\bf x})=\frac{1}{N_+}\sum_{{\bf x}_+}K({\bf x}_+,{\bf x})
+    -\frac{1}{N_-}\sum_{{\bf x}_-}K({\bf x}_-,{\bf x})+b
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.74ex; vertical-align: -3.45ex; " SRC="img642.svg"
+ ALT="$\displaystyle f({\bf x})=\frac{1}{N_+}\sum_{{\bf x}_+}K({\bf x}_+,{\bf x})
+-\frac{1}{N_-}\sum_{{\bf x}_-}K({\bf x}_-,{\bf x})+b$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">177</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>  
+
+<P>
+</LI>
+</UL>
+
+<P>
+Note that if the kernel method is used to replace an inner product by 
+a kernel function <!-- MATH
+ $K({\bf x},{\bf x}')=\phi({\bf x})^T\phi({\bf x}')$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img643.svg"
+ ALT="$K({\bf x},{\bf x}')=\phi({\bf x})^T\phi({\bf x}')$"></SPAN>,
+we need to map all data points to <!-- MATH
+ $\phi({\bf x}_n),\;\;(n=1,\cdots,N)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img644.svg"
+ ALT="$\phi({\bf x}_n),\;\;(n=1,\cdots,N)$"></SPAN>
+in the higher dimensional space, instead of only mapping their means 
+<!-- MATH
+ $\phi({\bf m}_+)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img645.svg"
+ ALT="$\phi({\bf m}_+)$"></SPAN> and <!-- MATH
+ $\phi({\bf m}_-)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img646.svg"
+ ALT="$\phi({\bf m}_-)$"></SPAN>, because the mapping of a sum 
+is not equal to the sum of the mapped points if the kernel is not linear:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\phi({\bf m}_+-{\bf m}_-)\ne \phi({\bf m}_+)-\phi({\bf m}_-),
+  \;\;\;\;\;\;\;\;
+  \phi({\bf m}_\pm)=\phi\left(\frac{1}{n_\pm}\sum_{{\bf x}\in C_\pm}{\bf x}\right)
+  \ne \frac{1}{n_\pm}\sum_{{\bf x}\in C_\pm} \phi({\bf x})
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img647.svg"
+ ALT="$\displaystyle \phi({\bf m}_+-{\bf m}_-)\ne \phi({\bf m}_+)-\phi({\bf m}_-),
+\;\...
+...n C_\pm}{\bf x}\right)
+\ne \frac{1}{n_\pm}\sum_{{\bf x}\in C_\pm} \phi({\bf x})$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">178</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The three cases above are summarized below:
+
+<UL>
+<LI>Type I, Eq. (<A HREF="#TypeI2">177</A>) 
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f({\bf x})=\frac{1}{N_+}\sum_{{\bf x}_+}K({\bf x}_+,{\bf x})
+  -\frac{1}{N_-}\sum_{{\bf x}_-}K({\bf x}_-,{\bf x})+b
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.74ex; vertical-align: -3.45ex; " SRC="img642.svg"
+ ALT="$\displaystyle f({\bf x})=\frac{1}{N_+}\sum_{{\bf x}_+}K({\bf x}_+,{\bf x})
+-\frac{1}{N_-}\sum_{{\bf x}_-}K({\bf x}_-,{\bf x})+b$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">179</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+</LI>
+<LI>Type II,  Eq. (<A HREF="#TypeII">174</A>) 
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f({\bf x})=\frac{1}{N_+}\sum_{{\bf z}_+}K({\bf z}_+,{\bf z})
+    -\frac{1}{N_-}\sum_{{\bf z}_-}K({\bf z}_-,{\bf z})+b
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.74ex; vertical-align: -3.45ex; " SRC="img638.svg"
+ ALT="$\displaystyle f({\bf x})=\frac{1}{N_+}\sum_{{\bf z}_+}K({\bf z}_+,{\bf z})
+-\frac{1}{N_-}\sum_{{\bf z}_-}K({\bf z}_-,{\bf z})+b$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">180</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+</LI>
+<LI>Type III, Eq. (<A HREF="#TypeIII">171</A>) 
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f({\bf x})={\bf z}^T{\bf z}
+  +\frac{1}{N_+}\sum_{{\bf z}_{++}}K({\bf z}_{++},{\bf z}_+)
+  -\frac{1}{N_-}\sum_{{\bf z}_{- -}}K({\bf z}_{- -},{\bf z}_-)+b
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.74ex; vertical-align: -3.45ex; " SRC="img648.svg"
+ ALT="$\displaystyle f({\bf x})={\bf z}^T{\bf z}
++\frac{1}{N_+}\sum_{{\bf z}_{++}}K({\bf z}_{++},{\bf z}_+)
+-\frac{1}{N_-}\sum_{{\bf z}_{--}}K({\bf z}_{--},{\bf z}_-)+b$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">181</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+</LI>
+</UL>
+
+<P>
+The Matlab code for the essential part of the algorithm is listed
+below. Given <code>X</code> and <code>y</code> for the data array composed of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="$N$"></SPAN> 
+training vectors <!-- MATH
+ ${\bf X}=[{\bf x}_1,\cdots,{\bf x}_N]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img9.svg"
+ ALT="${\bf X}=[{\bf x}_1,\cdots,{\bf x}_N]$"></SPAN> and their 
+corresponding labelings <!-- MATH
+ ${\bf y}=[y_1,\cdots,y_N]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img649.svg"
+ ALT="${\bf y}=[y_1,\cdots,y_N]$"></SPAN>, the code carries 
+out the training and then classifies any unlabeled data point into 
+either of the two classes. Parameter <code>type</code> selects any one of 
+the three different versions of the algorithm, and the function 
+<code>K(X,x)</code> returns a 1-D array containing all <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="$N$"></SPAN> kernel functions
+<!-- MATH
+ $K({\bf x}_i,{\bf x}),\;(i=1,\cdots,N)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img650.svg"
+ ALT="$K({\bf x}_i,{\bf x}),\;(i=1,\cdots,N)$"></SPAN> of the column vectors in 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img651.svg"
+ ALT="${\bf X}$"></SPAN> and vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN>.
+
+<P>
+<PRE>
+    X=getData;
+    [m n]=size(X);             
+    X0=X(:,find(y&gt;0));   n0=size(X0,2);     % separate C+ and C-
+    X1=X(:,find(y&lt;0));   n1=size(X1,2);   
+    m0=mean(X0,2);    C0=cov(X0');          % calculate mean and covariance
+    m1=mean(X1,2);    C1=cov(X1');    
+    if type==1
+        for i=1:n
+            x(i)=sum(K(X0,X(:,i)))/n0-sum(K(X1,X(:,i)))/n1;
+        end
+    elseif type==2
+        C=inv(C0+C1);   [V D]=eig(C);   U=(V*D^(1/2))';
+        Z=U*X;  Z0=U*X0;   Z1=U*X1;
+        for i=1:n
+            x(i)=sum(K(Z0,Z(:,i)))/n0-sum(K(Z1,Z(:,i)))/n1;
+        end
+    elseif type==3
+        C0=inv(C0);   C1=inv(C1);   W=-(C0-C1)/2;     
+        [V D]=eig(W);     U=(V*D^(1/2)).';    Z=U*X;  
+        [V0 D0]=eig(C0);  U0=(V0*D0^(1/2))';  Z0=U0*X;  Z00=U0*X0;
+        [V1 D1]=eig(C1);  U1=(V1*D1^(1/2))';  Z1=U1*X;  Z11=U1*X1;
+        for i=1:n
+            x(i)=K(Z(:,i),Z(:,i))+sum(K(Z00,Z0(:,i)))/n0-sum(K(Z11,Z1(:,i)))/n1;
+        end
+    end
+    [x I]=sort(x);   y=y(I);    % sort 1-D data together with their labelings
+    smax=0;
+    for i=1:n-1                 % find optimal threshold value b
+        s=abs(sum(y(1:i)))+abs(sum(y(i+1:n)));
+        if s&gt;smax
+            smax=s;  b=-(x(i)+x(i+1))/2;
+        end
+    end
+</PRE>
+
+<P>
+Note that <!-- MATH
+ ${\bf W}=-({\bf\Sigma}_0^{-1}-{\bf\Sigma}_1^{-1})/2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.74ex; " SRC="img652.svg"
+ ALT="${\bf W}=-({\bf\Sigma}_0^{-1}-{\bf\Sigma}_1^{-1})/2$"></SPAN> may be 
+either positive or negative definite, and its eigenvalue matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img653.svg"
+ ALT="${\bf D}$"></SPAN>
+may contain negative values and <!-- MATH
+ ${\bf D}^{1/2}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img654.svg"
+ ALT="${\bf D}^{1/2}$"></SPAN> may contain complex values. 
+Given any unlabeled data point <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN>, the code below is carried out
+<PRE>
+    if type==1
+        y(i)=sum(K(X0,x))/n0-sum(K(X1,x))/n1+b;
+    elseif type==2
+        Z=U*x;
+        y(i)=sum(K(Z0,z))/n0-sum(K(Z1,z))/n1+b;
+    elseif type==3
+        z=U*x;    z0=U0*x;   z1=U1*x;
+        y(i)=K(z,z)+sum(K(Z00,z0))/n0-sum(K(Z11,z1))/n1+b;
+    end
+</PRE>
+to classify <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> into either <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img14.svg"
+ ALT="$C_+$"></SPAN> if <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img655.svg"
+ ALT="$y&gt;0$"></SPAN>, or <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img15.svg"
+ ALT="$C_-$"></SPAN> if <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img656.svg"
+ ALT="$y&lt;0$"></SPAN>.
+
+<P>
+In comparison with the SVM method, which requires solving a QP problem 
+by certain iterative algorithm (either the interior point method or the
+SMO method), the kernel based Bayes method is closed-form and therefore 
+extremely efficient computationally. Moreover, as shown in the examples 
+below, this method is also highly effective as its classification results 
+are comparable and offen more accurate than those of the SVM method. 
+
+<P>
+We now show a few examples to test all three types of the kernel based 
+Bayes method based on a set of simulated 2-D data. Both linear kernel
+and RBF kernel <!-- MATH
+ $K({\bf x},{\bf y})=\exp(-\gamma||{\bf x}-{\bf y}||)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img657.svg"
+ ALT="$K({\bf x},{\bf y})=\exp(-\gamma\vert\vert{\bf x}-{\bf y}\vert\vert)$"></SPAN>.
+The value of the parameter <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img658.svg"
+ ALT="$\gamma$"></SPAN> used in the examples is 5, but it 
+can be fine tuned in a wide range (e.g., <!-- MATH
+ $1<\gamma<9$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img659.svg"
+ ALT="$1&lt;\gamma&lt;9$"></SPAN> to make proper
+trade-off between accuracy and avoiding overfitting. The performances 
+of these method are also compared with the SVM method implemented by 
+the Matlab function: 
+<PRE>
+fitcsvm(X',y,'Standardize',true,'KernelFunction','linear','KernelScale','auto'))
+</PRE>
+
+<P>
+<B>Example 1:</B> Based on some 2-D training datasets, four different 
+binary classifiers are tested. The correct rates of each of the four
+methods are listed below, together with the corresponding partitionings
+of the 2-D space shown in the figures.
+
+<P>
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{l||c||c|c|c|c} \hline
+& Kernel & \mbox{Matlab SVM} & \mbox{Kernel Bayes I} & \mbox{Kernel Bayes II} & \mbox{Kernel Bayes III}\\\hline\hline
+\mbox{Test 1} & \mbox{linear} & 93.0\% & 88.0\% & 94.0\% & 94.0\%\\\hline
+\mbox{Test 2} & \mbox{linear} & 73.0\% & 80.0\% & 79.5\% & 96.5\%\\\hline
+\mbox{Test 3} & \mbox{RBF}    & 98.5\% & 100\% & 100\% & 100\%\\\hline
+\end{array}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img660.svg"
+ ALT="\begin{displaymath}\begin{array}{l\vert\vert c\vert\vert c\vert c\vert c\vert c}...
+...mbox{RBF} &amp; 98.5\% &amp; 100\% &amp; 100\% &amp; 100\%\\ \hline
+\end{array}\end{displaymath}"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">182</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+
+<UL>
+<LI>Test 1: Two sets of data are generated based on the following
+  mean vectors and covarience matrices:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf m}_+=\left[\begin{array}{r}-1\\0\end{array}\right],\;\;\;\;\;\;
+    {\bf m}_-=\left[\begin{array}{r}+1\\0\end{array}\right],\;\;\;\;\;\;
+    {\bf\Sigma}_+={\bf\Sigma}_-
+    =3\times \left[\begin{array}{cc}1&0.5\\0.5&0.5\end{array}\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img661.svg"
+ ALT="$\displaystyle {\bf m}_+=\left[\begin{array}{r}-1\\ 0\end{array}\right],\;\;\;\;...
+...{\bf\Sigma}_-
+=3\times \left[\begin{array}{cc}1&amp;0.5\\ 0.5&amp;0.5\end{array}\right]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">183</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The linear kernel is used for all methods. The kernel Bayes methods 
+  II and III achieve the best result <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img662.svg"
+ ALT="$(94\%)$"></SPAN>, slightly better than that
+  of the standard SVM <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img663.svg"
+ ALT="$(93\%)$"></SPAN>. But the kernel Bayes method I performs
+  poorly <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img664.svg"
+ ALT="$(84.7\%)$"></SPAN>, as it is based only on the means of the two classes
+  without taking into consideration their covariances representing the
+  distribution of the data points.
+
+<P>
+<IMG STYLE="" SRC="../figures/myMethodEx2a.png"
+ ALT="myMethodEx2a.png">
+
+<P>
+</LI>
+<LI>Test 2: Two sets of data not linearly separable are classified
+  by the four methods all based on the linear kernel. The kernel Bayes
+  III achieves the best result <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img665.svg"
+ ALT="$(96.5\%)$"></SPAN>, due to its quadratic term 
+  in the decision function, the kernel Bayes I and II perform much
+  more poorly, but still slightly better than the SVM method.
+
+<P>
+<IMG STYLE="" SRC="../figures/myMethodEx2b.png"
+ ALT="myMethodEx2b.png">
+
+<P>
+</LI>
+<LI>Test 3: The same dataset as above is classified by the methods 
+  but now based on the RBF kernel. While the SVM performs performs
+  reasonably well <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img666.svg"
+ ALT="$(98.5\%)$"></SPAN>, all three versions of the kernel Bayes 
+  method (with <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img667.svg"
+ ALT="$\gamma=5$"></SPAN>) achieve the perfect result with all points 
+  of the two classes completely separate. However, the partitioning
+  of the space by the kernel Bayes III is highly fragmented, showing
+  a sign of overfitting.
+
+<P>
+<IMG STYLE="" SRC="../figures/myMethodEx2c.png"
+ ALT="myMethodEx2c.png">
+
+<P>
+</LI>
+</UL>
+
+<P>
+<B>Example 2:</B> The three datasets are generated using the Matlab
+code on 
+<A ID="tex2html19"
+  HREF="https://www.mathworks.com/help/stats/support-vector-machines-for-binary-classification.html">this site</A>. 
+A parameter value <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img667.svg"
+ ALT="$\gamma=5$"></SPAN> is used for the three versions of the 
+kernel Bayes method.
+
+<P>
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{l||c||c|c|c|c} \hline
+    & Kernel & \mbox{Matlab SVM} & \mbox{Kernel Bayes I} & \mbox{Kernel Bayes II} & \mbox{Kernel Bayes III}\\\hline\hline
+    \mbox{Test 1} & \mbox{Linear} & 58.75\% & 60.0\% & 60.25\% & 97.0\%\\\hline
+    \mbox{Test 2} & \mbox{RBF} & 97.75\% & 98.50\% & 98.50\% & 99.50\%\\\hline
+    \mbox{Test 3} & \mbox{RBF} & 98.0\% & 100\% & 100\% & 100\%\\\hline
+    \mbox{Test 4} & \mbox{RBF} & 96.0\% & 98.5\% & 95.5\% & 97.0\%\\\hline
+  \end{array}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img668.svg"
+ ALT="\begin{displaymath}\begin{array}{l\vert\vert c\vert\vert c\vert c\vert c\vert c}...
+...x{RBF} &amp; 96.0\% &amp; 98.5\% &amp; 95.5\% &amp; 97.0\%\\ \hline
+\end{array}\end{displaymath}"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">184</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+
+<UL>
+<LI>Test 1: Exclusive OR dataset, linear kernel 
+
+<P>
+As the data are not linearly separable, all methods performed poorly
+  except kernelized Bayes Type III with a second order term in the 
+  decison function. 
+
+<P>
+<IMG STYLE="" SRC="../figures/myMethodEx3d.png"
+ ALT="myMethodEx3d.png">
+
+<P>
+</LI>
+<LI>Test 2: Exclusive OR dataset, RBF kernel
+
+<P>
+All four methods performed very well, but all three variations of
+  the kernelized Bayes method achieved higher correct rates than
+  the SVM.
+
+<P>
+<IMG STYLE="" SRC="../figures/myMethodEx3b.png"
+ ALT="myMethodEx3b.png">
+
+<P>
+</LI>
+<LI>Test 3: Cocentric ring dataset, RBF kernel
+
+<P>
+<IMG STYLE="" SRC="../figures/myMethodEx3a.png"
+ ALT="myMethodEx3a.png">
+
+<P>
+</LI>
+<LI>Test 4: Multi-cluster dataset, RBF kernel
+
+<P>
+<IMG STYLE="" SRC="../figures/myMethodEx3c.png"
+ ALT="myMethodEx3c.png">
+
+<P>
+</LI>
+</UL>
+
+<P>
+<B>Example 3:</B> The classification results of Fisher's iris data by
+the SVM method (Matlab function <code>fitcsvm</code>) and the kernel Bayes 
+methods are shown below. This is an example used to illustrate the
+SVM method in the 
+<A ID="tex2html20"
+  HREF="https://www.mathworks.com/help/stats/fitcsvm.html">documentation of fitcsvm</A>. 
+
+<P>
+In this example only two (3rd and 4th) of the four features are used, with 
+half of the samples used for training while the other half for testing. 
+Note that the second class (setosa in green) and third class (versicolor 
+in blue) not linearly separable can be better separated by the kernel Bayes 
+method.
+
+<P>
+<IMG STYLE="" SRC="../figures/IrisClassification.png"
+ ALT="IrisClassification.png">
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node11.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="ch9.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node9.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node11.html">Gaussian Process Classification (GPC)</A>
+<B> Up:</B> <A
+ HREF="ch9.html">ch9</A>
+<B> Previous:</B> <A
+ HREF="node9.html">Multi-Class Classification</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

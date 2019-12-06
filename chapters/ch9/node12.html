@@ -1,0 +1,1685 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Gaussian Process Classifier - Binary</TITLE>
+<META NAME="description" CONTENT="Gaussian Process Classifier - Binary">
+<META NAME="keywords" CONTENT="ch9">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch9.css">
+
+<LINK REL="next" HREF="node13.html">
+<LINK REL="previous" HREF="node11.html">
+<LINK REL="next" HREF="node13.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node13.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node11.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node11.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node13.html">Gaussian Process Classifier -</A>
+<B> Up:</B> <A
+ HREF="node11.html">Gaussian Process Classification (GPC)</A>
+<B> Previous:</B> <A
+ HREF="node11.html">Gaussian Process Classification (GPC)</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION00061000000000000000">
+Gaussian Process Classifier - Binary</A>
+</H2>
+
+<P>
+In Chapter 7 we considered logistic regression based on the linear 
+regression function <!-- MATH
+ $y=f({\bf x})={\bf x}^T{\bf w}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img669.svg"
+ ALT="$y=f({\bf x})={\bf x}^T{\bf w}$"></SPAN>, of which the 
+parameter <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img248.svg"
+ ALT="${\bf w}$"></SPAN> is to be estimated based on the observed data 
+<!-- MATH
+ ${\cal D}=\{ ({\bf x}_n,\,y_n)|n=1,\cdots,N\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img670.svg"
+ ALT="${\cal D}=\{ ({\bf x}_n,\,y_n)\vert n=1,\cdots,N\}$"></SPAN>, where each training 
+sample <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img31.svg"
+ ALT="${\bf x}_n$"></SPAN> is labeled by <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img341.svg"
+ ALT="$y_n$"></SPAN> to belong to either class <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img236.svg"
+ ALT="$C_0$"></SPAN>
+if <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img671.svg"
+ ALT="$y_n=0$"></SPAN> or class <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img51.svg"
+ ALT="$C_1$"></SPAN> if <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img244.svg"
+ ALT="$y_n=1$"></SPAN>. We also considered the method of
+<A ID="tex2html21"
+  HREF="../ch7/node17.html">Gaussian process regression (GPR)</A>,
+based on the assumption that the regression function <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img578.svg"
+ ALT="$f({\bf x})$"></SPAN> is
+a nonlinear Gaussian process. 
+
+<P>
+We will now consider the method of
+<EM>Gaussian process classification (GPC)</EM>, a binary classifier
+based on both logistic regression and GPR. Compared to all 
+previously discussed binary classifiers based on the linear 
+function <!-- MATH
+ $f({\bf x})={\bf x}^T{\bf w}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img672.svg"
+ ALT="$f({\bf x})={\bf x}^T{\bf w}$"></SPAN>, GPC is a more powerful 
+classifier capable of non-linear classification. As a supervised
+method, GPC is based on a training set 
+<!-- MATH
+ ${\cal D}=\{ ({\bf x}_n,y_n)|n=1,\cdots,N\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img673.svg"
+ ALT="${\cal D}=\{ ({\bf x}_n,y_n)\vert n=1,\cdots,N\}$"></SPAN>, of which each 
+sample <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img31.svg"
+ ALT="${\bf x}_n$"></SPAN> belongs to either class <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img15.svg"
+ ALT="$C_-$"></SPAN> if <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img245.svg"
+ ALT="$y_n=-1$"></SPAN>
+or <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img14.svg"
+ ALT="$C_+$"></SPAN> if <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img244.svg"
+ ALT="$y_n=1$"></SPAN>. This class labeling different from that 
+of the logistic regression is for the convenience of the GPC 
+algorithm to be discussed below.
+
+<P>
+In logistic regression, we first find the parameter <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img248.svg"
+ ALT="${\bf w}$"></SPAN> of the
+linear model <!-- MATH
+ $f({\bf x})={\bf x}^T{\bf w}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img672.svg"
+ ALT="$f({\bf x})={\bf x}^T{\bf w}$"></SPAN> based on the training set
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img674.svg"
+ ALT="${\cal D}$"></SPAN>, and then map <!-- MATH
+ $f({\bf x}_*)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img675.svg"
+ ALT="$f({\bf x}_*)$"></SPAN> of any unlabeled test sample
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img676.svg"
+ ALT="${\bf x}_*$"></SPAN> by the logistic function to the probability
+<!-- MATH
+ $p(y_*=1|{\bf x}_*,{\cal D})=\sigma(f({\bf x}_*))=\sigma({\bf x}^T_*{\bf w})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img677.svg"
+ ALT="$p(y_*=1\vert{\bf x}_*,{\cal D})=\sigma(f({\bf x}_*))=\sigma({\bf x}^T_*{\bf w})$"></SPAN>,
+based on which <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img676.svg"
+ ALT="${\bf x}_*$"></SPAN> is classified into either of the two 
+classes by Eq. (<A HREF="#LogisticRegClassify"><IMG  ALT="[*]" SRC="crossref.png"></A>). Here in GPC, same 
+as logistic regression, we also classify <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img676.svg"
+ ALT="${\bf x}_*$"></SPAN> based on 
+<!-- MATH
+ $p(y_*=1|{\bf x}_*,{\cal D})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img678.svg"
+ ALT="$p(y_*=1\vert{\bf x}_*,{\cal D})$"></SPAN>, but now this probability is based 
+on a nonlinear Gaussian process <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img578.svg"
+ ALT="$f({\bf x})$"></SPAN> instead of a linear
+function, to be obtained as the expectation of <!-- MATH
+ $\sigma(f({\bf x}_*))$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img679.svg"
+ ALT="$\sigma(f({\bf x}_*))$"></SPAN>
+with respect to <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img578.svg"
+ ALT="$f({\bf x})$"></SPAN>: 
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+p(y_*=1|{\bf x}_*,{\cal D})
+  &=&\int p(y_*=1|{\bf x}_*,\,f)\;p(f|{{\bf x}_*,\cal D})\,d f
+  \nonumber\\
+  &=&\int\sigma(f({\bf x}_*))\;p(f|{\bf x}_*,{\cal D})\,d f
+  =E_f[\sigma(f({\bf x}_*))]=\sigma(E_f f({\bf x}_*))
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img680.svg"
+ ALT="$\displaystyle p(y_*=1\vert{\bf x}_*,{\cal D})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.57ex; vertical-align: -2.12ex; " SRC="img681.svg"
+ ALT="$\displaystyle \int p(y_*=1\vert{\bf x}_*,\,f)\;p(f\vert{{\bf x}_*,\cal D})\,d f$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.57ex; vertical-align: -2.12ex; " SRC="img682.svg"
+ ALT="$\displaystyle \int\sigma(f({\bf x}_*))\;p(f\vert{\bf x}_*,{\cal D})\,d f
+=E_f[\sigma(f({\bf x}_*))]=\sigma(E_f f({\bf x}_*))$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">185</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+As the function <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img578.svg"
+ ALT="$f({\bf x})$"></SPAN> is marginalized (averaged out) in the 
+integral above, it is not explicitly specified, and is therefore 
+called a <EM>latent function</EM>. 
+
+<P>
+In the case of multiple test samples in the test dataset
+<!-- MATH
+ ${\bf X}_*=[{\bf x}_{1*},\cdots,{\bf x}_{M*}]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img683.svg"
+ ALT="${\bf X}_*=[{\bf x}_{1*},\cdots,{\bf x}_{M*}]$"></SPAN>, the equation above
+can be expressed in vector form:
+<BR>
+<DIV CLASS="mathdisplay"><A ID="GPClassification"></A><!-- MATH
+ \begin{eqnarray}
+p({\bf y}_*=1|{\bf X}_*,{\cal D})  &=&
+  \int p({\bf y}_*={\bf 1}|{\bf X}_*,\,{\bf f})\,
+  p({\bf f}|{\bf X}_*,{\cal D})\,d {\bf f}
+  \nonumber\\
+  &=&\int\sigma({\bf f}({\bf X}_*))\, p({\bf f}|{\bf X}_*,{\cal D})\,d {\bf f}
+  =E_f[\sigma({\bf f}({\bf X}_*))]
+  =\sigma(E_f f({\bf X}_*))
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img684.svg"
+ ALT="$\displaystyle p({\bf y}_*=1\vert{\bf X}_*,{\cal D})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.57ex; vertical-align: -2.12ex; " SRC="img685.svg"
+ ALT="$\displaystyle \int p({\bf y}_*={\bf 1}\vert{\bf X}_*,\,{\bf f})\,
+p({\bf f}\vert{\bf X}_*,{\cal D})\,d {\bf f}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.57ex; vertical-align: -2.12ex; " SRC="img686.svg"
+ ALT="$\displaystyle \int\sigma({\bf f}({\bf X}_*))\, p({\bf f}\vert{\bf X}_*,{\cal D})\,d {\bf f}
+=E_f[\sigma({\bf f}({\bf X}_*))]
+=\sigma(E_f f({\bf X}_*))$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">186</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+where <!-- MATH
+ ${\bf f}({\bf X}_*)=[f({\bf x}_{1*}),\cdots,f({\bf x}_M)]^{T*}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img687.svg"
+ ALT="${\bf f}({\bf X}_*)=[f({\bf x}_{1*}),\cdots,f({\bf x}_M)]^{T*}$"></SPAN>.
+
+<P>
+In order to obtain the posterior <!-- MATH
+ $p({\bf f}|{\bf X}_*,{\cal D})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img688.svg"
+ ALT="$p({\bf f}\vert{\bf X}_*,{\cal D})$"></SPAN> 
+in the integral for the test dataset <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img689.svg"
+ ALT="${\bf X}_*$"></SPAN>, we first consider 
+<!-- MATH
+ $p({\bf f}|{\cal D})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img690.svg"
+ ALT="$p({\bf f}\vert{\cal D})$"></SPAN> where <!-- MATH
+ ${\bf f}={\bf f}({\bf X})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img691.svg"
+ ALT="${\bf f}={\bf f}({\bf X})$"></SPAN> based on the
+training dataset <!-- MATH
+ ${\bf X}=[{\bf x}_1,\cdots,{\bf x}_N]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img9.svg"
+ ALT="${\bf X}=[{\bf x}_1,\cdots,{\bf x}_N]$"></SPAN>. Similar to 
+how we find the posterior of the model parameter <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img248.svg"
+ ALT="${\bf w}$"></SPAN> in 
+Eq. (<A HREF="#posteriorw"><IMG  ALT="[*]" SRC="crossref.png"></A>) based on 
+<A ID="tex2html22"
+  HREF="../probability/node10.html">Bayes' theorem</A>,
+here we can also find the posterior of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img692.svg"
+ ALT="${\bf f}$"></SPAN> as:
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="PosteriorBayesGaussian"></A><!-- MATH
+ \begin{equation}
+p({\bf f}|{\cal D})=p({\bf f}|{\bf X},{\bf y})
+  =\frac{p({\bf y},{\bf f}|{\bf X})}{p({\bf y}|{\bf X})}
+  =\frac{p({\bf y}|{\bf f})\,p({\bf f}|{\bf X})}{p({\bf y}|{\bf X})}
+  \propto p({\bf y}|{\bf f})\,p({\bf f}|{\bf X})
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.29ex; " SRC="img693.svg"
+ ALT="$\displaystyle p({\bf f}\vert{\cal D})=p({\bf f}\vert{\bf X},{\bf y})
+=\frac{p({...
+...{p({\bf y}\vert{\bf X})}
+\propto p({\bf y}\vert{\bf f})\,p({\bf f}\vert{\bf X})$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">187</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <!-- MATH
+ ${\bf f}({\bf X})=[f({\bf x}_1),\cdots,f({\bf x}_N)]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img694.svg"
+ ALT="${\bf f}({\bf X})=[f({\bf x}_1),\cdots,f({\bf x}_N)]^T$"></SPAN>,
+<!-- MATH
+ $p({\bf y}|{\bf f})=L({\bf f}|{\bf y})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img695.svg"
+ ALT="$p({\bf y}\vert{\bf f})=L({\bf f}\vert{\bf y})$"></SPAN> is the likelihood, and
+<!-- MATH
+ $p({\bf f}|{\bf X})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img696.svg"
+ ALT="$p({\bf f}\vert{\bf X})$"></SPAN> is the prior of the function <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img692.svg"
+ ALT="${\bf f}$"></SPAN>. As 
+always, the denominator <!-- MATH
+ $p({\bf y}|{\bf X})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img697.svg"
+ ALT="$p({\bf y}\vert{\bf X})$"></SPAN> is dropped as it is 
+independent of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img692.svg"
+ ALT="${\bf f}$"></SPAN> and plays no role in its estimation. 
+
+<P>
+We first find the likelihood <!-- MATH
+ $p({\bf y}|{\bf f})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img698.svg"
+ ALT="$p({\bf y}\vert{\bf f})$"></SPAN>. Same as
+how <!-- MATH
+ $f({\bf x})={\bf x}^T{\bf w}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img672.svg"
+ ALT="$f({\bf x})={\bf x}^T{\bf w}$"></SPAN> is converted by the logistic 
+function to <!-- MATH
+ $p(y=1|{\bf x})=\sigma({\bf w}^T{\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img699.svg"
+ ALT="$p(y=1\vert{\bf x})=\sigma({\bf w}^T{\bf x})$"></SPAN> in 
+Eq. (<A HREF="#LogisticSigmoidMapping"><IMG  ALT="[*]" SRC="crossref.png"></A>) in logistic regression, here 
+function <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img578.svg"
+ ALT="$f({\bf x})$"></SPAN> is also converted into the probability for
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img700.svg"
+ ALT="$y=1$"></SPAN> or <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img701.svg"
+ ALT="$y=-1$"></SPAN>, representing respectively <!-- MATH
+ ${\bf x}\in C_+$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img702.svg"
+ ALT="${\bf x}\in C_+$"></SPAN> or 
+<!-- MATH
+ ${\bf x}\in C_-$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img703.svg"
+ ALT="${\bf x}\in C_-$"></SPAN>:
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+p(y=1| f({\bf x}) )&=&\sigma(f({\bf x}))
+  \nonumber\\
+  p(y=-1| f({\bf x}) )&=&1-p(y=1| f({\bf x}) )
+  =1-\sigma(f({\bf x})) =\sigma(-f({\bf x}))
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img704.svg"
+ ALT="$\displaystyle p(y=1\vert f({\bf x}) )$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img705.svg"
+ ALT="$\displaystyle \sigma(f({\bf x}))$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img706.svg"
+ ALT="$\displaystyle p(y=-1\vert f({\bf x}) )$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img707.svg"
+ ALT="$\displaystyle 1-p(y=1\vert f({\bf x}) )
+=1-\sigma(f({\bf x})) =\sigma(-f({\bf x}))$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">188</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+Combining these two cases, we get the conditional probability 
+of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img708.svg"
+ ALT="$y$"></SPAN> given <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img578.svg"
+ ALT="$f({\bf x})$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p(y|f({\bf x}))=\sigma(y\,f({\bf x}) )=\sigma(y\,f)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img709.svg"
+ ALT="$\displaystyle p(y\vert f({\bf x}))=\sigma(y\,f({\bf x}) )=\sigma(y\,f)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">189</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and the likelihood function of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img692.svg"
+ ALT="${\bf f}$"></SPAN> for all <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="$N$"></SPAN> samples 
+in the test dataset <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img651.svg"
+ ALT="${\bf X}$"></SPAN>, assumed to be independent and 
+identically distributed (i.i.d.):
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p({\bf y}|{\bf f})=\prod_{n=1}^N p(y_n|f_n)
+  =\prod_{n=1}^N \sigma(y_n\,f_n)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img710.svg"
+ ALT="$\displaystyle p({\bf y}\vert{\bf f})=\prod_{n=1}^N p(y_n\vert f_n)
+=\prod_{n=1}^N \sigma(y_n\,f_n)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">190</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+We next find the prior <!-- MATH
+ $p({\bf f}|{\bf X})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img696.svg"
+ ALT="$p({\bf f}\vert{\bf X})$"></SPAN>. As the latent 
+function <!-- MATH
+ ${\bf f}({\bf X})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img711.svg"
+ ALT="${\bf f}({\bf X})$"></SPAN> is a Gaussian process, its prior 
+can be assumed to be a zero-mean Gaussian 
+<!-- MATH
+ $p({\bf f}|{\bf X})={\cal N}({\bf0},{\bf\Sigma}_f)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img712.svg"
+ ALT="$p({\bf f}\vert{\bf X})={\cal N}({\bf0},{\bf\Sigma}_f)$"></SPAN>, where the 
+covariance matrix <!-- MATH
+ ${\bf\Sigma}_f$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img713.svg"
+ ALT="${\bf\Sigma}_f$"></SPAN> can be constructed based on 
+the training set <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img651.svg"
+ ALT="${\bf X}$"></SPAN>. The same as in GPR, the component 
+in the mth row and nth column of <!-- MATH
+ ${\bf\Sigma}_f$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img713.svg"
+ ALT="${\bf\Sigma}_f$"></SPAN> is modeled by 
+the squared exponential (SE) kernel:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+cov(f_m,f_n)=k({\bf x}_m,{\bf x}_n)
+  =\exp\left(-\frac{1}{a^2}||{\bf x}_m-{\bf x}_n||^2\right),
+  \;\;\;\;\;\;(m,n=1,\cdots,N)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img714.svg"
+ ALT="$\displaystyle cov(f_m,f_n)=k({\bf x}_m,{\bf x}_n)
+=\exp\left(-\frac{1}{a^2}\vert\vert{\bf x}_m-{\bf x}_n\vert\vert^2\right),
+\;\;\;\;\;\;(m,n=1,\cdots,N)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">191</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Such a covariance matrix is desired for GPC as well as GPR, so
+that <!-- MATH
+ $f_m=f({\bf x}_m)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img715.svg"
+ ALT="$f_m=f({\bf x}_m)$"></SPAN> and <!-- MATH
+ $f_n=f({\bf x}_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img716.svg"
+ ALT="$f_n=f({\bf x}_n)$"></SPAN> are more correlated
+if <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img359.svg"
+ ALT="${\bf x}_m$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img31.svg"
+ ALT="${\bf x}_n$"></SPAN> are close together, but less so if
+they are farther away from each other. However the justification 
+for such a property is different. In GPR, this property is needed
+for the continuity and smoothness of the regression function; while
+in GPC, this property is desired so that the function values of 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img359.svg"
+ ALT="${\bf x}_m$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img31.svg"
+ ALT="${\bf x}_n$"></SPAN> close to each other in the feature 
+space are more correlated and it is more likely for the two samples
+to be classified into the same class, but less so if they are far
+apart.
+
+<P>
+Also, as discussed in GPR, here the parameter <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img717.svg"
+ ALT="$a$"></SPAN> in the SE controls 
+the smoothness of the function. If <!-- MATH
+ $a\rightarrow\infty$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img718.svg"
+ ALT="$a\rightarrow\infty$"></SPAN>, the value of 
+the SE approaches 1, then <!-- MATH
+ $f({\bf x}_m)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img719.svg"
+ ALT="$f({\bf x}_m)$"></SPAN> and <!-- MATH
+ $f({\bf x}_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img720.svg"
+ ALT="$f({\bf x}_n)$"></SPAN> are highly
+correlated and <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img578.svg"
+ ALT="$f({\bf x})$"></SPAN> is very smooth; but if <!-- MATH
+ $a\rightarrow 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img721.svg"
+ ALT="$a\rightarrow 0$"></SPAN>, 
+SE approaches 0, then <!-- MATH
+ $f({\bf x}_m)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img719.svg"
+ ALT="$f({\bf x}_m)$"></SPAN> and <!-- MATH
+ $f({\bf x}_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img720.svg"
+ ALT="$f({\bf x}_n)$"></SPAN> are not 
+correlated and <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img578.svg"
+ ALT="$f({\bf x})$"></SPAN> is no longer smooth.
+
+<P>
+Having found both the likelihood <!-- MATH
+ $p({\bf y}|{\bf f})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img698.svg"
+ ALT="$p({\bf y}\vert{\bf f})$"></SPAN> and the prior
+<!-- MATH
+ $p({\bf f}|{\bf X})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img696.svg"
+ ALT="$p({\bf f}\vert{\bf X})$"></SPAN>, we can now get their produce for the posterior 
+in Eq. (<A HREF="#PosteriorBayesGaussian">187</A>):
+<BR>
+<DIV CLASS="mathdisplay"><A ID="PosteriorBayesGaussian1"></A><!-- MATH
+ \begin{eqnarray}
+p({\bf f}|{\cal D})&\propto& p({\bf y}|{\bf f})\,p({\bf f}|{\bf X})
+  =p({\bf y}|{\bf f})\,{\cal N}({\bf0},{\bf K})
+  =\prod_{n=1}^N\sigma(y_n\,f_n)\;
+  \frac{1}{(2\pi)^{d/2}|{\bf K}|^{1/2}}
+    \exp\left(-\frac{1}{2}{\bf f}^T{\bf K}^{-1}{\bf f}\right)
+    \nonumber\\
+    &\propto&\prod_{n=1}^N\sigma(y_n\,f_n)\;
+    \exp\left(-\frac{1}{2}{\bf f}^T{\bf K}^{-1}{\bf f}\right)
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img722.svg"
+ ALT="$\displaystyle p({\bf f}\vert{\cal D})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img723.svg"
+ ALT="$\displaystyle \propto$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img724.svg"
+ ALT="$\displaystyle p({\bf y}\vert{\bf f})\,p({\bf f}\vert{\bf X})
+=p({\bf y}\vert{\b...
+...rt{\bf K}\vert^{1/2}}
+\exp\left(-\frac{1}{2}{\bf f}^T{\bf K}^{-1}{\bf f}\right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img723.svg"
+ ALT="$\displaystyle \propto$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img725.svg"
+ ALT="$\displaystyle \prod_{n=1}^N\sigma(y_n\,f_n)\;
+\exp\left(-\frac{1}{2}{\bf f}^T{\bf K}^{-1}{\bf f}\right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">192</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+Note that the likelihood <!-- MATH
+ $p({\bf y}|{\bf f})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img698.svg"
+ ALT="$p({\bf y}\vert{\bf f})$"></SPAN> is not Gaussian, as 
+the binary labeling <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img726.svg"
+ ALT="${\bf y}$"></SPAN> of the training set <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img651.svg"
+ ALT="${\bf X}$"></SPAN> is not 
+continuous. Consequently, the posterior <!-- MATH
+ $p({\bf f}|{\cal D})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img690.svg"
+ ALT="$p({\bf f}\vert{\cal D})$"></SPAN>, as a 
+product of the Gaussian prior and non-Gaussian likelihood, is not 
+Gaussian. However, for convenience, we can still approximate it by 
+a Gaussian: 
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p({\bf f}|{\cal D})\approx {\cal N}({\bf m}_{f|D},{\bf\Sigma}_{f|D})
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.94ex; " SRC="img727.svg"
+ ALT="$\displaystyle p({\bf f}\vert{\cal D})\approx {\cal N}({\bf m}_{f\vert D},{\bf\Sigma}_{f\vert D})$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">193</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+in terms of the mean <!-- MATH
+ ${\bf m}_{f|D}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.94ex; " SRC="img728.svg"
+ ALT="${\bf m}_{f\vert D}$"></SPAN> and covariance <!-- MATH
+ ${\bf\Sigma}_{f|D}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.94ex; " SRC="img729.svg"
+ ALT="${\bf\Sigma}_{f\vert D}$"></SPAN>,
+which are to be obtained in the following.
+
+<P>
+We first get the log posterior denoted by <!-- MATH
+ $\psi({\bf f})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img730.svg"
+ ALT="$\psi({\bf f})$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="PsiLogPG"></A><!-- MATH
+ \begin{equation}
+\psi({\bf f})=\log\,p({\bf f}|{\cal D})
+  =\sum_{n=1}^N\log\sigma(y_n\,f_n)-\frac{N}{2}\log(2\pi)-\frac{1}{2}\log|{\bf K}|
+  -\frac{1}{2}{\bf f}^T {\bf K}^{-1}{\bf f}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img731.svg"
+ ALT="$\displaystyle \psi({\bf f})=\log\,p({\bf f}\vert{\cal D})
+=\sum_{n=1}^N\log\sig...
+...\pi)-\frac{1}{2}\log\vert{\bf K}\vert
+-\frac{1}{2}{\bf f}^T {\bf K}^{-1}{\bf f}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">194</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The two middle terms are constant independent of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img692.svg"
+ ALT="${\bf f}$"></SPAN> and can 
+therefore be dropped. 
+
+<P>
+We can further find the gradient vector and Hessian matrix of 
+<!-- MATH
+ $\psi({\bf f})=\log p({\bf y}|{\bf f})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img732.svg"
+ ALT="$\psi({\bf f})=\log p({\bf y}\vert{\bf f})$"></SPAN> as its first and second 
+order derivatives:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf g}_{\psi}({\bf f})=\frac{d}{d{\bf f}}\psi({\bf f})
+  =\frac{d}{d{\bf f}}\;\log\,p({\bf y}|{\bf f})\,
+  -\frac{d}{d{\bf f}}\left(\frac{1}{2} {\bf f}^T{\bf K}^{-1}{\bf f}\right)
+  ={\bf w}-{\bf K}^{-1}{\bf f}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img733.svg"
+ ALT="$\displaystyle {\bf g}_{\psi}({\bf f})=\frac{d}{d{\bf f}}\psi({\bf f})
+=\frac{d}...
+...ft(\frac{1}{2} {\bf f}^T{\bf K}^{-1}{\bf f}\right)
+={\bf w}-{\bf K}^{-1}{\bf f}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">195</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="HessianPsi2"></A><!-- MATH
+ \begin{equation}
+{\bf H}_{\psi}({\bf f})=\frac{d^2}{d{\bf f}^2}\psi({\bf f})
+  =\frac{d}{d{\bf f}} {\bf g}_\psi({\bf f})
+  =\frac{d}{d{\bf f}} \left( {\bf w}-{\bf K}^{-1}{\bf f}\right)
+  ={\bf W}-{\bf K}^{-1}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.34ex; vertical-align: -1.71ex; " SRC="img734.svg"
+ ALT="$\displaystyle {\bf H}_{\psi}({\bf f})=\frac{d^2}{d{\bf f}^2}\psi({\bf f})
+=\fra...
+...ac{d}{d{\bf f}} \left( {\bf w}-{\bf K}^{-1}{\bf f}\right)
+={\bf W}-{\bf K}^{-1}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">196</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Here we have defined
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="wW"></A><!-- MATH
+ \begin{equation}
+{\bf w}=\frac{d}{d{\bf f}}\log p({\bf y}|{\bf f}),
+  \;\;\;\;\;\;\;\;\;
+  {\bf W}=\frac{d^2}{d{\bf f}^2} \log p({\bf y}|{\bf f})
+  =\frac{d{\bf w}}{d{\bf f}}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.34ex; vertical-align: -1.71ex; " SRC="img735.svg"
+ ALT="$\displaystyle {\bf w}=\frac{d}{d{\bf f}}\log p({\bf y}\vert{\bf f}),
+\;\;\;\;\;...
+...}=\frac{d^2}{d{\bf f}^2} \log p({\bf y}\vert{\bf f})
+=\frac{d{\bf w}}{d{\bf f}}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">197</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+To find these first and second order derivatives with respection to 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img692.svg"
+ ALT="${\bf f}$"></SPAN>, we first find the first and second order derivatives with
+a single component:
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+\frac{d}{df_n}\log\,p(y_n|f_n)&=&\frac{d}{df_n}\,
+  \log\left(1+\exp(-y_n f_n)\right)^{-1}
+  =\frac{y_n}{1+\exp(y_n f_n)}
+  \nonumber\\
+  \frac{d^2}{df_n^2}\log\,p(y_n|f_n)&=&
+  \frac{d}{df_n}\left[\frac{y_n}{1+\exp(y_n f_n)}\right]
+  =\frac{-\exp(-y_n f_n)}{(1+\exp(-y_n f_n))^2}
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 5.57ex; vertical-align: -2.16ex; " SRC="img736.svg"
+ ALT="$\displaystyle \frac{d}{df_n}\log\,p(y_n\vert f_n)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.57ex; vertical-align: -2.29ex; " SRC="img737.svg"
+ ALT="$\displaystyle \frac{d}{df_n}\,
+\log\left(1+\exp(-y_n f_n)\right)^{-1}
+=\frac{y_n}{1+\exp(y_n f_n)}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 6.04ex; vertical-align: -2.28ex; " SRC="img738.svg"
+ ALT="$\displaystyle \frac{d^2}{df_n^2}\log\,p(y_n\vert f_n)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img739.svg"
+ ALT="$\displaystyle \frac{d}{df_n}\left[\frac{y_n}{1+\exp(y_n f_n)}\right]
+=\frac{-\exp(-y_n f_n)}{(1+\exp(-y_n f_n))^2}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">198</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+where we have used the facts that <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img740.svg"
+ ALT="$y_n=\pm 1$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img333.svg"
+ ALT="$y_n^2=1$"></SPAN>. We then 
+find
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="Smallw"></A><!-- MATH
+ \begin{equation}
+{\bf w}=\frac{d}{d{\bf f}} \log p({\bf y}|{\bf f})
+  =\left[\begin{array}{c}d/df_1\\\vdots\\d/df_N\end{array}\right]
+  \sum_{n=1}^N\log p(y_n|f_n)
+  =\left[\begin{array}{c}
+      d\log p(y_1|f_1)/df_1\\\vdots\\d\log p(y_N|f_N)/df_N
+    \end{array}\right]
+  =\left[\begin{array}{c}
+      \frac{y_1}{1+e^{y_1f_1}}\\\vdots\\\frac{y_N}{1+e^{y_Nf_N}}
+    \end{array}\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 10.68ex; vertical-align: -4.76ex; " SRC="img741.svg"
+ ALT="$\displaystyle {\bf w}=\frac{d}{d{\bf f}} \log p({\bf y}\vert{\bf f})
+=\left[\be...
+...\frac{y_1}{1+e^{y_1f_1}}\\ \vdots\\ \frac{y_N}{1+e^{y_Nf_N}}
+\end{array}\right]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">199</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and
+<BR>
+<DIV CLASS="mathdisplay"><A ID="BigW"></A><!-- MATH
+ \begin{eqnarray}
+{\bf W}&=&\frac{d^2}{d{\bf f}^2}  \log p({\bf y}|{\bf f})
+  =\left[\begin{array}{ccc}
+      \frac{\partial^2}{\partial f_1\partial f_1}&\cdots
+      &\frac{\partial^2}{\partial f_1\partial f_N}\\
+      \vdots&\ddots&\vdots\\
+      \frac{\partial^2}{\partial f_N\partial f_1}&\cdots
+      &\frac{\partial^2}{\partial f_N\partial f_N}\\
+    \end{array}\right]\sum_{n=1}^N\log p(y_n|f_n)
+  \nonumber\\
+  &=&diag \left[
+    \frac{d^2}{df_1^2}\log p(y_1|f_1),\cdots,\frac{d^2}{df_N^2}\log p(y_N|f_N)
+    \right]
+  =diag \left[
+    \frac{-e^{-y_1f_1}}{(1+e^{-y_1f_1})^2},\cdots,\frac{-e^{-y_Nf_N}}{(1+e^{-y_Nf_N})^2}
+    \right]
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img113.svg"
+ ALT="$\displaystyle {\bf W}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 11.61ex; vertical-align: -5.18ex; " SRC="img742.svg"
+ ALT="$\displaystyle \frac{d^2}{d{\bf f}^2} \log p({\bf y}\vert{\bf f})
+=\left[\begin{...
+...\partial f_N\partial f_N}\\
+\end{array}\right]\sum_{n=1}^N\log p(y_n\vert f_n)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.04ex; vertical-align: -2.39ex; " SRC="img743.svg"
+ ALT="$\displaystyle diag \left[
+\frac{d^2}{df_1^2}\log p(y_1\vert f_1),\cdots,\frac{d...
+...1f_1}}{(1+e^{-y_1f_1})^2},\cdots,\frac{-e^{-y_Nf_N}}{(1+e^{-y_Nf_N})^2}
+\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">200</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+On the other hand, we can also get <!-- MATH
+ ${\bf g}_\psi({\bf f})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img744.svg"
+ ALT="${\bf g}_\psi({\bf f})$"></SPAN> and
+<!-- MATH
+ ${\bf H}_\psi({\bf f})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img745.svg"
+ ALT="${\bf H}_\psi({\bf f})$"></SPAN>, as now the posterior <!-- MATH
+ $p({\bf f}|{\cal D})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img690.svg"
+ ALT="$p({\bf f}\vert{\cal D})$"></SPAN> is 
+approximated as a Gaussian. We can find the gradient and Hessian of 
+the log-normal distribution <!-- MATH
+ $\psi({\bf f})=\log p({\bf f}|{\cal D})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img746.svg"
+ ALT="$\psi({\bf f})=\log p({\bf f}\vert{\cal D})$"></SPAN> 
+(see <A ID="tex2html23"
+  HREF="../probability/node4.html">Appendix</A>):
+<BR>
+<DIV CLASS="mathdisplay"><A ID="GradientPsi"></A><A ID="HessianPsi1"></A><!-- MATH
+ \begin{eqnarray}
+{\bf g}_{\psi}({\bf f})&=&\frac{d}{d{\bf f}}\psi({\bf f})
+  =-{\bf\Sigma}^{-1}_{f|D} ({\bf f}-{\bf m}_{f|D})
+\\
+  {\bf H}_{\psi}({\bf f})&=&\frac{d^2}{d{\bf f}^2}\psi({\bf f})
+  =\frac{d}{d{\bf f}}{\bf g}_{\psi}({\bf f})=-{\bf\Sigma}_{f|D}^{-1}
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img747.svg"
+ ALT="$\displaystyle {\bf g}_{\psi}({\bf f})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.11ex; vertical-align: -1.71ex; " SRC="img748.svg"
+ ALT="$\displaystyle \frac{d}{d{\bf f}}\psi({\bf f})
+=-{\bf\Sigma}^{-1}_{f\vert D} ({\bf f}-{\bf m}_{f\vert D})$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">201</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img749.svg"
+ ALT="$\displaystyle {\bf H}_{\psi}({\bf f})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.34ex; vertical-align: -1.71ex; " SRC="img750.svg"
+ ALT="$\displaystyle \frac{d^2}{d{\bf f}^2}\psi({\bf f})
+=\frac{d}{d{\bf f}}{\bf g}_{\psi}({\bf f})=-{\bf\Sigma}_{f\vert D}^{-1}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">202</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+Equatiing the two expressions for <!-- MATH
+ ${\bf H}_{\psi}({\bf f})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img751.svg"
+ ALT="${\bf H}_{\psi}({\bf f})$"></SPAN> in
+Eqs. (<A HREF="#HessianPsi1">202</A>) and (<A HREF="#HessianPsi2">196</A>) we get:
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="SigmaFY"></A><!-- MATH
+ \begin{equation}
+{\bf H}_\psi({\bf f})={\bf W}-{\bf K}^{-1}=-{\bf\Sigma}_{f|D}^{-1},
+  \;\;\;\;\;\;\;\;\mbox{i.e.,}\;\;\;\;\;\;\;\;
+  {\bf\Sigma}_{f|D}=({\bf K}^{-1}-{\bf W})^{-1}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.48ex; vertical-align: -1.31ex; " SRC="img752.svg"
+ ALT="$\displaystyle {\bf H}_\psi({\bf f})={\bf W}-{\bf K}^{-1}=-{\bf\Sigma}_{f\vert D}^{-1},
+\;\;\;\;\;\;\;\;$">i.e.,<IMG STYLE="height: 3.25ex; vertical-align: -0.94ex; " SRC="img753.svg"
+ ALT="$\displaystyle \;\;\;\;\;\;\;\;
+{\bf\Sigma}_{f\vert D}=({\bf K}^{-1}-{\bf W})^{-1}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">203</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img592.svg"
+ ALT="${\bf W}$"></SPAN> is given in Eq. (<A HREF="#BigW">200</A>).
+
+<P>
+The mean <!-- MATH
+ ${\bf m}_{f|D}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.94ex; " SRC="img728.svg"
+ ALT="${\bf m}_{f\vert D}$"></SPAN> can be found as the point at which the 
+<!-- MATH
+ $p({\bf f}|{\cal D})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img690.svg"
+ ALT="$p({\bf f}\vert{\cal D})$"></SPAN>, now assumed to be Gaussian, reaches maximum, 
+and so does the log-normal <!-- MATH
+ $\psi({\bf f})=\log p({\bf f}|{\cal D})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img746.svg"
+ ALT="$\psi({\bf f})=\log p({\bf f}\vert{\cal D})$"></SPAN>.
+We can therefore find <!-- MATH
+ ${\bf m}_{f|D}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.94ex; " SRC="img728.svg"
+ ALT="${\bf m}_{f\vert D}$"></SPAN> by solving the equation
+<!-- MATH
+ ${\bf g}_{\psi}({\bf f})={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img754.svg"
+ ALT="${\bf g}_{\psi}({\bf f})={\bf0}$"></SPAN>, by 
+<A ID="tex2html24"
+  HREF="../ch3/node6.html">Newton's method</A>:
+<BR>
+<DIV CLASS="mathdisplay"><A ID="GPCiteration"></A><!-- MATH
+ \begin{eqnarray}
+{\bf f}_{n+1}&=&{\bf f}_n-{\bf H}_{\psi}^{-1}({\bf f}_n)\;{\bf g}_{\psi}({\bf f}_n)
+  ={\bf f}_n+({\bf K}^{-1}-{\bf W})^{-1}
+  \left({\bf w}-{\bf K}^{-1}{\bf f}_n\right)
+  \nonumber\\
+  &=&{\bf f}_n+({\bf K}^{-1}-{\bf W})^{-1}\left[-({\bf K}^{-1}-{\bf W}){\bf f}_n
+    +{\bf w}-{\bf W}{\bf f}_n\right]
+  \nonumber\\
+  &=&({\bf K}^{-1}-{\bf W})^{-1}\left({\bf w}-{\bf W}{\bf f}_n\right)
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img755.svg"
+ ALT="$\displaystyle {\bf f}_{n+1}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.48ex; vertical-align: -1.13ex; " SRC="img756.svg"
+ ALT="$\displaystyle {\bf f}_n-{\bf H}_{\psi}^{-1}({\bf f}_n)\;{\bf g}_{\psi}({\bf f}_...
+...\bf f}_n+({\bf K}^{-1}-{\bf W})^{-1}
+\left({\bf w}-{\bf K}^{-1}{\bf f}_n\right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.25ex; vertical-align: -0.93ex; " SRC="img757.svg"
+ ALT="$\displaystyle {\bf f}_n+({\bf K}^{-1}-{\bf W})^{-1}\left[-({\bf K}^{-1}-{\bf W}){\bf f}_n
++{\bf w}-{\bf W}{\bf f}_n\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img758.svg"
+ ALT="$\displaystyle ({\bf K}^{-1}-{\bf W})^{-1}\left({\bf w}-{\bf W}{\bf f}_n\right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">204</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+Note that <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img692.svg"
+ ALT="${\bf f}$"></SPAN> is updated based on <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img248.svg"
+ ALT="${\bf w}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img592.svg"
+ ALT="${\bf W}$"></SPAN>
+given in Eqs (<A HREF="#Smallw">199</A>) and (<A HREF="#BigW">200</A>), which in turn are 
+functions of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img692.svg"
+ ALT="${\bf f}$"></SPAN>. We therefore see that the function <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img692.svg"
+ ALT="${\bf f}$"></SPAN> 
+and the parameters <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img248.svg"
+ ALT="${\bf w}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img592.svg"
+ ALT="${\bf W}$"></SPAN> rely on each other and 
+they need to be updated alternatively uring the iteration above.
+
+<P>
+This iterative process converges to <!-- MATH
+ ${\bf f}={\bf m}_{f|D}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.94ex; " SRC="img759.svg"
+ ALT="${\bf f}={\bf m}_{f\vert D}$"></SPAN>, 
+at which both <!-- MATH
+ $\psi({\bf f})=\log p({\bf f}|{\cal D})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img746.svg"
+ ALT="$\psi({\bf f})=\log p({\bf f}\vert{\cal D})$"></SPAN> and 
+<!-- MATH
+ $p({\bf f}|{\cal D})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img690.svg"
+ ALT="$p({\bf f}\vert{\cal D})$"></SPAN> are maximized, and
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="aaa"></A><!-- MATH
+ \begin{equation}
+{\bf g}_{\psi}({\bf f})=\frac{d}{d{\bf f}} \psi({\bf f})
+  ={\bf w}-{\bf K}^{-1}{\bf f}
+  ={\bf0},\;\;\;\;\;\;\mbox{i.e.,}\;\;\;\;\;\;
+  {\bf f}={\bf K}\;{\bf w}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.11ex; vertical-align: -1.71ex; " SRC="img760.svg"
+ ALT="$\displaystyle {\bf g}_{\psi}({\bf f})=\frac{d}{d{\bf f}} \psi({\bf f})
+={\bf w}-{\bf K}^{-1}{\bf f}
+={\bf0},\;\;\;\;\;\;$">i.e.,<IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img761.svg"
+ ALT="$\displaystyle \;\;\;\;\;\;
+{\bf f}={\bf K}\;{\bf w}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">205</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Taking the expectation on both sides we get
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="MeanFY"></A><!-- MATH
+ \begin{equation}
+{\bf m}_{f|D}=E({\bf f})=E\left( {\bf K}{\bf w}\right)
+  = {\bf K} E( {\bf w})={\bf K}{\bf w}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.94ex; " SRC="img762.svg"
+ ALT="$\displaystyle {\bf m}_{f\vert D}=E({\bf f})=E\left( {\bf K}{\bf w}\right)
+= {\bf K} E( {\bf w})={\bf K}{\bf w}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">206</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Having found <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img248.svg"
+ ALT="${\bf w}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img592.svg"
+ ALT="${\bf W}$"></SPAN> as well as
+<!-- MATH
+ ${\bf f}={\bf m}_{f|D}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.94ex; " SRC="img759.svg"
+ ALT="${\bf f}={\bf m}_{f\vert D}$"></SPAN>, we can further obtain
+<!-- MATH
+ ${\bf\Sigma}_{f|D}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.94ex; " SRC="img729.svg"
+ ALT="${\bf\Sigma}_{f\vert D}$"></SPAN> in Eq. (<A HREF="#SigmaFY">203</A>), and approximate 
+the posterior as a Gaussian
+<!-- MATH
+ $p({\bf f}|{\cal D})\approx{\cal N}({\bf m}_{f|D},\,{\bf\Sigma}_{f|D})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.94ex; " SRC="img763.svg"
+ ALT="$p({\bf f}\vert{\cal D})\approx{\cal N}({\bf m}_{f\vert D},\,{\bf\Sigma}_{f\vert D})$"></SPAN>.
+
+<P>
+We are now ready to proceed to consider the classification of the 
+test set <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img689.svg"
+ ALT="${\bf X}_*$"></SPAN> by Eq. (<A HREF="#GPClassification">186</A>). To do so, we 
+first need to approximate the posterior of <!-- MATH
+ ${\bf f}_*={\bf f}({\bf X}_*)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img764.svg"
+ ALT="${\bf f}_*={\bf f}({\bf X}_*)$"></SPAN> 
+in the equation by a Gaussian
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p({\bf f}|{\bf X}_*,{\cal D})\approx
+  {\cal N}({\bf m}_{f_*},{\bf\Sigma}_{f_*})
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img765.svg"
+ ALT="$\displaystyle p({\bf f}\vert{\bf X}_*,{\cal D})\approx
+{\cal N}({\bf m}_{f_*},{\bf\Sigma}_{f_*})$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">207</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where the mean <!-- MATH
+ ${\bf m}_{f_*}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img766.svg"
+ ALT="${\bf m}_{f_*}$"></SPAN> and covariance <!-- MATH
+ ${\bf\Sigma}_{f_*}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img767.svg"
+ ALT="${\bf\Sigma}_{f_*}$"></SPAN> can 
+be obtained based on the fact that both <!-- MATH
+ ${\bf f}_*={\bf f}({\bf X}_*)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img764.svg"
+ ALT="${\bf f}_*={\bf f}({\bf X}_*)$"></SPAN> 
+and <!-- MATH
+ ${\bf f}={\bf f}({\bf X})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img691.svg"
+ ALT="${\bf f}={\bf f}({\bf X})$"></SPAN> are the same Gaussian process, i.e., 
+their joint probability <!-- MATH
+ $p({\bf f},{\bf f}_8)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img768.svg"
+ ALT="$p({\bf f},{\bf f}_8)$"></SPAN> is a Gaussian. The 
+method is therefore the same as what is discussed in the method of 
+<A ID="tex2html25"
+  HREF="../ch7/node17.html">GPR</A>. Specifically, we take 
+the following steps:
+
+<P>
+
+<UL>
+<LI>Find the mean <!-- MATH
+ ${\bf m}_{f_*|f}=E({\bf f}_*|{\bf f})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.94ex; " SRC="img769.svg"
+ ALT="${\bf m}_{f_*\vert f}=E({\bf f}_*\vert{\bf f})$"></SPAN> and 
+  covariance <!-- MATH
+ ${\bf\Sigma}_{f_*|f}=Cov({\bf f}_*|{\bf f})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.94ex; " SRC="img770.svg"
+ ALT="${\bf\Sigma}_{f_*\vert f}=Cov({\bf f}_*\vert{\bf f})$"></SPAN> of 
+  <!-- MATH
+ $p({\bf f}_*|{\bf X}_*,{\bf X},{\bf f})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img771.svg"
+ ALT="$p({\bf f}_*\vert{\bf X}_*,{\bf X},{\bf f})$"></SPAN> conditioned
+  on the latent function <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img692.svg"
+ ALT="${\bf f}$"></SPAN>, same as in Eq. (<A HREF="#MeanCovff"><IMG  ALT="[*]" SRC="crossref.png"></A>) 
+  for GPR:
+  <P></P>
+<DIV CLASS="mathdisplay"><A ID="MeanCovffGPC"></A><!-- MATH
+ \begin{equation}
+\left\{  \begin{array}{lcl}
+      {\bf m}_{f_*|f}={\bf K}_*^T {\bf K}^{-1} {\bf f} \\
+      {\bf\Sigma}_{f_*|f}={\bf K}_{**}-{\bf K}_*^T{\bf K}^{-1} {\bf K}_*
+    \end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.33ex; " SRC="img772.svg"
+ ALT="$\displaystyle \left\{ \begin{array}{lcl}
+{\bf m}_{f_*\vert f}={\bf K}_*^T {\bf ...
+..._{f_*\vert f}={\bf K}_{**}-{\bf K}_*^T{\bf K}^{-1} {\bf K}_*
+\end{array}\right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">208</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+</LI>
+<LI>Find <!-- MATH
+ ${\bf m}_{f_*}=E_f({\bf f}_*)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img773.svg"
+ ALT="${\bf m}_{f_*}=E_f({\bf f}_*)$"></SPAN> as the expectation of
+  <!-- MATH
+ ${\bf m}_{f_*|f}={\bf K}_*^T {\bf K}^{-1}{\bf f}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.94ex; " SRC="img774.svg"
+ ALT="${\bf m}_{f_*\vert f}={\bf K}_*^T {\bf K}^{-1}{\bf f}$"></SPAN> conditioned on 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img692.svg"
+ ALT="${\bf f}$"></SPAN>, i.e. find the average of <!-- MATH
+ ${\bf m}_{f_*|f}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.94ex; " SRC="img775.svg"
+ ALT="${\bf m}_{f_*\vert f}$"></SPAN> over <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img692.svg"
+ ALT="${\bf f}$"></SPAN> 
+  based on <!-- MATH
+ $p({\bf f}|{\cal D})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img690.svg"
+ ALT="$p({\bf f}\vert{\cal D})$"></SPAN> (marginalize over <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img692.svg"
+ ALT="${\bf f}$"></SPAN>):
+  <BR>
+<DIV CLASS="mathdisplay"><A ID="MeanFsY"></A><!-- MATH
+ \begin{eqnarray}
+{\bf m}_{f_*}&=&E_f ({\bf m}_{f_*|f})
+    =E_f \left( {\bf K}_*^T {\bf K}^{-1} {\bf f} \right)
+    ={\bf K}_*^T {\bf K}^{-1} E_f({\bf f})={\bf K}_*^T {\bf K}^{-1} {\bf m}_f
+    \nonumber\\
+    &=&{\bf K}_*^T {\bf K}^{-1}{\bf K}\;{\bf w}_{{\bf m}_f}
+    ={\bf K}_*^T {\bf w}_{{\bf m}_f}
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img776.svg"
+ ALT="$\displaystyle {\bf m}_{f_*}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.25ex; vertical-align: -0.94ex; " SRC="img777.svg"
+ ALT="$\displaystyle E_f ({\bf m}_{f_*\vert f})
+=E_f \left( {\bf K}_*^T {\bf K}^{-1} {...
+...ight)
+={\bf K}_*^T {\bf K}^{-1} E_f({\bf f})={\bf K}_*^T {\bf K}^{-1} {\bf m}_f$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.25ex; vertical-align: -0.94ex; " SRC="img778.svg"
+ ALT="$\displaystyle {\bf K}_*^T {\bf K}^{-1}{\bf K}\;{\bf w}_{{\bf m}_f}
+={\bf K}_*^T {\bf w}_{{\bf m}_f}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">209</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+  where <!-- MATH
+ ${\bf m}_f=E_f({\bf f})={\bf K}{\bf w}_{m_f}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.94ex; " SRC="img779.svg"
+ ALT="${\bf m}_f=E_f({\bf f})={\bf K}{\bf w}_{m_f}$"></SPAN> given in 
+  Eq. (<A HREF="#MeanFY">206</A>).
+
+<P>
+</LI>
+<LI>Find the covariance <!-- MATH
+ ${\bf\Sigma}_{m_{f_*|f}}=E_f[({\bf m}_{f_*|f}-{\bf m}_{f_*})^2]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -1.07ex; " SRC="img780.svg"
+ ALT="${\bf\Sigma}_{m_{f_*\vert f}}=E_f[({\bf m}_{f_*\vert f}-{\bf m}_{f_*})^2]$"></SPAN>.
+  Given the covariance <!-- MATH
+ ${\bf\Sigma}_{f|D}=({\bf K}^{-1}-{\bf W})^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.94ex; " SRC="img781.svg"
+ ALT="${\bf\Sigma}_{f\vert D}=({\bf K}^{-1}-{\bf W})^{-1}$"></SPAN>
+  of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img692.svg"
+ ALT="${\bf f}$"></SPAN> in Eq. (<A HREF="#SigmaFY">203</A>), we can further find the covariance of
+  <!-- MATH
+ ${\bf m}_{f_*|f}={\bf K}_*^T {\bf K}^{-1}{\bf f}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.94ex; " SRC="img774.svg"
+ ALT="${\bf m}_{f_*\vert f}={\bf K}_*^T {\bf K}^{-1}{\bf f}$"></SPAN> as a linear combination 
+  of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img692.svg"
+ ALT="${\bf f}$"></SPAN> (Recall if <!-- MATH
+ ${\bf y}={\bf Ax}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img782.svg"
+ ALT="${\bf y}={\bf Ax}$"></SPAN>, then 
+  <!-- MATH
+ ${\bf\Sigma}_y={\bf A\Sigma}_x{\bf A}^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img783.svg"
+ ALT="${\bf\Sigma}_y={\bf A\Sigma}_x{\bf A}^T$"></SPAN>):
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf\Sigma}_{m_{f_*|f}}
+    ={\bf K}_*^T {\bf K}^{-1}\,{\bf\Sigma}_{f|D} \,{\bf K}^{-1}{\bf K}_*
+    ={\bf K}_*^T {\bf K}^{-1} ({\bf K}^{-1}-{\bf W})^{-1} {\bf K}^{-1}{\bf K}_*
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -1.07ex; " SRC="img784.svg"
+ ALT="$\displaystyle {\bf\Sigma}_{m_{f_*\vert f}}
+={\bf K}_*^T {\bf K}^{-1}\,{\bf\Sigm...
+...}_*
+={\bf K}_*^T {\bf K}^{-1} ({\bf K}^{-1}-{\bf W})^{-1} {\bf K}^{-1}{\bf K}_*$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">210</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+</LI>
+<LI>Find the covariance <!-- MATH
+ ${\bf\Sigma}_{f_*}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img767.svg"
+ ALT="${\bf\Sigma}_{f_*}$"></SPAN> of <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img785.svg"
+ ALT="${\bf f}_*$"></SPAN> as the sum of 
+  <!-- MATH
+ ${\bf\Sigma}_{f_*|f}=E[({\bf f}_*-{\bf m}_{f_*|f})({\bf f}_*-{\bf m}_{f_*|f})^T]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.94ex; " SRC="img786.svg"
+ ALT="${\bf\Sigma}_{f_*\vert f}=E[({\bf f}_*-{\bf m}_{f_*\vert f})({\bf f}_*-{\bf m}_{f_*\vert f})^T]$"></SPAN>
+  for the variation of <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img785.svg"
+ ALT="${\bf f}_*$"></SPAN> with respect to <!-- MATH
+ ${\bf m}_{f_*|f}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.94ex; " SRC="img775.svg"
+ ALT="${\bf m}_{f_*\vert f}$"></SPAN>, and 
+  <!-- MATH
+ ${\bf\Sigma}_{m_{f_*|f}}=E_f[({\bf m}_{f_*|f}-{\bf m}_{f_*})^2]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -1.07ex; " SRC="img780.svg"
+ ALT="${\bf\Sigma}_{m_{f_*\vert f}}=E_f[({\bf m}_{f_*\vert f}-{\bf m}_{f_*})^2]$"></SPAN> for the
+  variation of <!-- MATH
+ ${\bf m}_{f_*|f}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.94ex; " SRC="img775.svg"
+ ALT="${\bf m}_{f_*\vert f}$"></SPAN> with respect to <!-- MATH
+ ${\bf m}_{f_*}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img766.svg"
+ ALT="${\bf m}_{f_*}$"></SPAN>:  
+  <BR>
+<DIV CLASS="mathdisplay"><A ID="CovarianceFsY"></A><!-- MATH
+ \begin{eqnarray}
+{\bf\Sigma}_{f_*}&=&{\bf\Sigma}_{f_*|f}+{\bf\Sigma}_{m_{f_*|f}}
+    \nonumber\\
+    &=&({\bf K}_{**}-{\bf K}_*^T{\bf K}^{-1}{\bf K}_*)
+    +({\bf K}_*^T{\bf K}^{-1}({\bf K}^{-1}-{\bf W})^{-1}{\bf K}^{-1}{\bf K}_*)
+    \nonumber\\
+    &=&{\bf K}_{**}-{\bf K}_*^T{\bf K}^{-1}{\bf K}_*
+    +{\bf K}_*^T{\bf K}^{-1} [{\bf K}-{\bf K}({\bf K}-{\bf W}^{-1})^{-1}{\bf K}]{\bf K}^{-1}{\bf K}_*
+    \nonumber\\
+    &=&{\bf K}_{**}-{\bf K}_*^T({\bf K}-{\bf W}^{-1})^{-1}{\bf K}_*
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img787.svg"
+ ALT="$\displaystyle {\bf\Sigma}_{f_*}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.79ex; vertical-align: -1.07ex; " SRC="img788.svg"
+ ALT="$\displaystyle {\bf\Sigma}_{f_*\vert f}+{\bf\Sigma}_{m_{f_*\vert f}}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img789.svg"
+ ALT="$\displaystyle ({\bf K}_{**}-{\bf K}_*^T{\bf K}^{-1}{\bf K}_*)
++({\bf K}_*^T{\bf K}^{-1}({\bf K}^{-1}-{\bf W})^{-1}{\bf K}^{-1}{\bf K}_*)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img790.svg"
+ ALT="$\displaystyle {\bf K}_{**}-{\bf K}_*^T{\bf K}^{-1}{\bf K}_*
++{\bf K}_*^T{\bf K}^{-1} [{\bf K}-{\bf K}({\bf K}-{\bf W}^{-1})^{-1}{\bf K}]{\bf K}^{-1}{\bf K}_*$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img791.svg"
+ ALT="$\displaystyle {\bf K}_{**}-{\bf K}_*^T({\bf K}-{\bf W}^{-1})^{-1}{\bf K}_*$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">211</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+  Here we have used the identity for <!-- MATH
+ $({\bf A}+{\bf B})^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img792.svg"
+ ALT="$({\bf A}+{\bf B})^{-1}$"></SPAN> given 
+  in the <A ID="tex2html26"
+  HREF="../algebra/node6.html">Appendices</A>.
+</LI>
+</UL>
+
+<P>
+Now that the posterior 
+<!-- MATH
+ $p({\bf f}|{\bf X}_*,{\cal D})={\cal N}({\bf m}_{f_*},{\bf\Sigma}_{f_*})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img793.svg"
+ ALT="$p({\bf f}\vert{\bf X}_*,{\cal D})={\cal N}({\bf m}_{f_*},{\bf\Sigma}_{f_*})$"></SPAN>
+is approximated as a Gaussian and its mean and covariance are
+obtained in Eqs. (<A HREF="#MeanFsY">209</A>) and (<A HREF="#CovarianceFsY">211</A>), we 
+can finally carry out Eq. (<A HREF="#GPClassification">186</A>) to find the 
+probability for the test points in <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img689.svg"
+ ALT="${\bf X}_*$"></SPAN> to belong to class
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img51.svg"
+ ALT="$C_1$"></SPAN>: 
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+p({\bf y}_*=1|{\bf X}_*,{\cal D})
+  &=&\int\sigma({\bf f}_*)\,p({\bf f}_*|{\bf X}_*,{\cal D})\,d {\bf f}_*
+  \nonumber\\
+  &=&E_f[ \sigma({\bf f}({\bf X}_*)) ]=\sigma(E_f({\bf f}({\bf X}_*)))
+  =\sigma( {\bf m}_{f_*} )
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img684.svg"
+ ALT="$\displaystyle p({\bf y}_*=1\vert{\bf X}_*,{\cal D})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.57ex; vertical-align: -2.12ex; " SRC="img794.svg"
+ ALT="$\displaystyle \int\sigma({\bf f}_*)\,p({\bf f}_*\vert{\bf X}_*,{\cal D})\,d {\bf f}_*$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img795.svg"
+ ALT="$\displaystyle E_f[ \sigma({\bf f}({\bf X}_*)) ]=\sigma(E_f({\bf f}({\bf X}_*)))
+=\sigma( {\bf m}_{f_*} )$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">212</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+Moreover, the certainty or confidence of this classification result 
+is represented by the covariance <!-- MATH
+ ${\bf\Sigma}_{f_*}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img767.svg"
+ ALT="${\bf\Sigma}_{f_*}$"></SPAN>.
+
+<P>
+The Matlab code for the essential parts of this algorithm is 
+listed below. Here <code>X</code> and <code>y</code> are for the training data 
+<!-- MATH
+ ${\cal D}=\{{\bf X},{\bf y}\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img796.svg"
+ ALT="${\cal D}=\{{\bf X},{\bf y}\}$"></SPAN>, and <code>Xs</code> is an array composed 
+of test vectors. First, the essential segment of the main program 
+listed below takes in the training and test data, generates the 
+covariance matrices <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img797.svg"
+ ALT="${\bf K}$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img798.svg"
+ ALT="${\bf K}_*$"></SPAN>, and <!-- MATH
+ ${\bf K}_{**}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img799.svg"
+ ALT="${\bf K}_{**}$"></SPAN> 
+represented by <code>K</code>, <code>Ks</code>, and <code>Kss</code>, respectively. 
+The function <code>Kernel</code> is exactly the same as the one used for 
+Gaussian process regression. This code segment then further calls 
+a function <code>findPosteriorMean</code> which finds the mean and 
+covariance of <!-- MATH
+ $p({\bf f}|{\bf X},{\bf y})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img800.svg"
+ ALT="$p({\bf f}\vert{\bf X},{\bf y})$"></SPAN> based on covariance of 
+training data (<!-- MATH
+ ${\bf K}=Cov({\bf X})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img801.svg"
+ ALT="${\bf K}=Cov({\bf X})$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img726.svg"
+ ALT="${\bf y}$"></SPAN>, and computes 
+the mean <!-- MATH
+ ${\bf m}_{f_*|y}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.94ex; " SRC="img802.svg"
+ ALT="${\bf m}_{f_*\vert y}$"></SPAN> and covariance <!-- MATH
+ ${\bf\Sigma}_{f_*|y}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.94ex; " SRC="img803.svg"
+ ALT="${\bf\Sigma}_{f_*\vert y}$"></SPAN> based 
+on Eqs. (<A HREF="#MeanFsY">209</A>) and (<A HREF="#CovarianceFsY">211</A>), respectively. The
+sign function of <!-- MATH
+ ${\bf m}_{f_*|y}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.94ex; " SRC="img802.svg"
+ ALT="${\bf m}_{f_*\vert y}$"></SPAN> indicates the classification of 
+the test data points in <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img689.svg"
+ ALT="${\bf X}_*$"></SPAN>.
+
+<P>
+<PRE>
+    K=Kernel(X,X);                     % cov(f,f), covariance of prior p(f|X)
+    Ks=Kernel(X,Xs);                   % cov(f_*,f)
+    Kss=Kernel(Xs,Xs);                 % cov(f_*,f_*)
+    [Sigmaf W w]=findPosteriorMean(K,y);   
+                                       % get mean/covariance of p(f|D), W, w
+    meanfD=Ks'*w;                      % mean of p(f_*|X_*,D)
+    SigmafD=Kss-Ks'*inv(K-inv(W))*Ks;  % covariance of p(f_*|X_*,D)
+    ys=sign(meanfD);                   % binary classification of test data
+    p=1./(1+exp(-meanfD));             % p(y_*=1|X_*,D) as logistic function
+</PRE>
+
+<P>
+The function <code>findPosteriorMean</code> listed below uses Newton's method
+to find the mean and covariance of the posterior <!-- MATH
+ $p({\bf f}|{\cal D})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img690.svg"
+ ALT="$p({\bf f}\vert{\cal D})$"></SPAN>
+of the latent function <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img692.svg"
+ ALT="${\bf f}$"></SPAN> based on the training data, and returns 
+them in <code>meanf</code> and <code>covf</code>, respectively, together with <code>w</code> 
+and <code>W</code> for the gradient and Hessian of the likelihood 
+<!-- MATH
+ $p({\bf y}|{\bf f})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img698.svg"
+ ALT="$p({\bf y}\vert{\bf f})$"></SPAN>, to be used for computing <!-- MATH
+ ${\bf m}_{f_*|D}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.94ex; " SRC="img804.svg"
+ ALT="${\bf m}_{f_*\vert D}$"></SPAN> 
+and <!-- MATH
+ ${\bf\Sigma}_{f_*|D}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.94ex; " SRC="img805.svg"
+ ALT="${\bf\Sigma}_{f_*\vert D}$"></SPAN>.
+
+<P>
+<PRE>
+function [covf W w]=findPosteriorMean(K,y)  
+    % K: covariance of prior of p(f|X)
+    % y: labeling of training data X
+    % w: gradient vector of log p(y|f)
+    % W: Hessian matrix of log p(y|f)
+    % meanf: mean of p(f|X,y)
+    % covf: covariance of p(f|X,y)
+    n=length(y);                    % number of training samples
+    f0=zeros(n,1);                  % initial value of latent function
+    f=zeros(n,1);        
+    er=1;
+    while er &gt; 10^(-9)              % Newton's method to get f that maximizes p(f|X,y)
+        e=exp(-y.*f);
+        w=y.*e./(1+e);              % update w
+        W=diag(-e./(1+e).^2);       % update W
+        f=inv(inv(K)-W)*(w-W*f0);   % iteration to get f from previous f0
+        er=norm(f-f0);              % difference between two consecutive f's
+        f0=f;                       % update f
+    end
+    covf=inv(inv(K)-W);             % coviance of f
+end
+</PRE>
+
+<P>
+<B>Example 1</B> The GPC method is trained by the two classes shown in
+the figure below, represented by 100 red points and 80 blue points 
+drawn from two Gaussian distributions <!-- MATH
+ ${\cal N}({\bf m}_0,{\bf\Sigma}_0)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img806.svg"
+ ALT="${\cal N}({\bf m}_0,{\bf\Sigma}_0)$"></SPAN> 
+and <!-- MATH
+ ${\cal N}({\bf m}_1,{\bf\Sigma}_1)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img807.svg"
+ ALT="${\cal N}({\bf m}_1,{\bf\Sigma}_1)$"></SPAN>, where
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf m}_0=\left[\begin{array}{c}1\\0\end{array}\right],\;\;\;
+{\bf m}_1=\left[\begin{array}{c}-1\\0\end{array}\right],\;\;\;
+{\bf\Sigma}_0=\left[\begin{array}{cc}1&0\\0&1\end{array}\right],\;\;\;
+{\bf\Sigma}_1=\left[\begin{array}{cc}1&0.9\\0.9&1\end{array}\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img808.svg"
+ ALT="$\displaystyle {\bf m}_0=\left[\begin{array}{c}1\\ 0\end{array}\right],\;\;\;
+{\...
+...ht],\;\;\;
+{\bf\Sigma}_1=\left[\begin{array}{cc}1&amp;0.9\\ 0.9&amp;1\end{array}\right]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">213</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The 3-D plot of these two normalized Gaussian distributions is also 
+shown in the figure.
+
+<P>
+<IMG STYLE="" SRC="../figures/GPCexample1.png"
+ ALT="GPCexample1.png">
+
+<P>
+Three classification results are shown in the figure below corresponding 
+to different values used in the kernel function. On the left, the 2-D
+space is partitioned into red and blue regions corresponding to the 
+two classes based on the sign function of <!-- MATH
+ ${\bf m}_{f_*|y}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.94ex; " SRC="img802.svg"
+ ALT="${\bf m}_{f_*\vert y}$"></SPAN>; on the right,
+the 3-D distribution plots of <!-- MATH
+ $\sigma({\bf m}_{f_*|y})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.94ex; " SRC="img809.svg"
+ ALT="$\sigma({\bf m}_{f_*\vert y})$"></SPAN> representing the
+estimated probability for <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img676.svg"
+ ALT="${\bf x}_*$"></SPAN> to belong to either class (not 
+normalized) is shown, to be compared with the original Gaussian 
+distributions from which the traning samples were drawn. 
+
+<P>
+We see that wherever there is evidence represented by the training 
+samples of either class in red or blue, there are high probabilities 
+for the neighboring points to belong to either <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img51.svg"
+ ALT="$C_1$"></SPAN> or <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img236.svg"
+ ALT="$C_0$"></SPAN> represented 
+by the positive or negative peaks in the 3-D plots. Data points far 
+away from any evidence will have low probability to belong to either 
+class.
+
+<P>
+We make the following observations for three different values of the
+parameter <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img810.svg"
+ ALT="$\alpha$"></SPAN> in SE:
+
+<UL>
+<LI><!-- MATH
+ $\alpha=0.4$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img811.svg"
+ ALT="$\alpha=0.4$"></SPAN> (top row), the space is partitioned into three regions,
+  with 20 out of 180 training points misclassified. The estimated
+  distribution is smooth.
+</LI>
+<LI><!-- MATH
+ $\alpha=0.2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img812.svg"
+ ALT="$\alpha=0.2$"></SPAN> (middle row), the space is fragmented into several 
+  more pieces for the two classes (blue islands inside the red region 
+  and vice versa), with 5 out of the 180 training points misclassified.
+  The estimated distribution is jagged.
+</LI>
+<LI><!-- MATH
+ $\alpha=0.03$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img813.svg"
+ ALT="$\alpha=0.03$"></SPAN> (bottom row), the space is partitioned into still 
+  more pieces, with all 180 training points correctly classified. The 
+  estimated distribution is spiky. 
+</LI>
+</UL>
+Although the error rate is lowest when <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img810.svg"
+ ALT="$\alpha$"></SPAN> is small, the classificatioin
+result is not necessarily the best as it may well be an overfitting of 
+the noisy data. We conclude that by adjusting parameter <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img810.svg"
+ ALT="$\alpha$"></SPAN>, we can 
+make proper tradeoff between error rate and over-fitting.
+
+<P>
+<IMG STYLE="" SRC="../figures/GPCexample1a.png"
+ ALT="GPCexample1a.png">
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node13.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node11.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node11.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node13.html">Gaussian Process Classifier -</A>
+<B> Up:</B> <A
+ HREF="node11.html">Gaussian Process Classification (GPC)</A>
+<B> Previous:</B> <A
+ HREF="node11.html">Gaussian Process Classification (GPC)</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

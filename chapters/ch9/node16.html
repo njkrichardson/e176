@@ -1,0 +1,559 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>K-means clustering</TITLE>
+<META NAME="description" CONTENT="K-means clustering">
+<META NAME="keywords" CONTENT="ch9">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch9.css">
+
+<LINK REL="next" HREF="node17.html">
+<LINK REL="previous" HREF="node15.html">
+<LINK REL="next" HREF="node17.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node17.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node15.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node15.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node17.html">Gaussian mixture model</A>
+<B> Up:</B> <A
+ HREF="node15.html">Clustering Analysis</A>
+<B> Previous:</B> <A
+ HREF="node15.html">Clustering Analysis</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION00081000000000000000">
+K-means clustering</A>
+</H2>
+
+<P>
+As suggested by the name, the K-means clustering uses a set of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> 
+mean vectors <!-- MATH
+ ${\bf m}_1,\cdots,{\bf m}_K$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img921.svg"
+ ALT="${\bf m}_1,\cdots,{\bf m}_K$"></SPAN> to represent the clusters 
+in the feature space, based on the assumption that there exist a set
+of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> clusters in the dataset. 
+
+<P>
+The K-means clustering algorithm can be formulated as an optimization
+problem to minimize an objective function
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+J=\sum_{n=1}^N\sum_{k=1}^K P_{nk}||{\bf x}_n-{\bf m}_k||^2
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img922.svg"
+ ALT="$\displaystyle J=\sum_{n=1}^N\sum_{k=1}^K P_{nk}\vert\vert{\bf x}_n-{\bf m}_k\vert\vert^2$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">247</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where 
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+P_{nk}=\left\{\begin{array}{ll}
+  1 & \mbox{if $k=\argmin_l ||{\bf x}_n-{\bf m}_l||$}\\
+  0 & \mbox{otherwise}
+  \end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img923.svg"
+ ALT="$\displaystyle P_{nk}=\left\{\begin{array}{ll}
+1 &amp; \mbox{if $k=\argmin_l \vert\vert{\bf x}_n-{\bf m}_l\vert\vert$}\\
+0 &amp; \mbox{otherwise}
+\end{array}\right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">248</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+indicates <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img31.svg"
+ ALT="${\bf x}_n$"></SPAN> is assigned to the kth cluster <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN> if its
+distance to the mean <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img42.svg"
+ ALT="${\bf m}_k$"></SPAN> is minimum. To minimize the objective 
+function <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img924.svg"
+ ALT="$J$"></SPAN> with respective to <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img42.svg"
+ ALT="${\bf m}_k$"></SPAN>, we set its derivative with
+respect to <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img42.svg"
+ ALT="${\bf m}_k$"></SPAN> to zero:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\frac{d}{d{\bf m}_k}J=2\sum_{n=1}^N P_{nk}||{\bf x}_n-{\bf m}_k||={\bf0}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img925.svg"
+ ALT="$\displaystyle \frac{d}{d{\bf m}_k}J=2\sum_{n=1}^N P_{nk}\vert\vert{\bf x}_n-{\bf m}_k\vert\vert={\bf0}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">249</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and solve for <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img42.svg"
+ ALT="${\bf m}_k$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf m}_k=\frac{\sum_{n=1}^N P_{nk}{\bf x}_n}{\sum_{n=1}^N P_{nk}}
+  =\frac{1}{N_k}\sum_{n=1}^N P_{nk}{\bf x}_n
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img926.svg"
+ ALT="$\displaystyle {\bf m}_k=\frac{\sum_{n=1}^N P_{nk}{\bf x}_n}{\sum_{n=1}^N P_{nk}}
+=\frac{1}{N_k}\sum_{n=1}^N P_{nk}{\bf x}_n$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">250</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <!-- MATH
+ $N_k=\sum_{n=1}^N P_{nk}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.81ex; " SRC="img927.svg"
+ ALT="$N_k=\sum_{n=1}^N P_{nk}$"></SPAN> is the number of all samples assigned to <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN>,
+and <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img42.svg"
+ ALT="${\bf m}_k$"></SPAN> is their mean.
+
+<P>
+The K-means algorithm is an iterative process that starts with <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> randomly
+initialized mean vectors which are iteratively revised until the eventual
+convergence. Here are steps of the process:
+
+<P>
+
+<OL>
+<LI>Step 0: Initialize randomly the mean vectors for the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> clusters,
+  such as any <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> samples of the dataset:
+  <!-- MATH
+ ${\bf m}_1^{(0)},\;{\bf m}_2^{(0)},....,{\bf m}_K^{(0)}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.48ex; vertical-align: -0.80ex; " SRC="img928.svg"
+ ALT="${\bf m}_1^{(0)},\;{\bf m}_2^{(0)},....,{\bf m}_K^{(0)}$"></SPAN>,
+  set iteration index to zero <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img929.svg"
+ ALT="$l=1$"></SPAN>;
+
+<P>
+</LI>
+<LI>Assign every sample <!-- MATH
+ ${\bf x}\in{\bf X}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img930.svg"
+ ALT="${\bf x}\in{\bf X}$"></SPAN> in the dataset to one of the
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> clusters according to its distance to the corresponding mean vector:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\mbox{if}\;\;\;
+    ||{\bf x}-{\bf m}_k^{(l)}||^2=\min_{1\le l\le K} \;||{\bf x}-{\bf m}_l^{(l)}||^2,
+    \;\;\;\mbox{then}\;\;\;\;{\bf x} \in C_k^{(l)}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH">if<IMG STYLE="height: 4.88ex; vertical-align: -2.17ex; " SRC="img931.svg"
+ ALT="$\displaystyle \;\;\;
+\vert\vert{\bf x}-{\bf m}_k^{(l)}\vert\vert^2=\min_{1\le l\le K} \;\vert\vert{\bf x}-{\bf m}_l^{(l)}\vert\vert^2,
+\;\;\;$">then<IMG STYLE="height: 3.48ex; vertical-align: -0.82ex; " SRC="img932.svg"
+ ALT="$\displaystyle \;\;\;\;{\bf x} \in C_k^{(l)}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">251</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <SPAN CLASS="MATH"><IMG STYLE="height: 3.48ex; vertical-align: -0.82ex; " SRC="img933.svg"
+ ALT="$C_k^{(l)}$"></SPAN> denotes the kth cluster with mean vector <!-- MATH
+ ${\bf m}_k^{(l)}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.48ex; vertical-align: -0.82ex; " SRC="img934.svg"
+ ALT="${\bf m}_k^{(l)}$"></SPAN>
+  in the lth iteration;
+
+<P>
+</LI>
+<LI>Update the mean vectors to get the new mean <!-- MATH
+ ${\bf m}_k^{(l+1)}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.48ex; vertical-align: -0.82ex; " SRC="img935.svg"
+ ALT="${\bf m}_k^{(l+1)}$"></SPAN> 
+  so that the objective function <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img924.svg"
+ ALT="$J$"></SPAN> given above, i.e., the sum of 
+  the distances squared from all <!-- MATH
+ ${\bf x}\in C_k$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img7.svg"
+ ALT="${\bf x}\in C_k$"></SPAN> to <!-- MATH
+ ${\bf m}_k^{l+1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.82ex; " SRC="img936.svg"
+ ALT="${\bf m}_k^{l+1}$"></SPAN> 
+  is minimized:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf m}_k^{(l+1)}=\frac{1}{N_k} \sum_{{\bf x} \in C_k} {\bf x},\;\;\;\;\;
+    (k=1,\cdots,K)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.74ex; vertical-align: -3.37ex; " SRC="img937.svg"
+ ALT="$\displaystyle {\bf m}_k^{(l+1)}=\frac{1}{N_k} \sum_{{\bf x} \in C_k} {\bf x},\;\;\;\;\;
+(k=1,\cdots,K)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">252</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>   
+
+<P>
+</LI>
+<LI>Terminate if the algorithm has converged:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf m}_k^{(l+1)}={\bf m}_k^{(l)}\;\;\;\;(k=1,\cdots,K)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.48ex; vertical-align: -0.82ex; " SRC="img938.svg"
+ ALT="$\displaystyle {\bf m}_k^{(l+1)}={\bf m}_k^{(l)}\;\;\;\;(k=1,\cdots,K)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">253</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Otherwise, <!-- MATH
+ $l \leftarrow l+1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img939.svg"
+ ALT="$l \leftarrow l+1 $"></SPAN>, go back to Step 2.
+</LI>
+</OL>
+
+<P>
+This method is simple and effective, but it has the main drawback that the 
+number of clusters <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> needs to be estimated based on some prior knowledge, 
+and it stays fixed through out the clustering process, even it may turn out 
+later that more or fewer clusters may fit the data better. One way to resolve
+this is to carry out the algorithm multiple times with different <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN>, and
+then evaluate each result based on the objective function <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img924.svg"
+ ALT="$J$"></SPAN>, or some 
+other separability criteria, such as <!-- MATH
+ $tr({\bf S}_T^{-1}{\bf S}_B)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.80ex; " SRC="img940.svg"
+ ALT="$tr({\bf S}_T^{-1}{\bf S}_B)$"></SPAN>.
+
+<P>
+The Matlab code for the iteration loop of the algorithm is listed below,
+where <code>Mold</code> and <code>Mnew</code> are respectively the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> mean vectors 
+before and after each modification. The iteration terminates when the
+mean vectors no longer change.
+
+<P>
+<PRE>
+    Mnew=X(:,randi(L,1,K));          % use any K data points as initial means
+
+    it=0;
+    er=inf;
+    while er&gt;0                       % main iteration
+        it=it+1;
+        Mold=Mnew;
+        Mnew=zeros(N,K);             % initialize new means
+        Number=zeros(1,K);     
+        for i=1:L                    % for all data points 
+            x=X(:,i);
+            dmin=inf;
+            for k=1:K                % for all K clusters
+                d=norm(x-Mold(:,k));
+                if d&lt;dmin
+                    dmin=d;  j=k;
+                end
+            end
+            Number(j)=Number(j)+1;
+            Mnew(:,j)=Mnew(:,j)+x;
+        end 
+        for k=1:K
+            if Number(k)&gt;0
+                Mnew(:,k)=Mnew(:,k)/Number(k);
+            end
+        end
+        er=norm(Mnew-Mold);          % terminate if means no longer change
+    end
+</PRE>
+
+<P>
+<B>Example 1</B> 
+
+<P>
+The K-means algorithm is applied to a simulated dataset in 3-D space with 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img941.svg"
+ ALT="$C=4$"></SPAN> clusters. The results are shown in the figure below, where the three 
+panels show the results corresponding to <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img942.svg"
+ ALT="$K=C-1$"></SPAN> (left), <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img943.svg"
+ ALT="$K=C$"></SPAN> (middle), 
+and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img944.svg"
+ ALT="$K=C+1$"></SPAN> (right). The initial positions of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> means are marked 
+by the black squares, while their subsequent positions through out the 
+iteration are marked by smaller dots. The iteration terminates once the
+means have moved to the centers of the clusters and no longer change 
+positions. 
+
+<P>
+<IMG STYLE="" SRC="../figures/KmeansEx3.png"
+ ALT="KmeansEx3.png">
+
+<P>
+The clustering results corresponding to <!-- MATH
+ $K=3,\,4,\,5$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img945.svg"
+ ALT="$K=3,\,4,\,5$"></SPAN> can be evaluated 
+by the separability <!-- MATH
+ $tr ({\bf S}_T^{-1}{\bf S}_B)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.80ex; " SRC="img940.svg"
+ ALT="$tr({\bf S}_T^{-1}{\bf S}_B)$"></SPAN>, the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> intra-cluster 
+istance <!-- MATH
+ $tr({\bf\Sigma}_k)\,\;(k=1,\cdots,K)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img946.svg"
+ ALT="$tr({\bf\Sigma}_k)\,\;(k=1,\cdots,K)$"></SPAN> of the resulting clusters:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{tabular}{c||ccc|cccc|ccccc}\hline
+  &\multicolumn{3}{c}{K=C-1=3} & \multicolumn{4}{|c|}{K=C=4} &
+  \multicolumn{5}{c}{K=C+1=5} \\\hline\hline
+  \mbox{Separability} & \multicolumn{3}{c}{1.76}&\multicolumn{4}{|c|}{2.56}
+  & \multicolumn{5}{c}{2.58}\\\hline
+  \mbox{Intra-cluster distance}
+& 9.1 & 44.3 & 11.8&10.8&12.7&11.1&9.1&10.8&9.1&11.1&8.9&9.4\\\hline
+\end{tabular}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 9.52ex; vertical-align: -4.13ex; " SRC="img947.svg"
+ ALT="$\displaystyle \begin{tabular}{c\vert\vert ccc\vert cccc\vert ccccc}\hline
+&amp;\mul...
+...1 &amp; 44.3 &amp; 11.8&amp;10.8&amp;12.7&amp;11.1&amp;9.1&amp;10.8&amp;9.1&amp;11.1&amp;8.9&amp;9.4\\ \hline
+\end{tabular}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">254</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and the <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img584.svg"
+ ALT="$K(K-1)/2$"></SPAN> inter-cluster (Bhattacharyya) distances (between any 
+two of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> clusters):
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{tabular}{r|rr}\hline
+  \multicolumn{3}{c}{K=C-1=3}    \\\hline\hline
+  & 1    & 2     \\\hline
+2 & 10.9 &       \\
+3 & 21.9 & 184.7 \\\hline
+\end{tabular}
+\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;
+\begin{tabular}{r|rrr}\hline
+\multicolumn{4}{c}{K=C=4}\\\hline\hline
+  & 1   & 2   & 3   \\\hline
+2 & 4.0 &     &     \\
+3 & 5.1 & 1.6 &     \\
+4 & 2.4 & 2.3 & 4.4 \\\hline
+\end{tabular}
+\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;
+\begin{tabular}{r|rrrr}\hline
+  \multicolumn{5}{c}{K=C+1=5}          \\\hline\hline
+  & 1   & 2    & 3   & 4    \\\hline
+2 & 4.0 &      &     &      \\
+3 & 5.1 &  1.6 &     &      \\
+4 & 7.0 &  4.3 & 0.3 &      \\
+5 &17.3 & 15.5 & 8.9 & 11.1 \\\hline
+\end{tabular}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 17.88ex; vertical-align: -8.31ex; " SRC="img948.svg"
+ ALT="$\displaystyle \begin{tabular}{r\vert rr}\hline
+\multicolumn{3}{c}{K=C-1=3} \\ \...
+...
+4 &amp; 7.0 &amp; 4.3 &amp; 0.3 &amp; \\
+5 &amp;17.3 &amp; 15.5 &amp; 8.9 &amp; 11.1 \\ \hline
+\end{tabular}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">255</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+We see that when <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img949.svg"
+ ALT="$K=3&lt;C=4$"></SPAN>, the intra-cluster distance of the 2nd cluster is 
+significantly greater than the other two, indicating the cluster may contain
+two smaller clusters. Also, when <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img950.svg"
+ ALT="$K=5&gt;C=4$"></SPAN>, the inter-cluster distance between 
+clusters 3 and 4 is significantly smaller than others, indicating the two 
+clusters are too close and can therefore be merged.
+
+<P>
+While the K-means method is simple and effective, it has the main shortcoming 
+that the number of clusters <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> needs to be specified, although in practice it 
+is typically unknown a head of time. In this case, one could try different <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> 
+values and compare the corresponding results in terms of the intra and inter 
+cluster distances, as well as the separabilities of the resulting clusters, as 
+shown in the example above. Moreover, if the intra-cluster distance of a cluster 
+is too large indicating it may contain more than one cluster (e.g., <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img951.svg"
+ ALT="$K=3$"></SPAN> in 
+the example), it can be split; on the other hand, if the inter-cluster distance 
+between two clusters is too small (e.g., <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img952.svg"
+ ALT="$K=5$"></SPAN> in the example), the two clusters
+may belong to the same cluster and need to be merged. Following such merging 
+and/or splitting, a few more iterations can be carried out to make sure the
+final clustering results are optimal. The figure below shows the clustering
+results of the same dataset above but modified by merging and splliting. The
+left pannel is for <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img951.svg"
+ ALT="$K=3$"></SPAN>, but the second cluster (green) is split, while the
+right pannel is for <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img952.svg"
+ ALT="$K=5$"></SPAN>, when the 4th (yellow) and 5th (cyan) clusters are 
+merged.
+
+<P>
+<IMG STYLE="" SRC="../figures/KmeansEx3a.png"
+ ALT="KmeansEx3a.png">
+
+<P>
+The idea of modifying the clustering results by merging and spliting leads to 
+the algorithm of Iterative Self-Organizing Data Analysis Technique (ISODATA), 
+which allows the number of clusters <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> to be adjusted automatically during the 
+iteration by merging clusters close to each other and splitting clusters with 
+large intra-cluster distances. However, this algorithm is highly heuristic as 
+the various parameters such the threshold values for merging and splitting need
+to be specified.
+
+<P>
+<B>Example 2</B>
+
+<P>
+The K-means clustering method is applied to the dataset of ten digits from 
+0 to 9 used previously. The resulting clustering is visualized based on the
+KLT to map the data points in the original 256-D space into the 3-D space 
+spanned by the three eigenvectors corresponding to the three greatest 
+eigenvalues of the covariance matrix of the dataset. The ground truth (with
+known class labelings) is shown on the left, and the clustering result is
+shown on the right below. We see that the clustering results match the
+original data reasonably well.
+
+<P>
+<IMG STYLE="" SRC="../figures/KmeansEx10.png"
+ ALT="KmeansEx10.png">
+
+<P>
+The confusion matrix shown below is still used to show the clustering 
+results when compared with the ground truth, where the element in the
+ith row and jth column is the number of samples in the ith cluster 
+(ground truth) but assigned to the jth cluster. 
+
+<P>
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left[ \begin{array}{rrrrrrrrrr}
+     1 &  27 &   3 & 166 &   0 &   0 &   3 &  24 &   0 &   0 \\
+     0 &   1 &  13 &   0 & 210 &   0 &   0 &   0 &   0 &   0 \\
+     0 &   3 &  16 &   0 &   3 & 180 &   9 &   8 &   5 &   0 \\
+     1 &   0 &  88 &   1 &   0 &   0 &   5 &   1 & 128 &   0 \\
+     4 &   1 &  52 &   0 &  26 &   0 &   0 &   6 &   0 & 135 \\
+     1 &   1 &  10 &   0 &   0 &   0 &   0 & 167 &  43 &   2 \\
+     0 & 161 &   5 &  14 &  13 &   2 &   0 &  29 &   0 &   0 \\
+     4 &   0 &  70 &   0 &   5 &   4 & 137 &   3 &   1 &   0 \\
+     4 &   1 &  69 &   2 &   1 &   3 &   2 &  31 & 110 &   1 \\
+    92 &   0 & 101 &   1 &   1 &   1 &   5 &   0 &   2 &  21 \\
+\end{array}\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 28.10ex; vertical-align: -13.47ex; " SRC="img953.svg"
+ ALT="$\displaystyle \left[ \begin{array}{rrrrrrrrrr}
+1 &amp; 27 &amp; 3 &amp; 166 &amp; 0 &amp; 0 &amp; 3 &amp; 2...
+... &amp; 110 &amp; 1 \\
+92 &amp; 0 &amp; 101 &amp; 1 &amp; 1 &amp; 1 &amp; 5 &amp; 0 &amp; 2 &amp; 21 \\
+\end{array}\right]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">256</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+<IMG STYLE="" SRC="../figures/KmeansDigits.png"
+ ALT="KmeansDigits.png">
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node17.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node15.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node15.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node17.html">Gaussian mixture model</A>
+<B> Up:</B> <A
+ HREF="node15.html">Clustering Analysis</A>
+<B> Previous:</B> <A
+ HREF="node15.html">Clustering Analysis</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

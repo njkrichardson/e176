@@ -1,0 +1,385 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>K Nearest Neighbor and Minimum Distance Classifiers</TITLE>
+<META NAME="description" CONTENT="K Nearest Neighbor and Minimum Distance Classifiers">
+<META NAME="keywords" CONTENT="ch9">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch9.css">
+
+<LINK REL="next" HREF="node2.html">
+<LINK REL="previous" HREF="ch9.html">
+<LINK REL="next" HREF="node2.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node2.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="ch9.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="ch9.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node2.html">Naive Bayes Classification</A>
+<B> Up:</B> <A
+ HREF="ch9.html">ch9</A>
+<B> Previous:</B> <A
+ HREF="ch9.html">ch9</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00010000000000000000">
+K Nearest Neighbor and Minimum Distance Classifiers</A>
+</H1>
+
+<P>
+Here we first consider a set of simple supervised classification
+algorithms that assign an unlabeled sample <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> to one of 
+the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> known classes based on set <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="$N$"></SPAN> of <EM>training samples</EM> 
+<!-- MATH
+ ${\bf X}=[{\bf x}_1,\cdots,{\bf x}_N]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img9.svg"
+ ALT="${\bf X}=[{\bf x}_1,\cdots,{\bf x}_N]$"></SPAN>, where each sample <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img31.svg"
+ ALT="${\bf x}_n$"></SPAN> 
+is labeled by <!-- MATH
+ $y_n=k\in\{1,\cdots,K\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img32.svg"
+ ALT="$y_n=k\in\{1,\cdots,K\}$"></SPAN>, indicating it belongs to 
+class <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN>. 
+
+<P>
+
+<UL>
+<LI><B>k Nearest neighbors (k-NN) Classifier</B>
+
+<P>
+Given an unlabeled pattern <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN>, we first find its <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img33.svg"
+ ALT="$k$"></SPAN>
+  <EM>nearest neighbors</EM> in the training dataset, and then assign 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> to one of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> classes by a majority vote of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img33.svg"
+ ALT="$k$"></SPAN>
+  neighbors based on their class labelings. The voting can be weighted
+  so that closer neighbors are more heavily weighted than those that 
+  are farther away. In particular, when <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img34.svg"
+ ALT="$k=1$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> is assigned 
+  to the class of its closest neighbor.
+
+<P>
+While the k-NN method is simple and straight forward, its computational
+  cost is high as classifying any unlabeled pattern <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> requires 
+  computing distances to all data points in the training set.
+
+<P>
+</LI>
+<LI><B>Minimum Distance Classifier</B>
+
+<P>
+Given a set of training data points <!-- MATH
+ $\{{\bf x}_1,\cdots,{\bf x}_{N_k}\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.71ex; " SRC="img35.svg"
+ ALT="$\{{\bf x}_1,\cdots,{\bf x}_{N_k}\}$"></SPAN> 
+  all belonging to the kth class <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN> (<!-- MATH
+ $k=1,\cdots,K$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img36.svg"
+ ALT="$k=1,\cdots,K$"></SPAN>), we can find their 
+  mean and covariance to represent the class:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf m}_k=\frac{1}{N_k}\sum_{n=1}^{N_k} {\bf x}_n,\;\;\;\;\;\;\;
+    {\bf\Sigma}_k=\frac{1}{N_k}\sum_{n=1}^{N_k} ({\bf x}_n-{\bf m})^T
+    ({\bf x}_n-{\bf m})
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.06ex; " SRC="img37.svg"
+ ALT="$\displaystyle {\bf m}_k=\frac{1}{N_k}\sum_{n=1}^{N_k} {\bf x}_n,\;\;\;\;\;\;\;
+...
+...igma}_k=\frac{1}{N_k}\sum_{n=1}^{N_k} ({\bf x}_n-{\bf m})^T
+({\bf x}_n-{\bf m})$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">1</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Any unlabeled data point <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> can be classified to one of the
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> classes based on certain distance <!-- MATH
+ $d({\bf x},\,C_k)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img38.svg"
+ ALT="$d({\bf x},\,C_k)$"></SPAN> between
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> and each of class <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN>:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\mbox{if}\;\;d({\bf x},C_k)=min \{d({\bf x},C_i)\;\;i=1,\cdots,C \}
+    \;\;\;\;\mbox{then} \;\;{\bf x}\in C_k
+  
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH">if<IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img39.svg"
+ ALT="$\displaystyle \;\;d({\bf x},C_k)=min \{d({\bf x},C_i)\;\;i=1,\cdots,C \}
+\;\;\;\;$">then<IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img40.svg"
+ ALT="$\displaystyle \;\;{\bf x}\in C_k$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">2</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+We could simply use the Euclidean distance <!-- MATH
+ $d_E({\bf x},{\bf m}_k)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img41.svg"
+ ALT="$d_E({\bf x},{\bf m}_k)$"></SPAN>
+  between <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img42.svg"
+ ALT="${\bf m}_k$"></SPAN>. But such a classification may not 
+  reliable as Euclidean distance does not take into consideration the
+  covariance <!-- MATH
+ ${\bf\Sigma}_k$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img43.svg"
+ ALT="${\bf\Sigma}_k$"></SPAN> representing how the <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img21.svg"
+ ALT="$N_k$"></SPAN> samples are 
+  distributed in the feature space, as illustrated by the following
+  example.
+
+<P>
+<B>Example 1:</B> As illustrated in the figure below (left plot), a
+  point <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img44.svg"
+ ALT="$x=1$"></SPAN> in 1-D space is to be classified into one of the two 
+  classes represented by their corresponding Gaussian pdfs:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+C_1\sim{\cal N}( 5, 1.2^2),\;\;\;\;\;\;\;\;\;\;\;\;\;
+    C_2\sim{\cal N}(-5, 3^2)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img45.svg"
+ ALT="$\displaystyle C_1\sim{\cal N}( 5, 1.2^2),\;\;\;\;\;\;\;\;\;\;\;\;\;
+C_2\sim{\cal N}(-5, 3^2)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">3</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+If only the two means <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img46.svg"
+ ALT="$m_1=5$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img47.svg"
+ ALT="$m_2=-5$"></SPAN> are considered, we have
+  <!-- MATH
+ $d_E(x,\,m_1)=4\;<\;d_E(x,\,m_2)=6$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img48.svg"
+ ALT="$d_E(x,\,m_1)=4\;&lt;\;d_E(x,\,m_2)=6$"></SPAN>, i.e., <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img44.svg"
+ ALT="$x=1$"></SPAN> is closer to <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img49.svg"
+ ALT="$m_1$"></SPAN> 
+  than <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img50.svg"
+ ALT="$m_2$"></SPAN> and therefore should be classified to class <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img51.svg"
+ ALT="$C_1$"></SPAN>. However,
+  as shown in the plot, <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img52.svg"
+ ALT="$x$"></SPAN> should be classified to class <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img53.svg"
+ ALT="$C_2$"></SPAN>, if the 
+  variances <!-- MATH
+ $\sigma_1=1.2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img54.svg"
+ ALT="$\sigma_1=1.2$"></SPAN> and <!-- MATH
+ $\sigma_2=3$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img55.svg"
+ ALT="$\sigma_2=3$"></SPAN> are also taken into consideration. 
+
+<P>
+<IMG STYLE="" SRC="../figures/GaussianPlot1.png"
+ ALT="GaussianPlot1.png">
+
+<P>
+We see the distance <!-- MATH
+ $d({\bf x},\,C_k)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img38.svg"
+ ALT="$d({\bf x},\,C_k)$"></SPAN> should be positively related 
+  to <!-- MATH
+ $d_E(x,\,m_k)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img56.svg"
+ ALT="$d_E(x,\,m_k)$"></SPAN>, but inversely related to <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img57.svg"
+ ALT="$\sigma_k$"></SPAN>, i.e., we can
+  define <!-- MATH
+ $d(x,C_k)=(x-m_k)^2/\sigma_k^2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.77ex; " SRC="img58.svg"
+ ALT="$d(x,C_k)=(x-m_k)^2/\sigma_k^2$"></SPAN>. Based on this distance, we find
+  <!-- MATH
+ $d(x_1,\,m_1)=11.11 \;>\;d(x_1,\,m_2)=4.0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img59.svg"
+ ALT="$d(x_1,\,m_1)=11.11 \;&gt;\;d(x_1,\,m_2)=4.0$"></SPAN>, i.e., <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img44.svg"
+ ALT="$x=1$"></SPAN> should be
+  classified to <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img53.svg"
+ ALT="$C_2$"></SPAN>.
+
+<P>
+In a higher dimensional feature space, we can carry out classification 
+  based on the more generally defined <EM>Mahalanobis distance</EM> between 
+  a point <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> and a distribution represented by <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img42.svg"
+ ALT="${\bf m}_k$"></SPAN> and 
+  <!-- MATH
+ ${\bf\Sigma}_k$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img43.svg"
+ ALT="${\bf\Sigma}_k$"></SPAN>:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+d_M({\bf x},C_k)=({\bf x}-{\bf m}_k)^T{\bf\Sigma}_k^{-1}({\bf x}-{\bf m}_k)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.82ex; " SRC="img60.svg"
+ ALT="$\displaystyle d_M({\bf x},C_k)=({\bf x}-{\bf m}_k)^T{\bf\Sigma}_k^{-1}({\bf x}-{\bf m}_k)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">4</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+<B>Example 2:</B> As illustrated in the above figure (right plot), two
+  samples <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img61.svg"
+ ALT="$x_1=1$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img62.svg"
+ ALT="$x_2=3$"></SPAN> are to be classified into either of two 
+  classes:  
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+C_1\sim{\cal N}(0, 1.2^2),\;\;\;\;\;\;\;\;\;\;\;\;\;
+    C_2\sim{\cal N}(0, 3^2)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img63.svg"
+ ALT="$\displaystyle C_1\sim{\cal N}(0, 1.2^2),\;\;\;\;\;\;\;\;\;\;\;\;\;
+C_2\sim{\cal N}(0, 3^2)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">5</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+As the two means <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img64.svg"
+ ALT="$m_1=m_2=0$"></SPAN> are the same, <!-- MATH
+ $|x_i-m_1|^2=|x_i-m_2|^2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img65.svg"
+ ALT="$\vert x_i-m_1\vert^2=\vert x_i-m_2\vert^2$"></SPAN> 
+  for both samples <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img66.svg"
+ ALT="$x_1$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img67.svg"
+ ALT="$x_2$"></SPAN>, they are both classified into <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img53.svg"
+ ALT="$C_2$"></SPAN> 
+  with a greater variance <!-- MATH
+ $\sigma_2\;> \;\sigma_2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.46ex; " SRC="img68.svg"
+ ALT="$\sigma_2\;&gt; \;\sigma_2$"></SPAN> therefore smaller
+  Mahalanobis distances:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left\{
+    \begin{array}{l}
+    d_M(x_1,\,C_1)=\frac{(x_1-m_1)^2}{\sigma_1^2}=\frac{1}{1.2^2}=0.69,
+    \;\;\;\;\;\;\;\;\;\;\;\;\;\;
+    d_M(x_1,\,C_2)=\frac{(x_1-m_1)^2}{\sigma_2^2}=\frac{1}{9}=0.11\\
+    d_M(x_2,\,C_1)=\frac{(x_1-m_1)^2}{\sigma_1^2}=\frac{3}{1.2^2}=6.25,
+    \;\;\;\;\;\;\;\;\;\;\;\;\;\;
+    d_M(x_1,\,C_2)=\frac{(x_1-m_1)^2}{\sigma_2^2}=\frac{3^2}{9}=1
+    \end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img69.svg"
+ ALT="\begin{displaymath}\left\{
+\begin{array}{l}
+d_M(x_1,\,C_1)=\frac{(x_1-m_1)^2}{\s...
+...rac{(x_1-m_1)^2}{\sigma_2^2}=\frac{3^2}{9}=1
+\end{array}\right.\end{displaymath}"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">6</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+However, as shown in the plot, <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img61.svg"
+ ALT="$x_1=1$"></SPAN> should be classified to <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img51.svg"
+ ALT="$C_1$"></SPAN>.
+  We therefore see that sometimes the Mahalanobis distance is not reliable
+  for classification, and some better method need to be considered, as 
+  discussed later.
+
+<P>
+</LI>
+</UL>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node2.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="ch9.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="ch9.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node2.html">Naive Bayes Classification</A>
+<B> Up:</B> <A
+ HREF="ch9.html">ch9</A>
+<B> Previous:</B> <A
+ HREF="ch9.html">ch9</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

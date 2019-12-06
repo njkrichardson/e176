@@ -1,0 +1,1345 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Maximal Margin and Support Vectors</TITLE>
+<META NAME="description" CONTENT="Maximal Margin and Support Vectors">
+<META NAME="keywords" CONTENT="ch9">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch9.css">
+
+<LINK REL="next" HREF="node6.html">
+<LINK REL="previous" HREF="node4.html">
+<LINK REL="next" HREF="node6.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node6.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node4.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node4.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node6.html">Kernel Mapping</A>
+<B> Up:</B> <A
+ HREF="node4.html">Support Vector machine</A>
+<B> Previous:</B> <A
+ HREF="node4.html">Support Vector machine</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION00041000000000000000">
+Maximal Margin and Support Vectors</A>
+</H2>
+
+<P>
+<A ID="tex2html4"
+  HREF="https://www.youtube.com/watch?v=_PwhiWxHK8o">MIT video</A>
+<P>
+<A ID="tex2html5"
+  HREF="https://www.youtube.com/watch?v=v7H5ks5iDEQ">Stanford video</A>
+<P>
+The support vector machine (SVM) is a supervised binary classifier 
+trained by a dsta set <!-- MATH
+ $\{ ({\bf x}_n, y_n),\;\;n=1,\cdots,N\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img243.svg"
+ ALT="$\{ ({\bf x}_n, y_n),\;\;n=1,\cdots,N\}$"></SPAN> of 
+which data sample <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img31.svg"
+ ALT="${\bf x}_n$"></SPAN>, a vector in the d-dimensional feature 
+space, belongs to either class <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img14.svg"
+ ALT="$C_+$"></SPAN> if labeled by <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img244.svg"
+ ALT="$y_n=1$"></SPAN> or class 
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img15.svg"
+ ALT="$C_-$"></SPAN> if labeled by <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img245.svg"
+ ALT="$y_n=-1$"></SPAN>. The result of the training process is 
+the <EM>decision plane</EM> <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img246.svg"
+ ALT="$H_0$"></SPAN> in the feature space, described by the
+linear <EM>decision equation</EM>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f({\bf x})={\bf w}^T{\bf x}+b=\sum_{i=1}^d x_i w_i+b=0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.09ex; " SRC="img247.svg"
+ ALT="$\displaystyle f({\bf x})={\bf w}^T{\bf x}+b=\sum_{i=1}^d x_i w_i+b=0$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">62</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+in terms of its normal vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img248.svg"
+ ALT="${\bf w}$"></SPAN> and intercept <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img249.svg"
+ ALT="$b$"></SPAN>. When these
+two parameters are determined in the training process, any unlabeled
+sample <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> is classified into either <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img14.svg"
+ ALT="$C_+$"></SPAN> if it is the positive 
+side of <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img246.svg"
+ ALT="$H_0$"></SPAN>, or <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img15.svg"
+ ALT="$C_-$"></SPAN> if it is on the negative side of <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img246.svg"
+ ALT="$H_0$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\mbox{if} \;\;f({\bf x})={\bf w}^T{\bf x}+b\;
+  \left\{ \begin{array}{l} >0 \\=0\\<0\end{array} \right.,
+  \;\;\;\mbox{then}\;\;
+  \left\{ \begin{array}{l} {\bf x}\in C_+ \\{\bf x}\in H_0\\
+    {\bf x}\in C_-\end{array} \right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH">if<IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img250.svg"
+ ALT="$\displaystyle \;\;f({\bf x})={\bf w}^T{\bf x}+b\;
+\left\{ \begin{array}{l} &gt;0 \\ =0\\ &lt;0\end{array} \right.,
+\;\;\;$">then<IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img251.svg"
+ ALT="$\displaystyle \;\;
+\left\{ \begin{array}{l} {\bf x}\in C_+ \\ {\bf x}\in H_0\\
+{\bf x}\in C_-\end{array} \right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">63</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+We note that the initial setup of the SVM is actually the same as the
+method of <A ID="tex2html6"
+  HREF="../ch7/node10.html">linear regression </A>,
+which can be treated as a binary classifier if the regression function
+<!-- MATH
+ $f({\bf x})={\bf w}^T{\bf x}+b$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img252.svg"
+ ALT="$f({\bf x})={\bf w}^T{\bf x}+b$"></SPAN> is thresholded by constant zero 
+<!-- MATH
+ $f({\bf x})=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img253.svg"
+ ALT="$f({\bf x})=0$"></SPAN>. However, the SVM is actually a much more sophisticated 
+and powerful binary classifier as we will see later.
+
+<P>
+<IMG STYLE="" SRC="../figures/LinearFunction.png"
+ ALT="LinearFunction.png">
+
+<P>
+The decision equation <!-- MATH
+ $f({\bf x})={\bf w}^T{\bf x}+b=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img254.svg"
+ ALT="$f({\bf x})={\bf w}^T{\bf x}+b=0$"></SPAN> can be 
+rewritten as 
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p_{\bf w}({\bf x})=\frac{{\bf w}^T{\bf x}}{||{\bf w}||}
+  =-\frac{b}{||{\bf w}||}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.29ex; " SRC="img255.svg"
+ ALT="$\displaystyle p_{\bf w}({\bf x})=\frac{{\bf w}^T{\bf x}}{\vert\vert{\bf w}\vert\vert}
+=-\frac{b}{\vert\vert{\bf w}\vert\vert}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">64</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+representing the projection of any point <!-- MATH
+ ${\bf x}\in H_0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img256.svg"
+ ALT="${\bf x}\in H_0$"></SPAN> on the decision
+plane <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img246.svg"
+ ALT="$H_0$"></SPAN> onto its normal direction <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img248.svg"
+ ALT="${\bf w}$"></SPAN>. The absolute value of
+this projection is the distance between <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img246.svg"
+ ALT="$H_0$"></SPAN> and the origin:
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="DistToOrigin"></A><!-- MATH
+ \begin{equation}
+d(H_0,\,{\bf0})=|p_{\bf w}({\bf x})|=\frac{|b|}{||{\bf w}||}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.29ex; " SRC="img257.svg"
+ ALT="$\displaystyle d(H_0,\,{\bf0})=\vert p_{\bf w}({\bf x})\vert=\frac{\vert b\vert}{\vert\vert{\bf w}\vert\vert}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">65</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Similarly, the projection of any point <!-- MATH
+ ${\bf x}'\notin H_0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img258.svg"
+ ALT="${\bf x}'\notin H_0$"></SPAN> 
+off the decision plane <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img246.svg"
+ ALT="$H_0$"></SPAN> onto <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img248.svg"
+ ALT="${\bf w}$"></SPAN> is 
+<!-- MATH
+ $p_{\bf w}({\bf x}')={\bf w}^T{\bf x}'/||{\bf w}||$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img259.svg"
+ ALT="$p_{\bf w}({\bf x}')={\bf w}^T{\bf x}'/\vert\vert{\bf w}\vert\vert$"></SPAN>, and the absolute 
+value of the difference between these two projections is the distances
+from <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.12ex; " SRC="img260.svg"
+ ALT="${\bf x}'$"></SPAN> to <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img246.svg"
+ ALT="$H_0$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+d(H_0,\,{\bf x}')=\bigg| p_{\bf w}({\bf x}')-p_{\bf w}({\bf x}) \bigg|
+  =\bigg|\frac{{\bf w}^T{\bf x}'}{||{\bf w}||}-\left(-\frac{b}{||{\bf w}||}\right)\bigg|
+  =\frac{|{\bf w}^T{\bf x}'+b|}{||{\bf w}||}
+  =\frac{|f({\bf x}')|}{||{\bf w}||}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.32ex; " SRC="img261.svg"
+ ALT="$\displaystyle d(H_0,\,{\bf x}')=\bigg\vert p_{\bf w}({\bf x}')-p_{\bf w}({\bf x...
+...t{\bf w}\vert\vert}
+=\frac{\vert f({\bf x}')\vert}{\vert\vert{\bf w}\vert\vert}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">66</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+<IMG STYLE="" SRC="../figures/SVMprojections.png"
+ ALT="SVMprojections.png">
+
+<P>
+We desire to find the optimal decision plane <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img246.svg"
+ ALT="$H_0$"></SPAN> that separates the 
+training samples belonging to the two different classes, assumed to be 
+linearly separable, in such a way that the following distance between 
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img246.svg"
+ ALT="$H_0$"></SPAN> and closest training samples on either sides, called the 
+<EM>support vectors</EM> and denoted by <!-- MATH
+ ${\bf x}_{sv}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img262.svg"
+ ALT="${\bf x}_{sv}$"></SPAN>, is maximized:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+d(H_0,\,{\bf x}_{sv}\in C_+)=d(H_0,\,{\bf x}_{sv}\in C_-)
+  =d(H_0,\,{\bf x}_{sv})=\frac{|f({\bf x}_{sv})|}{||{\bf w}||}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.29ex; " SRC="img263.svg"
+ ALT="$\displaystyle d(H_0,\,{\bf x}_{sv}\in C_+)=d(H_0,\,{\bf x}_{sv}\in C_-)
+=d(H_0,\,{\bf x}_{sv})=\frac{\vert f({\bf x}_{sv})\vert}{\vert\vert{\bf w}\vert\vert}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">67</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+We denote by <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img264.svg"
+ ALT="$H_+$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img265.svg"
+ ALT="$H_-$"></SPAN> the two planes that are parelle to <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img246.svg"
+ ALT="$H_0$"></SPAN> 
+and pass through the support vectors <!-- MATH
+ ${\bf x}_{sv}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img262.svg"
+ ALT="${\bf x}_{sv}$"></SPAN> on either side 
+of <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img246.svg"
+ ALT="$H_0$"></SPAN>, and assume their corresponding equations to be:
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="SVMplanes"></A><!-- MATH
+ \begin{equation}
+\left\{\begin{array}{ll}
+  H_+: & f_+({\bf x})=f({\bf x})-c={\bf w}^T {\bf x}+b-c=0 \\
+  H_-: & f_-({\bf x})=f({\bf x})+c={\bf w}^T {\bf x}+b+c=0
+  \end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.33ex; " SRC="img266.svg"
+ ALT="$\displaystyle \left\{\begin{array}{ll}
+H_+: &amp; f_+({\bf x})=f({\bf x})-c={\bf w}...
+...\\
+H_-: &amp; f_-({\bf x})=f({\bf x})+c={\bf w}^T {\bf x}+b+c=0
+\end{array}\right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">68</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+As these equations can be arbitrarily scaled, we can let <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img267.svg"
+ ALT="$c=1$"></SPAN> for 
+convenience. Based on Eq. (<A HREF="#DistToOrigin">65</A>), the distances from 
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img264.svg"
+ ALT="$H_+$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img265.svg"
+ ALT="$H_-$"></SPAN> to the origin can be written as 
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+d(H_{\pm},{\bf0})=\frac{|b\pm 1|}{||{\bf w}||}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.29ex; " SRC="img268.svg"
+ ALT="$\displaystyle d(H_{\pm},{\bf0})=\frac{\vert b\pm 1\vert}{\vert\vert{\bf w}\vert\vert}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">69</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and their distances to the decision plane <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img246.svg"
+ ALT="$H_0$"></SPAN> is
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\bigg| d(H_\pm,{\bf0})-d(H_0,{\bf0}) \bigg|
+  =\bigg| \frac{|b\pm 1|}{||{\bf w}||}-\frac{|b|}{||{\bf w}||} \bigg|
+      =\frac{1}{||{\bf w}||}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img269.svg"
+ ALT="$\displaystyle \bigg\vert d(H_\pm,{\bf0})-d(H_0,{\bf0}) \bigg\vert
+=\bigg\vert \...
+...{\vert\vert{\bf w}\vert\vert} \bigg\vert
+=\frac{1}{\vert\vert{\bf w}\vert\vert}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">70</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+This is called the <EM>margin</EM>, which is maximized if <!-- MATH
+ $||{\bf w}||$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img270.svg"
+ ALT="$\vert\vert{\bf w}\vert\vert$"></SPAN> 
+is minimized. 
+
+<P>
+For these planes to correctly separate all samples in the training set 
+<!-- MATH
+ $\{({\bf x}_n,\,y_n)\;\;(n=1,\cdots,N)\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img271.svg"
+ ALT="$\{({\bf x}_n,\,y_n)\;\;(n=1,\cdots,N)\}$"></SPAN>, they have to satisfy the 
+following two conditions:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left\{\begin{array}{ll}
+  f({\bf x}_n)-1={\bf w}^T {\bf x}_n+b-1 \ge 0 & \mbox{if $y_n=1$}\\
+  f({\bf x}_n)+1={\bf w}^T {\bf x}_n+b+1 \le 0 & \mbox{if $y_n=-1$}
+  \end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.33ex; " SRC="img272.svg"
+ ALT="$\displaystyle \left\{\begin{array}{ll}
+f({\bf x}_n)-1={\bf w}^T {\bf x}_n+b-1 \...
+...f x}_n)+1={\bf w}^T {\bf x}_n+b+1 \le 0 &amp; \mbox{if $y_n=-1$}
+\end{array}\right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">71</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+which can be combined to become:
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="SVMcondition"></A><!-- MATH
+ \begin{equation}
+y_n\,f({\bf x}_n)=y_n ({\bf w}^T{\bf x}_n +b) \ge 1
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img273.svg"
+ ALT="$\displaystyle y_n\,f({\bf x}_n)=y_n ({\bf w}^T{\bf x}_n +b) \ge 1$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">72</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Note that the equality is satisfied by the support vectors on <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img264.svg"
+ ALT="$H_+$"></SPAN> 
+or <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img265.svg"
+ ALT="$H_-$"></SPAN>, while the inequalities are satisfied by all other samples 
+farther away from <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img246.svg"
+ ALT="$H_0$"></SPAN> behind <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img264.svg"
+ ALT="$H_+$"></SPAN> or <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img265.svg"
+ ALT="$H_-$"></SPAN>. 
+
+<P>
+Now the task of finding the optimal decision plane <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img246.svg"
+ ALT="$H_0$"></SPAN> can be 
+formulated as a constrained minimization problem:
+<BR>
+<DIV CLASS="mathdisplay"><A ID="SVMprimal"></A><!-- MATH
+ \begin{eqnarray}
+\mbox{minimize:       } \;\;\;& &
+  \frac{1}{2}||{\bf w}||^2 =\frac{1}{2}{\bf w}^T {\bf w}  \nonumber \\
+  \mbox{subject to:     } \;\;\; & &
+  y_n ({\bf x}_n^T {\bf w}+b) \ge 1,\;\;\;\;(n=1,\cdots,N)
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">minimize: <IMG STYLE="height: 0.23ex; vertical-align: -0.12ex; " SRC="img274.svg"
+ ALT="$\displaystyle \;\;\;$"></TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img275.svg"
+ ALT="$\displaystyle \frac{1}{2}\vert\vert{\bf w}\vert\vert^2 =\frac{1}{2}{\bf w}^T {\bf w}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">subject to: <IMG STYLE="height: 0.23ex; vertical-align: -0.12ex; " SRC="img274.svg"
+ ALT="$\displaystyle \;\;\;$"></TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img276.svg"
+ ALT="$\displaystyle y_n ({\bf x}_n^T {\bf w}+b) \ge 1,\;\;\;\;(n=1,\cdots,N)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">73</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+<B>Example:</B>
+
+<P>
+<IMG STYLE="" SRC="../figures/svm1.png"
+ ALT="svm1.png">
+
+<P>
+The straight line in 2D space shown above, denoted by <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img246.svg"
+ ALT="$H_0$"></SPAN>, 
+is described by the following linear equation 
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f({\bf x})={\bf w}^T{\bf x}+b=[w_1,w_2]
+  \left[ \begin{array}{c} x_1 \\x_2 \end{array} \right]+b
+  =[1, 2]\left[ \begin{array}{c} x_1 \\x_2 \end{array} \right]-1
+  =x_1+2x_2-1=0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img277.svg"
+ ALT="$\displaystyle f({\bf x})={\bf w}^T{\bf x}+b=[w_1,w_2]
+\left[ \begin{array}{c} x...
+...b
+=[1, 2]\left[ \begin{array}{c} x_1 \\ x_2 \end{array} \right]-1
+=x_1+2x_2-1=0$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">74</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The distance from <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img246.svg"
+ ALT="$H_0$"></SPAN> to the origin is:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+d(H_0,{\bf0})=\frac{|b|}{||{\bf w}||}=\frac{1}{\sqrt{w_1^2+w_2^2}}
+  =\frac{1}{\sqrt{1^2+2^2}}=\frac{1}{\sqrt{5}}=0.447
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.27ex; vertical-align: -2.74ex; " SRC="img278.svg"
+ ALT="$\displaystyle d(H_0,{\bf0})=\frac{\vert b\vert}{\vert\vert{\bf w}\vert\vert}=\frac{1}{\sqrt{w_1^2+w_2^2}}
+=\frac{1}{\sqrt{1^2+2^2}}=\frac{1}{\sqrt{5}}=0.447$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">75</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+which is invariant with respect to any scaling of the equation. 
+Consider three points in the space:
+
+<UL>
+<LI><!-- MATH
+ ${\bf x}_0=[0.5,\;0.25]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img279.svg"
+ ALT="${\bf x}_0=[0.5,\;0.25]^T$"></SPAN>, <!-- MATH
+ $f({\bf x}_0)=0.5+2\times 0.25-1=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img280.svg"
+ ALT="$f({\bf x}_0)=0.5+2\times 0.25-1=0$"></SPAN>, 
+  i.e., <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img281.svg"
+ ALT="${\bf x}_0$"></SPAN> is on the plane. Its distance to the plane is
+  <!-- MATH
+ $d({\bf x}_0,H)=f({\bf x}_0)/||{\bf w}||=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img282.svg"
+ ALT="$d({\bf x}_0,H)=f({\bf x}_0)/\vert\vert{\bf w}\vert\vert=0$"></SPAN>.
+</LI>
+<LI><!-- MATH
+ ${\bf x}_1=[1,\;0.25]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img283.svg"
+ ALT="${\bf x}_1=[1,\;0.25]^T$"></SPAN>, <!-- MATH
+ $f({\bf x}_1)=1+2\times 0.25-1=0.5>0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img284.svg"
+ ALT="$f({\bf x}_1)=1+2\times 0.25-1=0.5&gt;0$"></SPAN>, 
+  i.e., <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img285.svg"
+ ALT="${\bf x}_1$"></SPAN> is above the straight line, its distance to the plane
+  is <!-- MATH
+ $d({\bf x}_1,H)=f({\bf x}_1)/||{\bf w}||=|0.5|/\sqrt{5}=0.2235$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img286.svg"
+ ALT="$d({\bf x}_1,H)=f({\bf x}_1)/\vert\vert{\bf w}\vert\vert=\vert.5\vert/\sqrt{5}=0.2235$"></SPAN>.
+</LI>
+<LI><!-- MATH
+ ${\bf x}_2=[0.5,\;0]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img287.svg"
+ ALT="${\bf x}_2=[0.5,\;0]^T$"></SPAN>, <!-- MATH
+ $f({\bf x}_2)=0.5+2\times 0-1=-0.5<0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img288.svg"
+ ALT="$f({\bf x}_2)=0.5+2\times 0-1=-0.5&lt;0$"></SPAN>, i.e., 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img289.svg"
+ ALT="${\bf x}_2$"></SPAN> is below the straight line, its distance to the plane is
+  <!-- MATH
+ $d({\bf x}_2,H)=f({\bf x}_2)/||{\bf w}||=|-0.5|/\sqrt{5}=0.2235$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img290.svg"
+ ALT="$d({\bf x}_2,H)=f({\bf x}_2)/\vert\vert{\bf w}\vert\vert=\vert-0.5\vert/\sqrt{5}=0.2235$"></SPAN>.
+</LI>
+</UL>
+
+<P>
+As the two points <!-- MATH
+ ${\bf x}_1=[1,\,0.25]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img291.svg"
+ ALT="${\bf x}_1=[1,\,0.25]^T$"></SPAN> and <!-- MATH
+ ${\bf x}_2=[0.5,\,0]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img292.svg"
+ ALT="${\bf x}_2=[0.5,\,0]^T$"></SPAN>
+have equal distance to the straight line <!-- MATH
+ $f({\bf x})=x_1+2x_2-1=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img293.svg"
+ ALT="$f({\bf x})=x_1+2x_2-1=0$"></SPAN>, 
+for <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img246.svg"
+ ALT="$H_0$"></SPAN>, they can be treated as two support vectors <!-- MATH
+ ${\bf x}_{sv}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img262.svg"
+ ALT="${\bf x}_{sv}$"></SPAN> 
+on either side of <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img246.svg"
+ ALT="$H_0$"></SPAN>, and 
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+|f({\bf x}_{sv})|=|{\bf w}^T{\bf x}_1+b|=|{\bf w}^T{\bf x}_2+b|=0.5
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img294.svg"
+ ALT="$\displaystyle \vert f({\bf x}_{sv})\vert=\vert{\bf w}^T{\bf x}_1+b\vert=\vert{\bf w}^T{\bf x}_2+b\vert=0.5$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">76</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Dividing by <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img295.svg"
+ ALT="$0.5$"></SPAN> on both sides of the decision equation <!-- MATH
+ $f({\bf x})=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img253.svg"
+ ALT="$f({\bf x})=0$"></SPAN>,
+it is scaled to become
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f({\bf x})={\bf w}^T{\bf x}+b=2x_1+4x_2-2=0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img296.svg"
+ ALT="$\displaystyle f({\bf x})={\bf w}^T{\bf x}+b=2x_1+4x_2-2=0$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">77</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and the two equations diescribing <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img264.svg"
+ ALT="$H_+$"></SPAN> parallel to <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img246.svg"
+ ALT="$H_0$"></SPAN> and passing
+through <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img285.svg"
+ ALT="${\bf x}_1$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img265.svg"
+ ALT="$H_-$"></SPAN> passing through <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img289.svg"
+ ALT="${\bf x}_2$"></SPAN> are
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+H_+: && 2x_1+4x_2-2-1=2x_1+4x_2-3=0\nonumber\\
+  H_-: && 2x_1+4x_2-2+1=2x_1+4x_2-1=0\nonumber
+  \nonumber
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img297.svg"
+ ALT="$\displaystyle H_+:$"></TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img298.svg"
+ ALT="$\displaystyle 2x_1+4x_2-2-1=2x_1+4x_2-3=0$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img299.svg"
+ ALT="$\displaystyle H_-:$"></TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img300.svg"
+ ALT="$\displaystyle 2x_1+4x_2-2+1=2x_1+4x_2-1=0
+\nonumber$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+Their distances to the origin are
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+d(H_+,\,{\bf0})=\frac{|-3|}{||{\bf w}||}=1.341,\;\;\;\;
+  d(H_-,\,{\bf0})=\frac{|-1|}{||{\bf w}||}=0.447
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.29ex; " SRC="img301.svg"
+ ALT="$\displaystyle d(H_+,\,{\bf0})=\frac{\vert-3\vert}{\vert\vert{\bf w}\vert\vert}=...
+...\;\;\;\;
+d(H_-,\,{\bf0})=\frac{\vert-1\vert}{\vert\vert{\bf w}\vert\vert}=0.447$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">78</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and the distance between <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img265.svg"
+ ALT="$H_-$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img264.svg"
+ ALT="$H_+$"></SPAN> is indeed <!-- MATH
+ $2/||{\bf w}||$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img302.svg"
+ ALT="$2/\vert\vert{\bf w}\vert\vert$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+d(H_-,\,H_+)=d(H_+,\,{\bf0})-d(H_-,\,{\bf0})=\frac{2}{||{\bf w}||}
+  =0.894
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.57ex; vertical-align: -2.29ex; " SRC="img303.svg"
+ ALT="$\displaystyle d(H_-,\,H_+)=d(H_+,\,{\bf0})-d(H_-,\,{\bf0})=\frac{2}{\vert\vert{\bf w}\vert\vert}
+=0.894$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">79</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+twice the distance between <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img246.svg"
+ ALT="$H_0$"></SPAN> and the origin <!-- MATH
+ $d(H_0,{\bf0})=0.447$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img304.svg"
+ ALT="$d(H_0,{\bf0})=0.447$"></SPAN>
+found previously.
+
+<P>
+<IMG STYLE="" SRC="../figures/svm2b.png"
+ ALT="svm2b.png">
+
+<P>
+For reasons to be discussed later, instead of directly solving the 
+constrained minimization problem in Eq. (<A HREF="#SVMprimal">73</A>), now called 
+the <EM>primal problem</EM>, we actually solve the
+<A ID="tex2html7"
+  HREF="../ch3/node13.html"><EM>dual problem</EM></A>.
+Specifically, we first construct the <EM>Lagrangian function</EM> of the
+primal problem:
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="SVMLagrange"></A><!-- MATH
+ \begin{equation}
+L_p({\bf w},b,{\bf\alpha})=\frac{1}{2}{\bf w}^T{\bf w}
+  +\sum_{n=1}^N \alpha_n(1-y_n( {\bf w}^T {\bf x}_n+b))
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img305.svg"
+ ALT="$\displaystyle L_p({\bf w},b,{\bf\alpha})=\frac{1}{2}{\bf w}^T{\bf w}
++\sum_{n=1}^N \alpha_n(1-y_n( {\bf w}^T {\bf x}_n+b))$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">80</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <!-- MATH
+ $\alpha_1,\cdots,\alpha_N$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img306.svg"
+ ALT="$\alpha_1,\cdots,\alpha_N$"></SPAN> are the <EM>Lagrange multipliers</EM>,
+which is called the <EM>primal function</EM>. Here for this minimization 
+problem with non-positive constraints, the Lagrangian multipliers are
+required to be negative, <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img307.svg"
+ ALT="$\alpha_n$"></SPAN>, according to Table <A HREF="#PolarityTable"><IMG  ALT="[*]" SRC="crossref.png"></A> 
+<A ID="tex2html8"
+  HREF="../ch3/node13.html">here</A>, if a minus sign is used 
+for the second term. However, to be consistent with most SVM literatures,
+we use the positive sign for the second term and require <!-- MATH
+ $\alpha_n\ge 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img308.svg"
+ ALT="$\alpha_n\ge 0$"></SPAN>.
+Note that if <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img31.svg"
+ ALT="${\bf x}_n$"></SPAN> is a support vector on either <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img264.svg"
+ ALT="$H_+$"></SPAN> or <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img265.svg"
+ ALT="$H_-$"></SPAN>, 
+i.e., the equality constraint <!-- MATH
+ $y_n({\bf w}^T{\bf x}_n+b)=1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img309.svg"
+ ALT="$y_n({\bf w}^T{\bf x}_n+b)=1$"></SPAN> holds, then 
+<!-- MATH
+ $\alpha_n>0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img310.svg"
+ ALT="$\alpha_n&gt;0$"></SPAN>; but if <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img31.svg"
+ ALT="${\bf x}_n$"></SPAN> is not a support vector, the equality
+constraint does not hold, and <!-- MATH
+ $\alpha_n=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img311.svg"
+ ALT="$\alpha_n=0$"></SPAN>.
+
+<P>
+We next find the minimum (or infimum) as the lower bound of the primal 
+function <!-- MATH
+ $L_p({\bf w},b)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img312.svg"
+ ALT="$L_p({\bf w},b)$"></SPAN> in Eq. (<A HREF="#SVMLagrange">80</A>), by setting to 
+zero its partial derivatives with respect to both <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img249.svg"
+ ALT="$b$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img248.svg"
+ ALT="${\bf w}$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="constraintAlpha"></A><!-- MATH
+ \begin{equation}
+\frac{\partial}{\partial b}L_p({\bf w},b)
+  =\frac{\partial}{\partial b}  \left[ \frac{1}{2}{\bf w}^T{\bf w}
+  +\sum_{n=1}^N \alpha_n(1-y_n( {\bf w}^T {\bf x}_n+b))\right]
+  =\sum_{n=1}^N \alpha_n y_n=0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img313.svg"
+ ALT="$\displaystyle \frac{\partial}{\partial b}L_p({\bf w},b)
+=\frac{\partial}{\parti...
+...}^N \alpha_n(1-y_n( {\bf w}^T {\bf x}_n+b))\right]
+=\sum_{n=1}^N \alpha_n y_n=0$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">81</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\frac{\partial}{\partial {\bf w}}L_p({\bf w},b)
+  =\frac{\partial}{\partial {\bf w}}
+  \left[ \frac{1}{2}{\bf w}^T{\bf w}
+  +\sum_{n=1}^N \alpha_n(1-y_n( {\bf w}^T {\bf x}_n+b))\right]
+  ={\bf w}-\sum_{n=1}^N\alpha_ny_n{\bf x}_n=0,
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img314.svg"
+ ALT="$\displaystyle \frac{\partial}{\partial {\bf w}}L_p({\bf w},b)
+=\frac{\partial}{...
+..._n( {\bf w}^T {\bf x}_n+b))\right]
+={\bf w}-\sum_{n=1}^N\alpha_ny_n{\bf x}_n=0,$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">82</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+i.e.,
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="SVMweightvector"></A><!-- MATH
+ \begin{equation}
+{\bf w}=\sum_{n=1}^N \alpha_n y_n {\bf x}_n
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img315.svg"
+ ALT="$\displaystyle {\bf w}=\sum_{n=1}^N \alpha_n y_n {\bf x}_n$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">83</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Substituting these back into the primal function 
+<!-- MATH
+ $L_p({\bf w},b,{\bf\alpha})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img316.svg"
+ ALT="$L_p({\bf w},b,{\bf\alpha})$"></SPAN>, we get its lower bound as a function
+of the Lagrange multipliers <!-- MATH
+ $\{\alpha_1,\cdots,\alpha_N\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img317.svg"
+ ALT="$\{\alpha_1,\cdots,\alpha_N\}$"></SPAN>, called 
+the <EM>dual function</EM>:
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+L_d({\bf\alpha})&=&\inf_{{\bf w},b} L_p({\bf w},b,{\bf\alpha})
+    =\inf_{{\bf w},b}\left[\frac{1}{2}{\bf w}^T{\bf w}
+  +\sum_{n=1}^N \alpha_n(1-y_n( {\bf w}^T {\bf x}_n+b)) \right]
+  \nonumber\\
+  &=&\inf_{{\bf w},b}\left[\frac{1}{2}{\bf w}^T{\bf w}
+  +\sum_{n=1}^N \alpha_n -{\bf w}^T \sum_{n=1}^N \alpha_ny_n{\bf x}_n
+  -b\;\sum_{n=1}^N \alpha_ny_n \right]
+  \nonumber\\
+  &=&\frac{1}{2} \left(\sum_{m=1}^N \alpha_m y_m {\bf x}_m\right)^T
+  \left(\sum_{n=1}^N \alpha_n y_n {\bf x}_n\right)+\sum_{n=1}^N \alpha_n
+  -\left(\sum_{m=1}^N \alpha_m y_m {\bf x}_m\right)^T
+  \left(\sum_{n=1}^N \alpha_n y_n {\bf x}_n\right)
+  \nonumber\\
+  &=&\sum_{n=1}^N\alpha_n -\frac{1}{2}
+  \sum_{n=1}^N \sum_{m=1}^N \alpha_n \alpha_m y_n y_m
+  \left({\bf x}_n^T{\bf x}_m\right)
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img318.svg"
+ ALT="$\displaystyle L_d({\bf\alpha})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img319.svg"
+ ALT="$\displaystyle \inf_{{\bf w},b} L_p({\bf w},b,{\bf\alpha})
+=\inf_{{\bf w},b}\lef...
+...}{\bf w}^T{\bf w}
++\sum_{n=1}^N \alpha_n(1-y_n( {\bf w}^T {\bf x}_n+b)) \right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img320.svg"
+ ALT="$\displaystyle \inf_{{\bf w},b}\left[\frac{1}{2}{\bf w}^T{\bf w}
++\sum_{n=1}^N \...
+...\bf w}^T \sum_{n=1}^N \alpha_ny_n{\bf x}_n
+-b\;\sum_{n=1}^N \alpha_ny_n \right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 8.13ex; vertical-align: -3.06ex; " SRC="img321.svg"
+ ALT="$\displaystyle \frac{1}{2} \left(\sum_{m=1}^N \alpha_m y_m {\bf x}_m\right)^T
+\l...
+...alpha_m y_m {\bf x}_m\right)^T
+\left(\sum_{n=1}^N \alpha_n y_n {\bf x}_n\right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img322.svg"
+ ALT="$\displaystyle \sum_{n=1}^N\alpha_n -\frac{1}{2}
+\sum_{n=1}^N \sum_{m=1}^N \alpha_n \alpha_m y_n y_m
+\left({\bf x}_n^T{\bf x}_m\right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">84</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+To further find the greatest or tightest lower bound of the primal 
+function, we need to maximize this dual function <!-- MATH
+ $L_d({\bf\alpha})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img323.svg"
+ ALT="$L_d({\bf\alpha})$"></SPAN> 
+with respect to the Lagrange multipliers, subject to the constraint 
+imposed by Eq. (<A HREF="#constraintAlpha">81</A>):
+<BR>
+<DIV CLASS="mathdisplay"><A ID="dualProblem"></A><!-- MATH
+ \begin{eqnarray}
+\mbox{maximize:} \;\;\; && L_d({\bf\alpha})
+  =\sum_{n=1}^N\alpha_n -\frac{1}{2}
+  \sum_{n=1}^N \sum_{m=1}^N \alpha_n \alpha_m y_n y_m
+  \left({\bf x}_n^T{\bf x}_m\right)
+  ={\bf 1}^T{\bf\alpha}-\frac{1}{2}{\bf\alpha}^T{\bf Q}{\bf\alpha}
+  \nonumber \\
+  \mbox{subject to:} \;\;\; && \sum_{n=1}^N \alpha_n y_n
+  ={\bf y}^T{\bf\alpha}=0, \;\;\;\; \alpha_n\ge 0\;\;\;(n=1,\cdots,N)
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">maximize:<IMG STYLE="height: 0.23ex; vertical-align: -0.12ex; " SRC="img274.svg"
+ ALT="$\displaystyle \;\;\;$"></TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img324.svg"
+ ALT="$\displaystyle L_d({\bf\alpha})
+=\sum_{n=1}^N\alpha_n -\frac{1}{2}
+\sum_{n=1}^N ...
+...bf x}_m\right)
+={\bf 1}^T{\bf\alpha}-\frac{1}{2}{\bf\alpha}^T{\bf Q}{\bf\alpha}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">subject to:<IMG STYLE="height: 0.23ex; vertical-align: -0.12ex; " SRC="img274.svg"
+ ALT="$\displaystyle \;\;\;$"></TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img325.svg"
+ ALT="$\displaystyle \sum_{n=1}^N \alpha_n y_n
+={\bf y}^T{\bf\alpha}=0, \;\;\;\; \alpha_n\ge 0\;\;\;(n=1,\cdots,N)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">85</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+where <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img326.svg"
+ ALT="${\bf Q}$"></SPAN> is an <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="$N$"></SPAN> by <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="$N$"></SPAN> symmetric matrix of which the component
+in the mth row and nth column is <!-- MATH
+ $Q(m,n)=y_my_n{\bf x}_m^T{\bf x}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img327.svg"
+ ALT="$Q(m,n)=y_my_n{\bf x}_m^T{\bf x}_n$"></SPAN> 
+(<!-- MATH
+ $m,n=1,\cdots,N$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img328.svg"
+ ALT="$m,n=1,\cdots,N$"></SPAN>). Now we have converted the primal problem of 
+constrained minimization of the primal function <!-- MATH
+ $L_p({\bf w},b,{\bf\alpha})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img316.svg"
+ ALT="$L_p({\bf w},b,{\bf\alpha})$"></SPAN> 
+with respect to <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img248.svg"
+ ALT="${\bf w}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img249.svg"
+ ALT="$b$"></SPAN> to its dual problem of linearly
+constrained maximization of the dual function <!-- MATH
+ $L_d({\bf\alpha})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img323.svg"
+ ALT="$L_d({\bf\alpha})$"></SPAN> 
+with respect to <!-- MATH
+ $\{\alpha_1,\cdots,\alpha_N\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img317.svg"
+ ALT="$\{\alpha_1,\cdots,\alpha_N\}$"></SPAN>. This is 
+<A ID="tex2html9"
+  HREF="../ch3/node18.html">quadratic programming (QP) problem</A>,
+solving which we get all Lagrange multipliers 
+<!-- MATH
+ $\alpha_n\ge 0,\;(n=1,\cdots,N)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img329.svg"
+ ALT="$\alpha_n\ge 0,\;(n=1,\cdots,N)$"></SPAN>.
+All training samples <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img31.svg"
+ ALT="${\bf x}_n$"></SPAN> corresponding to positive Lagrange 
+multipliers <!-- MATH
+ $\alpha_n>0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img310.svg"
+ ALT="$\alpha_n&gt;0$"></SPAN> are support vectors, while others corresponding
+to <!-- MATH
+ $\alpha_n=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img311.svg"
+ ALT="$\alpha_n=0$"></SPAN> are not support vectors.
+
+<P>
+We can now find the normal direction <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img248.svg"
+ ALT="${\bf w}$"></SPAN> of the optimal decision
+plane based on Eq. (<A HREF="#SVMweightvector">83</A>):
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="FindW"></A><!-- MATH
+ \begin{equation}
+{\bf w}=\sum_{n=1}^N \alpha_n y_n {\bf x}_n
+  =\sum_{n\in sv} \alpha_ny_n{\bf x}_n
+  =\sum_{x_n\in C_+,\;n\in sv} \alpha_n{\bf x}_n
+  -\sum_{x_n\in C_-,\;n\in sv} \alpha_n{\bf x}_n
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.90ex; vertical-align: -3.55ex; " SRC="img330.svg"
+ ALT="$\displaystyle {\bf w}=\sum_{n=1}^N \alpha_n y_n {\bf x}_n
+=\sum_{n\in sv} \alph...
+...C_+,\;n\in sv} \alpha_n{\bf x}_n
+-\sum_{x_n\in C_-,\;n\in sv} \alpha_n{\bf x}_n$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">86</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Note that the normal vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img248.svg"
+ ALT="${\bf w}$"></SPAN> is the difference between the
+weighted means of the support vectors in classes <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img14.svg"
+ ALT="$C_+$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img15.svg"
+ ALT="$C_-$"></SPAN>, and
+it determined only by the support vectors.
+
+<P>
+We can also find <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img249.svg"
+ ALT="$b$"></SPAN> based on the equality of Eq. (<A HREF="#SVMcondition">72</A>) 
+for any of the support vectors:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+y_n \left( {\bf w}^T {\bf x}_n+b\right) = 1\;\;\;\;\;\mbox{or}\;\;\;\;
+  {\bf w}^T {\bf x}_n+b = y_n,\;\;\;\;\;\;(n\in sv)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.93ex; " SRC="img331.svg"
+ ALT="$\displaystyle y_n \left( {\bf w}^T {\bf x}_n+b\right) = 1\;\;\;\;\;$">or<IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img332.svg"
+ ALT="$\displaystyle \;\;\;\;
+{\bf w}^T {\bf x}_n+b = y_n,\;\;\;\;\;\;(n\in sv)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">87</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+(recall <SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img333.svg"
+ ALT="$y_n^2=1$"></SPAN>). Solving the equation for <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img249.svg"
+ ALT="$b$"></SPAN> we get:
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="FindB"></A><!-- MATH
+ \begin{equation}
+b = y_n-{\bf w}^T {\bf x}_n
+  =y_n-\sum_{m \in sv} \alpha_m y_m( {\bf x}_m^T{\bf x}_n),\;\;\;\;\;(n\in sv)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -3.14ex; " SRC="img334.svg"
+ ALT="$\displaystyle b = y_n-{\bf w}^T {\bf x}_n
+=y_n-\sum_{m \in sv} \alpha_m y_m( {\bf x}_m^T{\bf x}_n),\;\;\;\;\;(n\in sv)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">88</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+All support vectors should yield the same result. Computationally we 
+simply get <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img249.svg"
+ ALT="$b$"></SPAN> as the average of the above for all support vectors.
+
+<P>
+We note that both <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img248.svg"
+ ALT="${\bf w}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img249.svg"
+ ALT="$b$"></SPAN> depend only on the support vectors 
+on planes <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img264.svg"
+ ALT="$H_+$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img265.svg"
+ ALT="$H_-$"></SPAN>, corresponding to a positive <!-- MATH
+ $\alpha_n>0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img310.svg"
+ ALT="$\alpha_n&gt;0$"></SPAN>, 
+while all remaining samples corresponding to <!-- MATH
+ $\alpha_n=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img311.svg"
+ ALT="$\alpha_n=0$"></SPAN> are farther 
+away from the decision plane <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img246.svg"
+ ALT="$H_0$"></SPAN>, behind either <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img264.svg"
+ ALT="$H_+$"></SPAN> or <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img265.svg"
+ ALT="$H_-$"></SPAN>. We 
+see that the SVM is solely based on those support vectors in the
+training set, once they are identified during the training process, 
+all other non-support vectors are irrelevant.
+
+<P>
+Having obtained <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img248.svg"
+ ALT="${\bf w}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img249.svg"
+ ALT="$b$"></SPAN> as shown above as the training process,
+any unlabeled sample <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> can be classified into either of the two 
+classes depending on whether the following decision function is greater 
+or smaller than zero:
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="SVMclassification"></A><!-- MATH
+ \begin{equation}
+f({\bf x})={\bf w}^T{\bf x}+b
+  =\left(\sum_{n\in sv}\alpha_ny_n{\bf x}_n\right)^T{\bf x}+b
+  =\sum_{n\in sv}\alpha_ny_n\,({\bf x}^T_n{\bf x})+b\;\;\;\;
+  \left\{\begin{array}{ll}>0 & {\bf x}\in C_+\\<0 & {\bf x}\in C_-
+    \end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.90ex; vertical-align: -3.14ex; " SRC="img335.svg"
+ ALT="$\displaystyle f({\bf x})={\bf w}^T{\bf x}+b
+=\left(\sum_{n\in sv}\alpha_ny_n{\b...
+...\{\begin{array}{ll}&gt;0 &amp; {\bf x}\in C_+\\ &lt;0 &amp; {\bf x}\in C_-
+\end{array}\right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">89</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+We also get:
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+||{\bf w}||^2&=&{\bf w}^T {\bf w}
+  =\left(\sum_{n\in sv} \alpha_n y_n {\bf x}^T_n\right)\,
+  \left(\sum_{m\in sv} \alpha_m y_m {\bf x}_m\right)
+  =\sum_{n\in sv} \alpha_n y_n \sum_{m\in sv} \alpha_m y_m ({\bf x}^T_n{\bf x}_m)
+  \nonumber \\
+  &=&\sum_{n\in sv} \alpha_n y_n (y_n-b)=\sum_{n\in sv} \alpha_n (1-y_n b)
+  =\sum_{n\in sv} \alpha_n - b\sum_{n\in sv} \alpha_n y_n=\sum_{n\in sv} \alpha_n
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img336.svg"
+ ALT="$\displaystyle \vert\vert{\bf w}\vert\vert^2$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.14ex; " SRC="img337.svg"
+ ALT="$\displaystyle {\bf w}^T {\bf w}
+=\left(\sum_{n\in sv} \alpha_n y_n {\bf x}^T_n\...
+...=\sum_{n\in sv} \alpha_n y_n \sum_{m\in sv} \alpha_m y_m ({\bf x}^T_n{\bf x}_m)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.81ex; vertical-align: -3.14ex; " SRC="img338.svg"
+ ALT="$\displaystyle \sum_{n\in sv} \alpha_n y_n (y_n-b)=\sum_{n\in sv} \alpha_n (1-y_...
+...=\sum_{n\in sv} \alpha_n - b\sum_{n\in sv} \alpha_n y_n=\sum_{n\in sv} \alpha_n$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">90</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+The last equality is due to equality constraints of the dual problem
+<!-- MATH
+ $\sum_{n=1}^N \alpha_n y_n=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.81ex; " SRC="img339.svg"
+ ALT="$\sum_{n=1}^N \alpha_n y_n=0$"></SPAN>. Now the margin can be written as:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\frac{1}{||{\bf w}||}=\left(\sum_{n\in sv} \alpha_n\right)^{-1/2}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.13ex; vertical-align: -3.14ex; " SRC="img340.svg"
+ ALT="$\displaystyle \frac{1}{\vert\vert{\bf w}\vert\vert}=\left(\sum_{n\in sv} \alpha_n\right)^{-1/2}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">91</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+The SVM algorithm for binary classification can now by summarized 
+as the following steps:
+
+<UL>
+<LI>Find the Lagrange multipliers <!-- MATH
+ $\{\alpha_1,\cdots,\alpha_N\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img317.svg"
+ ALT="$\{\alpha_1,\cdots,\alpha_N\}$"></SPAN>
+  by solving the QP problem in Eq. (<A HREF="#dualProblem">85</A>);  
+</LI>
+<LI>Find the normal vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img248.svg"
+ ALT="${\bf w}$"></SPAN> by Eq. (<A HREF="#FindW">86</A>);
+</LI>
+<LI>Find the bias <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img249.svg"
+ ALT="$b$"></SPAN> by Eq. (<A HREF="#FindB">88</A>);
+</LI>
+<LI>Classify unlabeled <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> by Eq. (<A HREF="#SVMclassification">89</A>).
+</LI>
+</UL>
+However, we note that as the last expression of the decision function 
+in Eq. (<A HREF="#SVMclassification">89</A>) depends only on <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img307.svg"
+ ALT="$\alpha_n$"></SPAN> as well
+as <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img31.svg"
+ ALT="${\bf x}_n$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img341.svg"
+ ALT="$y_n$"></SPAN> in the training set, while the normal vector
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img248.svg"
+ ALT="${\bf w}$"></SPAN> is never needed. The second step above for calculating 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img248.svg"
+ ALT="${\bf w}$"></SPAN> by Eq. (<A HREF="#FindW">86</A>) can therefore be dropped.
+
+<P>
+We prefer to solve this dual problem not only because it is easier 
+than the original primal problem, but also, more importantly, for 
+the reason that all data points appear only in the form of an inner 
+product <!-- MATH
+ ${\bf x}_n^T{\bf x}_m$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img342.svg"
+ ALT="${\bf x}_n^T{\bf x}_m$"></SPAN> in the dual problem, allowing the 
+<EM>kernel method</EM> to be used, as discussed later. 
+
+<P>
+The Matlab code for the essential part of the algorithm is listed 
+below, where <code>X</code> and <code>y</code> are respectively the data array 
+composed of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="$N$"></SPAN> training vectors <!-- MATH
+ $[{\bf x}_1,\cdots,{\bf x}_N]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img343.svg"
+ ALT="$[{\bf x}_1,\cdots,{\bf x}_N]$"></SPAN> and 
+their corresponding labelings <!-- MATH
+ $y_1,\cdots,y_N$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img344.svg"
+ ALT="$y_1,\cdots,y_N$"></SPAN>, and <code>IPmethod</code>
+is a function that implements the 
+<A ID="tex2html10"
+  HREF="../ch3/node18.html">interior point method</A>
+for solving a general QP problem of minimizing 
+<!-- MATH
+ ${\bf x}^T{\bf Qx}/2+{\bf c}^T{\bf x}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img345.svg"
+ ALT="${\bf x}^T{\bf Qx}/2+{\bf c}^T{\bf x}$"></SPAN> subject to the linear 
+equality constraints <!-- MATH
+ ${\bf Ax}={\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img346.svg"
+ ALT="${\bf Ax}={\bf b}$"></SPAN> and <!-- MATH
+ ${\bf x}\ge {\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.43ex; " SRC="img347.svg"
+ ALT="${\bf x}\ge {\bf0}$"></SPAN>.
+
+<P>
+<PRE>
+    [X y]=getData;               % get the training data
+    [m n]=size(X);   
+    Q=(y'*y).*(X'*X);            % compute the quadratic matrix
+    c=-ones(n,1);                % coefficients of linear term
+    A=y;                         % coefficient matrix and 
+    b=0;                         % constants of linear equality constraints
+    alpha=0.1*ones(n,1);         % initial guess of solution
+
+    [alpha mu lambda]=IPmethod(Q,A,c,b,alpha);  % solve QP to find alphas
+                                                % by interior point method
+    I=find(abs(alpha)&gt;10^(-3));  % indecies of non-zero alphas
+    asv=alpha(I);                % non-zero alphas
+    Xsv=X(:,I);                  % support vectors
+    ysv=y(:,I);                  % their labels
+    w=sum(repmat(ysv.*asv,m,1).*Xsv,2);  % normal vector (not needed)
+    bias=mean(ysv-w'*Xsv);               % bias
+</PRE>
+
+<P>
+<B>Example: </B> The training set contains two classess of 2-D points 
+with Gaussian distributions generated based on the following mean vectors 
+and covariance matrices:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf m}_-=\left[\begin{array}{c}3.5\\0\end{array}\right],\;\;\;\;
+  {\bf S}_-=\left[\begin{array}{cc}1&0.5\\0.5&1\end{array}\right],\;\;\;\;
+  {\bf m}_+=\left[\begin{array}{c}0\\3.5\end{array}\right],\;\;\;\;
+  {\bf S}_+=\left[\begin{array}{cc}1&0\\0&1\end{array}\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img348.svg"
+ ALT="$\displaystyle {\bf m}_-=\left[\begin{array}{c}3.5\\ 0\end{array}\right],\;\;\;\...
+...y}\right],\;\;\;\;
+{\bf S}_+=\left[\begin{array}{cc}1&amp;0\\ 0&amp;1\end{array}\right]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">92</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The SVM algorithm finds the weight vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img248.svg"
+ ALT="${\bf w}$"></SPAN> and constant <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img249.svg"
+ ALT="$b$"></SPAN> 
+of the optimal boundary between the two classes based on three support 
+vectors, all listed below. Note that decision boundary is completely 
+dictated by the three support vectors and the margion distance between
+them is maximized. 
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{c|c|l|r}\hline
+    n & \alpha_n & {\bf x}_n=[x_1,\,x_2] & y_n \\\hline\hline
+    %  9 &  6.47 & x=[2.19,\, 2.03]  &	-1 \\
+    40 &  0.52 & x=[4.43,\, 2.44]  &	-1 \\
+    52 &  3.11 & x=[1.17,\, 0.74]  &	-1 \\
+    103 &  3.64 & x=[1.30,\, 1.64]  &	 1 \\\hline
+  \end{array},\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;
+  %{\bf w}=\left[\begin{array}{c}-0.35\\0.40\end{array}\right],\;\;\;\;b=0.21
+  {\bf w}=\left[\begin{array}{r}-1.25\\2.39\end{array}\right],\;\;\;\;\;\;\;\;
+  b=-1.31
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img349.svg"
+ ALT="\begin{displaymath}\begin{array}{c\vert c\vert l\vert r}\hline
+n &amp; \alpha_n &amp; {\...
+...rray}{r}-1.25\\ 2.39\end{array}\right],\;\;\;\;\;\;\;\;
+b=-1.31\end{displaymath}"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">93</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+<IMG STYLE="" SRC="../figures/SVMexample.png"
+ ALT="SVMexample.png">
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node6.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node4.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node4.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node6.html">Kernel Mapping</A>
+<B> Up:</B> <A
+ HREF="node4.html">Support Vector machine</A>
+<B> Previous:</B> <A
+ HREF="node4.html">Support Vector machine</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>
