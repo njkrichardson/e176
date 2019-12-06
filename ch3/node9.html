@@ -1,3 +1,47 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Quasi-Newton Methods</TITLE>
+<META NAME="description" CONTENT="Quasi-Newton Methods">
+<META NAME="keywords" CONTENT="ch3">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch3.css">
+
+<LINK REL="next" HREF="node10.html">
+<LINK REL="previous" HREF="node8.html">
+<LINK REL="next" HREF="node10.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node10.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node8.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node10.html">Conjugate gradient method</A>
+<B> Up:</B> <A
+ HREF="node2.html">Unconstrained Optimization</A>
+<B> Previous:</B> <A
+ HREF="node8.html">Line minimization</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
 
 <H2><A ID="SECTION00027000000000000000">
 Quasi-Newton Methods</A>
@@ -10,213 +54,484 @@ and optimization problems to minimize a scalar-valued objective function
 based on the iterations of the same form. Specifically, 
 
 <UL>
-<LI>Solving equations <tex2html_verbatim_mark>#math507#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19099#</SPAN>:
+<LI>Solving equations <!-- MATH
+ ${\bf f}({\bf x})={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img42.svg"
+ ALT="${\bf f}({\bf x})={\bf0}$"></SPAN>:
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math508#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf x}_{n+1}={\bf x}_n-\delta {\bf J}({\bf x}_n)^{-1}{\bf f}({\bf x}_n)
+    ={\bf x}_n-\delta\;{\bf J}_n^{-1}{\bf f}_n
+  
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19101#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img389.svg"
+ ALT="$\displaystyle {\bf x}_{n+1}={\bf x}_n-\delta {\bf J}({\bf x}_n)^{-1}{\bf f}({\bf x}_n)
+={\bf x}_n-\delta\;{\bf J}_n^{-1}{\bf f}_n$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">78</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  where <tex2html_verbatim_mark>#math509#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19103#</SPAN> is the Jacobian matrix of 
-  <tex2html_verbatim_mark>#math510#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19105#</SPAN>, 
+where <!-- MATH
+ ${\bf J}_n={\bf J}({\bf x}_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img390.svg"
+ ALT="${\bf J}_n={\bf J}({\bf x}_n)$"></SPAN> is the Jacobian matrix of 
+  <!-- MATH
+ ${\bf f}({\bf x}_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img391.svg"
+ ALT="${\bf f}({\bf x}_n)$"></SPAN>, 
 </LI>
-<LI>Minimizing <tex2html_verbatim_mark>#math511#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19107#</SPAN>:
+<LI>Minimizing <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN>:
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math512#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf x}_{n+1}={\bf x}_n-\delta {\bf H}({\bf x}_n)^{-1}{\bf g}({\bf x}_n)
+  ={\bf x}_n-\delta\;{\bf H}_n^{-1}{\bf g}_n
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19109#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img392.svg"
+ ALT="$\displaystyle {\bf x}_{n+1}={\bf x}_n-\delta {\bf H}({\bf x}_n)^{-1}{\bf g}({\bf x}_n)
+={\bf x}_n-\delta\;{\bf H}_n^{-1}{\bf g}_n$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">79</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  where <tex2html_verbatim_mark>#math513#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19111#</SPAN> and 
-  <tex2html_verbatim_mark>#math514#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19113#</SPAN> are the gradient vector and 
-  Hessian matrix of <tex2html_verbatim_mark>#math515#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19115#</SPAN> at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19117#</SPAN>, respectively. 
+where <!-- MATH
+ ${\bf g}_n={\bf g}({\bf x}_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img216.svg"
+ ALT="${\bf g}_n={\bf g}({\bf x}_n)$"></SPAN> and 
+  <!-- MATH
+ ${\bf H}_n={\bf H}({\bf x}_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img217.svg"
+ ALT="${\bf H}_n={\bf H}({\bf x}_n)$"></SPAN> are the gradient vector and 
+  Hessian matrix of <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN> at <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img255.svg"
+ ALT="${\bf x}_n$"></SPAN>, respectively. 
 </LI>
 </UL>
 
 <P>
-If the Jacobian <tex2html_verbatim_mark>#math516#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19119#</SPAN> or the Hessian matrix <tex2html_verbatim_mark>#math517#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19121#</SPAN>
+If the Jacobian <!-- MATH
+ ${\bf J}({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img393.svg"
+ ALT="${\bf J}({\bf x})$"></SPAN> or the Hessian matrix <!-- MATH
+ ${\bf H}({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img394.svg"
+ ALT="${\bf H}({\bf x})$"></SPAN>
 is not available, or if it is too computationally costly to calculate
-its inverse (of complexity <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19123#</SPAN>), the quasi-Newton methods can be 
+its inverse (of complexity <SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img395.svg"
+ ALT="$O(N^3)$"></SPAN>), the quasi-Newton methods can be 
 used to approximate the Hessian matrix or its inverse based only on 
-the first order derivative, the gradient <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19125#</SPAN> of <tex2html_verbatim_mark>#math518#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19127#</SPAN> 
-(with complexity <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19129#</SPAN>), similar to the Broyden's method considered 
+the first order derivative, the gradient <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img302.svg"
+ ALT="${\bf g}$"></SPAN> of <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN> 
+(with complexity <SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img396.svg"
+ ALT="$O(N^2)$"></SPAN>), similar to the Broyden's method considered 
 <A ID="tex2html11"
   HREF="../ch2/node6.html">here</A>.
 
 <P>
-In the following, we consider the minimization of a function <tex2html_verbatim_mark>#math519#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19131#</SPAN>.
-Its Taylor expansion around point <tex2html_verbatim_mark>#math520#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19133#</SPAN> is
+In the following, we consider the minimization of a function <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN>.
+Its Taylor expansion around point <!-- MATH
+ ${\bf x}_{n+1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.66ex; " SRC="img257.svg"
+ ALT="${\bf x}_{n+1}$"></SPAN> is
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math521#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f({\bf x})=f({\bf x}_{n+1})+({\bf x}-{\bf x}_{n+1})^T {\bf g}_{n+1}
+  +\frac{1}{2}({\bf x}-{\bf x}_{n+1})^T {\bf H}_{n+1}
+  ({\bf x}-{\bf x}_{n+1})+O(||{\bf x}-{\bf x}_{n+1}||^3)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19135#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img397.svg"
+ ALT="$\displaystyle f({\bf x})=f({\bf x}_{n+1})+({\bf x}-{\bf x}_{n+1})^T {\bf g}_{n+...
+...H}_{n+1}
+({\bf x}-{\bf x}_{n+1})+O(\vert\vert{\bf x}-{\bf x}_{n+1}\vert\vert^3)$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">80</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-Taking derivetive with respect to <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19137#</SPAN>, we get
+Taking derivetive with respect to <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="${\bf x}$"></SPAN>, we get
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math522#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\frac{d}{d{\bf x}}f({\bf x})={\bf g}({\bf x})
+  ={\bf g}_{n+1}+{\bf H}_{n+1} ({\bf x}-{\bf x}_{n+1})
+  +O(||{\bf x}-{\bf x}_{n+1}||^2)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19139#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.11ex; vertical-align: -1.71ex; " SRC="img398.svg"
+ ALT="$\displaystyle \frac{d}{d{\bf x}}f({\bf x})={\bf g}({\bf x})
+={\bf g}_{n+1}+{\bf H}_{n+1} ({\bf x}-{\bf x}_{n+1})
++O(\vert\vert{\bf x}-{\bf x}_{n+1}\vert\vert^2)$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">81</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-Evaluating at <tex2html_verbatim_mark>#math523#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19141#</SPAN>, we have <tex2html_verbatim_mark>#math524#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19143#</SPAN>, 
+Evaluating at <!-- MATH
+ ${\bf x}={\bf x}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img399.svg"
+ ALT="${\bf x}={\bf x}_n$"></SPAN>, we have <!-- MATH
+ ${\bf g}({\bf x}_n)={\bf g}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img400.svg"
+ ALT="${\bf g}({\bf x}_n)={\bf g}_n$"></SPAN>, 
 and the above can be written as
 <BR>
 <DIV CLASS="mathdisplay">
-<tex2html_verbatim_mark>#math525#
+<!-- MATH
+ \begin{eqnarray}
+{\bf g}_{n+1}-{\bf g}_n&=&{\bf H}_{n+1}({\bf x}_{n+1}-{\bf x}_n)
+  +O(||{\bf x}_{n+1}-{\bf x}_n||^2)
+  \nonumber\\
+  &=&{\bf B}_{n+1}({\bf x}_{n+1}-{\bf x}_n)
+\end{eqnarray}
+ -->
 <TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
-<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><tex2html_image_mark>#tex2html_wrap_indisplay19146#</TD>
-<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay19148#</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay19150#</TD>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.32ex; vertical-align: -0.66ex; " SRC="img401.svg"
+ ALT="$\displaystyle {\bf g}_{n+1}-{\bf g}_n$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img104.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img402.svg"
+ ALT="$\displaystyle {\bf H}_{n+1}({\bf x}_{n+1}-{\bf x}_n)
++O(\vert\vert{\bf x}_{n+1}-{\bf x}_n\vert\vert^2)$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 &nbsp;</TD></TR>
 <TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
-<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay19152#</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay19154#</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img104.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img403.svg"
+ ALT="$\displaystyle {\bf B}_{n+1}({\bf x}_{n+1}-{\bf x}_n)$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 (<SPAN CLASS="arabic">82</SPAN>)</TD></TR>
 </TABLE></DIV>
 <BR CLEAR="ALL">
 
-where matrix <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19156#</SPAN> is the secant approximation of the Hessian
-matrix <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19158#</SPAN>, and the last eqality is called the 
-<#1738#><EM>secant equation</EM><#1738#>. For convenience, we further define:
+where matrix <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img404.svg"
+ ALT="${\bf B}_n$"></SPAN> is the secant approximation of the Hessian
+matrix <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img283.svg"
+ ALT="${\bf H}_n$"></SPAN>, and the last eqality is called the 
+<EM>secant equation</EM>. For convenience, we further define:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math526#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf s}_n={\bf x}_{n+1}-{\bf x}_n,\;\;\;\;\;\;
+{\bf y}_n={\bf g}_{n+1}-{\bf g}_n
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19160#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.66ex; " SRC="img405.svg"
+ ALT="$\displaystyle {\bf s}_n={\bf x}_{n+1}-{\bf x}_n,\;\;\;\;\;\;
+{\bf y}_n={\bf g}_{n+1}-{\bf g}_n$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">83</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 so that the equation above can be written as
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math527#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf B}_{n+1}{\bf s}_n={\bf y}_n,\;\;\;\;\;\mbox{or}\;\;\;\;\;
+  {\bf B}_{n+1}^{-1}{\bf y}_n={\bf s}_n
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19162#<#1#>or<#1#><tex2html_image_mark>#tex2html_wrap_indisplay19163#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img406.svg"
+ ALT="$\displaystyle {\bf B}_{n+1}{\bf s}_n={\bf y}_n,\;\;\;\;\;$">or<IMG STYLE="height: 3.25ex; vertical-align: -0.93ex; " SRC="img407.svg"
+ ALT="$\displaystyle \;\;\;\;\;
+{\bf B}_{n+1}^{-1}{\bf y}_n={\bf s}_n$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">84</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-This is the <#1761#><EM>quasi-Newton equation</EM><#1761#>, which is the 
-<#1762#><EM>secant condition</EM><#1762#> that must be satisfied by matrix 
-<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19165#</SPAN>, or its inverse <tex2html_verbatim_mark>#math528#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19167#</SPAN>, in any of the 
+This is the <EM>quasi-Newton equation</EM>, which is the 
+<EM>secant condition</EM> that must be satisfied by matrix 
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img404.svg"
+ ALT="${\bf B}_n$"></SPAN>, or its inverse <!-- MATH
+ ${\bf B}_n^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img408.svg"
+ ALT="${\bf B}_n^{-1}$"></SPAN>, in any of the 
 quasi-Newton algorithms, all taking the follow general steps:
 
 <OL>
-<LI>Initialize <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19169#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19171#</SPAN>, set <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19173#</SPAN>; 
+<LI>Initialize <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img125.svg"
+ ALT="${\bf x}_0$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img409.svg"
+ ALT="${\bf B}_0$"></SPAN>, set <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img410.svg"
+ ALT="$n=0$"></SPAN>; 
 </LI>
-<LI>Compute gradient <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19175#</SPAN> and the search direction 
-  <tex2html_verbatim_mark>#math529#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19177#</SPAN>;
+<LI>Compute gradient <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img256.svg"
+ ALT="${\bf g}_n$"></SPAN> and the search direction 
+  <!-- MATH
+ ${\bf d}_n=-{\bf B}_n^{-1}{\bf g}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img411.svg"
+ ALT="${\bf d}_n=-{\bf B}_n^{-1}{\bf g}_n$"></SPAN>;
 </LI>
-<LI>Get <tex2html_verbatim_mark>#math530#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19179#</SPAN> with step
-  size <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19181#</SPAN> satisfying the 
+<LI>Get <!-- MATH
+ ${\bf x}_{n+1}={\bf x}_n+\delta {\bf d}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img316.svg"
+ ALT="${\bf x}_{n+1}={\bf x}_n+\delta{\bf d}_n$"></SPAN> with step
+  size <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img253.svg"
+ ALT="$\delta$"></SPAN> satisfying the 
   <A ID="tex2html12"
   HREF="https://en.wikipedia.org/wiki/Wolfe_conditions">Wolfe conditions</A>.
 </LI>
-<LI>update <tex2html_verbatim_mark>#math531#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19183#</SPAN> or
+<LI>update <!-- MATH
+ ${\bf B}_{n+1}={\bf B}_n+\Delta{\bf B}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img412.svg"
+ ALT="${\bf B}_{n+1}={\bf B}_n+\Delta{\bf B}_n$"></SPAN> or
 
-<tex2html_verbatim_mark>#math532#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19185#</SPAN>,
+<!-- MATH
+ ${\bf B}_{n+1}^{-1}={\bf B}_n^{-1}+\Delta{\bf B}_n^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.93ex; " SRC="img413.svg"
+ ALT="${\bf B}_{n+1}^{-1}={\bf B}_n^{-1}+\Delta{\bf B}_n^{-1}$"></SPAN>,
   that satisfies the quasi-Newton equation;
 </LI>
-<LI>If termination condition is not satisfied, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19187#</SPAN>, go back 
+<LI>If termination condition is not satisfied, <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img414.svg"
+ ALT="$n=n+1$"></SPAN>, go back 
   to second step.
 </LI>
 </OL>
-For this iteration to converge to a local minimum of <tex2html_verbatim_mark>#math533#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19189#</SPAN>,
-<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19191#</SPAN> must be positive definite matrix, same as the Hessian
-matrix <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19193#</SPAN> it approximates. Specially, if <tex2html_verbatim_mark>#math534#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19195#</SPAN>, 
-then <tex2html_verbatim_mark>#math535#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19197#</SPAN>, the algorithm becomes the gradient 
-descent method; also, if <tex2html_verbatim_mark>#math536#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19199#</SPAN> is the Hessian matrix, 
+For this iteration to converge to a local minimum of <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN>,
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img404.svg"
+ ALT="${\bf B}_n$"></SPAN> must be positive definite matrix, same as the Hessian
+matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img232.svg"
+ ALT="${\bf H}$"></SPAN> it approximates. Specially, if <!-- MATH
+ ${\bf B}_n={\bf I}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img415.svg"
+ ALT="${\bf B}_n={\bf I}$"></SPAN>, 
+then <!-- MATH
+ ${\bf d}_n=-{\bf g}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img281.svg"
+ ALT="${\bf d}_n=-{\bf g}_n$"></SPAN>, the algorithm becomes the gradient 
+descent method; also, if <!-- MATH
+ ${\bf B}_n={\bf H}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img416.svg"
+ ALT="${\bf B}_n={\bf H}_n$"></SPAN> is the Hessian matrix, 
 then the algorithm becomes the Newton's method.
 
 <P>
-In a quasi-Newton method, we can choose to update either <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19201#</SPAN> 
-or its inverse <tex2html_verbatim_mark>#math537#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19203#</SPAN> based on one of the two forms of 
+In a quasi-Newton method, we can choose to update either <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img404.svg"
+ ALT="${\bf B}_n$"></SPAN> 
+or its inverse <!-- MATH
+ ${\bf B}_n^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img408.svg"
+ ALT="${\bf B}_n^{-1}$"></SPAN> based on one of the two forms of 
 the quasi-Newton equation. We note that there is a dual relationship 
-between the two ways to update, i.e., by swapping <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19205#</SPAN> and 
-<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19207#</SPAN>, an update formula for <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19209#</SPAN> can be directly 
+between the two ways to update, i.e., by swapping <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img417.svg"
+ ALT="${\bf y}_n$"></SPAN> and 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img418.svg"
+ ALT="${\bf s}_m$"></SPAN>, an update formula for <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img404.svg"
+ ALT="${\bf B}_n$"></SPAN> can be directly 
 applied to its inverse and vice versa.
 
 <P>
 
 <UL>
-<LI>The <#1808#><EM>Symmetric Rank 1 (SR1)</EM><#1808#> Algorithm
+<LI>The <EM>Symmetric Rank 1 (SR1)</EM> Algorithm
 
 <P>
-Here matrix <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19211#</SPAN> is updated by an additional term:
+Here matrix <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img404.svg"
+ ALT="${\bf B}_n$"></SPAN> is updated by an additional term:
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math538#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf B}_{n+1}={\bf B}_n+{\bf uu}^T
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19213#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.66ex; " SRC="img419.svg"
+ ALT="$\displaystyle {\bf B}_{n+1}={\bf B}_n+{\bf uu}^T$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">85</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  where <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19215#</SPAN> a vector and <tex2html_verbatim_mark>#math539#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19217#</SPAN> is a matrix of rank 1.
+where <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img420.svg"
+ ALT="${\bf u}$"></SPAN> a vector and <!-- MATH
+ ${\bf uu}^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img421.svg"
+ ALT="${\bf uu}^T$"></SPAN> is a matrix of rank 1.
   Imposing the secant condition, we get
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math540#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf B}_{n+1}{\bf s}_n
+    ={\bf B}_n{\bf s}_n+{\bf uu}^T{\bf s}_n={\bf y}_n,
+    \;\;\;\;\mbox{i.e.,}\;\;\;\;\;
+    {\bf u}({\bf u}^T{\bf s}_n)={\bf y}_n-{\bf B}_n{\bf s}_n
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19219#<#1#>i.e.,<#1#><tex2html_image_mark>#tex2html_wrap_indisplay19220#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.66ex; " SRC="img422.svg"
+ ALT="$\displaystyle {\bf B}_{n+1}{\bf s}_n
+={\bf B}_n{\bf s}_n+{\bf uu}^T{\bf s}_n={\bf y}_n,
+\;\;\;\;$">i.e.,<IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img423.svg"
+ ALT="$\displaystyle \;\;\;\;\;
+{\bf u}({\bf u}^T{\bf s}_n)={\bf y}_n-{\bf B}_n{\bf s}_n$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">86</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  This equation indicats <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19222#</SPAN> is in the same direction as 
-  <tex2html_verbatim_mark>#math541#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19224#</SPAN>, and can therefore
-  be written as <tex2html_verbatim_mark>#math542#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19226#</SPAN>. Substituting this back we get
+This equation indicats <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img420.svg"
+ ALT="${\bf u}$"></SPAN> is in the same direction as 
+  <!-- MATH
+ ${\bf w}={\bf y}_n-{\bf B}_n{\bf s}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img424.svg"
+ ALT="${\bf w}={\bf y}_n-{\bf B}_n{\bf s}_n$"></SPAN>, and can therefore
+  be written as <!-- MATH
+ ${\bf u}=c {\bf w}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img425.svg"
+ ALT="${\bf u}=c {\bf w}$"></SPAN>. Substituting this back we get
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math543#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf u}{\bf u}^T{\bf s}_n=c^2{\bf w}{\bf w}^T{\bf s}_n={\bf w}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19228#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.46ex; " SRC="img426.svg"
+ ALT="$\displaystyle {\bf u}{\bf u}^T{\bf s}_n=c^2{\bf w}{\bf w}^T{\bf s}_n={\bf w}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">87</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  Solving this we get <tex2html_verbatim_mark>#math544#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19230#</SPAN>,
+Solving this we get <!-- MATH
+ $c =1/({\bf w}^T {\bf s}_n)^{1/2}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img427.svg"
+ ALT="$c =1/({\bf w}^T {\bf s}_n)^{1/2}$"></SPAN>,
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math545#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf u}=c{\bf w}=\frac{{\bf y}_n-{\bf B}_n{\bf s}_n}{({\bf w}^T{\bf s}_n)^{1/2}}
+    =\frac{{\bf y}_n-{\bf B}_n{\bf s}_n}{( ({\bf y}_n-{\bf B}_n{\bf s}_n)^T{\bf s}_n)^{1/2}}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19232#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.33ex; " SRC="img428.svg"
+ ALT="$\displaystyle {\bf u}=c{\bf w}=\frac{{\bf y}_n-{\bf B}_n{\bf s}_n}{({\bf w}^T{\...
+...bf y}_n-{\bf B}_n{\bf s}_n}{( ({\bf y}_n-{\bf B}_n{\bf s}_n)^T{\bf s}_n)^{1/2}}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">88</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  and the iteration of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19234#</SPAN> becomes
+and the iteration of <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img404.svg"
+ ALT="${\bf B}_n$"></SPAN> becomes
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math546#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf B}_{n+1}={\bf B}_n+{\bf uu}^T
+    ={\bf B}_n
+    +\frac{ ({\bf y}_n-{\bf B}_n{\bf s}_n)({\bf y}_n-{\bf B}_n{\bf s}_n)^T }
+    { ({\bf y}_n-{\bf B}_n{\bf s}_n)^T {\bf s}_n }
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19236#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.29ex; " SRC="img429.svg"
+ ALT="$\displaystyle {\bf B}_{n+1}={\bf B}_n+{\bf uu}^T
+={\bf B}_n
++\frac{ ({\bf y}_n-...
+...\bf y}_n-{\bf B}_n{\bf s}_n)^T }
+{ ({\bf y}_n-{\bf B}_n{\bf s}_n)^T {\bf s}_n }$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">89</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  Applying the
+Applying the
   <A ID="tex2html13"
   HREF="../appendices/node7.html">Sherman-Morrison formula</A>,
 
-we can further get the inverse <tex2html_verbatim_mark>#math547#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19238#</SPAN>:
+we can further get the inverse <!-- MATH
+ ${\bf B}_{n+1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img430.svg"
+ ALT="${\bf B}_{n+1}$"></SPAN>:
   <BR>
 <DIV CLASS="mathdisplay">
-<tex2html_verbatim_mark>#math548#
+<!-- MATH
+ \begin{eqnarray}
+{\bf B}_{n+1}^{-1}&=&\left( {\bf B}_n+{\bf uu}^T \right)^{-1}
+    ={\bf B}_n^{-1}-\frac{ {\bf B}_n^{-1}{\bf uu}^T{\bf B}_n^{-1}}{1+{\bf u}^T{\bf B}_n^{-1}{\bf u}}
+    \nonumber\\
+    &=&{\bf B}_n^{-1}
+    +\frac{ ({\bf s}_n-{\bf B}_n^{-1}{\bf y}_n)({\bf s}_n-{\bf B}_n^{-1}{\bf y}_n)^T }
+    { ({\bf s}_n-{\bf B}_n^{-1}{\bf y}_n)^T {\bf y}_n }
+\end{eqnarray}
+ -->
 <TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
-<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><tex2html_image_mark>#tex2html_wrap_indisplay19241#</TD>
-<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay19243#</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay19245#</TD>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 3.25ex; vertical-align: -0.93ex; " SRC="img431.svg"
+ ALT="$\displaystyle {\bf B}_{n+1}^{-1}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img104.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.81ex; vertical-align: -2.17ex; " SRC="img432.svg"
+ ALT="$\displaystyle \left( {\bf B}_n+{\bf uu}^T \right)^{-1}
+={\bf B}_n^{-1}-\frac{ {\bf B}_n^{-1}{\bf uu}^T{\bf B}_n^{-1}}{1+{\bf u}^T{\bf B}_n^{-1}{\bf u}}$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 &nbsp;</TD></TR>
 <TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
-<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay19247#</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay19249#</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img104.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.27ex; vertical-align: -2.48ex; " SRC="img433.svg"
+ ALT="$\displaystyle {\bf B}_n^{-1}
++\frac{ ({\bf s}_n-{\bf B}_n^{-1}{\bf y}_n)({\bf s...
+...\bf B}_n^{-1}{\bf y}_n)^T }
+{ ({\bf s}_n-{\bf B}_n^{-1}{\bf y}_n)^T {\bf y}_n }$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 (<SPAN CLASS="arabic">90</SPAN>)</TD></TR>
 </TABLE></DIV>
@@ -224,144 +539,303 @@ we can further get the inverse <tex2html_verbatim_mark>#math547#<SPAN CLASS="MAT
 
   We note that this equation is dual to the previous one, and it
   can also be obtained based on the duality between the secant 
-  conditions for <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19251#</SPAN> and <tex2html_verbatim_mark>#math549#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19253#</SPAN>. Specifically, 
+  conditions for <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img404.svg"
+ ALT="${\bf B}_n$"></SPAN> and <!-- MATH
+ ${\bf B}_n^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img408.svg"
+ ALT="${\bf B}_n^{-1}$"></SPAN>. Specifically, 
   same as above, we impose the secant condition for the inverse 
-  <tex2html_verbatim_mark>#math550#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19255#</SPAN> of the following form
+  <!-- MATH
+ ${\bf B}_{n+1}^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.93ex; " SRC="img434.svg"
+ ALT="${\bf B}_{n+1}^{-1}$"></SPAN> of the following form
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math551#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf B}_{n+1}^{-1}={\bf B}_n^{-1}+{\bf uu}^T
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19257#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.93ex; " SRC="img435.svg"
+ ALT="$\displaystyle {\bf B}_{n+1}^{-1}={\bf B}_n^{-1}+{\bf uu}^T$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">91</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  and get
+and get
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math552#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf B}_{n+1}^{-1}{\bf y}_n
+    ={\bf B}_n^{-1}{\bf y}_n+{\bf uu}^T{\bf y}_n={\bf s}_n,
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19259#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.93ex; " SRC="img436.svg"
+ ALT="$\displaystyle {\bf B}_{n+1}^{-1}{\bf y}_n
+={\bf B}_n^{-1}{\bf y}_n+{\bf uu}^T{\bf y}_n={\bf s}_n,$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">92</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  Then by repeating the same process above, we get the same update
-  formula for <tex2html_verbatim_mark>#math553#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19261#</SPAN>.
+Then by repeating the same process above, we get the same update
+  formula for <!-- MATH
+ ${\bf B}_n^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img408.svg"
+ ALT="${\bf B}_n^{-1}$"></SPAN>.
 
 <P>
-This is the formula for directly updating <tex2html_verbatim_mark>#math554#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19263#</SPAN>. 
+This is the formula for directly updating <!-- MATH
+ ${\bf B}_n^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img408.svg"
+ ALT="${\bf B}_n^{-1}$"></SPAN>. 
   For the iteration to converge to a local minimum, matrix 
-  <tex2html_verbatim_mark>#math555#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19265#</SPAN> needs to be positive definite as well as 
-  <tex2html_verbatim_mark>#math556#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19267#</SPAN>, we therefore require
+  <!-- MATH
+ ${\bf B}_{n+1}^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.93ex; " SRC="img434.svg"
+ ALT="${\bf B}_{n+1}^{-1}$"></SPAN> needs to be positive definite as well as 
+  <!-- MATH
+ ${\bf B}_n^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img408.svg"
+ ALT="${\bf B}_n^{-1}$"></SPAN>, we therefore require
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math557#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf w}^T{\bf y}_n=({\bf s}_n-{\bf B}_n^{-1}{\bf y}_n)^T {\bf y}_n
+  ={\bf s}_n^T{\bf y}_n -{\bf y}_n^T {\bf B}_n^{-1}{\bf y}_n >0
+  
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19269#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img437.svg"
+ ALT="$\displaystyle {\bf w}^T{\bf y}_n=({\bf s}_n-{\bf B}_n^{-1}{\bf y}_n)^T {\bf y}_n
+={\bf s}_n^T{\bf y}_n -{\bf y}_n^T {\bf B}_n^{-1}{\bf y}_n &gt;0$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">93</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  It may be difficult to maintain this requirement through out the
+It may be difficult to maintain this requirement through out the
   iteration. This problem can be avoided in the following DFP and 
   BFGS methods.
 
 <P>
 </LI>
-<LI>The <#1978#><EM>BFGS (Broyden-Fletcher-Goldfarb-Shanno)</EM><#1978#> algorithm
+<LI>The <EM>BFGS (Broyden-Fletcher-Goldfarb-Shanno)</EM> algorithm
 
 <P>
-This is a rank 2 algorithm in which matrix <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19271#</SPAN> is updated 
+This is a rank 2 algorithm in which matrix <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img404.svg"
+ ALT="${\bf B}_n$"></SPAN> is updated 
   by two rank-1 terms:
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math558#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf B}_{n+1}={\bf B}_n+\alpha{\bf uu}^T+\beta{\bf vv}^T
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19273#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.66ex; " SRC="img438.svg"
+ ALT="$\displaystyle {\bf B}_{n+1}={\bf B}_n+\alpha{\bf uu}^T+\beta{\bf vv}^T$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">94</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  Imposing the secant condition for <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19275#</SPAN>, we get
+Imposing the secant condition for <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img404.svg"
+ ALT="${\bf B}_n$"></SPAN>, we get
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math559#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf B}_{n+1} {\bf s}_n
+    =({\bf B}_n+\alpha{\bf uu}^T+\beta{\bf vv}^T){\bf s}_n
+    ={\bf B}_n{\bf s}_n+{\bf u}(\alpha{\bf u}^T{\bf s}_n)
+    +{\bf v}(\beta{\bf v}^T{\bf s}_n)={\bf y}_n
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19277#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img439.svg"
+ ALT="$\displaystyle {\bf B}_{n+1} {\bf s}_n
+=({\bf B}_n+\alpha{\bf uu}^T+\beta{\bf vv...
+...n+{\bf u}(\alpha{\bf u}^T{\bf s}_n)
++{\bf v}(\beta{\bf v}^T{\bf s}_n)={\bf y}_n$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">95</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  or
+or
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math560#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf u}(\alpha{\bf u}^T{\bf s}_n)
+    +{\bf v}(\beta{\bf v}^T{\bf s}_n)={\bf y}_n-{\bf B}_n{\bf s}_n
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19279#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img440.svg"
+ ALT="$\displaystyle {\bf u}(\alpha{\bf u}^T{\bf s}_n)
++{\bf v}(\beta{\bf v}^T{\bf s}_n)={\bf y}_n-{\bf B}_n{\bf s}_n$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">96</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  which can be satisfied if we let
+which can be satisfied if we let
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math561#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf u}={\bf y}_n,\;\;\;\;\;\;\alpha=\frac{1}{{\bf s}_n^T{\bf y}_n},
+    \;\;\;\;\;{\bf v}={\bf B}_n{\bf s}_n,\;\;\;\;\;
+    \beta=-\frac{1}{{\bf v}^T{\bf s}_n}=-\frac{1}{{\bf s}_n^T{\bf B}_n{\bf s}_n}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19281#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.57ex; vertical-align: -2.28ex; " SRC="img441.svg"
+ ALT="$\displaystyle {\bf u}={\bf y}_n,\;\;\;\;\;\;\alpha=\frac{1}{{\bf s}_n^T{\bf y}_...
+...\;
+\beta=-\frac{1}{{\bf v}^T{\bf s}_n}=-\frac{1}{{\bf s}_n^T{\bf B}_n{\bf s}_n}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">97</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  Substituting these into 
-  <tex2html_verbatim_mark>#math562#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19283#</SPAN>
+Substituting these into 
+  <!-- MATH
+ ${\bf B}_{n+1}={\bf B}_n+\alpha{\bf uu}^T+\beta{\bf vv}^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.66ex; " SRC="img442.svg"
+ ALT="${\bf B}_{n+1}={\bf B}_n+\alpha{\bf uu}^T+\beta{\bf vv}^T$"></SPAN>
   we get
   <P></P>
-<DIV CLASS="mathdisplay"><A ID="BFGSupdateB"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math563#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><A ID="BFGSupdateB"></A><!-- MATH
+ \begin{equation}
+{\bf B}_{n+1}={\bf B}_n+\alpha{\bf uu}^T+\beta{\bf vv}^T
+    ={\bf B}_n+\frac{{\bf y}_n{\bf y}_n^T}{{\bf y}_n^T{\bf s}_n}
+    -\frac{{\bf B}_n{\bf s}_n{\bf s}_n^T{\bf B}_n}{{\bf s}_n^T{\bf B}_n{\bf s}_n}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19285#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.28ex; " SRC="img443.svg"
+ ALT="$\displaystyle {\bf B}_{n+1}={\bf B}_n+\alpha{\bf uu}^T+\beta{\bf vv}^T
+={\bf B}...
+...}
+-\frac{{\bf B}_n{\bf s}_n{\bf s}_n^T{\bf B}_n}{{\bf s}_n^T{\bf B}_n{\bf s}_n}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">98</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  Given this update formula for <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19287#</SPAN>, we can further find its
-  inverse <tex2html_verbatim_mark>#math564#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19289#</SPAN> and then the search direction 
-  <tex2html_verbatim_mark>#math565#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19291#</SPAN>.
+Given this update formula for <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img404.svg"
+ ALT="${\bf B}_n$"></SPAN>, we can further find its
+  inverse <!-- MATH
+ ${\bf B}_n^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img408.svg"
+ ALT="${\bf B}_n^{-1}$"></SPAN> and then the search direction 
+  <!-- MATH
+ ${\bf d}_n=-{\bf B}_n^{-1}{\bf g}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img411.svg"
+ ALT="${\bf d}_n=-{\bf B}_n^{-1}{\bf g}_n$"></SPAN>.
 
 <P>
-Alternatively, given <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19293#</SPAN>, we can further derive an update 
-  formula directly for the inverse matrix <tex2html_verbatim_mark>#math566#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19295#</SPAN>, so that 
-  the search direction <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19297#</SPAN> can be obtained without carrying 
+Alternatively, given <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img404.svg"
+ ALT="${\bf B}_n$"></SPAN>, we can further derive an update 
+  formula directly for the inverse matrix <!-- MATH
+ ${\bf B}_n^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img408.svg"
+ ALT="${\bf B}_n^{-1}$"></SPAN>, so that 
+  the search direction <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img304.svg"
+ ALT="${\bf d}_n$"></SPAN> can be obtained without carrying 
   out the inversion computation. Specifically, we first define 
-  <tex2html_verbatim_mark>#math567#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19299#</SPAN> and <tex2html_verbatim_mark>#math568#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19301#</SPAN>,
+  <!-- MATH
+ ${\bf U}=[{\bf u}_1\;{\bf u}_2]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img444.svg"
+ ALT="${\bf U}=[{\bf u}_1\;{\bf u}_2]$"></SPAN> and <!-- MATH
+ ${\bf V}=[{\bf v}_1\;{\bf v}_2]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img445.svg"
+ ALT="${\bf V}=[{\bf v}_1\;{\bf v}_2]$"></SPAN>,
   where
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math569#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf u}_1={\bf v}_1=\frac{{\bf y}_n}{({\bf s}_n^T{\bf y}_n)^{1/2}},
+    \;\;\;\;\;\;
+    {\bf u}_2=-{\bf v}_2=\frac{{\bf B}_n{\bf s}_n}{({\bf s}_n^T{\bf B}_n{\bf s}_n)^{1/2}}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19303#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.33ex; " SRC="img446.svg"
+ ALT="$\displaystyle {\bf u}_1={\bf v}_1=\frac{{\bf y}_n}{({\bf s}_n^T{\bf y}_n)^{1/2}...
+...}_2=-{\bf v}_2=\frac{{\bf B}_n{\bf s}_n}{({\bf s}_n^T{\bf B}_n{\bf s}_n)^{1/2}}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">99</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  so that the expression above can be written as:
+so that the expression above can be written as:
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math570#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf B}_{n+1}={\bf B}_n+{\bf u}_1{\bf v}_1^T+{\bf u}_2{\bf v}_2^T
+    =({\bf B}_n+{\bf UV}^T)^{-1}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19305#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img447.svg"
+ ALT="$\displaystyle {\bf B}_{n+1}={\bf B}_n+{\bf u}_1{\bf v}_1^T+{\bf u}_2{\bf v}_2^T
+=({\bf B}_n+{\bf UV}^T)^{-1}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">100</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  and then apply the
+and then apply the
   <A ID="tex2html14"
   HREF="../appendices/node7.html">Sherman-Morrison formula</A>,
 
 to get:
   <BR>
 <DIV CLASS="mathdisplay">
-<tex2html_verbatim_mark>#math571#
+<!-- MATH
+ \begin{eqnarray}
+{\bf B}_{n+1}^{-1}&=&({\bf B}_n+{\bf UV}^T)^{-1}
+    ={\bf B}_n^{-1}-{\bf B}_n^{-1}{\bf U}({\bf I}+{\bf V}^T{\bf B}_n^{-1}{\bf U})^{-1}{\bf V}^T{\bf B}_n^{-1}
+    \nonumber\\
+    &=&{\bf B}_n^{-1}-{\bf B}_n^{-1}{\bf U}{\bf C}^{-1}{\bf V}^T{\bf B}_n^{-1}
+    ={\bf B}_n^{-1}-{\bf B}_n^{-1}[{\bf u}_1\;{\bf u}_2]{\bf C}^{-1}
+    ({\bf B}_n^{-1}[{\bf v}_1\;{\bf v}_2])^T
+  
+\end{eqnarray}
+ -->
 <TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
-<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><tex2html_image_mark>#tex2html_wrap_indisplay19308#</TD>
-<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay19310#</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay19312#</TD>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 3.25ex; vertical-align: -0.93ex; " SRC="img431.svg"
+ ALT="$\displaystyle {\bf B}_{n+1}^{-1}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img104.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img448.svg"
+ ALT="$\displaystyle ({\bf B}_n+{\bf UV}^T)^{-1}
+={\bf B}_n^{-1}-{\bf B}_n^{-1}{\bf U}({\bf I}+{\bf V}^T{\bf B}_n^{-1}{\bf U})^{-1}{\bf V}^T{\bf B}_n^{-1}$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 &nbsp;</TD></TR>
 <TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
-<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay19314#</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay19316#</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img104.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img449.svg"
+ ALT="$\displaystyle {\bf B}_n^{-1}-{\bf B}_n^{-1}{\bf U}{\bf C}^{-1}{\bf V}^T{\bf B}_...
+...{-1}[{\bf u}_1\;{\bf u}_2]{\bf C}^{-1}
+({\bf B}_n^{-1}[{\bf v}_1\;{\bf v}_2])^T$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 (<SPAN CLASS="arabic">101</SPAN>)</TD></TR>
 </TABLE></DIV>
@@ -369,67 +843,153 @@ to get:
 
   where we have defined
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math572#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf C}=\left[\begin{array}{cc}c_{11} & c_{12}\\c_{21} & c_{22}\end{array}\right]
+    ={\bf I}+{\bf V}^T{\bf B}_n^{-1}{\bf U}
+    ={\bf I}+[{\bf v}_1\;{\bf v}_2]^T{\bf B}^{-1}_n[{\bf u}_1\;{\bf u}_2]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19318#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img450.svg"
+ ALT="$\displaystyle {\bf C}=\left[\begin{array}{cc}c_{11} &amp; c_{12}\\ c_{21} &amp; c_{22}\...
+...1}{\bf U}
+={\bf I}+[{\bf v}_1\;{\bf v}_2]^T{\bf B}^{-1}_n[{\bf u}_1\;{\bf u}_2]$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">102</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  with
+with
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math573#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+c_{11}=1+{\bf v}^T_1{\bf B}_n^{-1}{\bf u}_1
+  =1+\frac{{\bf y}^T_n{\bf B}_n^{-1}{\bf y}_n}{{\bf s}_n^T{\bf y}_n}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19320#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.28ex; " SRC="img451.svg"
+ ALT="$\displaystyle c_{11}=1+{\bf v}^T_1{\bf B}_n^{-1}{\bf u}_1
+=1+\frac{{\bf y}^T_n{\bf B}_n^{-1}{\bf y}_n}{{\bf s}_n^T{\bf y}_n}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">103</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math574#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+c_{22}=1+{\bf v}_2{\bf B}_n^{-1}{\bf u}_2
+  =1-\frac{{\bf s}_n^T{\bf B}_n{\bf B}_n^{-1}{\bf B}_n{\bf s}_n}{{\bf s}_n^T{\bf B}_n{\bf s}_n}
+  =0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19322#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.28ex; " SRC="img452.svg"
+ ALT="$\displaystyle c_{22}=1+{\bf v}_2{\bf B}_n^{-1}{\bf u}_2
+=1-\frac{{\bf s}_n^T{\bf B}_n{\bf B}_n^{-1}{\bf B}_n{\bf s}_n}{{\bf s}_n^T{\bf B}_n{\bf s}_n}
+=0$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">104</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math575#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+c_{12}={\bf v}_1^T{\bf B}_n^{-1}{\bf u}_2
+  =\frac{{\bf y}_n^T{\bf B}_n^{-1}{\bf B}_n{\bf s}_n}
+  { ({\bf s}_n^T{\bf y}_n)^{1/2} ({\bf s}_n^T{\bf B}_n{\bf s}_n)^{1/2} }
+  =\frac{({\bf s}_n^T{\bf y}_n)^{1/2}}{({\bf s}_n^T{\bf B}_n{\bf s}_n)^{1/2} }
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19324#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.27ex; vertical-align: -2.33ex; " SRC="img453.svg"
+ ALT="$\displaystyle c_{12}={\bf v}_1^T{\bf B}_n^{-1}{\bf u}_2
+=\frac{{\bf y}_n^T{\bf ...
+... }
+=\frac{({\bf s}_n^T{\bf y}_n)^{1/2}}{({\bf s}_n^T{\bf B}_n{\bf s}_n)^{1/2} }$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">105</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math576#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+c_{21}={\bf v}_2^T{\bf B}_n^{-1}{\bf u}_1=-c_{12}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19326#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.69ex; " SRC="img454.svg"
+ ALT="$\displaystyle c_{21}={\bf v}_2^T{\bf B}_n^{-1}{\bf u}_1=-c_{12}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">106</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math577#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf C}=\left[\begin{array}{cc}c_{11} & c_{12}\\-c_{12} & 0\end{array}\right],
+    \;\;\;\;\;\;\;\;\;\;\;\;
+    {\bf C}^{-1}=
+    \left[\begin{array}{cc}0 & -1/c_{12}\\1/c_{12} & c_{11}/c_{12}^2\end{array}\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19328#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img455.svg"
+ ALT="$\displaystyle {\bf C}=\left[\begin{array}{cc}c_{11} &amp; c_{12}\\ -c_{12} &amp; 0\end{...
+...t[\begin{array}{cc}0 &amp; -1/c_{12}\\ 1/c_{12} &amp; c_{11}/c_{12}^2\end{array}\right]$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">107</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  Substituting this <tex2html_verbatim_mark>#math578#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19330#</SPAN> into the expression for
-  <tex2html_verbatim_mark>#math579#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19332#</SPAN>, we get:
+Substituting this <!-- MATH
+ ${\bf C}^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img456.svg"
+ ALT="${\bf C}^{-1}$"></SPAN> into the expression for
+  <!-- MATH
+ ${\bf B}_{n+1}^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.93ex; " SRC="img434.svg"
+ ALT="${\bf B}_{n+1}^{-1}$"></SPAN>, we get:
   <BR>
-<DIV CLASS="mathdisplay"><A ID="BFGSinverseBexpression"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math580#
+<DIV CLASS="mathdisplay"><A ID="BFGSinverseBexpression"></A><!-- MATH
+ \begin{eqnarray}
+{\bf B}_{n+1}^{-1}&=&
+    {\bf B}_n^{-1}-[{\bf B}_n^{-1}{\bf u}_1\;{\bf B}_n^{-1}{\bf u}_2]
+    \left[\begin{array}{cc}0 & -1/c_{12}\\1/c_{12} & c_{11}/c_{12}^2\end{array}\right]
+    [{\bf B}_n^{-1}{\bf v}_1\;{\bf B}_n^{-1}{\bf v}_2]^T
+    \nonumber\\
+    &=& {\bf B}_n^{-1}-\frac{1}{c_{12}}
+        [{\bf B}_n^{-1}{\bf u}_2{\bf v}_1^T{\bf B}_n^{-1}
+          -{\bf B}_n^{-1}{\bf u}_1{\bf v}_2^T{\bf B}_n^{-1}]
+        -\frac{c_{11}}{c_{12}^2}{\bf B}_n^{-1}{\bf u}_2{\bf v}_2^T{\bf B}_n^{-1}
+\end{eqnarray}
+ -->
 <TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
-<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><tex2html_image_mark>#tex2html_wrap_indisplay19335#</TD>
-<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay19337#</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay19339#</TD>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 3.25ex; vertical-align: -0.93ex; " SRC="img431.svg"
+ ALT="$\displaystyle {\bf B}_{n+1}^{-1}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img104.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img457.svg"
+ ALT="$\displaystyle {\bf B}_n^{-1}-[{\bf B}_n^{-1}{\bf u}_1\;{\bf B}_n^{-1}{\bf u}_2]...
+...c_{12}^2\end{array}\right]
+[{\bf B}_n^{-1}{\bf v}_1\;{\bf B}_n^{-1}{\bf v}_2]^T$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 &nbsp;</TD></TR>
 <TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
-<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay19341#</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay19343#</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img104.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.57ex; vertical-align: -2.33ex; " SRC="img458.svg"
+ ALT="$\displaystyle {\bf B}_n^{-1}-\frac{1}{c_{12}}
+[{\bf B}_n^{-1}{\bf u}_2{\bf v}_1...
+...^{-1}]
+-\frac{c_{11}}{c_{12}^2}{\bf B}_n^{-1}{\bf u}_2{\bf v}_2^T{\bf B}_n^{-1}$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 (<SPAN CLASS="arabic">108</SPAN>)</TD></TR>
 </TABLE></DIV>
@@ -437,124 +997,268 @@ to get:
 
   where
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math581#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\frac{1}{c_{12}}{\bf B}_n^{-1}{\bf u}_2{\bf v}_1^T{\bf B}_n^{-1}
+  =\frac{({\bf s}_n^T{\bf B}_n{\bf s}_n)^{1/2} }{({\bf s}_n^T{\bf y}_n)^{1/2}}
+  {\bf B}_n^{-1}
+  \frac{{\bf B}_n{\bf s}_n}{({\bf s}_n^T{\bf B}_n{\bf s}_n)^{1/2}}
+  \frac{{\bf y}^T_n}{({\bf s}_n^T{\bf y}_n)^{1/2}} {\bf B}_n^{-1}
+  =\frac{{\bf s}_n{\bf y}_n^T{\bf B}_n^{-1}}{{\bf s}_n^T{\bf y}_n}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19345#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.27ex; vertical-align: -2.33ex; " SRC="img459.svg"
+ ALT="$\displaystyle \frac{1}{c_{12}}{\bf B}_n^{-1}{\bf u}_2{\bf v}_1^T{\bf B}_n^{-1}
+...
+...{\bf B}_n^{-1}
+=\frac{{\bf s}_n{\bf y}_n^T{\bf B}_n^{-1}}{{\bf s}_n^T{\bf y}_n}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">109</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math582#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+-\frac{1}{c_{12}}{\bf B}_n^{-1}{\bf u}_1{\bf v}_2^T{\bf B}_n^{-1}
+  =\frac{({\bf s}_n^T{\bf B}_n{\bf s}_n)^{1/2} }{({\bf s}_n^T{\bf y}_n)^{1/2}}
+  {\bf B}_n^{-1}
+  \frac{{\bf y}_n}{({\bf s}_n^T{\bf y}_n)^{1/2}}
+  \frac{{\bf s}_n^T {\bf B}_n}{({\bf s}_n^T{\bf B}_n{\bf s}_n)^{1/2}}{\bf B}_n^{-1}
+  =\frac{{\bf B}_n^{-1}{\bf y}_n{\bf s}_n^T}{{\bf s}_n^T{\bf y}_n}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19347#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.27ex; vertical-align: -2.33ex; " SRC="img460.svg"
+ ALT="$\displaystyle -\frac{1}{c_{12}}{\bf B}_n^{-1}{\bf u}_1{\bf v}_2^T{\bf B}_n^{-1}...
+...{\bf B}_n^{-1}
+=\frac{{\bf B}_n^{-1}{\bf y}_n{\bf s}_n^T}{{\bf s}_n^T{\bf y}_n}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">110</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
   <BR>
 <DIV CLASS="mathdisplay">
-<tex2html_verbatim_mark>#math583#
+<!-- MATH
+ \begin{eqnarray}
+\frac{c_{11}}{c_{12}^2}{\bf B}_n^{-1}{\bf u}_2{\bf v}_2^T{\bf B}_n^{-1}
+    &=&-\left(1+\frac{{\bf y}^T_n{\bf B}_n^{-1}{\bf y}_n}{{\bf s}_n^T{\bf y}_n}\right)
+    \frac{{\bf s}_n^T{\bf B}_n{\bf s}_n}{{\bf s}_n^T{\bf y}_n} {\bf B}_n^{-1}
+    \frac{{\bf B}_n{\bf s}_n}{({\bf s}_n^T{\bf B}_n{\bf s}_n)^{1/2}}
+    \frac{{\bf s}_n^T {\bf B}_n}{({\bf s}_n^T{\bf B}_n{\bf s}_n)^{1/2}} {\bf B}_n^{-1}
+    \nonumber\\
+    &=&-\left(1+\frac{{\bf y}^T_n{\bf B}_n^{-1}{\bf y}_n}{{\bf s}_n^T{\bf y}_n}\right)
+    \frac{{\bf s}_n{\bf s}_n^T}{{\bf s}_n^T{\bf y}_n}
+\end{eqnarray}
+ -->
 <TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
-<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><tex2html_image_mark>#tex2html_wrap_indisplay19350#</TD>
-<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay19352#</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay19354#</TD>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 5.11ex; vertical-align: -2.33ex; " SRC="img461.svg"
+ ALT="$\displaystyle \frac{c_{11}}{c_{12}^2}{\bf B}_n^{-1}{\bf u}_2{\bf v}_2^T{\bf B}_n^{-1}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img104.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.04ex; vertical-align: -2.33ex; " SRC="img462.svg"
+ ALT="$\displaystyle -\left(1+\frac{{\bf y}^T_n{\bf B}_n^{-1}{\bf y}_n}{{\bf s}_n^T{\b...
+...ac{{\bf s}_n^T {\bf B}_n}{({\bf s}_n^T{\bf B}_n{\bf s}_n)^{1/2}} {\bf B}_n^{-1}$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 &nbsp;</TD></TR>
 <TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
-<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay19356#</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay19358#</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img104.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.04ex; vertical-align: -2.32ex; " SRC="img463.svg"
+ ALT="$\displaystyle -\left(1+\frac{{\bf y}^T_n{\bf B}_n^{-1}{\bf y}_n}{{\bf s}_n^T{\bf y}_n}\right)
+\frac{{\bf s}_n{\bf s}_n^T}{{\bf s}_n^T{\bf y}_n}$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 (<SPAN CLASS="arabic">111</SPAN>)</TD></TR>
 </TABLE></DIV>
 <BR CLEAR="ALL">
 
-  Substituting these three terms back into Eq. (<A HREF=<tex2html_cr_mark>#BFGSinverseBexpression#2430><tex2html_cr_mark></A>),
-  we get the update formula for <tex2html_verbatim_mark>#math584#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19360#</SPAN>:
+  Substituting these three terms back into Eq. (<A HREF="#BFGSinverseBexpression">108</A>),
+  we get the update formula for <!-- MATH
+ ${\bf B}_n^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img408.svg"
+ ALT="${\bf B}_n^{-1}$"></SPAN>:
   <P></P>
-<DIV CLASS="mathdisplay"><A ID="BFGSupdateInvB"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math585#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><A ID="BFGSupdateInvB"></A><!-- MATH
+ \begin{equation}
+{\bf B}_{n+1}^{-1}=
+    {\bf B}_n^{-1}-\frac{{\bf B}_n^{-1}{\bf y}_n{\bf s}_n^T+{\bf s}_n{\bf y}_n^T{\bf B}_n^{-1}}{{\bf s}_n^T{\bf y}_n}
+    +\left(1+\frac{{\bf y}^T_n{\bf B}_n^{-1}{\bf y}_n}{{\bf s}_n^T{\bf y}_n}\right)
+    \frac{{\bf s}_n{\bf s}_n^T}{{\bf s}_n^T{\bf y}_n}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19362#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.32ex; " SRC="img464.svg"
+ ALT="$\displaystyle {\bf B}_{n+1}^{-1}=
+{\bf B}_n^{-1}-\frac{{\bf B}_n^{-1}{\bf y}_n{...
+...{{\bf s}_n^T{\bf y}_n}\right)
+\frac{{\bf s}_n{\bf s}_n^T}{{\bf s}_n^T{\bf y}_n}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">112</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  In summary, <tex2html_verbatim_mark>#math586#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19364#</SPAN> can be found by either Eq. 
-  (<A HREF=<tex2html_cr_mark>#BFGSupdateB#2464><tex2html_cr_mark></A>) for <tex2html_verbatim_mark>#math587#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19366#</SPAN> followed by an additional 
-  inversion operation, or Eq. (<A HREF=<tex2html_cr_mark>#BFGSupdateInvB#2467><tex2html_cr_mark></A>) directly for 
-  <tex2html_verbatim_mark>#math588#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19368#</SPAN>. The results obtained by these methods are
+In summary, <!-- MATH
+ ${\bf B}_{n+1}^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.93ex; " SRC="img434.svg"
+ ALT="${\bf B}_{n+1}^{-1}$"></SPAN> can be found by either Eq. 
+  (<A HREF="#BFGSupdateB">98</A>) for <!-- MATH
+ ${\bf B}_{n+1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img430.svg"
+ ALT="${\bf B}_{n+1}$"></SPAN> followed by an additional 
+  inversion operation, or Eq. (<A HREF="#BFGSupdateInvB">112</A>) directly for 
+  <!-- MATH
+ ${\bf B}_{n+1}^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.93ex; " SRC="img434.svg"
+ ALT="${\bf B}_{n+1}^{-1}$"></SPAN>. The results obtained by these methods are
   equivalent.
 
 <P>
 </LI>
-<LI>The <#2471#><EM>DFP (Davidon-Fletcher-Powell)</EM><#2471#> Algorithm
+<LI>The <EM>DFP (Davidon-Fletcher-Powell)</EM> Algorithm
 
 <P>
 Same as the BFGS algorithm, the DFP algorithm is also a rank 2 
-  algorithm, where instead of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19370#</SPAN>, the inverse matrix 
-  <tex2html_verbatim_mark>#math589#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19372#</SPAN> is updated by two rank-1 terms:
+  algorithm, where instead of <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img404.svg"
+ ALT="${\bf B}_n$"></SPAN>, the inverse matrix 
+  <!-- MATH
+ ${\bf B}^{-1}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img465.svg"
+ ALT="${\bf B}^{-1}_n$"></SPAN> is updated by two rank-1 terms:
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math590#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf B}^{-1}_{n+1}={\bf B}_n^{-1}+\alpha{\bf uu}^T+\beta{\bf vv}^T
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19374#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.93ex; " SRC="img466.svg"
+ ALT="$\displaystyle {\bf B}^{-1}_{n+1}={\bf B}_n^{-1}+\alpha{\bf uu}^T+\beta{\bf vv}^T$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">113</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  where <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19376#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19378#</SPAN> are real scalars, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19380#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19382#</SPAN>
+where <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img467.svg"
+ ALT="$\alpha$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img468.svg"
+ ALT="$\beta$"></SPAN> are real scalars, <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img420.svg"
+ ALT="${\bf u}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img469.svg"
+ ALT="${\bf v}$"></SPAN>
   are vectors. Imposing the secant condition for the inverse of 
-  <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19384#</SPAN>, we get
+  <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img404.svg"
+ ALT="${\bf B}_n$"></SPAN>, we get
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math591#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf B}_{n+1}^{-1} {\bf y}_n
+    =({\bf B}_n^{-1}+\alpha{\bf uu}^T+\beta{\bf vv}^T){\bf y}_n
+    ={\bf B}_n^{-1}{\bf y}_n+{\bf u}(\alpha{\bf u}^T{\bf y}_n)
+    +{\bf v}(\beta{\bf v}^T{\bf y}_n)={\bf s}_n
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19386#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.93ex; " SRC="img470.svg"
+ ALT="$\displaystyle {\bf B}_{n+1}^{-1} {\bf y}_n
+=({\bf B}_n^{-1}+\alpha{\bf uu}^T+\b...
+...n+{\bf u}(\alpha{\bf u}^T{\bf y}_n)
++{\bf v}(\beta{\bf v}^T{\bf y}_n)={\bf s}_n$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">114</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  or
+or
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math592#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf u}(\alpha{\bf u}^T{\bf y}_n)
+    +{\bf v}(\beta{\bf v}^T{\bf y}_n)={\bf s}_n-{\bf B}_n^{-1}{\bf y}_n
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19388#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img471.svg"
+ ALT="$\displaystyle {\bf u}(\alpha{\bf u}^T{\bf y}_n)
++{\bf v}(\beta{\bf v}^T{\bf y}_n)={\bf s}_n-{\bf B}_n^{-1}{\bf y}_n$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">115</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  which can be satisfied if we let
+which can be satisfied if we let
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math593#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf u}={\bf s}_n,\;\;\;\;\;\;\alpha=\frac{1}{{\bf s}^T{\bf y}_n},
+    \;\;\;\;\;{\bf v}={\bf B}_n^{-1}{\bf y}_n,\;\;\;\;\;
+    \beta=-\frac{1}{{\bf v}^T{\bf y}_n}=-\frac{1}{{\bf y}_n^T{\bf B}_n^{-1}{\bf y}_n}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19390#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.48ex; " SRC="img472.svg"
+ ALT="$\displaystyle {\bf u}={\bf s}_n,\;\;\;\;\;\;\alpha=\frac{1}{{\bf s}^T{\bf y}_n}...
+...eta=-\frac{1}{{\bf v}^T{\bf y}_n}=-\frac{1}{{\bf y}_n^T{\bf B}_n^{-1}{\bf y}_n}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">116</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  Substituting these into 
-  <tex2html_verbatim_mark>#math594#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19392#</SPAN>
+Substituting these into 
+  <!-- MATH
+ ${\bf B}^{-1}_{n+1}={\bf B}^{-1}_n+\alpha{\bf uu}^T+\beta{\bf vv}^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.93ex; " SRC="img473.svg"
+ ALT="${\bf B}^{-1}_{n+1}={\bf B}^{-1}_n+\alpha{\bf uu}^T+\beta{\bf vv}^T$"></SPAN>
   we get
   <P></P>
-<DIV CLASS="mathdisplay"><A ID="DFPupdateInvB"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math595#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><A ID="DFPupdateInvB"></A><!-- MATH
+ \begin{equation}
+{\bf B}^{-1}_{n+1}={\bf B}^{-1}_n+\alpha{\bf uu}^T+\beta{\bf vv}^T
+    ={\bf B}^{-1}_n+\frac{{\bf s}_n{\bf s}_n^T}{{\bf s}_n^T{\bf y}_n}
+    -\frac{{\bf B}_n^{-1}{\bf y}_n{\bf y}_n^T{\bf B}_n^{-1}}{{\bf y}_n^T{\bf B}_n^{-1}{\bf y}_n}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19394#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.27ex; vertical-align: -2.48ex; " SRC="img474.svg"
+ ALT="$\displaystyle {\bf B}^{-1}_{n+1}={\bf B}^{-1}_n+\alpha{\bf uu}^T+\beta{\bf vv}^...
+...}_n^{-1}{\bf y}_n{\bf y}_n^T{\bf B}_n^{-1}}{{\bf y}_n^T{\bf B}_n^{-1}{\bf y}_n}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">117</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  Following the same procedure used for the BFGS method, we can also
-  obtain the update formular of matrix <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19396#</SPAN> for the DFP method:
+Following the same procedure used for the BFGS method, we can also
+  obtain the update formular of matrix <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img404.svg"
+ ALT="${\bf B}_n$"></SPAN> for the DFP method:
   <P></P>
-<DIV CLASS="mathdisplay"><A ID="DFPupdateB"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math596#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><A ID="DFPupdateB"></A><!-- MATH
+ \begin{equation}
+{\bf B}_{n+1}=
+    {\bf B}_n-\frac{{\bf B}_n{\bf s}_n{\bf y}_n^T+{\bf y}_n{\bf s}_n^T{\bf B}_n}{{\bf y}_n^T{\bf s}_n}
+    +\left(1+\frac{{\bf s}^T_n{\bf B}_n{\bf s}_n}{{\bf y}_n^T{\bf s}_n}\right)
+    \frac{{\bf y}_n{\bf y}_n^T}{{\bf y}_n^T{\bf s}_n}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19398#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.32ex; " SRC="img475.svg"
+ ALT="$\displaystyle {\bf B}_{n+1}=
+{\bf B}_n-\frac{{\bf B}_n{\bf s}_n{\bf y}_n^T+{\bf...
+...{{\bf y}_n^T{\bf s}_n}\right)
+\frac{{\bf y}_n{\bf y}_n^T}{{\bf y}_n^T{\bf s}_n}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">118</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 
 <P>
-We note that Eqs. (<A HREF=<tex2html_cr_mark>#DFPupdateInvB#2596><tex2html_cr_mark></A>) and (<A HREF=<tex2html_cr_mark>#BFGSupdateB#2597><tex2html_cr_mark></A>) form 
-  a duality pair, and Eqs. (<A HREF=<tex2html_cr_mark>#DFPupdateB#2598><tex2html_cr_mark></A>) and (<A HREF=<tex2html_cr_mark>#BFGSupdateInvB#2599><tex2html_cr_mark></A>) 
+We note that Eqs. (<A HREF="#DFPupdateInvB">117</A>) and (<A HREF="#BFGSupdateB">98</A>) form 
+  a duality pair, and Eqs. (<A HREF="#DFPupdateB">118</A>) and (<A HREF="#BFGSupdateInvB">112</A>) 
   form another duality pair. In other words, the BFGS and FDP methods
   are dual of each other.
 
@@ -563,112 +1267,254 @@ We note that Eqs. (<A HREF=<tex2html_cr_mark>#DFPupdateInvB#2596><tex2html_cr_ma
 </UL>
 
 <P>
-In both the DFP and BFGS methods, matrix <tex2html_verbatim_mark>#math597#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19400#</SPAN>, as 
-well as <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19402#</SPAN>, must be positive definite, i.e., 
-<tex2html_verbatim_mark>#math598#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19404#</SPAN> must hold for any <tex2html_verbatim_mark>#math599#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19406#</SPAN>.
+In both the DFP and BFGS methods, matrix <!-- MATH
+ ${\bf B}_n^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img408.svg"
+ ALT="${\bf B}_n^{-1}$"></SPAN>, as 
+well as <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img404.svg"
+ ALT="${\bf B}_n$"></SPAN>, must be positive definite, i.e., 
+<!-- MATH
+ ${\bf z}^T{\bf B}_n{\bf z} > 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.46ex; " SRC="img476.svg"
+ ALT="${\bf z}^T{\bf B}_n{\bf z} &gt; 0$"></SPAN> must hold for any <!-- MATH
+ ${\bf z}\ne{\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img477.svg"
+ ALT="${\bf z}\ne{\bf0}$"></SPAN>.
 We now prove that this requirement is satisfied if the curvature
 condition of the <A ID="tex2html15"
   HREF="node7.html">Wolfe conditions</A>
 is satisfied:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math600#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf g}_{n+1}^T {\bf d}_n \ge c_2\;{\bf g}_n^T {\bf d}_n
+  \;\;\;\;\;\;\;\mbox{i.e.}\;\;\;\;\;
+  \left( {\bf g}_{n+1}-c_2\;{\bf g}_n\right)^T {\bf d}_n \ge 0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19408#<#1#>i.e.<#1#><tex2html_image_mark>#tex2html_wrap_indisplay19409#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.88ex; " SRC="img478.svg"
+ ALT="$\displaystyle {\bf g}_{n+1}^T {\bf d}_n \ge c_2\;{\bf g}_n^T {\bf d}_n
+\;\;\;\;\;\;\;$">i.e.<IMG STYLE="height: 3.25ex; vertical-align: -0.70ex; " SRC="img479.svg"
+ ALT="$\displaystyle \;\;\;\;\;
+\left( {\bf g}_{n+1}-c_2\;{\bf g}_n\right)^T {\bf d}_n \ge 0$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">119</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-Replacing the search direction <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19411#</SPAN> by
-<tex2html_verbatim_mark>#math601#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19413#</SPAN>, we get:
+Replacing the search direction <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img304.svg"
+ ALT="${\bf d}_n$"></SPAN> by
+<!-- MATH
+ $\delta{\bf d}_n={\bf x}_{n+1}-{\bf x}_n={\bf s}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img480.svg"
+ ALT="$\delta{\bf d}_n={\bf x}_{n+1}-{\bf x}_n={\bf s}_n$"></SPAN>, we get:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math602#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+({\bf g}_{n+1}-c_2{\bf g}_n)^T {\bf s}_n
+={\bf g}^T_{n+1}{\bf s}_n-c_2{\bf g}_n^T {\bf s}_n \ge 0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19415#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.88ex; " SRC="img481.svg"
+ ALT="$\displaystyle ({\bf g}_{n+1}-c_2{\bf g}_n)^T {\bf s}_n
+={\bf g}^T_{n+1}{\bf s}_n-c_2{\bf g}_n^T {\bf s}_n \ge 0$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">120</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 We also have
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math603#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf y}_n^T{\bf s}_n=({\bf g}_{n+1}-{\bf g}_n)^T {\bf s}_n
+={\bf g}_{n+1}^T{\bf s}_n-{\bf g}_n^T {\bf s}_n
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19417#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.88ex; " SRC="img482.svg"
+ ALT="$\displaystyle {\bf y}_n^T{\bf s}_n=({\bf g}_{n+1}-{\bf g}_n)^T {\bf s}_n
+={\bf g}_{n+1}^T{\bf s}_n-{\bf g}_n^T {\bf s}_n$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">121</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 Substracting the first equation from the second, we get
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math604#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf y}_n^T{\bf s}_n-
+  ({\bf g}^T_{n+1}{\bf s}_n-c_2{\bf g}_n^T {\bf s}_n)
+  =(c_2-1){\bf g}_n^T{\bf s}_n > 0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19419#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.88ex; " SRC="img483.svg"
+ ALT="$\displaystyle {\bf y}_n^T{\bf s}_n-
+({\bf g}^T_{n+1}{\bf s}_n-c_2{\bf g}_n^T {\bf s}_n)
+=(c_2-1){\bf g}_n^T{\bf s}_n &gt; 0$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">122</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-The last inequality is due to the fact that<tex2html_verbatim_mark>#math605#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19421#</SPAN> 
-and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19423#</SPAN>. We therefore have
+The last inequality is due to the fact that<!-- MATH
+ ${\bf g}_n^T{\bf s}_n<0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img484.svg"
+ ALT="${\bf g}_n^T{\bf s}_n&lt;0$"></SPAN> 
+and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img485.svg"
+ ALT="$c_2&lt;1$"></SPAN>. We therefore have
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math606#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf y}_n^T{\bf s}_n\ge {\bf g}^T_{n+1}{\bf s}_n-c_2{\bf g}_n^T {\bf s}_n \ge 0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19425#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.88ex; " SRC="img486.svg"
+ ALT="$\displaystyle {\bf y}_n^T{\bf s}_n\ge {\bf g}^T_{n+1}{\bf s}_n-c_2{\bf g}_n^T {\bf s}_n \ge 0$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">123</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-Given  <tex2html_verbatim_mark>#math607#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19427#</SPAN>, we can further prove by 
-induction that both <tex2html_verbatim_mark>#math608#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19429#</SPAN> and <tex2html_verbatim_mark>#math609#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19431#</SPAN> 
+Given  <!-- MATH
+ ${\bf y}_n^T{\bf s}_n>0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img487.svg"
+ ALT="${\bf y}_n^T{\bf s}_n&gt;0$"></SPAN>, we can further prove by 
+induction that both <!-- MATH
+ ${\bf B}_{n+1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img430.svg"
+ ALT="${\bf B}_{n+1}$"></SPAN> and <!-- MATH
+ ${\bf B}_{n+1}^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.93ex; " SRC="img434.svg"
+ ALT="${\bf B}_{n+1}^{-1}$"></SPAN> 
 based repectively on the update formulae in Eqs. 
-(<A HREF=<tex2html_cr_mark>#BFGSupdateB#2682><tex2html_cr_mark></A>) and (<A HREF=<tex2html_cr_mark>#DFPupdateInvB#2683><tex2html_cr_mark></A>) are positive 
-definite. We first assume <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19433#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19435#</SPAN> are both 
-positive definite, and express <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19437#</SPAN> in terms of its 
-Cholesky decomposition, <tex2html_verbatim_mark>#math610#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19439#</SPAN>. We further 
-define <tex2html_verbatim_mark>#math611#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19441#</SPAN>, <tex2html_verbatim_mark>#math612#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19443#</SPAN>, 
+(<A HREF="#BFGSupdateB">98</A>) and (<A HREF="#DFPupdateInvB">117</A>) are positive 
+definite. We first assume <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img409.svg"
+ ALT="${\bf B}_0$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img404.svg"
+ ALT="${\bf B}_n$"></SPAN> are both 
+positive definite, and express <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img404.svg"
+ ALT="${\bf B}_n$"></SPAN> in terms of its 
+Cholesky decomposition, <!-- MATH
+ ${\bf B}_n={\bf LL}^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.46ex; " SRC="img488.svg"
+ ALT="${\bf B}_n={\bf LL}^T$"></SPAN>. We further 
+define <!-- MATH
+ ${\bf a}={\bf L}^T{\bf z}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img489.svg"
+ ALT="${\bf a}={\bf L}^T{\bf z}$"></SPAN>, <!-- MATH
+ ${\bf b}={\bf L}^T{\bf s}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img490.svg"
+ ALT="${\bf b}={\bf L}^T{\bf s}$"></SPAN>, 
 and get
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math613#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf a}^T{\bf a}={\bf z}^T{\bf B}_n{\bf z},\;\;\;\;
+{\bf b}^T{\bf b}={\bf s}^T{\bf B}_n{\bf s},\;\;\;\;
+{\bf a}^T{\bf b}={\bf z}^T{\bf B}_n{\bf s}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19445#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.57ex; " SRC="img491.svg"
+ ALT="$\displaystyle {\bf a}^T{\bf a}={\bf z}^T{\bf B}_n{\bf z},\;\;\;\;
+{\bf b}^T{\bf b}={\bf s}^T{\bf B}_n{\bf s},\;\;\;\;
+{\bf a}^T{\bf b}={\bf z}^T{\bf B}_n{\bf s}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">124</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 Now we can show that the sum of the first and third terms of
-Eq. (<A HREF=<tex2html_cr_mark>#BFGSupdateInvB#2712><tex2html_cr_mark></A>) is positive definite:
+Eq. (<A HREF="#BFGSupdateInvB">112</A>) is positive definite:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math614#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf z}^T\left[ {\bf B}_n-\frac{{\bf B}_n{\bf s}_n{\bf s}_n^T{\bf B}_n}{{\bf s}_n^T{\bf B}_n{\bf s}_n}\right] {\bf z}
+  ={\bf z}^T{\bf B}_n{\bf z}
+  -\frac{({\bf z}^T{\bf B}_n{\bf s}_n)^2}{{\bf s}_n^T{\bf B}_n{\bf s}_n}
+  ={\bf a}^T{\bf a}-\frac{({\bf a}^T{\bf b})^2}{{\bf b}^T{\bf b}}\ge 0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19447#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.32ex; " SRC="img492.svg"
+ ALT="$\displaystyle {\bf z}^T\left[ {\bf B}_n-\frac{{\bf B}_n{\bf s}_n{\bf s}_n^T{\bf...
+...{\bf s}_n}
+={\bf a}^T{\bf a}-\frac{({\bf a}^T{\bf b})^2}{{\bf b}^T{\bf b}}\ge 0$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">125</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 The last step is due to the Cauchy-Schwarz inequality. Also, as
-<tex2html_verbatim_mark>#math615#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19449#</SPAN>, the second term of Eq. (<A HREF=<tex2html_cr_mark>#BFGSupdateB#2742><tex2html_cr_mark></A>) 
+<!-- MATH
+ ${\bf s}_n^T{\bf y}_n\ge 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img493.svg"
+ ALT="${\bf s}_n^T{\bf y}_n\ge 0$"></SPAN>, the second term of Eq. (<A HREF="#BFGSupdateB">98</A>) 
 is positive definite
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math616#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf z}^T\left(\frac{{\bf s}_n{\bf s}_n^T}{{\bf s}_n^T{\bf y}_n}\right){\bf z}\ge 0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19451#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.32ex; " SRC="img494.svg"
+ ALT="$\displaystyle {\bf z}^T\left(\frac{{\bf s}_n{\bf s}_n^T}{{\bf s}_n^T{\bf y}_n}\right){\bf z}\ge 0$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">126</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 Combining these two results, we get
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math617#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf z}^T{\bf B}_{n+1}{\bf z}
+=  {\bf z}^T\left( {\bf B}_n-\frac{{\bf B}_n{\bf s}_n{\bf s}_n^T{\bf B}_n}{{\bf s}_n^T{\bf B}_n{\bf s}_n}\right) {\bf z}
++{\bf z}^T\left(\frac{{\bf y}_n{\bf y}_n^T}{{\bf s}_n^T{\bf y}_n}\right){\bf z}\ge 0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19453#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.32ex; " SRC="img495.svg"
+ ALT="$\displaystyle {\bf z}^T{\bf B}_{n+1}{\bf z}
+= {\bf z}^T\left( {\bf B}_n-\frac{{...
+... z}^T\left(\frac{{\bf y}_n{\bf y}_n^T}{{\bf s}_n^T{\bf y}_n}\right){\bf z}\ge 0$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">127</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-i.e., <tex2html_verbatim_mark>#math618#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19455#</SPAN> based on the update formular Eq. (<A HREF=<tex2html_cr_mark>#BFGSupdateB#2775><tex2html_cr_mark></A>) 
+i.e., <!-- MATH
+ ${\bf B}_{n+1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img430.svg"
+ ALT="${\bf B}_{n+1}$"></SPAN> based on the update formular Eq. (<A HREF="#BFGSupdateB">98</A>) 
 is positive definite. Following the same steps, we can also show that
-<tex2html_verbatim_mark>#math619#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19457#</SPAN> based on Eq. (<A HREF=<tex2html_cr_mark>#DFPupdateInvB#2779><tex2html_cr_mark></A>) is positive definite.
+<!-- MATH
+ ${\bf B}_{n+1}^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.93ex; " SRC="img434.svg"
+ ALT="${\bf B}_{n+1}^{-1}$"></SPAN> based on Eq. (<A HREF="#DFPupdateInvB">117</A>) is positive definite.
 
 <P>
-<#2780#><B>Examples:</B><#2780#>
+<B>Examples:</B>
 
 <P>
 The figures below shows the search path of the DFP and BPGS methods
@@ -683,3 +1529,26 @@ when applied to find the minimum of the Rosenbrock function.
  ALT="RosenbrockBFGS.png">
 
 <P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node10.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node8.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node10.html">Conjugate gradient method</A>
+<B> Up:</B> <A
+ HREF="node2.html">Unconstrained Optimization</A>
+<B> Previous:</B> <A
+ HREF="node8.html">Line minimization</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

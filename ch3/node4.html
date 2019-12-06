@@ -1,88 +1,219 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Parabolic Interpolation</TITLE>
+<META NAME="description" CONTENT="Parabolic Interpolation">
+<META NAME="keywords" CONTENT="ch3">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch3.css">
+
+<LINK REL="next" HREF="node5.html">
+<LINK REL="previous" HREF="node3.html">
+<LINK REL="next" HREF="node5.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node5.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node3.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node5.html">Nelder-Mead method</A>
+<B> Up:</B> <A
+ HREF="node2.html">Unconstrained Optimization</A>
+<B> Previous:</B> <A
+ HREF="node3.html">Golden section search</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
 
 <H2><A ID="SECTION00022000000000000000">
 Parabolic Interpolation</A>
 </H2>
 
 <P>
-If a function <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18172#</SPAN> can be approximated by a parabola in the neighborhood 
+If a function <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img60.svg"
+ ALT="$f(x)$"></SPAN> can be approximated by a parabola in the neighborhood 
 of its minimum, then the vertex of the parabola can be used to approximate 
-the minimum. Assuming we have available three points <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18174#</SPAN> on the x-axis 
-corresponding to function values <tex2html_verbatim_mark>#math263#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18176#</SPAN>, then a quadratic function 
-<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18178#</SPAN> that goes through these points can be uniquely determined by the 
+the minimum. Assuming we have available three points <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img96.svg"
+ ALT="$a&lt;b&lt;c$"></SPAN> on the x-axis 
+corresponding to function values <!-- MATH
+ $f(a)>f(b)<f(c)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img97.svg"
+ ALT="$f(a)&gt;f(b)&lt;f(c)$"></SPAN>, then a quadratic function 
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img98.svg"
+ ALT="$q(x)$"></SPAN> that goes through these points can be uniquely determined by the 
 method of <A ID="tex2html2"
   HREF="../ch7/node3.html">Lagrange interpolation</A>:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math264#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+q(x)=f(a)\frac{(x-b)(x-c)}{(a-b)(a-c)}+f(b)\frac{(x-c)(x-a)}{(b-c)(b-a)}
+  +f(c)\frac{(x-a)(x-b)}{(c-a)(c-b)}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18180#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.29ex; " SRC="img99.svg"
+ ALT="$\displaystyle q(x)=f(a)\frac{(x-b)(x-c)}{(a-b)(a-c)}+f(b)\frac{(x-c)(x-a)}{(b-c)(b-a)}
++f(c)\frac{(x-a)(x-b)}{(c-a)(c-b)}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">17</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-To find the minimum <tex2html_verbatim_mark>#math265#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18182#</SPAN> at the vertex of this quadratic function, 
+To find the minimum <!-- MATH
+ $q(x_{min})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img100.svg"
+ ALT="$q(x_{min})$"></SPAN> at the vertex of this quadratic function, 
 we first set its derivative to zero:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math266#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+q'(x)=f(a)\frac{(x-b)+(x-c)}{(a-b)(a-c)}+f(b)\frac{(x-c)+(x-a)}{(b-c)(b-a)}
+  +f(c)\frac{(x-a)+(x-b)}{(c-a)(c-b)}=0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18184#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.29ex; " SRC="img101.svg"
+ ALT="$\displaystyle q'(x)=f(a)\frac{(x-b)+(x-c)}{(a-b)(a-c)}+f(b)\frac{(x-c)+(x-a)}{(b-c)(b-a)}
++f(c)\frac{(x-a)+(x-b)}{(c-a)(c-b)}=0$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">18</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-and multiply both sides by <tex2html_verbatim_mark>#math267#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18186#</SPAN>:
+and multiply both sides by <!-- MATH
+ $(a-b)(b-c)(c-a)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img102.svg"
+ ALT="$(a-b)(b-c)(c-a)$"></SPAN>:
 <BR>
 <DIV CLASS="mathdisplay">
-<tex2html_verbatim_mark>#math268#
+<!-- MATH
+ \begin{eqnarray}
+&&f(a)(c-b)(2x-b-c)+f(b)(a-c)(2x-c-a)+f(c)(b-a)(2x-a-b)
+  \nonumber \\
+  &=&2x[f(a)(c-b)+f(b)(a-c)+f(c)(b-a)]
+  -[f(a)(c^2-b^2)+f(b)(a^2-c^2)+f(c)(b^2-a^2)]=0
+\end{eqnarray}
+ -->
 <TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
 <TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
 <TD>&nbsp;</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay18189#</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img103.svg"
+ ALT="$\displaystyle f(a)(c-b)(2x-b-c)+f(b)(a-c)(2x-c-a)+f(c)(b-a)(2x-a-b)$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 &nbsp;</TD></TR>
 <TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
-<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay18191#</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay18193#</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img104.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img105.svg"
+ ALT="$\displaystyle 2x[f(a)(c-b)+f(b)(a-c)+f(c)(b-a)]
+-[f(a)(c^2-b^2)+f(b)(a^2-c^2)+f(c)(b^2-a^2)]=0$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 (<SPAN CLASS="arabic">19</SPAN>)</TD></TR>
 </TABLE></DIV>
 <BR CLEAR="ALL">
 
-and then solve the equation for <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18195#</SPAN> to get:
+and then solve the equation for <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img39.svg"
+ ALT="$x$"></SPAN> to get:
 <BR>
-<DIV CLASS="mathdisplay"><A ID="vertex"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math269#
+<DIV CLASS="mathdisplay"><A ID="vertex"></A><!-- MATH
+ \begin{eqnarray}
+x_{min}&=&\frac{1}{2}\frac{f(a)(c^2-b^2)+f(b)(a^2-c^2)+f(c)(b^2-a^2)}{f(a)(c-b)+f(b)(a-c)+f(c)(b-a)}
+  \nonumber \\
+  &=&b+\frac{1}{2}\frac{f(a)(c-b)(c+b-2b)+f(b)(a-c)(a+c-2b)+f(c)(b-a)(b+a-2b)}{f(a)(c-b)+f(b)(a-c)+f(c)(b-a)}
+  \nonumber \\
+  &=&b+\frac{1}{2}\frac{f(a)(c-b)^2+f(b)(a-c)(a+c-2b)-f(c)(b-a)^2}{f(a)(c-b)+f(b)(a-c)+f(c)(b-a)} 
+  \nonumber \\
+  &=&b+\frac{1}{2}\frac{[f(a)-f(b)](c-b)^2-[f(c)-f(b)](b-a)^2}{[f(a)-f(b)](c-b)+[f(c)-f(b)](b-a)} 
+\end{eqnarray}
+ -->
 <TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
-<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><tex2html_image_mark>#tex2html_wrap_indisplay18198#</TD>
-<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay18200#</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay18202#</TD>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img106.svg"
+ ALT="$\displaystyle x_{min}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img104.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.04ex; vertical-align: -2.29ex; " SRC="img107.svg"
+ ALT="$\displaystyle \frac{1}{2}\frac{f(a)(c^2-b^2)+f(b)(a^2-c^2)+f(c)(b^2-a^2)}{f(a)(c-b)+f(b)(a-c)+f(c)(b-a)}$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 &nbsp;</TD></TR>
 <TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
-<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay18204#</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay18206#</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img104.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.81ex; vertical-align: -2.29ex; " SRC="img108.svg"
+ ALT="$\displaystyle b+\frac{1}{2}\frac{f(a)(c-b)(c+b-2b)+f(b)(a-c)(a+c-2b)+f(c)(b-a)(b+a-2b)}{f(a)(c-b)+f(b)(a-c)+f(c)(b-a)}$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 &nbsp;</TD></TR>
 <TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
-<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay18208#</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay18210#</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img104.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.04ex; vertical-align: -2.29ex; " SRC="img109.svg"
+ ALT="$\displaystyle b+\frac{1}{2}\frac{f(a)(c-b)^2+f(b)(a-c)(a+c-2b)-f(c)(b-a)^2}{f(a)(c-b)+f(b)(a-c)+f(c)(b-a)}$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 &nbsp;</TD></TR>
 <TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
-<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay18212#</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay18214#</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img104.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.04ex; vertical-align: -2.29ex; " SRC="img110.svg"
+ ALT="$\displaystyle b+\frac{1}{2}\frac{[f(a)-f(b)](c-b)^2-[f(c)-f(b)](b-a)^2}{[f(a)-f(b)](c-b)+[f(c)-f(b)](b-a)}$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 (<SPAN CLASS="arabic">20</SPAN>)</TD></TR>
 </TABLE></DIV>
 <BR CLEAR="ALL">
 
-Unless <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18216#</SPAN> is already at the vertex of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18218#</SPAN>, <tex2html_verbatim_mark>#math270#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18220#</SPAN> is smaller than 
-<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18222#</SPAN>, i.e., <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18224#</SPAN> is closer to the minimum of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18226#</SPAN> than <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18228#</SPAN>. This 
+Unless <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img15.svg"
+ ALT="$b$"></SPAN> is already at the vertex of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img98.svg"
+ ALT="$q(x)$"></SPAN>, <!-- MATH
+ $f(x_{min})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img111.svg"
+ ALT="$f(x_{min})$"></SPAN> is smaller than 
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img112.svg"
+ ALT="$f(b)$"></SPAN>, i.e., <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img113.svg"
+ ALT="$x_{min}$"></SPAN> is closer to the minimum of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img60.svg"
+ ALT="$f(x)$"></SPAN> than <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img15.svg"
+ ALT="$b$"></SPAN>. This 
 interpolation process can then be repeated using a set of three new points 
-of <tex2html_verbatim_mark>#math271#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18230#</SPAN> if <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18232#</SPAN> or <tex2html_verbatim_mark>#math272#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18234#</SPAN> if <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18236#</SPAN>.
+of <!-- MATH
+ $\{a, x_{min}, b\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img114.svg"
+ ALT="$\{a, x_{min}, b\}$"></SPAN> if <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img115.svg"
+ ALT="$x_{min}&lt;b$"></SPAN> or <!-- MATH
+ $\{b, x_{min}, c\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img116.svg"
+ ALT="$\{b, x_{min}, c\}$"></SPAN> if <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img117.svg"
+ ALT="$x_{min}&gt;b$"></SPAN>.
 
 <P>
 In the unlikely case where the numerator of the second term in 
-Eq. (<A HREF=<tex2html_cr_mark>#vertex#397><tex2html_cr_mark></A>) is zero, i.e., <tex2html_verbatim_mark>#math273#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18238#</SPAN>,
-we get <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18240#</SPAN> and the iteration cannot proceed. We could choose some 
+Eq. (<A HREF="#vertex">20</A>) is zero, i.e., <!-- MATH
+ $[f(a)-f(b)](c-b)^2=[f(c)-f(b)](b-a)^2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img118.svg"
+ ALT="$[f(a)-f(b)](c-b)^2=[f(c)-f(b)](b-a)^2$"></SPAN>,
+we get <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img119.svg"
+ ALT="$x_{min}=b$"></SPAN> and the iteration cannot proceed. We could choose some 
 different point nearby to proceed.
 
 <P>
@@ -92,3 +223,26 @@ different point nearby to proceed.
  ALT="ParabolicInterpolate1.png">
 
 <P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node5.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node3.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node5.html">Nelder-Mead method</A>
+<B> Up:</B> <A
+ HREF="node2.html">Unconstrained Optimization</A>
+<B> Previous:</B> <A
+ HREF="node3.html">Golden section search</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

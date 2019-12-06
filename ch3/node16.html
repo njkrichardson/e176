@@ -1,3 +1,47 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Linear Programming (LP)</TITLE>
+<META NAME="description" CONTENT="Linear Programming (LP)">
+<META NAME="keywords" CONTENT="ch3">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch3.css">
+
+<LINK REL="next" HREF="node17.html">
+<LINK REL="previous" HREF="node15.html">
+<LINK REL="next" HREF="node17.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node17.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node12.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node15.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node17.html">The Simplex Algorithm</A>
+<B> Up:</B> <A
+ HREF="node12.html">Constrained Optimization</A>
+<B> Previous:</B> <A
+ HREF="node15.html">Duality and KKT Conditions</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
 
 <H2><A ID="SECTION00034000000000000000">
 Linear Programming (LP)</A>
@@ -5,24 +49,81 @@ Linear Programming (LP)</A>
 
 <P>
 The basic problem in linear programming (LP) is to maximize a linear 
-objective function <tex2html_verbatim_mark>#math930#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20505#</SPAN> of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20507#</SPAN> variables
-<tex2html_verbatim_mark>#math931#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20509#</SPAN> (or minimize <tex2html_verbatim_mark>#math932#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20511#</SPAN>), 
-under a set of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20513#</SPAN> linear constraints. 
+objective function <!-- MATH
+ $f(x_1,\cdots,x_N)=\sum_{i=1}^N c_ix_i$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.81ex; " SRC="img791.svg"
+ ALT="$f(x_1,\cdots,x_N)=\sum_{i=1}^N c_ix_i$"></SPAN> of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img54.svg"
+ ALT="$N$"></SPAN> variables
+<!-- MATH
+ $x_1,\cdots,x_N$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img792.svg"
+ ALT="$x_1,\cdots,x_N$"></SPAN> (or minimize <!-- MATH
+ $f'(x_1,\cdots,x_N)=-\sum_{i=1}^N c_ix_i$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.81ex; " SRC="img793.svg"
+ ALT="$f'(x_1,\cdots,x_N)=-\sum_{i=1}^N c_ix_i$"></SPAN>), 
+under a set of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img632.svg"
+ ALT="$M$"></SPAN> linear constraints. 
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math933#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{ll}
+    \mbox{maximize}    &
+    f(x_1,\cdots,x_N)=\sum_{i=1}^N c_ix_i \\
+    \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\\
+    \mbox{subject to:} & 
+    \left\{ \begin{array}{l} 
+      \sum_{i=1}^n a_{1i}x_i\le b_1\\
+      \cdots \cdots \cdots \cdots\\
+      \sum_{i=1}^N a_{Mi}x_i \le b_M\\
+      x_1\ge 0,\cdots,x_N\ge 0
+    \end{array} \right.
+  \end{array}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20515#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img794.svg"
+ ALT="\begin{displaymath}\begin{array}{ll}
+\mbox{maximize} &amp;
+f(x_1,\cdots,x_N)=\sum_{i...
+...b_M\\
+x_1\ge 0,\cdots,x_N\ge 0
+\end{array} \right.
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">203</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 For example, the objective function could be the total profit, the 
-constraints could be some limited resources. Let <tex2html_verbatim_mark>#math934#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20517#</SPAN> represent
-the quantities of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20519#</SPAN> different types of products, <tex2html_verbatim_mark>#math935#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20521#</SPAN> represent 
-their unit prices, and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20523#</SPAN> represent the consumption of the ith resource 
-of quantity <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20525#</SPAN> by the jth product, the goal is to maximize the profit 
-<tex2html_verbatim_mark>#math936#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20527#</SPAN> subject to the constraints imposed by the limited 
-resources <tex2html_verbatim_mark>#math937#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20529#</SPAN>.
+constraints could be some limited resources. Let <!-- MATH
+ $x_1,\cdots,x_N$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img792.svg"
+ ALT="$x_1,\cdots,x_N$"></SPAN> represent
+the quantities of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img54.svg"
+ ALT="$N$"></SPAN> different types of products, <!-- MATH
+ $c_1,\cdots,c_N$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img795.svg"
+ ALT="$c_1,\cdots,c_N$"></SPAN> represent 
+their unit prices, and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img796.svg"
+ ALT="$a_{ij}$"></SPAN> represent the consumption of the ith resource 
+of quantity <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img797.svg"
+ ALT="$b_i$"></SPAN> by the jth product, the goal is to maximize the profit 
+<!-- MATH
+ $f(x_1,\cdots,x_N)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img798.svg"
+ ALT="$f(x_1,\cdots,x_N)$"></SPAN> subject to the constraints imposed by the limited 
+resources <!-- MATH
+ $b_1,\cdots,b_M$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img799.svg"
+ ALT="$b_1,\cdots,b_M$"></SPAN>.
 
 <P>
 Here all variables are assumed to be non-negative. If there exists a
@@ -31,21 +132,62 @@ Specifically, we can solve one of the constraining equations for the
 variable and use the resulting expression of the variable to replace
 all its appearances in the problem. For example:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math938#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{ll}
+    \mbox{maximize}    & f(x,y,z)=2x-y+3z \\
+    \mbox{subject to:} &
+    \left\{\begin{array}{l} x-2y+z=3\\3x-y+4z=10\\
+    y \ge 0,\;\; z\ge 0\end{array}\right.\\
+  \end{array}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20531#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img800.svg"
+ ALT="\begin{displaymath}\begin{array}{ll}
+\mbox{maximize} &amp; f(x,y,z)=2x-y+3z \\
+\mbo...
+...y+4z=10\\
+y \ge 0,\;\; z\ge 0\end{array}\right.\\
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">204</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-Solving the first constraining equation for the free variable <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20533#</SPAN>, 
-we get <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20535#</SPAN>. Substituting this into the objective function and 
-the other constraint, we get <tex2html_verbatim_mark>#math939#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20537#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20539#</SPAN>, and the
+Solving the first constraining equation for the free variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img39.svg"
+ ALT="$x$"></SPAN>, 
+we get <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img801.svg"
+ ALT="$x=3+2y-z$"></SPAN>. Substituting this into the objective function and 
+the other constraint, we get <!-- MATH
+ $2x-y+z=3y+z+6$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img802.svg"
+ ALT="$2x-y+z=3y+z+6$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img803.svg"
+ ALT="$5y+z=1$"></SPAN>, and the
 problem can be reformulated as:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math940#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{ll}
+    \mbox{maximize}    & f(y,z)=3y+z+6 \\
+    \mbox{subject to:} &
+    \left\{\begin{array}{l} 5y+z=1 \\
+    y \ge 0,\;\; z\ge 0\end{array}\right.\\
+  \end{array}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20541#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img804.svg"
+ ALT="\begin{displaymath}\begin{array}{ll}
+\mbox{maximize} &amp; f(y,z)=3y+z+6 \\
+\mbox{s...
+...5y+z=1 \\
+y \ge 0,\;\; z\ge 0\end{array}\right.\\
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">205</SPAN>)</TD></TR>
 </TABLE></DIV>
@@ -54,18 +196,50 @@ problem can be reformulated as:
 <P>
 The LP problem can be more concisely represented in matrix form:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math941#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{ll}
+    \mbox{maximize} & {\bf c}^T{\bf x}\\
+    \mbox{subject to} & \left\{\begin{array}{l}
+         {\bf Ax}-{\bf b}\le {\bf0}\\
+         {\bf x}\ge {\bf0}\end{array}\right.\\
+  \end{array}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20543#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img805.svg"
+ ALT="\begin{displaymath}\begin{array}{ll}
+\mbox{maximize} &amp; {\bf c}^T{\bf x}\\
+\mbox...
+...le {\bf0}\\
+{\bf x}\ge {\bf0}\end{array}\right.\\
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">206</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 where
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math942#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf x}=\left[\begin{array}{c}x_1\\\vdots\\x_N\end{array}\right]
+\;\;\;\;\;\;
+{\bf c}=\left[\begin{array}{c}c_1\\\vdots\\c_N\end{array}\right]
+\;\;\;\;\;\;
+{\bf b}=\left[\begin{array}{c}b_1\\\vdots\\b_M\end{array}\right]
+\;\;\;\;\;\;
+{\bf A}=\left[\begin{array}{ccc}a_{11}&\cdots&a_{1N}\\
+\vdots & \ddots & \vdots \\a_{M1}&\cdots&a_{MN}\end{array}\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20545#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 10.22ex; vertical-align: -4.49ex; " SRC="img806.svg"
+ ALT="$\displaystyle {\bf x}=\left[\begin{array}{c}x_1\\ \vdots\\ x_N\end{array}\right...
+...ts&amp;a_{1N}\\
+\vdots &amp; \ddots &amp; \vdots \\ a_{M1}&amp;\cdots&amp;a_{MN}\end{array}\right]$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">207</SPAN>)</TD></TR>
 </TABLE></DIV>
@@ -75,60 +249,174 @@ as an element-wise relationship between to the corresponding elements of
 the vectors on the two sides.
 
 <P>
-Given the LP problem above, now called the <#4589#><EM>primal problem</EM><#4589#>, we 
-can find its <#4590#><EM>dual problem</EM><#4590#> as discussed before for the general 
+Given the LP problem above, now called the <EM>primal problem</EM>, we 
+can find its <EM>dual problem</EM> as discussed before for the general 
 constrained optimization problems. We first construct the Lagrangian
 of primal problem:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math943#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+L({\bf x})={\bf c}^T{\bf x}-{\bf y}^T({\bf Ax}-{\bf b})
+  =({\bf c}-{\bf A}^T{\bf y})^T{\bf x}+{\bf y}^T{\bf b}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20547#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img807.svg"
+ ALT="$\displaystyle L({\bf x})={\bf c}^T{\bf x}-{\bf y}^T({\bf Ax}-{\bf b})
+=({\bf c}-{\bf A}^T{\bf y})^T{\bf x}+{\bf y}^T{\bf b}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">208</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-Here <tex2html_verbatim_mark>#math944#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20549#</SPAN> contains the Lagrange multipliers 
-for the inequality constraints <tex2html_verbatim_mark>#math945#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20551#</SPAN>, and
-<tex2html_verbatim_mark>#math946#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20553#</SPAN> according to Table <A HREF=<tex2html_cr_mark>#PolarityTable#4611><tex2html_cr_mark></A> given
-before. We define the dual function as the maximum of <tex2html_verbatim_mark>#math947#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20555#</SPAN> 
-over <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20557#</SPAN>:
+Here <!-- MATH
+ ${\bf y}=[y_1,\cdots,y_M]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img808.svg"
+ ALT="${\bf y}=[y_1,\cdots,y_M]^T$"></SPAN> contains the Lagrange multipliers 
+for the inequality constraints <!-- MATH
+ ${\bf Ax}-{\bf b}\le{\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.43ex; " SRC="img809.svg"
+ ALT="${\bf Ax}-{\bf b}\le{\bf0}$"></SPAN>, and
+<!-- MATH
+ ${\bf y}\ge{\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img810.svg"
+ ALT="${\bf y}\ge{\bf0}$"></SPAN> according to Table <A HREF="node14.html#PolarityTable">183</A> given
+before. We define the dual function as the maximum of <!-- MATH
+ $L({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img811.svg"
+ ALT="$L({\bf x})$"></SPAN> 
+over <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="${\bf x}$"></SPAN>:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math948#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f_d({\bf y})=\max_{\bf x} L({\bf x})
+  =\max_{\bf x} [ {\bf c}^T{\bf x}-{\bf y}^T({\bf Ax}-{\bf b}) ]
+  =\max_{\bf x} [ ({\bf c}-{\bf A}^T{\bf y})^T{\bf x}+{\bf y}^T{\bf b} ]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20559#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.95ex; vertical-align: -1.74ex; " SRC="img812.svg"
+ ALT="$\displaystyle f_d({\bf y})=\max_{\bf x} L({\bf x})
+=\max_{\bf x} [ {\bf c}^T{\b...
+...bf b}) ]
+=\max_{\bf x} [ ({\bf c}-{\bf A}^T{\bf y})^T{\bf x}+{\bf y}^T{\bf b} ]$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">209</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-To find the value of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20561#</SPAN> that maximizes <tex2html_verbatim_mark>#math949#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20563#</SPAN>, we set 
+To find the value of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="${\bf x}$"></SPAN> that maximizes <!-- MATH
+ $L({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img811.svg"
+ ALT="$L({\bf x})$"></SPAN>, we set 
 its gradient to zero:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math950#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\bigtriangledown_{\bf x}L({\bf x})
+  =\bigtriangledown_{\bf x}[ ({\bf c}-{\bf A}^T{\bf y})^T{\bf x}+{\bf y}^T{\bf b}]
+  ={\bf c}-{\bf A}^T{\bf y}={\bf0}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20565#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img813.svg"
+ ALT="$\displaystyle \bigtriangledown_{\bf x}L({\bf x})
+=\bigtriangledown_{\bf x}[ ({\...
+...}-{\bf A}^T{\bf y})^T{\bf x}+{\bf y}^T{\bf b}]
+={\bf c}-{\bf A}^T{\bf y}={\bf0}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">210</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-and substitute it into <tex2html_verbatim_mark>#math951#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20567#</SPAN> to
-get: <tex2html_verbatim_mark>#math952#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20569#</SPAN>, which is the maximum of
-<tex2html_verbatim_mark>#math953#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20571#</SPAN>, if <tex2html_verbatim_mark>#math954#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20573#</SPAN> so that
-the term <tex2html_verbatim_mark>#math955#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20575#</SPAN> contributes 
-negatively to <tex2html_verbatim_mark>#math956#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20577#</SPAN> (as <tex2html_verbatim_mark>#math957#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20579#</SPAN>). Now <tex2html_verbatim_mark>#math958#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20581#</SPAN>
-is an upper bound of <tex2html_verbatim_mark>#math959#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20583#</SPAN>:
+and substitute it into <!-- MATH
+ $L_d({\bf y})=\max_{\bf x}L({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img814.svg"
+ ALT="$L_d({\bf y})=\max_{\bf x}L({\bf x})$"></SPAN> to
+get: <!-- MATH
+ $f_d({\bf y})={\bf y}^T{\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img815.svg"
+ ALT="$f_d({\bf y})={\bf y}^T{\bf b}$"></SPAN>, which is the maximum of
+<!-- MATH
+ $L({\bf x},{\bf y})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img816.svg"
+ ALT="$L({\bf x},{\bf y})$"></SPAN>, if <!-- MATH
+ ${\bf c}-{\bf A}^T{\bf y}\le 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.57ex; " SRC="img817.svg"
+ ALT="${\bf c}-{\bf A}^T{\bf y}\le 0$"></SPAN> so that
+the term <!-- MATH
+ $({\bf c}-{\bf A}^T{\bf y})^T{\bf x}\le 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img818.svg"
+ ALT="$({\bf c}-{\bf A}^T{\bf y})^T{\bf x}\le 0$"></SPAN> contributes 
+negatively to <!-- MATH
+ $L({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img811.svg"
+ ALT="$L({\bf x})$"></SPAN> (as <!-- MATH
+ ${\bf x}\ge 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.43ex; " SRC="img819.svg"
+ ALT="${\bf x}\ge 0$"></SPAN>). Now <!-- MATH
+ $f_d({\bf y})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img820.svg"
+ ALT="$f_d({\bf y})$"></SPAN>
+is an upper bound of <!-- MATH
+ $f_p({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img821.svg"
+ ALT="$f_p({\bf x})$"></SPAN>:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math960#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f_d({\bf y})={\bf b}^T{\bf y}\ge L({\bf x})
+={\bf c}^T{\bf x}-{\bf y}^T({\bf Ax}-{\bf b})
+\ge{\bf c}^T{\bf x}=f_p({\bf x})
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20585#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img822.svg"
+ ALT="$\displaystyle f_d({\bf y})={\bf b}^T{\bf y}\ge L({\bf x})
+={\bf c}^T{\bf x}-{\bf y}^T({\bf Ax}-{\bf b})
+\ge{\bf c}^T{\bf x}=f_p({\bf x})$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">211</SPAN>)</TD></TR>
 </TABLE></DIV>
-<P></P> 
+<P></P>
 We obtain the tightest upper bound by solving the following dual problem: 
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math961#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{ll}
+    \mbox{minimize} & f_d({\bf y})={\bf b}^T{\bf y}\\
+    \mbox{subject to} & \left\{\begin{array}{l}
+         {\bf A}^T{\bf y}-{\bf c}\ge {\bf0}\\
+         {\bf y}\ge {\bf0}\end{array}\right.\\
+  \end{array}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20587#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img823.svg"
+ ALT="\begin{displaymath}\begin{array}{ll}
+\mbox{minimize} &amp; f_d({\bf y})={\bf b}^T{\b...
+...ge {\bf0}\\
+{\bf y}\ge {\bf0}\end{array}\right.\\
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">212</SPAN>)</TD></TR>
 </TABLE></DIV>
@@ -138,17 +426,46 @@ primal problem. Moreover, we can also show that the dual of a dual problem
 is the original primal problem. Such duality relationships are summarized
 below:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math962#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left\{\begin{array}{ll}\mbox{max}: & {\bf c}^T{\bf x}\\
+\mbox{s.t.} & {\bf Ax}-{\bf b}\le{\bf0},\;\;{\bf x}\ge{\bf0}\end{array}\right.
+\Longleftrightarrow
+\left\{\begin{array}{ll}\mbox{min} & {\bf b}^T{\bf y}\\
+\mbox{s.t.} & {\bf Ay}-{\bf c}\ge{\bf0},\;\;{\bf y}\ge{\bf0}\end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20589#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img824.svg"
+ ALT="$\displaystyle \left\{\begin{array}{ll}\mbox{max}: &amp; {\bf c}^T{\bf x}\\
+\mbox{s...
+...
+\mbox{s.t.} &amp; {\bf Ay}-{\bf c}\ge{\bf0},\;\;{\bf y}\ge{\bf0}\end{array}\right.$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">213</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math963#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left\{\begin{array}{ll}\mbox{min}: & {\bf c}^T{\bf x}\\
+\mbox{s.t.} & {\bf Ax}-{\bf b}\le{\bf0},\;\;{\bf x}\ge{\bf0}\end{array}\right.
+\Longleftrightarrow
+\left\{\begin{array}{ll}\mbox{max} & {\bf b}^T{\bf y}\\
+\mbox{s.t.} & {\bf Ay}-{\bf c}\le{\bf0},\;\;{\bf y}\le{\bf0}\end{array}\right.
+\Longleftrightarrow
+\left\{\begin{array}{ll}\mbox{max} & -{\bf b}^T{\bf y}\\
+\mbox{s.t.} & {\bf Ay}+{\bf c}\ge{\bf0},\;\;{\bf y}\ge{\bf0}\end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20591#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img825.svg"
+ ALT="$\displaystyle \left\{\begin{array}{ll}\mbox{min}: &amp; {\bf c}^T{\bf x}\\
+\mbox{s...
+...
+\mbox{s.t.} &amp; {\bf Ay}+{\bf c}\ge{\bf0},\;\;{\bf y}\ge{\bf0}\end{array}\right.$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">214</SPAN>)</TD></TR>
 </TABLE></DIV>
@@ -157,66 +474,155 @@ below:
 <P>
 If either the primal or the
 dual is feasible and bounded, so is the other, and they form a
-strong duality, the solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20593#</SPAN> of the dual problem is the same
-as the solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20595#</SPAN> of the primal problem. Also, as the primal and
+strong duality, the solution <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img826.svg"
+ ALT="$d^*$"></SPAN> of the dual problem is the same
+as the solution <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img827.svg"
+ ALT="$p^*$"></SPAN> of the primal problem. Also, as the primal and
 dual problems are completely symmetric, 
 
 <P>
 Similarly, we can also get the dual problem of an equality constrained 
 standard LP problem:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math964#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{ll}
+    \mbox{minimize} & {\bf b}^T{\bf y}\\
+    \mbox{subject to} & {\bf A}^T{\bf y}-{\bf c}\ge {\bf0}\\
+  \end{array}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20597#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img828.svg"
+ ALT="\begin{displaymath}\begin{array}{ll}
+\mbox{minimize} &amp; {\bf b}^T{\bf y}\\
+\mbox{subject to} &amp; {\bf A}^T{\bf y}-{\bf c}\ge {\bf0}\\
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">215</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-Note that the condition <tex2html_verbatim_mark>#math965#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20599#</SPAN> for the multipliers 
+Note that the condition <!-- MATH
+ ${\bf y}\ge {\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img810.svg"
+ ALT="${\bf y}\ge{\bf0}$"></SPAN> for the multipliers 
 is dropped, due to the fact that the primal standard LP problem 
 is equality constrained (instead of inequality constrained). The 
 inequality constraints in the dual problem above can be further 
 converted to equality constraints by introducing a set of 
-<#4780#><EM>dual slack variables</EM><#4780#> <tex2html_verbatim_mark>#math966#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20601#</SPAN>:
+<EM>dual slack variables</EM> <!-- MATH
+ ${\bf s}\ge {\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.43ex; " SRC="img829.svg"
+ ALT="${\bf s}\ge {\bf0}$"></SPAN>:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math967#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{ll}
+    \mbox{minimize} & {\bf b}^T{\bf y}\\
+    \mbox{subject to} & \left\{\begin{array}{l}
+         {\bf A}^T{\bf y}-{\bf s}={\bf c}\\
+         {\bf s}\ge {\bf0}\end{array}\right.\\
+  \end{array}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20603#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img830.svg"
+ ALT="\begin{displaymath}\begin{array}{ll}
+\mbox{minimize} &amp; {\bf b}^T{\bf y}\\
+\mbox...
+...}={\bf c}\\
+{\bf s}\ge {\bf0}\end{array}\right.\\
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">216</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 
 <P>
-As <tex2html_verbatim_mark>#math968#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20605#</SPAN> and <tex2html_verbatim_mark>#math969#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20607#</SPAN>, we have the 
+As <!-- MATH
+ ${\bf c}\le {\bf A}^T{\bf y}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.57ex; " SRC="img831.svg"
+ ALT="${\bf c}\le {\bf A}^T{\bf y}$"></SPAN> and <!-- MATH
+ ${\bf b}\ge{\bf Ax}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.43ex; " SRC="img832.svg"
+ ALT="${\bf b}\ge{\bf Ax}$"></SPAN>, we have the 
 following
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math970#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf c}^T{\bf x}\le({\bf A}^T{\bf y})^T{\bf x}
+={\bf y}^T{\bf Ax}={\bf x}^T{\bf A}^T{\bf y}
+=({\bf Ax})^T{\bf y}\le{\bf b}^T{\bf y}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20609#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img833.svg"
+ ALT="$\displaystyle {\bf c}^T{\bf x}\le({\bf A}^T{\bf y})^T{\bf x}
+={\bf y}^T{\bf Ax}={\bf x}^T{\bf A}^T{\bf y}
+=({\bf Ax})^T{\bf y}\le{\bf b}^T{\bf y}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">217</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-therefore we get the dual gap <tex2html_verbatim_mark>#math971#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20611#</SPAN>.
+therefore we get the dual gap <!-- MATH
+ ${\bf b}^T{\bf y}\ge {\bf c}^T{\bf x}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.57ex; " SRC="img834.svg"
+ ALT="${\bf b}^T{\bf y}\ge {\bf c}^T{\bf x}$"></SPAN>.
 
 <P>
 The inequality constrained LP problem can be converted to an equality
-constrained problem by introducing <#4826#><EM>slack variables</EM><#4826#>:
+constrained problem by introducing <EM>slack variables</EM>:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math972#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\sum_{i=1}^N a_ix_i\le b \;\;\;\Longrightarrow\;\;\;
+  \sum_{i=1}^N a_ix_i + s = b,\;\;\;(s\ge 0)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20613#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img835.svg"
+ ALT="$\displaystyle \sum_{i=1}^N a_ix_i\le b \;\;\;\Longrightarrow\;\;\;
+\sum_{i=1}^N a_ix_i + s = b,\;\;\;(s\ge 0)$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">218</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 Now the inequality constrained LP problem can be reformulated to become 
-an equality constrained problem, called the <#4831#><EM>standard form</EM><#4831#>:
+an equality constrained problem, called the <EM>standard form</EM>:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math973#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{ll}
+    \mbox{maximize}    & z=f({\bf x})={\bf c}^T{\bf x}=\sum_{j=1}^N c_jx_j\\
+    \mbox{subject to:} &
+    \left\{\begin{array}{llllll}
+    \sum_{i=1}^N a_{1i}x_i&+s_1& & & & =b_1\\
+    \sum_{i=1}^N a_{2i}x_i& &+s_2& & & =b_2\\
+    \cdots & \cdots & \cdots &\cdots & \cdots &\cdots \\
+    \sum_{i=1}^N a_{Mi}x_i & & & & +s_M& =b_M\\
+    x_1\ge 0,&\cdots,& x_N\ge 0, &s_1\ge 0,&\cdots& s_M\ge 0\end{array}\right.
+  \end{array}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20615#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img836.svg"
+ ALT="\begin{displaymath}\begin{array}{ll}
+\mbox{maximize} &amp; z=f({\bf x})={\bf c}^T{\b...
+...ge 0, &amp;s_1\ge 0,&amp;\cdots&amp; s_M\ge 0\end{array}\right.
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">219</SPAN>)</TD></TR>
 </TABLE></DIV>
@@ -224,43 +630,131 @@ an equality constrained problem, called the <#4831#><EM>standard form</EM><#4831
 We further redefine the following:
 
 <UL>
-<LI><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20617#</SPAN> is an <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20619#</SPAN> dimensional augmented variable vector that
-  includes the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20621#</SPAN> slack variables <tex2html_verbatim_mark>#math974#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20623#</SPAN> as well as the 
-  <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20625#</SPAN> original variables <tex2html_verbatim_mark>#math975#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20627#</SPAN>:
+<LI><SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="${\bf x}$"></SPAN> is an <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img837.svg"
+ ALT="$N+M$"></SPAN> dimensional augmented variable vector that
+  includes the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img632.svg"
+ ALT="$M$"></SPAN> slack variables <!-- MATH
+ $\{s_1,\cdots,s_M\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img838.svg"
+ ALT="$\{s_1,\cdots,s_M\}$"></SPAN> as well as the 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img54.svg"
+ ALT="$N$"></SPAN> original variables <!-- MATH
+ $\{x_1,\cdots,x_N\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img839.svg"
+ ALT="$\{x_1,\cdots,x_N\}$"></SPAN>:
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math976#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf x}=[x_1,\;x_2,\cdots,x_N,\,s_1,\;s_2,\cdots,s_M]^T
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20629#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img840.svg"
+ ALT="$\displaystyle {\bf x}=[x_1,\;x_2,\cdots,x_N,\,s_1,\;s_2,\cdots,s_M]^T$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">220</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 </LI>
-<LI><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20631#</SPAN> is redefined as an <tex2html_verbatim_mark>#math977#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20633#</SPAN> augmented coefficient 
+<LI><SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img286.svg"
+ ALT="${\bf A}$"></SPAN> is redefined as an <!-- MATH
+ $M\times (N+M)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img841.svg"
+ ALT="$M\times (N+M)$"></SPAN> augmented coefficient 
   matrix that includes coefficients for both types of variables:
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math978#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf A}=\left[\begin{array}{cccc|cccc}
+        a_{11} & a_{12} & \cdots & a_{1N} & 1 & 0 & \cdots & 0\\
+        a_{21} & a_{22} & \cdots & a_{1N} & 0 & 1 & \cdots & 0\\
+        \vdots&\vdots & \ddots &\vdots &\vdots & \vdots & \ddots & \vdots\\
+        a_{M1} & a_{M2} & \cdots & a_{MN} & 0 & \cdots & 0 & 1\\
+      \end{array}\right]_{M\times (N+M)}
+    =[\;{\bf A}_{M\times N}\;|\; {\bf I}_{M\times M}\;]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20635#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 13.47ex; vertical-align: -6.41ex; " SRC="img842.svg"
+ ALT="$\displaystyle {\bf A}=\left[\begin{array}{cccc\vert cccc}
+a_{11} &amp; a_{12} &amp; \cd...
+...\right]_{M\times (N+M)}
+=[\;{\bf A}_{M\times N}\;\vert\; {\bf I}_{M\times M}\;]$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">221</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  where <tex2html_verbatim_mark>#math979#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20637#</SPAN> are the coefficients for the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20639#</SPAN> 
-  original variables <tex2html_verbatim_mark>#math980#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20641#</SPAN>, and the identity matrix 
-  <tex2html_verbatim_mark>#math981#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20643#</SPAN> is for the unity coefficients of the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20645#</SPAN> slack
-  variables <tex2html_verbatim_mark>#math982#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20647#</SPAN>, each of which appears in the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20649#</SPAN> 
+where <!-- MATH
+ ${\bf A}_{M\times N}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img843.svg"
+ ALT="${\bf A}_{M\times N}$"></SPAN> are the coefficients for the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img54.svg"
+ ALT="$N$"></SPAN> 
+  original variables <!-- MATH
+ $\{x_1,\cdots,x_N\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img839.svg"
+ ALT="$\{x_1,\cdots,x_N\}$"></SPAN>, and the identity matrix 
+  <!-- MATH
+ ${\bf I}_{M\times M}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img844.svg"
+ ALT="${\bf I}_{M\times M}$"></SPAN> is for the unity coefficients of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img632.svg"
+ ALT="$M$"></SPAN> slack
+  variables <!-- MATH
+ $\{s_1,\cdots,s_M\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img838.svg"
+ ALT="$\{s_1,\cdots,s_M\}$"></SPAN>, each of which appears in the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img632.svg"
+ ALT="$M$"></SPAN> 
   constraints only once.
 </LI>
 </UL>
 
 <P>
 Now the LP problem can be expressed in the standard form (original form 
-on the left, with <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20651#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20653#</SPAN> redefined on the right):
+on the left, with <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="${\bf x}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img286.svg"
+ ALT="${\bf A}$"></SPAN> redefined on the right):
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math983#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{ll}
+    \mbox{maximize} & {\bf c}^T{\bf x}\\
+    \mbox{subject to} &
+    \left\{ \begin{array}{l}
+      {\bf A}{\bf x}+{\bf s}={\bf b}\\
+      {\bf x}\ge{\bf0},\;{\bf s}\ge{\bf0}
+    \end{array}\right.
+  \end{array}
+  \;\;\;\;\;\;\;\;\mbox{or}\;\;\;\;\;\;
+  \begin{array}{ll}
+    \mbox{maximize} & {\bf c}^T{\bf x}\\
+    \mbox{subject to} &
+    \left\{ \begin{array}{l}
+      {\bf A}{\bf x}={\bf b}\\
+      {\bf x}\ge{\bf0}
+    \end{array}\right.
+  \end{array}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20655#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img845.svg"
+ ALT="\begin{displaymath}\begin{array}{ll}
+\mbox{maximize} &amp; {\bf c}^T{\bf x}\\
+\mbox...
+...f x}={\bf b}\\
+{\bf x}\ge{\bf0}
+\end{array}\right.
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">222</SPAN>)</TD></TR>
 </TABLE></DIV>
@@ -268,47 +762,101 @@ on the left, with <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline2
 
 <P>
 An LP problem can be viewed geometrically. We can normalize 
-<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20657#</SPAN> so that <tex2html_verbatim_mark>#math984#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20659#</SPAN>, so that the objective function 
-<tex2html_verbatim_mark>#math985#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20661#</SPAN> becomes the projection of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20663#</SPAN> 
-onto vector <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20665#</SPAN>. Each of the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20667#</SPAN> inequality constraints in 
-<tex2html_verbatim_mark>#math986#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20669#</SPAN> corresponds to a hyper-plane in the N-D 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img846.svg"
+ ALT="${\bf c}$"></SPAN> so that <!-- MATH
+ $||{\bf c}||=1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img847.svg"
+ ALT="$\vert\vert{\bf c}\vert\vert=1$"></SPAN>, so that the objective function 
+<!-- MATH
+ $f({\bf x})={\bf c}^T{\bf x}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img848.svg"
+ ALT="$f({\bf x})={\bf c}^T{\bf x}$"></SPAN> becomes the projection of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="${\bf x}$"></SPAN> 
+onto vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img846.svg"
+ ALT="${\bf c}$"></SPAN>. Each of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img632.svg"
+ ALT="$M$"></SPAN> inequality constraints in 
+<!-- MATH
+ ${\bf A}{\bf x}\le{\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.43ex; " SRC="img849.svg"
+ ALT="${\bf A}{\bf x}\le{\bf b}$"></SPAN> corresponds to a hyper-plane in the N-D 
 vector space perpendicular to its normal direction 
-<tex2html_verbatim_mark>#math987#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20671#</SPAN>:
+<!-- MATH
+ ${\bf a}_j=[a_{i1},\cdots,a_{IN}]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img850.svg"
+ ALT="${\bf a}_j=[a_{i1},\cdots,a_{IN}]^T$"></SPAN>:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math988#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\sum_{j=1}^N a_{ij}x_j={\bf a}_j^T{\bf x}=b_i,\;\;\;\;\;\;\;(i=1,\cdots,M)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20673#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.90ex; vertical-align: -3.40ex; " SRC="img851.svg"
+ ALT="$\displaystyle \sum_{j=1}^N a_{ij}x_j={\bf a}_j^T{\bf x}=b_i,\;\;\;\;\;\;\;(i=1,\cdots,M)$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">223</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-Also, each of the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20675#</SPAN> non-negativity conditions <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20677#</SPAN> in
-<tex2html_verbatim_mark>#math989#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20679#</SPAN> corresponds to a hyper-plane perpendicular to the 
-jth standard basis vector <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20681#</SPAN>. In the most general case (none 
-of the hyper-planes is parallel to any others, no more than <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20683#</SPAN> 
-hyper-planes intersect at one point), every <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20685#</SPAN> of these <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20687#</SPAN> 
+Also, each of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img54.svg"
+ ALT="$N$"></SPAN> non-negativity conditions <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img852.svg"
+ ALT="$x_j\ge 0$"></SPAN> in
+<!-- MATH
+ ${\bf x}\ge{\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.43ex; " SRC="img853.svg"
+ ALT="${\bf x}\ge{\bf0}$"></SPAN> corresponds to a hyper-plane perpendicular to the 
+jth standard basis vector <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img854.svg"
+ ALT="${\bf e}_j$"></SPAN>. In the most general case (none 
+of the hyper-planes is parallel to any others, no more than <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img54.svg"
+ ALT="$N$"></SPAN> 
+hyper-planes intersect at one point), every <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img54.svg"
+ ALT="$N$"></SPAN> of these <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img837.svg"
+ ALT="$N+M$"></SPAN> 
 hyper-planes intersect at a point in the N-D space, and they form
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math990#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+C_{M+N}^N=\frac{(M+N)!}{N!\;M!}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20689#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.34ex; vertical-align: -1.71ex; " SRC="img855.svg"
+ ALT="$\displaystyle C_{M+N}^N=\frac{(M+N)!}{N!\;M!}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">224</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 such intersection points in total.
-The polytope enclosed by these <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20691#</SPAN> hyper-planes is called the 
-<#4948#><EM>feasible region</EM><#4948#>, in which the optimal solution must lie. 
+The polytope enclosed by these <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img837.svg"
+ ALT="$N+M$"></SPAN> hyper-planes is called the 
+<EM>feasible region</EM>, in which the optimal solution must lie. 
 The vertices of the polytope of the feasible region are a subset 
-of the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20693#</SPAN> intersections at which all constraints in 
-<tex2html_verbatim_mark>#math991#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20695#</SPAN> and <tex2html_verbatim_mark>#math992#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20697#</SPAN> are satisfied.
+of the <SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.95ex; " SRC="img856.svg"
+ ALT="$C_{M+N}^N$"></SPAN> intersections at which all constraints in 
+<!-- MATH
+ ${\bf A}{\bf x}\le{\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.43ex; " SRC="img849.svg"
+ ALT="${\bf A}{\bf x}\le{\bf b}$"></SPAN> and <!-- MATH
+ ${\bf x}\ge{\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.43ex; " SRC="img853.svg"
+ ALT="${\bf x}\ge{\bf0}$"></SPAN> are satisfied.
 
 <P>
-<#4955#><B>Fundamental theorem of linear programming</B><#4955#>
+<B>Fundamental theorem of linear programming</B>
 
 <P>
-The optimal solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20699#</SPAN> of a linear programming problem formulated 
-above is either a vertex of the polytope feasible region <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20701#</SPAN>, or lies on a 
+The optimal solution <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}^*$"></SPAN> of a linear programming problem formulated 
+above is either a vertex of the polytope feasible region <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img638.svg"
+ ALT="$P$"></SPAN>, or lies on a 
 hyper-surface of the polytope, on which all points all optimal solutions.
 
 <P>
@@ -316,65 +864,148 @@ hyper-surface of the polytope, on which all points all optimal solutions.
  ALT="LPtheorem.png">
 
 <P>
-<#4958#><B>Proof:</B><#4958#>
+<B>Proof:</B>
 
 <P>
-Assume the optimal solution <tex2html_verbatim_mark>#math993#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20703#</SPAN> is interior to the polytope
-feasible region <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20705#</SPAN>, then there must exist some <tex2html_verbatim_mark>#math994#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20707#</SPAN> such that 
-the hyper-sphere of radius <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20709#</SPAN> centered at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20711#</SPAN> is inside 
-<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20713#</SPAN>. Evaluate the objective function at a point on the hyper-sphere
+Assume the optimal solution <!-- MATH
+ ${\bf x}^*\in P$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img857.svg"
+ ALT="${\bf x}^*\in P$"></SPAN> is interior to the polytope
+feasible region <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img638.svg"
+ ALT="$P$"></SPAN>, then there must exist some <!-- MATH
+ $\epsilon>0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.21ex; " SRC="img858.svg"
+ ALT="$\epsilon&gt;0$"></SPAN> such that 
+the hyper-sphere of radius <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img86.svg"
+ ALT="$\epsilon$"></SPAN> centered at <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}^*$"></SPAN> is inside 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img638.svg"
+ ALT="$P$"></SPAN>. Evaluate the objective function at a point on the hyper-sphere
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math995#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf x}'={\bf x}^*+\epsilon\;{\bf c}/||{\bf c}||\in P
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20715#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img859.svg"
+ ALT="$\displaystyle {\bf x}'={\bf x}^*+\epsilon\;{\bf c}/\vert\vert{\bf c}\vert\vert\in P$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">225</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 we get
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math996#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f({\bf x}')={\bf c}^T{\bf x}'
+={\bf c}^T({\bf x}^*+\epsilon\;{\bf c}/||{\bf c}||)
+={\bf c}^T{\bf x}^*+\epsilon\;{\bf c}^T{\bf c}/||{\bf c}||
+={\bf c}^T{\bf x}^*+\epsilon\;||{\bf c}||>{\bf c}^T{\bf x}^*=f({\bf x}^*)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20717#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img860.svg"
+ ALT="$\displaystyle f({\bf x}')={\bf c}^T{\bf x}'
+={\bf c}^T({\bf x}^*+\epsilon\;{\bf...
+...{\bf x}^*+\epsilon\;\vert\vert{\bf c}\vert\vert&gt;{\bf c}^T{\bf x}^*=f({\bf x}^*)$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">226</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-i.e., <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20719#</SPAN> cannot be the optimal solution as assumed. This contradiction
-indicates that an optimal solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20721#</SPAN> must be on the surface of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20723#</SPAN>,
+i.e., <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}^*$"></SPAN> cannot be the optimal solution as assumed. This contradiction
+indicates that an optimal solution <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}^*$"></SPAN> must be on the surface of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img638.svg"
+ ALT="$P$"></SPAN>,
 either at one of its vertices or on one of its surfaces. Q.E.D.
 
 <P>
 Based on this theorem, the optimization of a linear programming problem 
-could be solved by exhaustively checking each of the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20725#</SPAN> intersections
-formed by <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20727#</SPAN> of the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20729#</SPAN> hyper-planes to find (a) whether it is feasible 
-(satisfying all <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20731#</SPAN> constraints), and, if so, (b) whether the objective 
-function <tex2html_verbatim_mark>#math997#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20733#</SPAN> is maximized at the point. Specifically, we choose 
-<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20735#</SPAN> of the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20737#</SPAN> equations for the the constraints and solve this N-equation 
-and N-unknown linear system to get the intersection point of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20739#</SPAN> corresponding
+could be solved by exhaustively checking each of the <SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.95ex; " SRC="img861.svg"
+ ALT="$C_{N+M}^N$"></SPAN> intersections
+formed by <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img54.svg"
+ ALT="$N$"></SPAN> of the <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img837.svg"
+ ALT="$N+M$"></SPAN> hyper-planes to find (a) whether it is feasible 
+(satisfying all <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img837.svg"
+ ALT="$N+M$"></SPAN> constraints), and, if so, (b) whether the objective 
+function <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN> is maximized at the point. Specifically, we choose 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img54.svg"
+ ALT="$N$"></SPAN> of the <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img837.svg"
+ ALT="$N+M$"></SPAN> equations for the the constraints and solve this N-equation 
+and N-unknown linear system to get the intersection point of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img54.svg"
+ ALT="$N$"></SPAN> corresponding
 hyper-planes. This brute-force method is most straight forward, but the 
-computational complexity is high when <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20741#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20743#</SPAN>, and therefore <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20745#</SPAN>, 
+computational complexity is high when <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img54.svg"
+ ALT="$N$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img632.svg"
+ ALT="$M$"></SPAN>, and therefore <SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.95ex; " SRC="img861.svg"
+ ALT="$C_{N+M}^N$"></SPAN>, 
 become large.
 
 <P>
-<#4992#><B>Example:</B><#4992#>
+<B>Example:</B>
 
 <P>
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math998#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{ll}
+    \mbox{maximize}    & f_p(x_1,x_2)=2x_1+3x_2 \\
+    \mbox{subject to:} &
+    \left\{ \begin{array}{l}
+      2x_1+ x_2 \le 18\\6x_1+5x_2 \le 60 \\2x_1+5x_2 \le 40 \\x_1 \ge 0,\;\; x_2\ge 0
+    \end{array}\right.
+  \end{array}
+  \;\;\;\;\;\;\mbox{or}\;\;\;\;\;\;
+  \begin{array}{ll}
+    \mbox{maximize}    & f_p({\bf x})={\bf c}^T{\bf x} \\
+    \mbox{subject to:} & 
+    \left\{ \begin{array}{l}{\bf A}{\bf x}\le{\bf b}\\{\bf x}\ge {\bf0}
+    \end{array}\right.
+  \end{array}
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20747#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img862.svg"
+ ALT="\begin{displaymath}\begin{array}{ll}
+\mbox{maximize} &amp; f_p(x_1,x_2)=2x_1+3x_2 \\...
+...x}\le{\bf b}\\ {\bf x}\ge {\bf0}
+\end{array}\right.
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
 where
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math999#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf x}=\left[\begin{array}{c}x_1\\x_2\end{array}\right],\;\;\;\;
+  {\bf c}=\left[\begin{array}{c}2\\3\end{array}\right],\;\;\;\;
+  {\bf b}=\left[\begin{array}{c}18\\60\\40\end{array}\right],\;\;\;\;
+  {\bf A}=\left[\begin{array}{cc}2&1\\6&5\\2&5\end{array}\right]
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20749#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img863.svg"
+ ALT="$\displaystyle {\bf x}=\left[\begin{array}{c}x_1\\ x_2\end{array}\right],\;\;\;\...
+...ight],\;\;\;\;
+{\bf A}=\left[\begin{array}{cc}2&amp;1\\ 6&amp;5\\ 2&amp;5\end{array}\right]$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
 
@@ -383,50 +1014,139 @@ where
  ALT="SimplexEx0.png">
 
 <P>
-This problem has <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20751#</SPAN> variables with the same number of non-negativity
-constraints and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20753#</SPAN> linear inequality constraints. The <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20755#</SPAN> straight 
-lines form <tex2html_verbatim_mark>#math1000#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20757#</SPAN> intersections, out of which 5 are the 
+This problem has <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img557.svg"
+ ALT="$N=2$"></SPAN> variables with the same number of non-negativity
+constraints and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img864.svg"
+ ALT="$M=3$"></SPAN> linear inequality constraints. The <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img865.svg"
+ ALT="$n+m=5$"></SPAN> straight 
+lines form <!-- MATH
+ $C_{N+M}^N=C_5^2=10$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.95ex; " SRC="img866.svg"
+ ALT="$C_{N+M}^N=C_5^2=10$"></SPAN> intersections, out of which 5 are the 
 vertices of the polygonal feasible region satisfying all constraints. 
-The value of the objective function <tex2html_verbatim_mark>#math1001#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20759#</SPAN> 
+The value of the objective function <!-- MATH
+ $f_p(x_1,x_2)={\bf c}^T{\bf x}=c_1x_1+c_2x_2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img867.svg"
+ ALT="$f_p(x_1,x_2)={\bf c}^T{\bf x}=c_1x_1+c_2x_2$"></SPAN> 
 is proportional to the projection of the 2-D variable vector 
-<tex2html_verbatim_mark>#math1002#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20761#</SPAN> onto the coefficient vector <tex2html_verbatim_mark>#math1003#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20763#</SPAN>. 
+<!-- MATH
+ ${\bf x}=[x_1,\;x_2]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img868.svg"
+ ALT="${\bf x}=[x_1,\;x_2]^T$"></SPAN> onto the coefficient vector <!-- MATH
+ ${\bf c}=[2,\;3]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img869.svg"
+ ALT="${\bf c}=[2,\;3]^T$"></SPAN>. 
 The goal here is to find a point in the polygonal feasible region with 
-maximum projection onto vector <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20765#</SPAN>. 
+maximum projection onto vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img846.svg"
+ ALT="${\bf c}$"></SPAN>. 
 
 <P>
-The <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20767#</SPAN> intersections are listed in the table below together with
+The <SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img870.svg"
+ ALT="$C_5^2=10$"></SPAN> intersections are listed in the table below together with
 their feasibility (whether a vertex of the polygon or not) and the 
 corresponding objective function value (proportional to the projection
 in the parentheses). We see that out of the 5 feasible solutions at the
-vertices of the polygon, the one at <tex2html_verbatim_mark>#math1004#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20769#</SPAN> is optimal with 
-maximum objective function value <tex2html_verbatim_mark>#math1005#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20771#</SPAN> 
-(proportional to the projection <tex2html_verbatim_mark>#math1006#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20773#</SPAN>. 
+vertices of the polygon, the one at <!-- MATH
+ ${\bf x}^*=(5,\;6)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img871.svg"
+ ALT="${\bf x}^*=(5,\;6)$"></SPAN> is optimal with 
+maximum objective function value <!-- MATH
+ $f_p(x_1,x_2)=2x_1+3x_2=2\times 5+3\times6=28$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img872.svg"
+ ALT="$f_p(x_1,x_2)=2x_1+3x_2=2\times 5+3\times6=28$"></SPAN> 
+(proportional to the projection <!-- MATH
+ ${\bf c}^T{\bf x}^*/||{\bf c}||=28/3.61=7.77$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img873.svg"
+ ALT="${\bf c}^T{\bf x}^*/\vert\vert{\bf c}\vert\vert=28/3.61=7.77$"></SPAN>. 
 
 <P>
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1007#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{c|c|c|c}\hline
+    & (x_1,\; x_2) &  & \mbox{objective function (normalized)} \\\hline
+    1 & 5.00,\; 6.00 & \mbox{feasible}   & 28\; (7.77) \\
+    2 & 6.25,\; 5.50 & \mbox{infeasible} & 29\; (8.04) \\
+    3 & 7.50,\; 3.00 & \mbox{feasible}   & 24\; (6.66) \\
+    4 &20.00,\; 0.00 & \mbox{infeasible} & 40\; (11.1) \\
+    5 &10.00,\; 0.00 & \mbox{infeasible} & 20\; (5.55) \\
+    6 & 9.00,\; 0.00 & \mbox{feasible}   & 18\; (4.10) \\
+    7 & 0.00,\; 8.00 & \mbox{feasible}   & 24\; (6.66) \\
+    8 & 0.00,\; 12.00 & \mbox{infeasible}& 36\; (9.98) \\
+    9 & 0.00,\; 18.00 & \mbox{infeasible}& 54\; (14.99) \\
+    10& 0.00,\; 0.00 & \mbox{feasible }  &  0\; (0.00) \\\hline
+  \end{array}
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20775#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img874.svg"
+ ALT="\begin{displaymath}\begin{array}{c\vert c\vert c\vert c}\hline
+&amp; (x_1,\; x_2) &amp; ...
+...0,\; 0.00 &amp; \mbox{feasible } &amp; 0\; (0.00) \\ \hline
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
 
 <P>
 This problem can be converted to the standard form:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1008#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{ll}
+    \mbox{maximize}    & f_p(x_1,x_2)=2x_1+3x_2 \\
+    \mbox{subject to:} &
+    \left\{ \begin{array}{l}
+      2x_1+ x_2 \le 18\\6x_1+5x_2 \le 60 \\2x_1+5x_2 \le 40 \\
+      x_1 \ge 0,\;\; x_2\ge 0
+    \end{array}\right.
+  \end{array}
+  \;\;\;\;\;\;\Longrightarrow\;\;\;\;\;\;
+  \begin{array}{ll}
+    \mbox{maximize}    & f_p(x_1,x_2)=2x_1+3x_2 \\
+    \mbox{subject to:} & 
+    \left\{ \begin{array}{l}
+      2x_1+ x_2+s_1=18\\6x_1+5x_2+s_2=60 \\2x_1+5x_2+s_3=40 \\
+      x_1 \ge 0,\; x_2\ge 0,\; s_1\ge 0,\; s_2\ge 0,\; s_3\ge0
+    \end{array}\right.
+  \end{array}
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20777#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img875.svg"
+ ALT="\begin{displaymath}\begin{array}{ll}
+\mbox{maximize} &amp; f_p(x_1,x_2)=2x_1+3x_2 \\...
+... s_1\ge 0,\; s_2\ge 0,\; s_3\ge0
+\end{array}\right.
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
 
 <P>
 The goal of this linear programming problem can be intuitively understood 
-as to push the hyper-plane <tex2html_verbatim_mark>#math1009#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20779#</SPAN>, here a line in 2-D space, 
-along its normal direction <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20781#</SPAN>, from the origin to as far away as 
+as to push the hyper-plane <!-- MATH
+ ${\bf c}^T{\bf x}=z$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img876.svg"
+ ALT="${\bf c}^T{\bf x}=z$"></SPAN>, here a line in 2-D space, 
+along its normal direction <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img846.svg"
+ ALT="${\bf c}$"></SPAN>, from the origin to as far away as 
 possible inside the feasible region, to eventually arrive at one of the 
 vertices of the polytope feasible region that is farthest away from the 
 origin.
@@ -436,46 +1156,154 @@ We can also consider the dual problem
 
 <P>
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1010#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{ll}
+    \mbox{minimize}    & f_d(y_1,y_2,y_3)=18y_1+60y_2+40y_3 \\
+    \mbox{subject to:} &
+    \left\{ \begin{array}{l}
+      2y_1+6y_2+2y_3\ge 2 \\y_1+5y_2+5y_3\ge 3\\
+      y_1\ge 0,\;y_2\ge 0,\;y_3\ge 0\\
+    \end{array}\right.
+  \end{array}
+  \;\;\;\;\;\;\mbox{or}\;\;\;\;\;\;
+  \begin{array}{ll}
+    \mbox{minimize}    & f_d({\bf y})={\bf b}^T{\bf y} \\
+    \mbox{subject to:} & 
+    \left\{ \begin{array}{l}{\bf A}^T{\bf y}\le{\bf b}\\{\bf y}\ge {\bf0}
+    \end{array}\right.
+  \end{array}
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20783#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img877.svg"
+ ALT="\begin{displaymath}\begin{array}{ll}
+\mbox{minimize} &amp; f_d(y_1,y_2,y_3)=18y_1+60...
+...y}\le{\bf b}\\ {\bf y}\ge {\bf0}
+\end{array}\right.
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
 
 <P>
-The five planes, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20785#</SPAN> from the constraining inequalities, and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20787#</SPAN>
-for the non-negative constraints <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20789#</SPAN>, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20791#</SPAN>, and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20793#</SPAN>
-for the three variables, form <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20795#</SPAN> intersection points:
+The five planes, <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img878.svg"
+ ALT="$m=2$"></SPAN> from the constraining inequalities, and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img879.svg"
+ ALT="$n=3$"></SPAN>
+for the non-negative constraints <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img880.svg"
+ ALT="$y_1\le 0$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img881.svg"
+ ALT="$y_2\le 0$"></SPAN>, and <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img882.svg"
+ ALT="$y_3\le 0$"></SPAN>
+for the three variables, form <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img883.svg"
+ ALT="$10$"></SPAN> intersection points:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1011#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{c|c|c|c}\hline
+    & (y_1,\,y_2,\,y_3)  & \mbox{objective function} \\\hline
+    1 & (1,0,0) & \mbox{infeasible}   & 18\\
+    2 & (3,0,0) & \mbox{feasible}   & 54\\
+    3 & (0,1/3,0) & \mbox{infeasible}   & 20\\
+    4 & (0,3/5,0) & \mbox{feasible}   & 36\\
+    5 & (0,0,1) & \mbox{feasible}   & 40\\
+    6 & (0,0,3/5) & \mbox{infeasible}   & 24\\
+    7 & (0,1/5,2/5) & \mbox{feasible}   & 28\\
+    8 & (1/2,0,1/2) & \mbox{feasible}   & 29\\
+    9 & (-2,1,0) & \mbox{infeasible}   & 24\\
+    10 & (0,0,0) & \mbox{infeasible}   & 0\\\hline
+  \end{array}
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20797#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img884.svg"
+ ALT="\begin{displaymath}\begin{array}{c\vert c\vert c\vert c}\hline
+&amp; (y_1,\,y_2,\,y_...
+...24\\
+10 &amp; (0,0,0) &amp; \mbox{infeasible} &amp; 0\\ \hline
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
 
 <P>
-We see that at the feasible point <tex2html_verbatim_mark>#math1012#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20799#</SPAN>, the dual function 
-<tex2html_verbatim_mark>#math1013#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20801#</SPAN> is minimized to be <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20803#</SPAN>, the same 
-as the maximum of the primal function <tex2html_verbatim_mark>#math1014#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20805#</SPAN> at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20807#</SPAN>.
+We see that at the feasible point <!-- MATH
+ $(0,1/5,2/5)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img885.svg"
+ ALT="$(0,1/5,2/5)$"></SPAN>, the dual function 
+<!-- MATH
+ $f_d(y_1,y_2,y_3)=18y_1+60y_2+40y_3$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img886.svg"
+ ALT="$f_d(y_1,y_2,y_3)=18y_1+60y_2+40y_3$"></SPAN> is minimized to be <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img887.svg"
+ ALT="$28$"></SPAN>, the same 
+as the maximum of the primal function <!-- MATH
+ $f_p(x_1,x_2)=2x_1+3x_2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img888.svg"
+ ALT="$f_p(x_1,x_2)=2x_1+3x_2$"></SPAN> at <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img889.svg"
+ ALT="$(5,6)$"></SPAN>.
 
 <P>
 <IMG STYLE="" SRC="figures/LPdual1.png"
  ALT="LPdual1.png">
 
 <P>
-<#5130#><B>Homework:</B><#5130#> 
+<B>Homework:</B> 
 
 <P>
-Develop the code to find all <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20809#</SPAN> intersections formed by <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20811#</SPAN> 
+Develop the code to find all <SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.95ex; " SRC="img861.svg"
+ ALT="$C_{N+M}^N$"></SPAN> intersections formed by <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img837.svg"
+ ALT="$N+M$"></SPAN> 
 given hyper-planes in an N-D space in terms of their equations
-<tex2html_verbatim_mark>#math1015#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20813#</SPAN> and 
-<tex2html_verbatim_mark>#math1016#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20815#</SPAN>, identify which of them are vertices of the polytope 
+<!-- MATH
+ ${\bf A}_{M\times N}{\bf x}_{N\times 1}\le{\bf b}_{M\times 1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img890.svg"
+ ALT="${\bf A}_{M\times N}{\bf x}_{N\times 1}\le{\bf b}_{M\times 1}$"></SPAN> and 
+<!-- MATH
+ ${\bf x}\ge {\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.43ex; " SRC="img853.svg"
+ ALT="${\bf x}\ge{\bf0}$"></SPAN>, identify which of them are vertices of the polytope 
 surrounded by these hype-planes, and find the vertex corresponding to the 
-optimal solution that maximizes <tex2html_verbatim_mark>#math1017#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20817#</SPAN> for a given 
-<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20819#</SPAN>.
+optimal solution that maximizes <!-- MATH
+ $f({\bf x})={\bf c}^T{\bf x}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img848.svg"
+ ALT="$f({\bf x})={\bf c}^T{\bf x}$"></SPAN> for a given 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img846.svg"
+ ALT="${\bf c}$"></SPAN>.
 
 <P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node17.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node12.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node15.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node17.html">The Simplex Algorithm</A>
+<B> Up:</B> <A
+ HREF="node12.html">Constrained Optimization</A>
+<B> Previous:</B> <A
+ HREF="node15.html">Duality and KKT Conditions</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

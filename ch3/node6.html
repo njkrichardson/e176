@@ -1,3 +1,47 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Newton's method</TITLE>
+<META NAME="description" CONTENT="Newton's method">
+<META NAME="keywords" CONTENT="ch3">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch3.css">
+
+<LINK REL="next" HREF="node7.html">
+<LINK REL="previous" HREF="node5.html">
+<LINK REL="next" HREF="node7.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node7.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node5.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node7.html">Gradient Descent Method</A>
+<B> Up:</B> <A
+ HREF="node2.html">Unconstrained Optimization</A>
+<B> Previous:</B> <A
+ HREF="node5.html">Nelder-Mead method</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
 
 <H2><A ID="SECTION00024000000000000000">
 Newton's method</A>
@@ -5,25 +49,41 @@ Newton's method</A>
 
 <P>
 Newton's method is based on the Taylor series expansion of the function
-<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18336#</SPAN> to be minimized near some point <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18338#</SPAN>:
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img60.svg"
+ ALT="$f(x)$"></SPAN> to be minimized near some point <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img64.svg"
+ ALT="$x_0$"></SPAN>:
 <BR>
 <DIV CLASS="mathdisplay">
-<tex2html_verbatim_mark>#math296#
+<!-- MATH
+ \begin{eqnarray}
+f(x)&=&f(x_0)+f'(x_0)(x-x_0)+\frac{1}{2}f''(x_0)(x-x_0)^2 + \cdots
+  +\frac{1}{n!}f^{(n)}(x_0)(x-x_0)^n + \cdots
+  \nonumber\\
+  &\approx& f(x_0)+f'(x_0)(x-x_0)+\frac{1}{2}f''(x_0)(x-x_0)^2 =q(x)
+\end{eqnarray}
+ -->
 <TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
-<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><tex2html_image_mark>#tex2html_wrap_indisplay18341#</TD>
-<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay18343#</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay18345#</TD>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img154.svg"
+ ALT="$\displaystyle f(x)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img104.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img155.svg"
+ ALT="$\displaystyle f(x_0)+f'(x_0)(x-x_0)+\frac{1}{2}f''(x_0)(x-x_0)^2 + \cdots
++\frac{1}{n!}f^{(n)}(x_0)(x-x_0)^n + \cdots$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 &nbsp;</TD></TR>
 <TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
-<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay18347#</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay18349#</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img156.svg"
+ ALT="$\displaystyle \approx$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img157.svg"
+ ALT="$\displaystyle f(x_0)+f'(x_0)(x-x_0)+\frac{1}{2}f''(x_0)(x-x_0)^2 =q(x)$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 (<SPAN CLASS="arabic">28</SPAN>)</TD></TR>
 </TABLE></DIV>
 <BR CLEAR="ALL">
 
-If <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18351#</SPAN> is a quadratic function, then the Taylor series only
+If <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img158.svg"
+ ALT="$f(x)=q(t)$"></SPAN> is a quadratic function, then the Taylor series only
 contains the first three terms (constant, linear, and quadratic terms).
 
 <P>
@@ -31,257 +91,595 @@ contains the first three terms (constant, linear, and quadratic terms).
  ALT="NewtonEx1.png">
 
 <P>
-In this case, we can find the vertex point at which <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18353#</SPAN> reaches
+In this case, we can find the vertex point at which <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img159.svg"
+ ALT="$f(x)=q(x)$"></SPAN> reaches
 its extremum, by first setting its derivative to zero:
 <BR>
 <DIV CLASS="mathdisplay">
-<tex2html_verbatim_mark>#math297#
+<!-- MATH
+ \begin{eqnarray}
+q'(x)&=&\frac{d}{dx}q(x)=\frac{d}{dx}\left[ f(x_0)+f'(x_0)(x-x_0)
+    +\frac{1}{2}f''(x_0)(x-x_0)^2 \right]
+  \nonumber\\
+  &=&f'(x_0)+f''(x_0)(x-x_0)=0
+\end{eqnarray}
+ -->
 <TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
-<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><tex2html_image_mark>#tex2html_wrap_indisplay18356#</TD>
-<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay18358#</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay18360#</TD>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img160.svg"
+ ALT="$\displaystyle q'(x)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img104.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img161.svg"
+ ALT="$\displaystyle \frac{d}{dx}q(x)=\frac{d}{dx}\left[ f(x_0)+f'(x_0)(x-x_0)
++\frac{1}{2}f''(x_0)(x-x_0)^2 \right]$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 &nbsp;</TD></TR>
 <TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
-<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay18362#</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay18364#</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img104.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img162.svg"
+ ALT="$\displaystyle f'(x_0)+f''(x_0)(x-x_0)=0$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 (<SPAN CLASS="arabic">29</SPAN>)</TD></TR>
 </TABLE></DIV>
 <BR CLEAR="ALL">
 
-and then solving the resulting equation for <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18366#</SPAN> to get:
+and then solving the resulting equation for <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img39.svg"
+ ALT="$x$"></SPAN> to get:
 <P></P>
-<DIV CLASS="mathdisplay"><A ID="OptimalNewton"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math298#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><A ID="OptimalNewton"></A><!-- MATH
+ \begin{equation}
+x^*=x=x_0-\frac{f'(x_0)}{f''(x_0)}=x_0+\Delta x_0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18368#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.29ex; " SRC="img163.svg"
+ ALT="$\displaystyle x^*=x=x_0-\frac{f'(x_0)}{f''(x_0)}=x_0+\Delta x_0$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">30</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-where <tex2html_verbatim_mark>#math299#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18370#</SPAN> is the step we need to take to go
-from any initial point <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18372#</SPAN> to the solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18374#</SPAN> in a single step. 
-Note that <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18376#</SPAN> is a minimum if <tex2html_verbatim_mark>#math300#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18378#</SPAN> but a maximum if 
-<tex2html_verbatim_mark>#math301#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18380#</SPAN>.
+where <!-- MATH
+ $\Delta x_0=-f'(x_0)/f''(x_0)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img164.svg"
+ ALT="$\Delta x_0=-f'(x_0)/f''(x_0)$"></SPAN> is the step we need to take to go
+from any initial point <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img64.svg"
+ ALT="$x_0$"></SPAN> to the solution <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img165.svg"
+ ALT="$x^*$"></SPAN> in a single step. 
+Note that <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img166.svg"
+ ALT="$f(x^*)$"></SPAN> is a minimum if <!-- MATH
+ $f''(x^*)>0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img167.svg"
+ ALT="$f''(x^*)&gt;0$"></SPAN> but a maximum if 
+<!-- MATH
+ $f''(x^*)<0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img168.svg"
+ ALT="$f''(x^*)&lt;0$"></SPAN>.
 
 <P>
-If <tex2html_verbatim_mark>#math302#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18382#</SPAN> is not quadratic, the result above can still be 
+If <!-- MATH
+ $f(x)\ne q(x)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img169.svg"
+ ALT="$f(x)\ne q(x)$"></SPAN> is not quadratic, the result above can still be 
 considered as an approximation of the solution, which can be improved 
-iteratively from an initial guess <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18384#</SPAN> to eventually approach the 
+iteratively from an initial guess <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img64.svg"
+ ALT="$x_0$"></SPAN> to eventually approach the 
 solution:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math303#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+x_{n+1}=x_n+\Delta x_n=x_n-\frac{f'(x_n)}{f''(x_n)}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18386#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.29ex; " SRC="img170.svg"
+ ALT="$\displaystyle x_{n+1}=x_n+\Delta x_n=x_n-\frac{f'(x_n)}{f''(x_n)}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">31</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-We see that in each step <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18388#</SPAN> of the iteration, the function <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18390#</SPAN> is
-fitted by a quadratic functions <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18392#</SPAN> and its vertex at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18394#</SPAN> is 
+We see that in each step <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img171.svg"
+ ALT="$x_n$"></SPAN> of the iteration, the function <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img60.svg"
+ ALT="$f(x)$"></SPAN> is
+fitted by a quadratic functions <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img172.svg"
+ ALT="$q(x_n)$"></SPAN> and its vertex at <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.66ex; " SRC="img173.svg"
+ ALT="$x_{n+1}$"></SPAN> is 
 used as the updated approximated solution, at which the function is again
-fitted by another quadratic function <tex2html_verbatim_mark>#math304#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18396#</SPAN> for the next iteration. 
-Through this process the solution can be approached as <tex2html_verbatim_mark>#math305#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18398#</SPAN>.
+fitted by another quadratic function <!-- MATH
+ $q(x_{n+1})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img174.svg"
+ ALT="$q(x_{n+1})$"></SPAN> for the next iteration. 
+Through this process the solution can be approached as <!-- MATH
+ $n\rightarrow\infty$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img175.svg"
+ ALT="$n\rightarrow\infty$"></SPAN>.
 
 <P>
-We note that the iteration <tex2html_verbatim_mark>#math306#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18400#</SPAN> above is just 
+We note that the iteration <!-- MATH
+ $x_{n+1}=x_n-f'(x_n)/f''(x_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img176.svg"
+ ALT="$x_{n+1}=x_n-f'(x_n)/f''(x_n)$"></SPAN> above is just 
 the <A ID="tex2html6"
   HREF="../ch2/node5.html">Newton-Raphson method</A>
 for
-solving an equation <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18402#</SPAN> but now applied to equation <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18404#</SPAN>, as
-a necessary condition for an extremum of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18406#</SPAN>.
+solving an equation <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img61.svg"
+ ALT="$f(x)=0$"></SPAN> but now applied to equation <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img177.svg"
+ ALT="$f'(x)=0$"></SPAN>, as
+a necessary condition for an extremum of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img60.svg"
+ ALT="$f(x)$"></SPAN>.
 
 <P>
 This quadratic function
 <P></P>
-<DIV CLASS="mathdisplay"><A ID="qofx"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math307#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><A ID="qofx"></A><!-- MATH
+ \begin{equation}
+q(x)=f(x_0)+f'(x_0)(x-x_0)+\frac{1}{2}f''(x_0)(x-x_0)^2
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18408#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img178.svg"
+ ALT="$\displaystyle q(x)=f(x_0)+f'(x_0)(x-x_0)+\frac{1}{2}f''(x_0)(x-x_0)^2$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">32</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 can also be expressed as
 <P></P>
-<DIV CLASS="mathdisplay"><A ID="qofxnew"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math308#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><A ID="qofxnew"></A><!-- MATH
+ \begin{equation}
+q(x)=\frac{a}{2}(x-b)^2+c
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18410#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 4.41ex; vertical-align: -1.71ex; " SRC="img179.svg"
+ ALT="$\displaystyle q(x)=\frac{a}{2}(x-b)^2+c$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">33</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 in terms of the following three parameters:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math309#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left\{\begin{array}{l}a=f''(x_0)\\
+b=x_0-f'(x_0)/f''(x_0)\\c=f(x_0)-f'^2(x_0)/2f''(x_0)
+\end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18412#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img180.svg"
+ ALT="$\displaystyle \left\{\begin{array}{l}a=f''(x_0)\\
+b=x_0-f'(x_0)/f''(x_0)\\ c=f(x_0)-f'^2(x_0)/2f''(x_0)
+\end{array}\right.$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">34</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-(Substituting <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18414#</SPAN>, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18416#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18418#</SPAN> into Eq. (<A HREF=<tex2html_cr_mark>#qofxnew#553><tex2html_cr_mark></A>) one gets Eq. (<A HREF=<tex2html_cr_mark>#qofx#554><tex2html_cr_mark></A>).)
-Now it becomes obvious that when <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18420#</SPAN>, the function <tex2html_verbatim_mark>#math310#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18422#</SPAN> reaches its 
-minimum at the point <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18424#</SPAN>. Note that the expression of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18426#</SPAN> above is actually the
-same as Eq. (<A HREF=<tex2html_cr_mark>#OptimalNewton#555><tex2html_cr_mark></A>).
+(Substituting <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img14.svg"
+ ALT="$a$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img15.svg"
+ ALT="$b$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img181.svg"
+ ALT="$c$"></SPAN> into Eq. (<A HREF="#qofxnew">33</A>) one gets Eq. (<A HREF="#qofx">32</A>).)
+Now it becomes obvious that when <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img182.svg"
+ ALT="$x=b$"></SPAN>, the function <!-- MATH
+ $q(x)=q(b)=c$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img183.svg"
+ ALT="$q(x)=q(b)=c$"></SPAN> reaches its 
+minimum at the point <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img182.svg"
+ ALT="$x=b$"></SPAN>. Note that the expression of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img15.svg"
+ ALT="$b$"></SPAN> above is actually the
+same as Eq. (<A HREF="#OptimalNewton">30</A>).
 
 <P>
-<#556#><B>Example</B><#556#>
+<B>Example</B>
 
 <P>
 The function to be minimized and its first and second order derivatives are
 given below:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math311#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f(x)=2x^3-4x^2+x,\;\;\;\;\;f'(x)=6x^2-8x+1,\;\;\;\;\;\;\;f''(x)=12x-8
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18428#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img184.svg"
+ ALT="$\displaystyle f(x)=2x^3-4x^2+x,\;\;\;\;\;f'(x)=6x^2-8x+1,\;\;\;\;\;\;\;f''(x)=12x-8$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
-Solving <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18430#</SPAN> we get the optimal solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18432#</SPAN>, at which 
-<tex2html_verbatim_mark>#math312#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18434#</SPAN>. But here we will use the Newton's method to obtain the 
-solution iteratively based on an initial guess <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18436#</SPAN>, at which we have
+Solving <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img177.svg"
+ ALT="$f'(x)=0$"></SPAN> we get the optimal solution <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img185.svg"
+ ALT="$x^*=1.333$"></SPAN>, at which 
+<!-- MATH
+ $f(x^*)=-1.037$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img186.svg"
+ ALT="$f(x^*)=-1.037$"></SPAN>. But here we will use the Newton's method to obtain the 
+solution iteratively based on an initial guess <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img187.svg"
+ ALT="$x_0=3$"></SPAN>, at which we have
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math313#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f(x_0)=f(3)=21,\;\;\;\;\;\;\;f'(x_0)=f'(3)=31,\;\;\;\;\;\;f''(x_0)=f''(3)=28
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18438#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img188.svg"
+ ALT="$\displaystyle f(x_0)=f(3)=21,\;\;\;\;\;\;\;f'(x_0)=f'(3)=31,\;\;\;\;\;\;f''(x_0)=f''(3)=28$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
-Here <tex2html_verbatim_mark>#math314#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18440#</SPAN> indicates that the function <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18442#</SPAN> has a minimum in the
-neighborhood of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18444#</SPAN>. We use the parabola below to approximate <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18446#</SPAN>:
+Here <!-- MATH
+ $f''(x_0)>0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img189.svg"
+ ALT="$f''(x_0)&gt;0$"></SPAN> indicates that the function <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img190.svg"
+ ALT="$x(x)$"></SPAN> has a minimum in the
+neighborhood of <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img187.svg"
+ ALT="$x_0=3$"></SPAN>. We use the parabola below to approximate <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img60.svg"
+ ALT="$f(x)$"></SPAN>:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math315#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+q(x)=\frac{a}{2}(x-b)^2+c
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18448#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 4.41ex; vertical-align: -1.71ex; " SRC="img179.svg"
+ ALT="$\displaystyle q(x)=\frac{a}{2}(x-b)^2+c$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
 based on these parameters:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math316#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left\{\begin{array}{l}
+  a=f''(3)=28\\
+  b=3-f'(3)/f''(3)=1.8929\\
+  c=f(3)-f'^2(3)/2f''(3)=3.8393\end{array}\right.
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18450#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img191.svg"
+ ALT="$\displaystyle \left\{\begin{array}{l}
+a=f''(3)=28\\
+b=3-f'(3)/f''(3)=1.8929\\
+c=f(3)-f'^2(3)/2f''(3)=3.8393\end{array}\right.$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
-At the vertex of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18452#</SPAN> at <tex2html_verbatim_mark>#math317#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18454#</SPAN>, we have <tex2html_verbatim_mark>#math318#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18456#</SPAN>,
-much smaller than <tex2html_verbatim_mark>#math319#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18458#</SPAN>. The estimated solution 
-<tex2html_verbatim_mark>#math320#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18460#</SPAN> is used as an iterative step 
-<tex2html_verbatim_mark>#math321#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18462#</SPAN> for further improving the estimate.
+At the vertex of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img98.svg"
+ ALT="$q(x)$"></SPAN> at <!-- MATH
+ $x_1=b=1.8929$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img192.svg"
+ ALT="$x_1=b=1.8929$"></SPAN>, we have <!-- MATH
+ $f(x_1)=f(1.8929)=1.1251$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img193.svg"
+ ALT="$f(x_1)=f(1.8929)=1.1251$"></SPAN>,
+much smaller than <!-- MATH
+ $f(x_0)=f(3)=21$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img194.svg"
+ ALT="$f(x_0)=f(3)=21$"></SPAN>. The estimated solution 
+<!-- MATH
+ $x=b=x_0-f'(x_0)/f''(x_0)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img195.svg"
+ ALT="$x=b=x_0-f'(x_0)/f''(x_0)$"></SPAN> is used as an iterative step 
+<!-- MATH
+ $x_1=x_0-f'(x_0)/f''(x_0)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img196.svg"
+ ALT="$x_1=x_0-f'(x_0)/f''(x_0)$"></SPAN> for further improving the estimate.
 
 <P>
 We can further generalize Newton's method for single-variable function 
-<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18464#</SPAN> to mult-variable function <tex2html_verbatim_mark>#math322#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18466#</SPAN>, which 
-can be approximated by a quadratic function <tex2html_verbatim_mark>#math323#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18468#</SPAN> containing the 
-first three terms of its Taylor series at some point <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18470#</SPAN>:
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img60.svg"
+ ALT="$f(x)$"></SPAN> to mult-variable function <!-- MATH
+ $f({\bf x})=f(x_1,\cdots,x_N)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img197.svg"
+ ALT="$f({\bf x})=f(x_1,\cdots,x_N)$"></SPAN>, which 
+can be approximated by a quadratic function <!-- MATH
+ $q({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img198.svg"
+ ALT="$q({\bf x})$"></SPAN> containing the 
+first three terms of its Taylor series at some point <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img125.svg"
+ ALT="${\bf x}_0$"></SPAN>:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math324#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f({\bf x})\approx  f({\bf x}_0)+{\bf g}_0^T({\bf x}-{\bf x}_0)
+  +\frac{1}{2}({\bf x}-{\bf x}_0)^T{\bf H}_0\,({\bf x}-{\bf x}_0)
+  =q({\bf x})
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18472#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img199.svg"
+ ALT="$\displaystyle f({\bf x})\approx f({\bf x}_0)+{\bf g}_0^T({\bf x}-{\bf x}_0)
++\frac{1}{2}({\bf x}-{\bf x}_0)^T{\bf H}_0\,({\bf x}-{\bf x}_0)
+=q({\bf x})$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">35</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-where <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18474#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18476#</SPAN> are respectively the gradient vector and 
-Hessian matrix of the function <tex2html_verbatim_mark>#math325#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18478#</SPAN> at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18480#</SPAN>:
+where <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img200.svg"
+ ALT="${\bf g}_0$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img201.svg"
+ ALT="${\bf H}_0$"></SPAN> are respectively the gradient vector and 
+Hessian matrix of the function <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN> at <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img125.svg"
+ ALT="${\bf x}_0$"></SPAN>:
 <BR>
 <DIV CLASS="mathdisplay">
-<tex2html_verbatim_mark>#math326#
+<!-- MATH
+ \begin{eqnarray}
+{\bf g}_0&=&{\bf g}_f({\bf x}_0)=\frac{d}{d{\bf x}} f({\bf x}_0)
+  =\left[\begin{array}{c}\frac{\partial f({\bf x}_0)}{\partial x_1}\\
+      \vdots \\\frac{\partial f({\bf x}_0)}{\partial x_N}\end{array}\right],
+  \nonumber\\
+  {\bf H}_0&=&{\bf H}_f({\bf x}_0)=\frac{d}{d{\bf x}} {\bf g}({\bf x}_0)
+  =\frac{d^2}{d{\bf x}^2} f({\bf x}_0)
+  =\left[\begin{array}{ccc} \frac{\partial^2 f({\bf x}_0)}{\partial x_1^2} &
+      \cdots & \frac{\partial^2 f({\bf x}_0)}{\partial x_1\partial x_N} \\
+      \vdots & \ddots & \vdots \\
+      \frac{\partial^2 f({\bf x}_0)}{\partial x_N\partial x_1} & 
+      \cdots & \frac{\partial^2 f({\bf x}_0)}{\partial x_N^2}
+    \end{array}\right]
+\end{eqnarray}
+ -->
 <TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
-<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><tex2html_image_mark>#tex2html_wrap_indisplay18483#</TD>
-<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay18485#</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay18487#</TD>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img202.svg"
+ ALT="$\displaystyle {\bf g}_0$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img104.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 11.38ex; vertical-align: -5.11ex; " SRC="img203.svg"
+ ALT="$\displaystyle {\bf g}_f({\bf x}_0)=\frac{d}{d{\bf x}} f({\bf x}_0)
+=\left[\begi...
+...x_1}\\
+\vdots \\ \frac{\partial f({\bf x}_0)}{\partial x_N}\end{array}\right],$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 &nbsp;</TD></TR>
-<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><tex2html_image_mark>#tex2html_wrap_indisplay18489#</TD>
-<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay18491#</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay18493#</TD>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img204.svg"
+ ALT="$\displaystyle {\bf H}_0$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img104.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 12.54ex; vertical-align: -5.67ex; " SRC="img205.svg"
+ ALT="$\displaystyle {\bf H}_f({\bf x}_0)=\frac{d}{d{\bf x}} {\bf g}({\bf x}_0)
+=\frac...
+...1} &amp;
+\cdots &amp; \frac{\partial^2 f({\bf x}_0)}{\partial x_N^2}
+\end{array}\right]$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 (<SPAN CLASS="arabic">36</SPAN>)</TD></TR>
 </TABLE></DIV>
 <BR CLEAR="ALL">
 
-The stationary point of <tex2html_verbatim_mark>#math327#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18495#</SPAN> can be found from any point
-<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18497#</SPAN> by setting its derivative to zero
+The stationary point of <!-- MATH
+ $f({\bf x})=q({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img206.svg"
+ ALT="$f({\bf x})=q({\bf x})$"></SPAN> can be found from any point
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img125.svg"
+ ALT="${\bf x}_0$"></SPAN> by setting its derivative to zero
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math328#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\frac{d}{d{\bf x}}\left[f({\bf x}_0)+{\bf g}_0^T({\bf x}-{\bf x}_0)
+    +\frac{1}{2}({\bf x}-{\bf x}_0)^T{\bf H}_0\,({\bf x}-{\bf x}_0)\right]
+  ={\bf g}_0+{\bf H}_0\,({\bf x}-{\bf x}_0)={\bf0}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18499#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img207.svg"
+ ALT="$\displaystyle \frac{d}{d{\bf x}}\left[f({\bf x}_0)+{\bf g}_0^T({\bf x}-{\bf x}_...
+..._0\,({\bf x}-{\bf x}_0)\right]
+={\bf g}_0+{\bf H}_0\,({\bf x}-{\bf x}_0)={\bf0}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">37</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 and solving the resulting equation to get
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math329#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf x}^*={\bf x}={\bf x}_0-{\bf H}({\bf x}_0)^{-1}{\bf g}({\bf x}_0)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18501#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img208.svg"
+ ALT="$\displaystyle {\bf x}^*={\bf x}={\bf x}_0-{\bf H}({\bf x}_0)^{-1}{\bf g}({\bf x}_0)$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">38</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-Similar to the 1-D case where whether <tex2html_verbatim_mark>#math330#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18503#</SPAN> is a minimum or 
-maximum depends on whether the second order derivative <tex2html_verbatim_mark>#math331#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18505#</SPAN> 
-is greater or smaller than zero, here whether <tex2html_verbatim_mark>#math332#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18507#</SPAN> is a minimum,
+Similar to the 1-D case where whether <!-- MATH
+ $f({\bf x}^*)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img3.svg"
+ ALT="$f({\bf x}^*)$"></SPAN> is a minimum or 
+maximum depends on whether the second order derivative <!-- MATH
+ $f''({\bf x}^*)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img209.svg"
+ ALT="$f''({\bf x}^*)$"></SPAN> 
+is greater or smaller than zero, here whether <!-- MATH
+ $f({\bf x}^*)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img3.svg"
+ ALT="$f({\bf x}^*)$"></SPAN> is a minimum,
 maximum, or neither, depends on the second order derivatives, the Hessiam 
-matrix <tex2html_verbatim_mark>#math333#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18509#</SPAN>:
+matrix <!-- MATH
+ ${\bf H}^*={\bf H}({\bf x}^*)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img210.svg"
+ ALT="${\bf H}^*={\bf H}({\bf x}^*)$"></SPAN>:
 
 <UL>
-<LI>If <tex2html_verbatim_mark>#math334#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18511#</SPAN> is positive definite (all eigenvalues are positive),
-  <tex2html_verbatim_mark>#math335#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18513#</SPAN> is a local minimum;
+<LI>If <!-- MATH
+ ${\bf H}^*>0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img211.svg"
+ ALT="${\bf H}^*&gt;0$"></SPAN> is positive definite (all eigenvalues are positive),
+  <!-- MATH
+ $f({\bf x}^*)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img3.svg"
+ ALT="$f({\bf x}^*)$"></SPAN> is a local minimum;
 
 <P>
 </LI>
-<LI>If <tex2html_verbatim_mark>#math336#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18515#</SPAN> is negative definite (all eigenvalues are negative),
-  <tex2html_verbatim_mark>#math337#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18517#</SPAN> a local maximum;
+<LI>If <!-- MATH
+ ${\bf H}^*<0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img212.svg"
+ ALT="${\bf H}^*&lt;0$"></SPAN> is negative definite (all eigenvalues are negative),
+  <!-- MATH
+ $f({\bf x}^*)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img3.svg"
+ ALT="$f({\bf x}^*)$"></SPAN> a local maximum;
 
 <P>
 </LI>
-<LI>If <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18519#</SPAN> is indefinite (has both positive and negative 
-  eigenvalues), <tex2html_verbatim_mark>#math338#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18521#</SPAN> is a saddle point (neither minimum nor 
+<LI>If <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img213.svg"
+ ALT="${\bf H}^*$"></SPAN> is indefinite (has both positive and negative 
+  eigenvalues), <!-- MATH
+ $f({\bf x}^*)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img3.svg"
+ ALT="$f({\bf x}^*)$"></SPAN> is a saddle point (neither minimum nor 
   maximum).  
 </LI>
 </UL>
 
 <P>
-If <tex2html_verbatim_mark>#math339#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18523#</SPAN> is not quadratic, the result above is not
+If <!-- MATH
+ $f({\bf x})\ne q({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img214.svg"
+ ALT="$f({\bf x})\ne q({\bf x})$"></SPAN> is not quadratic, the result above is not
 a minimum or maximum, but it can still be used as an approximation of the
 solution, which can be improved to approached the true solution iteratively:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math340#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf x}_{n+1}={\bf x}_n+\Delta{\bf x}_n
+  ={\bf x}_n-{\bf H}_n^{-1}{\bf g}_n ={\bf x}_n+{\bf d}_n
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18525#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.69ex; " SRC="img215.svg"
+ ALT="$\displaystyle {\bf x}_{n+1}={\bf x}_n+\Delta{\bf x}_n
+={\bf x}_n-{\bf H}_n^{-1}{\bf g}_n ={\bf x}_n+{\bf d}_n$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">39</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-where <tex2html_verbatim_mark>#math341#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18527#</SPAN>, <tex2html_verbatim_mark>#math342#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18529#</SPAN>, and 
-<tex2html_verbatim_mark>#math343#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18531#</SPAN> is the increment in 
-the nth step, called <#700#><EM>Newton search direction</EM><#700#>.
+where <!-- MATH
+ ${\bf g}_n={\bf g}({\bf x}_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img216.svg"
+ ALT="${\bf g}_n={\bf g}({\bf x}_n)$"></SPAN>, <!-- MATH
+ ${\bf H}_n={\bf H}({\bf x}_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img217.svg"
+ ALT="${\bf H}_n={\bf H}({\bf x}_n)$"></SPAN>, and 
+<!-- MATH
+ ${\bf d}_n=\Delta{\bf x}_n=-{\bf H}_n^{-1}{\bf g}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img218.svg"
+ ALT="${\bf d}_n=\Delta{\bf x}_n=-{\bf H}_n^{-1}{\bf g}_n$"></SPAN> is the increment in 
+the nth step, called <EM>Newton search direction</EM>.
 
 <P>
 We note that the iteration above is just a generalization of 
-<tex2html_verbatim_mark>#math344#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18533#</SPAN> in 1-D case with <tex2html_verbatim_mark>#math345#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18535#</SPAN> 
-and <tex2html_verbatim_mark>#math346#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18537#</SPAN>. Also, the iteration 
-<tex2html_verbatim_mark>#math347#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18539#</SPAN> above is just the
+<!-- MATH
+ $x_{n+1}=x_n-f'(x_n)/f''(x_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img176.svg"
+ ALT="$x_{n+1}=x_n-f'(x_n)/f''(x_n)$"></SPAN> in 1-D case with <!-- MATH
+ ${\bf g}_n=f'(x_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img219.svg"
+ ALT="${\bf g}_n=f'(x_n)$"></SPAN> 
+and <!-- MATH
+ ${\bf H}_n=f''(x_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img220.svg"
+ ALT="${\bf H}_n=f''(x_n)$"></SPAN>. Also, the iteration 
+<!-- MATH
+ ${\bf x}_{n+1}={\bf x}_n-{\bf H}_n^{-1}\,{\bf g}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img221.svg"
+ ALT="${\bf x}_{n+1}={\bf x}_n-{\bf H}_n^{-1}\,{\bf g}_n$"></SPAN> above is just the
 <A ID="tex2html7"
   HREF="../ch2/node6.html">Newton-Raphson method</A>
 for 
-solving equation <tex2html_verbatim_mark>#math348#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18541#</SPAN> but here applied to
-solving <tex2html_verbatim_mark>#math349#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18543#</SPAN> as a necessary condition for
-an extremum of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18545#</SPAN>.
+solving equation <!-- MATH
+ ${\bf f}({\bf x})={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img42.svg"
+ ALT="${\bf f}({\bf x})={\bf0}$"></SPAN> but here applied to
+solving <!-- MATH
+ ${\bf g}_f({\bf x})={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img44.svg"
+ ALT="${\bf g}_f({\bf x})={\bf0}$"></SPAN> as a necessary condition for
+an extremum of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img222.svg"
+ ALT="${\bf f}$"></SPAN>.
 
 <P>
 The speed of convergence of the iteration can be controlled by a parameter 
-<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18547#</SPAN> that controls the step size:
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img223.svg"
+ ALT="$\delta&gt;0$"></SPAN> that controls the step size:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math350#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf x}_{n+1}={\bf x}_n+\delta_n \; \Delta{\bf x}_n
+  ={\bf x}_n-\delta_n \; {\bf H}_n^{-1}{\bf g}_n
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18549#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.69ex; " SRC="img224.svg"
+ ALT="$\displaystyle {\bf x}_{n+1}={\bf x}_n+\delta_n \; \Delta{\bf x}_n
+={\bf x}_n-\delta_n \; {\bf H}_n^{-1}{\bf g}_n$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">40</SPAN>)</TD></TR>
 </TABLE></DIV>
@@ -292,69 +690,215 @@ This quadratic function can also be expressed as (show it as
 <A ID="tex2html8"
   HREF="../sub1/sub1.html">homework</A>):
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math351#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+q({\bf x})=\frac{1}{2}({\bf x}-{\bf b})^T{\bf A}({\bf x}-{\bf b})+c
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18551#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img225.svg"
+ ALT="$\displaystyle q({\bf x})=\frac{1}{2}({\bf x}-{\bf b})^T{\bf A}({\bf x}-{\bf b})+c$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">41</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 where
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math352#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left\{\begin{array}{l}
+           {\bf A}={\bf H}_0\\
+           {\bf b}={\bf x}_0-{\bf H}^{-1}{\bf g}_0\\
+           c=f({\bf x}_0)-{\bf g}_0^T{\bf H}_0^{-1}{\bf g_0}/2
+\end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18553#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.83ex; vertical-align: -3.76ex; " SRC="img226.svg"
+ ALT="$\displaystyle \left\{\begin{array}{l}
+{\bf A}={\bf H}_0\\
+{\bf b}={\bf x}_0-{\...
+... g}_0\\
+c=f({\bf x}_0)-{\bf g}_0^T{\bf H}_0^{-1}{\bf g_0}/2
+\end{array}\right.$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">42</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 and we have
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math353#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf g}_0={\bf g}_f({\bf x}_0)={\bf A}({\bf x}_0-{\bf b})={\bf A}{\bf e}_0,
+  \;\;\;\;\;\;\;
+  {\bf H}_0={\bf H}_f({\bf x}_0)={\bf A}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18555#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img227.svg"
+ ALT="$\displaystyle {\bf g}_0={\bf g}_f({\bf x}_0)={\bf A}({\bf x}_0-{\bf b})={\bf A}{\bf e}_0,
+\;\;\;\;\;\;\;
+{\bf H}_0={\bf H}_f({\bf x}_0)={\bf A}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">43</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-where <tex2html_verbatim_mark>#math354#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18557#</SPAN> is the error, and <tex2html_verbatim_mark>#math355#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18559#</SPAN> is the
-distance from <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18561#</SPAN> to the vertex <tex2html_verbatim_mark>#math356#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18563#</SPAN> of the quadratic 
-function, at which it may take the extremum <tex2html_verbatim_mark>#math357#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18565#</SPAN> (if <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18567#</SPAN> is
+where <!-- MATH
+ ${\bf e}_0={\bf x}_0-{\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img228.svg"
+ ALT="${\bf e}_0={\bf x}_0-{\bf b}$"></SPAN> is the error, and <!-- MATH
+ $||{\bf e}_0||$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img229.svg"
+ ALT="$\vert\vert{\bf e}_0\vert\vert$"></SPAN> is the
+distance from <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img125.svg"
+ ALT="${\bf x}_0$"></SPAN> to the vertex <!-- MATH
+ ${\bf x}={\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img230.svg"
+ ALT="${\bf x}={\bf b}$"></SPAN> of the quadratic 
+function, at which it may take the extremum <!-- MATH
+ $q({\bf b})=c$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img231.svg"
+ ALT="$q({\bf b})=c$"></SPAN> (if <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img232.svg"
+ ALT="${\bf H}$"></SPAN> is
 either positive or negative definite).
 
 <P>
-<#781#><B>Example 0:</B><#781#> Consider the following quadratic function:
+<B>Example 0:</B> Consider the following quadratic function:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math358#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+q(x,y)=\frac{1}{2} [x,\;y]\left[\begin{array}{cc}a&b/2\\b/2&c\end{array}\right]
+  \left[\begin{array}{c}x\\y\end{array}\right]=\frac{1}{2}(ax^2+bxy+cy^2)
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18569#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img233.svg"
+ ALT="$\displaystyle q(x,y)=\frac{1}{2} [x,\;y]\left[\begin{array}{cc}a&amp;b/2\\ b/2&amp;c\en...
+...right]
+\left[\begin{array}{c}x\\ y\end{array}\right]=\frac{1}{2}(ax^2+bxy+cy^2)$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
 We have
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math359#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf g}=\left[\begin{array}{c}ax+by/2\\bx/2+cy\end{array}\right],
+  \;\;\;\;\;\;\;\;\;\;\;\;\;\;
+  {\bf H}=\left[\begin{array}{cc}a&b/2\\b/2&c\end{array}\right],
+  \;\;\;\;\;\;\det{\bf H}=ac-b^2/4
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18571#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img234.svg"
+ ALT="$\displaystyle {\bf g}=\left[\begin{array}{c}ax+by/2\\ bx/2+cy\end{array}\right]...
+...gin{array}{cc}a&amp;b/2\\ b/2&amp;c\end{array}\right],
+\;\;\;\;\;\;\det{\bf H}=ac-b^2/4$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
-We let <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18573#</SPAN>, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18575#</SPAN>, and consider the following values of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18577#</SPAN>:
+We let <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img235.svg"
+ ALT="$a=1$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img236.svg"
+ ALT="$c=2$"></SPAN>, and consider the following values of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img15.svg"
+ ALT="$b$"></SPAN>:
 
 <UL>
-<LI><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18579#</SPAN>, <tex2html_verbatim_mark>#math360#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18581#</SPAN>, <tex2html_verbatim_mark>#math361#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18583#</SPAN>, <tex2html_verbatim_mark>#math362#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18585#</SPAN>, 
-  <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18587#</SPAN> is positive definite, <tex2html_verbatim_mark>#math363#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18589#</SPAN> is the minimum.
+<LI><SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img237.svg"
+ ALT="$b=-2$"></SPAN>, <!-- MATH
+ $\lambda_1=2.618$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img238.svg"
+ ALT="$\lambda_1=2.618$"></SPAN>, <!-- MATH
+ $\lambda_2=0.382$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img239.svg"
+ ALT="$\lambda_2=0.382$"></SPAN>, <!-- MATH
+ $\det{\bf H}=\lambda_1\lambda_2=1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img240.svg"
+ ALT="$\det{\bf H}=\lambda_1\lambda_2=1$"></SPAN>, 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img241.svg"
+ ALT="${\bf H}&gt;0$"></SPAN> is positive definite, <!-- MATH
+ $f(0,\,0)=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img242.svg"
+ ALT="$f(0,\,0)=0$"></SPAN> is the minimum.
 </LI>
-<LI><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18591#</SPAN>, <tex2html_verbatim_mark>#math364#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18593#</SPAN>, <tex2html_verbatim_mark>#math365#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18595#</SPAN>, <tex2html_verbatim_mark>#math366#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18597#</SPAN>, 
-  <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18599#</SPAN> is positive definite, <tex2html_verbatim_mark>#math367#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18601#</SPAN> is the minimum.
+<LI><SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img243.svg"
+ ALT="$b=0$"></SPAN>, <!-- MATH
+ $\lambda_1=2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img244.svg"
+ ALT="$\lambda_1=2$"></SPAN>, <!-- MATH
+ $\lambda_2=1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img245.svg"
+ ALT="$\lambda_2=1$"></SPAN>, <!-- MATH
+ $\det{\bf H}=\lambda_1\lambda_2=2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img246.svg"
+ ALT="$\det{\bf H}=\lambda_1\lambda_2=2$"></SPAN>, 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img241.svg"
+ ALT="${\bf H}&gt;0$"></SPAN> is positive definite, <!-- MATH
+ $f(0,\,0)=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img242.svg"
+ ALT="$f(0,\,0)=0$"></SPAN> is the minimum.
 </LI>
-<LI><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18603#</SPAN>, <tex2html_verbatim_mark>#math368#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18605#</SPAN>, <tex2html_verbatim_mark>#math369#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18607#</SPAN>, <tex2html_verbatim_mark>#math370#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18609#</SPAN>, 
-  <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18611#</SPAN> is positive definite, <tex2html_verbatim_mark>#math371#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18613#</SPAN> is the minimum.
+<LI><SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img247.svg"
+ ALT="$b=2$"></SPAN>, <!-- MATH
+ $\lambda_1=2.618$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img238.svg"
+ ALT="$\lambda_1=2.618$"></SPAN>, <!-- MATH
+ $\lambda_2=0.382$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img239.svg"
+ ALT="$\lambda_2=0.382$"></SPAN>, <!-- MATH
+ $\det{\bf H}=\lambda_1\lambda_2=1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img240.svg"
+ ALT="$\det{\bf H}=\lambda_1\lambda_2=1$"></SPAN>, 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img241.svg"
+ ALT="${\bf H}&gt;0$"></SPAN> is positive definite, <!-- MATH
+ $f(0,\,0)=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img242.svg"
+ ALT="$f(0,\,0)=0$"></SPAN> is the minimum.
 </LI>
-<LI><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18615#</SPAN>, <tex2html_verbatim_mark>#math372#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18617#</SPAN>, <tex2html_verbatim_mark>#math373#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18619#</SPAN>, <tex2html_verbatim_mark>#math374#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18621#</SPAN>, 
-  <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18623#</SPAN> is indefinite, <tex2html_verbatim_mark>#math375#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18625#</SPAN> is a saddle point (minimum in one direction
+<LI><SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img248.svg"
+ ALT="$b=4$"></SPAN>, <!-- MATH
+ $\lambda_1=3.562$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img249.svg"
+ ALT="$\lambda_1=3.562$"></SPAN>, <!-- MATH
+ $\lambda_2=-0.562$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img250.svg"
+ ALT="$\lambda_2=-0.562$"></SPAN>, <!-- MATH
+ $\det{\bf H}=\lambda_1\lambda_2=-2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img251.svg"
+ ALT="$\det{\bf H}=\lambda_1\lambda_2=-2$"></SPAN>, 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img232.svg"
+ ALT="${\bf H}$"></SPAN> is indefinite, <!-- MATH
+ $f(0,\,0)=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img242.svg"
+ ALT="$f(0,\,0)=0$"></SPAN> is a saddle point (minimum in one direction
   but maximum in another).
 </LI>
 </UL>
@@ -364,18 +908,33 @@ We let <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18573#</SPA
  ALT="QuadraticSurf.png">
 
 <P>
-We can speed up the convergence by a bigger step size <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18627#</SPAN>. However, 
-if <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18629#</SPAN> is too big, the solution may be skipped and the iteration may 
+We can speed up the convergence by a bigger step size <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img252.svg"
+ ALT="$\delta&gt;1$"></SPAN>. However, 
+if <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img253.svg"
+ ALT="$\delta$"></SPAN> is too big, the solution may be skipped and the iteration may 
 not converge if it gets into an oscillation around the solution. Even worse,
 the iteration may become divergent. For such reasons, a smaller step size 
-<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18631#</SPAN> may be preferred sometimes.
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img254.svg"
+ ALT="$\delta&lt;1$"></SPAN> may be preferred sometimes.
 
 <P>
-In summary, Newton's method approximates the function <tex2html_verbatim_mark>#math376#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18633#</SPAN> at an
-estimated solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18635#</SPAN> by a quadratic equation (the first three 
-terms of the Taylor's series) based on the gradient <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18637#</SPAN> and Hessian 
-<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18639#</SPAN> of the function at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18641#</SPAN>, and treat the vertex of the 
-quadratic equation as the updated estimate <tex2html_verbatim_mark>#math377#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18643#</SPAN>.
+In summary, Newton's method approximates the function <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN> at an
+estimated solution <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img255.svg"
+ ALT="${\bf x}_n$"></SPAN> by a quadratic equation (the first three 
+terms of the Taylor's series) based on the gradient <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img256.svg"
+ ALT="${\bf g}_n$"></SPAN> and Hessian 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img232.svg"
+ ALT="${\bf H}$"></SPAN> of the function at <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img255.svg"
+ ALT="${\bf x}_n$"></SPAN>, and treat the vertex of the 
+quadratic equation as the updated estimate <!-- MATH
+ ${\bf x}_{n+1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.66ex; " SRC="img257.svg"
+ ALT="${\bf x}_{n+1}$"></SPAN>.
 
 <P>
 Newton's method requires the Hessian matrix as well as the gradient to be 
@@ -383,42 +942,133 @@ available. Moreover, it is necessary calculate the inverse of the Hessian
 matrix in each iteration, which may be computationally expensive. 
 
 <P>
-<#823#><B>Example 1</B><#823#> 
+<B>Example 1</B> 
 
 <P>
 The Newton's method is applied to solving the following non-linear equation 
-system of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18645#</SPAN> variables:
+system of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img258.svg"
+ ALT="$N=3$"></SPAN> variables:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math378#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left\{\begin{array}{l}
+  f_1(x_1,\,x_2,\,x_3)=3x_1-(x_2x_3)^2-3/2\\
+  f_2(x_1,\,x_2,\,x_3)=4x_1^2-625\,x_2^2+2x_2-1\\
+  f_3(x_1,\,x_2,\,x_3)=exp(-x_1x_2)+20x_3+9\end{array}\right.
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18647#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img259.svg"
+ ALT="$\displaystyle \left\{\begin{array}{l}
+f_1(x_1,\,x_2,\,x_3)=3x_1-(x_2x_3)^2-3/2\...
+...25\,x_2^2+2x_2-1\\
+f_3(x_1,\,x_2,\,x_3)=exp(-x_1x_2)+20x_3+9\end{array}\right.$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
-with the exact solution <tex2html_verbatim_mark>#math379#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18649#</SPAN>. These equations can 
-be expressed in vector form as <tex2html_verbatim_mark>#math380#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18651#</SPAN> and solved as an 
+with the exact solution <!-- MATH
+ $(x_1=0.5,\;x_2=0,\;x_3=-0.5)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img260.svg"
+ ALT="$(x_1=0.5,\;x_2=0,\;x_3=-0.5)$"></SPAN>. These equations can 
+be expressed in vector form as <!-- MATH
+ ${\bf f}({\bf x})={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img42.svg"
+ ALT="${\bf f}({\bf x})={\bf0}$"></SPAN> and solved as an 
 optimization problem with the objective function 
-<tex2html_verbatim_mark>#math381#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18653#</SPAN>. The iteration from an 
-initial guess <tex2html_verbatim_mark>#math382#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18655#</SPAN> is shown below. 
+<!-- MATH
+ $o({\bf x})={\bf f}^T({\bf x}){\bf f}({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img261.svg"
+ ALT="$o({\bf x})={\bf f}^T({\bf x}){\bf f}({\bf x})$"></SPAN>. The iteration from an 
+initial guess <!-- MATH
+ ${\bf x}_0={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img262.svg"
+ ALT="${\bf x}_0={\bf0}$"></SPAN> is shown below. 
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math383#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{c||c|c}\hline
+n & {\bf x}=[x_1,\,x_2,\,x_3]  & ||{\bf f}({\bf x})|| \\\hline\hline
+0 &	0.000000,\;\; 0.000000,\;\;  0.000000 &	1.016120e+01  \\\hline
+1 &	0.500000,\;\; 0.500000,\;\; -0.500000 &	1.552502e+02  \\\hline
+2 &	0.499550,\;\; 0.250800,\;\; -0.493801 &	3.881300e+01  \\\hline
+3 &	0.500096,\;\; 0.126206,\;\; -0.496852 &	9.702208e+00  \\\hline
+4 &	0.500025,\;\; 0.063914,\;\; -0.498405 &	2.425198e+00  \\\hline
+5 &	0.500010,\;\; 0.032778,\;\; -0.499181 &	6.059054e-01  \\\hline
+6 &	0.500005,\;\; 0.017231,\;\; -0.499570 &	1.510777e-01  \\\hline
+7 &	0.500003,\;\; 0.009498,\;\; -0.499763 &	3.737330e-02  \\\hline
+8 &	0.500002,\;\; 0.005712,\;\; -0.499857 &	8.959365e-03  \\\hline
+9 &	0.500001,\;\; 0.003968,\;\; -0.499901 &	1.900145e-03  \\\hline
+10 &	0.500001,\;\; 0.003326,\;\; -0.499917 &	2.577603e-04  \\\hline
+11 &	0.500001,\;\; 0.003206,\;\; -0.499920 &	8.932714e-06  \\\hline
+12 &	0.500001,\;\; 0.003202,\;\; -0.499920 &	1.238536e-08  \\\hline
+13 &	0.500001,\;\; 0.003202,\;\; -0.499920 &	2.371437e-14  \\\hline
+\end{array}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath18657#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img263.svg"
+ ALT="\begin{displaymath}\begin{array}{c\vert\vert c\vert c}\hline
+n &amp; {\bf x}=[x_1,\,...
+...\; 0.003202,\;\; -0.499920 &amp; 2.371437e-14 \\ \hline
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">44</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 We see that after 13 iterations the algorithm converges to 
 the following approximated solution with accuracy of 
-<tex2html_verbatim_mark>#math384#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18659#</SPAN>:
+<!-- MATH
+ $o({\bf x})=||{\bf f}({\bf x}^*)||^2\approx 10^{-28}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img264.svg"
+ ALT="$o({\bf x})=\vert\vert{\bf f}({\bf x}^*)\vert\vert^2\approx 10^{-28}$"></SPAN>:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math385#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf x}^*=\left[\begin{array}{r}0.5000008539707297\\0.0032017070323056\\
+      -0.4999200212218281\end{array}\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18661#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img265.svg"
+ ALT="$\displaystyle {\bf x}^*=\left[\begin{array}{r}0.5000008539707297\\ 0.0032017070323056\\
+-0.4999200212218281\end{array}\right]$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">45</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 
 <P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node7.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node5.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node7.html">Gradient Descent Method</A>
+<B> Up:</B> <A
+ HREF="node2.html">Unconstrained Optimization</A>
+<B> Previous:</B> <A
+ HREF="node5.html">Nelder-Mead method</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

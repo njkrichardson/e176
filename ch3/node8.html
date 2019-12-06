@@ -1,3 +1,47 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Line minimization</TITLE>
+<META NAME="description" CONTENT="Line minimization">
+<META NAME="keywords" CONTENT="ch3">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch3.css">
+
+<LINK REL="next" HREF="node9.html">
+<LINK REL="previous" HREF="node7.html">
+<LINK REL="next" HREF="node9.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node9.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node7.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node9.html">Quasi-Newton Methods</A>
+<B> Up:</B> <A
+ HREF="node2.html">Unconstrained Optimization</A>
+<B> Previous:</B> <A
+ HREF="node7.html">Gradient Descent Method</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
 
 <H2><A ID="SECTION00026000000000000000">
 Line minimization</A>
@@ -5,72 +49,195 @@ Line minimization</A>
 
 <P>
 In both Newton's method and the radient descent method, an iteration 
-<tex2html_verbatim_mark>#math420#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18786#</SPAN> is carried out to gradually 
-reduce the value of the objective function <tex2html_verbatim_mark>#math421#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18788#</SPAN>. Here both the
-search direction <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18790#</SPAN> and the step size <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18792#</SPAN> need to be 
-determined to maximally reduce the function value <tex2html_verbatim_mark>#math422#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18794#</SPAN>.
+<!-- MATH
+ ${\bf x}_{n+1}={\bf x}_n+\delta_n{\bf d}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img303.svg"
+ ALT="${\bf x}_{n+1}={\bf x}_n+\delta_n{\bf d}_n$"></SPAN> is carried out to gradually 
+reduce the value of the objective function <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN>. Here both the
+search direction <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img304.svg"
+ ALT="${\bf d}_n$"></SPAN> and the step size <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img253.svg"
+ ALT="$\delta$"></SPAN> need to be 
+determined to maximally reduce the function value <!-- MATH
+ $f({\bf x}_{n+1})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img305.svg"
+ ALT="$f({\bf x}_{n+1})$"></SPAN>.
 
 <P>
-First, we realize that to reduce <tex2html_verbatim_mark>#math423#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18796#</SPAN> the search 
-direction <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18798#</SPAN> needs to point away from the gradient <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18800#</SPAN> 
-along which <tex2html_verbatim_mark>#math424#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18802#</SPAN> increases most rapidly, i.e., the angle 
-<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18804#</SPAN> between <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18806#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18808#</SPAN> should be greater than 
-<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18810#</SPAN>:
+First, we realize that to reduce <!-- MATH
+ $f({\bf x}_{n+1})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img305.svg"
+ ALT="$f({\bf x}_{n+1})$"></SPAN> the search 
+direction <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img295.svg"
+ ALT="${\bf d}$"></SPAN> needs to point away from the gradient <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img256.svg"
+ ALT="${\bf g}_n$"></SPAN> 
+along which <!-- MATH
+ $f({\bf x}_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img306.svg"
+ ALT="$f({\bf x}_n)$"></SPAN> increases most rapidly, i.e., the angle 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img307.svg"
+ ALT="$\theta$"></SPAN> between <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img304.svg"
+ ALT="${\bf d}_n$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img256.svg"
+ ALT="${\bf g}_n$"></SPAN> should be greater than 
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img308.svg"
+ ALT="$\pi/2$"></SPAN>:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math425#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\theta=\cos^{-1}\frac{{\bf d}_n^T{\bf g}_n}{||{\bf d}_n||\;||{\bf g}_n||}
+  >\frac{\pi}{2}
+\;\;\;\;\;{i.e.,}\;\;\;\;\;  {\bf d}_n^T{\bf g}_n<0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18812#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.29ex; " SRC="img309.svg"
+ ALT="$\displaystyle \theta=\cos^{-1}\frac{{\bf d}_n^T{\bf g}_n}{\vert\vert{\bf d}_n\v...
+..._n\vert\vert}
+&gt;\frac{\pi}{2}
+\;\;\;\;\;{i.e.,}\;\;\;\;\; {\bf d}_n^T{\bf g}_n&lt;0$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">51</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-so that <tex2html_verbatim_mark>#math426#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18814#</SPAN> will decrease along <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18816#</SPAN>. 
+so that <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN> will decrease along <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img304.svg"
+ ALT="${\bf d}_n$"></SPAN>. 
 We see that this condition is indeed satisfied in both the gradient
-descent method with <tex2html_verbatim_mark>#math427#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18818#</SPAN> and Newton's method with
-<tex2html_verbatim_mark>#math428#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18820#</SPAN> (with <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18822#</SPAN> being positive 
+descent method with <!-- MATH
+ ${\bf d}_n=-{\bf g}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img281.svg"
+ ALT="${\bf d}_n=-{\bf g}_n$"></SPAN> and Newton's method with
+<!-- MATH
+ ${\bf d}_n=-{\bf H}_n^{-1}{\bf g}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img310.svg"
+ ALT="${\bf d}_n=-{\bf H}_n^{-1}{\bf g}_n$"></SPAN> (with <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img283.svg"
+ ALT="${\bf H}_n$"></SPAN> being positive 
 definite):
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math429#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf d}_n^T{\bf g}_n=-{\bf g}_n^T{\bf H}_n^{-1}{\bf g}_n <0,\;\;\;\;\;\;\;\;\;\;
+  {\bf d}_n^T{\bf g}_n=-{\bf g}_n^T{\bf g}_n=-||{\bf g}_n||^2 <0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18824#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img311.svg"
+ ALT="$\displaystyle {\bf d}_n^T{\bf g}_n=-{\bf g}_n^T{\bf H}_n^{-1}{\bf g}_n &lt;0,\;\;\...
+...
+{\bf d}_n^T{\bf g}_n=-{\bf g}_n^T{\bf g}_n=-\vert\vert{\bf g}_n\vert\vert^2 &lt;0$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">52</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 
 <P>
-Second, the optimal step size <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18826#</SPAN> needs to be determined so that 
-the function velue at the next step <tex2html_verbatim_mark>#math430#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18828#</SPAN> 
-is minimized along the search direction <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18830#</SPAN>. To find such a <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18832#</SPAN>,
-we set to zero the derivative of the function with respect to <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18834#</SPAN>, the 
-<#1101#><EM>directional derivative</EM><#1101#> along the direction of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18836#</SPAN>, and get 
+Second, the optimal step size <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img312.svg"
+ ALT="$\delta_n$"></SPAN> needs to be determined so that 
+the function velue at the next step <!-- MATH
+ $f({\bf x}_{n+1})=f({\bf x}_n+\delta_n{\bf d}_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img313.svg"
+ ALT="$f({\bf x}_{n+1})=f({\bf x}_n+\delta_n{\bf d}_n)$"></SPAN> 
+is minimized along the search direction <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img304.svg"
+ ALT="${\bf d}_n$"></SPAN>. To find such a <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img253.svg"
+ ALT="$\delta$"></SPAN>,
+we set to zero the derivative of the function with respect to <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img312.svg"
+ ALT="$\delta_n$"></SPAN>, the 
+<EM>directional derivative</EM> along the direction of <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img304.svg"
+ ALT="${\bf d}_n$"></SPAN>, and get 
 (by chain rule):
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math431#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\frac{d}{d\delta_n} f({\bf x}_{n+1})
+  =\frac{d}{d\delta_n}f({\bf x}_n+\delta_n{\bf d}_n)
+  =\left(\frac{d\,f({\bf x}_{n+1})}{d{\bf x}}\right)^T\;
+  \frac{d({\bf x}_n+\delta_n{\bf d}_n)}{d\delta_n}
+  ={\bf g}^T_{n+1}{\bf d}_n=0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18838#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.50ex; vertical-align: -2.32ex; " SRC="img314.svg"
+ ALT="$\displaystyle \frac{d}{d\delta_n} f({\bf x}_{n+1})
+=\frac{d}{d\delta_n}f({\bf x...
+...\;
+\frac{d({\bf x}_n+\delta_n{\bf d}_n)}{d\delta_n}
+={\bf g}^T_{n+1}{\bf d}_n=0$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">53</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-This result indicates that the gradient <tex2html_verbatim_mark>#math432#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18840#</SPAN> 
-at <tex2html_verbatim_mark>#math433#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18842#</SPAN> needs to be perpendicular to the previous search 
-direction <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18844#</SPAN>. In other words, when traversing along the 
-search direction <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18846#</SPAN>, we should stop at the point 
-<tex2html_verbatim_mark>#math434#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18848#</SPAN> at which the gradient 
-<tex2html_verbatim_mark>#math435#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18850#</SPAN> has zero component along the direction <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18852#</SPAN>, 
-and the corresponding <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18854#</SPAN> is the optimal step size.
+This result indicates that the gradient <!-- MATH
+ ${\bf g}_{n+1}=f'({\bf x}_{n+1})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img315.svg"
+ ALT="${\bf g}_{n+1}=f'({\bf x}_{n+1})$"></SPAN> 
+at <!-- MATH
+ ${\bf x}_{n+1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.66ex; " SRC="img257.svg"
+ ALT="${\bf x}_{n+1}$"></SPAN> needs to be perpendicular to the previous search 
+direction <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img304.svg"
+ ALT="${\bf d}_n$"></SPAN>. In other words, when traversing along the 
+search direction <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img304.svg"
+ ALT="${\bf d}_n$"></SPAN>, we should stop at the point 
+<!-- MATH
+ ${\bf x}_{n+1}={\bf x}_n+\delta{\bf d}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img316.svg"
+ ALT="${\bf x}_{n+1}={\bf x}_n+\delta{\bf d}_n$"></SPAN> at which the gradient 
+<!-- MATH
+ ${\bf g}_{n+1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.66ex; " SRC="img317.svg"
+ ALT="${\bf g}_{n+1}$"></SPAN> has zero component along the direction <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img304.svg"
+ ALT="${\bf d}_n$"></SPAN>, 
+and the corresponding <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img253.svg"
+ ALT="$\delta$"></SPAN> is the optimal step size.
 
 <P>
-Finding the optimal step size <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18856#</SPAN> is a 1-D optimization problem, 
+Finding the optimal step size <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img253.svg"
+ ALT="$\delta$"></SPAN> is a 1-D optimization problem, 
 which can be solved by Newton's method. Specifically, we treat
-<tex2html_verbatim_mark>#math436#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18858#</SPAN> as a function of the signle
-variable <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18860#</SPAN>, and approximate it by the first three terms of its 
-Taylor series at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18862#</SPAN>:
+<!-- MATH
+ $f({\bf x}_{n+1})=f({\bf x}_n+\delta{\bf d}_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img318.svg"
+ ALT="$f({\bf x}_{n+1})=f({\bf x}_n+\delta{\bf d}_n)$"></SPAN> as a function of the signle
+variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img253.svg"
+ ALT="$\delta$"></SPAN>, and approximate it by the first three terms of its 
+Taylor series at <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img319.svg"
+ ALT="$\delta=0$"></SPAN>:
 <P></P>
-<DIV CLASS="mathdisplay"><A ID="OptimalStepTaylor"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math437#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><A ID="OptimalStepTaylor"></A><!-- MATH
+ \begin{equation}
+f({\bf x}_{n+1})=f({\bf x}_n+\delta{\bf d}_n)\approx
+  \left[f({\bf x}_n+\delta{\bf d}_n)\right]_{\delta=0}
+  +\delta\;\left[\frac{d}{d\delta}f({\bf x}_n+\delta{\bf d}_n)\right]_{\delta=0}
+  +\frac{\delta^2}{2}\;\left[\frac{d^2}{d\delta^2}f({\bf x}_n+\delta{\bf d}_n)\right]_{\delta=0}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18864#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.44ex; " SRC="img320.svg"
+ ALT="$\displaystyle f({\bf x}_{n+1})=f({\bf x}_n+\delta{\bf d}_n)\approx
+\left[f({\bf...
+...}{2}\;\left[\frac{d^2}{d\delta^2}f({\bf x}_n+\delta{\bf d}_n)\right]_{\delta=0}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">54</SPAN>)</TD></TR>
 </TABLE></DIV>
@@ -78,58 +245,136 @@ Taylor series at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18
 where
 <BR>
 <DIV CLASS="mathdisplay">
-<tex2html_verbatim_mark>#math438#
+<!-- MATH
+ \begin{eqnarray}
+\left[f({\bf x}_n+\delta{\bf d}_n)\right]_{\delta=0}&=&f({\bf x}_n)  \\
+  \left[\frac{d}{d\delta}f({\bf x}_n+\delta{\bf d}_n)\right]_{\delta=0}
+  &=&{\bf g}({\bf x}_n+\delta{\bf d}_n)^T{\bf d}_n\bigg|_{\delta=0}
+  ={\bf g}^T_n{\bf d}_n\\
+  \left[\frac{d^2}{d\delta^2}f({\bf x}_n+\delta{\bf d}_n)\right]_{\delta=0}
+  &=&\left[\frac{d}{d\delta}{\bf g}({\bf x}_n
+  +\delta{\bf d}_n)^T\right]_{\delta=0}{\bf d}_n
+  =\left[\frac{d}{d{\bf x}} {\bf g}({\bf x})\;
+    \frac{d}{d\delta}({\bf x}_n+\delta{\bf d}_n)\right]^T_{\delta=0}
+  {\bf d}_n
+  \nonumber\\
+  &=&({\bf H}_n{\bf d}_n)^T{\bf d}_n={\bf d}^T_n{\bf H}_n{\bf d}_n
+\end{eqnarray}
+ -->
 <TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
-<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><tex2html_image_mark>#tex2html_wrap_indisplay18867#</TD>
-<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay18869#</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay18871#</TD>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.79ex; vertical-align: -0.81ex; " SRC="img321.svg"
+ ALT="$\displaystyle \left[f({\bf x}_n+\delta{\bf d}_n)\right]_{\delta=0}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img104.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img322.svg"
+ ALT="$\displaystyle f({\bf x}_n)$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 (<SPAN CLASS="arabic">55</SPAN>)</TD></TR>
-<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><tex2html_image_mark>#tex2html_wrap_indisplay18873#</TD>
-<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay18875#</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay18877#</TD>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 6.04ex; vertical-align: -2.44ex; " SRC="img323.svg"
+ ALT="$\displaystyle \left[\frac{d}{d\delta}f({\bf x}_n+\delta{\bf d}_n)\right]_{\delta=0}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img104.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.04ex; vertical-align: -2.44ex; " SRC="img324.svg"
+ ALT="$\displaystyle {\bf g}({\bf x}_n+\delta{\bf d}_n)^T{\bf d}_n\bigg\vert _{\delta=0}
+={\bf g}^T_n{\bf d}_n$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 (<SPAN CLASS="arabic">56</SPAN>)</TD></TR>
-<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><tex2html_image_mark>#tex2html_wrap_indisplay18879#</TD>
-<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay18881#</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay18883#</TD>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 6.04ex; vertical-align: -2.44ex; " SRC="img325.svg"
+ ALT="$\displaystyle \left[\frac{d^2}{d\delta^2}f({\bf x}_n+\delta{\bf d}_n)\right]_{\delta=0}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img104.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.50ex; vertical-align: -2.44ex; " SRC="img326.svg"
+ ALT="$\displaystyle \left[\frac{d}{d\delta}{\bf g}({\bf x}_n
++\delta{\bf d}_n)^T\righ...
+...})\;
+\frac{d}{d\delta}({\bf x}_n+\delta{\bf d}_n)\right]^T_{\delta=0}
+{\bf d}_n$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 &nbsp;</TD></TR>
 <TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
-<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay18885#</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay18887#</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img104.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img327.svg"
+ ALT="$\displaystyle ({\bf H}_n{\bf d}_n)^T{\bf d}_n={\bf d}^T_n{\bf H}_n{\bf d}_n$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 (<SPAN CLASS="arabic">57</SPAN>)</TD></TR>
 </TABLE></DIV>
 <BR CLEAR="ALL">
 
-where <tex2html_verbatim_mark>#math439#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18889#</SPAN> is the Hessian matrix of <tex2html_verbatim_mark>#math440#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18891#</SPAN>
-at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18893#</SPAN>. Substituting these back into the Taylor series above
+where <!-- MATH
+ ${\bf H}_n={\bf H}_n^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img328.svg"
+ ALT="${\bf H}_n={\bf H}_n^T$"></SPAN> is the Hessian matrix of <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN>
+at <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img255.svg"
+ ALT="${\bf x}_n$"></SPAN>. Substituting these back into the Taylor series above
 we get:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math441#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f({\bf x}_n+\delta{\bf d}_n)\approx
+  f({\bf x}_n)+\delta\,{\bf g}^T_n\,{\bf d}_n
+  +\frac{\delta^2}{2}\,{\bf d}^T_n{\bf H}_n\,{\bf d}_n 
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18895#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.34ex; vertical-align: -1.71ex; " SRC="img329.svg"
+ ALT="$\displaystyle f({\bf x}_n+\delta{\bf d}_n)\approx
+f({\bf x}_n)+\delta\,{\bf g}^T_n\,{\bf d}_n
++\frac{\delta^2}{2}\,{\bf d}^T_n{\bf H}_n\,{\bf d}_n$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">58</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-To find <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18897#</SPAN> that minimizes <tex2html_verbatim_mark>#math442#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18899#</SPAN>, we 
-set its derivative with respect to <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18901#</SPAN> to zero:
+To find <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img253.svg"
+ ALT="$\delta$"></SPAN> that minimizes <!-- MATH
+ $f({\bf x}_n+\delta{\bf d}_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img330.svg"
+ ALT="$f({\bf x}_n+\delta{\bf d}_n)$"></SPAN>, we 
+set its derivative with respect to <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img253.svg"
+ ALT="$\delta$"></SPAN> to zero:
 <P></P>
-<DIV CLASS="mathdisplay"><A ID="OptimalDelta1"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math443#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><A ID="OptimalDelta1"></A><!-- MATH
+ \begin{equation}
+\frac{d}{d\delta}f({\bf x}_n+\delta{\bf d}_n)
+  \approx\frac{d}{d\delta}\left(
+  f({\bf x}_n)+\delta{\bf g}^T_n\,{\bf d}_n
+  +\frac{\delta^2}{2}{\bf d}^T_n{\bf H}_n\,{\bf d}_n \right)
+  ={\bf g}^T_n\,{\bf d}_n+\delta\,{\bf d}^T_n{\bf H}_n\,{\bf d}_n=0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18903#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.32ex; " SRC="img331.svg"
+ ALT="$\displaystyle \frac{d}{d\delta}f({\bf x}_n+\delta{\bf d}_n)
+\approx\frac{d}{d\d...
+... d}_n \right)
+={\bf g}^T_n\,{\bf d}_n+\delta\,{\bf d}^T_n{\bf H}_n\,{\bf d}_n=0$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">59</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-and solve the resulting equation for <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18905#</SPAN> to get the optimal 
-step size based on both <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18907#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18909#</SPAN>:
+and solve the resulting equation for <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img253.svg"
+ ALT="$\delta$"></SPAN> to get the optimal 
+step size based on both <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img256.svg"
+ ALT="${\bf g}_n$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img283.svg"
+ ALT="${\bf H}_n$"></SPAN>:
 <P></P>
-<DIV CLASS="mathdisplay"><A ID="OptimalDelta"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math444#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><A ID="OptimalDelta"></A><!-- MATH
+ \begin{equation}
+\delta_n=-\frac{{\bf g}^T_n{\bf d}_n}{{\bf d}^T_n{\bf H}_n{\bf d}_n}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18911#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.28ex; " SRC="img332.svg"
+ ALT="$\displaystyle \delta_n=-\frac{{\bf g}^T_n{\bf d}_n}{{\bf d}^T_n{\bf H}_n{\bf d}_n}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">60</SPAN>)</TD></TR>
 </TABLE></DIV>
@@ -141,24 +386,49 @@ For example, consider the following two methods for minimization:
 <P>
 
 <UL>
-<LI><#1260#><B>Newton's method:</B><#1260#> 
+<LI><B>Newton's method:</B> 
 
 <P>
-The search direction is <tex2html_verbatim_mark>#math445#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18913#</SPAN>, and the 
+The search direction is <!-- MATH
+ ${\bf d}_n=-{\bf H}_n^{-1}{\bf g}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img310.svg"
+ ALT="${\bf d}_n=-{\bf H}_n^{-1}{\bf g}_n$"></SPAN>, and the 
   optimal step size is
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math446#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\delta_n=-\frac{{\bf g}_n^T{\bf d}_n}{{\bf d}_n^T{\bf H}_n{\bf d}_n}
+    =\frac{{\bf g}^T_n({\bf H}_n^{-1}{\bf g}_n)}
+    {({\bf H}_n^{-1}{\bf g}_n)^T{\bf H}_n({\bf H}^{-1}_n{\bf g}_n)}\;
+    =\frac{{\bf g}^T_n({\bf H}_n^{-1}{\bf g}_n)}
+    {({\bf H}_n^{-1}{\bf g}_n)^T{\bf g}_n}\;=1
+  
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18915#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.27ex; vertical-align: -2.48ex; " SRC="img333.svg"
+ ALT="$\displaystyle \delta_n=-\frac{{\bf g}_n^T{\bf d}_n}{{\bf d}_n^T{\bf H}_n{\bf d}...
+...\bf g}^T_n({\bf H}_n^{-1}{\bf g}_n)}
+{({\bf H}_n^{-1}{\bf g}_n)^T{\bf g}_n}\;=1$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">61</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  This is the iteration obtained before, which is indeed optimal:
+This is the iteration obtained before, which is indeed optimal:
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math447#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf x}_{n+1}={\bf x}_n+\delta_n{\bf d}_n
+    =x_n-\delta_n{\bf H}^{-1}_n{\bf g}_n={\bf x}_n-{\bf H}^{-1}_n{\bf g}_n
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18917#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.69ex; " SRC="img334.svg"
+ ALT="$\displaystyle {\bf x}_{n+1}={\bf x}_n+\delta_n{\bf d}_n
+=x_n-\delta_n{\bf H}^{-1}_n{\bf g}_n={\bf x}_n-{\bf H}^{-1}_n{\bf g}_n$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">62</SPAN>)</TD></TR>
 </TABLE></DIV>
@@ -166,27 +436,59 @@ The search direction is <tex2html_verbatim_mark>#math445#<SPAN CLASS="MATH"><tex
 
 <P>
 </LI>
-<LI><#1304#><B>Gradient descent method:</B><#1304#> 
+<LI><B>Gradient descent method:</B> 
 
 <P>
-The search direction is <tex2html_verbatim_mark>#math448#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18919#</SPAN>, we have
+The search direction is <!-- MATH
+ ${\bf d}_n=-{\bf g}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img281.svg"
+ ALT="${\bf d}_n=-{\bf g}_n$"></SPAN>, we have
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math449#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf g}^T_{n+1}{\bf d}_n=-{\bf g}^T_{n+1}{\bf g}_n=0,
+    \;\;\;\;\;\mbox{i.e.,}\;\;\;\;\;\; {\bf g}_{n+1}\perp{\bf g}_n
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18921#<#1#>i.e.,<#1#><tex2html_image_mark>#tex2html_wrap_indisplay18922#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.88ex; " SRC="img335.svg"
+ ALT="$\displaystyle {\bf g}^T_{n+1}{\bf d}_n=-{\bf g}^T_{n+1}{\bf g}_n=0,
+\;\;\;\;\;$">i.e.,<IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img336.svg"
+ ALT="$\displaystyle \;\;\;\;\;\; {\bf g}_{n+1}\perp{\bf g}_n$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">63</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  i.e., the search direction <tex2html_verbatim_mark>#math450#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18924#</SPAN> is always
-  perpendicular to the previous one <tex2html_verbatim_mark>#math451#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18926#</SPAN>, i.e., the
+i.e., the search direction <!-- MATH
+ ${\bf d}_{n+1}=-{\bf g}_{n+1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img337.svg"
+ ALT="${\bf d}_{n+1}=-{\bf g}_{n+1}$"></SPAN> is always
+  perpendicular to the previous one <!-- MATH
+ ${\bf d}_n=-{\bf g}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img281.svg"
+ ALT="${\bf d}_n=-{\bf g}_n$"></SPAN>, i.e., the
   iteration follows a zigzag path composed of a sequence of segments 
   from the initial guess to the final solution. The optimal step size 
   is
   <P></P>
-<DIV CLASS="mathdisplay"><A ID="GradientStepSizeOptimal"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math452#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><A ID="GradientStepSizeOptimal"></A><!-- MATH
+ \begin{equation}
+\delta_n=-\frac{{\bf g}_n^T{\bf d}_n}{{\bf d}_n^T{\bf H}_n{\bf d}_n}
+    =\frac{{\bf g}_n^T{\bf g}_n}{{\bf g}_n^T{\bf H}_n{\bf g}_n} 
+    =\frac{||{\bf g}_n||^2}{{\bf g}_n^T{\bf H}_n{\bf g}_n} 
+  
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18928#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.28ex; " SRC="img338.svg"
+ ALT="$\displaystyle \delta_n=-\frac{{\bf g}_n^T{\bf d}_n}{{\bf d}_n^T{\bf H}_n{\bf d}...
+...bf g}_n}
+=\frac{\vert\vert{\bf g}_n\vert\vert^2}{{\bf g}_n^T{\bf H}_n{\bf g}_n}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">64</SPAN>)</TD></TR>
 </TABLE></DIV>
@@ -195,104 +497,271 @@ The search direction is <tex2html_verbatim_mark>#math448#<SPAN CLASS="MATH"><tex
 </UL>
 
 <P>
-However, as the Hessian <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18930#</SPAN> is not assumed to be available in 
+However, as the Hessian <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img283.svg"
+ ALT="${\bf H}_n$"></SPAN> is not assumed to be available in 
 the gradient descent method, the optimal step size above cannot actually 
-be computed. We can instead approximate <tex2html_verbatim_mark>#math453#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18932#</SPAN> in 
-the third term of Eq. (<A HREF=<tex2html_cr_mark>#OptimalStepTaylor#1345><tex2html_cr_mark></A>) at two nearby points 
-at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18934#</SPAN> and <tex2html_verbatim_mark>#math454#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18936#</SPAN>, where <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18938#</SPAN> is a small value:
+be computed. We can instead approximate <!-- MATH
+ $f''(\delta)\big|_{\delta=0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -1.05ex; " SRC="img339.svg"
+ ALT="$f''(\delta)\big\vert _{\delta=0}$"></SPAN> in 
+the third term of Eq. (<A HREF="#OptimalStepTaylor">54</A>) at two nearby points 
+at <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img319.svg"
+ ALT="$\delta=0$"></SPAN> and <!-- MATH
+ $\delta=\sigma$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img340.svg"
+ ALT="$\delta=\sigma$"></SPAN>, where <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img341.svg"
+ ALT="$\sigma$"></SPAN> is a small value:
 <BR>
 <DIV CLASS="mathdisplay">
-<tex2html_verbatim_mark>#math455#
+<!-- MATH
+ \begin{eqnarray}
+\left[\frac{d^2}{d\delta^2} f({\bf x}+\delta{\bf d})\right]_{\delta=0}
+  &=&\left[\frac{d}{d\delta} f'({\bf x}+\delta{\bf d})\right]_{\delta=0}
+=\lim_{\sigma\rightarrow 0}
+  \frac{f'({\bf x}+\sigma{\bf d})-f'({\bf x})}{\sigma}
+  \nonumber\\
+  &\approx &\frac{{\bf g}^T({\bf x}+\sigma{\bf d})\,{\bf d}-{\bf g}^T({\bf x})\,{\bf d}}
+      {\sigma}
+      =\frac{{\bf g}^T_\sigma{\bf d}-{\bf g}^T{\bf d}}{\sigma}
+\end{eqnarray}
+ -->
 <TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
-<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><tex2html_image_mark>#tex2html_wrap_indisplay18941#</TD>
-<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay18943#</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay18945#</TD>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 6.04ex; vertical-align: -2.44ex; " SRC="img342.svg"
+ ALT="$\displaystyle \left[\frac{d^2}{d\delta^2} f({\bf x}+\delta{\bf d})\right]_{\delta=0}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img104.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.04ex; vertical-align: -2.44ex; " SRC="img343.svg"
+ ALT="$\displaystyle \left[\frac{d}{d\delta} f'({\bf x}+\delta{\bf d})\right]_{\delta=...
+...\lim_{\sigma\rightarrow 0}
+\frac{f'({\bf x}+\sigma{\bf d})-f'({\bf x})}{\sigma}$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 &nbsp;</TD></TR>
 <TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
-<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay18947#</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay18949#</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img156.svg"
+ ALT="$\displaystyle \approx$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.34ex; vertical-align: -1.71ex; " SRC="img344.svg"
+ ALT="$\displaystyle \frac{{\bf g}^T({\bf x}+\sigma{\bf d})\,{\bf d}-{\bf g}^T({\bf x})\,{\bf d}}
+{\sigma}
+=\frac{{\bf g}^T_\sigma{\bf d}-{\bf g}^T{\bf d}}{\sigma}$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 (<SPAN CLASS="arabic">65</SPAN>)</TD></TR>
 </TABLE></DIV>
 <BR CLEAR="ALL">
 
-where <tex2html_verbatim_mark>#math456#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18951#</SPAN> and <tex2html_verbatim_mark>#math457#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18953#</SPAN>.
-This approximation can be used to replace <tex2html_verbatim_mark>#math458#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18955#</SPAN> 
-in Eq. (<A HREF=<tex2html_cr_mark>#OptimalDelta1#1386><tex2html_cr_mark></A>) abve:
+where <!-- MATH
+ ${\bf g}={\bf g}({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img345.svg"
+ ALT="${\bf g}={\bf g}({\bf x})$"></SPAN> and <!-- MATH
+ ${\bf g}_\sigma={\bf g}({\bf x}+\sigma{\bf d})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img346.svg"
+ ALT="${\bf g}_\sigma={\bf g}({\bf x}+\sigma{\bf d})$"></SPAN>.
+This approximation can be used to replace <!-- MATH
+ ${\bf d}_n^T{\bf H}_n{\bf d}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img347.svg"
+ ALT="${\bf d}_n^T{\bf H}_n{\bf d}_n$"></SPAN> 
+in Eq. (<A HREF="#OptimalDelta1">59</A>) abve:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math459#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\frac{d}{d\delta}f({\bf x}_n+\delta{\bf d}_n)
+  \approx {\bf g}_n^T\,{\bf d}_n+\frac{\delta}{\sigma}
+  \left({\bf g}_{\sigma n}^T{\bf d}_n-{\bf g}_n^T{\bf d}_n\right)=0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18957#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.11ex; vertical-align: -1.71ex; " SRC="img348.svg"
+ ALT="$\displaystyle \frac{d}{d\delta}f({\bf x}_n+\delta{\bf d}_n)
+\approx {\bf g}_n^T...
+...elta}{\sigma}
+\left({\bf g}_{\sigma n}^T{\bf d}_n-{\bf g}_n^T{\bf d}_n\right)=0$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">66</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-Solving for <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18959#</SPAN> we get the estimated optimal step size:
+Solving for <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img253.svg"
+ ALT="$\delta$"></SPAN> we get the estimated optimal step size:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math460#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\delta_n=-\frac{\sigma\,{\bf g}_n^T{\bf d}_n}
+        {({\bf g}_{\sigma n}^T{\bf d}_n-{\bf g}_n^T{\bf d}_n)}
+        =-\frac{\sigma\,{\bf g}_n^T{\bf d}_n}{({\bf g}_{\sigma n}-{\bf g}_n)^T{\bf d}_n} 
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18961#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.29ex; " SRC="img349.svg"
+ ALT="$\displaystyle \delta_n=-\frac{\sigma\,{\bf g}_n^T{\bf d}_n}
+{({\bf g}_{\sigma n...
+...-\frac{\sigma\,{\bf g}_n^T{\bf d}_n}{({\bf g}_{\sigma n}-{\bf g}_n)^T{\bf d}_n}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">67</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 For example, in the gradient descent method, the search 
-direction is <tex2html_verbatim_mark>#math461#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18963#</SPAN>, and the optimal step size
-<tex2html_verbatim_mark>#math462#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18965#</SPAN> depends on
-<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18967#</SPAN>, which is not assumed to be available. Therefore the 
+direction is <!-- MATH
+ ${\bf d}_n=-{\bf g}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img281.svg"
+ ALT="${\bf d}_n=-{\bf g}_n$"></SPAN>, and the optimal step size
+<!-- MATH
+ $\delta=||{\bf g}_n||^2/{\bf g}_n^T{\bf H}_n{\bf g}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img350.svg"
+ ALT="$\delta=\vert\vert{\bf g}_n\vert\vert^2/{\bf g}_n^T{\bf H}_n{\bf g}_n$"></SPAN> depends on
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img232.svg"
+ ALT="${\bf H}$"></SPAN>, which is not assumed to be available. Therefore the 
 secant method can be used to approximate the optimal step size:  
 <P></P>
-<DIV CLASS="mathdisplay"><A ID="GradientStepSizeSecant"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math463#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><A ID="GradientStepSizeSecant"></A><!-- MATH
+ \begin{equation}
+\delta_n=-\frac{\sigma\,{\bf g}_n^T{\bf d}_n}{({\bf g}_{\sigma n}-{\bf g}_n)^T{\bf d}_n}
+  =-\frac{\sigma\,{\bf g}_n^T{\bf g}_n}{({\bf g}_{\sigma n}-{\bf g}_n)^T{\bf g}_n} 
+  =\frac{\sigma\,||{\bf g}_n||^2}{||{\bf g}_n||^2-{\bf g}_{\sigma n}^T{\bf g}_n} 
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18969#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.29ex; " SRC="img351.svg"
+ ALT="$\displaystyle \delta_n=-\frac{\sigma\,{\bf g}_n^T{\bf d}_n}{({\bf g}_{\sigma n}...
+...}_n\vert\vert^2}{\vert\vert{\bf g}_n\vert\vert^2-{\bf g}_{\sigma n}^T{\bf g}_n}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">68</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 The iteration becomes
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math464#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf x}_{n+1}={\bf x}_n-\delta_n{\bf g}_n
+  ={\bf x}_n+\frac{\sigma\,||{\bf g}_n||^2}{{\bf g}_{\sigma n}^T{\bf g}_n-||{\bf g}_n||^2}\,
+  {\bf g}_n
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18971#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.29ex; " SRC="img352.svg"
+ ALT="$\displaystyle {\bf x}_{n+1}={\bf x}_n-\delta_n{\bf g}_n
+={\bf x}_n+\frac{\sigma...
+...t^2}{{\bf g}_{\sigma n}^T{\bf g}_n-\vert\vert{\bf g}_n\vert\vert^2}\,
+{\bf g}_n$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">69</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 
 <P>
-<#1457#><B>Example: </B><#1457#> The gradient descent method applied to solve the same
+<B>Example: </B> The gradient descent method applied to solve the same
 three-variable equation system previously solved by Newton's method:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math465#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left\{\begin{array}{l}
+  f_1(x_1,\,x_2,\,x_3)=3x_1-(x_2x_3)^2-3/2\\
+  f_2(x_1,\,x_2,\,x_3)=4x_1^2-625\,x_2^2+2x_2-1\\
+  f_3(x_1,\,x_2,\,x_3)=exp(-x_1x_2)+20x_3+9\end{array}\right.
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18973#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img259.svg"
+ ALT="$\displaystyle \left\{\begin{array}{l}
+f_1(x_1,\,x_2,\,x_3)=3x_1-(x_2x_3)^2-3/2\...
+...25\,x_2^2+2x_2-1\\
+f_3(x_1,\,x_2,\,x_3)=exp(-x_1x_2)+20x_3+9\end{array}\right.$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
 
 <P>
-The step size <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18975#</SPAN> is determined by the secant method with 
-<tex2html_verbatim_mark>#math466#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18977#</SPAN>. The iteration from an initial guess <tex2html_verbatim_mark>#math467#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18979#</SPAN> 
+The step size <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img312.svg"
+ ALT="$\delta_n$"></SPAN> is determined by the secant method with 
+<!-- MATH
+ $\sigma=10^{-6}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img353.svg"
+ ALT="$\sigma=10^{-6}$"></SPAN>. The iteration from an initial guess <!-- MATH
+ ${\bf x}_0={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img262.svg"
+ ALT="${\bf x}_0={\bf0}$"></SPAN> 
 is shown below: 
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math468#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{c||c|c}\hline
+    n & {\bf x}=[x_1,\,x_2,\,x_3]  & ||{\bf f}({\bf x})|| \\\hline\hline
+    0  &	0.0000,\;\; 0.0000,\;\;  0.0000	&1.032500e+02 \\\hline
+    10 &	0.4246,\;\;-0.0073,\;\;-0.5002	&1.535939e-01 \\\hline
+    20 &	0.5015,\;\; 0.0064,\;\; -0.4998	&2.448241e-05 \\\hline
+    30 &	0.5009,\;\; 0.0057,\;\; -0.4998	&9.178209e-06 \\\hline
+    40 &	0.5006,\;\; 0.0052,\;\; -0.4998	&4.17587e-06 \\\hline
+    50 &	0.5004,\;\; 0.0049,\;\; -0.4999	&2.122594e-06 \\\hline
+    60 &	0.5003,\;\; 0.0047,\;\; -0.4999	&1.182466e-06 \\\hline
+    100&	0.5001,\;\; 0.0043,\;\; -0.4999	&1.805871e-07 \\\hline
+    150&	0.5000,\;\; 0.0041,\;\; -0.4999	&2.720744e-08 \\\hline
+    200&	0.5000,\;\; 0.0041,\;\; -0.4999	&4.934027e-09 \\\hline
+    250&	0.5000,\;\; 0.0040,\;\; -0.4999	&9.630085e-10 \\\hline
+    300&	0.5000,\;\; 0.0040,\;\; -0.4999	&1.939747e-10 \\\hline
+    350&	0.5000,\;\; 0.0040,\;\; -0.4999	&3.961646e-11 \\\hline
+    400&	0.5000,\;\; 0.0040,\;\; -0.4999	&8.140393e-12 \\\hline
+    450&	0.5000,\;\; 0.0040,\;\; -0.4999	&1.677968e-12 \\\hline
+    500&	0.5000,\;\; 0.0040,\;\; -0.4999	&3.462695e-13 \\\hline
+    550&	0.5000,\;\; 0.0040,\;\; -0.4999	&7.136628e-14 \\\hline
+    600&	0.5000,\;\; 0.0040,\;\; -0.4999	&1.474205e-14 \\\hline
+  \end{array}
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath18981#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img354.svg"
+ ALT="\begin{displaymath}\begin{array}{c\vert\vert c\vert c}\hline
+n &amp; {\bf x}=[x_1,\,...
+...00,\;\; 0.0040,\;\; -0.4999 &amp;1.474205e-14 \\ \hline
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
 We see that after the first 100 iterations the error is reduced
-to about <tex2html_verbatim_mark>#math469#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18983#</SPAN>, and
+to about <!-- MATH
+ $o({\bf x})=||{\bf f}({\bf x}^*)||^2\approx 10^{-14}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img355.svg"
+ ALT="$o({\bf x})=\vert\vert{\bf f}({\bf x}^*)\vert\vert^2\approx 10^{-14}$"></SPAN>, and
 With 500 additional iterations the algorithm converges to the 
 following approximated solution with accuracy of 
-<tex2html_verbatim_mark>#math470#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18985#</SPAN>:
+<!-- MATH
+ $o({\bf x})\approx 10^{-28}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img356.svg"
+ ALT="$o({\bf x})\approx 10^{-28}$"></SPAN>:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math471#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf x}^*=\left[\begin{array}{r}
+      0.5000013623816102\\
+      0.0040027495837189\\
+     -0.4999000311539049\end{array}\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18987#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img357.svg"
+ ALT="$\displaystyle {\bf x}^*=\left[\begin{array}{r}
+0.5000013623816102\\
+0.0040027495837189\\
+-0.4999000311539049\end{array}\right]$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">70</SPAN>)</TD></TR>
 </TABLE></DIV>
@@ -308,122 +777,285 @@ step size may be acceptable, such as in the
 <A ID="tex2html9"
   HREF="node8.html"><EM>quasi-Newton methods</EM></A>
 for minimization problems. In this case, although the step size 
-<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18989#</SPAN> is no longer required to be such that the function value 
-at the new position <tex2html_verbatim_mark>#math472#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18991#</SPAN> 
-is minimized along the search direction <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18993#</SPAN>, the step size 
-<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18995#</SPAN> still has to satisfy the following
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img253.svg"
+ ALT="$\delta$"></SPAN> is no longer required to be such that the function value 
+at the new position <!-- MATH
+ $f({\bf x}_{n+1})=f({\bf x}_n+\delta{\bf d}_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img318.svg"
+ ALT="$f({\bf x}_{n+1})=f({\bf x}_n+\delta{\bf d}_n)$"></SPAN> 
+is minimized along the search direction <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img304.svg"
+ ALT="${\bf d}_n$"></SPAN>, the step size 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img253.svg"
+ ALT="$\delta$"></SPAN> still has to satisfy the following
 <A ID="tex2html10"
   HREF="https://en.wikipedia.org/wiki/Wolfe_conditions"><EM>Wolfe conditions</EM></A>:
 
 <UL>
-<LI><#1496#><EM>Sufficient decrease (Armijo rule):</EM><#1496#>
+<LI><EM>Sufficient decrease (Armijo rule):</EM>
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math473#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f({\bf x}_{n+1})=f({\bf x}_n+\delta{\bf d}_n)
+    \le f({\bf x}_n)+c_1\,\delta{\bf d}^T {\bf g}_n
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18997#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img358.svg"
+ ALT="$\displaystyle f({\bf x}_{n+1})=f({\bf x}_n+\delta{\bf d}_n)
+\le f({\bf x}_n)+c_1\,\delta{\bf d}^T {\bf g}_n$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">71</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 </LI>
-<LI><#1506#><EM>Curvature condition:</EM><#1506#>
+<LI><EM>Curvature condition:</EM>
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math474#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf g}_{n+1}^T {\bf d}_n\ge c_2\;  {\bf g}_n^T {\bf d}_n
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18999#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.88ex; " SRC="img359.svg"
+ ALT="$\displaystyle {\bf g}_{n+1}^T {\bf d}_n\ge c_2\; {\bf g}_n^T {\bf d}_n$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">72</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  As <tex2html_verbatim_mark>#math475#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19001#</SPAN>, this condition can also be written 
+As <!-- MATH
+ ${\bf g}_n^T{\bf d}_n<0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img360.svg"
+ ALT="${\bf g}_n^T{\bf d}_n&lt;0$"></SPAN>, this condition can also be written 
   in the following alternative form:
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math476#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+|{\bf g}_{n+1}^T {\bf d}_n| < |c_2\;{\bf g}_n^T {\bf d}_n|
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19003#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.88ex; " SRC="img361.svg"
+ ALT="$\displaystyle \vert{\bf g}_{n+1}^T {\bf d}_n\vert &lt; \vert c_2\;{\bf g}_n^T {\bf d}_n\vert$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">73</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 </LI>
 </UL>
-Here the two constants <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19005#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19007#</SPAN> above satisfy <tex2html_verbatim_mark>#math477#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19009#</SPAN>. 
+Here the two constants <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img362.svg"
+ ALT="$c_1$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img363.svg"
+ ALT="$c_2$"></SPAN> above satisfy <!-- MATH
+ $0 < c_1 < c_2 < 1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img364.svg"
+ ALT="$0 &lt; c_1 &lt; c_2 &lt; 1$"></SPAN>. 
 
 <P>
 In general, these conditions are motivated by the desired effect 
 that after each iterative step, the function should have a shallower 
-slope along <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19011#</SPAN>, as well as a lower value, so that eventually 
-the solution can be approached where <tex2html_verbatim_mark>#math478#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19013#</SPAN> is minimum and 
+slope along <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img304.svg"
+ ALT="${\bf d}_n$"></SPAN>, as well as a lower value, so that eventually 
+the solution can be approached where <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN> is minimum and 
 the gradient is zero.
 
 <P>
 Specifically, to understand the first condition above, we represent
 the function to be minimized as a single-variable function of the 
-step size <tex2html_verbatim_mark>#math479#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19015#</SPAN>, and its 
-tangent line at the point <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19017#</SPAN> as a linear function 
-<tex2html_verbatim_mark>#math480#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19019#</SPAN>, where the intercept <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19021#</SPAN> can be found
-as <tex2html_verbatim_mark>#math481#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19023#</SPAN>, and the
-slope <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19025#</SPAN> can be found as the derivative of 
-<tex2html_verbatim_mark>#math482#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19027#</SPAN> at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19029#</SPAN>:
+step size <!-- MATH
+ $\phi(\delta)=f({\bf x}_n+\delta{\bf d}_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img365.svg"
+ ALT="$\phi(\delta)=f({\bf x}_n+\delta{\bf d}_n)$"></SPAN>, and its 
+tangent line at the point <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img319.svg"
+ ALT="$\delta=0$"></SPAN> as a linear function 
+<!-- MATH
+ $L_0(\delta)=a+b\delta$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img366.svg"
+ ALT="$L_0(\delta)=a+b\delta$"></SPAN>, where the intercept <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img14.svg"
+ ALT="$a$"></SPAN> can be found
+as <!-- MATH
+ $a=L_0(0)=\phi(\delta)\big|_{\delta=0}=f({\bf x}_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -1.05ex; " SRC="img367.svg"
+ ALT="$a=L_0(0)=\phi(\delta)\big\vert _{\delta=0}=f({\bf x}_n)$"></SPAN>, and the
+slope <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img15.svg"
+ ALT="$b$"></SPAN> can be found as the derivative of 
+<!-- MATH
+ $\phi(\delta)=f({\bf x}_n+\delta{\bf d}_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img365.svg"
+ ALT="$\phi(\delta)=f({\bf x}_n+\delta{\bf d}_n)$"></SPAN> at <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img319.svg"
+ ALT="$\delta=0$"></SPAN>:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math483#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+b=\frac{d}{d\delta}\;f({\bf x}_n+\delta{\bf d}_n)\bigg|_{\delta=0}
+  ={\bf g}^T_n{\bf d}_n<0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19031#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.44ex; " SRC="img368.svg"
+ ALT="$\displaystyle b=\frac{d}{d\delta}\;f({\bf x}_n+\delta{\bf d}_n)\bigg\vert _{\delta=0}
+={\bf g}^T_n{\bf d}_n&lt;0$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">74</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 which is required to be negative for the function value to be
-reduced, <tex2html_verbatim_mark>#math484#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19033#</SPAN>. Now the
+reduced, <!-- MATH
+ $f({\bf x}_n+\delta{\bf d}_n)<f({\bf x}_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img369.svg"
+ ALT="$f({\bf x}_n+\delta{\bf d}_n)&lt;f({\bf x}_n)$"></SPAN>. Now the
 function of the tangent line can be written as
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math485#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+L_0(\delta)=a+b\delta=f({\bf x}_n)+{\bf g}^T_n{\bf d}_n\delta
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19035#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img370.svg"
+ ALT="$\displaystyle L_0(\delta)=a+b\delta=f({\bf x}_n)+{\bf g}^T_n{\bf d}_n\delta$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">75</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-Comparing this with a constant line <tex2html_verbatim_mark>#math486#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19037#</SPAN> of
-slope zero, we see that any straight line between <tex2html_verbatim_mark>#math487#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19039#</SPAN>
-and <tex2html_verbatim_mark>#math488#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19041#</SPAN> can be described by 
-<tex2html_verbatim_mark>#math489#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19043#</SPAN> with 
-<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19045#</SPAN>, with a slope <tex2html_verbatim_mark>#math490#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19047#</SPAN>.
-The Armijo rule is to find any <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19049#</SPAN> that satisfies
+Comparing this with a constant line <!-- MATH
+ $L_1(\delta)=f({\bf x}_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img371.svg"
+ ALT="$L_1(\delta)=f({\bf x}_n)$"></SPAN> of
+slope zero, we see that any straight line between <!-- MATH
+ $L_0(\delta)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img372.svg"
+ ALT="$L_0(\delta)$"></SPAN>
+and <!-- MATH
+ $L_1(\delta)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img373.svg"
+ ALT="$L_1(\delta)$"></SPAN> can be described by 
+<!-- MATH
+ $L(\delta)=f({\bf x}_n)+c_1\,{\bf g}^T_n{\bf d}_n\delta$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img374.svg"
+ ALT="$L(\delta)=f({\bf x}_n)+c_1\,{\bf g}^T_n{\bf d}_n\delta$"></SPAN> with 
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img375.svg"
+ ALT="$0&lt;c_1&lt;1$"></SPAN>, with a slope <!-- MATH
+ $0< c_1 {\bf g}_n^T{\bf d}_n< {\bf g}_n^T{\bf d}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img376.svg"
+ ALT="$0&lt; c_1 {\bf g}_n^T{\bf d}_n&lt; {\bf g}_n^T{\bf d}_n$"></SPAN>.
+The Armijo rule is to find any <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img223.svg"
+ ALT="$\delta&gt;0$"></SPAN> that satisfies
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math491#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f({\bf x}_{n+1})=f({\bf x}_n+\delta{\bf d}_n)
+  \le f({\bf x}_n)+c_1\,{\bf g}^T_n{\bf d}_n\delta <f({\bf x}_n)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19051#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img377.svg"
+ ALT="$\displaystyle f({\bf x}_{n+1})=f({\bf x}_n+\delta{\bf d}_n)
+\le f({\bf x}_n)+c_1\,{\bf g}^T_n{\bf d}_n\delta &lt;f({\bf x}_n)$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">76</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-We see that the value of <tex2html_verbatim_mark>#math492#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19053#</SPAN> is guaranteed to be reduced.
+We see that the value of <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN> is guaranteed to be reduced.
 
 <P>
 The second condition requires that at the new position 
-<tex2html_verbatim_mark>#math493#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19055#</SPAN> the slope of the gradient <tex2html_verbatim_mark>#math494#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19057#</SPAN> along 
-the search direction <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19059#</SPAN> be sufficiently reduced to be 
-less than a specified value (determined by <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19061#</SPAN>), in comparison 
-to the slope at the old position <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19063#</SPAN>. 
+<!-- MATH
+ ${\bf x}_{n+1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.66ex; " SRC="img257.svg"
+ ALT="${\bf x}_{n+1}$"></SPAN> the slope of the gradient <!-- MATH
+ ${\bf g}_{n+1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.66ex; " SRC="img317.svg"
+ ALT="${\bf g}_{n+1}$"></SPAN> along 
+the search direction <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img304.svg"
+ ALT="${\bf d}_n$"></SPAN> be sufficiently reduced to be 
+less than a specified value (determined by <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img363.svg"
+ ALT="$c_2$"></SPAN>), in comparison 
+to the slope at the old position <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img255.svg"
+ ALT="${\bf x}_n$"></SPAN>. 
 
 <P>
 <IMG STYLE="" SRC="figures/GradientDescent.png"
  ALT="GradientDescent.png">
 
 <P>
-The reason why <tex2html_verbatim_mark>#math495#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19065#</SPAN> can also be explained geometrically.
+The reason why <!-- MATH
+ ${\bf g}_{n+1}\perp{\bf g}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img378.svg"
+ ALT="${\bf g}_{n+1}\perp{\bf g}_n$"></SPAN> can also be explained geometrically.
 As shown in the figure the gradient vectors at various points along the direction 
-of <tex2html_verbatim_mark>#math496#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19067#</SPAN> are shown by the blue arrows, and their projections onto the direction
-represent the slopes of the function <tex2html_verbatim_mark>#math497#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19069#</SPAN>. 
-Obviously at <tex2html_verbatim_mark>#math498#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19071#</SPAN> where <tex2html_verbatim_mark>#math499#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19073#</SPAN> reaches its minimum, its slope 
-is zero. In other words, the projection of the gradient <tex2html_verbatim_mark>#math500#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19075#</SPAN> onto the 
-direction of <tex2html_verbatim_mark>#math501#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19077#</SPAN> is zero, i.e., <tex2html_verbatim_mark>#math502#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19079#</SPAN> or
-<tex2html_verbatim_mark>#math503#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19081#</SPAN>.
+of <!-- MATH
+ $-{\bf g}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.57ex; " SRC="img379.svg"
+ ALT="$-{\bf g}_n$"></SPAN> are shown by the blue arrows, and their projections onto the direction
+represent the slopes of the function <!-- MATH
+ $f(\delta_n)=f({\bf x}_n-\delta_n{\bf g}_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img380.svg"
+ ALT="$f(\delta_n)=f({\bf x}_n-\delta_n{\bf g}_n)$"></SPAN>. 
+Obviously at <!-- MATH
+ ${\bf x}_{n+1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.66ex; " SRC="img257.svg"
+ ALT="${\bf x}_{n+1}$"></SPAN> where <!-- MATH
+ $f(\delta_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img381.svg"
+ ALT="$f(\delta_n)$"></SPAN> reaches its minimum, its slope 
+is zero. In other words, the projection of the gradient <!-- MATH
+ ${\bf g}_{n+1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.66ex; " SRC="img317.svg"
+ ALT="${\bf g}_{n+1}$"></SPAN> onto the 
+direction of <!-- MATH
+ $-{\bf g}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.57ex; " SRC="img379.svg"
+ ALT="$-{\bf g}_n$"></SPAN> is zero, i.e., <!-- MATH
+ ${\bf g}_{n+1}\perp {\bf g}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img378.svg"
+ ALT="${\bf g}_{n+1}\perp{\bf g}_n$"></SPAN> or
+<!-- MATH
+ ${\bf g}_{n+1}^T{\bf g}_n=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.89ex; " SRC="img382.svg"
+ ALT="${\bf g}_{n+1}^T{\bf g}_n=0$"></SPAN>.
 
 <P>
-The gradient descent method gradually approaches a solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19083#</SPAN> of an N-D
-minimization problem by moving from the initial guess <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19085#</SPAN> along a zigzag 
+The gradient descent method gradually approaches a solution <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="${\bf x}$"></SPAN> of an N-D
+minimization problem by moving from the initial guess <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img125.svg"
+ ALT="${\bf x}_0$"></SPAN> along a zigzag 
 path composed of a set of segments with any two consecutive segments
 perpendicular to each other. The number of steps depends greatly on the initial 
 guess. As illustrated in the example below in an N=2 dimensional case, the best 
@@ -439,16 +1071,23 @@ To improve the performance of the gradient descent method we can include in
 the iteration a momentum term representing the search direction previously
 traversed:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math504#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf x}_{n+1}={\bf x}_n-\delta_n{\bf g}_n+\alpha_n({\bf x}_n-{\bf x}_{n-1})
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19087#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img383.svg"
+ ALT="$\displaystyle {\bf x}_{n+1}={\bf x}_n-\delta_n{\bf g}_n+\alpha_n({\bf x}_n-{\bf x}_{n-1})$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">77</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 Now two consecutive search directions are no longer perpendicular to each 
 other and the resulting search path is smoother than the zigzag path  without
-the momentum term. The parameter <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19089#</SPAN> controls how much momentum is to 
+the momentum term. The parameter <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img384.svg"
+ ALT="$\alpha_m$"></SPAN> controls how much momentum is to 
 be added.
 
 <P>
@@ -463,17 +1102,32 @@ Such a method will be discussed in the next section.
  ALT="GradientDescent1.png">
 
 <P>
-<#1604#><B>Example:</B><#1604#> The Rosenbrock function 
+<B>Example:</B> The Rosenbrock function 
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math505#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f(x,y)=(a-x)^2+b(y-x^2)^2\;\;\;\;\;\;\;\;\mbox{typically $a=1,\;
+    b=100$}
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19091#<tex2html_image_mark>#tex2html_wrap_indisplay19092#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img385.svg"
+ ALT="$\displaystyle f(x,y)=(a-x)^2+b(y-x^2)^2\;\;\;\;\;\;\;\;$"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img386.svg"
+ ALT="$\displaystyle \mbox{typically $a=1,\;
+b=100$}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
 is a two-variable non-convex function with a global minimum 
-<tex2html_verbatim_mark>#math506#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19094#</SPAN> at the point <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19096#</SPAN>, which is inside a long parabolic 
+<!-- MATH
+ $f(1,\;1)=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img387.svg"
+ ALT="$f(1,\;1)=0$"></SPAN> at the point <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img388.svg"
+ ALT="$(1,\;1)$"></SPAN>, which is inside a long parabolic 
 shaped valley as shown in the figure below. As the slope along the 
 valley is very shallow, it is difficult for an algorithm to converge 
 quickly to the minimum. For this reason, the Rosenbrock function is 
@@ -486,7 +1140,7 @@ often used to test various minimization algorithms.
 <P>
 The figure below shows the search path of the gradient 
 descent method based on the optimal step size given in Eq. 
-(<A HREF=<tex2html_cr_mark>#GradientStepSizeOptimal#1609><tex2html_cr_mark></A>). We see that the search path 
+(<A HREF="#GradientStepSizeOptimal">64</A>). We see that the search path 
 is composed a long sequence of 90 degree turns between consecutive 
 segments.
 
@@ -508,3 +1162,26 @@ minimum, as shown in the figure below:
  ALT="RosenbrockNewton.png">
 
 <P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node9.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node7.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node9.html">Quasi-Newton Methods</A>
+<B> Up:</B> <A
+ HREF="node2.html">Unconstrained Optimization</A>
+<B> Previous:</B> <A
+ HREF="node7.html">Gradient Descent Method</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

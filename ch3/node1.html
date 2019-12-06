@@ -1,3 +1,47 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Optimization</TITLE>
+<META NAME="description" CONTENT="Optimization">
+<META NAME="keywords" CONTENT="ch3">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch3.css">
+
+<LINK REL="next" HREF="node2.html">
+<LINK REL="previous" HREF="ch3.html">
+<LINK REL="next" HREF="node2.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node2.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="ch3.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="ch3.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node2.html">Unconstrained Optimization</A>
+<B> Up:</B> <A
+ HREF="ch3.html">ch3</A>
+<B> Previous:</B> <A
+ HREF="ch3.html">ch3</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
 
 <H1><A ID="SECTION00010000000000000000">
 Optimization</A>
@@ -6,38 +50,99 @@ Optimization</A>
 <P>
 The goal of mathematical optimization or mathematical programming
 is to solve an optimization problem of a given real multivariate 
-function <tex2html_verbatim_mark>#math177#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17894#</SPAN> by searching its domain, 
+function <!-- MATH
+ $y=f({\bf x})=f(x_1,\cdots,x_N)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1.svg"
+ ALT="$y=f({\bf x})=f(x_1,\cdots,x_N)$"></SPAN> by searching its domain, 
 an N-dimensional space, to find the optimal point 
-<tex2html_verbatim_mark>#math178#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17896#</SPAN> at which the 
-corresponding function value <tex2html_verbatim_mark>#math179#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17898#</SPAN> is either maximized or
-minimized. As maximizing <tex2html_verbatim_mark>#math180#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17900#</SPAN> is equivalent to minimizing 
-<tex2html_verbatim_mark>#math181#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17902#</SPAN>, we can only consider minimization problems.
+<!-- MATH
+ ${\bf x}^*=[x_1^2,\cdots,x_N^*]^T\in\mathbb{R}^N$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.76ex; " SRC="img2.svg"
+ ALT="${\bf x}^*=[x_1^2,\cdots,x_N^*]^T\in\mathbb{R}^N$"></SPAN> at which the 
+corresponding function value <!-- MATH
+ $f({\bf x}^*)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img3.svg"
+ ALT="$f({\bf x}^*)$"></SPAN> is either maximized or
+minimized. As maximizing <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN> is equivalent to minimizing 
+<!-- MATH
+ $-f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img5.svg"
+ ALT="$-f({\bf x})$"></SPAN>, we can only consider minimization problems.
 
 <P>
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math182#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf x}^*=\argmin_{\bf x} f({\bf x}),\;\;\;\;\;\;\mbox{i.e.,}\;\;\;\;\;
+  f({\bf x}^*)=\min_{\bf x} f({\bf x})
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay17904#<#1#>i.e.,<#1#><tex2html_image_mark>#tex2html_wrap_indisplay17905#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 4.18ex; vertical-align: -2.19ex; " SRC="img6.svg"
+ ALT="$\displaystyle {\bf x}^*=\argmin_{\bf x} f({\bf x}),\;\;\;\;\;\;$">i.e.,<IMG STYLE="height: 3.72ex; vertical-align: -1.74ex; " SRC="img7.svg"
+ ALT="$\displaystyle \;\;\;\;\;
+f({\bf x}^*)=\min_{\bf x} f({\bf x})$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">1</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-If the independent variables in <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17907#</SPAN> are allowed to take 
-any values inside the function domain <tex2html_verbatim_mark>#math183#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17909#</SPAN>, then the 
-optimization problem is unconstrained, otherwise if <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17911#</SPAN> has
-to be inside a subset of <tex2html_verbatim_mark>#math184#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17913#</SPAN>, the problem is constrained.
+If the independent variables in <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="${\bf x}$"></SPAN> are allowed to take 
+any values inside the function domain <!-- MATH
+ $\mathbb{R}^N$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img9.svg"
+ ALT="$\mathbb{R}^N$"></SPAN>, then the 
+optimization problem is unconstrained, otherwise if <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="${\bf x}$"></SPAN> has
+to be inside a subset of <!-- MATH
+ $\mathbb{R}^N$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img9.svg"
+ ALT="$\mathbb{R}^N$"></SPAN>, the problem is constrained.
 
 <P>
-Typically the real function <tex2html_verbatim_mark>#math185#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17915#</SPAN> is an <#33#><EM>objective</EM><#33#> or 
-<#34#><EM>cost function</EM><#34#> which is to be either minimized or maximized. 
+Typically the real function <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN> is an <EM>objective</EM> or 
+<EM>cost function</EM> which is to be either minimized or maximized. 
 For example, in machine learning, we need to carry out regression 
 analysis and classification, and we may need to develop a model 
-<tex2html_verbatim_mark>#math186#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17917#</SPAN> to fit a set of observed data points 
-<tex2html_verbatim_mark>#math187#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17919#</SPAN>, by estimating
-the parameters in <tex2html_verbatim_mark>#math188#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17921#</SPAN> of the function.
+<!-- MATH
+ $y=f({\bf x},{\bf a})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img10.svg"
+ ALT="$y=f({\bf x},{\bf a})$"></SPAN> to fit a set of observed data points 
+<!-- MATH
+ ${\cal D}=\{ ({\bf x}_n,\,y_n),\;\;n=1,\cdots,N \}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img11.svg"
+ ALT="${\cal D}=\{ ({\bf x}_n,\,y_n),\;\;n=1,\cdots,N \}$"></SPAN>, by estimating
+the parameters in <!-- MATH
+ ${\bf a}=[a_1,\cdots,a_M]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img12.svg"
+ ALT="${\bf a}=[a_1,\cdots,a_M]^T$"></SPAN> of the function.
 Typically the function is assumed to be known, such as the linear
-model <tex2html_verbatim_mark>#math189#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17923#</SPAN>, containing two model parameters <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17925#</SPAN> (slope)
-and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17927#</SPAN> (intercept), to be estimated based on the observed data.
+model <!-- MATH
+ $y=f(x)=ax+b$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img13.svg"
+ ALT="$y=f(x)=ax+b$"></SPAN>, containing two model parameters <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img14.svg"
+ ALT="$a$"></SPAN> (slope)
+and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img15.svg"
+ ALT="$b$"></SPAN> (intercept), to be estimated based on the observed data.
 
 <P>
 Different methods can be used to solve this parameter estimation
@@ -45,101 +150,267 @@ problem. If the least square method is used, the objective function
 can be the squared error, the difference between the model and the 
 given data, which is to be minimized:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math190#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+o({\bf a})=\sum_{n=1}^N [y_n-f(({\bf x}_n,{\bf a}))]^2
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay17929#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img16.svg"
+ ALT="$\displaystyle o({\bf a})=\sum_{n=1}^N [y_n-f(({\bf x}_n,{\bf a}))]^2$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">2</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 Alternatively, if the Bayesian method is used, the objective 
 functioin can be the likelihood function of the parameters in
-<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17931#</SPAN>, which is to be maximized:
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img17.svg"
+ ALT="${\bf a}$"></SPAN>, which is to be maximized:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math191#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+o({\bf a})=L({\bf a}|{\cal D}) =p({\cal D}|{\bf a})
+  =\prod_{n=1}^N p(y_n|{\bf x}_n,{\bf a})
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay17933#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img18.svg"
+ ALT="$\displaystyle o({\bf a})=L({\bf a}\vert{\cal D}) =p({\cal D}\vert{\bf a})
+=\prod_{n=1}^N p(y_n\vert{\bf x}_n,{\bf a})$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">3</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 Solving suth optimization problems we get the optimal model 
-parameters in <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17935#</SPAN>.
+parameters in <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="${\bf a}^*$"></SPAN>.
 
 <P>
 If an optimization problem is unconstrained, and the analytical 
 expression of the objective function is explicitly given, then the 
-solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17937#</SPAN> at which the objective function <tex2html_verbatim_mark>#math192#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17939#</SPAN> 
+solution <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}^*$"></SPAN> at which the objective function <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN> 
 is minimized may be found by solving the following equation system 
-obtained by setting the gradient of the <tex2html_verbatim_mark>#math193#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17941#</SPAN> to be zero:
+obtained by setting the gradient of the <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN> to be zero:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math194#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf g}_f=\bigtriangledown_{\bf x} f({\bf x})
+  =\frac{d f({\bf x})}{d{\bf x}}
+  =\left[\frac{\partial f({\bf x})}{\partial x_1},\cdots,
+    \frac{\partial f({\bf x})}{\partial x_N}\right]^T ={\bf0}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay17943#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.50ex; vertical-align: -2.32ex; " SRC="img21.svg"
+ ALT="$\displaystyle {\bf g}_f=\bigtriangledown_{\bf x} f({\bf x})
+=\frac{d f({\bf x})...
+...\partial x_1},\cdots,
+\frac{\partial f({\bf x})}{\partial x_N}\right]^T ={\bf0}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">4</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-where <tex2html_verbatim_mark>#math195#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17945#</SPAN> 
-denotes the gradient vector of a scalar function <tex2html_verbatim_mark>#math196#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17947#</SPAN> with
-respect to its vector argument <tex2html_verbatim_mark>#math197#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17949#</SPAN>.
-The root <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17951#</SPAN> of the equation <tex2html_verbatim_mark>#math198#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17953#</SPAN> is called a 
-<#85#><EM>critical, stationary, or stable point</EM><#85#> of <tex2html_verbatim_mark>#math199#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17955#</SPAN>.
+where <!-- MATH
+ ${\bf g}_f=\bigtriangledown_{\bf x} f({\bf x})=d\,f({\bf x})/d{\bf x}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img22.svg"
+ ALT="${\bf g}_f=\bigtriangledown_{\bf x} f({\bf x})=d\,f({\bf x})/d{\bf x}$"></SPAN> 
+denotes the gradient vector of a scalar function <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN> with
+respect to its vector argument <!-- MATH
+ ${\bf x}=[{\bf x}_1,\cdots,{\bf x}_N]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img23.svg"
+ ALT="${\bf x}=[{\bf x}_1,\cdots,{\bf x}_N]^T$"></SPAN>.
+The root <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}^*$"></SPAN> of the equation <!-- MATH
+ ${\bf g}_f={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img24.svg"
+ ALT="${\bf g}_f={\bf0}$"></SPAN> is called a 
+<EM>critical, stationary, or stable point</EM> of <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN>.
 
 <P>
-Whether the function value <tex2html_verbatim_mark>#math200#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17957#</SPAN> at this stationary point 
+Whether the function value <!-- MATH
+ $f({\bf x}^*)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img3.svg"
+ ALT="$f({\bf x}^*)$"></SPAN> at this stationary point 
 is a maximum, minimum, or saddle point, depending on its Hessian 
 matrix for its second order derivatives:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math201#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf H}_f=\left[ \begin{array}{ccc}
+      \frac{\partial^2 f({\bf x})}{\partial x_1^2} & \cdots &
+      \frac{\partial^2 f({\bf x})}{\partial x_1\partial x_N} \\
+      \vdots & \ddots & \vdots \\
+      \frac{\partial^2 f({\bf x})}{\partial x_N\partial x_1} & \cdots & 
+      \frac{\partial^2 f({\bf x})}{\partial x_N^2}
+    \end{array} \right]_{{\bf x}={\bf x}^*}
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay17959#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 12.77ex; vertical-align: -5.79ex; " SRC="img25.svg"
+ ALT="$\displaystyle {\bf H}_f=\left[ \begin{array}{ccc}
+\frac{\partial^2 f({\bf x})}{...
+...{\partial^2 f({\bf x})}{\partial x_N^2}
+\end{array} \right]_{{\bf x}={\bf x}^*}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
 
 <P>
 
 <UL>
-<LI>If <tex2html_verbatim_mark>#math202#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17961#</SPAN> is positive definite (all eigenvalues are positive),
-  <tex2html_verbatim_mark>#math203#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17963#</SPAN> is a minimum;
+<LI>If <!-- MATH
+ ${\bf H}_f>0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img26.svg"
+ ALT="${\bf H}_f&gt;0$"></SPAN> is positive definite (all eigenvalues are positive),
+  <!-- MATH
+ $f({\bf x}^*)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img3.svg"
+ ALT="$f({\bf x}^*)$"></SPAN> is a minimum;
 </LI>
-<LI>If <tex2html_verbatim_mark>#math204#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17965#</SPAN> is negative definite (all eigenvalues are negative), 
-  <tex2html_verbatim_mark>#math205#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17967#</SPAN> is a maximum;
+<LI>If <!-- MATH
+ ${\bf H}_f<0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img27.svg"
+ ALT="${\bf H}_f&lt;0$"></SPAN> is negative definite (all eigenvalues are negative), 
+  <!-- MATH
+ $f({\bf x}^*)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img3.svg"
+ ALT="$f({\bf x}^*)$"></SPAN> is a maximum;
 </LI>
-<LI>If <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17969#</SPAN> is indefinite (with both positive and negative 
-  eigenvalues), <tex2html_verbatim_mark>#math206#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17971#</SPAN> is a saddle point (maximum in some directions,
+<LI>If <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img28.svg"
+ ALT="${\bf H}_f$"></SPAN> is indefinite (with both positive and negative 
+  eigenvalues), <!-- MATH
+ $f({\bf x}^*)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img3.svg"
+ ALT="$f({\bf x}^*)$"></SPAN> is a saddle point (maximum in some directions,
   but minimum in others). 
 </LI>
 </UL>
 
 <P>
 For  example, the gradient vectors and Hessian matrices of three 
-functions <tex2html_verbatim_mark>#math207#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17973#</SPAN>, <tex2html_verbatim_mark>#math208#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17975#</SPAN>, and <tex2html_verbatim_mark>#math209#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17977#</SPAN>:
+functions <!-- MATH
+ $f_1(x,y)=x^2+y^2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img29.svg"
+ ALT="$f_1(x,y)=x^2+y^2$"></SPAN>, <!-- MATH
+ $f_2(x,y)=-x^2-y^2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img30.svg"
+ ALT="$f_2(x,y)=-x^2-y^2$"></SPAN>, and <!-- MATH
+ $f_3(x,y)=x^2-y^2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img31.svg"
+ ALT="$f_3(x,y)=x^2-y^2$"></SPAN>:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math210#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf g}_{f_1}=\left[\begin{array}{c}2x\\2y\end{array}\right],
+  \;\;\;\;
+  {\bf g}_{f_2}=\left[\begin{array}{c}-2x\\-2y\end{array}\right], 
+  \;\;\;\;
+  {\bf g}_{f_3}=\left[\begin{array}{r}2x\\-2y\end{array}\right]
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay17979#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img32.svg"
+ ALT="$\displaystyle {\bf g}_{f_1}=\left[\begin{array}{c}2x\\ 2y\end{array}\right],
+\;...
+...right],
+\;\;\;\;
+{\bf g}_{f_3}=\left[\begin{array}{r}2x\\ -2y\end{array}\right]$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
 
 <P>
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math211#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf H}_{f_1}=\left[\begin{array}{rr}2 & 0\\0 & 2\end{array}\right]>0;
+  \;\;\;\;
+  {\bf H}_{f_2}=\left[\begin{array}{rr}-2 & 0\\0 & -2\end{array}\right]<0;
+  \;\;\;\;
+  {\bf H}_{f_3}=\left[\begin{array}{rr}2 & 0\\0 & -2\end{array}\right]
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay17981#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img33.svg"
+ ALT="$\displaystyle {\bf H}_{f_1}=\left[\begin{array}{rr}2 &amp; 0\\ 0 &amp; 2\end{array}\rig...
+...
+\;\;\;\;
+{\bf H}_{f_3}=\left[\begin{array}{rr}2 &amp; 0\\ 0 &amp; -2\end{array}\right]$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
-At the common stationary point <tex2html_verbatim_mark>#math212#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17983#</SPAN> for all three 
-functions at which <tex2html_verbatim_mark>#math213#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17985#</SPAN>, <tex2html_verbatim_mark>#math214#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17987#</SPAN> is 
-a minimum, <tex2html_verbatim_mark>#math215#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17989#</SPAN> is a maximum, and <tex2html_verbatim_mark>#math216#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17991#</SPAN> is a 
-saddle point, i.e., <tex2html_verbatim_mark>#math217#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17993#</SPAN> is a minimum in <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17995#</SPAN> direction but 
-a maximum in <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17997#</SPAN> direction.
+At the common stationary point <!-- MATH
+ ${\bf x}^*=[0,\,0]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img34.svg"
+ ALT="${\bf x}^*=[0,\,0]^T$"></SPAN> for all three 
+functions at which <!-- MATH
+ $f_1(x,y)=f_2(x,y)=f_3(x,y)=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img35.svg"
+ ALT="$f_1(x,y)=f_2(x,y)=f_3(x,y)=0$"></SPAN>, <!-- MATH
+ $f_1({\bf x}^*)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img36.svg"
+ ALT="$f_1({\bf x}^*)$"></SPAN> is 
+a minimum, <!-- MATH
+ $f_2({\bf x}^*)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img37.svg"
+ ALT="$f_2({\bf x}^*)$"></SPAN> is a maximum, and <!-- MATH
+ $f_3({\bf x}^*)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img38.svg"
+ ALT="$f_3({\bf x}^*)$"></SPAN> is a 
+saddle point, i.e., <!-- MATH
+ $f_3({\bf x}^*)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img38.svg"
+ ALT="$f_3({\bf x}^*)$"></SPAN> is a minimum in <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img39.svg"
+ ALT="$x$"></SPAN> direction but 
+a maximum in <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img40.svg"
+ ALT="$y$"></SPAN> direction.
 
 <P>
 We show that the problems of minimization and equation solving can be
@@ -148,81 +419,237 @@ converted to each other.
 <P>
 
 <UL>
-<LI>First, the problem of minimizing an objective function <tex2html_verbatim_mark>#math218#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17999#</SPAN>
+<LI>First, the problem of minimizing an objective function <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN>
   is equivalent to solving the following equation system:
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math219#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf g}_f({\bf x})=\bigtriangledown_{\bf x} f({\bf x})
+    =\frac{d f({\bf x}) }{d{\bf x}}
+    =\left[\begin{array}{c}\partial f/\partial x_1\\\vdots\\
+        \partial f/\partial x_N\end{array}\right] ={\bf0} 
+  
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18001#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 10.22ex; vertical-align: -4.49ex; " SRC="img41.svg"
+ ALT="$\displaystyle {\bf g}_f({\bf x})=\bigtriangledown_{\bf x} f({\bf x})
+=\frac{d f...
+...al f/\partial x_1\\ \vdots\\
+\partial f/\partial x_N\end{array}\right] ={\bf0}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">5</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  If its root <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18003#</SPAN> is not a saddle point, it is the solution of the
-  optimization problem that either maximizes or minimizes <tex2html_verbatim_mark>#math220#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18005#</SPAN>. 
+If its root <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}^*$"></SPAN> is not a saddle point, it is the solution of the
+  optimization problem that either maximizes or minimizes <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN>. 
 
 <P>
 This equation system can be solved by any of the methods discussed previously,
   such as the <A ID="tex2html1"
   HREF="../ch2/node6.html">Newton-Raphson method</A>,
 
-which finds the root of a general equation <tex2html_verbatim_mark>#math221#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18007#</SPAN> by the 
-  iteration <tex2html_verbatim_mark>#math222#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18009#</SPAN>. 
-  Here, specifically, to solve the equation <tex2html_verbatim_mark>#math223#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18011#</SPAN>, we
-  first get the Jacobian <tex2html_verbatim_mark>#math224#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18013#</SPAN> of the gradient
-  <tex2html_verbatim_mark>#math225#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18015#</SPAN> of <tex2html_verbatim_mark>#math226#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18017#</SPAN>, which is the Hessian of <tex2html_verbatim_mark>#math227#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18019#</SPAN>, 
-  and then carry out the iteration below to eventually find <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18021#</SPAN> that 
-  minimizes <tex2html_verbatim_mark>#math228#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18023#</SPAN>:
+which finds the root of a general equation <!-- MATH
+ ${\bf f}({\bf x})={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img42.svg"
+ ALT="${\bf f}({\bf x})={\bf0}$"></SPAN> by the 
+  iteration <!-- MATH
+ ${\bf x}_{n+1}={\bf x}_n-{\bf J}_f^{-1}({\bf x}_n)\,{\bf f}({\bf x}_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.48ex; vertical-align: -1.13ex; " SRC="img43.svg"
+ ALT="${\bf x}_{n+1}={\bf x}_n-{\bf J}_f^{-1}({\bf x}_n)\,{\bf f}({\bf x}_n)$"></SPAN>. 
+  Here, specifically, to solve the equation <!-- MATH
+ ${\bf g}_f({\bf x})={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img44.svg"
+ ALT="${\bf g}_f({\bf x})={\bf0}$"></SPAN>, we
+  first get the Jacobian <!-- MATH
+ ${\bf J}_g({\bf x})={\bf H}_f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img45.svg"
+ ALT="${\bf J}_g({\bf x})={\bf H}_f({\bf x})$"></SPAN> of the gradient
+  <!-- MATH
+ ${\bf g}_f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img46.svg"
+ ALT="${\bf g}_f({\bf x})$"></SPAN> of <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN>, which is the Hessian of <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN>, 
+  and then carry out the iteration below to eventually find <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}^*$"></SPAN> that 
+  minimizes <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN>:
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math229#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf x}_{n+1}={\bf x}_n-{\bf J}_g^{-1}({\bf x}_n)\,{\bf g}_f({\bf x}_n)
+    ={\bf x}_n-{\bf H}_g^{-1}({\bf x}_n)\,{\bf g}_f({\bf x}_n)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18025#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -1.01ex; " SRC="img47.svg"
+ ALT="$\displaystyle {\bf x}_{n+1}={\bf x}_n-{\bf J}_g^{-1}({\bf x}_n)\,{\bf g}_f({\bf x}_n)
+={\bf x}_n-{\bf H}_g^{-1}({\bf x}_n)\,{\bf g}_f({\bf x}_n)$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">6</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  The second equality is due to the fact that the Jacobian of the gradient
-  <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18027#</SPAN> of function <tex2html_verbatim_mark>#math230#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18029#</SPAN> is the Hessian of the function,
-  i.e., <tex2html_verbatim_mark>#math231#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18031#</SPAN>.
+The second equality is due to the fact that the Jacobian of the gradient
+  <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img48.svg"
+ ALT="${\bf g}_f$"></SPAN> of function <!-- MATH
+ ${\bf f}({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img49.svg"
+ ALT="${\bf f}({\bf x})$"></SPAN> is the Hessian of the function,
+  i.e., <!-- MATH
+ ${\bf J}_g={\bf H}_f$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img50.svg"
+ ALT="${\bf J}_g={\bf H}_f$"></SPAN>.
 
 <P>
 </LI>
 <LI>On the other hand, to solve the equation system 
-  <tex2html_verbatim_mark>#math232#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18033#</SPAN>, 
+  <!-- MATH
+ ${\bf g}({\bf x})=[g_1({\bf x}),\cdots,g_N({\bf x})]^T={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img51.svg"
+ ALT="${\bf g}({\bf x})=[g_1({\bf x}),\cdots,g_N({\bf x})]^T={\bf0}$"></SPAN>, 
   we can minimize the objective function defined as
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math233#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f({\bf x})=\frac{1}{2}{\bf g}^T({\bf x}){\bf g}({\bf x})
+    =\frac{1}{2}||{\bf g}({\bf x})||^2
+    =\frac{1}{2}\sum_{i=1}^N |g_i({\bf x})|^2
+  
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18035#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img52.svg"
+ ALT="$\displaystyle f({\bf x})=\frac{1}{2}{\bf g}^T({\bf x}){\bf g}({\bf x})
+=\frac{1...
+...{\bf g}({\bf x})\vert\vert^2
+=\frac{1}{2}\sum_{i=1}^N \vert g_i({\bf x})\vert^2$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">7</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  To solve this minimization problem, we solve the equations:
+To solve this minimization problem, we solve the equations:
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math234#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\frac{\partial{f({\bf x})}}{\partial x_j}
+    =\frac{\partial}{\partial x_j}\left(\frac{1}{2}\sum_{i=1}^N (g_i({\bf x}))^2\right)
+    =\sum_{i=1}^N g_i({\bf x})\frac{\partial g_i({\bf x})}{\partial x_j}=0,\;\;\;\;\;\;
+    (j=1,\cdots,N)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18037#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img53.svg"
+ ALT="$\displaystyle \frac{\partial{f({\bf x})}}{\partial x_j}
+=\frac{\partial}{\parti...
+...\bf x})\frac{\partial g_i({\bf x})}{\partial x_j}=0,\;\;\;\;\;\;
+(j=1,\cdots,N)$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">8</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  Combining all <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18039#</SPAN> of such equations we get the gradient vector of
-  function <tex2html_verbatim_mark>#math235#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18041#</SPAN>:
+Combining all <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img54.svg"
+ ALT="$N$"></SPAN> of such equations we get the gradient vector of
+  function <!-- MATH
+ $f({\bf x})={\bf g}^T{\bf g}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img55.svg"
+ ALT="$f({\bf x})={\bf g}^T{\bf g}$"></SPAN>:
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math236#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\bigtriangledown_{\bf x} f({\bf x})
+    =\frac{d}{d{\bf x}}\left[\frac{1}{2}{\bf g}^T({\bf x}){\bf g}({\bf x}) \right]
+    =\frac{d}{d{\bf x}}{\bf g}({\bf x})\;\;{\bf g}({\bf x})
+    ={\bf J}_{\bf g} ({\bf x})\,{\bf g}({\bf x})={\bf0}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18043#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img56.svg"
+ ALT="$\displaystyle \bigtriangledown_{\bf x} f({\bf x})
+=\frac{d}{d{\bf x}}\left[\fra...
+...\bf x})\;\;{\bf g}({\bf x})
+={\bf J}_{\bf g} ({\bf x})\,{\bf g}({\bf x})={\bf0}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">9</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  where <tex2html_verbatim_mark>#math237#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18045#</SPAN> is the Jicobian of <tex2html_verbatim_mark>#math238#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18047#</SPAN>.
-  As in general <tex2html_verbatim_mark>#math239#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18049#</SPAN> has full rank, the homogeneous 
-  equation above only has a zero solution <tex2html_verbatim_mark>#math240#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18051#</SPAN>. 
+where <!-- MATH
+ ${\bf J}_{\bf g} ({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img57.svg"
+ ALT="${\bf J}_{\bf g} ({\bf x})$"></SPAN> is the Jicobian of <!-- MATH
+ ${\bf g}({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img58.svg"
+ ALT="${\bf g}({\bf x})$"></SPAN>.
+  As in general <!-- MATH
+ ${\bf J}_{\bf g}({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img57.svg"
+ ALT="${\bf J}_{\bf g} ({\bf x})$"></SPAN> has full rank, the homogeneous 
+  equation above only has a zero solution <!-- MATH
+ ${\bf g}({\bf x})={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img59.svg"
+ ALT="${\bf g}({\bf x})={\bf0}$"></SPAN>. 
 
 <P>
 </LI>
 </UL>
 
 <P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node2.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="ch3.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="ch3.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node2.html">Unconstrained Optimization</A>
+<B> Up:</B> <A
+ HREF="ch3.html">ch3</A>
+<B> Previous:</B> <A
+ HREF="ch3.html">ch3</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>
