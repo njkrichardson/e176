@@ -1,3 +1,46 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Issues of Local/Global Minimum</TITLE>
+<META NAME="description" CONTENT="Issues of Local/Global Minimum">
+<META NAME="keywords" CONTENT="ch3">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch3.css">
+
+<LINK REL="previous" HREF="node10.html">
+<LINK REL="next" HREF="node12.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node12.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node10.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node12.html">Constrained Optimization</A>
+<B> Up:</B> <A
+ HREF="node2.html">Unconstrained Optimization</A>
+<B> Previous:</B> <A
+ HREF="node10.html">Conjugate gradient method</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
 
 <H2><A ID="SECTION00029000000000000000">
 Issues of Local/Global Minimum</A>
@@ -14,24 +57,46 @@ material reaches a state with minimum free energy.
 
 <P>
 The way the SA method avoids getting stuck at a local minimum is to allow the 
-iteration steps to go up-hill. Specifically, the objective function <tex2html_verbatim_mark>#math758#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19931#</SPAN> 
-evaluated at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19933#</SPAN> is treated as the energy at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19935#</SPAN>, and an up-hill 
-move corresponding to an energy increase <tex2html_verbatim_mark>#math759#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19937#</SPAN> 
+iteration steps to go up-hill. Specifically, the objective function <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN> 
+evaluated at <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img255.svg"
+ ALT="${\bf x}_n$"></SPAN> is treated as the energy at <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img255.svg"
+ ALT="${\bf x}_n$"></SPAN>, and an up-hill 
+move corresponding to an energy increase <!-- MATH
+ $\Delta E=f({\bf x}_{n+1})-f({\bf x}_n)_0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img636.svg"
+ ALT="$\Delta E=f({\bf x}_{n+1})-f({\bf x}_n)_0$"></SPAN> 
 can be accepted if some probability function is greater than a random threshold 
-value <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19939#</SPAN> within a certain range comparable with <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19941#</SPAN>:
+value <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img637.svg"
+ ALT="$Th$"></SPAN> within a certain range comparable with <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img638.svg"
+ ALT="$P$"></SPAN>:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math760#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+P(\Delta E, T)=e^{-\Delta E/T}  > Th
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19943#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img639.svg"
+ ALT="$\displaystyle P(\Delta E, T)=e^{-\Delta E/T} &gt; Th$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">167</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-Obviously smaller <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19945#</SPAN> and higher <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19947#</SPAN> will cause higher <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19949#</SPAN>, it is more
+Obviously smaller <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img640.svg"
+ ALT="$\Delta E$"></SPAN> and higher <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img641.svg"
+ ALT="$T$"></SPAN> will cause higher <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img638.svg"
+ ALT="$P$"></SPAN>, it is more
 probable for a move to be accepted.
 
 <P>
-During the entire search process, the temperature <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19951#</SPAN> gradually reduces so that 
+During the entire search process, the temperature <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img641.svg"
+ ALT="$T$"></SPAN> gradually reduces so that 
 the probability of accepting an up-hill move also gradually reduces. In the early
 stage of the search, it is more probable to go up-hill, thereby getting out of a
 local minimum; but toward the later part of the search process, such a move is
@@ -54,3 +119,26 @@ A c program for AS can be found
   HREF="http://fourier.eng.hmc.edu/e176/lectures/siman.c">here</A>.
 
 <P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node12.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node10.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node12.html">Constrained Optimization</A>
+<B> Up:</B> <A
+ HREF="node2.html">Unconstrained Optimization</A>
+<B> Previous:</B> <A
+ HREF="node10.html">Conjugate gradient method</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

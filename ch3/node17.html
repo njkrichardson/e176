@@ -1,3 +1,47 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>The Simplex Algorithm</TITLE>
+<META NAME="description" CONTENT="The Simplex Algorithm">
+<META NAME="keywords" CONTENT="ch3">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch3.css">
+
+<LINK REL="next" HREF="node18.html">
+<LINK REL="previous" HREF="node16.html">
+<LINK REL="next" HREF="node18.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node18.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node12.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node16.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node18.html">Quadratic Programming (QP)</A>
+<B> Up:</B> <A
+ HREF="node12.html">Constrained Optimization</A>
+<B> Previous:</B> <A
+ HREF="node16.html">Linear Programming (LP)</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
 
 <H2><A ID="SECTION00035000000000000000">
 The Simplex Algorithm</A>
@@ -8,187 +52,452 @@ Instead of exhausting all vertices of the feasible region to find
 the optimal solution, the simplex algorithm is an iterative process 
 that traverses along a sequence of edges of the polytopic feasible 
 region, starting at the origin and through a sequence of vertices 
-<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20822#</SPAN> with progressively greater objective value <tex2html_verbatim_mark>#math1018#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20824#</SPAN>,
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="${\bf x}$"></SPAN> with progressively greater objective value <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN>,
 until eventually reaching the optimal solution.
 
 <P>
 To understand the algorithm, we first consider the equality constraint 
-<tex2html_verbatim_mark>#math1019#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20826#</SPAN> 
+<!-- MATH
+ ${\bf Ax}=[{\bf A}_{M\times N}\;|\;{\bf I}_{M\times M}] {\bf x}={\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img891.svg"
+ ALT="${\bf Ax}=[{\bf A}_{M\times N}\;\vert\;{\bf I}_{M\times M}] {\bf x}={\bf b}$"></SPAN> 
 of the standard LP problem. This is an under-determined linear system
-of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20828#</SPAN> variables but only <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20830#</SPAN> equations, only <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20832#</SPAN> of its <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20834#</SPAN> 
-columns of the coefficient matrix <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20836#</SPAN> are independent (assuming 
-<tex2html_verbatim_mark>#math1020#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20838#</SPAN>). Initially we choose the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20840#</SPAN> columns of the 
-identity coefficient matrix <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20842#</SPAN> as the independent columns, but
-subsequently we can choose any other <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20844#</SPAN> columns of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20846#</SPAN> as the 
+of <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img837.svg"
+ ALT="$N+M$"></SPAN> variables but only <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img632.svg"
+ ALT="$M$"></SPAN> equations, only <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img632.svg"
+ ALT="$M$"></SPAN> of its <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img837.svg"
+ ALT="$N+M$"></SPAN> 
+columns of the coefficient matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img286.svg"
+ ALT="${\bf A}$"></SPAN> are independent (assuming 
+<!-- MATH
+ $rank({\bf A})=M$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img892.svg"
+ ALT="$rank({\bf A})=M$"></SPAN>). Initially we choose the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img632.svg"
+ ALT="$M$"></SPAN> columns of the 
+identity coefficient matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img893.svg"
+ ALT="${\bf I}$"></SPAN> as the independent columns, but
+subsequently we can choose any other <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img632.svg"
+ ALT="$M$"></SPAN> columns of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img286.svg"
+ ALT="${\bf A}$"></SPAN> as the 
 independent columns and convert them into a standard basis vector by 
 <A ID="tex2html23"
   HREF="../ch0/node5.html">Gauss-Jordan elimination</A>,
-together with the corresponding variables in <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20848#</SPAN>. The resulting
-equation <tex2html_verbatim_mark>#math1021#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20850#</SPAN> remains equivalent to the original one,
-i.e., the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20852#</SPAN> equality constraints are always preserved and never 
+together with the corresponding variables in <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="${\bf x}$"></SPAN>. The resulting
+equation <!-- MATH
+ ${\bf Ax}={\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img894.svg"
+ ALT="${\bf Ax}={\bf b}$"></SPAN> remains equivalent to the original one,
+i.e., the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img632.svg"
+ ALT="$M$"></SPAN> equality constraints are always preserved and never 
 violated in the process.
 
 <P>
 For convenience of discussion and without loss of generality, we could
-reorder (not actually carried out) the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20854#</SPAN> columns in <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20856#</SPAN>, 
-together with the corresponding variables in <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20858#</SPAN>, so that the 
+reorder (not actually carried out) the <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img837.svg"
+ ALT="$N+M$"></SPAN> columns in <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img286.svg"
+ ALT="${\bf A}$"></SPAN>, 
+together with the corresponding variables in <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="${\bf x}$"></SPAN>, so that the 
 constraining equation would always takes the following form:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1022#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf A}{\bf x}=[{\bf A}_n\;\;{\bf I}]
+  \left[\begin{array}{c}{\bf x}_n\\{\bf x}_b\end{array}\right]
+  ={\bf A}_n{\bf x}_n+{\bf I}\;{\bf x}_b={\bf b}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20860#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img895.svg"
+ ALT="$\displaystyle {\bf A}{\bf x}=[{\bf A}_n\;\;{\bf I}]
+\left[\begin{array}{c}{\bf x}_n\\ {\bf x}_b\end{array}\right]
+={\bf A}_n{\bf x}_n+{\bf I}\;{\bf x}_b={\bf b}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">227</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-Now the variables in the M-D vector <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20862#</SPAN> corresponding to the 
-<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20864#</SPAN> independent columns in <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20866#</SPAN> are the <#5183#><EM>basic variables</EM><#5183#>, 
-while the N-D vector <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20868#</SPAN> corresponding to the remaining <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20870#</SPAN> 
-dependent columns, now denoted by <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20872#</SPAN>, are the <#5186#><EM>non-basic 
-variables</EM><#5186#>. This equation will always hold if <tex2html_verbatim_mark>#math1023#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20874#</SPAN> and
-<tex2html_verbatim_mark>#math1024#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20876#</SPAN>. Such a solution is called a <#5191#><EM>basic solution</EM><#5191#> 
-of the linear system <tex2html_verbatim_mark>#math1025#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20878#</SPAN>:
+Now the variables in the M-D vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img896.svg"
+ ALT="${\bf x}_b$"></SPAN> corresponding to the 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img632.svg"
+ ALT="$M$"></SPAN> independent columns in <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img893.svg"
+ ALT="${\bf I}$"></SPAN> are the <EM>basic variables</EM>, 
+while the N-D vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img255.svg"
+ ALT="${\bf x}_n$"></SPAN> corresponding to the remaining <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img54.svg"
+ ALT="$N$"></SPAN> 
+dependent columns, now denoted by <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img897.svg"
+ ALT="${\bf A}_n$"></SPAN>, are the <EM>non-basic 
+variables</EM>. This equation will always hold if <!-- MATH
+ ${\bf x}_n={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img898.svg"
+ ALT="${\bf x}_n={\bf0}$"></SPAN> and
+<!-- MATH
+ ${\bf x}_b={\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img899.svg"
+ ALT="${\bf x}_b={\bf b}$"></SPAN>. Such a solution is called a <EM>basic solution</EM> 
+of the linear system <!-- MATH
+ ${\bf A}{\bf x}={\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img505.svg"
+ ALT="${\bf A}{\bf x}={\bf b}$"></SPAN>:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1026#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf x}=\left[\begin{array}{c}{\bf x}_n\\{\bf x}_b\end{array}\right]
+  =\left[\begin{array}{c}{\bf0}\\{\bf b}\end{array}\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20880#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img900.svg"
+ ALT="$\displaystyle {\bf x}=\left[\begin{array}{c}{\bf x}_n\\ {\bf x}_b\end{array}\right]
+=\left[\begin{array}{c}{\bf0}\\ {\bf b}\end{array}\right]$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">228</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-Initially, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20882#</SPAN> is the coefficient matrix in the inequality 
-constraint <tex2html_verbatim_mark>#math1027#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20884#</SPAN>, and the corresponding non-basic
-variables <tex2html_verbatim_mark>#math1028#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20886#</SPAN> is actually the origin. But through
-the iteration, we will keep converting some other columns of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20888#</SPAN>
-into standard basis vectors <tex2html_verbatim_mark>#math1029#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20890#</SPAN>, the 
-column vectors of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20892#</SPAN> by Gauss-Jordan elimination. The variables
-corresponding to the new <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20894#</SPAN> become the basic variables, while
+Initially, <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img897.svg"
+ ALT="${\bf A}_n$"></SPAN> is the coefficient matrix in the inequality 
+constraint <!-- MATH
+ ${\bf Ax}\le {\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.43ex; " SRC="img901.svg"
+ ALT="${\bf Ax}\le {\bf b}$"></SPAN>, and the corresponding non-basic
+variables <!-- MATH
+ ${\bf x}_n={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img898.svg"
+ ALT="${\bf x}_n={\bf0}$"></SPAN> is actually the origin. But through
+the iteration, we will keep converting some other columns of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img286.svg"
+ ALT="${\bf A}$"></SPAN>
+into standard basis vectors <!-- MATH
+ $\{{\bf e}_1,\cdots,{\bf e}_M\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img902.svg"
+ ALT="$\{{\bf e}_1,\cdots,{\bf e}_M\}$"></SPAN>, the 
+column vectors of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img893.svg"
+ ALT="${\bf I}$"></SPAN> by Gauss-Jordan elimination. The variables
+corresponding to the new <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img893.svg"
+ ALT="${\bf I}$"></SPAN> become the basic variables, while
 those corresponding to columns that become non-standard basis vectors 
 become non-basis variables.
 
 <P>
-The basic solutions corresponding the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20896#</SPAN> ways to choose <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20898#</SPAN> 
-of the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20900#</SPAN> columns of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20902#</SPAN> as independent are actually the
-intersections formed by any <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20904#</SPAN> of the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20906#</SPAN> constraining hyper-planes 
-in the N-D space. As noted before, only a subset of these <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20908#</SPAN> 
-basic solutions satisfy the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20910#</SPAN> constraints, and they are called 
-<#5221#><EM>basic feasible solutions (BFS)</EM><#5221#>. The goal of the iterative 
+The basic solutions corresponding the <SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.95ex; " SRC="img903.svg"
+ ALT="$C_{N+M}^M$"></SPAN> ways to choose <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img632.svg"
+ ALT="$M$"></SPAN> 
+of the <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img837.svg"
+ ALT="$N+M$"></SPAN> columns of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img286.svg"
+ ALT="${\bf A}$"></SPAN> as independent are actually the
+intersections formed by any <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img54.svg"
+ ALT="$N$"></SPAN> of the <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img837.svg"
+ ALT="$N+M$"></SPAN> constraining hyper-planes 
+in the N-D space. As noted before, only a subset of these <SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.95ex; " SRC="img903.svg"
+ ALT="$C_{N+M}^M$"></SPAN> 
+basic solutions satisfy the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img632.svg"
+ ALT="$M$"></SPAN> constraints, and they are called 
+<EM>basic feasible solutions (BFS)</EM>. The goal of the iterative 
 process in the simplex algorithm is to find the optimal basic feasible 
-solution that maximizes <tex2html_verbatim_mark>#math1030#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20912#</SPAN> without exhausting all <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20914#</SPAN> 
+solution that maximizes <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN> without exhausting all <SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.95ex; " SRC="img903.svg"
+ ALT="$C_{N+M}^M$"></SPAN> 
 possibilities. This is done by selecting the columns in such a way 
 that the value of the objective function will always be maximally 
-increased, until eventually we find the optimal solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20916#</SPAN>, 
-the vertex of the polytopic feasible region at which <tex2html_verbatim_mark>#math1031#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20918#</SPAN> 
+increased, until eventually we find the optimal solution <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}^*$"></SPAN>, 
+the vertex of the polytopic feasible region at which <!-- MATH
+ $f({\bf x}^*)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img3.svg"
+ ALT="$f({\bf x}^*)$"></SPAN> 
 is maximized.
 
 <P>
 Specially, the implementation of the simplex algorithm is based on a 
-tableau with <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20920#</SPAN> columns and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20922#</SPAN> rows, initialized as below:
+tableau with <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img904.svg"
+ ALT="$N+M+1$"></SPAN> columns and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img905.svg"
+ ALT="$M+1$"></SPAN> rows, initialized as below:
 
 <UL>
-<LI>The first <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20924#</SPAN> rows are for the coefficients in the equality
-  constraints <tex2html_verbatim_mark>#math1032#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20926#</SPAN> (<tex2html_verbatim_mark>#math1033#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20928#</SPAN>). An
-  additional <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20930#</SPAN> row at the bottom is for the coefficients
-  in the objective function <tex2html_verbatim_mark>#math1034#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20932#</SPAN>, which
-  is zero initially at the origin <tex2html_verbatim_mark>#math1035#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20934#</SPAN>, i.e., 
-  <tex2html_verbatim_mark>#math1036#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20936#</SPAN>.
+<LI>The first <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img632.svg"
+ ALT="$M$"></SPAN> rows are for the coefficients in the equality
+  constraints <!-- MATH
+ $\sum_{j=1}^N a_{ij}x_j+s_i=b_i$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.72ex; vertical-align: -1.13ex; " SRC="img906.svg"
+ ALT="$\sum_{j=1}^N a_{ij}x_j+s_i=b_i$"></SPAN> (<!-- MATH
+ $i=1,\cdots,M$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img907.svg"
+ ALT="$i=1,\cdots,M$"></SPAN>). An
+  additional <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img908.svg"
+ ALT="$(M+1)st$"></SPAN> row at the bottom is for the coefficients
+  in the objective function <!-- MATH
+ $f({\bf x})=\sum_{j=1}^N c_jx_j$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.72ex; vertical-align: -1.13ex; " SRC="img909.svg"
+ ALT="$f({\bf x})=\sum_{j=1}^N c_jx_j$"></SPAN>, which
+  is zero initially at the origin <!-- MATH
+ $x_1=\cdots=x_N=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img910.svg"
+ ALT="$x_1=\cdots=x_N=0$"></SPAN>, i.e., 
+  <!-- MATH
+ $z-c_1x_1-\cdots-c_Nx_N=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img911.svg"
+ ALT="$z-c_1x_1-\cdots-c_Nx_N=0$"></SPAN>.
 </LI>
-<LI>The first <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20938#</SPAN> columns contain the coefficients for the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20940#</SPAN> 
-  original variables <tex2html_verbatim_mark>#math1037#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20942#</SPAN> and the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20944#</SPAN> slack variables 
-  <tex2html_verbatim_mark>#math1038#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20946#</SPAN>, and an additional <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20948#</SPAN> column is for 
-  the constants <tex2html_verbatim_mark>#math1039#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20950#</SPAN> on the right-hand side of
-  the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20952#</SPAN> constraint equations. The last element of the column is the 
-  right-hand side of the objective equation <tex2html_verbatim_mark>#math1040#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20954#</SPAN>, which is 
+<LI>The first <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img837.svg"
+ ALT="$N+M$"></SPAN> columns contain the coefficients for the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img54.svg"
+ ALT="$N$"></SPAN> 
+  original variables <!-- MATH
+ $\{x_1,\cdots,x_N\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img839.svg"
+ ALT="$\{x_1,\cdots,x_N\}$"></SPAN> and the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img632.svg"
+ ALT="$M$"></SPAN> slack variables 
+  <!-- MATH
+ $\{s_1,\cdots,s_M\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img838.svg"
+ ALT="$\{s_1,\cdots,s_M\}$"></SPAN>, and an additional <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img912.svg"
+ ALT="$(N+M+1)st$"></SPAN> column is for 
+  the constants <!-- MATH
+ ${\bf b}=[b_1,\cdots,b_M]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img913.svg"
+ ALT="${\bf b}=[b_1,\cdots,b_M]^T$"></SPAN> on the right-hand side of
+  the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img632.svg"
+ ALT="$M$"></SPAN> constraint equations. The last element of the column is the 
+  right-hand side of the objective equation <!-- MATH
+ $z=f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img914.svg"
+ ALT="$z=f({\bf x})$"></SPAN>, which is 
   initially zero.
 </LI>
 </UL>
 
 <P>
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1041#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{c||cccc|cccc||c}\hline
+    \mbox{basic variables} & x_1   & x_2   & \cdots &  x_N   & s_1 & s_2 & \cdots & s_M & \mbox{basic solution}   \\\hline
+    s_1   & a_{11} & a_{12} & \cdots & a_{1N}  & 1    &  0   & \cdots & 0    & b_1  \\
+    s_2   & a_{21} & a_{22} & \cdots & a_{2N}  & 0    &  1   & \cdots & 0    & b_2  \\
+    \vdots & \vdots & \vdots & \ddots & \vdots & \vdots & \vdots & \ddots & \vdots & \vdots\\
+    s_M  & a_{M1} & a_{M2} & \cdots & a_{MN}  & 0    &  0   & \cdots & 1    & b_M   \\\hline
+    z   & -c_1  & -c_2  & \cdots &  -c_M  & 0   &  0   & \cdots & 0  & 0\\\hline
+  \end{array}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20956#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img915.svg"
+ ALT="\begin{displaymath}\begin{array}{c\vert\vert cccc\vert cccc\vert\vert c}\hline
+\...
+...2 &amp; \cdots &amp; -c_M &amp; 0 &amp; 0 &amp; \cdots &amp; 0 &amp; 0\\ \hline
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">229</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 
 <P>
-At this initial stage of the iteration, the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20958#</SPAN> original variables 
-<tex2html_verbatim_mark>#math1042#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20960#</SPAN> are the non-basic variables, while the 
-<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20962#</SPAN> slack variables <tex2html_verbatim_mark>#math1043#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20964#</SPAN> are the basic variables 
-and their coefficients form an <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20966#</SPAN> identity matrix <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20968#</SPAN>, 
+At this initial stage of the iteration, the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img54.svg"
+ ALT="$N$"></SPAN> original variables 
+<!-- MATH
+ ${\bf x}_n=[x_1,\cdots,x_N]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img916.svg"
+ ALT="${\bf x}_n=[x_1,\cdots,x_N]^T$"></SPAN> are the non-basic variables, while the 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img632.svg"
+ ALT="$M$"></SPAN> slack variables <!-- MATH
+ ${\bf x}_b=[s_1,\cdots,s_M]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img917.svg"
+ ALT="${\bf x}_b=[s_1,\cdots,s_M]^T$"></SPAN> are the basic variables 
+and their coefficients form an <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img918.svg"
+ ALT="$M\times M$"></SPAN> identity matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img893.svg"
+ ALT="${\bf I}$"></SPAN>, 
 composed of the standard basis vectors. The corresponding feasible basic 
 solution is simply
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1044#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf x}_b=[s_1,\cdots,s_M]^T={\bf b},\;\;\;\;\;
+  {\bf x}_n=[x_1,\cdots,x_N]^T={\bf0}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20970#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img919.svg"
+ ALT="$\displaystyle {\bf x}_b=[s_1,\cdots,s_M]^T={\bf b},\;\;\;\;\;
+{\bf x}_n=[x_1,\cdots,x_N]^T={\bf0}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">230</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 that satisfies all the constraints
-<tex2html_verbatim_mark>#math1045#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20972#</SPAN>. 
+<!-- MATH
+ ${\bf Ax}={\bf A}_n{\bf x}_n+{\bf I}{\bf x}_b={\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img920.svg"
+ ALT="${\bf Ax}={\bf A}_n{\bf x}_n+{\bf I}{\bf x}_b={\bf b}$"></SPAN>. 
 
 <P>
 In each of the subsequent iterations, we will select one of the non-basic
-variables, called the <#5265#><EM>entering variable</EM><#5265#>, to replace one of the basic
-variables, called the <#5266#><EM>leaving variable</EM><#5266#>, in such a way that the value
-of the objective function value <tex2html_verbatim_mark>#math1046#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20974#</SPAN> in the last row will be 
+variables, called the <EM>entering variable</EM>, to replace one of the basic
+variables, called the <EM>leaving variable</EM>, in such a way that the value
+of the objective function value <!-- MATH
+ $z=f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img914.svg"
+ ALT="$z=f({\bf x})$"></SPAN> in the last row will be 
 maximally increased, while all constraints remain satisfied. Here are the 
 steps in each iteration:
 
 <P>
 
 <UL>
-<LI><#5269#><B>Selection of the entering variable</B><#5269#>
+<LI><B>Selection of the entering variable</B>
 
 <P>
-This section is based on the maximization of <tex2html_verbatim_mark>#math1047#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20976#</SPAN>. We select 
-  <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20978#</SPAN> in the jth column of the tableau if <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20980#</SPAN> is most negative, i.e.,
-  <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20982#</SPAN> is most heavily weighted by <tex2html_verbatim_mark>#math1048#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20984#</SPAN>, so that 
-  it will increase <tex2html_verbatim_mark>#math1049#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20986#</SPAN> more than any other <tex2html_verbatim_mark>#math1050#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20988#</SPAN>. 
+This section is based on the maximization of <!-- MATH
+ $z=f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img914.svg"
+ ALT="$z=f({\bf x})$"></SPAN>. We select 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img921.svg"
+ ALT="$x_j$"></SPAN> in the jth column of the tableau if <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.78ex; " SRC="img922.svg"
+ ALT="$-c_j$"></SPAN> is most negative, i.e.,
+  <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img921.svg"
+ ALT="$x_j$"></SPAN> is most heavily weighted by <!-- MATH
+ $c_j=\max\{c_1,\cdots,c_N\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img923.svg"
+ ALT="$c_j=\max\{c_1,\cdots,c_N\}$"></SPAN>, so that 
+  it will increase <!-- MATH
+ $z=\sum_{j=1}^N c_jx_j$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.72ex; vertical-align: -1.13ex; " SRC="img924.svg"
+ ALT="$z=\sum_{j=1}^N c_jx_j$"></SPAN> more than any other <!-- MATH
+ $x_k\;\;(k\ne j)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img925.svg"
+ ALT="$x_k\;\;(k\ne j)$"></SPAN>. 
 
 <P>
 </LI>
-<LI><#5272#><B>Selection of the leaving variable</B><#5272#>
+<LI><B>Selection of the leaving variable</B>
 
 <P>
 This selection is based on the constraints imposed on the selected 
-  entering variable <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20990#</SPAN>. In general, the restriction on <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20992#</SPAN> set by 
-  the kth constraint <tex2html_verbatim_mark>#math1051#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20994#</SPAN> is <tex2html_verbatim_mark>#math1052#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20996#</SPAN>
-  when <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20998#</SPAN>. If <tex2html_verbatim_mark>#math1053#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21000#</SPAN> for all <tex2html_verbatim_mark>#math1054#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21002#</SPAN>,
-  then the ith constraint is most restrictive on <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21004#</SPAN>, we will therefore
-  select the corresponding basic variable <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21006#</SPAN> as the leaving variable,
-  i.e., it becomes a non-basic variable to be set to zero, so that <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21008#</SPAN>
+  entering variable <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img921.svg"
+ ALT="$x_j$"></SPAN>. In general, the restriction on <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img921.svg"
+ ALT="$x_j$"></SPAN> set by 
+  the kth constraint <!-- MATH
+ $\sum_{j=1}^N a_{kj}x_j\le b_k$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.72ex; vertical-align: -1.13ex; " SRC="img926.svg"
+ ALT="$\sum_{j=1}^N a_{kj}x_j\le b_k$"></SPAN> is <!-- MATH
+ $x_j\le b_k/a_{kj}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img927.svg"
+ ALT="$x_j\le b_k/a_{kj}$"></SPAN>
+  when <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img928.svg"
+ ALT="$a_{kj}&gt;0$"></SPAN>. If <!-- MATH
+ $b_i/a_{ij} \le b_k/a_{kj}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img929.svg"
+ ALT="$b_i/a_{ij} \le b_k/a_{kj}$"></SPAN> for all <!-- MATH
+ $k=1,\cdots,M$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img930.svg"
+ ALT="$k=1,\cdots,M$"></SPAN>,
+  then the ith constraint is most restrictive on <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img921.svg"
+ ALT="$x_j$"></SPAN>, we will therefore
+  select the corresponding basic variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img931.svg"
+ ALT="$s_i$"></SPAN> as the leaving variable,
+  i.e., it becomes a non-basic variable to be set to zero, so that <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img921.svg"
+ ALT="$x_j$"></SPAN>
   can be maximally increased without violating the constraints. If all 
-  <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21010#</SPAN> for all <tex2html_verbatim_mark>#math1055#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21012#</SPAN>, variable <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21014#</SPAN> is not bounded.
+  <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img932.svg"
+ ALT="$a_{kj}&lt;0$"></SPAN> for all <!-- MATH
+ $k=1,\cdots,M$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img930.svg"
+ ALT="$k=1,\cdots,M$"></SPAN>, variable <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img921.svg"
+ ALT="$x_j$"></SPAN> is not bounded.
 
 <P>
 </LI>
-<LI><#5280#><B>Gauss-Jordan elimination based on Pivoting</B><#5280#>
+<LI><B>Gauss-Jordan elimination based on Pivoting</B>
 
 <P>
-To convert the entering variable <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21016#</SPAN> to a basic variable to replace the
-  leaving variable <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21018#</SPAN>, we need to turn the corresponding jth column into a
-  standard basis vector <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21020#</SPAN>. This is realized by pivoting on <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21022#</SPAN>
+To convert the entering variable <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img921.svg"
+ ALT="$x_j$"></SPAN> to a basic variable to replace the
+  leaving variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img931.svg"
+ ALT="$s_i$"></SPAN>, we need to turn the corresponding jth column into a
+  standard basis vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img933.svg"
+ ALT="${\bf e}_i$"></SPAN>. This is realized by pivoting on <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img796.svg"
+ ALT="$a_{ij}$"></SPAN>
   in the following steps:
   
 <OL>
-<LI>Divide the ith row by <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21024#</SPAN>: <tex2html_verbatim_mark>#math1056#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21026#</SPAN>.
-    Now <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21028#</SPAN>.
+<LI>Divide the ith row by <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img796.svg"
+ ALT="$a_{ij}$"></SPAN>: <!-- MATH
+ ${\bf r}_i\leftarrow{\bf r}_i/a_{ij}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img934.svg"
+ ALT="${\bf r}_i\leftarrow{\bf r}_i/a_{ij}$"></SPAN>.
+    Now <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img935.svg"
+ ALT="$a_{ij}=1$"></SPAN>.
 </LI>
-<LI>Subtract <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21030#</SPAN> times the ith row from the kth row:
-    <tex2html_verbatim_mark>#math1057#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21032#</SPAN>. 
-    Now <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21034#</SPAN> for all <tex2html_verbatim_mark>#math1058#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21036#</SPAN>, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21038#</SPAN>.
+<LI>Subtract <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img936.svg"
+ ALT="$a_{kj}$"></SPAN> times the ith row from the kth row:
+    <!-- MATH
+ ${\bf r}_k\leftarrow{\bf r}_k-a_{kj}{\bf r}_i$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.78ex; " SRC="img937.svg"
+ ALT="${\bf r}_k\leftarrow{\bf r}_k-a_{kj}{\bf r}_i$"></SPAN>. 
+    Now <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img938.svg"
+ ALT="$a_{kj}=0$"></SPAN> for all <!-- MATH
+ $k=1,\cdots,M$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img930.svg"
+ ALT="$k=1,\cdots,M$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img939.svg"
+ ALT="$k\ne i$"></SPAN>.
   
 </LI>
 </OL>
-  Now the jth column corresponding to the entering variable <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21040#</SPAN> becomes
-  a standard basis vector <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21042#</SPAN>, i.e., <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21044#</SPAN> becomes a basic variable 
-  that takes the value of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21046#</SPAN>, and the column corresponding to the leaving 
-  variable <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21048#</SPAN> is no longer a standard basis vector, and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21050#</SPAN> as it is
+  Now the jth column corresponding to the entering variable <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img921.svg"
+ ALT="$x_j$"></SPAN> becomes
+  a standard basis vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img933.svg"
+ ALT="${\bf e}_i$"></SPAN>, i.e., <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img921.svg"
+ ALT="$x_j$"></SPAN> becomes a basic variable 
+  that takes the value of <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img797.svg"
+ ALT="$b_i$"></SPAN>, and the column corresponding to the leaving 
+  variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img931.svg"
+ ALT="$s_i$"></SPAN> is no longer a standard basis vector, and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img940.svg"
+ ALT="$s_i=0$"></SPAN> as it is
   now a non-basic variable.
 
 <P>
@@ -199,161 +508,442 @@ To convert the entering variable <SPAN CLASS="MATH"><tex2html_image_mark>#tex2ht
 As Gauss-Jordan elimination converts the linear equations to a set of 
 equivalent equations, the constraints remain satisfied through out the 
 process. Although the membership of the basic and non-basic variable 
-groups keeps changing in the iteration, so long as <tex2html_verbatim_mark>#math1059#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21052#</SPAN> 
-and <tex2html_verbatim_mark>#math1060#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21054#</SPAN>, the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21056#</SPAN> constraint equations 
-<tex2html_verbatim_mark>#math1061#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21058#</SPAN> always holds.
+groups keeps changing in the iteration, so long as <!-- MATH
+ ${\bf x}_b={\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img899.svg"
+ ALT="${\bf x}_b={\bf b}$"></SPAN> 
+and <!-- MATH
+ ${\bf x}_n={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img898.svg"
+ ALT="${\bf x}_n={\bf0}$"></SPAN>, the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img632.svg"
+ ALT="$M$"></SPAN> constraint equations 
+<!-- MATH
+ ${\bf Ax}={\bf A}_n{\bf x}_n+{\bf I}{\bf x}_b={\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img920.svg"
+ ALT="${\bf Ax}={\bf A}_n{\bf x}_n+{\bf I}{\bf x}_b={\bf b}$"></SPAN> always holds.
 
 <P>
 This iterative process keeps replacing the slack variables 
-<tex2html_verbatim_mark>#math1062#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21060#</SPAN> (the basic variables initially) by the original 
-variables <tex2html_verbatim_mark>#math1063#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21062#</SPAN> (the non-basic variables initially), 
+<!-- MATH
+ $\{s_1,\cdots,s_M\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img838.svg"
+ ALT="$\{s_1,\cdots,s_M\}$"></SPAN> (the basic variables initially) by the original 
+variables <!-- MATH
+ $\{x_1,\cdots,x_N\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img839.svg"
+ ALT="$\{x_1,\cdots,x_N\}$"></SPAN> (the non-basic variables initially), 
 one at a time, until all elements in the last row are non-negative.
 
 <P>
 The final result can be read out directly from the tableau. The variables 
-corresponding to the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21064#</SPAN> standard basis vectors <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21066#</SPAN> (<tex2html_verbatim_mark>#math1064#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21068#</SPAN>) 
-are the final basic variables that take the values in <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21070#</SPAN> in the
+corresponding to the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img632.svg"
+ ALT="$M$"></SPAN> standard basis vectors <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img933.svg"
+ ALT="${\bf e}_i$"></SPAN> (<!-- MATH
+ $i=1,\cdots,M$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img907.svg"
+ ALT="$i=1,\cdots,M$"></SPAN>) 
+are the final basic variables that take the values in <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img941.svg"
+ ALT="${\bf b}$"></SPAN> in the
 right-most column of the tableau. They form the optimal basic solution, 
-with the maximum of the objective function <tex2html_verbatim_mark>#math1065#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21072#</SPAN> given by the last 
-element also in the last column. The remaining <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21074#</SPAN> variables corresponding 
+with the maximum of the objective function <!-- MATH
+ $z=f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img914.svg"
+ ALT="$z=f({\bf x})$"></SPAN> given by the last 
+element also in the last column. The remaining <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img548.svg"
+ ALT="$n$"></SPAN> variables corresponding 
 to non-standard columns are non-basic variables that take the value zero. 
-When <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21076#</SPAN> (more constraints than variables), some of the slack variables 
-may remain in the basic variable group taking non-zero values; when <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21078#</SPAN>, 
+When <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img942.svg"
+ ALT="$M&gt;N$"></SPAN> (more constraints than variables), some of the slack variables 
+may remain in the basic variable group taking non-zero values; when <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img943.svg"
+ ALT="$M&lt;N$"></SPAN>, 
 some of the original variable may be in the non-basic group taking the value
 zero.
 
 <P>
-<#5311#><B>Example:</B><#5311#>
+<B>Example:</B>
 
 <P>
-There are <tex2html_verbatim_mark>#math1066#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21080#</SPAN> basic solutions as listed below, 
-out of which five are basic feasible solutions with all <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21082#</SPAN>
+There are <!-- MATH
+ $C_{M+N}^M=C_{10}^3=10$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.95ex; " SRC="img944.svg"
+ ALT="$C_{M+N}^M=C_{10}^3=10$"></SPAN> basic solutions as listed below, 
+out of which five are basic feasible solutions with all <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img945.svg"
+ ALT="$M+N=5$"></SPAN>
 variables taking non-negative values. The remaining solutions 
 are not feasible, as some of the variables take negative values.
 
 <P>
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1067#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{c|ccccc|c|c}\hline
+    & x_1 & x_2 & s_1 & s_2 & s_3 & & \mbox{objective function (normalized)} \\\hline
+    1 & 5 & 6 & 2 & 0 & 0 & \mbox{feasible}   & 28\; (7.77) \\
+    2 &6.25 & 5.5 & 0 & -5 & 0 & \mbox{infeasible} & 29\; (8.04) \\
+    3 & 7.5 & 3 & 0 & 0 & 10 & \mbox{feasible}   & 24\; (6.66) \\
+    4 &20 & 0 & -2 & -60 & 20  & \mbox{infeasible} & 40\; (11.1) \\
+    5 &10 & 0 & -2 & 0 & 20 & \mbox{infeasible} & 20\; (5.55) \\
+    6 & 9 & 0 & 0 & 6 & 22 & \mbox{feasible}   & 18\; (4.10) \\
+    7 & 0 & 8 & 10 & 20 & 0 & \mbox{feasible}   & 24\; (6.66) \\
+    8 & 0 & 12 & 6 & 0 & -20 & \mbox{infeasible} & 36\; (9.98) \\
+    9 & 0 & 18 & 0 & -30 & -50 & \mbox{infeasible} & 54\; (14.99) \\
+    10& 0 & 0 & 18 & 60 & 40 & \mbox{feasible}   &  0\; (0.00) \\\hline
+  \end{array}
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21084#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img946.svg"
+ ALT="\begin{displaymath}\begin{array}{c\vert ccccc\vert c\vert c}\hline
+&amp; x_1 &amp; x_2 &amp;...
+... &amp; 60 &amp; 40 &amp; \mbox{feasible} &amp; 0\; (0.00) \\ \hline
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
 
 <P>
-<#5330#><B>Example:</B><#5330#>
+<B>Example:</B>
 
 <P>
 We re-solve the LP problem considered in the previous examples, now 
 in the standard form:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1068#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{ll}
+    \mbox{maximize}    & f({\bf x})=2x_1+3x_2 \\
+    \mbox{subject to:} &
+    \left\{ \begin{array}{l}
+      2x_1+ x_2+s_1=18\\6x_1+5x_2+s_2=60 \\2x_1+5x_2+s_3=40 \\
+      x_1 \ge 0,\; x_2\ge 0,\; s_1\ge 0,\; s_2\ge 0,\; s_3\ge0
+    \end{array}\right.
+  \end{array}
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21086#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img947.svg"
+ ALT="\begin{displaymath}\begin{array}{ll}
+\mbox{maximize} &amp; f({\bf x})=2x_1+3x_2 \\
+...
+... s_1\ge 0,\; s_2\ge 0,\; s_3\ge0
+\end{array}\right.
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
 The standard form is further converted to a tableau as shown below. The 
-left-most column indicates the basic variables, the next <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21088#</SPAN> columns 
-are for the variables <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21090#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21092#</SPAN>,the next <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21094#</SPAN> columns are for the slack 
-variables <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21096#</SPAN>, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21098#</SPAN>, and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21100#</SPAN>, the right most column is for the constants 
-<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21102#</SPAN>, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21104#</SPAN>, and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21106#</SPAN> on the right-hand side of the equations.
+left-most column indicates the basic variables, the next <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img557.svg"
+ ALT="$N=2$"></SPAN> columns 
+are for the variables <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img39.svg"
+ ALT="$x$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img40.svg"
+ ALT="$y$"></SPAN>,the next <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img864.svg"
+ ALT="$M=3$"></SPAN> columns are for the slack 
+variables <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img948.svg"
+ ALT="$u$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img949.svg"
+ ALT="$v$"></SPAN>, and <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img950.svg"
+ ALT="$w$"></SPAN>, the right most column is for the constants 
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img951.svg"
+ ALT="$b_1$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img952.svg"
+ ALT="$b_2$"></SPAN>, and <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img953.svg"
+ ALT="$b_3$"></SPAN> on the right-hand side of the equations.
 
 <P>
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1069#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{c|cc|ccc|c}  \hline
+    & x_1 & x_2 & s_1 & s_2 & s_3 & b  \\\hline
+    s_1 & 2 & 1 & 1 & 0 & 0 & 18 \\
+    s_2 & 6 & 5 & 0 & 1 & 0 & 60 \\
+    s_3 & 2 & 5 & 0 & 0 & 1 & 40 \\\hline
+    z &-2 &-3 & 0 & 0 & 0 & 0  \\\hline
+  \end{array}
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21108#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img954.svg"
+ ALT="\begin{displaymath}\begin{array}{c\vert cc\vert ccc\vert c} \hline
+&amp; x_1 &amp; x_2 &amp;...
+... &amp; 40 \\ \hline
+z &amp;-2 &amp;-3 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ \hline
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
 
 <P>
-In this initial state, the basic variables are <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21110#</SPAN>, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21112#</SPAN>, and 
-<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21114#</SPAN>, the non-basic variables are <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21116#</SPAN>. The corresponding basic
+In this initial state, the basic variables are <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img955.svg"
+ ALT="$s_1=18$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img956.svg"
+ ALT="$s_2=60$"></SPAN>, and 
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img957.svg"
+ ALT="$s_3=40$"></SPAN>, the non-basic variables are <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img958.svg"
+ ALT="$x_1=x_2=0$"></SPAN>. The corresponding basic
 feasible solution is at the origin.
 
 <P>
 
 <UL>
-<LI>Select column <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21118#</SPAN> as the pivot column, as <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21120#</SPAN> is the most 
+<LI>Select column <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img959.svg"
+ ALT="$j=2$"></SPAN> as the pivot column, as <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img960.svg"
+ ALT="$-c_2=-3$"></SPAN> is the most 
   negative coefficient.
 </LI>
-<LI>Select row <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21122#</SPAN> as the pivot row, as the ratio 
-  <tex2html_verbatim_mark>#math1070#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21124#</SPAN> is the minimum among all <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21126#</SPAN> ratios <tex2html_verbatim_mark>#math1071#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21128#</SPAN>
-  (<tex2html_verbatim_mark>#math1072#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21130#</SPAN>).
+<LI>Select row <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img961.svg"
+ ALT="$i=3$"></SPAN> as the pivot row, as the ratio 
+  <!-- MATH
+ $b_3/a_{32}=40/5=8$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img962.svg"
+ ALT="$b_3/a_{32}=40/5=8$"></SPAN> is the minimum among all <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img864.svg"
+ ALT="$M=3$"></SPAN> ratios <!-- MATH
+ $b_k/a_{k2}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img963.svg"
+ ALT="$b_k/a_{k2}$"></SPAN>
+  (<!-- MATH
+ $18/1,\;60/5,\;40/5$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img964.svg"
+ ALT="$18/1,\;60/5,\;40/5$"></SPAN>).
 </LI>
-<LI>Divide pivot row <tex2html_verbatim_mark>#math1073#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21132#</SPAN> by 
-  the pivot element <tex2html_verbatim_mark>#math1074#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21134#</SPAN> to get <tex2html_verbatim_mark>#math1075#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21136#</SPAN>.
+<LI>Divide pivot row <!-- MATH
+ ${\bf r}_i={\bf r}_3=[2,\;5,\;0,\;0,\;1,\;40]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img965.svg"
+ ALT="${\bf r}_i={\bf r}_3=[2,\;5,\;0,\;0,\;1,\;40]$"></SPAN> by 
+  the pivot element <!-- MATH
+ $a_{ij}=a_{32}=5$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img966.svg"
+ ALT="$a_{ij}=a_{32}=5$"></SPAN> to get <!-- MATH
+ ${\bf r}_3=[0.4,\;1,\;0,\;0,\;0.2,\;8]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img967.svg"
+ ALT="${\bf r}_3=[0.4,\;1,\;0,\;0,\;0.2,\;8]$"></SPAN>.
 </LI>
-<LI>Subtract <tex2html_verbatim_mark>#math1076#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21138#</SPAN><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21140#</SPAN> from row <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21142#</SPAN>, so that 
-  <tex2html_verbatim_mark>#math1077#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21144#</SPAN>.
+<LI>Subtract <!-- MATH
+ $a_{kj}=a_{k2}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img968.svg"
+ ALT="$a_{kj}=a_{k2}$"></SPAN><SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img969.svg"
+ ALT="${\bf r}_k$"></SPAN> from row <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img969.svg"
+ ALT="${\bf r}_k$"></SPAN>, so that 
+  <!-- MATH
+ $a_{kj}=a_{k2}=0, \;(k=1,2)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img970.svg"
+ ALT="$a_{kj}=a_{k2}=0, \;(k=1,2)$"></SPAN>.
 </LI>
-<LI>Subtract <tex2html_verbatim_mark>#math1078#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21146#</SPAN> from <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21148#</SPAN> (last row).
+<LI>Subtract <!-- MATH
+ $a_{4j}{\bf r}_i=a_{42}{\bf r}_3$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img971.svg"
+ ALT="$a_{4j}{\bf r}_i=a_{42}{\bf r}_3$"></SPAN> from <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img972.svg"
+ ALT="${\bf r}_4$"></SPAN> (last row).
 </LI>
 </UL>
 
 <P>
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1079#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{c|cc|ccc|c}     \hline
+    & x_1 & x_2 & s_1 & s_2 & s_3  &  b  \\\hline
+    s_1 &1.6& 0 & 1 & 0 &-0.2& 10  \\
+    s_2 & 4 & 0 & 0 & 1 &-1  & 20  \\
+    x_2 &0.4&1.0& 0 & 0 & 0.2&  8  \\\hline
+    z &-0.8& 0 & 0 & 0 &0.6& 24  \\\hline
+  \end{array}
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21150#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img973.svg"
+ ALT="\begin{displaymath}\begin{array}{c\vert cc\vert ccc\vert c} \hline
+&amp; x_1 &amp; x_2 &amp;...
+...&amp; 8 \\ \hline
+z &amp;-0.8&amp; 0 &amp; 0 &amp; 0 &amp;0.6&amp; 24 \\ \hline
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
 
 <P>
-The entering variable <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21152#</SPAN> becomes a basic variable to replace the 
-leaving variable <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21154#</SPAN> which becomes a non-basic variable. The corresponding
-basic feasible solution is at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21156#</SPAN>, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21158#</SPAN>, with <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21160#</SPAN>, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21162#</SPAN>,
-<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21164#</SPAN>. The objective function value is <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21166#</SPAN>.
+The entering variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img40.svg"
+ ALT="$y$"></SPAN> becomes a basic variable to replace the 
+leaving variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img950.svg"
+ ALT="$w$"></SPAN> which becomes a non-basic variable. The corresponding
+basic feasible solution is at <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img974.svg"
+ ALT="$x_1=0$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img975.svg"
+ ALT="$x_2=b_3=8$"></SPAN>, with <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img976.svg"
+ ALT="$s_1=10$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img977.svg"
+ ALT="$s_2=20$"></SPAN>,
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img978.svg"
+ ALT="$s_3=0$"></SPAN>. The objective function value is <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img979.svg"
+ ALT="$z=24$"></SPAN>.
 
 <P>
 
 <UL>
-<LI>Select column <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21168#</SPAN> as the pivot column, as <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21170#</SPAN> is the most 
+<LI>Select column <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img980.svg"
+ ALT="$j=1$"></SPAN> as the pivot column, as <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img981.svg"
+ ALT="$-c_1=-0.8$"></SPAN> is the most 
   (only) negative coefficient.
 </LI>
-<LI>Select row <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21172#</SPAN> as the pivot row, as the ratio 
-  <tex2html_verbatim_mark>#math1080#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21174#</SPAN> is the minimum among all <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21176#</SPAN> ratios <tex2html_verbatim_mark>#math1081#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21178#</SPAN>
-  (<tex2html_verbatim_mark>#math1082#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21180#</SPAN>).
+<LI>Select row <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img982.svg"
+ ALT="$i=2$"></SPAN> as the pivot row, as the ratio 
+  <!-- MATH
+ $b_2/a_{21}=20/4=5$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img983.svg"
+ ALT="$b_2/a_{21}=20/4=5$"></SPAN> is the minimum among all <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img864.svg"
+ ALT="$M=3$"></SPAN> ratios <!-- MATH
+ $b_k/a_{k1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img984.svg"
+ ALT="$b_k/a_{k1}$"></SPAN>
+  (<!-- MATH
+ $10/1.6=6.25,\;20/4=5,\;8/0.4=20$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img985.svg"
+ ALT="$10/1.6=6.25,\;20/4=5,\;8/0.4=20$"></SPAN>).
 </LI>
-<LI>Divide row <tex2html_verbatim_mark>#math1083#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21182#</SPAN> by the pivot 
-  element <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21184#</SPAN> to get <tex2html_verbatim_mark>#math1084#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21186#</SPAN>.
+<LI>Divide row <!-- MATH
+ ${\bf r}_i={\bf r}_2=[4,\;0,\;0,\;1,\;-1,\;20]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img986.svg"
+ ALT="${\bf r}_i={\bf r}_2=[4,\;0,\;0,\;1,\;-1,\;20]$"></SPAN> by the pivot 
+  element <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img987.svg"
+ ALT="$a_{21}=4$"></SPAN> to get <!-- MATH
+ ${\bf r}_2=[1,\;0,\;0,\;0.25,\;-0.25,\;5]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img988.svg"
+ ALT="${\bf r}_2=[1,\;0,\;0,\;0.25,\;-0.25,\;5]$"></SPAN>.
 </LI>
-<LI>Subtract <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21188#</SPAN><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21190#</SPAN> from row <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21192#</SPAN>, so that 
-  <tex2html_verbatim_mark>#math1085#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21194#</SPAN>.
+<LI>Subtract <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img989.svg"
+ ALT="$a_{k1}$"></SPAN><SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img969.svg"
+ ALT="${\bf r}_k$"></SPAN> from row <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img969.svg"
+ ALT="${\bf r}_k$"></SPAN>, so that 
+  <!-- MATH
+ $a_{k1}=0, (k=1,3)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img990.svg"
+ ALT="$a_{k1}=0, (k=1,3)$"></SPAN>.
 </LI>
-<LI>Subtract <tex2html_verbatim_mark>#math1086#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21196#</SPAN> from <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21198#</SPAN> (last row).
+<LI>Subtract <!-- MATH
+ $a_{4j}{\bf r}_i=a_{41}{\bf r}_4$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img991.svg"
+ ALT="$a_{4j}{\bf r}_i=a_{41}{\bf r}_4$"></SPAN> from <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img972.svg"
+ ALT="${\bf r}_4$"></SPAN> (last row).
 </LI>
 </UL>
 
 <P>
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1087#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{c|cc|ccc|c}       \hline
+    & x_1 & x_2 & s_1 & s_2  & s_3   & b   \\\hline
+    s_1 & 0 & 0 & 1 &-0.4& 0.2 & 2   \\
+    x_1 & 1 & 0 & 0 &0.25&-0.25& 5   \\
+    x_2 & 0 & 1 & 0 &-0,1& 0.3 & 6   \\\hline
+    z & 0 & 0 & 0 & 0.2& 0.4 & 28  \\\hline
+  \end{array}
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21200#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img992.svg"
+ ALT="\begin{displaymath}\begin{array}{c\vert cc\vert ccc\vert c} \hline
+&amp; x_1 &amp; x_2 &amp;...
+...6 \\ \hline
+z &amp; 0 &amp; 0 &amp; 0 &amp; 0.2&amp; 0.4 &amp; 28 \\ \hline
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
 
 <P>
-The entering variable <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21202#</SPAN> becomes a basic variable to replace the leaving 
-variable <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21204#</SPAN> which becomes a non-basic variable. The corresponding basic 
-feasible solution is at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21206#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21208#</SPAN>, with <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21210#</SPAN>, and 
-<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21212#</SPAN>. The objective function value is <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21214#</SPAN>.
+The entering variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img39.svg"
+ ALT="$x$"></SPAN> becomes a basic variable to replace the leaving 
+variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img949.svg"
+ ALT="$v$"></SPAN> which becomes a non-basic variable. The corresponding basic 
+feasible solution is at <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img993.svg"
+ ALT="$x_1=b_2=5$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img994.svg"
+ ALT="$y_2=b_3=6$"></SPAN>, with <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img995.svg"
+ ALT="$s_1=2$"></SPAN>, and 
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img996.svg"
+ ALT="$s_2=s_3=0$"></SPAN>. The objective function value is <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img997.svg"
+ ALT="$z=28$"></SPAN>.
 
 <P>
-This problem has <tex2html_verbatim_mark>#math1088#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21216#</SPAN> basic solutions, corresponding
+This problem has <!-- MATH
+ $C_{N+M}^M=C_5^3=10$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.95ex; " SRC="img998.svg"
+ ALT="$C_{N+M}^M=C_5^3=10$"></SPAN> basic solutions, corresponding
 to the same number of intersections, out of which five are feasible,
 as previously obtained. The simplex method finds three of these feasible
-solutions, starting from <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21218#</SPAN> at the origin with <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21220#</SPAN>, through 
-the vertex at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21222#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21224#</SPAN> with <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21226#</SPAN>, to the optimal solution 
-at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21228#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21230#</SPAN> with <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21232#</SPAN>.
+solutions, starting from <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img999.svg"
+ ALT="$x_1=s_2=0$"></SPAN> at the origin with <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1000.svg"
+ ALT="$z=0$"></SPAN>, through 
+the vertex at <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img974.svg"
+ ALT="$x_1=0$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img1001.svg"
+ ALT="$x_2=8$"></SPAN> with <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img979.svg"
+ ALT="$z=24$"></SPAN>, to the optimal solution 
+at <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img1002.svg"
+ ALT="$x_1=5$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img1003.svg"
+ ALT="$x_2=6$"></SPAN> with <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img997.svg"
+ ALT="$z=28$"></SPAN>.
 
 <P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node18.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node12.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node16.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node18.html">Quadratic Programming (QP)</A>
+<B> Up:</B> <A
+ HREF="node12.html">Constrained Optimization</A>
+<B> Previous:</B> <A
+ HREF="node16.html">Linear Programming (LP)</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

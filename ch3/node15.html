@@ -1,86 +1,245 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Duality and KKT Conditions</TITLE>
+<META NAME="description" CONTENT="Duality and KKT Conditions">
+<META NAME="keywords" CONTENT="ch3">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch3.css">
+
+<LINK REL="next" HREF="node16.html">
+<LINK REL="previous" HREF="node14.html">
+<LINK REL="next" HREF="node16.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node16.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node12.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node14.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node16.html">Linear Programming (LP)</A>
+<B> Up:</B> <A
+ HREF="node12.html">Constrained Optimization</A>
+<B> Previous:</B> <A
+ HREF="node14.html">Optimization with Inequality Constraints</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
 
 <H2><A ID="SECTION00033000000000000000">
 Duality and KKT Conditions</A>
 </H2>
 
 <P>
-For a given optimization problem, now called the <#4300#><EM>primal problem</EM><#4300#>,
-there exists a <#4301#><EM>dual problem</EM><#4301#>. To see this, consider the following
+For a given optimization problem, now called the <EM>primal problem</EM>,
+there exists a <EM>dual problem</EM>. To see this, consider the following
 problem:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math902#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{ll}
+    \mbox{minimize} & f_p({\bf x})\\
+    \mbox{subject to:} &
+    \left\{ \begin{array}{l} 
+      {\bf h}({\bf x})={\bf0}\\
+      {\bf g}({\bf x})\le{\bf0}\;\;\mbox{or}\;\;{\bf g}({\bf x})\ge{\bf0}
+    \end{array} \right.
+  \end{array}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20415#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img761.svg"
+ ALT="\begin{displaymath}\begin{array}{ll}
+\mbox{minimize} &amp; f_p({\bf x})\\
+\mbox{sub...
+...r}\;\;{\bf g}({\bf x})\ge{\bf0}
+\end{array} \right.
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">195</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 with its Lagrangian:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math903#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+L({\bf x},{\bf\lambda},{\bf\mu})
+  =f_p({\bf x})-{\bf\lambda}^T{\bf h}({\bf x})-{\bf\mu}^T{\bf g}({\bf x})
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20417#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img762.svg"
+ ALT="$\displaystyle L({\bf x},{\bf\lambda},{\bf\mu})
+=f_p({\bf x})-{\bf\lambda}^T{\bf h}({\bf x})-{\bf\mu}^T{\bf g}({\bf x})$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">196</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-As this is a minimization problem, here <tex2html_verbatim_mark>#math904#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20419#</SPAN> as
-indicated in Table <A HREF=<tex2html_cr_mark>#PolarityTable#4336><tex2html_cr_mark></A>.
+As this is a minimization problem, here <!-- MATH
+ $\mu^T g({\bf x})\ge 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img763.svg"
+ ALT="$\mu^T g({\bf x})\ge 0$"></SPAN> as
+indicated in Table <A HREF="node14.html#PolarityTable">183</A>.
 
 <P>
-We now consider the <#4337#><EM>dual function</EM><#4337#> defined as the infimum 
-(lower bound) of the Lagrangian over <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20421#</SPAN>:
+We now consider the <EM>dual function</EM> defined as the infimum 
+(lower bound) of the Lagrangian over <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="${\bf x}$"></SPAN>:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math905#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f_d({\bf\lambda},{\bf\mu})
+  =\inf_{\bf x} L({\bf x},{\bf\lambda},{\bf\mu})
+  =\inf_{\bf x}\left[ f_p({\bf x})-{\bf\lambda}^T{\bf h}({\bf x})
+    -{\bf\mu}^T{\bf g}({\bf x})\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20423#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.95ex; vertical-align: -1.74ex; " SRC="img764.svg"
+ ALT="$\displaystyle f_d({\bf\lambda},{\bf\mu})
+=\inf_{\bf x} L({\bf x},{\bf\lambda},{...
+... f_p({\bf x})-{\bf\lambda}^T{\bf h}({\bf x})
+-{\bf\mu}^T{\bf g}({\bf x})\right]$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">197</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 which can be obtained by solving the equation
-<tex2html_verbatim_mark>#math906#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20425#</SPAN> to 
-get <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20427#</SPAN> that minimizes the Lagrangian, and then substituting 
+<!-- MATH
+ $\bigtriangledown_{\bf x}L({\bf x},{\bf\lambda},{\bf\mu})={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img765.svg"
+ ALT="$\bigtriangledown_{\bf x}L({\bf x},{\bf\lambda},{\bf\mu})={\bf0}$"></SPAN> to 
+get <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="${\bf x}$"></SPAN> that minimizes the Lagrangian, and then substituting 
 it back into the Lagrangian. Moreover, in order to obtain the 
 tightest lower bound, the supremum (upper bound) of the dual function 
-<tex2html_verbatim_mark>#math907#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20429#</SPAN> over all possible values for its variables
-<tex2html_verbatim_mark>#math908#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20431#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20433#</SPAN>, we need to solve the following optimization
+<!-- MATH
+ $f_d({\bf\lambda},{\bf\mu})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img766.svg"
+ ALT="$f_d({\bf\lambda},{\bf\mu})$"></SPAN> over all possible values for its variables
+<!-- MATH
+ ${\bf\lambda}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img731.svg"
+ ALT="${\bf\lambda}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img724.svg"
+ ALT="${\bf\mu}$"></SPAN>, we need to solve the following optimization
 problem:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math909#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{ll}
+    \mbox{maximize} & f_d({\bf\lambda},{\bf\mu})
+    =\inf_{\bf x}L({\bf x},{\bf\lambda},{\bf\mu})\\
+    \mbox{subject to:} & {\bf\mu}\le{\bf0}\;\;\mbox{or}\;\;
+    {\bf\mu}\ge{\bf0}
+  \end{array}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20435#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img767.svg"
+ ALT="\begin{displaymath}\begin{array}{ll}
+\mbox{maximize} &amp; f_d({\bf\lambda},{\bf\mu}...
+...\bf\mu}\le{\bf0}\;\;\mbox{or}\;\;
+{\bf\mu}\ge{\bf0}
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">198</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-This is the <#4383#><EM>dual problem</EM><#4383#> of the original primal problem.
+This is the <EM>dual problem</EM> of the original primal problem.
 Note that which of the two inequalities of the dual problem is used 
 depends on which of the two inequalities of the primal problem is 
-used, as indicated in Table <A HREF=<tex2html_cr_mark>#PolarityTable#4384><tex2html_cr_mark></A>. Specifically, for 
-this minimization primal problem, <tex2html_verbatim_mark>#math910#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20437#</SPAN>
-(Eq. (<A HREF=<tex2html_cr_mark>#mugminmax#4388><tex2html_cr_mark></A>)), i.e., the inequality constraints of both
+used, as indicated in Table <A HREF="node14.html#PolarityTable">183</A>. Specifically, for 
+this minimization primal problem, <!-- MATH
+ ${\bf\mu}^T{\bf g}({\bf x})\ge 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img768.svg"
+ ALT="${\bf\mu}^T{\bf g}({\bf x})\ge 0$"></SPAN>
+(Eq. (<A HREF="node14.html#mugminmax">184</A>)), i.e., the inequality constraints of both
 the primal and dual problems should be either greater or smaller than 
 zero.
 
 <P>
-For any <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20439#</SPAN>, including the solutions <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20441#</SPAN>, in the 
-feasible regions defined by <tex2html_verbatim_mark>#math911#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20443#</SPAN> and 
-<tex2html_verbatim_mark>#math912#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20445#</SPAN>, the following holds
+For any <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="${\bf x}$"></SPAN>, including the solutions <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}^*$"></SPAN>, in the 
+feasible regions defined by <!-- MATH
+ ${\bf h}({\bf x})={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img769.svg"
+ ALT="${\bf h}({\bf x})={\bf0}$"></SPAN> and 
+<!-- MATH
+ ${\bf g}({\bf x})\ge{\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img770.svg"
+ ALT="${\bf g}({\bf x})\ge{\bf0}$"></SPAN>, the following holds
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math913#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f_d({\bf\lambda},{\bf\mu})\le L({\bf x},{\bf\lambda},{\bf\mu})
+  =f_p({\bf x})-{\bf\lambda}^T{\bf h}({\bf x})-{\bf\mu}^T{\bf g}({\bf x})
+  \le f_p({\bf x})-{\bf\mu}^T{\bf g}({\bf x}) \le f_p({\bf x})
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20447#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img771.svg"
+ ALT="$\displaystyle f_d({\bf\lambda},{\bf\mu})\le L({\bf x},{\bf\lambda},{\bf\mu})
+=f...
+...^T{\bf g}({\bf x})
+\le f_p({\bf x})-{\bf\mu}^T{\bf g}({\bf x}) \le f_p({\bf x})$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">199</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-We further define <tex2html_verbatim_mark>#math914#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20449#</SPAN> and 
-<tex2html_verbatim_mark>#math915#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20451#</SPAN>, and get
+We further define <!-- MATH
+ $d^*=f_d({\bf\lambda}^*,{\bf\mu}^*)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img772.svg"
+ ALT="$d^*=f_d({\bf\lambda}^*,{\bf\mu}^*)$"></SPAN> and 
+<!-- MATH
+ $f_p({\bf x}^*)=p^*$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img773.svg"
+ ALT="$f_p({\bf x}^*)=p^*$"></SPAN>, and get
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math916#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+d^*=f_d({\bf\lambda}^*,{\bf\mu}^*)\le L({\bf x},{\bf\lambda},{\bf\mu})
+  \le f_p({\bf x}^*)=p^*
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20453#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img774.svg"
+ ALT="$\displaystyle d^*=f_d({\bf\lambda}^*,{\bf\mu}^*)\le L({\bf x},{\bf\lambda},{\bf\mu})
+\le f_p({\bf x}^*)=p^*$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">200</SPAN>)</TD></TR>
 </TABLE></DIV>
@@ -88,13 +247,28 @@ We further define <tex2html_verbatim_mark>#math914#<SPAN CLASS="MATH"><tex2html_
 
 <P>
 Similarly, we can also show that a primal maximization problem with
-solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20455#</SPAN> that satisfies <tex2html_verbatim_mark>#math917#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20457#</SPAN> has
-a dual minimization problem with solution <tex2html_verbatim_mark>#math918#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20459#</SPAN>
+solution <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}^*$"></SPAN> that satisfies <!-- MATH
+ $p^*=f({\bf x}^*)\ge f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img775.svg"
+ ALT="$p^*=f({\bf x}^*)\ge f({\bf x})$"></SPAN> has
+a dual minimization problem with solution <!-- MATH
+ ${\bf\lambda}^*,\;{\bf\mu}^*$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img776.svg"
+ ALT="${\bf\lambda}^*,\;{\bf\mu}^*$"></SPAN>
 that satisfies
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math919#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+d^*=f_d({\bf\lambda}^*,\;{\bf\mu}^*)\ge f_p({\bf x}^*)=p^*
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20461#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img777.svg"
+ ALT="$\displaystyle d^*=f_d({\bf\lambda}^*,\;{\bf\mu}^*)\ge f_p({\bf x}^*)=p^*$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">201</SPAN>)</TD></TR>
 </TABLE></DIV>
@@ -103,23 +277,49 @@ that satisfies
 <P>
 We can therefore conclude that the solution of the dual problem always 
 provides the tightest bound for the solution of the primal problem. The 
-difference <tex2html_verbatim_mark>#math920#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20463#</SPAN> for the minimization primal problem or 
-<tex2html_verbatim_mark>#math921#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20465#</SPAN> for the maximization primal problem is called the 
-<#4437#><EM>duality gap</EM><#4437#>. If the duality gap is non-zero, i.e., <tex2html_verbatim_mark>#math922#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20467#</SPAN>, 
-the dual relationship is a <#4438#><EM>weak duality</EM><#4438#>, otherwise it is a 
-<#4439#><EM>strong duality</EM><#4439#>, for which the following holds:
+difference <!-- MATH
+ $p^*-d^*\ge 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img778.svg"
+ ALT="$p^*-d^*\ge 0$"></SPAN> for the minimization primal problem or 
+<!-- MATH
+ $d^*-p^*\ge 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img779.svg"
+ ALT="$d^*-p^*\ge 0$"></SPAN> for the maximization primal problem is called the 
+<EM>duality gap</EM>. If the duality gap is non-zero, i.e., <!-- MATH
+ $d^*\ne p^*$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img780.svg"
+ ALT="$d^*\ne p^*$"></SPAN>, 
+the dual relationship is a <EM>weak duality</EM>, otherwise it is a 
+<EM>strong duality</EM>, for which the following holds:
 <BR>
 <DIV CLASS="mathdisplay">
-<tex2html_verbatim_mark>#math923#
+<!-- MATH
+ \begin{eqnarray}
+d^*&=&f_d({\bf\lambda}^*,{\bf\mu}^*)= L({\bf x}^*,{\bf\lambda}^*,{\bf\mu}^*)
+  =f_p({\bf x}^*)-{\bf\lambda}^{*T}{\bf h}({\bf x}^*)-{\bf\mu}^{*T}{\bf g}({\bf x}^*)
+  \nonumber\\
+  &=&f_p({\bf x}^*)-{\bf\mu}^{*T}{\bf g}({\bf x}^*) =f_p({\bf x}^*)=p^*
+  \nonumber
+\end{eqnarray}
+ -->
 <TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
-<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><tex2html_image_mark>#tex2html_wrap_indisplay20470#</TD>
-<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay20472#</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay20474#</TD>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.09ex; vertical-align: -0.12ex; " SRC="img781.svg"
+ ALT="$\displaystyle d^*$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img104.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img782.svg"
+ ALT="$\displaystyle f_d({\bf\lambda}^*,{\bf\mu}^*)= L({\bf x}^*,{\bf\lambda}^*,{\bf\m...
+...({\bf x}^*)-{\bf\lambda}^{*T}{\bf h}({\bf x}^*)-{\bf\mu}^{*T}{\bf g}({\bf x}^*)$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 &nbsp;</TD></TR>
 <TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
-<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay20476#</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay20478#</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img104.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img783.svg"
+ ALT="$\displaystyle f_p({\bf x}^*)-{\bf\mu}^{*T}{\bf g}({\bf x}^*) =f_p({\bf x}^*)=p^*$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 &nbsp;</TD></TR>
 </TABLE></DIV>
@@ -127,36 +327,87 @@ the dual relationship is a <#4438#><EM>weak duality</EM><#4438#>, otherwise it i
 
 which further implies all following equations must hold:
 <P></P>
-<DIV CLASS="mathdisplay"><A ID="KKTConditions"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math924#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><A ID="KKTConditions"></A><!-- MATH
+ \begin{equation}
+\left\{\begin{array}{ll}
+  \bigtriangledown_{\bf x} L({\bf x}^*,{\bf\lambda},{\bf\mu})
+  =\bigtriangledown_{\bf x} f({\bf x}^*)
+  -\sum_{i=1}^m\lambda_i \bigtriangledown_{\bf x} h_i({\bf x}^*)
+  -\sum_{j=1}^n\mu_j     \bigtriangledown_{\bf x} g_j({\bf x}^*)={\bf0}
+  & \mbox{(stationarity)}  \\
+  \left\{\begin{array}{l}
+  h_i({\bf x}^*)=0,\;\;\;\;\;(i=1,\cdots,m)\\
+  g_j({\bf x}^*)\le 0\;\;\mbox{or}\;\; g_j({\bf x}^*)\ge 0,\;\;\;
+  (j=1,\cdots,n)
+  \end{array}\right.&\mbox{(primal feasibility)}  \\
+  \mu_j^*\le 0,\;\;\mbox{or}\;\;\mu_j^*\ge 0,\;\;\;\;(j=1,\cdots,n)&
+  \mbox{(dual feasibility)} \\
+  \mu_j^*\,g_j({\bf x}^*)=0,\;\;\;\;\;(j=1,\cdots,n) &
+  \mbox{(complementarity)}
+  \end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20480#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 14.63ex; vertical-align: -6.68ex; " SRC="img784.svg"
+ ALT="$\displaystyle \left\{\begin{array}{ll}
+\bigtriangledown_{\bf x} L({\bf x}^*,{\b...
+... x}^*)=0,\;\;\;\;\;(j=1,\cdots,n) &amp;
+\mbox{(complementarity)}
+\end{array}\right.$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">202</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 
 <P>
-These are called the <#4494#><EM>Karush-Kuhn-Tucker (KKT) conditions</EM><#4494#>, the 
+These are called the <EM>Karush-Kuhn-Tucker (KKT) conditions</EM>, the 
 necessary conditions for the solution of a constrained optimization 
-problem, i.e., for any <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20482#</SPAN> to be a solution, it must satisfy
+problem, i.e., for any <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="${\bf x}$"></SPAN> to be a solution, it must satisfy
 all of the following:
 
 <UL>
-<LI>Stationarity: <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20484#</SPAN> maximizes or minimizes the Lagrangian, 
-  i.e., <tex2html_verbatim_mark>#math925#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20486#</SPAN>;
+<LI>Stationarity: <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="${\bf x}$"></SPAN> maximizes or minimizes the Lagrangian, 
+  i.e., <!-- MATH
+ $\bigtriangledown_{\bf x}L({\bf x},{\bf\lambda},{\bf\mu})={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img765.svg"
+ ALT="$\bigtriangledown_{\bf x}L({\bf x},{\bf\lambda},{\bf\mu})={\bf0}$"></SPAN>;
 </LI>
-<LI>Primal feasibility: <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20488#</SPAN> must be inside the feasible region;
+<LI>Primal feasibility: <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="${\bf x}$"></SPAN> must be inside the feasible region;
 </LI>
-<LI>Dual feasibility: all multipliers <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20490#</SPAN> for the inequalities 
-  must take the proper sign as specified by Table <A HREF=<tex2html_cr_mark>#PolarityTable#4504><tex2html_cr_mark></A>;
+<LI>Dual feasibility: all multipliers <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img732.svg"
+ ALT="$\mu_j$"></SPAN> for the inequalities 
+  must take the proper sign as specified by Table <A HREF="node14.html#PolarityTable">183</A>;
 </LI>
-<LI>Complementarity: one of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20492#</SPAN> and <tex2html_verbatim_mark>#math926#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20494#</SPAN> must be 
+<LI>Complementarity: one of <SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -1.04ex; " SRC="img785.svg"
+ ALT="$\mu_j^*$"></SPAN> and <!-- MATH
+ $g_j({\bf x}^*)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img786.svg"
+ ALT="$g_j({\bf x}^*)$"></SPAN> must be 
   zero for the following two possible cases:
   
 <UL>
-<LI>the jth constraint is inactive, <tex2html_verbatim_mark>#math927#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20496#</SPAN>, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20498#</SPAN>;
+<LI>the jth constraint is inactive, <!-- MATH
+ $g_j({\bf x}^*)\ne 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img787.svg"
+ ALT="$g_j({\bf x}^*)\ne 0$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -1.04ex; " SRC="img788.svg"
+ ALT="$\mu_j^*=0$"></SPAN>;
 </LI>
-<LI>the jth constraint is active if <tex2html_verbatim_mark>#math928#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20500#</SPAN>, <tex2html_verbatim_mark>#math929#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20502#</SPAN>.
+<LI>the jth constraint is active if <!-- MATH
+ $\mu_j^*\ne 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -1.04ex; " SRC="img789.svg"
+ ALT="$\mu_j^*\ne 0$"></SPAN>, <!-- MATH
+ $g_j({\bf x}^*)=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img790.svg"
+ ALT="$g_j({\bf x}^*)=0$"></SPAN>.
   
 </LI>
 </UL>
@@ -164,3 +415,26 @@ all of the following:
 </UL>
 
 <P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node16.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node12.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node14.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node16.html">Linear Programming (LP)</A>
+<B> Up:</B> <A
+ HREF="node12.html">Constrained Optimization</A>
+<B> Previous:</B> <A
+ HREF="node14.html">Optimization with Inequality Constraints</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

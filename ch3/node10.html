@@ -1,3 +1,47 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Conjugate gradient method</TITLE>
+<META NAME="description" CONTENT="Conjugate gradient method">
+<META NAME="keywords" CONTENT="ch3">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch3.css">
+
+<LINK REL="next" HREF="node11.html">
+<LINK REL="previous" HREF="node9.html">
+<LINK REL="next" HREF="node11.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node11.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node9.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node11.html">Issues of Local/Global Minimum</A>
+<B> Up:</B> <A
+ HREF="node2.html">Unconstrained Optimization</A>
+<B> Previous:</B> <A
+ HREF="node9.html">Quasi-Newton Methods</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
 
 <H2><A ID="SECTION00028000000000000000">
 Conjugate gradient method</A>
@@ -5,202 +49,447 @@ Conjugate gradient method</A>
 
 <P>
 <A ID="tex2html16"
-  HREF="http://www.cs.cmu.edu/&#126;quake-papers/painless-conjugate-gradient.pdf">reference</A>
+  HREF="http://www.cs.cmu.edu/~quake-papers/painless-conjugate-gradient.pdf">reference</A>
 <P>
 The gradient descent method can be used to solve the minimization problem
 when the Hessian matrix of the objective function is not available. However, 
 this method may not be efficient if it gets into a zigzag search pattern and 
 repeat the same search directions many times. This problem can be avoided 
-in the <#2787#><EM>conjugate gradient (CG)</EM><#2787#> method. If the objective function is
-quadratic, the CG method converges to the solution in <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19460#</SPAN> iterations without 
+in the <EM>conjugate gradient (CG)</EM> method. If the objective function is
+quadratic, the CG method converges to the solution in <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img54.svg"
+ ALT="$N$"></SPAN> iterations without 
 repeating any of the directions previously traversed. If the objective function 
 is not quadratic, the CG method can still significantly improve the performance
 in comparison to the gradient descent method. 
 
 <P>
-Here we will first assume the function <tex2html_verbatim_mark>#math620#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19462#</SPAN> to be minimized is quadratic:
+Here we will first assume the function <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN> to be minimized is quadratic:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math621#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f({\bf x})=\frac{1}{2}{\bf x}^T{\bf A}{\bf x}-{\bf b}^T{\bf x}+c
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19464#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img496.svg"
+ ALT="$\displaystyle f({\bf x})=\frac{1}{2}{\bf x}^T{\bf A}{\bf x}-{\bf b}^T{\bf x}+c$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">128</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-where <tex2html_verbatim_mark>#math622#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19466#</SPAN> is symmetric. Later we will relax the condition 
-for <tex2html_verbatim_mark>#math623#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19468#</SPAN> and consider the minimization of arbitrary functions, which
+where <!-- MATH
+ ${\bf A}={\bf A}^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img497.svg"
+ ALT="${\bf A}={\bf A}^T$"></SPAN> is symmetric. Later we will relax the condition 
+for <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN> and consider the minimization of arbitrary functions, which
 can be approximated by the first three terms of it Taylor expansion, with 
 the symmetric Hessian matrix in the third term.
 
 <P>
 The gradient and Hessian of the quadratic function given above are respectively:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math624#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf g}({\bf x})=\frac{d}{d{\bf x}}f({\bf x})
+  =\frac{d}{d{\bf x}}\left(\frac{1}{2}{\bf x}^T{\bf A}{\bf x}
+  -{\bf b}^T{\bf x}+c\right)  ={\bf A}{\bf x}-{\bf b}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19470#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img498.svg"
+ ALT="$\displaystyle {\bf g}({\bf x})=\frac{d}{d{\bf x}}f({\bf x})
+=\frac{d}{d{\bf x}}...
+...1}{2}{\bf x}^T{\bf A}{\bf x}
+-{\bf b}^T{\bf x}+c\right) ={\bf A}{\bf x}-{\bf b}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">129</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 and 
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math625#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf H}({\bf x})=\frac{d^2}{d{\bf x}^2}f({\bf x})=\frac{d}{d{\bf x}}{\bf g}
+  =\frac{d}{d{\bf x}}({\bf Ax}-{\bf b})={\bf A}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19472#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.34ex; vertical-align: -1.71ex; " SRC="img499.svg"
+ ALT="$\displaystyle {\bf H}({\bf x})=\frac{d^2}{d{\bf x}^2}f({\bf x})=\frac{d}{d{\bf x}}{\bf g}
+=\frac{d}{d{\bf x}}({\bf Ax}-{\bf b})={\bf A}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">130</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-We further assume the Hessian matrix is positive definite, so that <tex2html_verbatim_mark>#math626#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19474#</SPAN> 
+We further assume the Hessian matrix is positive definite, so that <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN> 
 has a minimum. 
 
 <P>
-Solving <tex2html_verbatim_mark>#math627#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19476#</SPAN>, we get the
-solution <tex2html_verbatim_mark>#math628#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19478#</SPAN>, at which the function is minimized 
+Solving <!-- MATH
+ ${\bf g}({\bf x})={\bf A}{\bf x}-{\bf b}={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img500.svg"
+ ALT="${\bf g}({\bf x})={\bf A}{\bf x}-{\bf b}={\bf0}$"></SPAN>, we get the
+solution <!-- MATH
+ ${\bf x}^*={\bf A}^{-1}{\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img501.svg"
+ ALT="${\bf x}^*={\bf A}^{-1}{\bf b}$"></SPAN>, at which the function is minimized 
 to 
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math629#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f({\bf x}^*)=\frac{1}{2}({\bf A}^{-1}{\bf b})^T{\bf A}({\bf A}^{-1}{\bf b})
+  -{\bf b}^T({\bf A}^{-1}{\bf b})+c=-\frac{1}{2}{\bf b}^T{\bf A}^{-1}{\bf b}+c
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19480#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img502.svg"
+ ALT="$\displaystyle f({\bf x}^*)=\frac{1}{2}({\bf A}^{-1}{\bf b})^T{\bf A}({\bf A}^{-...
+...})
+-{\bf b}^T({\bf A}^{-1}{\bf b})+c=-\frac{1}{2}{\bf b}^T{\bf A}^{-1}{\bf b}+c$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">131</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 
 <P>
-At the solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19482#</SPAN> that minimizes <tex2html_verbatim_mark>#math630#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19484#</SPAN>, its gradient
-<tex2html_verbatim_mark>#math631#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19486#</SPAN>. At the nth estimate 
-<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19488#</SPAN> the gradient <tex2html_verbatim_mark>#math632#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19490#</SPAN> can be considered 
-as the residual of the nth iteration, and <tex2html_verbatim_mark>#math633#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19492#</SPAN> can 
-be used as an error measurement representing how close <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19494#</SPAN> is to 
-the true solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19496#</SPAN>. 
+At the solution <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}^*$"></SPAN> that minimizes <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN>, its gradient
+<!-- MATH
+ ${\bf g}({\bf x}^*)={\bf A}{\bf x}^*-{\bf b}={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img503.svg"
+ ALT="${\bf g}({\bf x}^*)={\bf A}{\bf x}^*-{\bf b}={\bf0}$"></SPAN>. At the nth estimate 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img255.svg"
+ ALT="${\bf x}_n$"></SPAN> the gradient <!-- MATH
+ ${\bf g}_n={\bf g}({\bf x}_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img216.svg"
+ ALT="${\bf g}_n={\bf g}({\bf x}_n)$"></SPAN> can be considered 
+as the residual of the nth iteration, and <!-- MATH
+ $\varepsilon=||{\bf g}_n||^2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img504.svg"
+ ALT="$\varepsilon=\vert\vert{\bf g}_n\vert\vert^2$"></SPAN> can 
+be used as an error measurement representing how close <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img255.svg"
+ ALT="${\bf x}_n$"></SPAN> is to 
+the true solution <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}^*$"></SPAN>. 
 
 <P>
-We also see that the minimization of the quadratic function <tex2html_verbatim_mark>#math634#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19498#</SPAN> 
-is equivalent to solving a linear equation <tex2html_verbatim_mark>#math635#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19500#</SPAN> with 
-a symmetric positive definite coefficient matrix <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19502#</SPAN>. The CG method 
+We also see that the minimization of the quadratic function <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN> 
+is equivalent to solving a linear equation <!-- MATH
+ ${\bf A}{\bf x}={\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img505.svg"
+ ALT="${\bf A}{\bf x}={\bf b}$"></SPAN> with 
+a symmetric positive definite coefficient matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img286.svg"
+ ALT="${\bf A}$"></SPAN>. The CG method 
 considered here can therefore be used for solving both problems. 
 
 <P>
-<#2889#><B>Conjugate basis vectors</B><#2889#>
+<B>Conjugate basis vectors</B>
 
 <P>
 Before continuing to discuss the CG algorithm, we first review the concept of 
 <A ID="tex2html17"
   HREF="http://fourier.eng.hmc.edu/e176/lectures/algebra/node2.html">conjugate vectors</A>,
-which is the key to the CG method. Two vectors <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19504#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19506#</SPAN> are
-<#2894#><EM>mutually conjugate</EM><#2894#> (or A-orthogonal or A-conjugate) to each other 
-with respect to a symmetric matrix <tex2html_verbatim_mark>#math636#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19508#</SPAN>, if they satisfy:
+which is the key to the CG method. Two vectors <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img420.svg"
+ ALT="${\bf u}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img469.svg"
+ ALT="${\bf v}$"></SPAN> are
+<EM>mutually conjugate</EM> (or A-orthogonal or A-conjugate) to each other 
+with respect to a symmetric matrix <!-- MATH
+ ${\bf A}={\bf A}^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img497.svg"
+ ALT="${\bf A}={\bf A}^T$"></SPAN>, if they satisfy:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math637#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf u}^T{\bf A}{\bf v}=({\bf A}{\bf v})^T{\bf u}
+  ={\bf v}^T{\bf A}{\bf u}=0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19510#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img506.svg"
+ ALT="$\displaystyle {\bf u}^T{\bf A}{\bf v}=({\bf A}{\bf v})^T{\bf u}
+={\bf v}^T{\bf A}{\bf u}=0$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">132</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-Specially, if <tex2html_verbatim_mark>#math638#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19512#</SPAN>, the two conjugate vectors become orthogonal 
-to each other, i.e., <tex2html_verbatim_mark>#math639#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19514#</SPAN>.
+Specially, if <!-- MATH
+ ${\bf A}={\bf I}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img507.svg"
+ ALT="${\bf A}={\bf I}$"></SPAN>, the two conjugate vectors become orthogonal 
+to each other, i.e., <!-- MATH
+ ${\bf v}^T{\bf u}=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img508.svg"
+ ALT="${\bf v}^T{\bf u}=0$"></SPAN>.
 
 <P>
-Similar to a set of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19516#</SPAN> orthogonal vectors that can be used as the basis 
-spanning an N-D space, a set of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19518#</SPAN> mutually conjugate vectors 
-<tex2html_verbatim_mark>#math640#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19520#</SPAN> satisfying <tex2html_verbatim_mark>#math641#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19522#</SPAN>
-(<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19524#</SPAN>) can also be used as a basis to span the N-D space. Any vector in 
+Similar to a set of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img54.svg"
+ ALT="$N$"></SPAN> orthogonal vectors that can be used as the basis 
+spanning an N-D space, a set of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img54.svg"
+ ALT="$N$"></SPAN> mutually conjugate vectors 
+<!-- MATH
+ $\{{\bf d}_0,\cdots,{\bf d}_{N-1}\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img509.svg"
+ ALT="$\{{\bf d}_0,\cdots,{\bf d}_{N-1}\}$"></SPAN> satisfying <!-- MATH
+ ${\bf d}_i^T{\bf A}{\bf d}_j=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img510.svg"
+ ALT="${\bf d}_i^T{\bf A}{\bf d}_j=0$"></SPAN>
+(<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img511.svg"
+ ALT="$i\ne j$"></SPAN>) can also be used as a basis to span the N-D space. Any vector in 
 the space can be expressed as a linear combination of these basis vectors.
 
 <P>
-Also we note that any set of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19526#</SPAN> independent vectors can be converted by the
+Also we note that any set of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img54.svg"
+ ALT="$N$"></SPAN> independent vectors can be converted by the
 <A ID="tex2html18"
   HREF="http://fourier.eng.hmc.edu/e176/lectures/algebra/node2.html">Gram-Schmidt process</A>
-to a set of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19528#</SPAN> basis vectors that are either orthogonal or A-orthogonal.
+to a set of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img54.svg"
+ ALT="$N$"></SPAN> basis vectors that are either orthogonal or A-orthogonal.
 
 <P>
-<#2920#><B>Example:</B><#2920#>  Given two independent basis vectors of the 2-D space, and
+<B>Example:</B>  Given two independent basis vectors of the 2-D space, and
 a positive-definite matrix:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math642#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf v}_1=\left[\begin{array}{r}1\\0\end{array}\right],\;\;\;\;\;
+  {\bf v}_2=\left[\begin{array}{r}0\\1\end{array}\right],\;\;\;\;\;
+  {\bf A}=\left[\begin{array}{rr}3&1\\1&2\end{array}\right]
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19530#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img512.svg"
+ ALT="$\displaystyle {\bf v}_1=\left[\begin{array}{r}1\\ 0\end{array}\right],\;\;\;\;\...
+...y}\right],\;\;\;\;\;
+{\bf A}=\left[\begin{array}{rr}3&amp;1\\ 1&amp;2\end{array}\right]$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
 we can construct two A-orthogonal basis vectors by the Gram-Schmidt method:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math643#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf u}_1={\bf v}_1=\left[\begin{array}{r}1\\0\end{array}\right],
+  \;\;\;\;\;\;\;\;
+  {\bf u}_2={\bf v}_2-\frac{{\bf u}_1^T{\bf A}{\bf v}_2}{{\bf u}_1^T{\bf A}{\bf u}_1}{\bf u}_1
+  =\left[\begin{array}{c}-1/3\\1\end{array}\right]
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19532#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.39ex; " SRC="img513.svg"
+ ALT="$\displaystyle {\bf u}_1={\bf v}_1=\left[\begin{array}{r}1\\ 0\end{array}\right]...
+...1^T{\bf A}{\bf u}_1}{\bf u}_1
+=\left[\begin{array}{c}-1/3\\ 1\end{array}\right]$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
-The projections of a vector <tex2html_verbatim_mark>#math644#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19534#</SPAN> onto <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19536#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19538#</SPAN> 
+The projections of a vector <!-- MATH
+ ${\bf x}=[2,\;3]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img514.svg"
+ ALT="${\bf x}=[2,\;3]^T$"></SPAN> onto <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img515.svg"
+ ALT="${\bf v}_1$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img516.svg"
+ ALT="${\bf v}_2$"></SPAN> 
 are:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math645#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf p}_{{\bf v}_1}({\bf x})=\frac{{\bf v}_1^T{\bf x}}{{\bf v}_1^T{\bf v}_1}{\bf v}_1
+  =2\left[\begin{array}{c}1\\0\end{array}\right]
+  =\left[\begin{array}{c}2\\0\end{array}\right],\;\;\;\;\;
+  {\bf p}_{{\bf v}_2}({\bf x})=\frac{{\bf v}_2^T{\bf x}}{{\bf v}_2^T{\bf v}_2}{\bf v}_2
+  =3\left[\begin{array}{c}0\\1\end{array}\right]
+  =\left[\begin{array}{c}0\\3\end{array}\right]
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19540#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.39ex; " SRC="img517.svg"
+ ALT="$\displaystyle {\bf p}_{{\bf v}_1}({\bf x})=\frac{{\bf v}_1^T{\bf x}}{{\bf v}_1^...
+...array}{c}0\\ 1\end{array}\right]
+=\left[\begin{array}{c}0\\ 3\end{array}\right]$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
-The A-projections of the same vector <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19542#</SPAN> onto <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19544#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19546#</SPAN>
+The A-projections of the same vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="${\bf x}$"></SPAN> onto <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img518.svg"
+ ALT="${\bf u}_1$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img519.svg"
+ ALT="${\bf u}_2$"></SPAN>
 are:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math646#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf p}_{{\bf u}_1}({\bf x})=\frac{{\bf u}_1^T{\bf A}{\bf x}}
+  {{\bf u}_1^T{\bf A}{\bf u}_1}{\bf u}_1
+  =3\left[\begin{array}{c}1\\0\end{array}\right]
+  =\left[\begin{array}{c}3\\0\end{array}\right],
+  \;\;\;\;\;\;\;\;\;
+  {\bf p}_{{\bf u}_2}({\bf x})=\frac{{\bf u}_2^T{\bf A}{\bf x}}
+  {{\bf u}_2^T{\bf A}{\bf u}_2}{\bf u}_2
+  =3\left[\begin{array}{c}-1/3\\1\end{array}\right]
+  =\left[\begin{array}{c}-1\\3\end{array}\right]
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19548#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.39ex; " SRC="img520.svg"
+ ALT="$\displaystyle {\bf p}_{{\bf u}_1}({\bf x})=\frac{{\bf u}_1^T{\bf A}{\bf x}}
+{{\...
+...y}{c}-1/3\\ 1\end{array}\right]
+=\left[\begin{array}{c}-1\\ 3\end{array}\right]$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
-The original vector <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19550#</SPAN> can be represented in either of the two bases:
+The original vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="${\bf x}$"></SPAN> can be represented in either of the two bases:
 <BR>
 <DIV CLASS="mathdisplay">
-<tex2html_verbatim_mark>#math647#
+<!-- MATH
+ \begin{eqnarray}
+{\bf x}=\left[\begin{array}{c}2\\3\end{array}\right]
+  &=&2\left[\begin{array}{c}1\\0\end{array}\right]
+  +3\left[\begin{array}{c}0\\1\end{array}\right]
+  =2{\bf v}_1+3{\bf v}_2
+  ={\bf p}_{{\bf v}_1}({\bf x})+{\bf p}_{{\bf v}_2}({\bf x})
+  \nonumber \\
+  &=&3\left[\begin{array}{c}1\\0\end{array}\right]
+  +3\left[\begin{array}{c}-1/3\\1\end{array}\right]
+  =3{\bf u}_1+3{\bf u}_2
+  ={\bf p}_{{\bf u}_1}({\bf x})+{\bf p}_{{\bf u}_2}({\bf x})
+  \nonumber
+\end{eqnarray}
+ -->
 <TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
-<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><tex2html_image_mark>#tex2html_wrap_indisplay19553#</TD>
-<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay19555#</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay19557#</TD>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img521.svg"
+ ALT="$\displaystyle {\bf x}=\left[\begin{array}{c}2\\ 3\end{array}\right]$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img104.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img522.svg"
+ ALT="$\displaystyle 2\left[\begin{array}{c}1\\ 0\end{array}\right]
++3\left[\begin{arr...
+...{\bf v}_1+3{\bf v}_2
+={\bf p}_{{\bf v}_1}({\bf x})+{\bf p}_{{\bf v}_2}({\bf x})$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 &nbsp;</TD></TR>
 <TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
-<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay19559#</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay19561#</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img104.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img523.svg"
+ ALT="$\displaystyle 3\left[\begin{array}{c}1\\ 0\end{array}\right]
++3\left[\begin{arr...
+...{\bf u}_1+3{\bf u}_2
+={\bf p}_{{\bf u}_1}({\bf x})+{\bf p}_{{\bf u}_2}({\bf x})$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 &nbsp;</TD></TR>
 </TABLE></DIV>
 <BR CLEAR="ALL">
-
 
 <P>
 <IMG STYLE="" SRC="figures/Aorthogonal.png"
  ALT="Aorthogonal.png">
 
 <P>
-<#3060#><B>Search along a conjugate basis</B><#3060#>
+<B>Search along a conjugate basis</B>
 
 <P>
 Similar to the gradient descent method, which iteratively improves 
 the estimated solution by following a sequence of orthogonal search 
-directions <tex2html_verbatim_mark>#math648#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19563#</SPAN>, the CG method
-also follows a sequence of search directions <tex2html_verbatim_mark>#math649#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19565#</SPAN> A-orthogonal to each other, i.e., 
-<tex2html_verbatim_mark>#math650#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19567#</SPAN>:
+directions <!-- MATH
+ $\{ -{\bf g}_0,\cdots,-{\bf g}_n,\cdots\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img524.svg"
+ ALT="$\{ -{\bf g}_0,\cdots,-{\bf g}_n,\cdots\}$"></SPAN>, the CG method
+also follows a sequence of search directions <!-- MATH
+ $\{{\bf d}_0,\cdots,
+{\bf d}_{N-1}\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img509.svg"
+ ALT="$\{{\bf d}_0,\cdots,{\bf d}_{N-1}\}$"></SPAN> A-orthogonal to each other, i.e., 
+<!-- MATH
+ ${\bf d}_i^T{\bf Ad}_j=0\;(i\ne j)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img525.svg"
+ ALT="${\bf d}_i^T{\bf Ad}_j=0\;(i\ne j)$"></SPAN>:
 <P></P>
-<DIV CLASS="mathdisplay"><A ID="CGiteration"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math651#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><A ID="CGiteration"></A><!-- MATH
+ \begin{equation}
+{\bf x}_{n+1}={\bf x}_n+\delta_n{\bf d}_n
+  =\cdots ={\bf x}_0+\sum_{i=0}^n \delta_i{\bf d}_i
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19569#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.20ex; vertical-align: -3.09ex; " SRC="img526.svg"
+ ALT="$\displaystyle {\bf x}_{n+1}={\bf x}_n+\delta_n{\bf d}_n
+=\cdots ={\bf x}_0+\sum_{i=0}^n \delta_i{\bf d}_i$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">133</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-Subtracting <tex2html_verbatim_mark>#math652#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19571#</SPAN>
+Subtracting <!-- MATH
+ ${\bf x}^*={\bf x}_{n+1}-{\bf e}_{n+1}={\bf x}_n-{\bf e}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img527.svg"
+ ALT="${\bf x}^*={\bf x}_{n+1}-{\bf e}_{n+1}={\bf x}_n-{\bf e}_n$"></SPAN>
 from both sides, we get the iteration in terms of the errors:
 <P></P>
-<DIV CLASS="mathdisplay"><A ID="CGerror"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math653#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><A ID="CGerror"></A><!-- MATH
+ \begin{equation}
+{\bf e}_{n+1}={\bf e}_n+\delta_n{\bf d}_n
+  =\cdots={\bf e}_0+\sum_{i=0}^n \delta_i{\bf d}_i
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19573#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.20ex; vertical-align: -3.09ex; " SRC="img528.svg"
+ ALT="$\displaystyle {\bf e}_{n+1}={\bf e}_n+\delta_n{\bf d}_n
+=\cdots={\bf e}_0+\sum_{i=0}^n \delta_i{\bf d}_i$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">134</SPAN>)</TD></TR>
 </TABLE></DIV>
@@ -208,118 +497,286 @@ from both sides, we get the iteration in terms of the errors:
 
 <P>
 As it is assumed that the function to be minimized is quadratic 
-<tex2html_verbatim_mark>#math654#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19575#</SPAN>, its
-gradient at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19577#</SPAN> is:
+<!-- MATH
+ $f({\bf x})={\bf x}^T{\bf Ax}/2-{\bf b}^T{\bf x}+c$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img529.svg"
+ ALT="$f({\bf x})={\bf x}^T{\bf Ax}/2-{\bf b}^T{\bf x}+c$"></SPAN>, its
+gradient at <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img530.svg"
+ ALT="${\bf x}_i$"></SPAN> is:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math655#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf g}_i=f'({\bf x}_i)
+  ={\bf A}{\bf x}_i-{\bf b}={\bf A}({\bf x}^*+{\bf e}_i)-{\bf b}
+  ={\bf A}{\bf x}^*-{\bf b}+{\bf A}{\bf e}_i={\bf A}{\bf e}_i
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19579#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img531.svg"
+ ALT="$\displaystyle {\bf g}_i=f'({\bf x}_i)
+={\bf A}{\bf x}_i-{\bf b}={\bf A}({\bf x}^*+{\bf e}_i)-{\bf b}
+={\bf A}{\bf x}^*-{\bf b}+{\bf A}{\bf e}_i={\bf A}{\bf e}_i$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">135</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-where <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19581#</SPAN> is the solution satisfying
-<tex2html_verbatim_mark>#math656#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19583#</SPAN>. The optimal 
-step size in Eq. (<A HREF=<tex2html_cr_mark>#OptimalDelta#3126><tex2html_cr_mark></A>) can be written as
+where <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}^*$"></SPAN> is the solution satisfying
+<!-- MATH
+ ${\bf g}({\bf x}^*)={\bf A}{\bf x}^*-{\bf b}={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img503.svg"
+ ALT="${\bf g}({\bf x}^*)={\bf A}{\bf x}^*-{\bf b}={\bf0}$"></SPAN>. The optimal 
+step size in Eq. (<A HREF="node8.html#OptimalDelta">60</A>) can be written as
 <BR>
-<DIV CLASS="mathdisplay"><A ID="delta_gd"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math657#
+<DIV CLASS="mathdisplay"><A ID="delta_gd"></A><!-- MATH
+ \begin{eqnarray}
+\delta_i&=&-\frac{{\bf g}_i^T{\bf d}_i}{{\bf d}_i^T{\bf A}{\bf d}_i}
+  =-\frac{{\bf e}_i^T{\bf A}{\bf d}_i}{{\bf d}_i^T{\bf A}{\bf d}_i}
+  =-\frac{{\bf d}_i^T{\bf A}{\bf e}_i}{{\bf d}_i^T{\bf A}{\bf d}_i}
+  =-\frac{ {\bf d}^T_i{\bf A} \left( {\bf e}_0+\sum_{j=0}^{i-1}\delta_j{\bf d}_j \right)}{{\bf d}^T_i{\bf A}{\bf d}_i}
+  \nonumber\\
+  &=&-\frac{ {\bf d}^T_i{\bf A}{\bf e}_0+\sum_{j=0}^{i-1}\delta_j{\bf d}^T_i{\bf A}{\bf d}_j}{{\bf d}^T_i{\bf A}{\bf d}_i}
+  =-\frac{ {\bf d}^T_i{\bf A}{\bf e}_0}{ {\bf d}^T_i{\bf A}{\bf d}_i}
+\end{eqnarray}
+ -->
 <TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
-<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><tex2html_image_mark>#tex2html_wrap_indisplay19586#</TD>
-<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay19588#</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay19590#</TD>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img532.svg"
+ ALT="$\displaystyle \delta_i$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img104.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.66ex; vertical-align: -2.42ex; " SRC="img533.svg"
+ ALT="$\displaystyle -\frac{{\bf g}_i^T{\bf d}_i}{{\bf d}_i^T{\bf A}{\bf d}_i}
+=-\frac...
+...bf e}_0+\sum_{j=0}^{i-1}\delta_j{\bf d}_j \right)}{{\bf d}^T_i{\bf A}{\bf d}_i}$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 &nbsp;</TD></TR>
 <TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
-<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay19592#</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay19594#</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img104.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.74ex; vertical-align: -2.42ex; " SRC="img534.svg"
+ ALT="$\displaystyle -\frac{ {\bf d}^T_i{\bf A}{\bf e}_0+\sum_{j=0}^{i-1}\delta_j{\bf ...
+...}{\bf d}_i}
+=-\frac{ {\bf d}^T_i{\bf A}{\bf e}_0}{ {\bf d}^T_i{\bf A}{\bf d}_i}$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 (<SPAN CLASS="arabic">136</SPAN>)</TD></TR>
 </TABLE></DIV>
 <BR CLEAR="ALL">
 
-The last equality is due to the fact that <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19596#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19598#</SPAN>
-are A-orthogonal, i.e., <tex2html_verbatim_mark>#math658#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19600#</SPAN>.
-Substituting this into Eq. (<A HREF=<tex2html_cr_mark>#CGerror#3178><tex2html_cr_mark></A>) we get
+The last equality is due to the fact that <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img535.svg"
+ ALT="${\bf d}_i$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img536.svg"
+ ALT="${\bf d}_j$"></SPAN>
+are A-orthogonal, i.e., <!-- MATH
+ ${\bf d}^T_i{\bf A}{\bf d}_j=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img537.svg"
+ ALT="${\bf d}^T_i{\bf A}{\bf d}_j=0$"></SPAN>.
+Substituting this into Eq. (<A HREF="#CGerror">134</A>) we get
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math659#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf e}_{n+1}={\bf e}_n+\delta_n{\bf d}_n
+  ={\bf e}_n-\left(\frac{{\bf d}_n^T{\bf A}{\bf e}_0}{{\bf d}_n^T{\bf A}{\bf d}_n}\right){\bf d}_n
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19602#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.32ex; " SRC="img538.svg"
+ ALT="$\displaystyle {\bf e}_{n+1}={\bf e}_n+\delta_n{\bf d}_n
+={\bf e}_n-\left(\frac{{\bf d}_n^T{\bf A}{\bf e}_0}{{\bf d}_n^T{\bf A}{\bf d}_n}\right){\bf d}_n$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">137</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 
 <P>
-On the other hand, we represent the error <tex2html_verbatim_mark>#math660#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19604#</SPAN> 
-associated with the initial guess <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19606#</SPAN> as a linear combination of 
-the search vectors <tex2html_verbatim_mark>#math661#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19608#</SPAN> treated as <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19610#</SPAN> basis 
+On the other hand, we represent the error <!-- MATH
+ ${\bf e}_0={\bf x}_0-{\bf x}^*$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img539.svg"
+ ALT="${\bf e}_0={\bf x}_0-{\bf x}^*$"></SPAN> 
+associated with the initial guess <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img125.svg"
+ ALT="${\bf x}_0$"></SPAN> as a linear combination of 
+the search vectors <!-- MATH
+ $\{{\bf d}_0,\cdots,{\bf d}_{N-1}\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img509.svg"
+ ALT="$\{{\bf d}_0,\cdots,{\bf d}_{N-1}\}$"></SPAN> treated as <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img54.svg"
+ ALT="$N$"></SPAN> basis 
 vectors that span the N-D vector space:
 <P></P>
-<DIV CLASS="mathdisplay"><A ID="cine0"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math662#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><A ID="cine0"></A><!-- MATH
+ \begin{equation}
+{\bf e}_0=\sum_{i=0}^{N-1} c_i{\bf d}_i
+  =\sum_{i=0}^{N-1}{\bf p}_{{\bf d}_i}({\bf e}_0)
+  =\sum_{i=0}^{N-1} \left(\frac{ {\bf d}^T_i{\bf A}{\bf e}_0}{ {\bf d}^T_i{\bf A}{\bf d}_i}\right){\bf d}_i
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19612#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img540.svg"
+ ALT="$\displaystyle {\bf e}_0=\sum_{i=0}^{N-1} c_i{\bf d}_i
+=\sum_{i=0}^{N-1}{\bf p}_...
+...rac{ {\bf d}^T_i{\bf A}{\bf e}_0}{ {\bf d}^T_i{\bf A}{\bf d}_i}\right){\bf d}_i$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">138</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-where <tex2html_verbatim_mark>#math663#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19614#</SPAN> is the A-projection of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19616#</SPAN> 
-onto the ith basis vector <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19618#</SPAN>:
+where <!-- MATH
+ ${\bf p}_{{\bf d}_i}({\bf e}_0)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img541.svg"
+ ALT="${\bf p}_{{\bf d}_i}({\bf e}_0)$"></SPAN> is the A-projection of <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img542.svg"
+ ALT="${\bf e}_0$"></SPAN> 
+onto the ith basis vector <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img535.svg"
+ ALT="${\bf d}_i$"></SPAN>:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math664#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf p}_{{\bf d}_i}({\bf e}_0)=c_i{\bf d}_i
+  =\left(\frac{ {\bf d}^T_i{\bf A}{\bf e}_0}{ {\bf d}^T_i{\bf A}{\bf d}_i}\right)
+  {\bf d}_i
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19620#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.42ex; " SRC="img543.svg"
+ ALT="$\displaystyle {\bf p}_{{\bf d}_i}({\bf e}_0)=c_i{\bf d}_i
+=\left(\frac{ {\bf d}^T_i{\bf A}{\bf e}_0}{ {\bf d}^T_i{\bf A}{\bf d}_i}\right)
+{\bf d}_i$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">139</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-We note that the coefficient <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19622#</SPAN> happens to be the negative optimal step
-size in Eq. (<A HREF=<tex2html_cr_mark>#delta_gd#3239><tex2html_cr_mark></A>):
+We note that the coefficient <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img544.svg"
+ ALT="$c_i$"></SPAN> happens to be the negative optimal step
+size in Eq. (<A HREF="#delta_gd">136</A>):
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math665#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+c_i=\frac{{\bf d}^T_i{\bf A}{\bf e}_0}{{\bf d}^T_i{\bf A}{\bf d}_i}=-\delta_i
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19624#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.42ex; " SRC="img545.svg"
+ ALT="$\displaystyle c_i=\frac{{\bf d}^T_i{\bf A}{\bf e}_0}{{\bf d}^T_i{\bf A}{\bf d}_i}=-\delta_i$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">140</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-Now the expression of <tex2html_verbatim_mark>#math666#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19626#</SPAN> in Eq. (<A HREF=<tex2html_cr_mark>#CGerror#3250><tex2html_cr_mark></A>) can be written as
+Now the expression of <!-- MATH
+ ${\bf e}_{n+1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.66ex; " SRC="img546.svg"
+ ALT="${\bf e}_{n+1}$"></SPAN> in Eq. (<A HREF="#CGerror">134</A>) can be written as
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math667#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf e}_{n+1}={\bf e}_0+\sum_{i=0}^n\delta_i{\bf d}_i
+  =\sum_{i=0}^{N-1}c_i{\bf d}_i-\sum_{i=0}^n c_i{\bf d}_i=\sum_{i=n+1}^{N-1}c_i{\bf d}_i
+  =\sum_{i=n+1}^{N-1}{\bf p}_{{\bf d}_i}({\bf e}_0)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19628#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.28ex; " SRC="img547.svg"
+ ALT="$\displaystyle {\bf e}_{n+1}={\bf e}_0+\sum_{i=0}^n\delta_i{\bf d}_i
+=\sum_{i=0}...
+...sum_{i=n+1}^{N-1}c_i{\bf d}_i
+=\sum_{i=n+1}^{N-1}{\bf p}_{{\bf d}_i}({\bf e}_0)$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">141</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-We see that in each iteration from <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19630#</SPAN> to <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19632#</SPAN>, the number of terms
+We see that in each iteration from <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img548.svg"
+ ALT="$n$"></SPAN> to <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img549.svg"
+ ALT="$n+1$"></SPAN>, the number of terms
 in the summation is reduced by one, i.e., the nth component 
-<tex2html_verbatim_mark>#math668#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19634#</SPAN> of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19636#</SPAN> along the direction of 
-<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19638#</SPAN> is completely eliminated. After <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19640#</SPAN> such iterations, the
-error is reduced from <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19642#</SPAN> to <tex2html_verbatim_mark>#math669#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19644#</SPAN>, and the true 
-solution is obtained <tex2html_verbatim_mark>#math670#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19646#</SPAN>. 
+<!-- MATH
+ ${\bf p}_{{\bf d}_n}({\bf e}_0)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img550.svg"
+ ALT="${\bf p}_{{\bf d}_n}({\bf e}_0)$"></SPAN> of <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img551.svg"
+ ALT="${\bf e}_n$"></SPAN> along the direction of 
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img304.svg"
+ ALT="${\bf d}_n$"></SPAN> is completely eliminated. After <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img54.svg"
+ ALT="$N$"></SPAN> such iterations, the
+error is reduced from <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img542.svg"
+ ALT="${\bf e}_0$"></SPAN> to <!-- MATH
+ ${\bf e}_N={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img552.svg"
+ ALT="${\bf e}_N={\bf0}$"></SPAN>, and the true 
+solution is obtained <!-- MATH
+ ${\bf x}_N={\bf x}^*+{\bf e}_N={\bf x}^*$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img553.svg"
+ ALT="${\bf x}_N={\bf x}^*+{\bf e}_N={\bf x}^*$"></SPAN>. 
 
 <P>
-Pre-multiplying <tex2html_verbatim_mark>#math671#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19648#</SPAN> on both sides of the
+Pre-multiplying <!-- MATH
+ ${\bf d}_k^T{\bf A}\;(k\le n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.77ex; " SRC="img554.svg"
+ ALT="${\bf d}_k^T{\bf A}\;(k\le n)$"></SPAN> on both sides of the
 equation above, we get:
 <P></P>
-<DIV CLASS="mathdisplay"><A ID="gd0"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math672#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><A ID="gd0"></A><!-- MATH
+ \begin{equation}
+{\bf d}_k^T{\bf A}{\bf e}_{n+1}={\bf d}_k^T{\bf g}_{n+1}
+  =\sum_{i=n+1}^{N-1}c_i{\bf d}_k^T{\bf A}{\bf d}_j=0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19650#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.28ex; " SRC="img555.svg"
+ ALT="$\displaystyle {\bf d}_k^T{\bf A}{\bf e}_{n+1}={\bf d}_k^T{\bf g}_{n+1}
+=\sum_{i=n+1}^{N-1}c_i{\bf d}_k^T{\bf A}{\bf d}_j=0$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">142</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-We see that after <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19652#</SPAN> iterations the remaining error <tex2html_verbatim_mark>#math673#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19654#</SPAN> is 
-A-orthogonal to all previous directions <tex2html_verbatim_mark>#math674#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19656#</SPAN>, and 
-the gradient <tex2html_verbatim_mark>#math675#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19658#</SPAN> is orthogonal to these directions.
+We see that after <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img549.svg"
+ ALT="$n+1$"></SPAN> iterations the remaining error <!-- MATH
+ ${\bf e}_{n+1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.66ex; " SRC="img546.svg"
+ ALT="${\bf e}_{n+1}$"></SPAN> is 
+A-orthogonal to all previous directions <!-- MATH
+ ${\bf d}_0,\cdots,{\bf d}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img556.svg"
+ ALT="${\bf d}_0,\cdots,{\bf d}_n$"></SPAN>, and 
+the gradient <!-- MATH
+ ${\bf g}_{n+1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.66ex; " SRC="img317.svg"
+ ALT="${\bf g}_{n+1}$"></SPAN> is orthogonal to these directions.
 
 <P>
 In the figure below, the conjugate gradient method is compared with the gradient 
-descent method for the case of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19660#</SPAN>. We see that the first search direction is
-the same <tex2html_verbatim_mark>#math676#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19662#</SPAN> for both methods. However, the next search direction 
-<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19664#</SPAN> is A-orthogonal to <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19666#</SPAN>, same as the next error <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19668#</SPAN>, 
-different from the search direction <tex2html_verbatim_mark>#math677#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19670#</SPAN> in gradient descent method. 
-The conjugate gradient method finds the solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19672#</SPAN> in <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19674#</SPAN> steps, 
+descent method for the case of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img557.svg"
+ ALT="$N=2$"></SPAN>. We see that the first search direction is
+the same <!-- MATH
+ $-{\bf g}_0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.57ex; " SRC="img558.svg"
+ ALT="$-{\bf g}_0$"></SPAN> for both methods. However, the next search direction 
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img559.svg"
+ ALT="${\bf d}_1$"></SPAN> is A-orthogonal to <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img560.svg"
+ ALT="${\bf d}_0$"></SPAN>, same as the next error <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img561.svg"
+ ALT="${\bf e}_1$"></SPAN>, 
+different from the search direction <!-- MATH
+ $-{\bf g}_1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.57ex; " SRC="img562.svg"
+ ALT="$-{\bf g}_1$"></SPAN> in gradient descent method. 
+The conjugate gradient method finds the solution <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="${\bf x}$"></SPAN> in <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img557.svg"
+ ALT="$N=2$"></SPAN> steps, 
 while the gradient descent method has to go through many more steps all 
 orthogonal to each other before it finds the solution.
 
@@ -328,174 +785,394 @@ orthogonal to each other before it finds the solution.
  ALT="ConjugateGradient.png">.
 
 <P>
-<#3313#><B>Find the A-orthogonal basis</B><#3313#>
+<B>Find the A-orthogonal basis</B>
 
 <P>
-The <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19676#</SPAN> A-orthogonal search directions <tex2html_verbatim_mark>#math678#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19678#</SPAN> 
-can be constructed based on any set of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19680#</SPAN> independent vectors 
-<tex2html_verbatim_mark>#math679#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19682#</SPAN> by the 
+The <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img54.svg"
+ ALT="$N$"></SPAN> A-orthogonal search directions <!-- MATH
+ $\{{\bf d}_0,\cdots,{\bf d}_{N-1}\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img509.svg"
+ ALT="$\{{\bf d}_0,\cdots,{\bf d}_{N-1}\}$"></SPAN> 
+can be constructed based on any set of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img54.svg"
+ ALT="$N$"></SPAN> independent vectors 
+<!-- MATH
+ $\{{\bf v}_0,\cdots,{\bf v}_{N-1}\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img563.svg"
+ ALT="$\{{\bf v}_0,\cdots,{\bf v}_{N-1}\}$"></SPAN> by the 
 <A ID="tex2html19"
   HREF="../algebra/node2.html">Gram-Schmidt process</A>:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math680#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf d}_n={\bf v}_n-\sum_{j=0}^{n-1} {\bf p}_{{\bf d}_j}({\bf v}_n)
+  ={\bf v}_n-\sum_{m=0}^{n-1} \left(\frac{{\bf d}^T_m{\bf A}{\bf v}_n}{{\bf d}^T_m{\bf A}{\bf d}_m}\right)  {\bf d}_m
+  ={\bf v}_n-\sum_{m=0}^{n-1} \beta_{nm}{\bf d}_m
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19684#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.90ex; vertical-align: -3.40ex; " SRC="img564.svg"
+ ALT="$\displaystyle {\bf d}_n={\bf v}_n-\sum_{j=0}^{n-1} {\bf p}_{{\bf d}_j}({\bf v}_...
+...f A}{\bf d}_m}\right) {\bf d}_m
+={\bf v}_n-\sum_{m=0}^{n-1} \beta_{nm}{\bf d}_m$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">143</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-where <tex2html_verbatim_mark>#math681#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19686#</SPAN> 
-and <tex2html_verbatim_mark>#math682#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19688#</SPAN> is the A-projection of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19690#</SPAN> onto each
-of the previous direction <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19692#</SPAN>.
+where <!-- MATH
+ $\beta_{nm}={\bf d}^T_m{\bf A}{\bf v}_n/({\bf d}^T_m{\bf A}{\bf d}_m)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img565.svg"
+ ALT="$\beta_{nm}={\bf d}^T_m{\bf A}{\bf v}_n/({\bf d}^T_m{\bf A}{\bf d}_m)$"></SPAN> 
+and <!-- MATH
+ $\beta_{nm}{\bf d}_m$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img566.svg"
+ ALT="$\beta_{nm}{\bf d}_m$"></SPAN> is the A-projection of <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img567.svg"
+ ALT="${\bf v}_n$"></SPAN> onto each
+of the previous direction <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img568.svg"
+ ALT="${\bf d}_m$"></SPAN>.
 
 <P>
-However, we specifically choose to use <tex2html_verbatim_mark>#math683#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19694#</SPAN>, to gain
+However, we specifically choose to use <!-- MATH
+ ${\bf v}_n=-{\bf g}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.57ex; " SRC="img569.svg"
+ ALT="${\bf v}_n=-{\bf g}_n$"></SPAN>, to gain
 some significant computational advantage as shows below. Now the
 Gram-Schmidt process above becomes:
 <P></P>
-<DIV CLASS="mathdisplay"><A ID="GSCG"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math684#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><A ID="GSCG"></A><!-- MATH
+ \begin{equation}
+{\bf d}_n =-{\bf g}_n-\sum_{m=0}^{n-1} \beta_{nm}{\bf d}_m
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19696#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img570.svg"
+ ALT="$\displaystyle {\bf d}_n =-{\bf g}_n-\sum_{m=0}^{n-1} \beta_{nm}{\bf d}_m$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">144</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 where
 <P></P>
-<DIV CLASS="mathdisplay"><A ID="GSbeta"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math685#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><A ID="GSbeta"></A><!-- MATH
+ \begin{equation}
+\beta_{nm}=\frac{{\bf d}_m^T{\bf A}{\bf v}_n}{{\bf d}^T_m{\bf A}{\bf d}_m}
+  =-\frac{{\bf d}_m^T{\bf A}{\bf g}_n}{{\bf d}^T_m{\bf A}{\bf d}_m}
+  \;\;\;\;\;\;(m<n)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19698#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.28ex; " SRC="img571.svg"
+ ALT="$\displaystyle \beta_{nm}=\frac{{\bf d}_m^T{\bf A}{\bf v}_n}{{\bf d}^T_m{\bf A}{...
+...rac{{\bf d}_m^T{\bf A}{\bf g}_n}{{\bf d}^T_m{\bf A}{\bf d}_m}
+\;\;\;\;\;\;(m&lt;n)$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">145</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-The equation above also indicates that <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19700#</SPAN> can be written 
+The equation above also indicates that <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img256.svg"
+ ALT="${\bf g}_n$"></SPAN> can be written 
 as a linear combination of all previous search directions
-<tex2html_verbatim_mark>#math686#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19702#</SPAN>:
+<!-- MATH
+ ${\bf d}_0,\cdots,{\bf d}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img556.svg"
+ ALT="${\bf d}_0,\cdots,{\bf d}_n$"></SPAN>:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math687#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf g}_n=\sum_{i=0}^n \alpha_i{\bf d}_i
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19704#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.20ex; vertical-align: -3.09ex; " SRC="img572.svg"
+ ALT="$\displaystyle {\bf g}_n=\sum_{i=0}^n \alpha_i{\bf d}_i$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">146</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-Premultiplying <tex2html_verbatim_mark>#math688#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19706#</SPAN> on both sides, we get
+Premultiplying <!-- MATH
+ ${\bf g}_{n+1}^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.89ex; " SRC="img573.svg"
+ ALT="${\bf g}_{n+1}^T$"></SPAN> on both sides, we get
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math689#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf g}_{n+1}^T{\bf g}_k={\bf g}_{n+1}^T\left( \sum_{i=0}^k \alpha_i{\bf d}_i\right)
+  =\sum_{i=0}^k \alpha_i\;{\bf g}_{n+1}^T{\bf d}_i=0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19708#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.09ex; " SRC="img574.svg"
+ ALT="$\displaystyle {\bf g}_{n+1}^T{\bf g}_k={\bf g}_{n+1}^T\left( \sum_{i=0}^k \alpha_i{\bf d}_i\right)
+=\sum_{i=0}^k \alpha_i\;{\bf g}_{n+1}^T{\bf d}_i=0$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">147</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-The last equality is due to <tex2html_verbatim_mark>#math690#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19710#</SPAN> (Eq. (<A HREF=<tex2html_cr_mark>#gd0#3410><tex2html_cr_mark></A>)).
-We see that <tex2html_verbatim_mark>#math691#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19712#</SPAN> is also orthogonal to all previous gradients 
-<tex2html_verbatim_mark>#math692#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19714#</SPAN>.
+The last equality is due to <!-- MATH
+ ${\bf g}_{n+1}^T{\bf d}_k=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.89ex; " SRC="img575.svg"
+ ALT="${\bf g}_{n+1}^T{\bf d}_k=0$"></SPAN> (Eq. (<A HREF="#gd0">142</A>)).
+We see that <!-- MATH
+ ${\bf g}_{n+1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.66ex; " SRC="img317.svg"
+ ALT="${\bf g}_{n+1}$"></SPAN> is also orthogonal to all previous gradients 
+<!-- MATH
+ ${\bf g}_0,\cdots,{\bf g}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img576.svg"
+ ALT="${\bf g}_0,\cdots,{\bf g}_n$"></SPAN>.
 
 <P>
-Pre-multiplying <tex2html_verbatim_mark>#math693#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19716#</SPAN> on both sides of Eq. (<A HREF=<tex2html_cr_mark>#GSCG#3416><tex2html_cr_mark></A>),
+Pre-multiplying <!-- MATH
+ ${\bf g}_k^T (k\ge n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.77ex; " SRC="img577.svg"
+ ALT="${\bf g}_k^T (k\ge n)$"></SPAN> on both sides of Eq. (<A HREF="#GSCG">144</A>),
 we get
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math694#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf g}_k^T{\bf d}_n=-{\bf g}_k^T{\bf g}_n-\sum_{m=0}^{n-1} \beta_{mn}\,{\bf g}_k^T{\bf d}_m
+  =-{\bf g}_k^T{\bf g}_n
+  =\left\{ \begin{array}{cc}-||{\bf g}_n||^2&n=k\\0&n<k\end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19718#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img578.svg"
+ ALT="$\displaystyle {\bf g}_k^T{\bf d}_n=-{\bf g}_k^T{\bf g}_n-\sum_{m=0}^{n-1} \beta...
+...\begin{array}{cc}-\vert\vert{\bf g}_n\vert\vert^2&amp;n=k\\ 0&amp;n&lt;k\end{array}\right.$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">148</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-Note that all terms in the summation are zero as <tex2html_verbatim_mark>#math695#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19720#</SPAN> 
-for all <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19722#</SPAN> (Eq. (<A HREF=<tex2html_cr_mark>#gd0#3436><tex2html_cr_mark></A>)). Substituting 
-<tex2html_verbatim_mark>#math696#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19724#</SPAN> into Eq. (<A HREF=<tex2html_cr_mark>#delta_gd#3440><tex2html_cr_mark></A>), we get
+Note that all terms in the summation are zero as <!-- MATH
+ ${\bf g}_k^T{\bf d}_m=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.77ex; " SRC="img579.svg"
+ ALT="${\bf g}_k^T{\bf d}_m=0$"></SPAN> 
+for all <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.43ex; " SRC="img580.svg"
+ ALT="$m&lt;n\le k$"></SPAN> (Eq. (<A HREF="#gd0">142</A>)). Substituting 
+<!-- MATH
+ ${\bf g}_n^T{\bf d}_n=-||{\bf g}_n||^2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img581.svg"
+ ALT="${\bf g}_n^T{\bf d}_n=-\vert\vert{\bf g}_n\vert\vert^2$"></SPAN> into Eq. (<A HREF="#delta_gd">136</A>), we get
 <P></P>
-<DIV CLASS="mathdisplay"><A ID="CGstepsize"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math697#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><A ID="CGstepsize"></A><!-- MATH
+ \begin{equation}
+\delta_n=-\frac{{\bf g}_n^T{\bf d}_n}{{\bf d}_n^T{\bf A}{\bf d}_n}
+  =\frac{||{\bf g}_n||^2}{{\bf d}_n^T{\bf A}{\bf d}_n}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19726#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.28ex; " SRC="img582.svg"
+ ALT="$\displaystyle \delta_n=-\frac{{\bf g}_n^T{\bf d}_n}{{\bf d}_n^T{\bf A}{\bf d}_n}
+=\frac{\vert\vert{\bf g}_n\vert\vert^2}{{\bf d}_n^T{\bf A}{\bf d}_n}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">149</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 Next we consider
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math698#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf g}_{m+1}={\bf A}{\bf x}_{m+1}-{\bf b}
+  ={\bf A}({\bf x}_m+\delta_m{\bf d}_m)-{\bf b}
+  =({\bf A}{\bf x}_m-{\bf b})+\delta_m{\bf A}{\bf d}_m
+  ={\bf g}_m+\delta_m{\bf A}{\bf d}_m
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19728#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img583.svg"
+ ALT="$\displaystyle {\bf g}_{m+1}={\bf A}{\bf x}_{m+1}-{\bf b}
+={\bf A}({\bf x}_m+\de...
+...{\bf x}_m-{\bf b})+\delta_m{\bf A}{\bf d}_m
+={\bf g}_m+\delta_m{\bf A}{\bf d}_m$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">150</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-Pre-multiplying <tex2html_verbatim_mark>#math699#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19730#</SPAN> with <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19732#</SPAN> on both sides we get
+Pre-multiplying <!-- MATH
+ ${\bf g}_n^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img584.svg"
+ ALT="${\bf g}_n^T$"></SPAN> with <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.21ex; " SRC="img585.svg"
+ ALT="$n&gt;m$"></SPAN> on both sides we get
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math700#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf g}_n^T{\bf g}_{m+1}={\bf g}_n^T{\bf g}_m+\delta_m{\bf g}_n^T{\bf A}{\bf d}_m
+  =\delta_m{\bf g}_n^T{\bf A}{\bf d}_m 
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19734#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.69ex; " SRC="img586.svg"
+ ALT="$\displaystyle {\bf g}_n^T{\bf g}_{m+1}={\bf g}_n^T{\bf g}_m+\delta_m{\bf g}_n^T{\bf A}{\bf d}_m
+=\delta_m{\bf g}_n^T{\bf A}{\bf d}_m$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">151</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-where <tex2html_verbatim_mark>#math701#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19736#</SPAN> (<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19738#</SPAN>). Solving for <tex2html_verbatim_mark>#math702#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19740#</SPAN> 
+where <!-- MATH
+ ${\bf g}_n^T{\bf g}_m=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img587.svg"
+ ALT="${\bf g}_n^T{\bf g}_m=0$"></SPAN> (<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img588.svg"
+ ALT="$m\ne n$"></SPAN>). Solving for <!-- MATH
+ ${\bf g}_n^T{\bf A}{\bf d}_m$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img589.svg"
+ ALT="${\bf g}_n^T{\bf A}{\bf d}_m$"></SPAN> 
 we get
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math703#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf g}_n^T{\bf A}{\bf d}_m
+  =\frac{1}{\delta_m} {\bf g}_n^T{\bf g}_{m+1}
+  =\left\{\begin{array}{cl}
+  ||{\bf g}_n||^2/\delta_{n-1}&m=n-1\\0&m<n-1\end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19742#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img590.svg"
+ ALT="$\displaystyle {\bf g}_n^T{\bf A}{\bf d}_m
+=\frac{1}{\delta_m} {\bf g}_n^T{\bf g...
+...
+\vert\vert{\bf g}_n\vert\vert^2/\delta_{n-1}&amp;m=n-1\\ 0&amp;m&lt;n-1\end{array}\right.$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">152</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-Substituting this into Eq. (<A HREF=<tex2html_cr_mark>#GSbeta#3507><tex2html_cr_mark></A>) we get
+Substituting this into Eq. (<A HREF="#GSbeta">145</A>) we get
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math704#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\beta_{nm}=-\frac{{\bf d}_m^T{\bf A}{\bf g}_n}{{\bf d}^T_m{\bf A}{\bf d}_m}
+  =\left\{\begin{array}{cl}-||{\bf g}_n||^2/\delta_{n-1}{\bf d}_{n-1}^T{\bf A}{\bf d}_{n-1}
+&m=n-1
+  \\0&m<n-1\end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19744#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.32ex; " SRC="img591.svg"
+ ALT="$\displaystyle \beta_{nm}=-\frac{{\bf d}_m^T{\bf A}{\bf g}_n}{{\bf d}^T_m{\bf A}...
+...ta_{n-1}{\bf d}_{n-1}^T{\bf A}{\bf d}_{n-1}
+&amp;m=n-1
+\\ 0&amp;m&lt;n-1\end{array}\right.$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">153</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 
 <P>
-which is non-zero only when <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19746#</SPAN>, i.e., there is only one non-zero term
-in the summation of the Gram-Schmidt formula for <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19748#</SPAN>. This is the 
-reason why we choose <tex2html_verbatim_mark>#math705#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19750#</SPAN>. We can now drop the second 
-subscript <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19752#</SPAN> in <tex2html_verbatim_mark>#math706#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19754#</SPAN>. Substituting the step size
-<tex2html_verbatim_mark>#math707#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19756#</SPAN> 
-(Eq. (<A HREF=<tex2html_cr_mark>#CGstepsize#3539><tex2html_cr_mark></A>)) into the above expression for <tex2html_verbatim_mark>#math708#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19758#</SPAN>,
+which is non-zero only when <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img592.svg"
+ ALT="$m=n-1$"></SPAN>, i.e., there is only one non-zero term
+in the summation of the Gram-Schmidt formula for <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img304.svg"
+ ALT="${\bf d}_n$"></SPAN>. This is the 
+reason why we choose <!-- MATH
+ ${\bf v}_n=-{\bf g}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.57ex; " SRC="img569.svg"
+ ALT="${\bf v}_n=-{\bf g}_n$"></SPAN>. We can now drop the second 
+subscript <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img593.svg"
+ ALT="$m$"></SPAN> in <!-- MATH
+ $\beta_{nm}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img594.svg"
+ ALT="$\beta_{nm}$"></SPAN>. Substituting the step size
+<!-- MATH
+ $\delta_{n-1}=||{\bf g}_{n-1}||^2/{\bf d}_{n-1}^T{\bf A}{\bf d}_{n-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.89ex; " SRC="img595.svg"
+ ALT="$\delta_{n-1}=\vert\vert{\bf g}_{n-1}\vert\vert^2/{\bf d}_{n-1}^T{\bf A}{\bf d}_{n-1}$"></SPAN> 
+(Eq. (<A HREF="#CGstepsize">149</A>)) into the above expression for <!-- MATH
+ $\beta_{nm}=\beta_m$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img596.svg"
+ ALT="$\beta_{nm}=\beta_m$"></SPAN>,
 we get
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math709#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\beta_n=-\frac{||{\bf g}_n||^2}{||{\bf g}_{n-1}||^2}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19760#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.29ex; " SRC="img597.svg"
+ ALT="$\displaystyle \beta_n=-\frac{\vert\vert{\bf g}_n\vert\vert^2}{\vert\vert{\bf g}_{n-1}\vert\vert^2}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">154</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-We note that matrix <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19762#</SPAN> no longer appears in the expression.
+We note that matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img286.svg"
+ ALT="${\bf A}$"></SPAN> no longer appears in the expression.
 
 <P>
-<#3547#><B>The CG algorithm</B><#3547#>
+<B>The CG algorithm</B>
 
 <P>
 In summary here are the steps of the conjugate gradient algorithm:
 
 <OL>
-<LI>Set <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19764#</SPAN> and initialize the search direction (same as gradient descent):
+<LI>Set <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img410.svg"
+ ALT="$n=0$"></SPAN> and initialize the search direction (same as gradient descent):
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math710#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf d}_0=-{\bf g}_0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19766#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img598.svg"
+ ALT="$\displaystyle {\bf d}_0=-{\bf g}_0$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">155</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 </LI>
-<LI>Terminate if the error <tex2html_verbatim_mark>#math711#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19768#</SPAN> is smaller 
+<LI>Terminate if the error <!-- MATH
+ $\varepsilon=||{\bf g}_n||^2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img504.svg"
+ ALT="$\varepsilon=\vert\vert{\bf g}_n\vert\vert^2$"></SPAN> is smaller 
   than a preset threshold. Otherwise, continue with the following:
 </LI>
 <LI>Find optimal step size and step forward:
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math712#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\delta_n=\frac{||{\bf g}_n||^2}{{\bf d}_n^T{\bf A}{\bf d}_n},
+  \;\;\;\;\;\;\;\;
+  {\bf x}_{n+1}={\bf x}_n+\delta_n{\bf d}_n
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19770#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.28ex; " SRC="img599.svg"
+ ALT="$\displaystyle \delta_n=\frac{\vert\vert{\bf g}_n\vert\vert^2}{{\bf d}_n^T{\bf A}{\bf d}_n},
+\;\;\;\;\;\;\;\;
+{\bf x}_{n+1}={\bf x}_n+\delta_n{\bf d}_n$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">156</SPAN>)</TD></TR>
 </TABLE></DIV>
@@ -503,9 +1180,15 @@ In summary here are the steps of the conjugate gradient algorithm:
 </LI>
 <LI>Update gradient:
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math713#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf g}_{n+1}=\frac{d}{d{\bf x}}f({\bf x}_{n+1})
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19772#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.11ex; vertical-align: -1.71ex; " SRC="img600.svg"
+ ALT="$\displaystyle {\bf g}_{n+1}=\frac{d}{d{\bf x}}f({\bf x}_{n+1})$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">157</SPAN>)</TD></TR>
 </TABLE></DIV>
@@ -513,9 +1196,15 @@ In summary here are the steps of the conjugate gradient algorithm:
 </LI>
 <LI>Find coefficient for the Gram-Schmidt process:
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math714#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\beta_{n+1}=\frac{||{\bf g}_{n+1}||^2}{||{\bf g}_n||^2}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19774#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.29ex; " SRC="img601.svg"
+ ALT="$\displaystyle \beta_{n+1}=\frac{\vert\vert{\bf g}_{n+1}\vert\vert^2}{\vert\vert{\bf g}_n\vert\vert^2}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">158</SPAN>)</TD></TR>
 </TABLE></DIV>
@@ -523,70 +1212,167 @@ In summary here are the steps of the conjugate gradient algorithm:
 </LI>
 <LI>Update search direction:
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math715#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf d}_{n+1}=-{\bf g}_{n+1}+\beta_{n+1}{\bf d}_n
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19776#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img602.svg"
+ ALT="$\displaystyle {\bf d}_{n+1}=-{\bf g}_{n+1}+\beta_{n+1}{\bf d}_n$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">159</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  Set <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19778#</SPAN> and go back to step 2.
+Set <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img414.svg"
+ ALT="$n=n+1$"></SPAN> and go back to step 2.
 </LI>
 </OL>
 
 <P>
-The algorithm above assumes the objective function <tex2html_verbatim_mark>#math716#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19780#</SPAN> to be quadratic 
-with known <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19782#</SPAN>. But when <tex2html_verbatim_mark>#math717#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19784#</SPAN> is not quadratic, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19786#</SPAN> is no 
-longer available, and the Hessian <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19788#</SPAN> may not be a good approximation of 
-<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19790#</SPAN>. However, we can still assume that <tex2html_verbatim_mark>#math718#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19792#</SPAN> can be approximated 
+The algorithm above assumes the objective function <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN> to be quadratic 
+with known <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img286.svg"
+ ALT="${\bf A}$"></SPAN>. But when <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN> is not quadratic, <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img286.svg"
+ ALT="${\bf A}$"></SPAN> is no 
+longer available, and the Hessian <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img232.svg"
+ ALT="${\bf H}$"></SPAN> may not be a good approximation of 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img286.svg"
+ ALT="${\bf A}$"></SPAN>. However, we can still assume that <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN> can be approximated 
 as a quadratic function in the neighborhood of its minimum. In this case, the 
-algorithm can be modified so that it does not depend on <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19794#</SPAN>. Specifically,
-in step 3 above, the optimal step size <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19796#</SPAN> is calculated based on <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19798#</SPAN>.
-When <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19800#</SPAN> is unavailable, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19802#</SPAN> can also be found by line minimization
+algorithm can be modified so that it does not depend on <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img286.svg"
+ ALT="${\bf A}$"></SPAN>. Specifically,
+in step 3 above, the optimal step size <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img312.svg"
+ ALT="$\delta_n$"></SPAN> is calculated based on <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img286.svg"
+ ALT="${\bf A}$"></SPAN>.
+When <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img286.svg"
+ ALT="${\bf A}$"></SPAN> is unavailable, <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img253.svg"
+ ALT="$\delta$"></SPAN> can also be found by line minimization
 based on any suitable algorithms for 1-D optimization. 
 
 <P>
-If it is known that the current <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19804#</SPAN> is close enough to the solution 
-<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19806#</SPAN>, we can approximate <tex2html_verbatim_mark>#math719#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19808#</SPAN> as a quadratic function, and
-its Hessian matrix <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19810#</SPAN> can be used to approximate <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19812#</SPAN> so that the 
+If it is known that the current <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img255.svg"
+ ALT="${\bf x}_n$"></SPAN> is close enough to the solution 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}^*$"></SPAN>, we can approximate <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN> as a quadratic function, and
+its Hessian matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img232.svg"
+ ALT="${\bf H}$"></SPAN> can be used to approximate <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img286.svg"
+ ALT="${\bf A}$"></SPAN> so that the 
 original algorithm may still be used. 
 
 <P>
-<#3602#><B>Example 1:</B><#3602#> 
+<B>Example 1:</B> 
 To compare the conjugate method and the gradient descent method, consider a very 
 simple 2-D quadratic function
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math720#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f(x,y)={\bf x}^T{\bf A}{\bf x}
+  =[x_1,\,x_2]\left[\begin{array}{cc}3&1\\1&2\end{array}\right]
+  \left[\begin{array}{c}x_1\\x_2\end{array}\right]
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19814#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img603.svg"
+ ALT="$\displaystyle f(x,y)={\bf x}^T{\bf A}{\bf x}
+=[x_1,\,x_2]\left[\begin{array}{cc}3&amp;1\\ 1&amp;2\end{array}\right]
+\left[\begin{array}{c}x_1\\ x_2\end{array}\right]$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
 The performance of the gradient descent method depends significantly on
-the initial guess. For the specific initial guess of <tex2html_verbatim_mark>#math721#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19816#</SPAN>,
+the initial guess. For the specific initial guess of <!-- MATH
+ ${\bf x}_0=[1.5,\;-0.75]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img604.svg"
+ ALT="${\bf x}_0=[1.5,\;-0.75]^T$"></SPAN>,
 the iteration gets into a zigzag pattern and the convergence is very slow,
 as shown below:
 
 <P>
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math722#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{c|c|c}\hline
+    n & {\bf x}=[x_1,\,x_2] & f({\bf x}) \\\hline
+    0 & 1.500000, -0.750000 & 2.812500 \\
+    1 & 0.250000, -0.750000 & 0.468750e-01 \\
+    2 & 0.250000, -0.125000 & 7.812500e-02 \\
+    3 & 0.041667, -0.125000 & 1.302083e-02 \\
+    4 & 0.041667, -0.020833 & 2.170139e-03 \\
+    5 & 0.006944, -0.020833 & 3.616898e-04 \\
+    6 & 0.006944, -0.003472 & 6.028164e-05 \\
+    7 & 0.001157, -0.003472 & 1.004694e-05 \\
+    8 & 0.001157, -0.000579 & 1.674490e-06 \\
+    9 & 0.000193, -0.000579 & 2.790816e-07 \\
+    10 & 0.000193, -0.000096 & 4.651361e-08 \\
+    11 & 0.000032, -0.000096 & 7.752268e-09 \\
+    12 & 0.000032, -0.000016 & 1.292045e-09 \\
+    13 & 0.000005, -0.000016 & 2.153408e-10 \\\hline
+  \end{array}
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath19818#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img605.svg"
+ ALT="\begin{displaymath}\begin{array}{c\vert c\vert c}\hline
+n &amp; {\bf x}=[x_1,\,x_2] ...
+...
+13 &amp; 0.000005, -0.000016 &amp; 2.153408e-10 \\ \hline
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
 However, as expected, the conjugate gradient method takes exactly
-<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19820#</SPAN> steps from any initial guess to reach at the solution:
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img557.svg"
+ ALT="$N=2$"></SPAN> steps from any initial guess to reach at the solution:
 
 <P>
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math723#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{c|c|c}\hline
+    n & {\bf x}=[x_1,\,x_2] & f({\bf x}) \\\hline
+    0 & 1.500000, -0.750000 & 2.812500e+00 \\
+    1 & 0.250000, -0.750000 & 4.687500e-01 \\
+    2 & 0.000000, -0.000000 & 1.155558e-33 \\\hline
+  \end{array}
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath19822#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img606.svg"
+ ALT="\begin{displaymath}\begin{array}{c\vert c\vert c}\hline
+n &amp; {\bf x}=[x_1,\,x_2] ...
+...\
+2 &amp; 0.000000, -0.000000 &amp; 1.155558e-33 \\ \hline
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
 
@@ -595,39 +1381,92 @@ However, as expected, the conjugate gradient method takes exactly
  ALT="GDvsCG2.png">
 
 <P>
-For an <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19824#</SPAN> example of <tex2html_verbatim_mark>#math724#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19826#</SPAN> with
+For an <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img258.svg"
+ ALT="$N=3$"></SPAN> example of <!-- MATH
+ $f({\bf x})={\bf x}^T{\bf A}{\bf x}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img607.svg"
+ ALT="$f({\bf x})={\bf x}^T{\bf A}{\bf x}$"></SPAN> with
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math725#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf A}=\left[\begin{array}{ccc}5 & 3 & 1\\3 & 4 & 2\\1 & 2 & 3
+    \end{array}\right]
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19828#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img608.svg"
+ ALT="$\displaystyle {\bf A}=\left[\begin{array}{ccc}5 &amp; 3 &amp; 1\\ 3 &amp; 4 &amp; 2\\ 1 &amp; 2 &amp; 3
+\end{array}\right]$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
-from an initial guess <tex2html_verbatim_mark>#math726#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19830#</SPAN>, it takes the gradient 
+from an initial guess <!-- MATH
+ ${\bf x}_0=[1,\;2,\;3]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img609.svg"
+ ALT="${\bf x}_0=[1,\;2,\;3]^T$"></SPAN>, it takes the gradient 
 descent method 41 iterations to reach 
-<tex2html_verbatim_mark>#math727#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19832#</SPAN> corresponding
-to <tex2html_verbatim_mark>#math728#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19834#</SPAN>. From the same initial guess, it takes the 
-conjugate gradient method only <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19836#</SPAN> iterations to converge to the 
+<!-- MATH
+ ${\bf x}_{41}=[3.5486e-06,\;-7.4471e-06,\;4.6180e-06]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img610.svg"
+ ALT="${\bf x}_{41}=[3.5486e-06,\;-7.4471e-06,\;4.6180e-06]^T$"></SPAN> corresponding
+to <!-- MATH
+ $f({\bf x})=8.5429e-11$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img611.svg"
+ ALT="$f({\bf x})=8.5429e-11$"></SPAN>. From the same initial guess, it takes the 
+conjugate gradient method only <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img258.svg"
+ ALT="$N=3$"></SPAN> iterations to converge to the 
 solution:
 
 <P>
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math729#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{c|c|c}\hline
+    n & {\bf x}=[x_1,\,x_2,\,x_3] & f({\bf x}) \\\hline
+    0 &  1.000000,  2.000000, 3.000000 & 4.500000e+01 \\
+    1 & -0.734716, -0.106441, 1.265284 & 2.809225e+00 \\
+    2 &  0.123437, -0.209498, 0.136074 & 3.584736e-02 \\
+    3 & -0.000000,  0.000000, 0.000000 & 3.949119e-31 \\\hline
+  \end{array}
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath19838#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img612.svg"
+ ALT="\begin{displaymath}\begin{array}{c\vert c\vert c}\hline
+n &amp; {\bf x}=[x_1,\,x_2,\...
+...000000, 0.000000, 0.000000 &amp; 3.949119e-31 \\ \hline
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
 
 <P>
-For an <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19840#</SPAN> example, it takes over 4000 iterations for the gradient
-descent method to converge with <tex2html_verbatim_mark>#math730#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19842#</SPAN>, but exactly 9
-iterations for the CG method to converge with <tex2html_verbatim_mark>#math731#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19844#</SPAN>.
+For an <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img613.svg"
+ ALT="$N=9$"></SPAN> example, it takes over 4000 iterations for the gradient
+descent method to converge with <!-- MATH
+ $||{\bf e}||\approx 10^{-10}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img614.svg"
+ ALT="$\vert\vert{\bf e}\vert\vert\approx 10^{-10}$"></SPAN>, but exactly 9
+iterations for the CG method to converge with <!-- MATH
+ $||{\bf e}||\approx 10^{-16}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img615.svg"
+ ALT="$\vert\vert{\bf e}\vert\vert\approx 10^{-16}$"></SPAN>.
 
 <P>
-<#3655#><B>Example 2:</B><#3655#> 
+<B>Example 2:</B> 
 
 <P>
 The figure below shows the search path of the conjugate gradient method
@@ -638,31 +1477,90 @@ applied to the minimization of the Rosenbrock function:
  ALT="RosenbrockCG.png">
 
 <P>
-<#3657#><B>Example 3:</B><#3657#> 
+<B>Example 3:</B> 
 
 <P>
-Solve the following <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19846#</SPAN> non-linear equation system by the CG method:
+Solve the following <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img258.svg"
+ ALT="$N=3$"></SPAN> non-linear equation system by the CG method:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math732#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left\{\begin{array}{l}
+  f_1(x_1,\,x_2,\,x_3)=3x_1-(x_2x_3)^2-3/2\\
+  f_2(x_1,\,x_2,\,x_3)=4x_1^2-625\,x_2^2+2x_2-1\\
+  f_3(x_1,\,x_2,\,x_3)=exp(-x_1x_2)+20x_3+9\end{array}\right.
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19848#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img259.svg"
+ ALT="$\displaystyle \left\{\begin{array}{l}
+f_1(x_1,\,x_2,\,x_3)=3x_1-(x_2x_3)^2-3/2\...
+...25\,x_2^2+2x_2-1\\
+f_3(x_1,\,x_2,\,x_3)=exp(-x_1x_2)+20x_3+9\end{array}\right.$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
-The solution is known to be <tex2html_verbatim_mark>#math733#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19850#</SPAN>.
+The solution is known to be <!-- MATH
+ $x_1=0.5,\;x_2=0,\;x_3=-0.5$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img616.svg"
+ ALT="$x_1=0.5,\;x_2=0,\;x_3=-0.5$"></SPAN>.
 
 <P>
-This equation system can be represented in vector form as <tex2html_verbatim_mark>#math734#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19852#</SPAN>
-and the objective function is <tex2html_verbatim_mark>#math735#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19854#</SPAN>. 
-The iteration of the CG method with an initial guess <tex2html_verbatim_mark>#math736#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19856#</SPAN> is 
+This equation system can be represented in vector form as <!-- MATH
+ ${\bf f}({\bf x})={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img42.svg"
+ ALT="${\bf f}({\bf x})={\bf0}$"></SPAN>
+and the objective function is <!-- MATH
+ $o({\bf x})={\bf f}^T({\bf x}){\bf f}({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img261.svg"
+ ALT="$o({\bf x})={\bf f}^T({\bf x}){\bf f}({\bf x})$"></SPAN>. 
+The iteration of the CG method with an initial guess <!-- MATH
+ ${\bf x}_0={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img262.svg"
+ ALT="${\bf x}_0={\bf0}$"></SPAN> is 
 shown below:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math737#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{c|c|c}\hline
+    n & {\bf x}=[x_1,\,x_2,\,x_3] & o({\bf x}) \\\hline
+    0 &	0.0000,  0.0000,  0.0000 &	1.032500e+02 \\
+    1 &	0.0113,  0.0050, -0.5001 &	3.160163e+00 \\
+    2 &	0.0188, -0.0021, -0.5004 &	3.095894e+00 \\
+    3 &	0.5009, -0.0018, -0.5004 &	7.268252e-05 \\
+    4 &	0.5009, -0.0017, -0.5000 &	1.051537e-05 \\
+    5 &	0.5008, -0.0012, -0.5000 &	6.511151e-06 \\
+    6 &	0.5001, -0.0005, -0.5000 &	6.365321e-07 \\
+    7 &	0.5001, -0.0005, -0.5000 &	5.667357e-07 \\
+    8 &	0.5002, -0.0004, -0.5000 &	2.675128e-07 \\
+    9 &	0.5001, -0.0003, -0.5000 &	1.344218e-07 \\
+    10&	0.5001, -0.0002, -0.5000 &	1.241196e-07 \\
+    11&	0.5000, -0.0001, -0.5000 &	2.120969e-08 \\
+    12&	0.5000, -0.0001, -0.5000 &	1.541814e-08 \\
+    13&	0.5000, -0.0001, -0.5000 &	7.282025e-09 \\
+    14&	0.5000, -0.0001, -0.5000 &	4.801781e-09 \\
+    15&	0.5000, -0.0000, -0.5000 &	4.463926e-09 \\\hline
+  \end{array}
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath19858#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img617.svg"
+ ALT="\begin{displaymath}\begin{array}{c\vert c\vert c}\hline
+n &amp; {\bf x}=[x_1,\,x_2,\...
+...&amp; 0.5000, -0.0000, -0.5000 &amp; 4.463926e-09 \\ \hline
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
 
@@ -672,76 +1570,173 @@ iterations (with much reduced complexity though) to reach this level of
 error. 
 
 <P>
-<#3680#><B>Conjugate gradient method used for solving linear equation systems:</B><#3680#>
+<B>Conjugate gradient method used for solving linear equation systems:</B>
 
 <P>
-As discussed before, if <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19860#</SPAN> is the solution that minimizes the 
-quadratic function <tex2html_verbatim_mark>#math738#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19862#</SPAN>, 
-with <tex2html_verbatim_mark>#math739#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19864#</SPAN> being symmetric and positive definite, it also satisfies
-<tex2html_verbatim_mark>#math740#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19866#</SPAN>. In other words, the 
+As discussed before, if <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="${\bf x}$"></SPAN> is the solution that minimizes the 
+quadratic function <!-- MATH
+ $f({\bf x})={\bf x}^T{\bf A}{\bf x}/2-{\bf b}^T{\bf x}+c$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img618.svg"
+ ALT="$f({\bf x})={\bf x}^T{\bf A}{\bf x}/2-{\bf b}^T{\bf x}+c$"></SPAN>, 
+with <!-- MATH
+ ${\bf A}={\bf A}^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img497.svg"
+ ALT="${\bf A}={\bf A}^T$"></SPAN> being symmetric and positive definite, it also satisfies
+<!-- MATH
+ $d\,f({\bf x})/d{\bf x}={\bf A}{\bf x}-{\bf b}={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img619.svg"
+ ALT="$d\,f({\bf x})/d{\bf x}={\bf A}{\bf x}-{\bf b}={\bf0}$"></SPAN>. In other words, the 
 optimization problem is equivalent to the problem of solving the linear system 
-<tex2html_verbatim_mark>#math741#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19868#</SPAN>, both can be solved by the conjugate gradient 
+<!-- MATH
+ ${\bf A}{\bf x}-{\bf b}={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img620.svg"
+ ALT="${\bf A}{\bf x}-{\bf b}={\bf0}$"></SPAN>, both can be solved by the conjugate gradient 
 method.
 
 <P>
-Now consider solving the linear system <tex2html_verbatim_mark>#math742#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19870#</SPAN> with 
-<tex2html_verbatim_mark>#math743#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19872#</SPAN>. Let <tex2html_verbatim_mark>#math744#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19874#</SPAN> be a set of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19876#</SPAN> 
-A-orthogonal vectors satisfying <tex2html_verbatim_mark>#math745#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19878#</SPAN>,
-which can be generated based on any <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19880#</SPAN> independent vectors, such as the
-standard basis vectors, by the Gram-Smidth method. The solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19882#</SPAN>
-of the equation <tex2html_verbatim_mark>#math746#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19884#</SPAN> can be represented by these <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19886#</SPAN> 
+Now consider solving the linear system <!-- MATH
+ ${\bf A}{\bf x}={\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img505.svg"
+ ALT="${\bf A}{\bf x}={\bf b}$"></SPAN> with 
+<!-- MATH
+ ${\bf A}={\bf A}^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img497.svg"
+ ALT="${\bf A}={\bf A}^T$"></SPAN>. Let <!-- MATH
+ ${\bf d}_i,\;(i=1,\cdots,N)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img621.svg"
+ ALT="${\bf d}_i,\;(i=1,\cdots,N)$"></SPAN> be a set of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img54.svg"
+ ALT="$N$"></SPAN> 
+A-orthogonal vectors satisfying <!-- MATH
+ ${\bf d}_i^T{\bf A}{\bf d}_j=0\;(i\ne j)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img622.svg"
+ ALT="${\bf d}_i^T{\bf A}{\bf d}_j=0\;(i\ne j)$"></SPAN>,
+which can be generated based on any <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img54.svg"
+ ALT="$N$"></SPAN> independent vectors, such as the
+standard basis vectors, by the Gram-Smidth method. The solution <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="${\bf x}$"></SPAN>
+of the equation <!-- MATH
+ ${\bf A}{\bf x}={\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img505.svg"
+ ALT="${\bf A}{\bf x}={\bf b}$"></SPAN> can be represented by these <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img54.svg"
+ ALT="$N$"></SPAN> 
 vectors as
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math747#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf x}=\sum_{i=1}^N c_i{\bf d}_i
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19888#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img623.svg"
+ ALT="$\displaystyle {\bf x}=\sum_{i=1}^N c_i{\bf d}_i$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">160</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 Now we have
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math748#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf b}={\bf A}{\bf x}={\bf A}\left[\sum_{i=1}^N c_i{\bf d}_i\right]
+=\sum_{i=1}^N c_i{\bf A}{\bf d}_i
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19890#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img624.svg"
+ ALT="$\displaystyle {\bf b}={\bf A}{\bf x}={\bf A}\left[\sum_{i=1}^N c_i{\bf d}_i\right]
+=\sum_{i=1}^N c_i{\bf A}{\bf d}_i$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">161</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-Pre-multiplying <tex2html_verbatim_mark>#math749#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19892#</SPAN> on both sides we get
+Pre-multiplying <!-- MATH
+ ${\bf d}_j^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -1.04ex; " SRC="img625.svg"
+ ALT="${\bf d}_j^T$"></SPAN> on both sides we get
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math750#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf d}_j^T{\bf b}=\sum_{i=1}^N c_i{\bf d}_j^T{\bf A}{\bf d}_i=c_j{\bf d}_j^T{\bf A}{\bf d}_j
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19894#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img626.svg"
+ ALT="$\displaystyle {\bf d}_j^T{\bf b}=\sum_{i=1}^N c_i{\bf d}_j^T{\bf A}{\bf d}_i=c_j{\bf d}_j^T{\bf A}{\bf d}_j$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">162</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-Solving for <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19896#</SPAN> we get
+Solving for <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img627.svg"
+ ALT="$c_j$"></SPAN> we get
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math751#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+c_j=\frac{{\bf d}_j^T{\bf b}}{{\bf d}_j^T{\bf A}{\bf d}_j}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19898#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.74ex; vertical-align: -2.74ex; " SRC="img628.svg"
+ ALT="$\displaystyle c_j=\frac{{\bf d}_j^T{\bf b}}{{\bf d}_j^T{\bf A}{\bf d}_j}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">163</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-Substituting this back into the expression for <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19900#</SPAN> we get the solution
+Substituting this back into the expression for <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="${\bf x}$"></SPAN> we get the solution
 of the equation:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math752#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf x}=\sum_{i=1}^N c_i{\bf d}_i
+  =\sum_{i=1}^N \left(\frac{{\bf d}_i^T{\bf b}}{{\bf d}_i^T{\bf A}{\bf d}_i}\right)
+  {\bf d}_i
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19902#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img629.svg"
+ ALT="$\displaystyle {\bf x}=\sum_{i=1}^N c_i{\bf d}_i
+=\sum_{i=1}^N \left(\frac{{\bf d}_i^T{\bf b}}{{\bf d}_i^T{\bf A}{\bf d}_i}\right)
+{\bf d}_i$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">164</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-Also note that as <tex2html_verbatim_mark>#math753#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19904#</SPAN>, the ith term of the summation above
-is simply the A-projection of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19906#</SPAN> onto the ith direction <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19908#</SPAN>:
+Also note that as <!-- MATH
+ ${\bf b}={\bf A}{\bf x}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img630.svg"
+ ALT="${\bf b}={\bf A}{\bf x}$"></SPAN>, the ith term of the summation above
+is simply the A-projection of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="${\bf x}$"></SPAN> onto the ith direction <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img535.svg"
+ ALT="${\bf d}_i$"></SPAN>:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math754#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf p}_{{\bf d}_i}({\bf x})
+=\left(\frac{{\bf d}_i^T{\bf A}{\bf x}}{{\bf d}_i^T{\bf A}{\bf d}_i}\right){\bf d}_i
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19910#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.42ex; " SRC="img631.svg"
+ ALT="$\displaystyle {\bf p}_{{\bf d}_i}({\bf x})
+=\left(\frac{{\bf d}_i^T{\bf A}{\bf x}}{{\bf d}_i^T{\bf A}{\bf d}_i}\right){\bf d}_i$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">165</SPAN>)</TD></TR>
 </TABLE></DIV>
@@ -750,18 +1745,61 @@ is simply the A-projection of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_
 <P>
 One application of the conjugate gradient method is to solve the normal 
 equation to find the least-square solution of an over-constrained equation 
-system <tex2html_verbatim_mark>#math755#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19912#</SPAN>, where the coefficient matrix <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19914#</SPAN> is <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19916#</SPAN> 
-by <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19918#</SPAN> with rank <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19920#</SPAN>. As discussed previously, the normal equation of this 
+system <!-- MATH
+ ${\bf A}{\bf x}={\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img505.svg"
+ ALT="${\bf A}{\bf x}={\bf b}$"></SPAN>, where the coefficient matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img286.svg"
+ ALT="${\bf A}$"></SPAN> is <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img632.svg"
+ ALT="$M$"></SPAN> 
+by <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img54.svg"
+ ALT="$N$"></SPAN> with rank <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img633.svg"
+ ALT="$R=N&lt;M$"></SPAN>. As discussed previously, the normal equation of this 
 system is
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math756#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf A}^T{\bf A}{\bf x}={\bf A}^T{\bf b}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19922#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img634.svg"
+ ALT="$\displaystyle {\bf A}^T{\bf A}{\bf x}={\bf A}^T{\bf b}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">166</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-Here <tex2html_verbatim_mark>#math757#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19924#</SPAN> is an <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19926#</SPAN> by <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19928#</SPAN> symmetric, positive definite matrix.
+Here <!-- MATH
+ ${\bf A}^T{\bf A}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img635.svg"
+ ALT="${\bf A}^T{\bf A}$"></SPAN> is an <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img54.svg"
+ ALT="$N$"></SPAN> by <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img54.svg"
+ ALT="$N$"></SPAN> symmetric, positive definite matrix.
 This normal equation can be solved by the conjugate gradient method.
 
 <P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node11.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node9.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node11.html">Issues of Local/Global Minimum</A>
+<B> Up:</B> <A
+ HREF="node2.html">Unconstrained Optimization</A>
+<B> Previous:</B> <A
+ HREF="node9.html">Quasi-Newton Methods</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

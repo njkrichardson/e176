@@ -1,3 +1,46 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Interior Point Methods</TITLE>
+<META NAME="description" CONTENT="Interior Point Methods">
+<META NAME="keywords" CONTENT="ch3">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch3.css">
+
+<LINK REL="previous" HREF="node18.html">
+<LINK REL="next" HREF="node20.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node20.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node12.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node18.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node20.html">About this document ...</A>
+<B> Up:</B> <A
+ HREF="node12.html">Constrained Optimization</A>
+<B> Previous:</B> <A
+ HREF="node18.html">Quadratic Programming (QP)</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
 
 <H2><A ID="SECTION00037000000000000000">
 Interior Point Methods</A>
@@ -6,61 +49,192 @@ Interior Point Methods</A>
 <P>
 Consider the a general constrained optimization problem:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1110#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{ll}
+    \mbox{minimize} & f({\bf x}) \\
+    \mbox{subject to:} &
+    \left\{ \begin{array}{l}
+         {\bf h}({\bf x})={\bf0}\\
+         {\bf g}({\bf x})\le{\bf0}\;\;\;\mbox{or}\;\;\;
+         {\bf g}({\bf x})\ge{\bf0}\\
+         {\bf x}\ge{\bf0} 
+    \end{array}\right.\end{array}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21327#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img1031.svg"
+ ALT="\begin{displaymath}\begin{array}{ll}
+\mbox{minimize} &amp; f({\bf x}) \\
+\mbox{subj...
+... x})\ge{\bf0}\\
+{\bf x}\ge{\bf0}
+\end{array}\right.\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">235</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-By introducing slack variables <tex2html_verbatim_mark>#math1111#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21329#</SPAN>, all inequality
+By introducing slack variables <!-- MATH
+ ${\bf s}\ge{\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.43ex; " SRC="img829.svg"
+ ALT="${\bf s}\ge {\bf0}$"></SPAN>, all inequality
 constraints can be converted into equality constraints:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1112#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf g}({\bf x})\le{\bf0}\;\Longrightarrow \;
+    {\bf g}({\bf x})+{\bf s}={\bf0},\;\;\;\;\;\;\;
+    {\bf g}({\bf x})\ge{\bf0}\;\Longrightarrow \;
+    {\bf g}({\bf x})-{\bf s}={\bf0}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21331#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1032.svg"
+ ALT="$\displaystyle {\bf g}({\bf x})\le{\bf0}\;\Longrightarrow \;
+{\bf g}({\bf x})+{\...
+...;
+{\bf g}({\bf x})\ge{\bf0}\;\Longrightarrow \;
+{\bf g}({\bf x})-{\bf s}={\bf0}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">236</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 which can then be combined with the equality constraints and still 
-denoted by <tex2html_verbatim_mark>#math1113#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21333#</SPAN>, while the slack variables 
-<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21335#</SPAN> are also combined with the original variables and still 
-denoted by <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21337#</SPAN>. We assume there are in total <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21339#</SPAN> equality 
-constraints and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21341#</SPAN> variables. Now the optimization problem can be
+denoted by <!-- MATH
+ ${\bf h}({\bf x})={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img769.svg"
+ ALT="${\bf h}({\bf x})={\bf0}$"></SPAN>, while the slack variables 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img1033.svg"
+ ALT="${\bf s}$"></SPAN> are also combined with the original variables and still 
+denoted by <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="${\bf x}$"></SPAN>. We assume there are in total <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img632.svg"
+ ALT="$M$"></SPAN> equality 
+constraints and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img54.svg"
+ ALT="$N$"></SPAN> variables. Now the optimization problem can be
 reformulated as:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1114#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{ll}
+    \mbox{minimize} & f({\bf x}) \\
+    \mbox{subject to:} &
+    \left\{\begin{array}{l}
+         {\bf h}({\bf x})={\bf0}\\
+         {\bf x}\ge{\bf0}
+    \end{array}\right.\end{array}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21343#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img1034.svg"
+ ALT="\begin{displaymath}\begin{array}{ll}
+\mbox{minimize} &amp; f({\bf x}) \\
+\mbox{subj...
+...bf x})={\bf0}\\
+{\bf x}\ge{\bf0}
+\end{array}\right.\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">237</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 The Lagrangian is
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1115#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+L({\bf x},{\bf\lambda},{\bf\mu})=f({\bf x})
+  +{\bf\lambda}^T{\bf h}({\bf x})-{\bf\mu}^T{\bf x}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21345#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img1035.svg"
+ ALT="$\displaystyle L({\bf x},{\bf\lambda},{\bf\mu})=f({\bf x})
++{\bf\lambda}^T{\bf h}({\bf x})-{\bf\mu}^T{\bf x}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">238</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 The KKT conditions are
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1116#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left\{
+\begin{array}{ll}
+  \bigtriangledown_{\bf x} L({\bf x},{\bf\lambda},{\bf\mu})
+  ={\bf g}_f({\bf x})+{\bf J}_{\bf h}^T({\bf x}){\bf\lambda}-{\bf\mu}
+  ={\bf0}&
+  \mbox{(stationarity)}\\
+  {\bf h}({\bf x})={\bf0},\;\;\;\;{\bf x}\ge{\bf0} &
+  \mbox{(primal feasibility)}\\
+  {\bf\mu}\ge {\bf0} & \mbox{(dual feasibility)}\\
+  \mu_j x_j=0,\;\;\;\;(j=1,\cdots,N)\;\;\;\;\mbox{or}\;\;\;
+  {\bf XM1}={\bf0} & \mbox{(complementarity)}
+  \end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21347#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img1036.svg"
+ ALT="\begin{displaymath}\left\{
+\begin{array}{ll}
+\bigtriangledown_{\bf x} L({\bf x},...
+...
+{\bf XM1}={\bf0} &amp; \mbox{(complementarity)}
+\end{array}\right.\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">239</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-where <tex2html_verbatim_mark>#math1117#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21349#</SPAN>, <tex2html_verbatim_mark>#math1118#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21351#</SPAN>,
-and <tex2html_verbatim_mark>#math1119#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21353#</SPAN> is the Jacobian matrix of <tex2html_verbatim_mark>#math1120#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21355#</SPAN>:
+where <!-- MATH
+ ${\bf X}=diag(x_1,\cdots,x_N)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1037.svg"
+ ALT="${\bf X}=diag(x_1,\cdots,x_N)$"></SPAN>, <!-- MATH
+ ${\bf M}=diag(\mu_1,\cdots,\mu_N)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1038.svg"
+ ALT="${\bf M}=diag(\mu_1,\cdots,\mu_N)$"></SPAN>,
+and <!-- MATH
+ ${\bf J}_{\bf f}({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1039.svg"
+ ALT="${\bf J}_{\bf f}({\bf x})$"></SPAN> is the Jacobian matrix of <!-- MATH
+ ${\bf h}({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1040.svg"
+ ALT="${\bf h}({\bf x})$"></SPAN>:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1121#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf X}=\left[\begin{array}{ccc}x_1&\cdots&0\\
+    \vdots&\ddots&\vdots\\0&\cdots&x_n \end{array}\right]_{N\times N},
+  \;\;\;\;\;
+{\bf M}=\left[\begin{array}{ccc}\mu_1&\cdots&0\\
+    \vdots&\ddots&\vdots\\0&\cdots&\mu_N
+    \end{array}\right]_{N\times N},
+  \;\;\;\;\;
+{\bf J}_{\bf h}({\bf x})=\left[\begin{array}{ccc}
+      \frac{\partial h_1}{\partial x_1}&\cdots&
+      \frac{\partial h_1}{\partial x_n}\\
+      \vdots & \ddots & \vdots\\
+      \frac{\partial h_m}{\partial x_1}&\cdots&
+      \frac{\partial h_m}{\partial x_n}\end{array}\right]_{M\times N}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21357#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 11.15ex; vertical-align: -5.13ex; " SRC="img1041.svg"
+ ALT="$\displaystyle {\bf X}=\left[\begin{array}{ccc}x_1&amp;\cdots&amp;0\\
+\vdots&amp;\ddots&amp;\vd...
+...al x_1}&amp;\cdots&amp;
+\frac{\partial h_m}{\partial x_n}\end{array}\right]_{M\times N}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">240</SPAN>)</TD></TR>
 </TABLE></DIV>
@@ -68,32 +242,65 @@ and <tex2html_verbatim_mark>#math1119#<SPAN CLASS="MATH"><tex2html_image_mark>#t
 To simplify the problem, the non-negativity constraints can be removed 
 by introducing an indicator function:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1122#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+I(x)=\left\{\begin{array}{ll}0 & x\ge 0\\\infty& x<0\end{array}
+\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21359#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img1042.svg"
+ ALT="$\displaystyle I(x)=\left\{\begin{array}{ll}0 &amp; x\ge 0\\ \infty&amp; x&lt;0\end{array}\right.$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">241</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 which, when used as a cost function, penalizes any violation of the 
-non-negativity constraint <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21361#</SPAN>. Now the optimization problem can
+non-negativity constraint <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.43ex; " SRC="img1043.svg"
+ ALT="$x\ge 0$"></SPAN>. Now the optimization problem can
 be reformulated as shown below without the non-negative constants 
-<tex2html_verbatim_mark>#math1123#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21363#</SPAN>:
+<!-- MATH
+ ${\bf x}\ge{\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.43ex; " SRC="img853.svg"
+ ALT="${\bf x}\ge{\bf0}$"></SPAN>:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1124#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{ll}
+  \mbox{minimize} & f({\bf x})+\sum_{i=1}^N I(x_i)\\
+  \mbox{subject to} & {\bf h}({\bf x})={\bf0}
+  \end{array}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21365#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img1044.svg"
+ ALT="\begin{displaymath}\begin{array}{ll}
+\mbox{minimize} &amp; f({\bf x})+\sum_{i=1}^N I(x_i)\\
+\mbox{subject to} &amp; {\bf h}({\bf x})={\bf0}
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">242</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 However, as the indicator function is not smooth and therefore not
-differentiable, it is approximated by the <#5733#><EM>logarithmic barrier function</EM><#5733#> 
-which approaches <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21367#</SPAN> when the parameter <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21369#</SPAN> approaches infinity:
+differentiable, it is approximated by the <EM>logarithmic barrier function</EM> 
+which approaches <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1045.svg"
+ ALT="$I(x)$"></SPAN> when the parameter <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.21ex; " SRC="img1046.svg"
+ ALT="$t&gt;0$"></SPAN> approaches infinity:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1125#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+-\frac{1}{t}\ln(x)\;\;\stackrel{t\rightarrow\infty}{\Longrightarrow}\;\;I(x)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21371#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img1047.svg"
+ ALT="$\displaystyle -\frac{1}{t}\ln(x)\;\;\stackrel{t\rightarrow\infty}{\Longrightarrow}\;\;I(x)$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">243</SPAN>)</TD></TR>
 </TABLE></DIV>
@@ -106,36 +313,80 @@ which approaches <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21
 <P>
 Now the optimization problem can be written as:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1126#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{ll}
+  \mbox{minimize} & f({\bf x})-\frac{1}{t}\sum_{i=1}^N\ln x_i\\
+  \mbox{subject to} & {\bf h}({\bf x})={\bf0}
+  \end{array}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21373#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img1048.svg"
+ ALT="\begin{displaymath}\begin{array}{ll}
+\mbox{minimize} &amp; f({\bf x})-\frac{1}{t}\su...
+... x_i\\
+\mbox{subject to} &amp; {\bf h}({\bf x})={\bf0}
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">244</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 The Lagrangian is:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1127#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+L({\bf x},{\bf\lambda},{\bf\mu})=f({\bf x})
+  +{\bf\lambda}^T{\bf h}({\bf x})-\frac{1}{t}\sum_{j=1}^N\ln x_j\\
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21375#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.90ex; vertical-align: -3.40ex; " SRC="img1049.svg"
+ ALT="$\displaystyle L({\bf x},{\bf\lambda},{\bf\mu})=f({\bf x})
++{\bf\lambda}^T{\bf h}({\bf x})-\frac{1}{t}\sum_{j=1}^N\ln x_j\\ $"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">245</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 and its gradient is:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1128#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\bigtriangledown_{\bf x} L({\bf x},{\bf\lambda},{\bf\mu})
+  ={\bf g}_f({\bf x})+{\bf J}_{\bf h}^T({\bf x}){\bf\lambda}
+  -\frac{1}{t}{\bf X}^{-1}{\bf 1}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21377#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img1050.svg"
+ ALT="$\displaystyle \bigtriangledown_{\bf x} L({\bf x},{\bf\lambda},{\bf\mu})
+={\bf g...
+...{\bf x})+{\bf J}_{\bf h}^T({\bf x}){\bf\lambda}
+-\frac{1}{t}{\bf X}^{-1}{\bf 1}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">246</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 We define
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1129#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf\mu}=\frac{\bf x}{t}=\frac{1}{t}{\bf X}^{-1}{\bf 1},
+  \;\;\;\;\mbox{i.e.}\;\;\;
+  {\bf X\mu}={\bf XM 1}=\frac{\bf 1}{t}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21379#<#1#>i.e.<#1#><tex2html_image_mark>#tex2html_wrap_indisplay21380#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img1051.svg"
+ ALT="$\displaystyle {\bf\mu}=\frac{\bf x}{t}=\frac{1}{t}{\bf X}^{-1}{\bf 1},
+\;\;\;\;$">i.e.<IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img1052.svg"
+ ALT="$\displaystyle \;\;\;
+{\bf X\mu}={\bf XM 1}=\frac{\bf 1}{t}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">247</SPAN>)</TD></TR>
 </TABLE></DIV>
@@ -143,45 +394,114 @@ We define
 and combine this equation with the KKT conditions of the new 
 optimization problem to get
 <P></P>
-<DIV CLASS="mathdisplay"><A ID="KKTconditionsIP"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math1130#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><A ID="KKTconditionsIP"></A><!-- MATH
+ \begin{equation}
+\left\{
+  \begin{array}{ll}
+    {\bf g}_f({\bf x})+{\bf J}_{\bf h}^T({\bf x}){\bf\lambda}-\mu={\bf0} &
+    \mbox{(stationarity)}\\
+         {\bf h}({\bf x})={\bf0} & \mbox{(primal feasibility)}\\
+         {\bf XM1}-{\bf 1}/t={\bf0} & \mbox{(complementarity)}
+  \end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21382#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img1053.svg"
+ ALT="\begin{displaymath}\left\{
+\begin{array}{ll}
+{\bf g}_f({\bf x})+{\bf J}_{\bf h}^...
+...-{\bf 1}/t={\bf0} &amp; \mbox{(complementarity)}
+\end{array}\right.\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">248</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-The third condition is actually from the definition of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21384#</SPAN> 
+The third condition is actually from the definition of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img724.svg"
+ ALT="${\bf\mu}$"></SPAN> 
 given above, but here it is labeled as complementarity, so that 
 these conditions can be compared with the KKT conditions of the 
 original problem. We see that the two sets of KKT conditions are
 similar to each other, with the following differences:
 
 <UL>
-<LI>The non-negativity <tex2html_verbatim_mark>#math1131#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21386#</SPAN> in the primal feasibility
+<LI>The non-negativity <!-- MATH
+ ${\bf x}\ge{\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.43ex; " SRC="img853.svg"
+ ALT="${\bf x}\ge{\bf0}$"></SPAN> in the primal feasibility
   of the original KKT is dropped;
 </LI>
-<LI>Consequently the inequality <tex2html_verbatim_mark>#math1132#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21388#</SPAN> in the dual 
+<LI>Consequently the inequality <!-- MATH
+ ${\bf\mu}\ge{\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img1054.svg"
+ ALT="${\bf\mu}\ge{\bf0}$"></SPAN> in the dual 
   feasibility of the original KKT conditions is also dropped;
 </LI>
-<LI>There is an extra term <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21390#</SPAN> in complementarity which
-  will vanish when <tex2html_verbatim_mark>#math1133#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21392#</SPAN>.
+<LI>There is an extra term <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1055.svg"
+ ALT="${\bf 1}/t$"></SPAN> in complementarity which
+  will vanish when <!-- MATH
+ $t\rightarrow\infty$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1056.svg"
+ ALT="$t\rightarrow\infty$"></SPAN>.
 </LI>
 </UL>
 
 <P>
-The optimal solution that minimizes the objective function <tex2html_verbatim_mark>#math1134#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21394#</SPAN>
+The optimal solution that minimizes the objective function <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN>
 can be found by solving the simultaneous equations in the modified
 KKT conditions (with no inequalities) given above. To do so, we first
 express the equations in the KKT conditions above as a nonlinear
-equation system <tex2html_verbatim_mark>#math1135#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21396#</SPAN>, and 
-find its Jacobian matrix <tex2html_verbatim_mark>#math1136#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21398#</SPAN> composed of the partial 
-derivatives of the function <tex2html_verbatim_mark>#math1137#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21400#</SPAN> 
-with respect to each of the three variables <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21402#</SPAN>, <tex2html_verbatim_mark>#math1138#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21404#</SPAN>, 
-and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21406#</SPAN>:
+equation system <!-- MATH
+ ${\bf F}({\bf x},{\bf\lambda},{\bf\mu})={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1057.svg"
+ ALT="${\bf F}({\bf x},{\bf\lambda},{\bf\mu})={\bf0}$"></SPAN>, and 
+find its Jacobian matrix <!-- MATH
+ ${\bf J}_{\bf F}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img1058.svg"
+ ALT="${\bf J}_{\bf F}$"></SPAN> composed of the partial 
+derivatives of the function <!-- MATH
+ ${\bf F}({\bf x},{\bf\lambda},{\bf\mu})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1059.svg"
+ ALT="${\bf F}({\bf x},{\bf\lambda},{\bf\mu})$"></SPAN> 
+with respect to each of the three variables <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="${\bf x}$"></SPAN>, <!-- MATH
+ ${\bf\lambda}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img731.svg"
+ ALT="${\bf\lambda}$"></SPAN>, 
+and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img724.svg"
+ ALT="${\bf\mu}$"></SPAN>:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1139#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf F}({\bf x},{\bf\lambda},{\bf\mu})=\left[ \begin{array}{c}
+      {\bf g}_f({\bf x})+{\bf J}_{\bf h}^T({\bf x}){\bf\lambda}-\mu\\
+      {\bf h}({\bf x})\\{\bf XM1}-{\bf 1}/t \end{array}\right],
+  \;\;\;\;\;\;
+  {\bf J}_{\bf F}=\left[\begin{array}{ccc}
+      {\bf W}({\bf x}) & {\bf J}^T_{\bf h}({\bf x}) & -{\bf I}\\
+      {\bf J}_{\bf h}({\bf x}) & {\bf0} & {\bf0} \\
+      {\bf M} & {\bf0} & {\bf X}\end{array}\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21408#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img1060.svg"
+ ALT="$\displaystyle {\bf F}({\bf x},{\bf\lambda},{\bf\mu})=\left[ \begin{array}{c}
+{\...
+... h}({\bf x}) &amp; {\bf0} &amp; {\bf0} \\
+{\bf M} &amp; {\bf0} &amp; {\bf X}\end{array}\right]$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">249</SPAN>)</TD></TR>
 </TABLE></DIV>
@@ -189,128 +509,305 @@ and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21406#</SPAN>:
 where 
 <BR>
 <DIV CLASS="mathdisplay">
-<tex2html_verbatim_mark>#math1140#
+<!-- MATH
+ \begin{eqnarray}
+{\bf W}({\bf x})&=&\bigtriangledown_{\bf x}
+  \left[{\bf g}_f({\bf x})+{\bf J}_{\bf h}^T({\bf x}){\bf\lambda}
+  -{\bf\mu}\right]
+  \nonumber\\
+  &=&\bigtriangledown_{\bf x} {\bf g}_f({\bf x})
+  -\bigtriangledown_{\bf x} \left[\sum_{i=1}^M\lambda_i\frac{\partial h_i}{\partial x_1},
+    \cdots,\sum_{i=1}^M\lambda_i\frac{\partial h_i}{\partial x_N}\right]^T
+  ={\bf H}_f({\bf x})-\sum_{i=1}^M\lambda_i{\bf H}_{h_i}({\bf x})
+\end{eqnarray}
+ -->
 <TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
-<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><tex2html_image_mark>#tex2html_wrap_indisplay21411#</TD>
-<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay21413#</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay21415#</TD>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1061.svg"
+ ALT="$\displaystyle {\bf W}({\bf x})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img104.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.25ex; vertical-align: -0.93ex; " SRC="img1062.svg"
+ ALT="$\displaystyle \bigtriangledown_{\bf x}
+\left[{\bf g}_f({\bf x})+{\bf J}_{\bf h}^T({\bf x}){\bf\lambda}
+-{\bf\mu}\right]$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 &nbsp;</TD></TR>
 <TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
-<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay21417#</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay21419#</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img104.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 8.13ex; vertical-align: -3.09ex; " SRC="img1063.svg"
+ ALT="$\displaystyle \bigtriangledown_{\bf x} {\bf g}_f({\bf x})
+-\bigtriangledown_{\b...
+...l x_N}\right]^T
+={\bf H}_f({\bf x})-\sum_{i=1}^M\lambda_i{\bf H}_{h_i}({\bf x})$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 (<SPAN CLASS="arabic">250</SPAN>)</TD></TR>
 </TABLE></DIV>
 <BR CLEAR="ALL">
 
-is symmetric as the Hessian matrices <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21421#</SPAN> and <tex2html_verbatim_mark>#math1141#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21423#</SPAN> are symmetric.
+is symmetric as the Hessian matrices <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img28.svg"
+ ALT="${\bf H}_f$"></SPAN> and <!-- MATH
+ ${\bf H}_{h_i},\;
+(i=1,\cdots,M)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1064.svg"
+ ALT="${\bf H}_{h_i},\;
+(i=1,\cdots,M)$"></SPAN> are symmetric.
 
 <P>
 We can now use the 
 <A ID="tex2html24"
   HREF="../ch2/node7.html">Newton-Raphson method</A>
 to find the solution of the nonlinear equation 
-<tex2html_verbatim_mark>#math1142#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21425#</SPAN> iteratively:
+<!-- MATH
+ ${\bf F}({\bf x},{\bf\lambda},{\bf\mu})={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1057.svg"
+ ALT="${\bf F}({\bf x},{\bf\lambda},{\bf\mu})={\bf0}$"></SPAN> iteratively:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1143#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left[\begin{array}{c}{\bf x}_{n+1}\\{\bf\lambda}_{n+1}\\
+      {\bf\mu}_{n+1}\end{array}\right]
+  =\left[\begin{array}{c}{\bf x}_n\\{\bf\lambda}_n\\
+      {\bf\mu}_n\end{array}\right]
+  +\alpha\left[\begin{array}{c}\delta{\bf x}_n\\\delta{\bf\lambda}_n\\
+      \delta{\bf\mu}_n\end{array}\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21427#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img1065.svg"
+ ALT="$\displaystyle \left[\begin{array}{c}{\bf x}_{n+1}\\ {\bf\lambda}_{n+1}\\
+{\bf\...
+...{c}\delta{\bf x}_n\\ \delta{\bf\lambda}_n\\
+\delta{\bf\mu}_n\end{array}\right]$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">251</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-where <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21429#</SPAN> is a parameter that controls the step size and 
-<tex2html_verbatim_mark>#math1144#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21431#</SPAN> is the
-search direction (<#5946#><EM>Newton direction</EM><#5946#>), which can be found by 
+where <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img467.svg"
+ ALT="$\alpha$"></SPAN> is a parameter that controls the step size and 
+<!-- MATH
+ $[\delta{\bf x}_n,\delta{\bf\lambda}_n,\delta{\bf\mu}_n]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1066.svg"
+ ALT="$[\delta{\bf x}_n,\delta{\bf\lambda}_n,\delta{\bf\mu}_n]^T$"></SPAN> is the
+search direction (<EM>Newton direction</EM>), which can be found by 
 solving the following equation:
 <BR>
 <DIV CLASS="mathdisplay">
-<tex2html_verbatim_mark>#math1145#
+<!-- MATH
+ \begin{eqnarray}
+&&{\bf J}_{\bf F}({\bf x}_n,{\bf\lambda}_n,{\bf\mu}_n)
+  \left[\begin{array}{c}
+      \delta{\bf x}_n\\\delta{\bf\lambda}_n\\\delta{\bf\mu}_n
+    \end{array}\right]
+  =\left[\begin{array}{ccc}
+      {\bf W}({\bf x}_n) & {\bf J}^T_{\bf h}({\bf x}_n) & -{\bf I}\\
+      {\bf J}_{\bf h}({\bf x}_n) & {\bf0} & {\bf0} \\
+      {\bf M}_n & {\bf0} & {\bf X}_n\end{array}\right]
+  \left[\begin{array}{c}
+      \delta{\bf x}_n\\\delta{\bf\lambda}_n\\\delta{\bf\mu}_n
+    \end{array}\right]
+  \nonumber\\
+  &=&-{\bf F}({\bf x}_n,{\bf\lambda}_n,{\bf\mu}_n)
+  =-\left[\begin{array}{c}
+      {\bf g}_f({\bf x}_n)+{\bf J}_{\bf h}^T({\bf x}_n){\bf\lambda}_n-\mu_n\\
+      {\bf h}({\bf x}_n)\\{\bf X_nM_n1}-{\bf 1}/t
+    \end{array}\right]
+\end{eqnarray}
+ -->
 <TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
 <TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
 <TD>&nbsp;</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay21434#</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img1067.svg"
+ ALT="$\displaystyle {\bf J}_{\bf F}({\bf x}_n,{\bf\lambda}_n,{\bf\mu}_n)
+\left[\begin...
+...c}
+\delta{\bf x}_n\\ \delta{\bf\lambda}_n\\ \delta{\bf\mu}_n
+\end{array}\right]$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 &nbsp;</TD></TR>
 <TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
-<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay21436#</TD>
-<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay21438#</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img104.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img1068.svg"
+ ALT="$\displaystyle -{\bf F}({\bf x}_n,{\bf\lambda}_n,{\bf\mu}_n)
+=-\left[\begin{arra...
+...bda}_n-\mu_n\\
+{\bf h}({\bf x}_n)\\ {\bf X_nM_n1}-{\bf 1}/t
+\end{array}\right]$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 (<SPAN CLASS="arabic">252</SPAN>)</TD></TR>
 </TABLE></DIV>
 <BR CLEAR="ALL">
 
 To get the initial values for the iteration, we first find any point 
-inside the feasible region <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21440#</SPAN> and then <tex2html_verbatim_mark>#math1146#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21442#</SPAN>,
-based on which we further find <tex2html_verbatim_mark>#math1147#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21444#</SPAN> by solving the first 
-equation in the KKT conditions in Eq. (<A HREF=<tex2html_cr_mark>#KKTconditionsIP#6004><tex2html_cr_mark></A>).
+inside the feasible region <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img125.svg"
+ ALT="${\bf x}_0$"></SPAN> and then <!-- MATH
+ ${\bf\mu}_0={\bf x}_0/t$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1069.svg"
+ ALT="${\bf\mu}_0={\bf x}_0/t$"></SPAN>,
+based on which we further find <!-- MATH
+ ${\bf\lambda}_0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img1070.svg"
+ ALT="${\bf\lambda}_0$"></SPAN> by solving the first 
+equation in the KKT conditions in Eq. (<A HREF="#KKTconditionsIP">248</A>).
 
 <P>
 Actually this equation system above can be separated into two
-subsystems, which are easier to solve. Pre-multiplying <tex2html_verbatim_mark>#math1148#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21446#</SPAN> 
+subsystems, which are easier to solve. Pre-multiplying <!-- MATH
+ ${\bf X}^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img1071.svg"
+ ALT="${\bf X}^{-1}$"></SPAN> 
 to the third equation:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1149#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf M}\delta{\bf x}+{\bf X}\delta{\bf\mu}=-{\bf XM1}+{\bf 1}/t
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21448#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1072.svg"
+ ALT="$\displaystyle {\bf M}\delta{\bf x}+{\bf X}\delta{\bf\mu}=-{\bf XM1}+{\bf 1}/t$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">253</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 we get
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1150#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf X}^{-1}{\bf M}\delta{\bf x}+\delta{\bf\mu}
+  =-{\bf M1}+{\bf X}^{-1}{\bf 1}/t=-{\bf\mu}+{\bf X}^{-1}{\bf 1}/t
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21450#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img1073.svg"
+ ALT="$\displaystyle {\bf X}^{-1}{\bf M}\delta{\bf x}+\delta{\bf\mu}
+=-{\bf M1}+{\bf X}^{-1}{\bf 1}/t=-{\bf\mu}+{\bf X}^{-1}{\bf 1}/t$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">254</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 Adding this to the first equation:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1151#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf W}\delta{\bf x}+ {\bf J}^T_{\bf h}({\bf x}) \delta{\bf\lambda}
+  -\delta{\bf\mu}=-{\bf g}_f({\bf x})-{\bf J}_{\bf h}^T({\bf x}){\bf\lambda}+{\bf\mu}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21452#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img1074.svg"
+ ALT="$\displaystyle {\bf W}\delta{\bf x}+ {\bf J}^T_{\bf h}({\bf x}) \delta{\bf\lambd...
+...lta{\bf\mu}=-{\bf g}_f({\bf x})-{\bf J}_{\bf h}^T({\bf x}){\bf\lambda}+{\bf\mu}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">255</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 we get
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1152#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+({\bf W}+{\bf X}^{-1}{\bf M})\delta{\bf x}+{\bf J}^T_{\bf h}({\bf x})\delta{\bf\lambda}
+  =-{\bf g}_f({\bf x})-{\bf J}_{\bf h}^T({\bf x}){\bf\lambda}+{\bf X}^{-1}{\bf 1}/t
+  =-\bigtriangledown_{\bf x}L({\bf x},{\bf\lambda},{\bf\mu})
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21454#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img1075.svg"
+ ALT="$\displaystyle ({\bf W}+{\bf X}^{-1}{\bf M})\delta{\bf x}+{\bf J}^T_{\bf h}({\bf...
+...\bf X}^{-1}{\bf 1}/t
+=-\bigtriangledown_{\bf x}L({\bf x},{\bf\lambda},{\bf\mu})$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">256</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 Combining this equation with the second one, we get an equation system 
-of two vector variables <tex2html_verbatim_mark>#math1153#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21456#</SPAN> and <tex2html_verbatim_mark>#math1154#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21458#</SPAN> with
+of two vector variables <!-- MATH
+ $\delta{\bf x}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1076.svg"
+ ALT="$\delta{\bf x}$"></SPAN> and <!-- MATH
+ $\delta{\bf\lambda}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1077.svg"
+ ALT="$\delta{\bf\lambda}$"></SPAN> with
 symmetric coefficient matrix:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1155#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left[\begin{array}{ccc}
+      {\bf W}+{\bf X}^{-1}{\bf M} & {\bf J}^T_{\bf h}({\bf x})\\
+      {\bf J}_{\bf h}({\bf x}) & {\bf0} \end{array}\right]
+  \left[\begin{array}{c}
+      \delta{\bf x}\\\delta{\bf\lambda}\end{array}\right]
+  =-\left[\begin{array}{c}
+      \bigtriangledown_{\bf x}L({\bf x},{\bf\lambda},{\bf\mu})\\
+                      {\bf h}({\bf x})
+    \end{array}\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21460#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img1078.svg"
+ ALT="$\displaystyle \left[\begin{array}{ccc}
+{\bf W}+{\bf X}^{-1}{\bf M} &amp; {\bf J}^T_...
+..._{\bf x}L({\bf x},{\bf\lambda},{\bf\mu})\\
+{\bf h}({\bf x})
+\end{array}\right]$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">257</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-Solving this equation system we get <tex2html_verbatim_mark>#math1156#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21462#</SPAN> and <tex2html_verbatim_mark>#math1157#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21464#</SPAN>,
-and we can further find <tex2html_verbatim_mark>#math1158#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21466#</SPAN> by solving the third equation
+Solving this equation system we get <!-- MATH
+ $\delta{\bf x}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1076.svg"
+ ALT="$\delta{\bf x}$"></SPAN> and <!-- MATH
+ $\delta{\bf\lambda}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1077.svg"
+ ALT="$\delta{\bf\lambda}$"></SPAN>,
+and we can further find <!-- MATH
+ $\delta{\bf\mu}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img1079.svg"
+ ALT="$\delta{\bf\mu}$"></SPAN> by solving the third equation
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1159#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf M}\delta{\bf x}+{\bf X}\delta\mu=-{\bf XM1}-{\bf 1}/t
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21468#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1080.svg"
+ ALT="$\displaystyle {\bf M}\delta{\bf x}+{\bf X}\delta\mu=-{\bf XM1}-{\bf 1}/t$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">258</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 to get
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1160#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\delta{\bf\mu}={\bf X}^{-1}{\bf 1}/t-{\bf X}^{-1}{\bf M}\delta{\bf x}-{\bf\mu}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21470#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img1081.svg"
+ ALT="$\displaystyle \delta{\bf\mu}={\bf X}^{-1}{\bf 1}/t-{\bf X}^{-1}{\bf M}\delta{\bf x}-{\bf\mu}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">259</SPAN>)</TD></TR>
 </TABLE></DIV>
@@ -321,13 +818,28 @@ We now consider the two special cases of linear and quadratic
 programming:
 
 <UL>
-<LI><#6124#><B>Linear programming</B><#6124#>:
+<LI><B>Linear programming</B>:
 
 <P>
 <P></P>
-<DIV CLASS="mathdisplay"><A ID="LPproblem"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math1161#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><A ID="LPproblem"></A><!-- MATH
+ \begin{equation}
+\begin{array}{ll}
+    \mbox{minimize}  &  f({\bf x})={\bf c}^T{\bf x}\\
+    \mbox{subject to:} & {\bf h}({\bf x})={\bf Ax}-{\bf b}={\bf0},
+    \;\;\;\;{\bf x}\ge{\bf0}
+  \end{array}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21472#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img1082.svg"
+ ALT="\begin{displaymath}\begin{array}{ll}
+\mbox{minimize} &amp; f({\bf x})={\bf c}^T{\bf ...
+...)={\bf Ax}-{\bf b}={\bf0},
+\;\;\;\;{\bf x}\ge{\bf0}
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">260</SPAN>)</TD></TR>
 </TABLE></DIV>
@@ -335,110 +847,324 @@ programming:
 We have 
 
 <UL>
-<LI><tex2html_verbatim_mark>#math1162#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21474#</SPAN>
+<LI><!-- MATH
+ ${\bf g}_f({\bf x})=\bigtriangledown_{\bf x}f({\bf x})={\bf c}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img1083.svg"
+ ALT="${\bf g}_f({\bf x})=\bigtriangledown_{\bf x}f({\bf x})={\bf c}$"></SPAN>
 </LI>
-<LI><tex2html_verbatim_mark>#math1163#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21476#</SPAN>.
+<LI><!-- MATH
+ ${\bf J}_{\bf h}({\bf x})=\bigtriangledown_{\bf x}({\bf Ax}-{\bf b})={\bf A}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1084.svg"
+ ALT="${\bf J}_{\bf h}({\bf x})=\bigtriangledown_{\bf x}({\bf Ax}-{\bf b})={\bf A}$"></SPAN>.
 </LI>
-<LI><tex2html_verbatim_mark>#math1164#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21478#</SPAN>.
+<LI><!-- MATH
+ ${\bf W}({\bf x})=\bigtriangledown^2_{\bf x} L({\bf x},{\bf\lambda},{\bf\mu})={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1085.svg"
+ ALT="${\bf W}({\bf x})=\bigtriangledown^2_{\bf x} L({\bf x},{\bf\lambda},{\bf\mu})={\bf0}$"></SPAN>.
 </LI>
 </UL>
 The Lagrangian is
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1165#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+L({\bf x},{\bf\lambda},{\bf\mu})
+  ={\bf c}^T{\bf x}+{\bf\lambda}^T({\bf Ax}-{\bf b})-{\bf\mu}^T{\bf x}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21480#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img1086.svg"
+ ALT="$\displaystyle L({\bf x},{\bf\lambda},{\bf\mu})
+={\bf c}^T{\bf x}+{\bf\lambda}^T({\bf Ax}-{\bf b})-{\bf\mu}^T{\bf x}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">261</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 The KKT conditions are:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1166#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left\{
+  \begin{array}{ll}
+    \bigtriangledown_{\bf x} L({\bf x},{\bf\lambda},{\bf\mu})
+    ={\bf g}_f({\bf x})+{\bf J}_{\bf h}^T({\bf x}){\bf\lambda}-\mu
+    ={\bf c}+{\bf A}^T{\bf\lambda}-{\bf\mu}={\bf0} \nonumber\\
+    {\bf h}({\bf x})={\bf Ax}-{\bf b}={\bf0} \nonumber\\
+    {\bf XM1}-{\bf 1}/t={\bf0}
+    \end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21482#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img1087.svg"
+ ALT="\begin{displaymath}\left\{
+\begin{array}{ll}
+\bigtriangledown_{\bf x} L({\bf x},...
+...bf0} \nonumber\\
+{\bf XM1}-{\bf 1}/t={\bf0}
+\end{array}\right.\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
 The search direction of the iteration can be found by solving the
 this equation system:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1167#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left[\begin{array}{ccc}
+      {\bf0} & {\bf A}^T & -{\bf I}\\
+      {\bf A} & {\bf0} & {\bf0} \\
+      {\bf M} & {\bf0} & {\bf X}\end{array}\right]
+  \left[\begin{array}{c}
+      \delta{\bf x}\\\delta{\bf\lambda}\\\delta{\bf\mu}
+    \end{array}\right]
+  =-\left[\begin{array}{c}
+      {\bf c}+{\bf A}^T{\bf\lambda}-{\bf\mu}\\
+      {\bf Ax}-{\bf b}\\{\bf XM1}-{\bf 1}/t
+    \end{array}\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21484#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img1088.svg"
+ ALT="$\displaystyle \left[\begin{array}{ccc}
+{\bf0} &amp; {\bf A}^T &amp; -{\bf I}\\
+{\bf A}...
+...f\lambda}-{\bf\mu}\\
+{\bf Ax}-{\bf b}\\ {\bf XM1}-{\bf 1}/t
+\end{array}\right]$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">262</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-By solving the equation <tex2html_verbatim_mark>#math1168#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21486#</SPAN>
-we get the initial value <tex2html_verbatim_mark>#math1169#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21488#</SPAN>. The Matlab code for the interior 
+By solving the equation <!-- MATH
+ ${\bf c}+{\bf A}^T{\bf\lambda}-{\bf\mu}={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.57ex; " SRC="img1089.svg"
+ ALT="${\bf c}+{\bf A}^T{\bf\lambda}-{\bf\mu}={\bf0}$"></SPAN>
+we get the initial value <!-- MATH
+ ${\bf\lambda}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img731.svg"
+ ALT="${\bf\lambda}$"></SPAN>. The Matlab code for the interior 
 point method for the LP problem is listed below:
 
 <P>
-<PRE><tex2html_verbatim_mark>verbatim175#</PRE>
+<PRE>
+function x=InterierPointLP(A,c,b,x)
+    % given A,b,c of the LP problem and inital value of x,
+    % find optimal solution x that minimizes c'*x
+    [m n]=size(A);      % m constraints, n variables
+    z1=zeros(n);
+    z2=zeros(m);        % zero matrices in coefficient matrix
+    z3=zeros(m,n);
+    I=eye(n);           % identity matrix in coefficient matrix
+    y=ones(n,1);
+    t=9;                % initinal value for parameter t
+    alpha=0.3;          % small enough not to exceed boundary
+    mu=x./t;
+    lambda=pinv(A')*(mu-c); % initial value of lambda
+    w=[x; lambda; mu];      % initial values for all three 
+    B=[c+A'*lambda-mu; A*x-b; x.*mu-y/t];   
+    p=[x(1) x(2)];      % initial guess of solution
+    while norm(B)&gt;10^(-7)        
+        t=t*9;          % increase parameter t
+        X=diag(x);
+        M=diag(mu);
+        C=[z1 A' -I; A z2 z3; M z3' X];
+        B=[c+A'*lambda-mu; A*x-b; x.*mu-y/t]; 
+        dw=-inv(C)*B;  	% find search direction
+        w=w+alpha*dw;   % step forward
+        x=w(1:n);
+        lambda=w(n+1:n+m);
+        mu=w(n+m+1:length(w));       
+        p=[p; x(1), x(2)];
+    end
+    scatter(p(:,1),p(:,2));  % plot trajectory of solution
+end
+</PRE>
 
 <P>
-<#6243#><B>Example 1:</B><#6243#> A given linear programming problem shown below is first 
+<B>Example 1:</B> A given linear programming problem shown below is first 
 converted into the standard form:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1170#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{ll}
+    \mbox{maximize}    & f(x_1,x_2)=2x_1+3x_2 \\
+    \mbox{subject to:} &
+    \left\{ \begin{array}{l}
+      2x_1+ x_2 \le 18\\6x_1+5x_2 \le 60 \\2x_1+5x_2 \le 40 \\x_1 \ge 0,\;\; x_2\ge 0
+    \end{array}\right.
+  \end{array}
+  \;\;\;\;\;\Longrightarrow\;\;\;\;\;
+  \begin{array}{ll}
+    \mbox{minimize}    & f(x_1,x_2,x_3,x_4,x_5)=-2x_1-3x_2 \\
+    \mbox{subject to:} & 
+    \left\{ \begin{array}{l}
+      2x_1+x_2+x_3=18\\6x_1+5x_2+x_4=60 \\2x_1+5x_2+x_5=40 \\x_i \ge 0,\;\;(i=1,\cdots,5)
+    \end{array}\right.
+  \end{array}
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21490#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img1090.svg"
+ ALT="\begin{displaymath}\begin{array}{ll}
+\mbox{maximize} &amp; f(x_1,x_2)=2x_1+3x_2 \\
+...
+... \\ x_i \ge 0,\;\;(i=1,\cdots,5)
+\end{array}\right.
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
 or in matrix form:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1171#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{ll}
+    \mbox{minimize}    & f({\bf x})={\bf c}^T{\bf x} \\
+    \mbox{subject to}  & {\bf h}({\bf x})={\bf A}{\bf x}-{\bf b}={\bf0},\;\;{\bf x}\ge {\bf0}
+  \end{array}
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21492#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img1091.svg"
+ ALT="\begin{displaymath}\begin{array}{ll}
+\mbox{minimize} &amp; f({\bf x})={\bf c}^T{\bf ...
+...{\bf A}{\bf x}-{\bf b}={\bf0},\;\;{\bf x}\ge {\bf0}
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
 with
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1172#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf x}=\left[\begin{array}{c}x_1\\x_2\\x_3\\x_4\\x_5\end{array}\right],\;\;\;\;
+  {\bf c}=\left[\begin{array}{c}-2\\-3\\0\\0\\0\end{array}\right],\;\;\;\;
+  {\bf A}=\left[\begin{array}{ccccc}2&1&1&0&0\\6&5&0&1&0\\2&5&0&0&1\end{array}\right],\;\;\;\;
+  {\bf b}=\left[\begin{array}{c}18\\60\\40\end{array}\right]
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21494#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 14.17ex; vertical-align: -6.50ex; " SRC="img1092.svg"
+ ALT="$\displaystyle {\bf x}=\left[\begin{array}{c}x_1\\ x_2\\ x_3\\ x_4\\ x_5\end{arr...
+...y}\right],\;\;\;\;
+{\bf b}=\left[\begin{array}{c}18\\ 60\\ 40\end{array}\right]$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
-where <tex2html_verbatim_mark>#math1173#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21496#</SPAN> are the slack variables.
+where <!-- MATH
+ $x_3,\,x_4,\,x_5$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img1093.svg"
+ ALT="$x_3,\,x_4,\,x_5$"></SPAN> are the slack variables.
 
 <P>
 <IMG STYLE="" SRC="figures/InteriorPointLPexample.png"
  ALT="InteriorPointLPexample.png">
 
 <P>
-We choose an initial value <tex2html_verbatim_mark>#math1174#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21498#</SPAN>, and 
-an initial parameter <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21500#</SPAN>, which is scaled up by a factor of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21502#</SPAN> 
-in each iteration. We also used full Newton step size of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21504#</SPAN>. 
+We choose an initial value <!-- MATH
+ ${\bf x}_0=[1,\,2,\,1,\,1,\,1]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1094.svg"
+ ALT="${\bf x}_0=[1,\,2,\,1,\,1,\,1]^T$"></SPAN>, and 
+an initial parameter <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1095.svg"
+ ALT="$t=9$"></SPAN>, which is scaled up by a factor of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1096.svg"
+ ALT="$9$"></SPAN> 
+in each iteration. We also used full Newton step size of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img129.svg"
+ ALT="$\alpha=1$"></SPAN>. 
 After 8 iterations, the algorithm converged to the optimal solution 
-<tex2html_verbatim_mark>#math1175#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21506#</SPAN> corresponding to the maximum function value 
-<tex2html_verbatim_mark>#math1176#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21508#</SPAN>:
+<!-- MATH
+ ${\bf x}^*=[5,\;6]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1097.svg"
+ ALT="${\bf x}^*=[5,\;6]^T$"></SPAN> corresponding to the maximum function value 
+<!-- MATH
+ $f({\bf x}^*)=2x_1+3x_2=28$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1098.svg"
+ ALT="$f({\bf x}^*)=2x_1+3x_2=28$"></SPAN>:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1177#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{c|| c c| c | c}\hline
+    & (x_1 & x_2) & f({\bf x}) & \mbox{error} \\\hline
+    1 & (1.000000e+00 & 2.000000e+00) &  -8.000000	& 52.413951 \\
+    2 & (4.654514e+00 & 6.346354e+00) & -28.348090	& 3.080204 \\
+    3 & (5.040828e+00 & 5.946973e+00) & -27.922575	& 0.213509 \\
+    4 & (4.997282e+00 & 6.001764e+00) & -27.999856	& 0.004262 \\
+    5 & (4.999906e+00 & 5.999962e+00) & -27.999697	& 0.000303 \\
+    6 & (4.999989e+00 & 5.999996e+00) & -27.999966	& 0.000034 \\
+    7 & (4.999999e+00 & 6.000000e+00) & -27.999996	& 0.000004 \\
+    8 & (5.000000e+00 & 6.000000e+00) & -28.000000	& 0.000000 \\\hline
+  \end{array}
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21510#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img1099.svg"
+ ALT="\begin{displaymath}\begin{array}{c\vert\vert c c\vert c \vert c}\hline
+&amp; (x_1 &amp; ...
+...0 &amp; 6.000000e+00) &amp; -28.000000 &amp; 0.000000 \\ \hline
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
 At the end of the iteration, we also get the values of the slack 
-variables: <tex2html_verbatim_mark>#math1178#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21512#</SPAN>.
+variables: <!-- MATH
+ $x_3=2,\;x_4=x_5=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img1100.svg"
+ ALT="$x_3=2,\;x_4=x_5=0$"></SPAN>.
 
 <P>
 </LI>
-<LI><#6309#><B>Quadratic programming:</B><#6309#>
+<LI><B>Quadratic programming:</B>
 
 <P>
 <P></P>
-<DIV CLASS="mathdisplay"><A ID="QPproblem"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math1179#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><A ID="QPproblem"></A><!-- MATH
+ \begin{equation}
+\begin{array}{ll}
+    \mbox{minimize}    &
+    f({\bf x})=\frac{1}{2}{\bf x}^T{\bf Q}{\bf x}+{\bf c}^T{\bf x}\\
+    \mbox{subject to:} & {\bf h}({\bf x})={\bf A}{\bf x}-{\bf b}={\bf0},
+    \;\;\;\;{\bf x}\ge{\bf0}
+  \end{array}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21514#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img1101.svg"
+ ALT="\begin{displaymath}\begin{array}{ll}
+\mbox{minimize} &amp;
+f({\bf x})=\frac{1}{2}{\b...
+... A}{\bf x}-{\bf b}={\bf0},
+\;\;\;\;{\bf x}\ge{\bf0}
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">263</SPAN>)</TD></TR>
 </TABLE></DIV>
@@ -446,36 +1172,100 @@ variables: <tex2html_verbatim_mark>#math1178#<SPAN CLASS="MATH"><tex2html_image_
 We have
 
 <UL>
-<LI><tex2html_verbatim_mark>#math1180#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21516#</SPAN>
+<LI><!-- MATH
+ ${\bf g}_f({\bf x})=\bigtriangledown_{\bf x}f({\bf x})={\bf Qx}+{\bf c}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img1102.svg"
+ ALT="${\bf g}_f({\bf x})=\bigtriangledown_{\bf x}f({\bf x})={\bf Qx}+{\bf c}$"></SPAN>
 </LI>
-<LI><tex2html_verbatim_mark>#math1181#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21518#</SPAN>.
+<LI><!-- MATH
+ ${\bf J}_{\bf h}({\bf x})=\bigtriangledown_{\bf x}({\bf Ax}-{\bf b})={\bf A}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1084.svg"
+ ALT="${\bf J}_{\bf h}({\bf x})=\bigtriangledown_{\bf x}({\bf Ax}-{\bf b})={\bf A}$"></SPAN>.
 </LI>
-<LI><tex2html_verbatim_mark>#math1182#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21520#</SPAN>.
+<LI><!-- MATH
+ ${\bf W}({\bf x})=\bigtriangledown^2_{\bf x} L({\bf x},{\bf\lambda},{\bf\mu})={\bf Q}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1103.svg"
+ ALT="${\bf W}({\bf x})=\bigtriangledown^2_{\bf x} L({\bf x},{\bf\lambda},{\bf\mu})={\bf Q}$"></SPAN>.
 </LI>
 </UL>
 The Lagrangian is 
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1183#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+L({\bf x},{\bf\lambda},{\bf\mu})
+  =\frac{1}{2}{\bf x}^T{\bf Qx}+{\bf c}^T{\bf x}
+  +{\bf\lambda}^T({\bf Ax}-{\bf b})-{\bf\mu}^T{\bf x}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21522#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img1104.svg"
+ ALT="$\displaystyle L({\bf x},{\bf\lambda},{\bf\mu})
+=\frac{1}{2}{\bf x}^T{\bf Qx}+{\bf c}^T{\bf x}
++{\bf\lambda}^T({\bf Ax}-{\bf b})-{\bf\mu}^T{\bf x}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">264</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 The KKT conditions are:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1184#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left\{
+  \begin{array}{ll}
+    \bigtriangledown_{\bf x} L({\bf x},{\bf\lambda},{\bf\mu})
+    ={\bf g}_f({\bf x})+{\bf J}_{\bf h}^T({\bf x}){\bf\lambda}-\mu
+    ={\bf Qx}+{\bf c}+{\bf A}^T{\bf\lambda}-{\bf\mu}={\bf0}
+    \nonumber\\
+        {\bf h}({\bf x})={\bf Ax}-{\bf b}={\bf0} \nonumber\\
+        {\bf XM1}-{\bf 1}/t={\bf0}
+    \end{array}
+  \right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21524#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img1087.svg"
+ ALT="\begin{displaymath}\left\{
+\begin{array}{ll}
+\bigtriangledown_{\bf x} L({\bf x},...
+...bf0} \nonumber\\
+{\bf XM1}-{\bf 1}/t={\bf0}
+\end{array}\right.\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
 The equation system for the Newton-Raphson method is:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1185#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left[\begin{array}{ccc}
+      {\bf Q} & {\bf A}^T & -{\bf I}\\
+      {\bf A} & {\bf0} & {\bf0} \\
+      {\bf M} & {\bf0} & {\bf X}\end{array}\right]
+  \left[\begin{array}{c}
+      \delta{\bf x}\\\delta{\bf\lambda}\\\delta{\bf\mu}
+    \end{array}\right]
+  =-\left[\begin{array}{c}
+      {\bf Qx}+{\bf c}+{\bf A}^T{\bf\lambda}-{\bf\mu}\\
+      {\bf Ax}-{\bf b}\\{\bf XM1}-{\bf 1}/t
+    \end{array}\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21526#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img1105.svg"
+ ALT="$\displaystyle \left[\begin{array}{ccc}
+{\bf Q} &amp; {\bf A}^T &amp; -{\bf I}\\
+{\bf A...
+...f\lambda}-{\bf\mu}\\
+{\bf Ax}-{\bf b}\\ {\bf XM1}-{\bf 1}/t
+\end{array}\right]$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">265</SPAN>)</TD></TR>
 </TABLE></DIV>
@@ -490,44 +1280,119 @@ The Matlab code for the interior point method for the QP problem is
 listed below:
 
 <P>
-<PRE><tex2html_verbatim_mark>verbatim176#</PRE>
+<PRE>
+function [x mu lambda]=InteriorPointQP(Q,A,c,b,x)
+    n=length(c);        % n variables
+    m=length(b);    	% m constraints
+    z2=zeros(m);
+    z3=zeros(m,n);
+    I=eye(n);
+    y=ones(n,1);
+    t=9;                % initinal value for parameter t
+    alpha=0.1;       	% stepsize, small enough not to exceed boundary
+    mu=x./t;
+    lambda=pinv(A')*(mu-c-Q*x); % initial value of lambda
+    w=[x; lambda; mu];   	% initial value
+    B=[Q*x+c+A'*lambda-mu; A*x-b; x.*mu-y/t];             
+    while norm(B)&gt;10^(-7)   
+        t=t*9;        	% increase parameter t
+        X=diag(x);
+        M=diag(mu);       
+        C=[Q A' -I; A z2 z3; M z3' X];
+        B=[Q*x+c+A'*lambda-mu; A*x-b; x.*mu-y/t];             
+        dw=-inv(C)*B;  	% find search direction
+        w=w+alpha*dw;  	% step forward
+        x=w(1:n);
+        lambda=w(n+1:n+m);
+        mu=w(n+m+1:length(w));
+    end
+end
+</PRE>
 
 <P>
-<#6436#><B>Example 2:</B><#6436#> A 2-D quadratic programming problem shown below is to 
+<B>Example 2:</B> A 2-D quadratic programming problem shown below is to 
 minimize four different quadratic functions under the same linear 
 constraints as the liniear programming problem in the previous example.
 In general, the quadratic function is given in the matrix form:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1186#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{ll}
+    \mbox{minimize}    & f({\bf x})=[{\bf x}-{\bf m}]^T{\bf Q}[{\bf x}-{\bf m}]
+    ={\bf x}^T{\bf Q}{\bf x}+{\bf c}^T{\bf x}+d \\
+    \mbox{subject to}  & {\bf h}({\bf x})={\bf A}{\bf x}-{\bf b}={\bf0},\;\;{\bf x}\ge {\bf0}
+  \end{array}
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21528#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img1106.svg"
+ ALT="\begin{displaymath}\begin{array}{ll}
+\mbox{minimize} &amp; f({\bf x})=[{\bf x}-{\bf ...
+...{\bf A}{\bf x}-{\bf b}={\bf0},\;\;{\bf x}\ge {\bf0}
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
 with following four different sets of function parameters:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1187#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf Q}=\left[\begin{array}{rr}4 & -1\\-1 & 4\end{array}\right],\;\;\;
+  \left[\begin{array}{rr}2 &  1\\1 & 2\end{array}\right],\;\;\;
+  \left[\begin{array}{rr}2 &  1\\1 & 2\end{array}\right],\;\;\;
+  \left[\begin{array}{rr}3 & -1\\-1 & 3\end{array}\right]
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21530#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img1107.svg"
+ ALT="$\displaystyle {\bf Q}=\left[\begin{array}{rr}4 &amp; -1\\ -1 &amp; 4\end{array}\right],...
+...d{array}\right],\;\;\;
+\left[\begin{array}{rr}3 &amp; -1\\ -1 &amp; 3\end{array}\right]$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
 
 <P>
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1188#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf m}=\left[\begin{array}{r}4\\10\end{array}\right],\;\;\;
+  \left[\begin{array}{r}9\\5\end{array}\right],\;\;\;
+  \left[\begin{array}{r}7\\2\end{array}\right],\;\;\;
+  \left[\begin{array}{r}-1\\6\end{array}\right]
+  \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21532#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img1108.svg"
+ ALT="$\displaystyle {\bf m}=\left[\begin{array}{r}4\\ 10\end{array}\right],\;\;\;
+\le...
+...r}7\\ 2\end{array}\right],\;\;\;
+\left[\begin{array}{r}-1\\ 6\end{array}\right]$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
 As shown in the four panels in the figure below, the iteration of 
 the interior point algorithm brings the solution from the same 
-initial position at <tex2html_verbatim_mark>#math1189#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21534#</SPAN> to the final position 
-for each of the four objective functions <tex2html_verbatim_mark>#math1190#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21536#</SPAN>, the optimal
+initial position at <!-- MATH
+ ${\bf x}_0=[2,\;1]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1109.svg"
+ ALT="${\bf x}_0=[2,\;1]^T$"></SPAN> to the final position 
+for each of the four objective functions <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN>, the optimal
 solution, which is on the boundary of the feasible region in all 
 cases except the third one, where the optimal solution is inside
 the feasible region, i.e., the optimization problem is not constrained.
@@ -543,3 +1408,26 @@ greater value of the log barrier function close to the boundary.
  ALT="InteriorPointQPexample.png">
 
 <P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node20.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node12.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node18.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node20.html">About this document ...</A>
+<B> Up:</B> <A
+ HREF="node12.html">Constrained Optimization</A>
+<B> Previous:</B> <A
+ HREF="node18.html">Quadratic Programming (QP)</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

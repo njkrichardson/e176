@@ -1,3 +1,47 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Optimization with Inequality Constraints</TITLE>
+<META NAME="description" CONTENT="Optimization with Inequality Constraints">
+<META NAME="keywords" CONTENT="ch3">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch3.css">
+
+<LINK REL="next" HREF="node15.html">
+<LINK REL="previous" HREF="node13.html">
+<LINK REL="next" HREF="node15.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node15.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node12.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node13.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node15.html">Duality and KKT Conditions</A>
+<B> Up:</B> <A
+ HREF="node12.html">Constrained Optimization</A>
+<B> Previous:</B> <A
+ HREF="node13.html">Optimization with Equality Constraints</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
 
 <H2><A ID="SECTION00032000000000000000">
 Optimization with Inequality Constraints</A>
@@ -7,18 +51,52 @@ Optimization with Inequality Constraints</A>
 The optimization problems subject to inequality constraints can
 be generally formulated as:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math824#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{ll}
+    \mbox{maximize/minimize} & f({\bf x})=f(x_1,\cdots,x_N) \\
+    \mbox{subject to:} &
+      g_j({\bf x})=g_j(x_1,\cdots,x_N)\le \;\mbox{or}\;\;
+\ge 0,\;\;\;\;\;\;\;\;(j=1,\cdots n)
+  \end{array}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20187#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img691.svg"
+ ALT="\begin{displaymath}\begin{array}{ll}
+\mbox{maximize/minimize} &amp; f({\bf x})=f(x_1...
+...;\mbox{or}\;\;
+\ge 0,\;\;\;\;\;\;\;\;(j=1,\cdots n)
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">181</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 Again, to visualize the problem we first consider an example with 
-<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20189#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20191#</SPAN>, as shown in the figure below for the minimization 
-(left) and maximization (right) of <tex2html_verbatim_mark>#math825#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20193#</SPAN> subject to 
-<tex2html_verbatim_mark>#math826#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20195#</SPAN>. The constrained solution <tex2html_verbatim_mark>#math827#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20197#</SPAN> 
-is on the boundary of the feasible region satisfying <tex2html_verbatim_mark>#math828#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20199#</SPAN>, 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img557.svg"
+ ALT="$N=2$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img692.svg"
+ ALT="$n=1$"></SPAN>, as shown in the figure below for the minimization 
+(left) and maximization (right) of <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN> subject to 
+<!-- MATH
+ $g({\bf x}) > 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img693.svg"
+ ALT="$g({\bf x}) &gt; 0$"></SPAN>. The constrained solution <!-- MATH
+ ${\bf x}^*=[x^*_1,\,x^*_2]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img694.svg"
+ ALT="${\bf x}^*=[x^*_1,\,x^*_2]^T$"></SPAN> 
+is on the boundary of the feasible region satisfying <!-- MATH
+ $g(x^*_1,x^*_2)=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img695.svg"
+ ALT="$g(x^*_1,x^*_2)=0$"></SPAN>, 
 while the unconstrained extremum is outside the feasible region.
 
 <P>
@@ -30,33 +108,68 @@ Consider the following two possible cases.
 
 <UL>
 <LI>First, if the unconstrained extremum at which 
-  <tex2html_verbatim_mark>#math829#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20201#</SPAN> is outside the feasible
+  <!-- MATH
+ $\bigtriangledown_{\bf x} f({\bf x})=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img696.svg"
+ ALT="$\bigtriangledown_{\bf x} f({\bf x})=0$"></SPAN> is outside the feasible
   region, i.e., the inequality constraint is active, then the 
-  constrained solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20203#</SPAN> must be
+  constrained solution <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}^*$"></SPAN> must be
   
 <UL>
-<LI>on the boundary of the feasible region, i.e., <tex2html_verbatim_mark>#math830#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20205#</SPAN>,
+<LI>on the boundary of the feasible region, i.e., <!-- MATH
+ $g({\bf x}^*)=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img697.svg"
+ ALT="$g({\bf x}^*)=0$"></SPAN>,
 </LI>
 <LI>different from the unconstrained solution, i.e., 
-    <tex2html_verbatim_mark>#math831#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20207#</SPAN>;
+    <!-- MATH
+ $\bigtriangledown_{\bf x} f({\bf x}^*)\ne{\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img698.svg"
+ ALT="$\bigtriangledown_{\bf x} f({\bf x}^*)\ne{\bf0}$"></SPAN>;
   
 </LI>
 </UL>
   The problem becomes the same as an equality constrained problem 
-  considered before, which requires the objective function <tex2html_verbatim_mark>#math832#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20209#</SPAN>
-  and the constraining function <tex2html_verbatim_mark>#math833#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20211#</SPAN> to have the same tangent
-  at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20213#</SPAN>, or parallel gradients: 
+  considered before, which requires the objective function <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN>
+  and the constraining function <!-- MATH
+ $g({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img699.svg"
+ ALT="$g({\bf x})$"></SPAN> to have the same tangent
+  at <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}^*$"></SPAN>, or parallel gradients: 
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math834#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\bigtriangledown_{\bf x} f({\bf x}^*)=\mu^*\;\bigtriangledown_{\bf x} g({\bf x}^*)
+    \;\;\;\;\mbox{or}\;\;\;\;
+    \bigtriangledown_{\bf x} f({\bf x}^*)-\mu^*\;\bigtriangledown_{\bf x} g({\bf x}^*)=0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20215#<#1#>or<#1#><tex2html_image_mark>#tex2html_wrap_indisplay20216#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img700.svg"
+ ALT="$\displaystyle \bigtriangledown_{\bf x} f({\bf x}^*)=\mu^*\;\bigtriangledown_{\bf x} g({\bf x}^*)
+\;\;\;\;$">or<IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img701.svg"
+ ALT="$\displaystyle \;\;\;\;
+\bigtriangledown_{\bf x} f({\bf x}^*)-\mu^*\;\bigtriangledown_{\bf x} g({\bf x}^*)=0$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">182</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  However, different from before, now we are also concerned with whether
+However, different from before, now we are also concerned with whether
   the two gradients have the same or opposite directions, corresponding to 
-  <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20218#</SPAN> or <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20220#</SPAN>, respectively, as illustrated in the 1-D examples in 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img702.svg"
+ ALT="$\mu&gt;0$"></SPAN> or <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img703.svg"
+ ALT="$\mu&lt;0$"></SPAN>, respectively, as illustrated in the 1-D examples in 
   the figure below:
 
 <P>
@@ -64,26 +177,72 @@ Consider the following two possible cases.
  ALT="KKT1a.png">
 
 <P>
-Depending on whether <tex2html_verbatim_mark>#math835#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20222#</SPAN> is to be maximized or minimized, 
-  and whether the constraint is <tex2html_verbatim_mark>#math836#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20224#</SPAN> or <tex2html_verbatim_mark>#math837#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20226#</SPAN>,
-  there exist four possible cases in terms of the sign of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20228#</SPAN>, as 
+Depending on whether <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN> is to be maximized or minimized, 
+  and whether the constraint is <!-- MATH
+ $g({\bf x})\ge 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img704.svg"
+ ALT="$g({\bf x})\ge 0$"></SPAN> or <!-- MATH
+ $g({\bf x})\le 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img705.svg"
+ ALT="$g({\bf x})\le 0$"></SPAN>,
+  there exist four possible cases in terms of the sign of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img706.svg"
+ ALT="$\mu$"></SPAN>, as 
   summarized in the table below: 
 
 <P>
 <P></P>
-<DIV CLASS="mathdisplay"><A ID="PolarityTable"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math838#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><A ID="PolarityTable"></A><!-- MATH
+ \begin{equation}
+\begin{array}{c||c|c}\hline
+      & g({\bf x})\ge 0 & g({\bf x})\le 0 \\\hline\hline
+      \max\; f({\bf x}) &\bigtriangledown f({\bf x}_1)=\mu\,\bigtriangledown g({\bf x}_1),\;\mu<0 & 
+      \bigtriangledown f({\bf x}_3)=\mu\,\bigtriangledown g({\bf x}_3),\;\mu>0 \\\hline
+      \min\; f({\bf x}) & \bigtriangledown f({\bf x}_2)=\mu\,\bigtriangledown g({\bf x}_2),\;\mu>0 & 
+      \bigtriangledown f({\bf x}_4)=\mu \,\bigtriangledown g({\bf x}_4),\;\mu<0 \\\hline
+    \end{array}
+  
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20230#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img707.svg"
+ ALT="\begin{displaymath}\begin{array}{c\vert\vert c\vert c}\hline
+&amp; g({\bf x})\ge 0 &amp;...
+...u \,\bigtriangledown g({\bf x}_4),\;\mu&lt;0 \\ \hline
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">183</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  These cases can also be summarized in terms of the product of
-  the coeficient <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20232#</SPAN> and the constraining function <tex2html_verbatim_mark>#math839#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20234#</SPAN>:
+These cases can also be summarized in terms of the product of
+  the coeficient <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img706.svg"
+ ALT="$\mu$"></SPAN> and the constraining function <!-- MATH
+ $g({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img699.svg"
+ ALT="$g({\bf x})$"></SPAN>:
   <P></P>
-<DIV CLASS="mathdisplay"><A ID="mugminmax"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math840#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><A ID="mugminmax"></A><!-- MATH
+ \begin{equation}
+\mu\, g({\bf x})\;\left\{\begin{array}{ll}
+    \le 0 & \mbox{for maximization}\\\ge 0 & \mbox{for minimization}
+    \end{array}\right.
+  
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20236#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img708.svg"
+ ALT="$\displaystyle \mu\, g({\bf x})\;\left\{\begin{array}{ll}
+\le 0 &amp; \mbox{for maximization}\\ \ge 0 &amp; \mbox{for minimization}
+\end{array}\right.$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">184</SPAN>)</TD></TR>
 </TABLE></DIV>
@@ -93,79 +252,161 @@ Depending on whether <tex2html_verbatim_mark>#math835#<SPAN CLASS="MATH"><tex2ht
 </LI>
 <LI>Second, if the unconstrained extremum is inside the feasible 
   region, i.e., the inequality constraint is inactive, then the problem 
-  is actually unconstrained and its solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20238#</SPAN> is 
+  is actually unconstrained and its solution <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}^*$"></SPAN> is 
   
 <UL>
 <LI>the same as the unconstrained solution, i.e.,
-    <tex2html_verbatim_mark>#math841#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20240#</SPAN>;
+    <!-- MATH
+ $\bigtriangledown_{\bf x} f({\bf x}^*)={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img709.svg"
+ ALT="$\bigtriangledown_{\bf x} f({\bf x}^*)={\bf0}$"></SPAN>;
 </LI>
 <LI>not on the boundary of the feasible region, i.e., 
-    <tex2html_verbatim_mark>#math842#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20242#</SPAN>;
+    <!-- MATH
+ $g({\bf x}^*)\ne 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img710.svg"
+ ALT="$g({\bf x}^*)\ne 0$"></SPAN>;
   
 </LI>
 </UL>
   This solution can still be found by solving the same equation 
-  <tex2html_verbatim_mark>#math843#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20244#</SPAN> with <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20246#</SPAN>. 
+  <!-- MATH
+ $\bigtriangledown_{\bf x} f({\bf x})
+  =\mu\,\bigtriangledown_{\bf x} g({\bf x})={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img711.svg"
+ ALT="$\bigtriangledown_{\bf x} f({\bf x})
+=\mu\,\bigtriangledown_{\bf x} g({\bf x})={\bf0}$"></SPAN> with <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img712.svg"
+ ALT="$\mu=0$"></SPAN>. 
 </LI>
 </UL>
 
 <P>
-Summarizing the two cases above, we see that <tex2html_verbatim_mark>#math844#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20248#</SPAN> but
-<tex2html_verbatim_mark>#math845#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20250#</SPAN> in the first case, <tex2html_verbatim_mark>#math846#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20252#</SPAN> but <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20254#</SPAN>
+Summarizing the two cases above, we see that <!-- MATH
+ $g({\bf x}^*)=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img697.svg"
+ ALT="$g({\bf x}^*)=0$"></SPAN> but
+<!-- MATH
+ $\mu^*\ne 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img713.svg"
+ ALT="$\mu^*\ne 0$"></SPAN> in the first case, <!-- MATH
+ $g({\bf x}^*)\ne 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img710.svg"
+ ALT="$g({\bf x}^*)\ne 0$"></SPAN> but <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img714.svg"
+ ALT="$\mu^*=0$"></SPAN>
 in the second case, i.e., the following holds in either case:
 <P></P>
-<DIV CLASS="mathdisplay"><A ID="mugeqz"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math847#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><A ID="mugeqz"></A><!-- MATH
+ \begin{equation}
+\mu^*\,g({\bf x}^*)=0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20256#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img715.svg"
+ ALT="$\displaystyle \mu^*\,g({\bf x}^*)=0$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">185</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 
 <P>
-The discussion above can be generalized from 2-D to <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20258#</SPAN> dimensional
-space, in which the optimal solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20260#</SPAN> is to be found 
-to extremize the objective <tex2html_verbatim_mark>#math848#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20262#</SPAN> subject to <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20264#</SPAN> inequality 
-constraints <tex2html_verbatim_mark>#math849#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20266#</SPAN>. To solve this inequality
+The discussion above can be generalized from 2-D to <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img672.svg"
+ ALT="$N&gt;2$"></SPAN> dimensional
+space, in which the optimal solution <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}^*$"></SPAN> is to be found 
+to extremize the objective <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN> subject to <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img548.svg"
+ ALT="$n$"></SPAN> inequality 
+constraints <!-- MATH
+ $g_i({\bf x})=0\;(i=1,\cdots,n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img716.svg"
+ ALT="$g_i({\bf x})=0\;(i=1,\cdots,n)$"></SPAN>. To solve this inequality
 constrained optimization problem, we first construct the Lagrangian:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math850#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+L({\bf x},{\bf\mu})=f({\bf x})-\sum_{i=1}^n\mu_i\,g_i({\bf x})
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20268#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.20ex; vertical-align: -3.09ex; " SRC="img717.svg"
+ ALT="$\displaystyle L({\bf x},{\bf\mu})=f({\bf x})-\sum_{i=1}^n\mu_i\,g_i({\bf x})$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">186</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 Here we note that in some literatures, a plus sign is used in front of 
 the summation of the second term. This is equivalent to our discussion
-here so long as the sign of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20270#</SPAN> indicated in Table <A HREF=<tex2html_cr_mark>#PolarityTable#4117><tex2html_cr_mark></A>
+here so long as the sign of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img706.svg"
+ ALT="$\mu$"></SPAN> indicated in Table <A HREF="#PolarityTable">183</A>
 is negated. 
 
 <P>
 We now set the gradient of the Lagrangian to zero: 
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math851#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\bigtriangledown_{{\bf x},{\bf\mu}} L({\bf x},{\bf\mu})
+  =\bigtriangledown_{{\bf x},{\bf\mu}}\left[f({\bf x})-\sum_{i=1}^n\mu_i\,g_i({\bf x})\right]
+  ={\bf0}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20272#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img718.svg"
+ ALT="$\displaystyle \bigtriangledown_{{\bf x},{\bf\mu}} L({\bf x},{\bf\mu})
+=\bigtria...
+...\bf x},{\bf\mu}}\left[f({\bf x})-\sum_{i=1}^n\mu_i\,g_i({\bf x})\right]
+={\bf0}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">187</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-and get two equation systems of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20274#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20276#</SPAN> equations,
+and get two equation systems of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img54.svg"
+ ALT="$N$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img548.svg"
+ ALT="$n$"></SPAN> equations,
 respectively:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math852#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\bigtriangledown_{\bf x}f({\bf x})
+  =\sum_{i=1}^n\mu_i \bigtriangledown_{\bf x} g_i({\bf x})
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20278#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.20ex; vertical-align: -3.09ex; " SRC="img719.svg"
+ ALT="$\displaystyle \bigtriangledown_{\bf x}f({\bf x})
+=\sum_{i=1}^n\mu_i \bigtriangledown_{\bf x} g_i({\bf x})$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">188</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 and
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math853#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\frac{\partial L({\bf x},{\bf\mu})}{\partial\mu_i}
+  =g_i({\bf x})=0\;\;\;\;(i=1,\cdots,n)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20280#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.57ex; vertical-align: -2.16ex; " SRC="img720.svg"
+ ALT="$\displaystyle \frac{\partial L({\bf x},{\bf\mu})}{\partial\mu_i}
+=g_i({\bf x})=0\;\;\;\;(i=1,\cdots,n)$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">189</SPAN>)</TD></TR>
 </TABLE></DIV>
@@ -176,195 +417,524 @@ The result above for the inequality constrained problems is the same
 as that for the equality constrained problems considered before. However,
 we note that there is an additional requirement regarding the sign of the
 scaling coifficients. For an equality constrained problem, the direction 
-of the gradient <tex2html_verbatim_mark>#math854#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20282#</SPAN> is of no concern, i.e., the
-sign of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20284#</SPAN> is unrestricted; but here for an inequality constrained 
-problem, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20286#</SPAN> is required to be either positive or negative, depending
-on whether the gradients of <tex2html_verbatim_mark>#math855#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20288#</SPAN> and <tex2html_verbatim_mark>#math856#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20290#</SPAN> are in the
-same or opposite directions, as shown in Table <A HREF=<tex2html_cr_mark>#PolarityTable#4146><tex2html_cr_mark></A>. For 
-example, to minimize <tex2html_verbatim_mark>#math857#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20292#</SPAN> subject to <tex2html_verbatim_mark>#math858#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20294#</SPAN>, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20296#</SPAN> 
-needs to be positive, but to maximize <tex2html_verbatim_mark>#math859#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20298#</SPAN> subject to 
-<tex2html_verbatim_mark>#math860#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20300#</SPAN>, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20302#</SPAN> needs to be negative.
+of the gradient <!-- MATH
+ $\bigtriangledown g({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img721.svg"
+ ALT="$\bigtriangledown g({\bf x})$"></SPAN> is of no concern, i.e., the
+sign of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img658.svg"
+ ALT="$\lambda$"></SPAN> is unrestricted; but here for an inequality constrained 
+problem, <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img706.svg"
+ ALT="$\mu$"></SPAN> is required to be either positive or negative, depending
+on whether the gradients of <!-- MATH
+ $f({\bf x}^*)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img3.svg"
+ ALT="$f({\bf x}^*)$"></SPAN> and <!-- MATH
+ $g({\bf x}^*)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img722.svg"
+ ALT="$g({\bf x}^*)$"></SPAN> are in the
+same or opposite directions, as shown in Table <A HREF="#PolarityTable">183</A>. For 
+example, to minimize <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN> subject to <!-- MATH
+ $g({\bf x})\ge 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img704.svg"
+ ALT="$g({\bf x})\ge 0$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img723.svg"
+ ALT="$\mu^*$"></SPAN> 
+needs to be positive, but to maximize <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN> subject to 
+<!-- MATH
+ $g({\bf x})\ge 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img704.svg"
+ ALT="$g({\bf x})\ge 0$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img723.svg"
+ ALT="$\mu^*$"></SPAN> needs to be negative.
 
 <P>
-In principle, we can find the solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20304#</SPAN> that optimizes 
-<tex2html_verbatim_mark>#math861#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20306#</SPAN> while also satisfying the inequality constraints by
-solving the equation system above for <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20308#</SPAN> as well as <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20310#</SPAN>
+In principle, we can find the solution <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}^*$"></SPAN> that optimizes 
+<!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN> while also satisfying the inequality constraints by
+solving the equation system above for <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="${\bf x}$"></SPAN> as well as <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img724.svg"
+ ALT="${\bf\mu}$"></SPAN>
 with the required sign.
 
 <P>
 We can now address the general optimization of an N-D objective function
-<tex2html_verbatim_mark>#math862#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20312#</SPAN> subject to multiple constraints of both equalities and 
+<!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN> subject to multiple constraints of both equalities and 
 inequalities:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math863#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{ll}
+    \mbox{maximize/minimize} & f({\bf x})=f(x_1,\cdots,x_N) \\
+    \mbox{subject to:} &
+    \left\{ \begin{array}{l} 
+      h_i({\bf x})=0,\;\;\;\;\;(i=1,\cdots m)\\
+      g_j({\bf x})\le 0\;\;\mbox{or}\;\;
+      g_j({\bf x})\ge 0,\;\;\;\;\;\;\;\;(j=1,\cdots n)\\
+    \end{array} \right.
+  \end{array}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20314#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img725.svg"
+ ALT="\begin{displaymath}\begin{array}{ll}
+\mbox{maximize/minimize} &amp; f({\bf x})=f(x_1...
+...\;\;\;\;\;\;\;(j=1,\cdots n)\\
+\end{array} \right.
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">190</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-For notational convenience, we represent the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20316#</SPAN> equality and 
+For notational convenience, we represent the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.31ex; " SRC="img644.svg"
+ ALT="$m+n$"></SPAN> equality and 
 inequality constraints in vector form as: 
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math864#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{ll}
+    \mbox{maximize/minimize} & f({\bf x})\\
+    \mbox{subject to:} &
+    \left\{ \begin{array}{l} 
+      {\bf h}({\bf x})={\bf0}\\
+      {\bf g}({\bf x})\le{\bf0}\;\;\mbox{or}\;\;{\bf g}({\bf x})\ge{\bf0}
+    \end{array} \right.
+  \end{array}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20318#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img726.svg"
+ ALT="\begin{displaymath}\begin{array}{ll}
+\mbox{maximize/minimize} &amp; f({\bf x})\\
+\m...
+...r}\;\;{\bf g}({\bf x})\ge{\bf0}
+\end{array} \right.
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">191</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-where <tex2html_verbatim_mark>#math865#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20320#</SPAN> and 
-<tex2html_verbatim_mark>#math866#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20322#</SPAN>.
+where <!-- MATH
+ ${\bf h}({\bf x})=[h_1({\bf x}),\cdots,h_m({\bf x})]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img727.svg"
+ ALT="${\bf h}({\bf x})=[h_1({\bf x}),\cdots,h_m({\bf x})]^T$"></SPAN> and 
+<!-- MATH
+ ${\bf g}({\bf x})=[g_1({\bf x}),\cdots,g_n({\bf x})]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img728.svg"
+ ALT="${\bf g}({\bf x})=[g_1({\bf x}),\cdots,g_n({\bf x})]^T$"></SPAN>.
 
 <P>
 To solve this optimization problem, we first construct the Lagrangian
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math867#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+L({\bf x},{\bf\lambda},{\bf\mu})
+  =f({\bf x})-\sum_{i=1}^m\lambda_i h_i({\bf x})-\sum_{j=1}^n\mu_j g_j({\bf x})
+  =f({\bf x})-{\bf\lambda}^T {\bf h}({\bf x})-{\bf\mu}^T{\bf g}({\bf x})
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20324#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.40ex; " SRC="img729.svg"
+ ALT="$\displaystyle L({\bf x},{\bf\lambda},{\bf\mu})
+=f({\bf x})-\sum_{i=1}^m\lambda_...
+...{\bf x})
+=f({\bf x})-{\bf\lambda}^T {\bf h}({\bf x})-{\bf\mu}^T{\bf g}({\bf x})$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">192</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-where the Lagrange multipliers in <tex2html_verbatim_mark>#math868#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20326#</SPAN> 
-and <tex2html_verbatim_mark>#math869#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20328#</SPAN> are for the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20330#</SPAN> equality and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20332#</SPAN> 
+where the Lagrange multipliers in <!-- MATH
+ ${\bf\lambda}=[\lambda_1,\cdots,\lambda_m]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img680.svg"
+ ALT="${\bf\lambda}=[\lambda_1,\cdots,\lambda_m]^T$"></SPAN> 
+and <!-- MATH
+ ${\bf\mu}=[\mu_1,\cdots,\mu_n]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img730.svg"
+ ALT="${\bf\mu}=[\mu_1,\cdots,\mu_n]^T$"></SPAN> are for the <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img593.svg"
+ ALT="$m$"></SPAN> equality and <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img548.svg"
+ ALT="$n$"></SPAN> 
 non-negative constraints, respectively, and then set its gradient with 
-respect to both <tex2html_verbatim_mark>#math870#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20334#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20336#</SPAN> as well as <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20338#</SPAN> to 
-zero. The solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20340#</SPAN> can then be obtained by solving the 
-resulting equation system, with <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20342#</SPAN> taking the proper sign depending
-on whether <tex2html_verbatim_mark>#math871#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20344#</SPAN> is to be maximized or minimized, and whether the
-inequality constraints are <tex2html_verbatim_mark>#math872#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20346#</SPAN> or <tex2html_verbatim_mark>#math873#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20348#</SPAN>, 
-as specified in Table <A HREF=<tex2html_cr_mark>#PolarityTable#4226><tex2html_cr_mark></A>. Also, the solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20350#</SPAN>
-should satisfy the generalized version of Eq. (<A HREF=<tex2html_cr_mark>#mugeqz#4228><tex2html_cr_mark></A>):
+respect to both <!-- MATH
+ ${\bf\lambda}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img731.svg"
+ ALT="${\bf\lambda}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img724.svg"
+ ALT="${\bf\mu}$"></SPAN> as well as <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="${\bf x}$"></SPAN> to 
+zero. The solution <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}^*$"></SPAN> can then be obtained by solving the 
+resulting equation system, with <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img732.svg"
+ ALT="$\mu_j$"></SPAN> taking the proper sign depending
+on whether <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$f({\bf x})$"></SPAN> is to be maximized or minimized, and whether the
+inequality constraints are <!-- MATH
+ $g_j({\bf x})\le 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img733.svg"
+ ALT="$g_j({\bf x})\le 0$"></SPAN> or <!-- MATH
+ $g_j({\bf x})\ge 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img734.svg"
+ ALT="$g_j({\bf x})\ge 0$"></SPAN>, 
+as specified in Table <A HREF="#PolarityTable">183</A>. Also, the solution <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}^*$"></SPAN>
+should satisfy the generalized version of Eq. (<A HREF="#mugeqz">185</A>):
 <P></P>
-<DIV CLASS="mathdisplay"><A ID="mugeqz1"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math874#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><A ID="mugeqz1"></A><!-- MATH
+ \begin{equation}
+\mu_j\,g_j({\bf x}^*)=0,\;\;\;\;\;\;(j=1,\cdots,n)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20352#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img735.svg"
+ ALT="$\displaystyle \mu_j\,g_j({\bf x}^*)=0,\;\;\;\;\;\;(j=1,\cdots,n)$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">193</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 
 <P>
-<#4233#><B>Example</B><#4233#> 
+<B>Example</B> 
 
 <P>
-Find the extremum of <tex2html_verbatim_mark>#math875#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20354#</SPAN> subject to each of 
-the three different constraints: <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20356#</SPAN>, <tex2html_verbatim_mark>#math876#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20358#</SPAN>, and 
-<tex2html_verbatim_mark>#math877#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20360#</SPAN>. 
+Find the extremum of <!-- MATH
+ $f(x_1,x_2)=x^2_1+x^2_2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img736.svg"
+ ALT="$f(x_1,x_2)=x^2_1+x^2_2$"></SPAN> subject to each of 
+the three different constraints: <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img737.svg"
+ ALT="$x_1+x_2=1$"></SPAN>, <!-- MATH
+ $x_1+x_2\le 1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img738.svg"
+ ALT="$x_1+x_2\le 1$"></SPAN>, and 
+<!-- MATH
+ $x_1+x_2\ge 1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img739.svg"
+ ALT="$x_1+x_2\ge 1$"></SPAN>. 
 
 <UL>
-<LI><tex2html_verbatim_mark>#math878#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20362#</SPAN>:
+<LI><!-- MATH
+ $h(x_1,x_2)=x_1+x_2-1=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img740.svg"
+ ALT="$h(x_1,x_2)=x_1+x_2-1=0$"></SPAN>:
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math879#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{ll}
+      \mbox{minimize/maximize:}\;\;\;\;\;\;f(x_1,x_2)=x^2_1+x^2_2\\
+      \mbox{subject to:}\;\;\;\;\;\;h(x_1,x_2)=x_1+x_2-1=0\\
+    \end{array}
+    \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20364#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img741.svg"
+ ALT="\begin{displaymath}\begin{array}{ll}
+\mbox{minimize/maximize:}\;\;\;\;\;\;f(x_1,...
+...x{subject to:}\;\;\;\;\;\;h(x_1,x_2)=x_1+x_2-1=0\\
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
-  The Lagrangian is:
+The Lagrangian is:
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math880#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+L(x_1,x_2,\lambda)=f(x_1,x_2)-\lambda g(x_1,x_2)
+    =x^2_1+x^2_2-\lambda(x_1+x_2-1)
+    \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20366#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img742.svg"
+ ALT="$\displaystyle L(x_1,x_2,\lambda)=f(x_1,x_2)-\lambda g(x_1,x_2)
+=x^2_1+x^2_2-\lambda(x_1+x_2-1)$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
-  Solving the following equations 
+Solving the following equations 
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math881#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\frac{\partial L}{\partial x_1}=2x_1-\lambda=0,\;\;\;
+    \frac{\partial L}{\partial x_2}=2x_2-\lambda=0,\;\;\;
+    \frac{\partial L}{\partial \lambda}=x_1+x_2-1=0
+    \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20368#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.34ex; vertical-align: -2.06ex; " SRC="img743.svg"
+ ALT="$\displaystyle \frac{\partial L}{\partial x_1}=2x_1-\lambda=0,\;\;\;
+\frac{\part...
+...tial x_2}=2x_2-\lambda=0,\;\;\;
+\frac{\partial L}{\partial \lambda}=x_1+x_2-1=0$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
-  we get <tex2html_verbatim_mark>#math882#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20370#</SPAN> and the optimal solution <tex2html_verbatim_mark>#math883#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20372#</SPAN> 
-  (satisfying <tex2html_verbatim_mark>#math884#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20374#</SPAN>), at which the function is minimized to 
-  be <tex2html_verbatim_mark>#math885#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20376#</SPAN>. We also note that <tex2html_verbatim_mark>#math886#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20378#</SPAN> and <tex2html_verbatim_mark>#math887#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20380#</SPAN> 
+we get <!-- MATH
+ $\lambda^*=1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img744.svg"
+ ALT="$\lambda^*=1$"></SPAN> and the optimal solution <!-- MATH
+ $x_1^*=x_2^*=0.5$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.69ex; " SRC="img745.svg"
+ ALT="$x_1^*=x_2^*=0.5$"></SPAN> 
+  (satisfying <!-- MATH
+ $x_1^*+x_2^*=1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.69ex; " SRC="img746.svg"
+ ALT="$x_1^*+x_2^*=1$"></SPAN>), at which the function is minimized to 
+  be <!-- MATH
+ $f(0.5,\,0.5)=0.5$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img747.svg"
+ ALT="$f(0.5,\,0.5)=0.5$"></SPAN>. We also note that <!-- MATH
+ $f(x_1,x_2)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img748.svg"
+ ALT="$f(x_1,x_2)$"></SPAN> and <!-- MATH
+ $g(x_1,x_2)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img749.svg"
+ ALT="$g(x_1,x_2)$"></SPAN> 
   have the same gradients
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math888#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\bigtriangledown f(0.5,0.5)=\bigtriangledown h(0.5,0.5)=[1,1]^T
+    \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20382#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img750.svg"
+ ALT="$\displaystyle \bigtriangledown f(0.5,0.5)=\bigtriangledown h(0.5,0.5)=[1,1]^T$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
 </LI>
 <LI>The following two problems
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math889#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{ll}
+      \mbox{minimize:} & f(x_1,x_2)=x^2_1+x^2_2\\
+      \mbox{subject to:} & g(x_1,x_2)=x_1+x_2-1\ge 0
+    \end{array}
+    \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20384#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img751.svg"
+ ALT="\begin{displaymath}\begin{array}{ll}
+\mbox{minimize:} &amp; f(x_1,x_2)=x^2_1+x^2_2\\
+\mbox{subject to:} &amp; g(x_1,x_2)=x_1+x_2-1\ge 0
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
-  and
+and
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math890#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{ll}
+      \mbox{maximize:} & f(x_1,x_2)=x^2_1+x^2_2\\
+      \mbox{subject to:} & g(x_1,x_2)=x_1+x_2-1\le 0
+    \end{array}
+    \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20386#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img752.svg"
+ ALT="\begin{displaymath}\begin{array}{ll}
+\mbox{maximize:} &amp; f(x_1,x_2)=x^2_1+x^2_2\\
+\mbox{subject to:} &amp; g(x_1,x_2)=x_1+x_2-1\le 0
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
-  have the same Lagrangian:
+have the same Lagrangian:
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math891#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+L(x_1,x_2,\mu)=f(x_1,x_2)-\mu\, g(x_1,x_2)=x^2_1+x^2_2-\mu(x_1+x_2-1)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20388#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img753.svg"
+ ALT="$\displaystyle L(x_1,x_2,\mu)=f(x_1,x_2)-\mu\, g(x_1,x_2)=x^2_1+x^2_2-\mu(x_1+x_2-1)$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">194</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  Solving the following equations 
+Solving the following equations 
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math892#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\frac{\partial L}{\partial x_1}=2x_1-\mu=0,\;\;\;
+    \frac{\partial L}{\partial x_2}=2x_2-\mu=0,\;\;\;
+    \frac{\partial L}{\partial \mu}=x_1+x_2-1=0
+    \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20390#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.57ex; vertical-align: -2.16ex; " SRC="img754.svg"
+ ALT="$\displaystyle \frac{\partial L}{\partial x_1}=2x_1-\mu=0,\;\;\;
+\frac{\partial L}{\partial x_2}=2x_2-\mu=0,\;\;\;
+\frac{\partial L}{\partial \mu}=x_1+x_2-1=0$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
-  we still get the same results <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20392#</SPAN> and <tex2html_verbatim_mark>#math893#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20394#</SPAN>, 
-  at which the function reaches minimum or maximum <tex2html_verbatim_mark>#math894#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20396#</SPAN> 
-  subject to the corresponding constraint <tex2html_verbatim_mark>#math895#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20398#</SPAN> or 
-  <tex2html_verbatim_mark>#math896#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20400#</SPAN>.
+we still get the same results <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img755.svg"
+ ALT="$\mu^*=1&gt;0$"></SPAN> and <!-- MATH
+ $x_1^*=x_2^*=\mu^*/2=0.5$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img756.svg"
+ ALT="$x_1^*=x_2^*=\mu^*/2=0.5$"></SPAN>, 
+  at which the function reaches minimum or maximum <!-- MATH
+ $f(0.5,\,0.5)=0.5$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img747.svg"
+ ALT="$f(0.5,\,0.5)=0.5$"></SPAN> 
+  subject to the corresponding constraint <!-- MATH
+ $x_1+x_2\ge 1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img739.svg"
+ ALT="$x_1+x_2\ge 1$"></SPAN> or 
+  <!-- MATH
+ $x_1+x_2\le 1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img738.svg"
+ ALT="$x_1+x_2\le 1$"></SPAN>.
 </LI>
 <LI>We could also consider the following two problems:
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math897#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{ll}
+      \mbox{minimize:} & f(x_1,x_2)=x^2_1+x^2_2\\
+      \mbox{subject to:} & g(x_1,x_2)=x_1+x_2-1\le 0
+    \end{array}
+    \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20402#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img757.svg"
+ ALT="\begin{displaymath}\begin{array}{ll}
+\mbox{minimize:} &amp; f(x_1,x_2)=x^2_1+x^2_2\\
+\mbox{subject to:} &amp; g(x_1,x_2)=x_1+x_2-1\le 0
+\end{array}\end{displaymath}"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
-</TABLE></DIV>
-<P></P>  
-  and
-  <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math898#<TABLE CLASS="equation" >
-<TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20404#</SPAN></TD>
-<TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
-</TABLE></DIV>
-<P></P>
-  The Lagrangian is the same as before, however, now we need to
-  consider the case where <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20406#</SPAN> and
-  <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math899#<TABLE CLASS="equation" >
-<TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20408#</SPAN></TD>
-<TD  CLASS="eqno" style="text-align:right">
-;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+&nbsp;&nbsp;&nbsp;</TD></TR>
 </TABLE></DIV>
 <P></P>
-  Solving these we get <tex2html_verbatim_mark>#math900#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20410#</SPAN>, corresponding to the solution
-  for the first problem, the absolute minimum of <tex2html_verbatim_mark>#math901#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20412#</SPAN>,
+and
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{array}{ll}
+      \mbox{maximize:} & f(x_1,x_2)=x^2_1+x^2_2\\
+      \mbox{subject to:} & g(x_1,x_2)=x_1+x_2-1\ge 0
+    \end{array}
+    \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE=""
+ SRC="img758.svg"
+ ALT="\begin{displaymath}\begin{array}{ll}
+\mbox{maximize:} &amp; f(x_1,x_2)=x^2_1+x^2_2\\
+\mbox{subject to:} &amp; g(x_1,x_2)=x_1+x_2-1\ge 0
+\end{array}\end{displaymath}"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+&nbsp;&nbsp;&nbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+The Lagrangian is the same as before, however, now we need to
+  consider the case where <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img714.svg"
+ ALT="$\mu^*=0$"></SPAN> and
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\frac{\partial L}{\partial x_1}=2x_1=0,\;\;\;
+    \frac{\partial L}{\partial x_2}=2x_2=0
+    \nonumber
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.34ex; vertical-align: -2.06ex; " SRC="img759.svg"
+ ALT="$\displaystyle \frac{\partial L}{\partial x_1}=2x_1=0,\;\;\;
+\frac{\partial L}{\partial x_2}=2x_2=0$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+&nbsp;&nbsp;&nbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+Solving these we get <!-- MATH
+ $x_1^*=x_2^*=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.69ex; " SRC="img760.svg"
+ ALT="$x_1^*=x_2^*=0$"></SPAN>, corresponding to the solution
+  for the first problem, the absolute minimum of <!-- MATH
+ $f(0,\,0)=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img242.svg"
+ ALT="$f(0,\,0)=0$"></SPAN>,
   independent of any constraint, i.e, the minimization problem is 
   unconstrained. However, as the function is not bounded from above,
   its maximum does not exist, i.e., the second problem has no
@@ -373,3 +943,26 @@ the three different constraints: <SPAN CLASS="MATH"><tex2html_image_mark>#tex2ht
 </UL>
 
 <P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node15.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node12.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node13.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node15.html">Duality and KKT Conditions</A>
+<B> Up:</B> <A
+ HREF="node12.html">Constrained Optimization</A>
+<B> Previous:</B> <A
+ HREF="node13.html">Optimization with Equality Constraints</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

@@ -1,38 +1,101 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Nelder-Mead method</TITLE>
+<META NAME="description" CONTENT="Nelder-Mead method">
+<META NAME="keywords" CONTENT="ch3">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch3.css">
+
+<LINK REL="next" HREF="node6.html">
+<LINK REL="previous" HREF="node4.html">
+<LINK REL="next" HREF="node6.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node6.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node4.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node6.html">Newton's method</A>
+<B> Up:</B> <A
+ HREF="node2.html">Unconstrained Optimization</A>
+<B> Previous:</B> <A
+ HREF="node4.html">Parabolic Interpolation</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
 
 <H2><A ID="SECTION00023000000000000000">
 Nelder-Mead method</A>
 </H2>
 
 <P>
-<#402#><EM>There are occasions where it has been spectacularly good ...
+<EM>There are occasions where it has been spectacularly good ...
 Mathematicians hate it because you can’t prove convergence; engineers
-seem to love it because it often works.</EM><#402#> ---- John Nelder
+seem to love it because it often works.</EM> -- John Nelder
 
 <P>
-The <#403#><EM>Nelder-Mead (NM) method</EM><#403#> (also called <#404#><EM>downhill simplex 
-method</EM><#404#> is a heuristic (search method for minimizing an objective 
-function <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18243#</SPAN> given in an N-dimensional space. The key 
+The <EM>Nelder-Mead (NM) method</EM> (also called <EM>downhill simplex 
+method</EM> is a heuristic (search method for minimizing an objective 
+function <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img120.svg"
+ ALT="$f({\bf x}$"></SPAN> given in an N-dimensional space. The key 
 concept of the mehtod is the <A ID="tex2html3"
-  HREF="https://en.wikipedia.org/wiki/Simplex"><EM>simplex</EM></A>, an <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18245#</SPAN> dimensional 
+  HREF="https://en.wikipedia.org/wiki/Simplex"><EM>simplex</EM></A>, an <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img54.svg"
+ ALT="$N$"></SPAN> dimensional 
 <A ID="tex2html4"
   HREF="https://en.wikipedia.org/wiki/Polytope">polytope</A>
 that is a <A ID="tex2html5"
   HREF="https://en.wikipedia.org/wiki/Convex_hull">convex hull</A>
-of a set of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18247#</SPAN> 
-linearly independent points <tex2html_verbatim_mark>#math274#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18249#</SPAN>. These
-points are linearly independent in the sense that the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18251#</SPAN> vectors
-<tex2html_verbatim_mark>#math275#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18253#</SPAN> are linearliy independent
+of a set of <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img121.svg"
+ ALT="$N+1$"></SPAN> 
+linearly independent points <!-- MATH
+ ${\bf x}_0,\cdots,{\bf x}_N$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img122.svg"
+ ALT="${\bf x}_0,\cdots,{\bf x}_N$"></SPAN>. These
+points are linearly independent in the sense that the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img54.svg"
+ ALT="$N$"></SPAN> vectors
+<!-- MATH
+ ${\bf x}_i={\bf x}_0\\;\;(i=1,\cdots,N)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img123.svg"
+ ALT="${\bf x}_i={\bf x}_0\\ ;\;(i=1,\cdots,N)$"></SPAN> are linearliy independent
 (no three points are colinear):
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math276#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+S=\left\{\sum_{i=0}^Nc_i{\bf x}_i \;\bigg|\;\sum_{i=0}^Nc_i=1,\;\;\;\;c_i\ge 0\right\}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18255#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img124.svg"
+ ALT="$\displaystyle S=\left\{\sum_{i=0}^Nc_i{\bf x}_i \;\bigg\vert\;\sum_{i=0}^Nc_i=1,\;\;\;\;c_i\ge 0\right\}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">21</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 Intuitively, a simplex is a volumn in the N-D space enclosed by 
-flat surfaces and spanned by <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18257#</SPAN> verticies. For example, a 
+flat surfaces and spanned by <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img121.svg"
+ ALT="$N+1$"></SPAN> verticies. For example, a 
 simplex is a line sigment spanned by 2 points in 1-D space, a 
 triangle spanned by 3 points in 2-D space, and a tetrahedron
 spanned by 4 points in 3-D space.
@@ -42,13 +105,25 @@ The NM method is an iterative process which transforms an
 initial simplex iteratively into a different one following a
 path in the space along which the function values are progressively 
 reduced. The initial simplex can be generated based on a single
-point <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18259#</SPAN>, an initial guess, by adding a constant along
-each of the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18261#</SPAN> dimensions spanned by the standard basis
-<tex2html_verbatim_mark>#math277#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18263#</SPAN>:
+point <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img125.svg"
+ ALT="${\bf x}_0$"></SPAN>, an initial guess, by adding a constant along
+each of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img54.svg"
+ ALT="$N$"></SPAN> dimensions spanned by the standard basis
+<!-- MATH
+ $\{{\bf e}_1,\cdots,{\bf e}_N\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img126.svg"
+ ALT="$\{{\bf e}_1,\cdots,{\bf e}_N\}$"></SPAN>:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math278#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf x}_i={\bf x}_0+c{\bf e}_i
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18265#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img127.svg"
+ ALT="$\displaystyle {\bf x}_i={\bf x}_0+c{\bf e}_i$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">22</SPAN>)</TD></TR>
 </TABLE></DIV>
@@ -57,13 +132,27 @@ In the subsequent iterations, the initial simplex is transformed
 based on four parameters:
 
 <UL>
-<LI><#430#><EM>reflection coefficient:</EM><#430#> <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18267#</SPAN>, e.g., <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18269#</SPAN> 
+<LI><EM>reflection coefficient:</EM> <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.21ex; " SRC="img128.svg"
+ ALT="$\alpha&gt;0$"></SPAN>, e.g., <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img129.svg"
+ ALT="$\alpha=1$"></SPAN> 
 </LI>
-<LI><#431#><EM>expansion coefficient:</EM><#431#> <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18271#</SPAN>, e.g., <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18273#</SPAN> 
+<LI><EM>expansion coefficient:</EM> <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img130.svg"
+ ALT="$0&lt;\beta&lt;1$"></SPAN>, e.g., <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img131.svg"
+ ALT="$\beta=1/2$"></SPAN> 
 </LI>
-<LI><#432#><EM>contraction coefficient:</EM><#432#> <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18275#</SPAN>, e.g., <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18277#</SPAN> 
+<LI><EM>contraction coefficient:</EM> <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img132.svg"
+ ALT="$\gamma&gt;1$"></SPAN>, e.g., <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img133.svg"
+ ALT="$\gamma=2$"></SPAN> 
 </LI>
-<LI><#433#><EM>shrink coefficient:</EM><#433#> <tex2html_verbatim_mark>#math279#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18279#</SPAN>, e.g., <tex2html_verbatim_mark>#math280#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18281#</SPAN> 
+<LI><EM>shrink coefficient:</EM> <!-- MATH
+ $0<\delta<1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img134.svg"
+ ALT="$0&lt;\delta&lt;1$"></SPAN>, e.g., <!-- MATH
+ $\delta=1/2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img135.svg"
+ ALT="$\delta=1/2$"></SPAN> 
 </LI>
 </UL>
 
@@ -71,77 +160,158 @@ based on four parameters:
 Specially here are the steps in each iteration:
 
 <UL>
-<LI><#436#><EM>Order</EM><#436#> all <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18283#</SPAN> vertex points according to their 
+<LI><EM>Order</EM> all <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img121.svg"
+ ALT="$N+1$"></SPAN> vertex points according to their 
   function values:
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math281#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f({\bf x}_0)\le f({\bf x}_1)\le\cdots\le f({\bf x}_N)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18285#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img136.svg"
+ ALT="$\displaystyle f({\bf x}_0)\le f({\bf x}_1)\le\cdots\le f({\bf x}_N)$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">23</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  Denote the best point with lowest function value by <tex2html_verbatim_mark>#math282#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18287#</SPAN>,
-  the worst point with the highest function value by <tex2html_verbatim_mark>#math283#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18289#</SPAN>,
-  and the second worst point by <tex2html_verbatim_mark>#math284#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18291#</SPAN>.
+Denote the best point with lowest function value by <!-- MATH
+ ${\bf x}_0={\bf x}_l$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img137.svg"
+ ALT="${\bf x}_0={\bf x}_l$"></SPAN>,
+  the worst point with the highest function value by <!-- MATH
+ ${\bf x}_N={\bf x}_h$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img138.svg"
+ ALT="${\bf x}_N={\bf x}_h$"></SPAN>,
+  and the second worst point by <!-- MATH
+ ${\bf x}_{N-1}={\bf x}_s$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.66ex; " SRC="img139.svg"
+ ALT="${\bf x}_{N-1}={\bf x}_s$"></SPAN>.
 </LI>
 <LI>Find the centroid of all points except the worst one 
-  <tex2html_verbatim_mark>#math285#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18293#</SPAN>:
+  <!-- MATH
+ ${\bf x}_N={\bf x}_h$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img138.svg"
+ ALT="${\bf x}_N={\bf x}_h$"></SPAN>:
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math286#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf c}=\frac{1}{N}\sum_{i=1}^N{\bf x}_i
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18295#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img140.svg"
+ ALT="$\displaystyle {\bf c}=\frac{1}{N}\sum_{i=1}^N{\bf x}_i$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">24</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 </LI>
-<LI>Find a new <#458#><EM>reflection</EM><#458#> point:
+<LI>Find a new <EM>reflection</EM> point:
   <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math287#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf x}_r={\bf c}+\alpha({\bf c}-{\bf x}_h)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18297#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img141.svg"
+ ALT="$\displaystyle {\bf x}_r={\bf c}+\alpha({\bf c}-{\bf x}_h)$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">25</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-  Depending on the function value <tex2html_verbatim_mark>#math288#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18299#</SPAN>, we will do one of
+Depending on the function value <!-- MATH
+ $f({\bf x}_r)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img142.svg"
+ ALT="$f({\bf x}_r)$"></SPAN>, we will do one of
   the following:
   
 <UL>
-<LI>If <tex2html_verbatim_mark>#math289#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18301#</SPAN>, then replace 
-    <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18303#</SPAN> by <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18305#</SPAN>.
+<LI>If <!-- MATH
+ $f({\bf x}_s<f({\bf x}_r)<f({\bf x}_l)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img143.svg"
+ ALT="$f({\bf x}_s&lt;f({\bf x}_r)&lt;f({\bf x}_l)$"></SPAN>, then replace 
+    <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img144.svg"
+ ALT="${\bf x}_h$"></SPAN> by <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img145.svg"
+ ALT="${\bf x}_r$"></SPAN>.
 </LI>
-<LI>If <tex2html_verbatim_mark>#math290#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18307#</SPAN>, get an <#474#><EM>expansion</EM><#474#> point
+<LI>If <!-- MATH
+ $f({\bf x}_r)<f({\bf x}_l)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img146.svg"
+ ALT="$f({\bf x}_r)&lt;f({\bf x}_l)$"></SPAN>, get an <EM>expansion</EM> point
     <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math291#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf x}_e={\bf c}+\gamma({\bf x}_r-{\bf c})
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18309#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img147.svg"
+ ALT="$\displaystyle {\bf x}_e={\bf c}+\gamma({\bf x}_r-{\bf c})$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">26</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-    Replace <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18311#</SPAN> by the better (with lower function value) of
-    <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18313#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18315#</SPAN>. This is called <#484#><EM>greedy optimization</EM><#484#>.
+Replace <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img144.svg"
+ ALT="${\bf x}_h$"></SPAN> by the better (with lower function value) of
+    <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img145.svg"
+ ALT="${\bf x}_r$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img148.svg"
+ ALT="${\bf x}_e$"></SPAN>. This is called <EM>greedy optimization</EM>.
 </LI>
-<LI><tex2html_verbatim_mark>#math292#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18317#</SPAN>, i.e., <tex2html_verbatim_mark>#math293#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18319#</SPAN> is a 
-    wrong direction, get a <#489#><EM>contraction</EM><#489#> point
+<LI><!-- MATH
+ $f({\bf x}_r)>f({\bf x}_s)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img149.svg"
+ ALT="$f({\bf x}_r)&gt;f({\bf x}_s)$"></SPAN>, i.e., <!-- MATH
+ ${bf x}_r-{\bf c}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.68ex; " SRC="img150.svg"
+ ALT="${bf x}_r-{\bf c}$"></SPAN> is a 
+    wrong direction, get a <EM>contraction</EM> point
     <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math294#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf x}_c={\bf c}+\beta({\bf x}_h-{\bf c})
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18321#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img151.svg"
+ ALT="$\displaystyle {\bf x}_c={\bf c}+\beta({\bf x}_h-{\bf c})$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">27</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-    If <tex2html_verbatim_mark>#math295#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18323#</SPAN> is better than <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18325#</SPAN>, replace
-    <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18327#</SPAN> by <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18329#</SPAN>
+If <!-- MATH
+ $f({\bf x}_c)<f({\bf x}_h)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img152.svg"
+ ALT="$f({\bf x}_c)&lt;f({\bf x}_h)$"></SPAN> is better than <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img144.svg"
+ ALT="${\bf x}_h$"></SPAN>, replace
+    <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img144.svg"
+ ALT="${\bf x}_h$"></SPAN> by <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img153.svg"
+ ALT="${\bf x}_c$"></SPAN>
 </LI>
 <LI><P>
 </LI>
-<LI>Terminate the iteration when the variance of the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18331#</SPAN> 
+<LI>Terminate the iteration when the variance of the <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img121.svg"
+ ALT="$N+1$"></SPAN> 
     function values at the vertices of the current simplex is smaller
-    than a tolerance. The best point <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18333#</SPAN> with lowest function
+    than a tolerance. The best point <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img125.svg"
+ ALT="${\bf x}_0$"></SPAN> with lowest function
     value is returned as the solution.
   
 </LI>
@@ -150,3 +320,26 @@ Specially here are the steps in each iteration:
 </UL>
 
 <P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node6.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node4.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node6.html">Newton's method</A>
+<B> Up:</B> <A
+ HREF="node2.html">Unconstrained Optimization</A>
+<B> Previous:</B> <A
+ HREF="node4.html">Parabolic Interpolation</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

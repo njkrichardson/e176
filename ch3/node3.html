@@ -1,3 +1,47 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Golden section search</TITLE>
+<META NAME="description" CONTENT="Golden section search">
+<META NAME="keywords" CONTENT="ch3">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch3.css">
+
+<LINK REL="next" HREF="node4.html">
+<LINK REL="previous" HREF="node2.html">
+<LINK REL="next" HREF="node4.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node4.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node2.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node4.html">Parabolic Interpolation</A>
+<B> Up:</B> <A
+ HREF="node2.html">Unconstrained Optimization</A>
+<B> Previous:</B> <A
+ HREF="node2.html">Unconstrained Optimization</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
 
 <H2><A ID="SECTION00021000000000000000">
 Golden section search</A>
@@ -5,28 +49,80 @@ Golden section search</A>
 
 <P>
 The golden section search algorithm can be used for finding a minimum (or
-maximum) of a single-variable function <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18055#</SPAN>. If it is known that the
+maximum) of a single-variable function <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img60.svg"
+ ALT="$f(x)$"></SPAN>. If it is known that the
 function has a minimum between some two points, then we can search for it 
 iteratively, in a manner similar to the bisection search for the root of 
-an equation <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18057#</SPAN>. Specifically, if in the neighborhood of the minimum
-we can find three points <tex2html_verbatim_mark>#math241#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18059#</SPAN> corresponding to <tex2html_verbatim_mark>#math242#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18061#</SPAN>,
-then there exists a minimum between <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18063#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18065#</SPAN>. To search for this
-minimum, we can choose another point <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18067#</SPAN> between <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18069#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18071#</SPAN> as shown
+an equation <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img61.svg"
+ ALT="$f(x)=0$"></SPAN>. Specifically, if in the neighborhood of the minimum
+we can find three points <!-- MATH
+ $x_0<x_1<x_2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.46ex; " SRC="img62.svg"
+ ALT="$x_0&lt;x_1&lt;x_2$"></SPAN> corresponding to <!-- MATH
+ $f(x_0)>f(x_1)<f(x_2)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img63.svg"
+ ALT="$f(x_0)&gt;f(x_1)&lt;f(x_2)$"></SPAN>,
+then there exists a minimum between <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img64.svg"
+ ALT="$x_0$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img65.svg"
+ ALT="$x_2$"></SPAN>. To search for this
+minimum, we can choose another point <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img66.svg"
+ ALT="$x_3$"></SPAN> between <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img67.svg"
+ ALT="$x_1$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img65.svg"
+ ALT="$x_2$"></SPAN> as shown
 in the figure below, with the following two possible outcomes:
 
 <UL>
-<LI>If <tex2html_verbatim_mark>#math243#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18073#</SPAN>, the minimum is inside the interval <tex2html_verbatim_mark>#math244#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18075#</SPAN> 
-  associated with three new points <tex2html_verbatim_mark>#math245#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18077#</SPAN>, i.e., <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18079#</SPAN> is replaced by 
-  <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18081#</SPAN>.
+<LI>If <!-- MATH
+ $f(x_3)=f_{3a}>f(x_1)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img68.svg"
+ ALT="$f(x_3)=f_{3a}&gt;f(x_1)$"></SPAN>, the minimum is inside the interval <!-- MATH
+ $x_3-x_0=a+c$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img69.svg"
+ ALT="$x_3-x_0=a+c$"></SPAN> 
+  associated with three new points <!-- MATH
+ $x_0<x_1<x_3$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.46ex; " SRC="img70.svg"
+ ALT="$x_0&lt;x_1&lt;x_3$"></SPAN>, i.e., <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img65.svg"
+ ALT="$x_2$"></SPAN> is replaced by 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img66.svg"
+ ALT="$x_3$"></SPAN>.
 </LI>
-<LI>If <tex2html_verbatim_mark>#math246#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18083#</SPAN>, the minimum is inside the interval <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18085#</SPAN>
-  associated with three new points <tex2html_verbatim_mark>#math247#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18087#</SPAN>, i.e., <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18089#</SPAN> is replaced by 
-  <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18091#</SPAN>.
+<LI>If <!-- MATH
+ $f(x_3)=f_{3b}<f(x_1)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img71.svg"
+ ALT="$f(x_3)=f_{3b}&lt;f(x_1)$"></SPAN>, the minimum is inside the interval <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img72.svg"
+ ALT="$x_2-x_1=b$"></SPAN>
+  associated with three new points <!-- MATH
+ $x_1<x_3<x_2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.46ex; " SRC="img73.svg"
+ ALT="$x_1&lt;x_3&lt;x_2$"></SPAN>, i.e., <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img64.svg"
+ ALT="$x_0$"></SPAN> is replaced by 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img67.svg"
+ ALT="$x_1$"></SPAN>.
 </LI>
 </UL>
-In either case, the new search interval <tex2html_verbatim_mark>#math248#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18093#</SPAN> or <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18095#</SPAN> is 
-smaller than the old one <tex2html_verbatim_mark>#math249#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18097#</SPAN>, i.e., such an iteration is guaranteed
-to converge. Of course <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18099#</SPAN> can also be between <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18101#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18103#</SPAN>, the 
+In either case, the new search interval <!-- MATH
+ $x_3-x_0=a+c$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img69.svg"
+ ALT="$x_3-x_0=a+c$"></SPAN> or <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img72.svg"
+ ALT="$x_2-x_1=b$"></SPAN> is 
+smaller than the old one <!-- MATH
+ $x_2-x_0=a+b$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img74.svg"
+ ALT="$x_2-x_0=a+b$"></SPAN>, i.e., such an iteration is guaranteed
+to converge. Of course <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img66.svg"
+ ALT="$x_3$"></SPAN> can also be between <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img64.svg"
+ ALT="$x_0$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img67.svg"
+ ALT="$x_1$"></SPAN>, the 
 iteration can be similarly carried out accordingly.
 
 <P>
@@ -34,15 +130,27 @@ iteration can be similarly carried out accordingly.
  ALT="GoldenRatio.png">
 
 <P>
-Similar to the bisection search for the root of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18105#</SPAN>, here to search
-for the minimum of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18107#</SPAN>, we also want to avoid the worst possible case 
+Similar to the bisection search for the root of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img61.svg"
+ ALT="$f(x)=0$"></SPAN>, here to search
+for the minimum of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img60.svg"
+ ALT="$f(x)$"></SPAN>, we also want to avoid the worst possible case 
 in which the minimum always happens to be in the larger one of the two 
-sections <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18109#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18111#</SPAN>. We therefore choose <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18113#</SPAN> in such a way that the
+sections <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.31ex; " SRC="img75.svg"
+ ALT="$a+c$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img15.svg"
+ ALT="$b$"></SPAN>. We therefore choose <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img66.svg"
+ ALT="$x_3$"></SPAN> in such a way that the
 two resulting search intervals will always be the same:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math250#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+a+c=b,\;\;\;\;\;\;\;\mbox{i.e.}\;\;\;\;\;\;\;c=b-a
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18115#<#1#>i.e.<#1#><tex2html_image_mark>#tex2html_wrap_indisplay18116#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img76.svg"
+ ALT="$\displaystyle a+c=b,\;\;\;\;\;\;\;$">i.e.<IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img77.svg"
+ ALT="$\displaystyle \;\;\;\;\;\;\;c=b-a$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">10</SPAN>)</TD></TR>
 </TABLE></DIV>
@@ -50,81 +158,189 @@ two resulting search intervals will always be the same:
 In other words, through out the iteration, the search interval should 
 always be partitioned into two sections with the same ratio:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math251#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\frac{a+b}{b}=\frac{a+c}{a}=\frac{b}{a}
+  \;\;\;\;\;\mbox{or}\;\;\;\;\;
+  \frac{a+b}{b}=\frac{b}{b-c}=\frac{b}{a}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18118#<#1#>or<#1#><tex2html_image_mark>#tex2html_wrap_indisplay18119#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.11ex; vertical-align: -1.71ex; " SRC="img78.svg"
+ ALT="$\displaystyle \frac{a+b}{b}=\frac{a+c}{a}=\frac{b}{a}
+\;\;\;\;\;$">or<IMG STYLE="height: 5.34ex; vertical-align: -1.90ex; " SRC="img79.svg"
+ ALT="$\displaystyle \;\;\;\;\;
+\frac{a+b}{b}=\frac{b}{b-c}=\frac{b}{a}$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">11</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 In either case, we get
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math252#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+a^2+ab-b^2=0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18121#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.31ex; " SRC="img80.svg"
+ ALT="$\displaystyle a^2+ab-b^2=0$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">12</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-Solving this quadratic equation for <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18123#</SPAN> in terms of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18125#</SPAN> we get
+Solving this quadratic equation for <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img14.svg"
+ ALT="$a$"></SPAN> in terms of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img15.svg"
+ ALT="$b$"></SPAN> we get
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math253#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+a_{1,2}=\frac{-1\pm\sqrt{5}}{2}\;b
+  =\left\{\begin{array}{r}0.618\,b\\-1.618\,b\end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18127#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.27ex; vertical-align: -2.32ex; " SRC="img81.svg"
+ ALT="$\displaystyle a_{1,2}=\frac{-1\pm\sqrt{5}}{2}\;b
+=\left\{\begin{array}{r}0.618\,b\\ -1.618\,b\end{array}\right.$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">13</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
 We keep the positive result and get
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math254#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\frac{a}{b}=0.618,\;\;\;\;\;\;\;\;\;
+ \frac{b}{a+b}=\frac{b}{0.618b+b}=\frac{1}{1.618}=0.618
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18129#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.34ex; vertical-align: -1.90ex; " SRC="img82.svg"
+ ALT="$\displaystyle \frac{a}{b}=0.618,\;\;\;\;\;\;\;\;\;
+\frac{b}{a+b}=\frac{b}{0.618b+b}=\frac{1}{1.618}=0.618$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">14</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-This is the <#334#><EM>golden ratio</EM><#334#> between the two sections <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18131#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18133#</SPAN> of 
+This is the <EM>golden ratio</EM> between the two sections <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img14.svg"
+ ALT="$a$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img15.svg"
+ ALT="$b$"></SPAN> of 
 the search interval.
 
 <P>
 The iteration of the golden section search can terminate when the size 
-of the search brackets <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18135#</SPAN> is small enough, compared with some
-tolerance, such as <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18137#</SPAN>, pre-determined based on some prior knowledge 
+of the search brackets <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img83.svg"
+ ALT="$\vert x_2-x_0\vert$"></SPAN> is small enough, compared with some
+tolerance, such as <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img84.svg"
+ ALT="$10^{-9}$"></SPAN>, pre-determined based on some prior knowledge 
 of the scale of the problem. However, this scale may be unknown, or it may
 vary drastically, and an absolute tolerance may be too large for a small 
 scale problem but too small for a large scale problem. This problem can 
 be resolved by using a relative tolerance with a scale comparable with 
 that of the size of the problem:
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math255#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+|x_2-x_0| < \epsilon(|x_1|+|x_3|)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18139#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img85.svg"
+ ALT="$\displaystyle \vert x_2-x_0\vert &lt; \epsilon(\vert x_1\vert+\vert x_3\vert)$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">15</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-where <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18141#</SPAN> is a small value such as <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18143#</SPAN>, and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18145#</SPAN>
-represents the size of the search interval and <tex2html_verbatim_mark>#math256#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18147#</SPAN> represents
+where <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img86.svg"
+ ALT="$\epsilon$"></SPAN> is a small value such as <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img84.svg"
+ ALT="$10^{-9}$"></SPAN>, and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img83.svg"
+ ALT="$\vert x_2-x_0\vert$"></SPAN>
+represents the size of the search interval and <!-- MATH
+ $|x_1|+|x_3|$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img87.svg"
+ ALT="$\vert x_1\vert+\vert x_3\vert$"></SPAN> represents
 the scale of the problem. When the inequality is satisfied, the iteration 
 is terminated.
 
 <P>
 It is possible that the three initial points chosen are such that either 
-<tex2html_verbatim_mark>#math257#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18149#</SPAN> or <tex2html_verbatim_mark>#math258#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18151#</SPAN>, then we have to search 
-toward the descending direction of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18153#</SPAN> until it starts to ascend. 
-For example, if <tex2html_verbatim_mark>#math259#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18155#</SPAN>, they can be iteratively updated 
+<!-- MATH
+ $f(x_0)<f(x_1)<f(x_2)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img88.svg"
+ ALT="$f(x_0)&lt;f(x_1)&lt;f(x_2)$"></SPAN> or <!-- MATH
+ $f(x_0)>f(x_1)>f(x_2)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img89.svg"
+ ALT="$f(x_0)&gt;f(x_1)&gt;f(x_2)$"></SPAN>, then we have to search 
+toward the descending direction of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img60.svg"
+ ALT="$f(x)$"></SPAN> until it starts to ascend. 
+For example, if <!-- MATH
+ $f(x_0)>f(x_1)>f(x_2)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img89.svg"
+ ALT="$f(x_0)&gt;f(x_1)&gt;f(x_2)$"></SPAN>, they can be iteratively updated 
 by the following
 <P></P>
-<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math260#<TABLE CLASS="equation" >
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+x^{new}_0=x^{old}_1,\;\;\;\;x^{new}_1=x^{old}_2,
+  \;\;\;\;x^{new}_2=x^{old}_2+c(x^{old}_2-x^{old}_1)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
 <TR>
-<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18157#</SPAN></TD>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img90.svg"
+ ALT="$\displaystyle x^{new}_0=x^{old}_1,\;\;\;\;x^{new}_1=x^{old}_2,
+\;\;\;\;x^{new}_2=x^{old}_2+c(x^{old}_2-x^{old}_1)$"></SPAN></TD>
 <TD  CLASS="eqno" style="text-align:right">
 (<SPAN CLASS="arabic">16</SPAN>)</TD></TR>
 </TABLE></DIV>
 <P></P>
-where <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18159#</SPAN> (e.g., <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18161#</SPAN>), until we reach a point <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18163#</SPAN> at which
-<tex2html_verbatim_mark>#math261#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18165#</SPAN>. Obviously the distance <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18167#</SPAN> grows exponentially 
-<tex2html_verbatim_mark>#math262#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18169#</SPAN>. 
+where <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.21ex; " SRC="img91.svg"
+ ALT="$c&gt;1$"></SPAN> (e.g., <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img92.svg"
+ ALT="$c=1.618$"></SPAN>), until we reach a point <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img65.svg"
+ ALT="$x_2$"></SPAN> at which
+<!-- MATH
+ $f(x_2)>f(x_1)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img93.svg"
+ ALT="$f(x_2)&gt;f(x_1)$"></SPAN>. Obviously the distance <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img94.svg"
+ ALT="$d=x_2-x_1$"></SPAN> grows exponentially 
+<!-- MATH
+ $d\propto c^n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img95.svg"
+ ALT="$d\propto c^n$"></SPAN>. 
 
 <P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node4.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node2.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node4.html">Parabolic Interpolation</A>
+<B> Up:</B> <A
+ HREF="node2.html">Unconstrained Optimization</A>
+<B> Previous:</B> <A
+ HREF="node2.html">Unconstrained Optimization</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>
