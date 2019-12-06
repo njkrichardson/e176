@@ -1,0 +1,152 @@
+
+<H2><A ID="SECTION00023000000000000000">
+Nelder-Mead method</A>
+</H2>
+
+<P>
+<#402#><EM>There are occasions where it has been spectacularly good ...
+Mathematicians hate it because you can’t prove convergence; engineers
+seem to love it because it often works.</EM><#402#> ---- John Nelder
+
+<P>
+The <#403#><EM>Nelder-Mead (NM) method</EM><#403#> (also called <#404#><EM>downhill simplex 
+method</EM><#404#> is a heuristic (search method for minimizing an objective 
+function <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18243#</SPAN> given in an N-dimensional space. The key 
+concept of the mehtod is the <A ID="tex2html3"
+  HREF="https://en.wikipedia.org/wiki/Simplex"><EM>simplex</EM></A>, an <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18245#</SPAN> dimensional 
+<A ID="tex2html4"
+  HREF="https://en.wikipedia.org/wiki/Polytope">polytope</A>
+that is a <A ID="tex2html5"
+  HREF="https://en.wikipedia.org/wiki/Convex_hull">convex hull</A>
+of a set of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18247#</SPAN> 
+linearly independent points <tex2html_verbatim_mark>#math274#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18249#</SPAN>. These
+points are linearly independent in the sense that the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18251#</SPAN> vectors
+<tex2html_verbatim_mark>#math275#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18253#</SPAN> are linearliy independent
+(no three points are colinear):
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math276#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18255#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">21</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Intuitively, a simplex is a volumn in the N-D space enclosed by 
+flat surfaces and spanned by <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18257#</SPAN> verticies. For example, a 
+simplex is a line sigment spanned by 2 points in 1-D space, a 
+triangle spanned by 3 points in 2-D space, and a tetrahedron
+spanned by 4 points in 3-D space.
+
+<P>
+The NM method is an iterative process which transforms an 
+initial simplex iteratively into a different one following a
+path in the space along which the function values are progressively 
+reduced. The initial simplex can be generated based on a single
+point <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18259#</SPAN>, an initial guess, by adding a constant along
+each of the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18261#</SPAN> dimensions spanned by the standard basis
+<tex2html_verbatim_mark>#math277#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18263#</SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math278#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18265#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">22</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+In the subsequent iterations, the initial simplex is transformed 
+based on four parameters:
+
+<UL>
+<LI><#430#><EM>reflection coefficient:</EM><#430#> <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18267#</SPAN>, e.g., <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18269#</SPAN> 
+</LI>
+<LI><#431#><EM>expansion coefficient:</EM><#431#> <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18271#</SPAN>, e.g., <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18273#</SPAN> 
+</LI>
+<LI><#432#><EM>contraction coefficient:</EM><#432#> <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18275#</SPAN>, e.g., <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18277#</SPAN> 
+</LI>
+<LI><#433#><EM>shrink coefficient:</EM><#433#> <tex2html_verbatim_mark>#math279#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18279#</SPAN>, e.g., <tex2html_verbatim_mark>#math280#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18281#</SPAN> 
+</LI>
+</UL>
+
+<P>
+Specially here are the steps in each iteration:
+
+<UL>
+<LI><#436#><EM>Order</EM><#436#> all <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18283#</SPAN> vertex points according to their 
+  function values:
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math281#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18285#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">23</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  Denote the best point with lowest function value by <tex2html_verbatim_mark>#math282#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18287#</SPAN>,
+  the worst point with the highest function value by <tex2html_verbatim_mark>#math283#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18289#</SPAN>,
+  and the second worst point by <tex2html_verbatim_mark>#math284#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18291#</SPAN>.
+</LI>
+<LI>Find the centroid of all points except the worst one 
+  <tex2html_verbatim_mark>#math285#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18293#</SPAN>:
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math286#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18295#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">24</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+</LI>
+<LI>Find a new <#458#><EM>reflection</EM><#458#> point:
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math287#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18297#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">25</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  Depending on the function value <tex2html_verbatim_mark>#math288#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18299#</SPAN>, we will do one of
+  the following:
+  
+<UL>
+<LI>If <tex2html_verbatim_mark>#math289#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18301#</SPAN>, then replace 
+    <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18303#</SPAN> by <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18305#</SPAN>.
+</LI>
+<LI>If <tex2html_verbatim_mark>#math290#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18307#</SPAN>, get an <#474#><EM>expansion</EM><#474#> point
+    <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math291#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18309#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">26</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+    Replace <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18311#</SPAN> by the better (with lower function value) of
+    <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18313#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18315#</SPAN>. This is called <#484#><EM>greedy optimization</EM><#484#>.
+</LI>
+<LI><tex2html_verbatim_mark>#math292#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18317#</SPAN>, i.e., <tex2html_verbatim_mark>#math293#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18319#</SPAN> is a 
+    wrong direction, get a <#489#><EM>contraction</EM><#489#> point
+    <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math294#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18321#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">27</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+    If <tex2html_verbatim_mark>#math295#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18323#</SPAN> is better than <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18325#</SPAN>, replace
+    <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18327#</SPAN> by <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18329#</SPAN>
+</LI>
+<LI><P>
+</LI>
+<LI>Terminate the iteration when the variance of the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18331#</SPAN> 
+    function values at the vertices of the current simplex is smaller
+    than a tolerance. The best point <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18333#</SPAN> with lowest function
+    value is returned as the solution.
+  
+</LI>
+</UL>
+</LI>
+</UL>
+
+<P>

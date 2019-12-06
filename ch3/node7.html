@@ -1,0 +1,216 @@
+
+<H2><A ID="SECTION00025000000000000000">
+Gradient Descent Method</A>
+</H2>
+
+<P>
+Newton's method discussed above is based on the Hessian <tex2html_verbatim_mark>#math386#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18664#</SPAN>
+of the function <tex2html_verbatim_mark>#math387#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18666#</SPAN> to be minimized as well as its gradient 
+<tex2html_verbatim_mark>#math388#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18668#</SPAN>. The method is not applicable if the Hessian 
+<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18670#</SPAN> is not available, or the cost of computing the inverse 
+<tex2html_verbatim_mark>#math389#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18672#</SPAN> is too high. In such a case, the gradient descent method
+can be used without using the Hessian matrix.
+
+<P>
+We first consider the minimization of a single-variable function 
+<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18674#</SPAN>. From any inital point <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18676#</SPAN>, we can move to a nearby point
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math390#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18678#;SPMnbsp; ;SPMnbsp;<#1#>where<#1#><tex2html_image_mark>#tex2html_wrap_indisplay18679#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">46</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P> 
+No matter whether <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18681#</SPAN> is positive or negative, the function value 
+<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18683#</SPAN> (approximated by the first two terms of its Taylor series) is 
+always reduced if the positive step size <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18685#</SPAN> is small enough:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math391#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18687#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">47</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+This process can be carried out iteratively 
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math392#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18689#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">48</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+until eventually reaching a point <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18691#</SPAN> at which <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18693#</SPAN> and no 
+further progress can be made, i.e. a local minimum of the function is 
+obtained.
+
+<P>
+This simple method can be generalized to minimize a multi-variable 
+objective function <tex2html_verbatim_mark>#math393#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18695#</SPAN> in N-D space. The 
+derivative of the 1-D case is generalized to the gradient vector 
+<tex2html_verbatim_mark>#math394#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18697#</SPAN> of function <tex2html_verbatim_mark>#math395#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18699#</SPAN>,
+which is in the direction along which the function increases most rapidly 
+with the steepest slope, perpendicular to the contour or iso-lines of the
+function <tex2html_verbatim_mark>#math396#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18701#</SPAN>. The fastest way to reduce <tex2html_verbatim_mark>#math397#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18703#</SPAN> is to go 
+down hill along the opposite direction of the gradient vector. 
+
+<P>
+Specifically the gradient descent method (also called steepest 
+descent or down hill method) carries out the following approximation
+<tex2html_verbatim_mark>#math398#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18705#</SPAN> (the first two terms of the 
+Taylor series) with <tex2html_verbatim_mark>#math399#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18707#</SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math400#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18709#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">49</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+iteratively:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math401#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18711#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">50</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+untill eventually reaching a point at which <tex2html_verbatim_mark>#math402#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18713#</SPAN> and the 
+minimum of the function <tex2html_verbatim_mark>#math403#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18715#</SPAN> is reached.
+
+<P>
+Comparing the gradient descent method with Newton's method we see that
+here the Hessian matrix is no longer used. The iteration simply follows 
+a search direction <tex2html_verbatim_mark>#math404#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18717#</SPAN>, which is different from the 
+search direction <tex2html_verbatim_mark>#math405#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18719#</SPAN> of Newton's method,
+based on <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18721#</SPAN> as well as <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18723#</SPAN>. Specially, when <tex2html_verbatim_mark>#math406#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18725#</SPAN>, 
+the two methods become the same.
+
+<P>
+As the gradient descent method relies only on the gradient vector of the
+objective function without any information contained in the second order 
+derivatives in the Hessian matrix, it does not have as much information as
+Newton's method and therefore may not be as efficient. For example, when 
+the function is quadratic, as discussed before, Newton's method can find 
+the solution in a single step from any initial guess, but it may take the 
+gradient descent method many steps to reach the solution, because it always 
+follows the negative direction of the local gradient, which typically does 
+not point to the solution directly. However, for the same reason, the 
+gradient descent method is computationally less expensive and will be 
+effective when the Hessian matrix is not used.
+
+<P>
+<#930#><B>Example:</B><#930#> Consider a two-variable quadratic function in the following
+general form:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math407#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18727#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18729#</SPAN> is a symmetric positive semidefinite matrix,
+i.e., <tex2html_verbatim_mark>#math408#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18731#</SPAN> and <tex2html_verbatim_mark>#math409#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18733#</SPAN>. Specially, if we let 
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math410#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18735#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P> 
+then we have the following function:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math411#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18737#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+which has a minimum <tex2html_verbatim_mark>#math412#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18739#</SPAN> at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18741#</SPAN>. 
+
+<P>
+<IMG STYLE="" SRC="figures/gradient1.png"
+ ALT="gradient1.png">
+
+<P>
+We assume the initial guess is <tex2html_verbatim_mark>#math413#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18743#</SPAN>, at which the
+gradient is <tex2html_verbatim_mark>#math414#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18745#</SPAN>. Now we compare the gradient method
+with Newton's method, in terms of the search direction <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18747#</SPAN> and 
+progress of the iterations:
+
+<UL>
+<LI>Newton's method: Here we have
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math415#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18749#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+  and the search direction is 
+  <tex2html_verbatim_mark>#math416#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18751#</SPAN> (the red arrow in the figure).
+  The iteration is:
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math417#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18753#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+  which is the minimum of the function.
+</LI>
+<LI>The gradient descent method: the search direction is
+  <tex2html_verbatim_mark>#math418#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18755#</SPAN>, perpendicular to the contour of 
+  the function. The first iteration is:
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math419#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18757#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+  We need to determine the step size <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18759#</SPAN> (to be considered later)
+  to find <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18761#</SPAN>, and then continue the iteration.
+</LI>
+</UL>
+
+<P>
+The figure below compares the search directions of the gradient descent
+method (blue) based only on the gradient vector <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18763#</SPAN>, the local 
+information at the point <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18765#</SPAN>, and Newton's method (red) based on 
+the Hessian matrix <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18767#</SPAN>, the global of the quadratic function, as well
+as the gradient <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18769#</SPAN>.
+
+<P>
+<IMG STYLE="" SRC="figures/QuadraticContourEx2.png"
+ ALT="QuadraticContourEx2.png">
+
+<P>
+We see that Newton's method finds the solution in a single step, but
+the gradient descent method requires an iteration, and therefore less
+effective. This is because the gradient descent method only has available
+the local information provided by the first order derivative <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18771#</SPAN>, 
+the gradient direction of the function at a single point, while Newton's
+method can make use of the second order derivative <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18773#</SPAN>, representing
+the global information of the elliptical shape of the contour line of the
+quadratic function, as well as the local information. 
+
+<P>
+Moreover, in the gradient descent method, we still need to determine 
+a proper step size <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18775#</SPAN>. If <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18777#</SPAN> is too small, the iteration
+may converge very slowly, especially when <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18779#</SPAN> reduces slowly toward 
+its minimum. On the other hand, if <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18781#</SPAN> is too large but <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18783#</SPAN> has
+some rapid variations in the local region, the minimum of the function 
+may be skipped and the iteration may not converge. We will consider how
+to find the optimal step size in the next section.
+
+<P>

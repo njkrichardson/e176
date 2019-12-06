@@ -1,0 +1,424 @@
+
+<H2><A ID="SECTION00024000000000000000">
+Newton's method</A>
+</H2>
+
+<P>
+Newton's method is based on the Taylor series expansion of the function
+<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18336#</SPAN> to be minimized near some point <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18338#</SPAN>:
+<BR>
+<DIV CLASS="mathdisplay">
+<tex2html_verbatim_mark>#math296#
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><tex2html_image_mark>#tex2html_wrap_indisplay18341#</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay18343#</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay18345#</TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay18347#</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay18349#</TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">28</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+If <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18351#</SPAN> is a quadratic function, then the Taylor series only
+contains the first three terms (constant, linear, and quadratic terms).
+
+<P>
+<IMG STYLE="" SRC="figures/NewtonEx1.png"
+ ALT="NewtonEx1.png">
+
+<P>
+In this case, we can find the vertex point at which <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18353#</SPAN> reaches
+its extremum, by first setting its derivative to zero:
+<BR>
+<DIV CLASS="mathdisplay">
+<tex2html_verbatim_mark>#math297#
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><tex2html_image_mark>#tex2html_wrap_indisplay18356#</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay18358#</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay18360#</TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay18362#</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay18364#</TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">29</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+and then solving the resulting equation for <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18366#</SPAN> to get:
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="OptimalNewton"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math298#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18368#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">30</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <tex2html_verbatim_mark>#math299#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18370#</SPAN> is the step we need to take to go
+from any initial point <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18372#</SPAN> to the solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18374#</SPAN> in a single step. 
+Note that <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18376#</SPAN> is a minimum if <tex2html_verbatim_mark>#math300#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18378#</SPAN> but a maximum if 
+<tex2html_verbatim_mark>#math301#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18380#</SPAN>.
+
+<P>
+If <tex2html_verbatim_mark>#math302#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18382#</SPAN> is not quadratic, the result above can still be 
+considered as an approximation of the solution, which can be improved 
+iteratively from an initial guess <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18384#</SPAN> to eventually approach the 
+solution:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math303#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18386#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">31</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+We see that in each step <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18388#</SPAN> of the iteration, the function <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18390#</SPAN> is
+fitted by a quadratic functions <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18392#</SPAN> and its vertex at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18394#</SPAN> is 
+used as the updated approximated solution, at which the function is again
+fitted by another quadratic function <tex2html_verbatim_mark>#math304#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18396#</SPAN> for the next iteration. 
+Through this process the solution can be approached as <tex2html_verbatim_mark>#math305#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18398#</SPAN>.
+
+<P>
+We note that the iteration <tex2html_verbatim_mark>#math306#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18400#</SPAN> above is just 
+the <A ID="tex2html6"
+  HREF="../ch2/node5.html">Newton-Raphson method</A>
+for
+solving an equation <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18402#</SPAN> but now applied to equation <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18404#</SPAN>, as
+a necessary condition for an extremum of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18406#</SPAN>.
+
+<P>
+This quadratic function
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="qofx"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math307#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18408#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">32</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+can also be expressed as
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="qofxnew"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math308#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18410#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">33</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+in terms of the following three parameters:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math309#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18412#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">34</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+(Substituting <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18414#</SPAN>, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18416#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18418#</SPAN> into Eq. (<A HREF=<tex2html_cr_mark>#qofxnew#553><tex2html_cr_mark></A>) one gets Eq. (<A HREF=<tex2html_cr_mark>#qofx#554><tex2html_cr_mark></A>).)
+Now it becomes obvious that when <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18420#</SPAN>, the function <tex2html_verbatim_mark>#math310#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18422#</SPAN> reaches its 
+minimum at the point <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18424#</SPAN>. Note that the expression of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18426#</SPAN> above is actually the
+same as Eq. (<A HREF=<tex2html_cr_mark>#OptimalNewton#555><tex2html_cr_mark></A>).
+
+<P>
+<#556#><B>Example</B><#556#>
+
+<P>
+The function to be minimized and its first and second order derivatives are
+given below:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math311#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18428#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+Solving <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18430#</SPAN> we get the optimal solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18432#</SPAN>, at which 
+<tex2html_verbatim_mark>#math312#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18434#</SPAN>. But here we will use the Newton's method to obtain the 
+solution iteratively based on an initial guess <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18436#</SPAN>, at which we have
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math313#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18438#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+Here <tex2html_verbatim_mark>#math314#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18440#</SPAN> indicates that the function <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18442#</SPAN> has a minimum in the
+neighborhood of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18444#</SPAN>. We use the parabola below to approximate <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18446#</SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math315#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18448#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+based on these parameters:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math316#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18450#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+At the vertex of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18452#</SPAN> at <tex2html_verbatim_mark>#math317#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18454#</SPAN>, we have <tex2html_verbatim_mark>#math318#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18456#</SPAN>,
+much smaller than <tex2html_verbatim_mark>#math319#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18458#</SPAN>. The estimated solution 
+<tex2html_verbatim_mark>#math320#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18460#</SPAN> is used as an iterative step 
+<tex2html_verbatim_mark>#math321#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18462#</SPAN> for further improving the estimate.
+
+<P>
+We can further generalize Newton's method for single-variable function 
+<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18464#</SPAN> to mult-variable function <tex2html_verbatim_mark>#math322#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18466#</SPAN>, which 
+can be approximated by a quadratic function <tex2html_verbatim_mark>#math323#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18468#</SPAN> containing the 
+first three terms of its Taylor series at some point <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18470#</SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math324#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18472#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">35</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18474#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18476#</SPAN> are respectively the gradient vector and 
+Hessian matrix of the function <tex2html_verbatim_mark>#math325#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18478#</SPAN> at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18480#</SPAN>:
+<BR>
+<DIV CLASS="mathdisplay">
+<tex2html_verbatim_mark>#math326#
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><tex2html_image_mark>#tex2html_wrap_indisplay18483#</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay18485#</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay18487#</TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><tex2html_image_mark>#tex2html_wrap_indisplay18489#</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay18491#</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay18493#</TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">36</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+The stationary point of <tex2html_verbatim_mark>#math327#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18495#</SPAN> can be found from any point
+<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18497#</SPAN> by setting its derivative to zero
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math328#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18499#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">37</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and solving the resulting equation to get
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math329#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18501#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">38</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Similar to the 1-D case where whether <tex2html_verbatim_mark>#math330#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18503#</SPAN> is a minimum or 
+maximum depends on whether the second order derivative <tex2html_verbatim_mark>#math331#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18505#</SPAN> 
+is greater or smaller than zero, here whether <tex2html_verbatim_mark>#math332#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18507#</SPAN> is a minimum,
+maximum, or neither, depends on the second order derivatives, the Hessiam 
+matrix <tex2html_verbatim_mark>#math333#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18509#</SPAN>:
+
+<UL>
+<LI>If <tex2html_verbatim_mark>#math334#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18511#</SPAN> is positive definite (all eigenvalues are positive),
+  <tex2html_verbatim_mark>#math335#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18513#</SPAN> is a local minimum;
+
+<P>
+</LI>
+<LI>If <tex2html_verbatim_mark>#math336#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18515#</SPAN> is negative definite (all eigenvalues are negative),
+  <tex2html_verbatim_mark>#math337#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18517#</SPAN> a local maximum;
+
+<P>
+</LI>
+<LI>If <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18519#</SPAN> is indefinite (has both positive and negative 
+  eigenvalues), <tex2html_verbatim_mark>#math338#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18521#</SPAN> is a saddle point (neither minimum nor 
+  maximum).  
+</LI>
+</UL>
+
+<P>
+If <tex2html_verbatim_mark>#math339#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18523#</SPAN> is not quadratic, the result above is not
+a minimum or maximum, but it can still be used as an approximation of the
+solution, which can be improved to approached the true solution iteratively:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math340#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18525#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">39</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <tex2html_verbatim_mark>#math341#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18527#</SPAN>, <tex2html_verbatim_mark>#math342#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18529#</SPAN>, and 
+<tex2html_verbatim_mark>#math343#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18531#</SPAN> is the increment in 
+the nth step, called <#700#><EM>Newton search direction</EM><#700#>.
+
+<P>
+We note that the iteration above is just a generalization of 
+<tex2html_verbatim_mark>#math344#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18533#</SPAN> in 1-D case with <tex2html_verbatim_mark>#math345#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18535#</SPAN> 
+and <tex2html_verbatim_mark>#math346#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18537#</SPAN>. Also, the iteration 
+<tex2html_verbatim_mark>#math347#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18539#</SPAN> above is just the
+<A ID="tex2html7"
+  HREF="../ch2/node6.html">Newton-Raphson method</A>
+for 
+solving equation <tex2html_verbatim_mark>#math348#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18541#</SPAN> but here applied to
+solving <tex2html_verbatim_mark>#math349#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18543#</SPAN> as a necessary condition for
+an extremum of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18545#</SPAN>.
+
+<P>
+The speed of convergence of the iteration can be controlled by a parameter 
+<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18547#</SPAN> that controls the step size:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math350#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18549#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">40</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+This quadratic function can also be expressed as (show it as 
+<A ID="tex2html8"
+  HREF="../sub1/sub1.html">homework</A>):
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math351#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18551#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">41</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math352#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18553#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">42</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and we have
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math353#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18555#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">43</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <tex2html_verbatim_mark>#math354#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18557#</SPAN> is the error, and <tex2html_verbatim_mark>#math355#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18559#</SPAN> is the
+distance from <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18561#</SPAN> to the vertex <tex2html_verbatim_mark>#math356#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18563#</SPAN> of the quadratic 
+function, at which it may take the extremum <tex2html_verbatim_mark>#math357#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18565#</SPAN> (if <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18567#</SPAN> is
+either positive or negative definite).
+
+<P>
+<#781#><B>Example 0:</B><#781#> Consider the following quadratic function:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math358#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18569#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+We have
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math359#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18571#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+We let <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18573#</SPAN>, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18575#</SPAN>, and consider the following values of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18577#</SPAN>:
+
+<UL>
+<LI><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18579#</SPAN>, <tex2html_verbatim_mark>#math360#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18581#</SPAN>, <tex2html_verbatim_mark>#math361#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18583#</SPAN>, <tex2html_verbatim_mark>#math362#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18585#</SPAN>, 
+  <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18587#</SPAN> is positive definite, <tex2html_verbatim_mark>#math363#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18589#</SPAN> is the minimum.
+</LI>
+<LI><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18591#</SPAN>, <tex2html_verbatim_mark>#math364#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18593#</SPAN>, <tex2html_verbatim_mark>#math365#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18595#</SPAN>, <tex2html_verbatim_mark>#math366#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18597#</SPAN>, 
+  <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18599#</SPAN> is positive definite, <tex2html_verbatim_mark>#math367#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18601#</SPAN> is the minimum.
+</LI>
+<LI><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18603#</SPAN>, <tex2html_verbatim_mark>#math368#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18605#</SPAN>, <tex2html_verbatim_mark>#math369#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18607#</SPAN>, <tex2html_verbatim_mark>#math370#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18609#</SPAN>, 
+  <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18611#</SPAN> is positive definite, <tex2html_verbatim_mark>#math371#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18613#</SPAN> is the minimum.
+</LI>
+<LI><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18615#</SPAN>, <tex2html_verbatim_mark>#math372#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18617#</SPAN>, <tex2html_verbatim_mark>#math373#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18619#</SPAN>, <tex2html_verbatim_mark>#math374#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18621#</SPAN>, 
+  <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18623#</SPAN> is indefinite, <tex2html_verbatim_mark>#math375#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18625#</SPAN> is a saddle point (minimum in one direction
+  but maximum in another).
+</LI>
+</UL>
+
+<P>
+<IMG STYLE="" SRC="figures/QuadraticSurf.png"
+ ALT="QuadraticSurf.png">
+
+<P>
+We can speed up the convergence by a bigger step size <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18627#</SPAN>. However, 
+if <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18629#</SPAN> is too big, the solution may be skipped and the iteration may 
+not converge if it gets into an oscillation around the solution. Even worse,
+the iteration may become divergent. For such reasons, a smaller step size 
+<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18631#</SPAN> may be preferred sometimes.
+
+<P>
+In summary, Newton's method approximates the function <tex2html_verbatim_mark>#math376#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18633#</SPAN> at an
+estimated solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18635#</SPAN> by a quadratic equation (the first three 
+terms of the Taylor's series) based on the gradient <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18637#</SPAN> and Hessian 
+<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18639#</SPAN> of the function at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18641#</SPAN>, and treat the vertex of the 
+quadratic equation as the updated estimate <tex2html_verbatim_mark>#math377#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18643#</SPAN>.
+
+<P>
+Newton's method requires the Hessian matrix as well as the gradient to be 
+available. Moreover, it is necessary calculate the inverse of the Hessian 
+matrix in each iteration, which may be computationally expensive. 
+
+<P>
+<#823#><B>Example 1</B><#823#> 
+
+<P>
+The Newton's method is applied to solving the following non-linear equation 
+system of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18645#</SPAN> variables:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math378#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18647#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+with the exact solution <tex2html_verbatim_mark>#math379#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18649#</SPAN>. These equations can 
+be expressed in vector form as <tex2html_verbatim_mark>#math380#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18651#</SPAN> and solved as an 
+optimization problem with the objective function 
+<tex2html_verbatim_mark>#math381#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18653#</SPAN>. The iteration from an 
+initial guess <tex2html_verbatim_mark>#math382#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18655#</SPAN> is shown below. 
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math383#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath18657#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">44</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+We see that after 13 iterations the algorithm converges to 
+the following approximated solution with accuracy of 
+<tex2html_verbatim_mark>#math384#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18659#</SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math385#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18661#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">45</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>

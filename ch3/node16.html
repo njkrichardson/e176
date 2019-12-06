@@ -1,0 +1,481 @@
+
+<H2><A ID="SECTION00034000000000000000">
+Linear Programming (LP)</A>
+</H2>
+
+<P>
+The basic problem in linear programming (LP) is to maximize a linear 
+objective function <tex2html_verbatim_mark>#math930#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20505#</SPAN> of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20507#</SPAN> variables
+<tex2html_verbatim_mark>#math931#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20509#</SPAN> (or minimize <tex2html_verbatim_mark>#math932#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20511#</SPAN>), 
+under a set of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20513#</SPAN> linear constraints. 
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math933#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20515#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">203</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+For example, the objective function could be the total profit, the 
+constraints could be some limited resources. Let <tex2html_verbatim_mark>#math934#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20517#</SPAN> represent
+the quantities of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20519#</SPAN> different types of products, <tex2html_verbatim_mark>#math935#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20521#</SPAN> represent 
+their unit prices, and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20523#</SPAN> represent the consumption of the ith resource 
+of quantity <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20525#</SPAN> by the jth product, the goal is to maximize the profit 
+<tex2html_verbatim_mark>#math936#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20527#</SPAN> subject to the constraints imposed by the limited 
+resources <tex2html_verbatim_mark>#math937#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20529#</SPAN>.
+
+<P>
+Here all variables are assumed to be non-negative. If there exists a
+variable that is not restricted, it can be eliminated. 
+Specifically, we can solve one of the constraining equations for the
+variable and use the resulting expression of the variable to replace
+all its appearances in the problem. For example:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math938#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20531#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">204</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Solving the first constraining equation for the free variable <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20533#</SPAN>, 
+we get <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20535#</SPAN>. Substituting this into the objective function and 
+the other constraint, we get <tex2html_verbatim_mark>#math939#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20537#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20539#</SPAN>, and the
+problem can be reformulated as:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math940#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20541#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">205</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+The LP problem can be more concisely represented in matrix form:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math941#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20543#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">206</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math942#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20545#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">207</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and the less or greater than signs in a vector inequality is understood
+as an element-wise relationship between to the corresponding elements of
+the vectors on the two sides.
+
+<P>
+Given the LP problem above, now called the <#4589#><EM>primal problem</EM><#4589#>, we 
+can find its <#4590#><EM>dual problem</EM><#4590#> as discussed before for the general 
+constrained optimization problems. We first construct the Lagrangian
+of primal problem:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math943#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20547#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">208</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Here <tex2html_verbatim_mark>#math944#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20549#</SPAN> contains the Lagrange multipliers 
+for the inequality constraints <tex2html_verbatim_mark>#math945#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20551#</SPAN>, and
+<tex2html_verbatim_mark>#math946#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20553#</SPAN> according to Table <A HREF=<tex2html_cr_mark>#PolarityTable#4611><tex2html_cr_mark></A> given
+before. We define the dual function as the maximum of <tex2html_verbatim_mark>#math947#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20555#</SPAN> 
+over <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20557#</SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math948#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20559#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">209</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+To find the value of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20561#</SPAN> that maximizes <tex2html_verbatim_mark>#math949#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20563#</SPAN>, we set 
+its gradient to zero:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math950#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20565#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">210</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and substitute it into <tex2html_verbatim_mark>#math951#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20567#</SPAN> to
+get: <tex2html_verbatim_mark>#math952#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20569#</SPAN>, which is the maximum of
+<tex2html_verbatim_mark>#math953#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20571#</SPAN>, if <tex2html_verbatim_mark>#math954#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20573#</SPAN> so that
+the term <tex2html_verbatim_mark>#math955#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20575#</SPAN> contributes 
+negatively to <tex2html_verbatim_mark>#math956#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20577#</SPAN> (as <tex2html_verbatim_mark>#math957#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20579#</SPAN>). Now <tex2html_verbatim_mark>#math958#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20581#</SPAN>
+is an upper bound of <tex2html_verbatim_mark>#math959#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20583#</SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math960#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20585#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">211</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P> 
+We obtain the tightest upper bound by solving the following dual problem: 
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math961#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20587#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">212</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Following the same approach, we can also find the dual of a minimization
+primal problem. Moreover, we can also show that the dual of a dual problem
+is the original primal problem. Such duality relationships are summarized
+below:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math962#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20589#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">213</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math963#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20591#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">214</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+If either the primal or the
+dual is feasible and bounded, so is the other, and they form a
+strong duality, the solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20593#</SPAN> of the dual problem is the same
+as the solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20595#</SPAN> of the primal problem. Also, as the primal and
+dual problems are completely symmetric, 
+
+<P>
+Similarly, we can also get the dual problem of an equality constrained 
+standard LP problem:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math964#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20597#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">215</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Note that the condition <tex2html_verbatim_mark>#math965#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20599#</SPAN> for the multipliers 
+is dropped, due to the fact that the primal standard LP problem 
+is equality constrained (instead of inequality constrained). The 
+inequality constraints in the dual problem above can be further 
+converted to equality constraints by introducing a set of 
+<#4780#><EM>dual slack variables</EM><#4780#> <tex2html_verbatim_mark>#math966#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20601#</SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math967#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20603#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">216</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+As <tex2html_verbatim_mark>#math968#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20605#</SPAN> and <tex2html_verbatim_mark>#math969#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20607#</SPAN>, we have the 
+following
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math970#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20609#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">217</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+therefore we get the dual gap <tex2html_verbatim_mark>#math971#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20611#</SPAN>.
+
+<P>
+The inequality constrained LP problem can be converted to an equality
+constrained problem by introducing <#4826#><EM>slack variables</EM><#4826#>:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math972#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20613#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">218</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Now the inequality constrained LP problem can be reformulated to become 
+an equality constrained problem, called the <#4831#><EM>standard form</EM><#4831#>:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math973#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20615#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">219</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+We further redefine the following:
+
+<UL>
+<LI><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20617#</SPAN> is an <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20619#</SPAN> dimensional augmented variable vector that
+  includes the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20621#</SPAN> slack variables <tex2html_verbatim_mark>#math974#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20623#</SPAN> as well as the 
+  <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20625#</SPAN> original variables <tex2html_verbatim_mark>#math975#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20627#</SPAN>:
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math976#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20629#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">220</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+</LI>
+<LI><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20631#</SPAN> is redefined as an <tex2html_verbatim_mark>#math977#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20633#</SPAN> augmented coefficient 
+  matrix that includes coefficients for both types of variables:
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math978#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20635#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">221</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  where <tex2html_verbatim_mark>#math979#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20637#</SPAN> are the coefficients for the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20639#</SPAN> 
+  original variables <tex2html_verbatim_mark>#math980#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20641#</SPAN>, and the identity matrix 
+  <tex2html_verbatim_mark>#math981#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20643#</SPAN> is for the unity coefficients of the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20645#</SPAN> slack
+  variables <tex2html_verbatim_mark>#math982#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20647#</SPAN>, each of which appears in the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20649#</SPAN> 
+  constraints only once.
+</LI>
+</UL>
+
+<P>
+Now the LP problem can be expressed in the standard form (original form 
+on the left, with <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20651#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20653#</SPAN> redefined on the right):
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math983#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20655#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">222</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+An LP problem can be viewed geometrically. We can normalize 
+<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20657#</SPAN> so that <tex2html_verbatim_mark>#math984#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20659#</SPAN>, so that the objective function 
+<tex2html_verbatim_mark>#math985#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20661#</SPAN> becomes the projection of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20663#</SPAN> 
+onto vector <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20665#</SPAN>. Each of the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20667#</SPAN> inequality constraints in 
+<tex2html_verbatim_mark>#math986#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20669#</SPAN> corresponds to a hyper-plane in the N-D 
+vector space perpendicular to its normal direction 
+<tex2html_verbatim_mark>#math987#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20671#</SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math988#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20673#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">223</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Also, each of the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20675#</SPAN> non-negativity conditions <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20677#</SPAN> in
+<tex2html_verbatim_mark>#math989#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20679#</SPAN> corresponds to a hyper-plane perpendicular to the 
+jth standard basis vector <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20681#</SPAN>. In the most general case (none 
+of the hyper-planes is parallel to any others, no more than <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20683#</SPAN> 
+hyper-planes intersect at one point), every <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20685#</SPAN> of these <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20687#</SPAN> 
+hyper-planes intersect at a point in the N-D space, and they form
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math990#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20689#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">224</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+such intersection points in total.
+The polytope enclosed by these <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20691#</SPAN> hyper-planes is called the 
+<#4948#><EM>feasible region</EM><#4948#>, in which the optimal solution must lie. 
+The vertices of the polytope of the feasible region are a subset 
+of the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20693#</SPAN> intersections at which all constraints in 
+<tex2html_verbatim_mark>#math991#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20695#</SPAN> and <tex2html_verbatim_mark>#math992#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20697#</SPAN> are satisfied.
+
+<P>
+<#4955#><B>Fundamental theorem of linear programming</B><#4955#>
+
+<P>
+The optimal solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20699#</SPAN> of a linear programming problem formulated 
+above is either a vertex of the polytope feasible region <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20701#</SPAN>, or lies on a 
+hyper-surface of the polytope, on which all points all optimal solutions.
+
+<P>
+<IMG STYLE="" SRC="figures/LPtheorem.png"
+ ALT="LPtheorem.png">
+
+<P>
+<#4958#><B>Proof:</B><#4958#>
+
+<P>
+Assume the optimal solution <tex2html_verbatim_mark>#math993#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20703#</SPAN> is interior to the polytope
+feasible region <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20705#</SPAN>, then there must exist some <tex2html_verbatim_mark>#math994#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20707#</SPAN> such that 
+the hyper-sphere of radius <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20709#</SPAN> centered at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20711#</SPAN> is inside 
+<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20713#</SPAN>. Evaluate the objective function at a point on the hyper-sphere
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math995#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20715#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">225</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+we get
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math996#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20717#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">226</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+i.e., <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20719#</SPAN> cannot be the optimal solution as assumed. This contradiction
+indicates that an optimal solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20721#</SPAN> must be on the surface of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20723#</SPAN>,
+either at one of its vertices or on one of its surfaces. Q.E.D.
+
+<P>
+Based on this theorem, the optimization of a linear programming problem 
+could be solved by exhaustively checking each of the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20725#</SPAN> intersections
+formed by <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20727#</SPAN> of the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20729#</SPAN> hyper-planes to find (a) whether it is feasible 
+(satisfying all <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20731#</SPAN> constraints), and, if so, (b) whether the objective 
+function <tex2html_verbatim_mark>#math997#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20733#</SPAN> is maximized at the point. Specifically, we choose 
+<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20735#</SPAN> of the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20737#</SPAN> equations for the the constraints and solve this N-equation 
+and N-unknown linear system to get the intersection point of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20739#</SPAN> corresponding
+hyper-planes. This brute-force method is most straight forward, but the 
+computational complexity is high when <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20741#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20743#</SPAN>, and therefore <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20745#</SPAN>, 
+become large.
+
+<P>
+<#4992#><B>Example:</B><#4992#>
+
+<P>
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math998#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20747#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+where
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math999#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20749#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+<IMG STYLE="" SRC="figures/SimplexEx0.png"
+ ALT="SimplexEx0.png">
+
+<P>
+This problem has <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20751#</SPAN> variables with the same number of non-negativity
+constraints and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20753#</SPAN> linear inequality constraints. The <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20755#</SPAN> straight 
+lines form <tex2html_verbatim_mark>#math1000#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20757#</SPAN> intersections, out of which 5 are the 
+vertices of the polygonal feasible region satisfying all constraints. 
+The value of the objective function <tex2html_verbatim_mark>#math1001#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20759#</SPAN> 
+is proportional to the projection of the 2-D variable vector 
+<tex2html_verbatim_mark>#math1002#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20761#</SPAN> onto the coefficient vector <tex2html_verbatim_mark>#math1003#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20763#</SPAN>. 
+The goal here is to find a point in the polygonal feasible region with 
+maximum projection onto vector <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20765#</SPAN>. 
+
+<P>
+The <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20767#</SPAN> intersections are listed in the table below together with
+their feasibility (whether a vertex of the polygon or not) and the 
+corresponding objective function value (proportional to the projection
+in the parentheses). We see that out of the 5 feasible solutions at the
+vertices of the polygon, the one at <tex2html_verbatim_mark>#math1004#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20769#</SPAN> is optimal with 
+maximum objective function value <tex2html_verbatim_mark>#math1005#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20771#</SPAN> 
+(proportional to the projection <tex2html_verbatim_mark>#math1006#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20773#</SPAN>. 
+
+<P>
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1007#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20775#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+This problem can be converted to the standard form:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1008#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20777#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+The goal of this linear programming problem can be intuitively understood 
+as to push the hyper-plane <tex2html_verbatim_mark>#math1009#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20779#</SPAN>, here a line in 2-D space, 
+along its normal direction <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20781#</SPAN>, from the origin to as far away as 
+possible inside the feasible region, to eventually arrive at one of the 
+vertices of the polytope feasible region that is farthest away from the 
+origin.
+
+<P>
+We can also consider the dual problem
+
+<P>
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1010#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20783#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+The five planes, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20785#</SPAN> from the constraining inequalities, and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20787#</SPAN>
+for the non-negative constraints <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20789#</SPAN>, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20791#</SPAN>, and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20793#</SPAN>
+for the three variables, form <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20795#</SPAN> intersection points:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1011#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20797#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+We see that at the feasible point <tex2html_verbatim_mark>#math1012#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20799#</SPAN>, the dual function 
+<tex2html_verbatim_mark>#math1013#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20801#</SPAN> is minimized to be <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20803#</SPAN>, the same 
+as the maximum of the primal function <tex2html_verbatim_mark>#math1014#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20805#</SPAN> at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20807#</SPAN>.
+
+<P>
+<IMG STYLE="" SRC="figures/LPdual1.png"
+ ALT="LPdual1.png">
+
+<P>
+<#5130#><B>Homework:</B><#5130#> 
+
+<P>
+Develop the code to find all <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20809#</SPAN> intersections formed by <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20811#</SPAN> 
+given hyper-planes in an N-D space in terms of their equations
+<tex2html_verbatim_mark>#math1015#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20813#</SPAN> and 
+<tex2html_verbatim_mark>#math1016#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20815#</SPAN>, identify which of them are vertices of the polytope 
+surrounded by these hype-planes, and find the vertex corresponding to the 
+optimal solution that maximizes <tex2html_verbatim_mark>#math1017#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20817#</SPAN> for a given 
+<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20819#</SPAN>.
+
+<P>

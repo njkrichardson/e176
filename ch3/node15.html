@@ -1,0 +1,166 @@
+
+<H2><A ID="SECTION00033000000000000000">
+Duality and KKT Conditions</A>
+</H2>
+
+<P>
+For a given optimization problem, now called the <#4300#><EM>primal problem</EM><#4300#>,
+there exists a <#4301#><EM>dual problem</EM><#4301#>. To see this, consider the following
+problem:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math902#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20415#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">195</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+with its Lagrangian:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math903#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20417#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">196</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+As this is a minimization problem, here <tex2html_verbatim_mark>#math904#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20419#</SPAN> as
+indicated in Table <A HREF=<tex2html_cr_mark>#PolarityTable#4336><tex2html_cr_mark></A>.
+
+<P>
+We now consider the <#4337#><EM>dual function</EM><#4337#> defined as the infimum 
+(lower bound) of the Lagrangian over <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20421#</SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math905#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20423#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">197</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+which can be obtained by solving the equation
+<tex2html_verbatim_mark>#math906#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20425#</SPAN> to 
+get <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20427#</SPAN> that minimizes the Lagrangian, and then substituting 
+it back into the Lagrangian. Moreover, in order to obtain the 
+tightest lower bound, the supremum (upper bound) of the dual function 
+<tex2html_verbatim_mark>#math907#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20429#</SPAN> over all possible values for its variables
+<tex2html_verbatim_mark>#math908#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20431#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20433#</SPAN>, we need to solve the following optimization
+problem:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math909#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20435#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">198</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+This is the <#4383#><EM>dual problem</EM><#4383#> of the original primal problem.
+Note that which of the two inequalities of the dual problem is used 
+depends on which of the two inequalities of the primal problem is 
+used, as indicated in Table <A HREF=<tex2html_cr_mark>#PolarityTable#4384><tex2html_cr_mark></A>. Specifically, for 
+this minimization primal problem, <tex2html_verbatim_mark>#math910#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20437#</SPAN>
+(Eq. (<A HREF=<tex2html_cr_mark>#mugminmax#4388><tex2html_cr_mark></A>)), i.e., the inequality constraints of both
+the primal and dual problems should be either greater or smaller than 
+zero.
+
+<P>
+For any <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20439#</SPAN>, including the solutions <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20441#</SPAN>, in the 
+feasible regions defined by <tex2html_verbatim_mark>#math911#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20443#</SPAN> and 
+<tex2html_verbatim_mark>#math912#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20445#</SPAN>, the following holds
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math913#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20447#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">199</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+We further define <tex2html_verbatim_mark>#math914#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20449#</SPAN> and 
+<tex2html_verbatim_mark>#math915#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20451#</SPAN>, and get
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math916#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20453#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">200</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+Similarly, we can also show that a primal maximization problem with
+solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20455#</SPAN> that satisfies <tex2html_verbatim_mark>#math917#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20457#</SPAN> has
+a dual minimization problem with solution <tex2html_verbatim_mark>#math918#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20459#</SPAN>
+that satisfies
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math919#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20461#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">201</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+We can therefore conclude that the solution of the dual problem always 
+provides the tightest bound for the solution of the primal problem. The 
+difference <tex2html_verbatim_mark>#math920#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20463#</SPAN> for the minimization primal problem or 
+<tex2html_verbatim_mark>#math921#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20465#</SPAN> for the maximization primal problem is called the 
+<#4437#><EM>duality gap</EM><#4437#>. If the duality gap is non-zero, i.e., <tex2html_verbatim_mark>#math922#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20467#</SPAN>, 
+the dual relationship is a <#4438#><EM>weak duality</EM><#4438#>, otherwise it is a 
+<#4439#><EM>strong duality</EM><#4439#>, for which the following holds:
+<BR>
+<DIV CLASS="mathdisplay">
+<tex2html_verbatim_mark>#math923#
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><tex2html_image_mark>#tex2html_wrap_indisplay20470#</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay20472#</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay20474#</TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay20476#</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay20478#</TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+which further implies all following equations must hold:
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="KKTConditions"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math924#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20480#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">202</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+These are called the <#4494#><EM>Karush-Kuhn-Tucker (KKT) conditions</EM><#4494#>, the 
+necessary conditions for the solution of a constrained optimization 
+problem, i.e., for any <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20482#</SPAN> to be a solution, it must satisfy
+all of the following:
+
+<UL>
+<LI>Stationarity: <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20484#</SPAN> maximizes or minimizes the Lagrangian, 
+  i.e., <tex2html_verbatim_mark>#math925#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20486#</SPAN>;
+</LI>
+<LI>Primal feasibility: <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20488#</SPAN> must be inside the feasible region;
+</LI>
+<LI>Dual feasibility: all multipliers <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20490#</SPAN> for the inequalities 
+  must take the proper sign as specified by Table <A HREF=<tex2html_cr_mark>#PolarityTable#4504><tex2html_cr_mark></A>;
+</LI>
+<LI>Complementarity: one of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20492#</SPAN> and <tex2html_verbatim_mark>#math926#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20494#</SPAN> must be 
+  zero for the following two possible cases:
+  
+<UL>
+<LI>the jth constraint is inactive, <tex2html_verbatim_mark>#math927#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20496#</SPAN>, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20498#</SPAN>;
+</LI>
+<LI>the jth constraint is active if <tex2html_verbatim_mark>#math928#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20500#</SPAN>, <tex2html_verbatim_mark>#math929#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20502#</SPAN>.
+  
+</LI>
+</UL>
+</LI>
+</UL>
+
+<P>

@@ -1,0 +1,408 @@
+
+<tex2html_mydb_mark>#1#%\documentstyle[12pt]{article}
+
+<tex2html_mydb_mark>#2#%;SPMlt;script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';SPMgt;;SPMlt;/script;SPMgt;
+
+<tex2html_mydb_mark>#3#%;SPMlt;script type=;SPMquot;text/x-mathjax-config;SPMquot;;SPMgt;
+
+<tex2html_mydb_mark>#4#%   MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\ (','\\ )']]}});
+
+<tex2html_mydb_mark>#5#%;SPMlt;/script;SPMgt;
+
+<tex2html_mydb_mark>#6#%http://cs229.stanford.edu/notes/cs229-notes1.pdf
+
+<tex2html_mydb_mark>#7#%\subsection*{Brent's method}
+
+<tex2html_mydb_mark>#8#%https://www.math.uni-bielefeld.de/documenta/vol-ismp/42_wright-margaret.pdf
+
+<tex2html_mydb_mark>#9#%https://www.mathworks.com/help/optim/ug/fminsearch-algorithm.html
+
+<tex2html_mydb_mark>#10#%From an initial guess ${\bf x}_0$ we arrive at ${\bf x}_{n+1}$ after $n+1$ 
+
+<tex2html_mydb_mark>#11#%such iterations:
+
+<tex2html_mydb_mark>#12#%\begin{equation}
+
+<tex2html_mydb_mark>#13#%  {\bf x}_{n+1}={\bf x}_n+\delta_n{\bf d}_n
+
+<tex2html_mydb_mark>#14#%  =({\bf x}_{n-1}+\delta_{n-1}{\bf d}_{n-1})+\delta_n{\bf d}_n
+
+<tex2html_mydb_mark>#15#%  =\dots={\bf x}_0+\sum_{i=0}^n\delta_i{\bf d}_i
+
+<tex2html_mydb_mark>#16#%\end{equation}
+
+<tex2html_mydb_mark>#17#%We define the error associated with the nth iteration to be the difference 
+
+<tex2html_mydb_mark>#18#%between ${\bf x}_n$ and the solution ${\bf x}^*$:
+
+<tex2html_mydb_mark>#19#%\begin{equation}
+
+<tex2html_mydb_mark>#20#%  {\bf e}_n={\bf x}_n-{\bf x}^*
+
+<tex2html_mydb_mark>#21#%\end{equation}
+
+<tex2html_mydb_mark>#22#%and subtract ${\bf x}^*={\bf x}_{n+1}-{\bf e}_{n+1}={\bf x}_0-{\bf e}_0$ 
+
+<tex2html_mydb_mark>#23#%from both sides of the equation above to get
+
+<tex2html_mydb_mark>#24#%\begin{equation}
+
+<tex2html_mydb_mark>#25#%  {\bf e}_{n+1}={\bf e}_n+\delta_n{\bf d}_n={\bf e}_0+\sum_{i=0}^n\delta_i{\bf d}_i
+
+<tex2html_mydb_mark>#26#%\end{equation}
+
+<tex2html_mydb_mark>#27#%  =\lim\limitation_{\sigma\rightarrow 0}
+  
+<tex2html_mydb_mark>#28#%If the function $f({\bf x})$ to be minimized is quadratic:
+
+<tex2html_mydb_mark>#29#%\begin{equation}
+
+<tex2html_mydb_mark>#30#%  f({\bf x})=\frac{1}{2}{\bf x}^T{\bf A}{\bf x}-{\bf b}^T{\bf x}+c 
+
+<tex2html_mydb_mark>#31#%\end{equation}
+
+<tex2html_mydb_mark>#32#%and ${\bf A}={\bf A}^T$ is symmetric and positive definite, the derivative 
+
+<tex2html_mydb_mark>#33#%of $f({\bf x})$ is its gradient vector:
+
+<tex2html_mydb_mark>#34#%\begin{equation}
+
+<tex2html_mydb_mark>#35#%  {\bf g}=\frac{d}{d{\bf x}}f({\bf x})
+
+<tex2html_mydb_mark>#36#%%  =\frac{d}{d{\bf x}}\left( \frac{1}{2}{\bf x}^T{\bf A}{\bf x}-{\bf b}^T{\bf x}+c \right)
+
+<tex2html_mydb_mark>#37#%  ={\bf A}{\bf x}-{\bf b}
+
+<tex2html_mydb_mark>#38#%\end{equation}
+
+<tex2html_mydb_mark>#39#%which is zero at the optimal solution ${\bf x}*$ at which $f({\bf x})$ 
+
+<tex2html_mydb_mark>#40#%is minimized, i.e., by solving the linear equation system 
+
+<tex2html_mydb_mark>#41#%${\bf A}{\bf x}={\bf b}$, we can find the optimal solution to be
+
+<tex2html_mydb_mark>#42#%\begin{equation}
+
+<tex2html_mydb_mark>#43#%  {\bf x}^*={\bf A}^{-1}{\bf b} 
+
+<tex2html_mydb_mark>#44#%\end{equation}
+
+<tex2html_mydb_mark>#45#%If ${\bf A}\ne{\bf A}^T$ is not symmetric, then
+
+<tex2html_mydb_mark>#46#%\begin{equation}
+
+<tex2html_mydb_mark>#47#%  {\bf g}=\frac{d}{d{\bf x}}f({\bf x})
+
+<tex2html_mydb_mark>#48#%  =\frac{d}{d{\bf x}}\left( \frac{1}{2}{\bf x}^T{\bf A}{\bf x}-{\bf b}^T{\bf x}+c \right)
+
+<tex2html_mydb_mark>#49#%  =\frac{1}{2}\left({\bf A}+{\bf A}^T\right){\bf x}-{\bf b}
+
+<tex2html_mydb_mark>#50#%\end{equation}
+
+<tex2html_mydb_mark>#51#%and the optimal solution is
+
+<tex2html_mydb_mark>#52#%\begin{equation}
+
+<tex2html_mydb_mark>#53#%  {\bf x}^*=2({\bf A}+{\bf A}^T)^{-1}{\bf b} 
+
+<tex2html_mydb_mark>#54#%\end{equation}
+
+<tex2html_mydb_mark>#55#%If $f({\bf x})$ is not quadratic, we can still approximate it by 
+
+<tex2html_mydb_mark>#56#%the first three terms of its Taylor series as a quadratic equation 
+
+<tex2html_mydb_mark>#57#%(with ${\bf A}={\bf H}$), and its optimal solution can be found 
+
+<tex2html_mydb_mark>#58#%iteratively by the gradient descent method 
+
+<tex2html_mydb_mark>#59#%${\bf x}_{n+1}={\bf x}_n-\delta{\bf g}_n$. The optimal step size 
+
+<tex2html_mydb_mark>#60#%$\delta_n$ that minimizes $f({\bf x}_{n+1})=f({\bf x}_n-\delta_n{\bf g}_n)$ 
+
+<tex2html_mydb_mark>#61#%along the search direction ${\bf d}_n=-{\bf g}_n$ can be found based 
+
+<tex2html_mydb_mark>#62#%on the fact that ${\bf g}_{n+1}^T\;{\bf g}_n=0$:
+
+<tex2html_mydb_mark>#63#%\begin{eqnarray}
+
+<tex2html_mydb_mark>#64#%  {\bf g}_{n+1}^T {\bf g}_n;SPMamp;=;SPMamp;({\bf A}{\bf x}_{n+1}-{\bf b})^T{\bf g}_n
+
+<tex2html_mydb_mark>#65#%  =[{\bf A}({\bf x}_n-\delta_n{\bf g}_n)-{\bf b}]^T{\bf g}_n
+
+<tex2html_mydb_mark>#66#%  \nonumber \\ 
+
+<tex2html_mydb_mark>#67#%  ;SPMamp;=;SPMamp;({\bf A}{\bf x}_n-{\bf b})^T{\bf g}_n-\delta_n({\bf A}{\bf g}_n)^T{\bf g}_n
+
+<tex2html_mydb_mark>#68#%  ={\bf g}_n^T{\bf g}_n-\delta_n{\bf g}_n^T{\bf A}{\bf g}_n =0
+
+<tex2html_mydb_mark>#69#%  \nonumber
+
+<tex2html_mydb_mark>#70#%\end{eqnarray}
+
+<tex2html_mydb_mark>#71#%Solving $\delta_n$ we get
+
+<tex2html_mydb_mark>#72#%\begin{equation}
+
+<tex2html_mydb_mark>#73#%  \delta_n=\frac{{\bf g}_n^T{\bf g}_n}{{\bf g}_n^T{\bf A}{\bf g}_n} 
+
+<tex2html_mydb_mark>#74#%  =\frac{||{\bf g}_n||^2}{{\bf g}_n^T{\bf A}{\bf g}_n} 
+
+<tex2html_mydb_mark>#75#%  =\frac{{\bf g}_n^T{\bf A}{\bf e}_n}{{\bf g}_n^T{\bf A}{\bf g}_n} 
+
+<tex2html_mydb_mark>#76#%\end{equation}
+
+<tex2html_mydb_mark>#77#%which is of course the same as the generic optimal step size 
+
+<tex2html_mydb_mark>#78#%$\delta=-{\bf g}^T{\bf d}/{\bf d}^T{\bf H}{\bf d}$ obtained before, when
+
+<tex2html_mydb_mark>#79#%${\bf A}={\bf H}$ and ${\bf d}_n=-{\bf g}_n$. 
+
+<tex2html_mydb_mark>#80#%The Taylor series expansion of function $f({\bf x})$ at point ${\bf 0}$ is 
+
+<tex2html_mydb_mark>#81#%\begin{equation} f({\bf x})=f({\bf 0})+\sum_{i=1}^N \frac{\partial f}{\partial x_i}x_i
+
+<tex2html_mydb_mark>#82#%=f({\bf 0})+{\bf g}\cdot{\bf x}+\frac{1}{2}{\bf x}^T{\bf H}{\bf x}
+
+<tex2html_mydb_mark>#83#%\end{equation}
+
+<tex2html_mydb_mark>#84#%where ${\bf g}$ and ${\bf H}$ are respectively the gradient vector and Hessian matrix
+
+<tex2html_mydb_mark>#85#%of function $f({\bf x})$ (first and second derivative for a 1-D function $f(x)$) 
+
+<tex2html_mydb_mark>#86#%evaluated at ${\bf 0}$:
+
+<tex2html_mydb_mark>#87#%\begin{equation} {\bf g}=\bigtriangledown f({\bf 0}),
+
+<tex2html_mydb_mark>#88#%\;\;\;\;\;\;
+
+<tex2html_mydb_mark>#89#%{\bf H}={\bf H}(f({\bf 0}))=\left[\begin{array}{ccc}
+
+<tex2html_mydb_mark>#90#%    \frac{\partial^2 f}{\partial x_1^2} ;SPMamp; \cdots ;SPMamp; \frac{\partial^2 f}{\partial x_1\partial x_N} \\ 
+
+<tex2html_mydb_mark>#91#%    \vdots ;SPMamp; \ddots ;SPMamp; \vdots \\ 
+
+<tex2html_mydb_mark>#92#%    \frac{\partial^2 f}{\partial x_N\partial x_1} ;SPMamp; \cdots ;SPMamp; \frac{\partial^2 f}{\partial x_N^2}
+
+<tex2html_mydb_mark>#93#%    \end{array}\right]_{\bf 0}
+
+<tex2html_mydb_mark>#94#%\end{equation}
+ 
+<tex2html_mydb_mark>#95#%The gradient vector of $f({\bf x})$ is:
+
+<tex2html_mydb_mark>#96#%\begin{equation} \bigtriangledown f({\bf x})=\frac{d}{d{\bf x}} f({\bf x})={\bf g}+{\bf H}{\bf x} \end{equation}
+
+<tex2html_mydb_mark>#97#%and the difference between the gradients of $f({\bf 0})$ and $f({\bf x})$x is
+
+<tex2html_mydb_mark>#98#%\begin{equation} \bigtriangledown f({\bf x})-\bigtriangledown f({\bf 0})
+
+<tex2html_mydb_mark>#99#%={\bf g}+{\bf H}{\bf x}-{\bf g}={\bf H}{\bf x} \end{equation}
+
+<tex2html_mydb_mark>#100#%We see that when the argument of the function changes by ${\bf x}$ (from ${\bf 0}$
+
+<tex2html_mydb_mark>#101#%to ${\bf x}$), the corresponding change in its gradient vector is ${\bf H}{\bf x}$.
+
+<tex2html_mydb_mark>#102#%http://www.ing.unitn.it/~bertolaz/2-teaching/2004-2005/AA-2004-2005-PHD/lucidi/slides-mQN-1x2.pdf
+
+<tex2html_mydb_mark>#103#%  \begin{equation} {\bf g}_{n+1}={\bf g}_n+\delta_n{\bf A}{\bf d}_n \end{equation}
+
+<tex2html_mydb_mark>#104#%  =-\frac{||{\bf r}_{n+1}||^2}{||{\bf r}_n||^2} 
+  
+<tex2html_mydb_mark>#105#%    ={\bf r}_{n+1}-\beta_{n+1}{\bf d}_n 
+  
+<tex2html_mydb_mark>#106#%Also, the coefficient $\beta_{n+1}$, which is derived based on the assumption 
+
+<tex2html_mydb_mark>#107#%that $f({\bf x})$ is quadratic, may no longer be valid. Some alternative formulas
+
+<tex2html_mydb_mark>#108#%for $\beta_{n+1}$ can be used:
+
+<tex2html_mydb_mark>#109#%\begin{equation} 
+
+<tex2html_mydb_mark>#110#%  \beta_{n+1}=\frac{{\bf g}^T_{n+1}({\bf g}_{n+1}-{\bf g}_n)}{||{\bf g}_n||^2}
+
+<tex2html_mydb_mark>#111#%  \;\;\;\;\;\mbox{or}\;\;\;\;\;
+
+<tex2html_mydb_mark>#112#%  \beta_{n+1}=-\frac{{\bf g}^T_{n+1}({\bf g}_{n+1}-{\bf g}_n)}
+
+<tex2html_mydb_mark>#113#%       { {\bf d}_n^T({\bf g}_{n+1}-{\bf g}_n)} 
+
+<tex2html_mydb_mark>#114#%\end{equation}
+
+<tex2html_mydb_mark>#115#%These expressions are identical to $\beta_{n+1}=||{\bf g}_{n+1}||^2/||{\bf g}_n||^2$
+
+<tex2html_mydb_mark>#116#%when $f({\bf x})$ is indeed quadratic. Note that it is now possible for $\beta_{n+1};SPMlt;0$.
+
+<tex2html_mydb_mark>#117#%If this happens to be the case, we will use $\beta_{n+1}=0$, i.e., the next search
+
+<tex2html_mydb_mark>#118#%direction is simply ${\bf d}_{n+1}=-{\bf g}_n-\beta_n{\bf d}_n=-{\bf g}_n$, same
+
+<tex2html_mydb_mark>#119#%as the gradient descent method.
+
+<tex2html_mydb_mark>#120#% http://web.stanford.edu/class/msande310/310trialtext.pdf
+
+<tex2html_mydb_mark>#121#% http://web.mit.edu/15.053/www/AMP-Chapter-13.pdf
+
+<tex2html_mydb_mark>#122#% http://www.ifp.illinois.edu/~angelia/ge330fall09_nlpkkt_l26.pdf
+
+<tex2html_mydb_mark>#123#% http://www.math.mtu.edu/~msgocken/ma5630spring2003/lectures/bar/bar.pdf
+
+<tex2html_mydb_mark>#124#% http://www.csc.kth.se/utbildning/kth/kurser/DD3364/Lectures/KKT.pdf
+
+<tex2html_mydb_mark>#125#% http://privatewww.essex.ac.uk/~wangt/Presession%20Math/Lecture%205.pdf
+
+<tex2html_mydb_mark>#126#% https://www.cs.cmu.edu/~ggordon/10725-F12/slides/16-kkt.pdf
+
+<tex2html_mydb_mark>#127#% https://www.tu-ilmenau.de/fileadmin/media/simulation/Lehre/Vorlesungsskripte/Lecture_materials_Abebe/NLP_Notes.pdf
+
+<tex2html_mydb_mark>#128#%      g_j({\bf x})=g_j(x_1,\cdots,x_N)
+      
+<tex2html_mydb_mark>#129#% https://people.eecs.berkeley.edu/~elghaoui/Teaching/EE227A/lecture7.pdf
+
+<tex2html_mydb_mark>#130#% https://www.cs.cmu.edu/~ggordon/10725-F12/slides/16-kkt.pdf
+
+<tex2html_mydb_mark>#131#% https://www.princeton.edu/~chiangm/optimization.pdf
+
+<tex2html_mydb_mark>#132#% https://web.stanford.edu/class/ee364a/lectures/duality.pdf
+
+<tex2html_mydb_mark>#133#% https://web.stanford.edu/class/ee364a/lectures/duality.pdf
+
+<tex2html_mydb_mark>#134#% it can be replaced by $x'_j-x;SPMrdquo;_j$ with $x'_j\ge 0$ and $x;SPMrdquo;_j\ge 0$. 
+
+<tex2html_mydb_mark>#135#% http://www.seas.ucla.edu/~vandenbe/ee236a/lectures/duality.pdf
+
+<tex2html_mydb_mark>#136#% {\bf Duality}
+
+<tex2html_mydb_mark>#137#% http://theory.stanford.edu/~trevisan/cs261/lecture06.pdf
+
+<tex2html_mydb_mark>#138#% http://etd.dtu.dk/thesis/220437/ep08_19.pdf
+
+<tex2html_mydb_mark>#139#% https://people.eecs.berkeley.edu/~elghaoui/Teaching/EE227A/lecture19.pdf
+
+<tex2html_mydb_mark>#140#% https://people.eecs.berkeley.edu/~elghaoui/Teaching/EE227A/lecture1.pdf
+
+<tex2html_mydb_mark>#141#% http://www.solver.com/linear-quadratic-programming#Quadratic Programming (QP) Problems
+
+<tex2html_mydb_mark>#142#% https://www.tu-ilmenau.de/fileadmin/media/simulation/Lehre/Vorlesungsskripte/Lecture_materials_Abebe/NLP_Notes.pdf
+
+<tex2html_mydb_mark>#143#% https://www.math.uh.edu/~rohop/fall_06/Chapter3.pdf
+
+<tex2html_mydb_mark>#144#% http://home.agh.edu.pl/~pba/pdfdoc/Numerical_Optimization.pdf
+
+<tex2html_mydb_mark>#145#% https://ocw.mit.edu/courses/sloan-school-of-management/15-084j-nonlinear-programming-spring-2004/lecture-notes/lec14_int_pt_mthd.pdf
+
+<tex2html_mydb_mark>#146#%http://cepac.cheme.cmu.edu/pasilectures/biegler/ipopt.pdf
+
+<tex2html_mydb_mark>#147#% It is difficult to find the solution ${\bf x}^*$ of the optimization
+
+<tex2html_mydb_mark>#148#% problem that satisfies all the inequalities as well as equalities 
+
+<tex2html_mydb_mark>#149#% in the KKT conditions. 
+
+<tex2html_mydb_mark>#150#% http://cepac.cheme.cmu.edu/pasilectures/biegler/ipopt.pdf
+
+<tex2html_mydb_mark>#151#% given A,b,c of the LP problem and inital value of x,
+    
+<tex2html_mydb_mark>#152#% m constraints, n variables
+    
+<tex2html_mydb_mark>#153#% zero matrices in coefficient matrix
+    
+<tex2html_mydb_mark>#154#% identity matrix in coefficient matrix
+    
+<tex2html_mydb_mark>#155#% initinal value for parameter t
+    
+<tex2html_mydb_mark>#156#% small enough not to exceed boundary
+    
+<tex2html_mydb_mark>#157#% initial value of lambda
+    
+<tex2html_mydb_mark>#158#% initial values for all three 
+    
+<tex2html_mydb_mark>#159#% initial guess of solution
+    
+<tex2html_mydb_mark>#160#% increase parameter t
+        
+<tex2html_mydb_mark>#161#% find search direction
+        
+<tex2html_mydb_mark>#162#% step forward
+        
+<tex2html_mydb_mark>#163#% plot trajectory of solution
+
+<tex2html_mydb_mark>#164#% n variables
+    
+<tex2html_mydb_mark>#165#% m constraints
+    
+<tex2html_mydb_mark>#166#% initinal value for parameter t
+    
+<tex2html_mydb_mark>#167#% stepsize, small enough not to exceed boundary
+    
+<tex2html_mydb_mark>#168#% initial value of lambda
+    
+<tex2html_mydb_mark>#169#% initial value
+    
+<tex2html_mydb_mark>#170#% increase parameter t
+        
+<tex2html_mydb_mark>#171#% find search direction
+        
+<tex2html_mydb_mark>#172#% step forward
+        
+<tex2html_mydb_mark>#173#% http://www.cs.toronto.edu/~robere/paper/interiorpoint.pdf
+
+<tex2html_mydb_mark>#174#% http://apmonitor.com/me575/uploads/Main/interior_point_lecture.pdf
+
+<tex2html_mydb_mark>#175#
+function x=InterierPointLP(A,c,b,x)
+    % given A,b,c of the LP problem and inital value of x,
+    % find optimal solution x that minimizes c'*x
+    [m n]=size(A);      % m constraints, n variables
+    z1=zeros(n);
+    z2=zeros(m);        % zero matrices in coefficient matrix
+    z3=zeros(m,n);
+    I=eye(n);           % identity matrix in coefficient matrix
+    y=ones(n,1);
+    t=9;                % initinal value for parameter t
+    alpha=0.3;          % small enough not to exceed boundary
+    mu=x./t;
+    lambda=pinv(A')*(mu-c); % initial value of lambda
+    w=[x; lambda; mu];      % initial values for all three 
+    B=[c+A'*lambda-mu; A*x-b; x.*mu-y/t];   
+    p=[x(1) x(2)];      % initial guess of solution
+    while norm(B);SPMgt;10^(-7)        
+        t=t*9;          % increase parameter t
+        X=diag(x);
+        M=diag(mu);
+        C=[z1 A' -I; A z2 z3; M z3' X];
+        B=[c+A'*lambda-mu; A*x-b; x.*mu-y/t]; 
+        dw=-inv(C)*B;  	% find search direction
+        w=w+alpha*dw;   % step forward
+        x=w(1:n);
+        lambda=w(n+1:n+m);
+        mu=w(n+m+1:length(w));       
+        p=[p; x(1), x(2)];
+    end
+    scatter(p(:,1),p(:,2));  % plot trajectory of solution
+end
+<tex2html_mydb_mark>#176#
+function [x mu lambda]=InteriorPointQP(Q,A,c,b,x)
+    n=length(c);        % n variables
+    m=length(b);    	% m constraints
+    z2=zeros(m);
+    z3=zeros(m,n);
+    I=eye(n);
+    y=ones(n,1);
+    t=9;                % initinal value for parameter t
+    alpha=0.1;       	% stepsize, small enough not to exceed boundary
+    mu=x./t;
+    lambda=pinv(A')*(mu-c-Q*x); % initial value of lambda
+    w=[x; lambda; mu];   	% initial value
+    B=[Q*x+c+A'*lambda-mu; A*x-b; x.*mu-y/t];             
+    while norm(B);SPMgt;10^(-7)   
+        t=t*9;        	% increase parameter t
+        X=diag(x);
+        M=diag(mu);       
+        C=[Q A' -I; A z2 z3; M z3' X];
+        B=[Q*x+c+A'*lambda-mu; A*x-b; x.*mu-y/t];             
+        dw=-inv(C)*B;  	% find search direction
+        w=w+alpha*dw;  	% step forward
+        x=w(1:n);
+        lambda=w(n+1:n+m);
+        mu=w(n+m+1:length(w));
+    end
+end

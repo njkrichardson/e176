@@ -1,0 +1,134 @@
+
+<H2><A ID="SECTION00036000000000000000">
+Quadratic Programming (QP)</A>
+</H2>
+
+<P>
+A quadratic programming (QP) problem is to minimize a quadratic function 
+subject to some equality and/or inequality constraints:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1089#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21235#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">231</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <tex2html_verbatim_mark>#math1090#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21237#</SPAN> is a positive definite matrix, <tex2html_verbatim_mark>#math1091#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21239#</SPAN>. Here the scalar constant <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21241#</SPAN> can be dropped
+as it does not play any role in the optimization.
+
+<P>
+We let <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21243#</SPAN> be an <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21245#</SPAN> matrix, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21247#</SPAN> an <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21249#</SPAN> matrix,
+and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21251#</SPAN> is an m-D vector, and <tex2html_verbatim_mark>#math1092#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21253#</SPAN> is a hyper 
+elliptic paraboloid with the minimum at point <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21255#</SPAN> in the N-D space.
+
+<P>
+We first consider the special case where the QP problem is only subject to
+equality constraints and we assume <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21257#</SPAN>, i.e., the number of constraints
+is smaller than the number of unknowns in <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21259#</SPAN>. Then the solution 
+<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21261#</SPAN> has to satisfy <tex2html_verbatim_mark>#math1093#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21263#</SPAN>, i.e., it has to be on
+<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21265#</SPAN> hyper planes in the N-D space.
+
+<P>
+The Lagrangian function of the QP problem is:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1094#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21267#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">232</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and then set its derivatives with respect to both <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21269#</SPAN> and
+<tex2html_verbatim_mark>#math1095#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21271#</SPAN> to zero:
+<BR>
+<DIV CLASS="mathdisplay">
+<tex2html_verbatim_mark>#math1096#
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><tex2html_image_mark>#tex2html_wrap_indisplay21274#</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay21276#</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay21278#</TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><tex2html_image_mark>#tex2html_wrap_indisplay21280#</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay21282#</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay21284#</TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">233</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+These two equations can be combined and expressed in matrix form as:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1097#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21286#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">234</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Solving this system of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21288#</SPAN> equations, we get both <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21290#</SPAN> and
+<tex2html_verbatim_mark>#math1098#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21292#</SPAN>.
+
+<P>
+<#5504#><B>Example</B><#5504#> 
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1099#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><#1#>Minimize:<#1#><tex2html_image_mark>#tex2html_wrap_indisplay21294#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1100#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><#1#>subject to:<#1#><tex2html_image_mark>#tex2html_wrap_indisplay21296#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+where
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1101#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21298#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1102#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21300#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+Solving this equation we get the solution <tex2html_verbatim_mark>#math1103#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21302#</SPAN> and
+<tex2html_verbatim_mark>#math1104#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21304#</SPAN>, at which the function <tex2html_verbatim_mark>#math1105#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21306#</SPAN> is 
+minimized subject to <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21308#</SPAN>.
+
+<P>
+If <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21310#</SPAN>, i.e., the number of equality constraints is the same
+as the number of variables, then the variable <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21312#</SPAN> is uniquely
+determined by the linear system <tex2html_verbatim_mark>#math1106#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21314#</SPAN>, as the intersect
+of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21316#</SPAN> hyper planes, independent of the objective function 
+<tex2html_verbatim_mark>#math1107#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21318#</SPAN>. Further if <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21320#</SPAN>, i.e., the system <tex2html_verbatim_mark>#math1108#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21322#</SPAN> 
+is over constrained, and its solution does not exist in general.
+It is therefore more interesting to consider QP problems subject to
+both equality and inequality constraints:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1109#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21324#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>

@@ -1,0 +1,359 @@
+
+<H2><A ID="SECTION00035000000000000000">
+The Simplex Algorithm</A>
+</H2>
+
+<P>
+Instead of exhausting all vertices of the feasible region to find
+the optimal solution, the simplex algorithm is an iterative process 
+that traverses along a sequence of edges of the polytopic feasible 
+region, starting at the origin and through a sequence of vertices 
+<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20822#</SPAN> with progressively greater objective value <tex2html_verbatim_mark>#math1018#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20824#</SPAN>,
+until eventually reaching the optimal solution.
+
+<P>
+To understand the algorithm, we first consider the equality constraint 
+<tex2html_verbatim_mark>#math1019#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20826#</SPAN> 
+of the standard LP problem. This is an under-determined linear system
+of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20828#</SPAN> variables but only <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20830#</SPAN> equations, only <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20832#</SPAN> of its <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20834#</SPAN> 
+columns of the coefficient matrix <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20836#</SPAN> are independent (assuming 
+<tex2html_verbatim_mark>#math1020#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20838#</SPAN>). Initially we choose the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20840#</SPAN> columns of the 
+identity coefficient matrix <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20842#</SPAN> as the independent columns, but
+subsequently we can choose any other <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20844#</SPAN> columns of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20846#</SPAN> as the 
+independent columns and convert them into a standard basis vector by 
+<A ID="tex2html23"
+  HREF="../ch0/node5.html">Gauss-Jordan elimination</A>,
+together with the corresponding variables in <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20848#</SPAN>. The resulting
+equation <tex2html_verbatim_mark>#math1021#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20850#</SPAN> remains equivalent to the original one,
+i.e., the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20852#</SPAN> equality constraints are always preserved and never 
+violated in the process.
+
+<P>
+For convenience of discussion and without loss of generality, we could
+reorder (not actually carried out) the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20854#</SPAN> columns in <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20856#</SPAN>, 
+together with the corresponding variables in <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20858#</SPAN>, so that the 
+constraining equation would always takes the following form:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1022#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20860#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">227</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Now the variables in the M-D vector <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20862#</SPAN> corresponding to the 
+<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20864#</SPAN> independent columns in <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20866#</SPAN> are the <#5183#><EM>basic variables</EM><#5183#>, 
+while the N-D vector <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20868#</SPAN> corresponding to the remaining <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20870#</SPAN> 
+dependent columns, now denoted by <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20872#</SPAN>, are the <#5186#><EM>non-basic 
+variables</EM><#5186#>. This equation will always hold if <tex2html_verbatim_mark>#math1023#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20874#</SPAN> and
+<tex2html_verbatim_mark>#math1024#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20876#</SPAN>. Such a solution is called a <#5191#><EM>basic solution</EM><#5191#> 
+of the linear system <tex2html_verbatim_mark>#math1025#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20878#</SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1026#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20880#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">228</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Initially, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20882#</SPAN> is the coefficient matrix in the inequality 
+constraint <tex2html_verbatim_mark>#math1027#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20884#</SPAN>, and the corresponding non-basic
+variables <tex2html_verbatim_mark>#math1028#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20886#</SPAN> is actually the origin. But through
+the iteration, we will keep converting some other columns of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20888#</SPAN>
+into standard basis vectors <tex2html_verbatim_mark>#math1029#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20890#</SPAN>, the 
+column vectors of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20892#</SPAN> by Gauss-Jordan elimination. The variables
+corresponding to the new <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20894#</SPAN> become the basic variables, while
+those corresponding to columns that become non-standard basis vectors 
+become non-basis variables.
+
+<P>
+The basic solutions corresponding the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20896#</SPAN> ways to choose <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20898#</SPAN> 
+of the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20900#</SPAN> columns of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20902#</SPAN> as independent are actually the
+intersections formed by any <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20904#</SPAN> of the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20906#</SPAN> constraining hyper-planes 
+in the N-D space. As noted before, only a subset of these <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20908#</SPAN> 
+basic solutions satisfy the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20910#</SPAN> constraints, and they are called 
+<#5221#><EM>basic feasible solutions (BFS)</EM><#5221#>. The goal of the iterative 
+process in the simplex algorithm is to find the optimal basic feasible 
+solution that maximizes <tex2html_verbatim_mark>#math1030#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20912#</SPAN> without exhausting all <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20914#</SPAN> 
+possibilities. This is done by selecting the columns in such a way 
+that the value of the objective function will always be maximally 
+increased, until eventually we find the optimal solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20916#</SPAN>, 
+the vertex of the polytopic feasible region at which <tex2html_verbatim_mark>#math1031#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20918#</SPAN> 
+is maximized.
+
+<P>
+Specially, the implementation of the simplex algorithm is based on a 
+tableau with <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20920#</SPAN> columns and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20922#</SPAN> rows, initialized as below:
+
+<UL>
+<LI>The first <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20924#</SPAN> rows are for the coefficients in the equality
+  constraints <tex2html_verbatim_mark>#math1032#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20926#</SPAN> (<tex2html_verbatim_mark>#math1033#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20928#</SPAN>). An
+  additional <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20930#</SPAN> row at the bottom is for the coefficients
+  in the objective function <tex2html_verbatim_mark>#math1034#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20932#</SPAN>, which
+  is zero initially at the origin <tex2html_verbatim_mark>#math1035#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20934#</SPAN>, i.e., 
+  <tex2html_verbatim_mark>#math1036#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20936#</SPAN>.
+</LI>
+<LI>The first <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20938#</SPAN> columns contain the coefficients for the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20940#</SPAN> 
+  original variables <tex2html_verbatim_mark>#math1037#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20942#</SPAN> and the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20944#</SPAN> slack variables 
+  <tex2html_verbatim_mark>#math1038#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20946#</SPAN>, and an additional <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20948#</SPAN> column is for 
+  the constants <tex2html_verbatim_mark>#math1039#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20950#</SPAN> on the right-hand side of
+  the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20952#</SPAN> constraint equations. The last element of the column is the 
+  right-hand side of the objective equation <tex2html_verbatim_mark>#math1040#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20954#</SPAN>, which is 
+  initially zero.
+</LI>
+</UL>
+
+<P>
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1041#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20956#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">229</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+At this initial stage of the iteration, the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20958#</SPAN> original variables 
+<tex2html_verbatim_mark>#math1042#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20960#</SPAN> are the non-basic variables, while the 
+<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20962#</SPAN> slack variables <tex2html_verbatim_mark>#math1043#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20964#</SPAN> are the basic variables 
+and their coefficients form an <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20966#</SPAN> identity matrix <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20968#</SPAN>, 
+composed of the standard basis vectors. The corresponding feasible basic 
+solution is simply
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1044#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20970#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">230</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+that satisfies all the constraints
+<tex2html_verbatim_mark>#math1045#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20972#</SPAN>. 
+
+<P>
+In each of the subsequent iterations, we will select one of the non-basic
+variables, called the <#5265#><EM>entering variable</EM><#5265#>, to replace one of the basic
+variables, called the <#5266#><EM>leaving variable</EM><#5266#>, in such a way that the value
+of the objective function value <tex2html_verbatim_mark>#math1046#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20974#</SPAN> in the last row will be 
+maximally increased, while all constraints remain satisfied. Here are the 
+steps in each iteration:
+
+<P>
+
+<UL>
+<LI><#5269#><B>Selection of the entering variable</B><#5269#>
+
+<P>
+This section is based on the maximization of <tex2html_verbatim_mark>#math1047#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20976#</SPAN>. We select 
+  <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20978#</SPAN> in the jth column of the tableau if <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20980#</SPAN> is most negative, i.e.,
+  <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20982#</SPAN> is most heavily weighted by <tex2html_verbatim_mark>#math1048#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20984#</SPAN>, so that 
+  it will increase <tex2html_verbatim_mark>#math1049#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20986#</SPAN> more than any other <tex2html_verbatim_mark>#math1050#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20988#</SPAN>. 
+
+<P>
+</LI>
+<LI><#5272#><B>Selection of the leaving variable</B><#5272#>
+
+<P>
+This selection is based on the constraints imposed on the selected 
+  entering variable <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20990#</SPAN>. In general, the restriction on <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20992#</SPAN> set by 
+  the kth constraint <tex2html_verbatim_mark>#math1051#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20994#</SPAN> is <tex2html_verbatim_mark>#math1052#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20996#</SPAN>
+  when <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20998#</SPAN>. If <tex2html_verbatim_mark>#math1053#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21000#</SPAN> for all <tex2html_verbatim_mark>#math1054#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21002#</SPAN>,
+  then the ith constraint is most restrictive on <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21004#</SPAN>, we will therefore
+  select the corresponding basic variable <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21006#</SPAN> as the leaving variable,
+  i.e., it becomes a non-basic variable to be set to zero, so that <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21008#</SPAN>
+  can be maximally increased without violating the constraints. If all 
+  <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21010#</SPAN> for all <tex2html_verbatim_mark>#math1055#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21012#</SPAN>, variable <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21014#</SPAN> is not bounded.
+
+<P>
+</LI>
+<LI><#5280#><B>Gauss-Jordan elimination based on Pivoting</B><#5280#>
+
+<P>
+To convert the entering variable <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21016#</SPAN> to a basic variable to replace the
+  leaving variable <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21018#</SPAN>, we need to turn the corresponding jth column into a
+  standard basis vector <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21020#</SPAN>. This is realized by pivoting on <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21022#</SPAN>
+  in the following steps:
+  
+<OL>
+<LI>Divide the ith row by <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21024#</SPAN>: <tex2html_verbatim_mark>#math1056#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21026#</SPAN>.
+    Now <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21028#</SPAN>.
+</LI>
+<LI>Subtract <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21030#</SPAN> times the ith row from the kth row:
+    <tex2html_verbatim_mark>#math1057#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21032#</SPAN>. 
+    Now <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21034#</SPAN> for all <tex2html_verbatim_mark>#math1058#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21036#</SPAN>, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21038#</SPAN>.
+  
+</LI>
+</OL>
+  Now the jth column corresponding to the entering variable <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21040#</SPAN> becomes
+  a standard basis vector <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21042#</SPAN>, i.e., <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21044#</SPAN> becomes a basic variable 
+  that takes the value of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21046#</SPAN>, and the column corresponding to the leaving 
+  variable <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21048#</SPAN> is no longer a standard basis vector, and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21050#</SPAN> as it is
+  now a non-basic variable.
+
+<P>
+</LI>
+</UL>
+
+<P>
+As Gauss-Jordan elimination converts the linear equations to a set of 
+equivalent equations, the constraints remain satisfied through out the 
+process. Although the membership of the basic and non-basic variable 
+groups keeps changing in the iteration, so long as <tex2html_verbatim_mark>#math1059#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21052#</SPAN> 
+and <tex2html_verbatim_mark>#math1060#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21054#</SPAN>, the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21056#</SPAN> constraint equations 
+<tex2html_verbatim_mark>#math1061#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21058#</SPAN> always holds.
+
+<P>
+This iterative process keeps replacing the slack variables 
+<tex2html_verbatim_mark>#math1062#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21060#</SPAN> (the basic variables initially) by the original 
+variables <tex2html_verbatim_mark>#math1063#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21062#</SPAN> (the non-basic variables initially), 
+one at a time, until all elements in the last row are non-negative.
+
+<P>
+The final result can be read out directly from the tableau. The variables 
+corresponding to the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21064#</SPAN> standard basis vectors <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21066#</SPAN> (<tex2html_verbatim_mark>#math1064#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21068#</SPAN>) 
+are the final basic variables that take the values in <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21070#</SPAN> in the
+right-most column of the tableau. They form the optimal basic solution, 
+with the maximum of the objective function <tex2html_verbatim_mark>#math1065#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21072#</SPAN> given by the last 
+element also in the last column. The remaining <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21074#</SPAN> variables corresponding 
+to non-standard columns are non-basic variables that take the value zero. 
+When <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21076#</SPAN> (more constraints than variables), some of the slack variables 
+may remain in the basic variable group taking non-zero values; when <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21078#</SPAN>, 
+some of the original variable may be in the non-basic group taking the value
+zero.
+
+<P>
+<#5311#><B>Example:</B><#5311#>
+
+<P>
+There are <tex2html_verbatim_mark>#math1066#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21080#</SPAN> basic solutions as listed below, 
+out of which five are basic feasible solutions with all <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21082#</SPAN>
+variables taking non-negative values. The remaining solutions 
+are not feasible, as some of the variables take negative values.
+
+<P>
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1067#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21084#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+<#5330#><B>Example:</B><#5330#>
+
+<P>
+We re-solve the LP problem considered in the previous examples, now 
+in the standard form:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1068#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21086#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+The standard form is further converted to a tableau as shown below. The 
+left-most column indicates the basic variables, the next <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21088#</SPAN> columns 
+are for the variables <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21090#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21092#</SPAN>,the next <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21094#</SPAN> columns are for the slack 
+variables <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21096#</SPAN>, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21098#</SPAN>, and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21100#</SPAN>, the right most column is for the constants 
+<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21102#</SPAN>, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21104#</SPAN>, and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21106#</SPAN> on the right-hand side of the equations.
+
+<P>
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1069#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21108#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+In this initial state, the basic variables are <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21110#</SPAN>, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21112#</SPAN>, and 
+<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21114#</SPAN>, the non-basic variables are <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21116#</SPAN>. The corresponding basic
+feasible solution is at the origin.
+
+<P>
+
+<UL>
+<LI>Select column <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21118#</SPAN> as the pivot column, as <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21120#</SPAN> is the most 
+  negative coefficient.
+</LI>
+<LI>Select row <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21122#</SPAN> as the pivot row, as the ratio 
+  <tex2html_verbatim_mark>#math1070#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21124#</SPAN> is the minimum among all <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21126#</SPAN> ratios <tex2html_verbatim_mark>#math1071#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21128#</SPAN>
+  (<tex2html_verbatim_mark>#math1072#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21130#</SPAN>).
+</LI>
+<LI>Divide pivot row <tex2html_verbatim_mark>#math1073#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21132#</SPAN> by 
+  the pivot element <tex2html_verbatim_mark>#math1074#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21134#</SPAN> to get <tex2html_verbatim_mark>#math1075#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21136#</SPAN>.
+</LI>
+<LI>Subtract <tex2html_verbatim_mark>#math1076#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21138#</SPAN><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21140#</SPAN> from row <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21142#</SPAN>, so that 
+  <tex2html_verbatim_mark>#math1077#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21144#</SPAN>.
+</LI>
+<LI>Subtract <tex2html_verbatim_mark>#math1078#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21146#</SPAN> from <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21148#</SPAN> (last row).
+</LI>
+</UL>
+
+<P>
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1079#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21150#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+The entering variable <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21152#</SPAN> becomes a basic variable to replace the 
+leaving variable <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21154#</SPAN> which becomes a non-basic variable. The corresponding
+basic feasible solution is at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21156#</SPAN>, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21158#</SPAN>, with <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21160#</SPAN>, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21162#</SPAN>,
+<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21164#</SPAN>. The objective function value is <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21166#</SPAN>.
+
+<P>
+
+<UL>
+<LI>Select column <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21168#</SPAN> as the pivot column, as <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21170#</SPAN> is the most 
+  (only) negative coefficient.
+</LI>
+<LI>Select row <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21172#</SPAN> as the pivot row, as the ratio 
+  <tex2html_verbatim_mark>#math1080#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21174#</SPAN> is the minimum among all <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21176#</SPAN> ratios <tex2html_verbatim_mark>#math1081#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21178#</SPAN>
+  (<tex2html_verbatim_mark>#math1082#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21180#</SPAN>).
+</LI>
+<LI>Divide row <tex2html_verbatim_mark>#math1083#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21182#</SPAN> by the pivot 
+  element <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21184#</SPAN> to get <tex2html_verbatim_mark>#math1084#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21186#</SPAN>.
+</LI>
+<LI>Subtract <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21188#</SPAN><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21190#</SPAN> from row <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21192#</SPAN>, so that 
+  <tex2html_verbatim_mark>#math1085#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21194#</SPAN>.
+</LI>
+<LI>Subtract <tex2html_verbatim_mark>#math1086#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21196#</SPAN> from <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21198#</SPAN> (last row).
+</LI>
+</UL>
+
+<P>
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1087#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21200#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+The entering variable <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21202#</SPAN> becomes a basic variable to replace the leaving 
+variable <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21204#</SPAN> which becomes a non-basic variable. The corresponding basic 
+feasible solution is at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21206#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21208#</SPAN>, with <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21210#</SPAN>, and 
+<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21212#</SPAN>. The objective function value is <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21214#</SPAN>.
+
+<P>
+This problem has <tex2html_verbatim_mark>#math1088#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21216#</SPAN> basic solutions, corresponding
+to the same number of intersections, out of which five are feasible,
+as previously obtained. The simplex method finds three of these feasible
+solutions, starting from <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21218#</SPAN> at the origin with <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21220#</SPAN>, through 
+the vertex at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21222#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21224#</SPAN> with <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21226#</SPAN>, to the optimal solution 
+at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21228#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21230#</SPAN> with <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21232#</SPAN>.
+
+<P>

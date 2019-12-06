@@ -1,0 +1,130 @@
+
+<H2><A ID="SECTION00021000000000000000">
+Golden section search</A>
+</H2>
+
+<P>
+The golden section search algorithm can be used for finding a minimum (or
+maximum) of a single-variable function <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18055#</SPAN>. If it is known that the
+function has a minimum between some two points, then we can search for it 
+iteratively, in a manner similar to the bisection search for the root of 
+an equation <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18057#</SPAN>. Specifically, if in the neighborhood of the minimum
+we can find three points <tex2html_verbatim_mark>#math241#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18059#</SPAN> corresponding to <tex2html_verbatim_mark>#math242#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18061#</SPAN>,
+then there exists a minimum between <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18063#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18065#</SPAN>. To search for this
+minimum, we can choose another point <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18067#</SPAN> between <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18069#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18071#</SPAN> as shown
+in the figure below, with the following two possible outcomes:
+
+<UL>
+<LI>If <tex2html_verbatim_mark>#math243#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18073#</SPAN>, the minimum is inside the interval <tex2html_verbatim_mark>#math244#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18075#</SPAN> 
+  associated with three new points <tex2html_verbatim_mark>#math245#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18077#</SPAN>, i.e., <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18079#</SPAN> is replaced by 
+  <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18081#</SPAN>.
+</LI>
+<LI>If <tex2html_verbatim_mark>#math246#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18083#</SPAN>, the minimum is inside the interval <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18085#</SPAN>
+  associated with three new points <tex2html_verbatim_mark>#math247#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18087#</SPAN>, i.e., <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18089#</SPAN> is replaced by 
+  <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18091#</SPAN>.
+</LI>
+</UL>
+In either case, the new search interval <tex2html_verbatim_mark>#math248#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18093#</SPAN> or <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18095#</SPAN> is 
+smaller than the old one <tex2html_verbatim_mark>#math249#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18097#</SPAN>, i.e., such an iteration is guaranteed
+to converge. Of course <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18099#</SPAN> can also be between <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18101#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18103#</SPAN>, the 
+iteration can be similarly carried out accordingly.
+
+<P>
+<IMG STYLE="" SRC="figures/GoldenRatio.png"
+ ALT="GoldenRatio.png">
+
+<P>
+Similar to the bisection search for the root of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18105#</SPAN>, here to search
+for the minimum of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18107#</SPAN>, we also want to avoid the worst possible case 
+in which the minimum always happens to be in the larger one of the two 
+sections <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18109#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18111#</SPAN>. We therefore choose <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18113#</SPAN> in such a way that the
+two resulting search intervals will always be the same:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math250#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18115#<#1#>i.e.<#1#><tex2html_image_mark>#tex2html_wrap_indisplay18116#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">10</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+In other words, through out the iteration, the search interval should 
+always be partitioned into two sections with the same ratio:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math251#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18118#<#1#>or<#1#><tex2html_image_mark>#tex2html_wrap_indisplay18119#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">11</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+In either case, we get
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math252#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18121#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">12</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Solving this quadratic equation for <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18123#</SPAN> in terms of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18125#</SPAN> we get
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math253#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18127#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">13</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+We keep the positive result and get
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math254#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18129#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">14</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+This is the <#334#><EM>golden ratio</EM><#334#> between the two sections <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18131#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18133#</SPAN> of 
+the search interval.
+
+<P>
+The iteration of the golden section search can terminate when the size 
+of the search brackets <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18135#</SPAN> is small enough, compared with some
+tolerance, such as <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18137#</SPAN>, pre-determined based on some prior knowledge 
+of the scale of the problem. However, this scale may be unknown, or it may
+vary drastically, and an absolute tolerance may be too large for a small 
+scale problem but too small for a large scale problem. This problem can 
+be resolved by using a relative tolerance with a scale comparable with 
+that of the size of the problem:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math255#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18139#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">15</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18141#</SPAN> is a small value such as <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18143#</SPAN>, and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18145#</SPAN>
+represents the size of the search interval and <tex2html_verbatim_mark>#math256#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18147#</SPAN> represents
+the scale of the problem. When the inequality is satisfied, the iteration 
+is terminated.
+
+<P>
+It is possible that the three initial points chosen are such that either 
+<tex2html_verbatim_mark>#math257#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18149#</SPAN> or <tex2html_verbatim_mark>#math258#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18151#</SPAN>, then we have to search 
+toward the descending direction of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18153#</SPAN> until it starts to ascend. 
+For example, if <tex2html_verbatim_mark>#math259#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18155#</SPAN>, they can be iteratively updated 
+by the following
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math260#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18157#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">16</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18159#</SPAN> (e.g., <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18161#</SPAN>), until we reach a point <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18163#</SPAN> at which
+<tex2html_verbatim_mark>#math261#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18165#</SPAN>. Obviously the distance <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18167#</SPAN> grows exponentially 
+<tex2html_verbatim_mark>#math262#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18169#</SPAN>. 
+
+<P>

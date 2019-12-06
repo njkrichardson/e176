@@ -1,0 +1,56 @@
+
+<H2><A ID="SECTION00029000000000000000">
+Issues of Local/Global Minimum</A>
+</H2>
+
+<P>
+A main concern in optimization problems is whether the solution obtained by 
+the algorithm is a local minimum or a global one. The simulated annealing
+(SA) algorithm is typically used to search for the global minimum in a 
+high-dimensional space, by allowing up-hill moves in the iteration to avoid
+getting stuck by a local minimum. SA mimics the annealing process in metallurgy,
+in which the temperature is carefully controlled to decrease slowly so that the
+material reaches a state with minimum free energy. 
+
+<P>
+The way the SA method avoids getting stuck at a local minimum is to allow the 
+iteration steps to go up-hill. Specifically, the objective function <tex2html_verbatim_mark>#math758#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19931#</SPAN> 
+evaluated at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19933#</SPAN> is treated as the energy at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19935#</SPAN>, and an up-hill 
+move corresponding to an energy increase <tex2html_verbatim_mark>#math759#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19937#</SPAN> 
+can be accepted if some probability function is greater than a random threshold 
+value <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19939#</SPAN> within a certain range comparable with <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19941#</SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math760#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19943#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">167</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Obviously smaller <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19945#</SPAN> and higher <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19947#</SPAN> will cause higher <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19949#</SPAN>, it is more
+probable for a move to be accepted.
+
+<P>
+During the entire search process, the temperature <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19951#</SPAN> gradually reduces so that 
+the probability of accepting an up-hill move also gradually reduces. In the early
+stage of the search, it is more probable to go up-hill, thereby getting out of a
+local minimum; but toward the later part of the search process, such a move is
+less likely to happen, as presumably in this late stage of the search, the energy
+level is already low, not likely to be at a local minimum with high energy level.
+Through out the search, the best result corresponding to he lowest energy level
+is always updated, to be returned as the final solution at the end of the process.
+
+<P>
+Further information can be found at 
+<A ID="tex2html20"
+  HREF="http://en.wikipedia.org/wiki/Simulated_annealing">wikipedia</A>
+and
+<A ID="tex2html21"
+  HREF="http://mathworld.wolfram.com/SimulatedAnnealing.html">mathworld</A>.
+
+<P>
+A c program for AS can be found 
+<A ID="tex2html22"
+  HREF="http://fourier.eng.hmc.edu/e176/lectures/siman.c">here</A>.
+
+<P>

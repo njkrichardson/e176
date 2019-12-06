@@ -1,0 +1,767 @@
+
+<H2><A ID="SECTION00028000000000000000">
+Conjugate gradient method</A>
+</H2>
+
+<P>
+<A ID="tex2html16"
+  HREF="http://www.cs.cmu.edu/&#126;quake-papers/painless-conjugate-gradient.pdf">reference</A>
+<P>
+The gradient descent method can be used to solve the minimization problem
+when the Hessian matrix of the objective function is not available. However, 
+this method may not be efficient if it gets into a zigzag search pattern and 
+repeat the same search directions many times. This problem can be avoided 
+in the <#2787#><EM>conjugate gradient (CG)</EM><#2787#> method. If the objective function is
+quadratic, the CG method converges to the solution in <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19460#</SPAN> iterations without 
+repeating any of the directions previously traversed. If the objective function 
+is not quadratic, the CG method can still significantly improve the performance
+in comparison to the gradient descent method. 
+
+<P>
+Here we will first assume the function <tex2html_verbatim_mark>#math620#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19462#</SPAN> to be minimized is quadratic:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math621#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19464#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">128</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <tex2html_verbatim_mark>#math622#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19466#</SPAN> is symmetric. Later we will relax the condition 
+for <tex2html_verbatim_mark>#math623#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19468#</SPAN> and consider the minimization of arbitrary functions, which
+can be approximated by the first three terms of it Taylor expansion, with 
+the symmetric Hessian matrix in the third term.
+
+<P>
+The gradient and Hessian of the quadratic function given above are respectively:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math624#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19470#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">129</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and 
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math625#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19472#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">130</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+We further assume the Hessian matrix is positive definite, so that <tex2html_verbatim_mark>#math626#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19474#</SPAN> 
+has a minimum. 
+
+<P>
+Solving <tex2html_verbatim_mark>#math627#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19476#</SPAN>, we get the
+solution <tex2html_verbatim_mark>#math628#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19478#</SPAN>, at which the function is minimized 
+to 
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math629#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19480#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">131</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+At the solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19482#</SPAN> that minimizes <tex2html_verbatim_mark>#math630#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19484#</SPAN>, its gradient
+<tex2html_verbatim_mark>#math631#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19486#</SPAN>. At the nth estimate 
+<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19488#</SPAN> the gradient <tex2html_verbatim_mark>#math632#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19490#</SPAN> can be considered 
+as the residual of the nth iteration, and <tex2html_verbatim_mark>#math633#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19492#</SPAN> can 
+be used as an error measurement representing how close <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19494#</SPAN> is to 
+the true solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19496#</SPAN>. 
+
+<P>
+We also see that the minimization of the quadratic function <tex2html_verbatim_mark>#math634#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19498#</SPAN> 
+is equivalent to solving a linear equation <tex2html_verbatim_mark>#math635#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19500#</SPAN> with 
+a symmetric positive definite coefficient matrix <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19502#</SPAN>. The CG method 
+considered here can therefore be used for solving both problems. 
+
+<P>
+<#2889#><B>Conjugate basis vectors</B><#2889#>
+
+<P>
+Before continuing to discuss the CG algorithm, we first review the concept of 
+<A ID="tex2html17"
+  HREF="http://fourier.eng.hmc.edu/e176/lectures/algebra/node2.html">conjugate vectors</A>,
+which is the key to the CG method. Two vectors <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19504#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19506#</SPAN> are
+<#2894#><EM>mutually conjugate</EM><#2894#> (or A-orthogonal or A-conjugate) to each other 
+with respect to a symmetric matrix <tex2html_verbatim_mark>#math636#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19508#</SPAN>, if they satisfy:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math637#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19510#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">132</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Specially, if <tex2html_verbatim_mark>#math638#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19512#</SPAN>, the two conjugate vectors become orthogonal 
+to each other, i.e., <tex2html_verbatim_mark>#math639#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19514#</SPAN>.
+
+<P>
+Similar to a set of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19516#</SPAN> orthogonal vectors that can be used as the basis 
+spanning an N-D space, a set of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19518#</SPAN> mutually conjugate vectors 
+<tex2html_verbatim_mark>#math640#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19520#</SPAN> satisfying <tex2html_verbatim_mark>#math641#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19522#</SPAN>
+(<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19524#</SPAN>) can also be used as a basis to span the N-D space. Any vector in 
+the space can be expressed as a linear combination of these basis vectors.
+
+<P>
+Also we note that any set of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19526#</SPAN> independent vectors can be converted by the
+<A ID="tex2html18"
+  HREF="http://fourier.eng.hmc.edu/e176/lectures/algebra/node2.html">Gram-Schmidt process</A>
+to a set of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19528#</SPAN> basis vectors that are either orthogonal or A-orthogonal.
+
+<P>
+<#2920#><B>Example:</B><#2920#>  Given two independent basis vectors of the 2-D space, and
+a positive-definite matrix:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math642#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19530#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+we can construct two A-orthogonal basis vectors by the Gram-Schmidt method:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math643#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19532#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+The projections of a vector <tex2html_verbatim_mark>#math644#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19534#</SPAN> onto <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19536#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19538#</SPAN> 
+are:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math645#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19540#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+The A-projections of the same vector <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19542#</SPAN> onto <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19544#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19546#</SPAN>
+are:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math646#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19548#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+The original vector <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19550#</SPAN> can be represented in either of the two bases:
+<BR>
+<DIV CLASS="mathdisplay">
+<tex2html_verbatim_mark>#math647#
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><tex2html_image_mark>#tex2html_wrap_indisplay19553#</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay19555#</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay19557#</TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay19559#</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay19561#</TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+
+<P>
+<IMG STYLE="" SRC="figures/Aorthogonal.png"
+ ALT="Aorthogonal.png">
+
+<P>
+<#3060#><B>Search along a conjugate basis</B><#3060#>
+
+<P>
+Similar to the gradient descent method, which iteratively improves 
+the estimated solution by following a sequence of orthogonal search 
+directions <tex2html_verbatim_mark>#math648#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19563#</SPAN>, the CG method
+also follows a sequence of search directions <tex2html_verbatim_mark>#math649#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19565#</SPAN> A-orthogonal to each other, i.e., 
+<tex2html_verbatim_mark>#math650#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19567#</SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="CGiteration"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math651#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19569#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">133</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Subtracting <tex2html_verbatim_mark>#math652#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19571#</SPAN>
+from both sides, we get the iteration in terms of the errors:
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="CGerror"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math653#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19573#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">134</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+As it is assumed that the function to be minimized is quadratic 
+<tex2html_verbatim_mark>#math654#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19575#</SPAN>, its
+gradient at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19577#</SPAN> is:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math655#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19579#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">135</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19581#</SPAN> is the solution satisfying
+<tex2html_verbatim_mark>#math656#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19583#</SPAN>. The optimal 
+step size in Eq. (<A HREF=<tex2html_cr_mark>#OptimalDelta#3126><tex2html_cr_mark></A>) can be written as
+<BR>
+<DIV CLASS="mathdisplay"><A ID="delta_gd"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math657#
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><tex2html_image_mark>#tex2html_wrap_indisplay19586#</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay19588#</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay19590#</TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay19592#</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay19594#</TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">136</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+The last equality is due to the fact that <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19596#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19598#</SPAN>
+are A-orthogonal, i.e., <tex2html_verbatim_mark>#math658#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19600#</SPAN>.
+Substituting this into Eq. (<A HREF=<tex2html_cr_mark>#CGerror#3178><tex2html_cr_mark></A>) we get
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math659#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19602#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">137</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+On the other hand, we represent the error <tex2html_verbatim_mark>#math660#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19604#</SPAN> 
+associated with the initial guess <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19606#</SPAN> as a linear combination of 
+the search vectors <tex2html_verbatim_mark>#math661#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19608#</SPAN> treated as <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19610#</SPAN> basis 
+vectors that span the N-D vector space:
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="cine0"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math662#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19612#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">138</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <tex2html_verbatim_mark>#math663#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19614#</SPAN> is the A-projection of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19616#</SPAN> 
+onto the ith basis vector <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19618#</SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math664#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19620#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">139</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+We note that the coefficient <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19622#</SPAN> happens to be the negative optimal step
+size in Eq. (<A HREF=<tex2html_cr_mark>#delta_gd#3239><tex2html_cr_mark></A>):
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math665#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19624#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">140</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Now the expression of <tex2html_verbatim_mark>#math666#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19626#</SPAN> in Eq. (<A HREF=<tex2html_cr_mark>#CGerror#3250><tex2html_cr_mark></A>) can be written as
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math667#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19628#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">141</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+We see that in each iteration from <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19630#</SPAN> to <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19632#</SPAN>, the number of terms
+in the summation is reduced by one, i.e., the nth component 
+<tex2html_verbatim_mark>#math668#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19634#</SPAN> of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19636#</SPAN> along the direction of 
+<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19638#</SPAN> is completely eliminated. After <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19640#</SPAN> such iterations, the
+error is reduced from <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19642#</SPAN> to <tex2html_verbatim_mark>#math669#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19644#</SPAN>, and the true 
+solution is obtained <tex2html_verbatim_mark>#math670#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19646#</SPAN>. 
+
+<P>
+Pre-multiplying <tex2html_verbatim_mark>#math671#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19648#</SPAN> on both sides of the
+equation above, we get:
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="gd0"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math672#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19650#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">142</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+We see that after <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19652#</SPAN> iterations the remaining error <tex2html_verbatim_mark>#math673#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19654#</SPAN> is 
+A-orthogonal to all previous directions <tex2html_verbatim_mark>#math674#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19656#</SPAN>, and 
+the gradient <tex2html_verbatim_mark>#math675#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19658#</SPAN> is orthogonal to these directions.
+
+<P>
+In the figure below, the conjugate gradient method is compared with the gradient 
+descent method for the case of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19660#</SPAN>. We see that the first search direction is
+the same <tex2html_verbatim_mark>#math676#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19662#</SPAN> for both methods. However, the next search direction 
+<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19664#</SPAN> is A-orthogonal to <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19666#</SPAN>, same as the next error <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19668#</SPAN>, 
+different from the search direction <tex2html_verbatim_mark>#math677#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19670#</SPAN> in gradient descent method. 
+The conjugate gradient method finds the solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19672#</SPAN> in <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19674#</SPAN> steps, 
+while the gradient descent method has to go through many more steps all 
+orthogonal to each other before it finds the solution.
+
+<P>
+<IMG STYLE="" SRC="figures/ConjugateGradient.png"
+ ALT="ConjugateGradient.png">.
+
+<P>
+<#3313#><B>Find the A-orthogonal basis</B><#3313#>
+
+<P>
+The <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19676#</SPAN> A-orthogonal search directions <tex2html_verbatim_mark>#math678#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19678#</SPAN> 
+can be constructed based on any set of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19680#</SPAN> independent vectors 
+<tex2html_verbatim_mark>#math679#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19682#</SPAN> by the 
+<A ID="tex2html19"
+  HREF="../algebra/node2.html">Gram-Schmidt process</A>:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math680#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19684#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">143</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <tex2html_verbatim_mark>#math681#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19686#</SPAN> 
+and <tex2html_verbatim_mark>#math682#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19688#</SPAN> is the A-projection of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19690#</SPAN> onto each
+of the previous direction <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19692#</SPAN>.
+
+<P>
+However, we specifically choose to use <tex2html_verbatim_mark>#math683#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19694#</SPAN>, to gain
+some significant computational advantage as shows below. Now the
+Gram-Schmidt process above becomes:
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="GSCG"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math684#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19696#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">144</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="GSbeta"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math685#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19698#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">145</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The equation above also indicates that <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19700#</SPAN> can be written 
+as a linear combination of all previous search directions
+<tex2html_verbatim_mark>#math686#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19702#</SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math687#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19704#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">146</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Premultiplying <tex2html_verbatim_mark>#math688#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19706#</SPAN> on both sides, we get
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math689#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19708#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">147</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The last equality is due to <tex2html_verbatim_mark>#math690#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19710#</SPAN> (Eq. (<A HREF=<tex2html_cr_mark>#gd0#3410><tex2html_cr_mark></A>)).
+We see that <tex2html_verbatim_mark>#math691#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19712#</SPAN> is also orthogonal to all previous gradients 
+<tex2html_verbatim_mark>#math692#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19714#</SPAN>.
+
+<P>
+Pre-multiplying <tex2html_verbatim_mark>#math693#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19716#</SPAN> on both sides of Eq. (<A HREF=<tex2html_cr_mark>#GSCG#3416><tex2html_cr_mark></A>),
+we get
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math694#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19718#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">148</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Note that all terms in the summation are zero as <tex2html_verbatim_mark>#math695#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19720#</SPAN> 
+for all <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19722#</SPAN> (Eq. (<A HREF=<tex2html_cr_mark>#gd0#3436><tex2html_cr_mark></A>)). Substituting 
+<tex2html_verbatim_mark>#math696#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19724#</SPAN> into Eq. (<A HREF=<tex2html_cr_mark>#delta_gd#3440><tex2html_cr_mark></A>), we get
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="CGstepsize"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math697#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19726#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">149</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Next we consider
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math698#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19728#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">150</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Pre-multiplying <tex2html_verbatim_mark>#math699#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19730#</SPAN> with <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19732#</SPAN> on both sides we get
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math700#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19734#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">151</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <tex2html_verbatim_mark>#math701#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19736#</SPAN> (<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19738#</SPAN>). Solving for <tex2html_verbatim_mark>#math702#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19740#</SPAN> 
+we get
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math703#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19742#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">152</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Substituting this into Eq. (<A HREF=<tex2html_cr_mark>#GSbeta#3507><tex2html_cr_mark></A>) we get
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math704#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19744#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">153</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+which is non-zero only when <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19746#</SPAN>, i.e., there is only one non-zero term
+in the summation of the Gram-Schmidt formula for <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19748#</SPAN>. This is the 
+reason why we choose <tex2html_verbatim_mark>#math705#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19750#</SPAN>. We can now drop the second 
+subscript <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19752#</SPAN> in <tex2html_verbatim_mark>#math706#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19754#</SPAN>. Substituting the step size
+<tex2html_verbatim_mark>#math707#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19756#</SPAN> 
+(Eq. (<A HREF=<tex2html_cr_mark>#CGstepsize#3539><tex2html_cr_mark></A>)) into the above expression for <tex2html_verbatim_mark>#math708#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19758#</SPAN>,
+we get
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math709#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19760#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">154</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+We note that matrix <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19762#</SPAN> no longer appears in the expression.
+
+<P>
+<#3547#><B>The CG algorithm</B><#3547#>
+
+<P>
+In summary here are the steps of the conjugate gradient algorithm:
+
+<OL>
+<LI>Set <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19764#</SPAN> and initialize the search direction (same as gradient descent):
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math710#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19766#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">155</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+</LI>
+<LI>Terminate if the error <tex2html_verbatim_mark>#math711#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19768#</SPAN> is smaller 
+  than a preset threshold. Otherwise, continue with the following:
+</LI>
+<LI>Find optimal step size and step forward:
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math712#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19770#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">156</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+</LI>
+<LI>Update gradient:
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math713#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19772#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">157</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+</LI>
+<LI>Find coefficient for the Gram-Schmidt process:
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math714#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19774#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">158</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+</LI>
+<LI>Update search direction:
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math715#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19776#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">159</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  Set <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19778#</SPAN> and go back to step 2.
+</LI>
+</OL>
+
+<P>
+The algorithm above assumes the objective function <tex2html_verbatim_mark>#math716#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19780#</SPAN> to be quadratic 
+with known <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19782#</SPAN>. But when <tex2html_verbatim_mark>#math717#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19784#</SPAN> is not quadratic, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19786#</SPAN> is no 
+longer available, and the Hessian <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19788#</SPAN> may not be a good approximation of 
+<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19790#</SPAN>. However, we can still assume that <tex2html_verbatim_mark>#math718#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19792#</SPAN> can be approximated 
+as a quadratic function in the neighborhood of its minimum. In this case, the 
+algorithm can be modified so that it does not depend on <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19794#</SPAN>. Specifically,
+in step 3 above, the optimal step size <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19796#</SPAN> is calculated based on <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19798#</SPAN>.
+When <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19800#</SPAN> is unavailable, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19802#</SPAN> can also be found by line minimization
+based on any suitable algorithms for 1-D optimization. 
+
+<P>
+If it is known that the current <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19804#</SPAN> is close enough to the solution 
+<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19806#</SPAN>, we can approximate <tex2html_verbatim_mark>#math719#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19808#</SPAN> as a quadratic function, and
+its Hessian matrix <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19810#</SPAN> can be used to approximate <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19812#</SPAN> so that the 
+original algorithm may still be used. 
+
+<P>
+<#3602#><B>Example 1:</B><#3602#> 
+To compare the conjugate method and the gradient descent method, consider a very 
+simple 2-D quadratic function
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math720#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19814#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+The performance of the gradient descent method depends significantly on
+the initial guess. For the specific initial guess of <tex2html_verbatim_mark>#math721#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19816#</SPAN>,
+the iteration gets into a zigzag pattern and the convergence is very slow,
+as shown below:
+
+<P>
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math722#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath19818#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+However, as expected, the conjugate gradient method takes exactly
+<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19820#</SPAN> steps from any initial guess to reach at the solution:
+
+<P>
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math723#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath19822#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+<IMG STYLE="" SRC="figures/GDvsCG2.png"
+ ALT="GDvsCG2.png">
+
+<P>
+For an <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19824#</SPAN> example of <tex2html_verbatim_mark>#math724#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19826#</SPAN> with
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math725#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19828#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+from an initial guess <tex2html_verbatim_mark>#math726#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19830#</SPAN>, it takes the gradient 
+descent method 41 iterations to reach 
+<tex2html_verbatim_mark>#math727#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19832#</SPAN> corresponding
+to <tex2html_verbatim_mark>#math728#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19834#</SPAN>. From the same initial guess, it takes the 
+conjugate gradient method only <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19836#</SPAN> iterations to converge to the 
+solution:
+
+<P>
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math729#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath19838#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+For an <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19840#</SPAN> example, it takes over 4000 iterations for the gradient
+descent method to converge with <tex2html_verbatim_mark>#math730#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19842#</SPAN>, but exactly 9
+iterations for the CG method to converge with <tex2html_verbatim_mark>#math731#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19844#</SPAN>.
+
+<P>
+<#3655#><B>Example 2:</B><#3655#> 
+
+<P>
+The figure below shows the search path of the conjugate gradient method
+applied to the minimization of the Rosenbrock function:
+
+<P>
+<IMG STYLE="" SRC="figures/RosenbrockCG.png"
+ ALT="RosenbrockCG.png">
+
+<P>
+<#3657#><B>Example 3:</B><#3657#> 
+
+<P>
+Solve the following <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19846#</SPAN> non-linear equation system by the CG method:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math732#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19848#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+The solution is known to be <tex2html_verbatim_mark>#math733#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19850#</SPAN>.
+
+<P>
+This equation system can be represented in vector form as <tex2html_verbatim_mark>#math734#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19852#</SPAN>
+and the objective function is <tex2html_verbatim_mark>#math735#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19854#</SPAN>. 
+The iteration of the CG method with an initial guess <tex2html_verbatim_mark>#math736#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19856#</SPAN> is 
+shown below:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math737#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath19858#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+In comparison, the gradient descent method would need to take over 200 
+iterations (with much reduced complexity though) to reach this level of 
+error. 
+
+<P>
+<#3680#><B>Conjugate gradient method used for solving linear equation systems:</B><#3680#>
+
+<P>
+As discussed before, if <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19860#</SPAN> is the solution that minimizes the 
+quadratic function <tex2html_verbatim_mark>#math738#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19862#</SPAN>, 
+with <tex2html_verbatim_mark>#math739#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19864#</SPAN> being symmetric and positive definite, it also satisfies
+<tex2html_verbatim_mark>#math740#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19866#</SPAN>. In other words, the 
+optimization problem is equivalent to the problem of solving the linear system 
+<tex2html_verbatim_mark>#math741#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19868#</SPAN>, both can be solved by the conjugate gradient 
+method.
+
+<P>
+Now consider solving the linear system <tex2html_verbatim_mark>#math742#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19870#</SPAN> with 
+<tex2html_verbatim_mark>#math743#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19872#</SPAN>. Let <tex2html_verbatim_mark>#math744#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19874#</SPAN> be a set of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19876#</SPAN> 
+A-orthogonal vectors satisfying <tex2html_verbatim_mark>#math745#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19878#</SPAN>,
+which can be generated based on any <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19880#</SPAN> independent vectors, such as the
+standard basis vectors, by the Gram-Smidth method. The solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19882#</SPAN>
+of the equation <tex2html_verbatim_mark>#math746#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19884#</SPAN> can be represented by these <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19886#</SPAN> 
+vectors as
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math747#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19888#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">160</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Now we have
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math748#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19890#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">161</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Pre-multiplying <tex2html_verbatim_mark>#math749#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19892#</SPAN> on both sides we get
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math750#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19894#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">162</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Solving for <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19896#</SPAN> we get
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math751#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19898#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">163</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Substituting this back into the expression for <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19900#</SPAN> we get the solution
+of the equation:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math752#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19902#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">164</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Also note that as <tex2html_verbatim_mark>#math753#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19904#</SPAN>, the ith term of the summation above
+is simply the A-projection of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19906#</SPAN> onto the ith direction <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19908#</SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math754#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19910#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">165</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+One application of the conjugate gradient method is to solve the normal 
+equation to find the least-square solution of an over-constrained equation 
+system <tex2html_verbatim_mark>#math755#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19912#</SPAN>, where the coefficient matrix <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19914#</SPAN> is <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19916#</SPAN> 
+by <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19918#</SPAN> with rank <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19920#</SPAN>. As discussed previously, the normal equation of this 
+system is
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math756#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19922#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">166</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Here <tex2html_verbatim_mark>#math757#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19924#</SPAN> is an <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19926#</SPAN> by <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19928#</SPAN> symmetric, positive definite matrix.
+This normal equation can be solved by the conjugate gradient method.
+
+<P>

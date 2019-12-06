@@ -1,0 +1,545 @@
+
+<H2><A ID="SECTION00037000000000000000">
+Interior Point Methods</A>
+</H2>
+
+<P>
+Consider the a general constrained optimization problem:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1110#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21327#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">235</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+By introducing slack variables <tex2html_verbatim_mark>#math1111#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21329#</SPAN>, all inequality
+constraints can be converted into equality constraints:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1112#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21331#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">236</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+which can then be combined with the equality constraints and still 
+denoted by <tex2html_verbatim_mark>#math1113#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21333#</SPAN>, while the slack variables 
+<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21335#</SPAN> are also combined with the original variables and still 
+denoted by <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21337#</SPAN>. We assume there are in total <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21339#</SPAN> equality 
+constraints and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21341#</SPAN> variables. Now the optimization problem can be
+reformulated as:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1114#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21343#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">237</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The Lagrangian is
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1115#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21345#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">238</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The KKT conditions are
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1116#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21347#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">239</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <tex2html_verbatim_mark>#math1117#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21349#</SPAN>, <tex2html_verbatim_mark>#math1118#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21351#</SPAN>,
+and <tex2html_verbatim_mark>#math1119#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21353#</SPAN> is the Jacobian matrix of <tex2html_verbatim_mark>#math1120#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21355#</SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1121#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21357#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">240</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+To simplify the problem, the non-negativity constraints can be removed 
+by introducing an indicator function:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1122#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21359#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">241</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+which, when used as a cost function, penalizes any violation of the 
+non-negativity constraint <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21361#</SPAN>. Now the optimization problem can
+be reformulated as shown below without the non-negative constants 
+<tex2html_verbatim_mark>#math1123#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21363#</SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1124#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21365#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">242</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+However, as the indicator function is not smooth and therefore not
+differentiable, it is approximated by the <#5733#><EM>logarithmic barrier function</EM><#5733#> 
+which approaches <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21367#</SPAN> when the parameter <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21369#</SPAN> approaches infinity:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1125#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21371#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">243</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+<IMG STYLE="" SRC="figures/LogBarrier.png"
+ ALT="LogBarrier.png">
+
+<P>
+Now the optimization problem can be written as:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1126#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21373#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">244</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The Lagrangian is:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1127#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21375#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">245</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and its gradient is:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1128#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21377#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">246</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+We define
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1129#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21379#<#1#>i.e.<#1#><tex2html_image_mark>#tex2html_wrap_indisplay21380#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">247</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and combine this equation with the KKT conditions of the new 
+optimization problem to get
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="KKTconditionsIP"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math1130#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21382#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">248</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The third condition is actually from the definition of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21384#</SPAN> 
+given above, but here it is labeled as complementarity, so that 
+these conditions can be compared with the KKT conditions of the 
+original problem. We see that the two sets of KKT conditions are
+similar to each other, with the following differences:
+
+<UL>
+<LI>The non-negativity <tex2html_verbatim_mark>#math1131#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21386#</SPAN> in the primal feasibility
+  of the original KKT is dropped;
+</LI>
+<LI>Consequently the inequality <tex2html_verbatim_mark>#math1132#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21388#</SPAN> in the dual 
+  feasibility of the original KKT conditions is also dropped;
+</LI>
+<LI>There is an extra term <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21390#</SPAN> in complementarity which
+  will vanish when <tex2html_verbatim_mark>#math1133#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21392#</SPAN>.
+</LI>
+</UL>
+
+<P>
+The optimal solution that minimizes the objective function <tex2html_verbatim_mark>#math1134#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21394#</SPAN>
+can be found by solving the simultaneous equations in the modified
+KKT conditions (with no inequalities) given above. To do so, we first
+express the equations in the KKT conditions above as a nonlinear
+equation system <tex2html_verbatim_mark>#math1135#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21396#</SPAN>, and 
+find its Jacobian matrix <tex2html_verbatim_mark>#math1136#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21398#</SPAN> composed of the partial 
+derivatives of the function <tex2html_verbatim_mark>#math1137#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21400#</SPAN> 
+with respect to each of the three variables <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21402#</SPAN>, <tex2html_verbatim_mark>#math1138#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21404#</SPAN>, 
+and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21406#</SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1139#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21408#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">249</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where 
+<BR>
+<DIV CLASS="mathdisplay">
+<tex2html_verbatim_mark>#math1140#
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><tex2html_image_mark>#tex2html_wrap_indisplay21411#</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay21413#</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay21415#</TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay21417#</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay21419#</TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">250</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+is symmetric as the Hessian matrices <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21421#</SPAN> and <tex2html_verbatim_mark>#math1141#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21423#</SPAN> are symmetric.
+
+<P>
+We can now use the 
+<A ID="tex2html24"
+  HREF="../ch2/node7.html">Newton-Raphson method</A>
+to find the solution of the nonlinear equation 
+<tex2html_verbatim_mark>#math1142#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21425#</SPAN> iteratively:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1143#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21427#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">251</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21429#</SPAN> is a parameter that controls the step size and 
+<tex2html_verbatim_mark>#math1144#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21431#</SPAN> is the
+search direction (<#5946#><EM>Newton direction</EM><#5946#>), which can be found by 
+solving the following equation:
+<BR>
+<DIV CLASS="mathdisplay">
+<tex2html_verbatim_mark>#math1145#
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay21434#</TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay21436#</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay21438#</TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">252</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+To get the initial values for the iteration, we first find any point 
+inside the feasible region <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21440#</SPAN> and then <tex2html_verbatim_mark>#math1146#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21442#</SPAN>,
+based on which we further find <tex2html_verbatim_mark>#math1147#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21444#</SPAN> by solving the first 
+equation in the KKT conditions in Eq. (<A HREF=<tex2html_cr_mark>#KKTconditionsIP#6004><tex2html_cr_mark></A>).
+
+<P>
+Actually this equation system above can be separated into two
+subsystems, which are easier to solve. Pre-multiplying <tex2html_verbatim_mark>#math1148#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21446#</SPAN> 
+to the third equation:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1149#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21448#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">253</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+we get
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1150#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21450#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">254</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Adding this to the first equation:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1151#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21452#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">255</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+we get
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1152#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21454#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">256</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Combining this equation with the second one, we get an equation system 
+of two vector variables <tex2html_verbatim_mark>#math1153#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21456#</SPAN> and <tex2html_verbatim_mark>#math1154#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21458#</SPAN> with
+symmetric coefficient matrix:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1155#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21460#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">257</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Solving this equation system we get <tex2html_verbatim_mark>#math1156#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21462#</SPAN> and <tex2html_verbatim_mark>#math1157#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21464#</SPAN>,
+and we can further find <tex2html_verbatim_mark>#math1158#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21466#</SPAN> by solving the third equation
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1159#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21468#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">258</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+to get
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1160#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21470#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">259</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+We now consider the two special cases of linear and quadratic 
+programming:
+
+<UL>
+<LI><#6124#><B>Linear programming</B><#6124#>:
+
+<P>
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="LPproblem"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math1161#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21472#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">260</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+We have 
+
+<UL>
+<LI><tex2html_verbatim_mark>#math1162#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21474#</SPAN>
+</LI>
+<LI><tex2html_verbatim_mark>#math1163#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21476#</SPAN>.
+</LI>
+<LI><tex2html_verbatim_mark>#math1164#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21478#</SPAN>.
+</LI>
+</UL>
+The Lagrangian is
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1165#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21480#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">261</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The KKT conditions are:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1166#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21482#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+The search direction of the iteration can be found by solving the
+this equation system:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1167#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21484#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">262</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+By solving the equation <tex2html_verbatim_mark>#math1168#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21486#</SPAN>
+we get the initial value <tex2html_verbatim_mark>#math1169#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21488#</SPAN>. The Matlab code for the interior 
+point method for the LP problem is listed below:
+
+<P>
+<PRE><tex2html_verbatim_mark>verbatim175#</PRE>
+
+<P>
+<#6243#><B>Example 1:</B><#6243#> A given linear programming problem shown below is first 
+converted into the standard form:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1170#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21490#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+or in matrix form:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1171#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21492#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+with
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1172#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21494#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <tex2html_verbatim_mark>#math1173#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21496#</SPAN> are the slack variables.
+
+<P>
+<IMG STYLE="" SRC="figures/InteriorPointLPexample.png"
+ ALT="InteriorPointLPexample.png">
+
+<P>
+We choose an initial value <tex2html_verbatim_mark>#math1174#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21498#</SPAN>, and 
+an initial parameter <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21500#</SPAN>, which is scaled up by a factor of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21502#</SPAN> 
+in each iteration. We also used full Newton step size of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21504#</SPAN>. 
+After 8 iterations, the algorithm converged to the optimal solution 
+<tex2html_verbatim_mark>#math1175#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21506#</SPAN> corresponding to the maximum function value 
+<tex2html_verbatim_mark>#math1176#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21508#</SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1177#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21510#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+At the end of the iteration, we also get the values of the slack 
+variables: <tex2html_verbatim_mark>#math1178#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21512#</SPAN>.
+
+<P>
+</LI>
+<LI><#6309#><B>Quadratic programming:</B><#6309#>
+
+<P>
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="QPproblem"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math1179#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21514#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">263</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+We have
+
+<UL>
+<LI><tex2html_verbatim_mark>#math1180#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21516#</SPAN>
+</LI>
+<LI><tex2html_verbatim_mark>#math1181#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21518#</SPAN>.
+</LI>
+<LI><tex2html_verbatim_mark>#math1182#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21520#</SPAN>.
+</LI>
+</UL>
+The Lagrangian is 
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1183#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21522#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">264</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The KKT conditions are:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1184#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21524#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+The equation system for the Newton-Raphson method is:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1185#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21526#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">265</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+</LI>
+</UL>
+
+<P>
+The Matlab code for the interior point method for the QP problem is
+listed below:
+
+<P>
+<PRE><tex2html_verbatim_mark>verbatim176#</PRE>
+
+<P>
+<#6436#><B>Example 2:</B><#6436#> A 2-D quadratic programming problem shown below is to 
+minimize four different quadratic functions under the same linear 
+constraints as the liniear programming problem in the previous example.
+In general, the quadratic function is given in the matrix form:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1186#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath21528#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+with following four different sets of function parameters:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1187#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21530#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math1188#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay21532#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+As shown in the four panels in the figure below, the iteration of 
+the interior point algorithm brings the solution from the same 
+initial position at <tex2html_verbatim_mark>#math1189#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21534#</SPAN> to the final position 
+for each of the four objective functions <tex2html_verbatim_mark>#math1190#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline21536#</SPAN>, the optimal
+solution, which is on the boundary of the feasible region in all 
+cases except the third one, where the optimal solution is inside
+the feasible region, i.e., the optimization problem is not constrained.
+Also note that the trajectories of the solution during the iteration 
+go straightly from the initial guess to the final optimal solution 
+by following the negative gradient direction of the quadratic function
+in all cases execpt in the last one, where it makes a turn while 
+approaching the vertical boundary, due obviously to the significantly
+greater value of the log barrier function close to the boundary.
+
+<P>
+<IMG STYLE="" SRC="figures/InteriorPointQPexample.png"
+ ALT="InteriorPointQPexample.png">
+
+<P>

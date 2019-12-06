@@ -1,0 +1,38 @@
+
+<H1><A ID="SECTION00030000000000000000">
+Constrained Optimization</A>
+</H1>
+
+<P>
+An optimization problem is more complicated if it is constrained, i.e.,
+the arguments <tex2html_verbatim_mark>#math761#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19954#</SPAN> of the objective function 
+<tex2html_verbatim_mark>#math762#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19956#</SPAN> are subject to certain equality or inequality constraints
+in terms of what values they can take. Such a constrained optimization
+problem can be formulated as:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math763#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath19958#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">168</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The set of all <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19960#</SPAN> satisfying the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19962#</SPAN> constraints is called
+the feasible region of the problem. The goal is to find a point
+<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19964#</SPAN> in the feasible region at which <tex2html_verbatim_mark>#math764#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19966#</SPAN> is an 
+extremum. 
+
+<P>
+In the most general case where the objective function <tex2html_verbatim_mark>#math765#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19968#</SPAN> 
+and the constraint functions <tex2html_verbatim_mark>#math766#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19970#</SPAN> and <tex2html_verbatim_mark>#math767#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19972#</SPAN> are 
+nonlinear, the process of solving this nonlinear optimization problem 
+is called <#3829#><EM>nonlinear programming (NLP)</EM><#3829#>. Specially, if the 
+objective function is quadratic while the constraints are linear, 
+(the feasible region is a polytope), the process is called 
+<#3830#><EM>quadratic programming (QP)</EM><#3830#>. More specially, if the objective 
+function is linear as well as the constraints, the process is called 
+<#3831#><EM>linear programming (LP)</EM><#3831#>. In the following, we will first 
+consider the NLP in general, and then discuss more specifically 
+QP and LP.
+
+<P>

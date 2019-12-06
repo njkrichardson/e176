@@ -1,0 +1,238 @@
+
+<H2><A ID="SECTION00031000000000000000">
+Optimization with Equality Constraints</A>
+</H2>
+
+<P>
+The optimization problems subject to equality constraints can be
+generally formulated as:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math768#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath19975#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">169</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <tex2html_verbatim_mark>#math769#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19977#</SPAN> is the objective function and <tex2html_verbatim_mark>#math770#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19979#</SPAN>
+is the ith constraint. Here <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19981#</SPAN>, as in general there does not
+exist a solution that satisfies more than <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19983#</SPAN> equations in the N-D 
+space.
+
+<P>
+To visualize the problem, we first consider the special case with 
+<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19985#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19987#</SPAN>. In this case, both <tex2html_verbatim_mark>#math771#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19989#</SPAN> and <tex2html_verbatim_mark>#math772#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19991#</SPAN> 
+are surfaces defined over the 2-D space spanned by <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19993#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19995#</SPAN>, 
+and <tex2html_verbatim_mark>#math773#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19997#</SPAN> is the contour line of <tex2html_verbatim_mark>#math774#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19999#</SPAN> on the 2-D 
+plane. The solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20001#</SPAN> must satisfy the following two 
+conditions:
+
+ 
+<UL>
+<LI><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20003#</SPAN> is on the contour line <tex2html_verbatim_mark>#math775#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20005#</SPAN>;
+</LI>
+<LI><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20007#</SPAN> is on the contour line <tex2html_verbatim_mark>#math776#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20009#</SPAN> (for some 
+  <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20011#</SPAN> as shown in the figure), so that <tex2html_verbatim_mark>#math777#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20013#</SPAN> is an extremum,
+  it does not increase/decrease in the neighborhood of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20015#</SPAN>
+  along the contour line.
+</LI>
+</UL>
+In other words, the two contours <tex2html_verbatim_mark>#math778#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20017#</SPAN> and <tex2html_verbatim_mark>#math779#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20019#</SPAN>
+must coincide at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20021#</SPAN>, i.e., they must have the same tangents
+and therefore parallel gradients (perpendicular to the tangents):
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math780#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20023#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">170</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where the constant scaling factor <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20025#</SPAN> is positive if the
+two gradients are in the same direction or negative if they are
+in opposite directions. As here we are only interested in whether
+the two curves coincide or not, the sign of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20027#</SPAN> is of no
+concern.
+
+<P>
+<IMG STYLE="" SRC="figures/Lagrange.png"
+ ALT="Lagrange.png">
+
+<P>
+To find such a point <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20029#</SPAN>, we first construct a new objective 
+function, called the <#3868#><EM>Lagrange function</EM><#3868#> (or simply 
+<#3869#><EM>Lagrangian</EM><#3869#>):
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math781#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20031#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">171</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20033#</SPAN> is the <#3875#><EM>Lagrange multiplier</EM><#3875#>, which can be 
+either positive or negative (the sign in front of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20035#</SPAN> can 
+be either plus or minus), and then set the gradient of this 
+objective function with respect to <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20037#</SPAN> as well as <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20039#</SPAN> 
+to zero:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math782#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20041#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">172</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+This equation contains two parts:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math783#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20043#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">173</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+This is an equation system containing <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20045#</SPAN> equations for 
+the same number of unknowns <tex2html_verbatim_mark>#math784#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20047#</SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math785#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20049#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">174</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The solution <tex2html_verbatim_mark>#math786#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20051#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20053#</SPAN> (either
+positive or negative) of this equation system happens to satisfy 
+the desired relationships: (a) 
+<tex2html_verbatim_mark>#math787#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20055#</SPAN>,
+i.e., the two curves <tex2html_verbatim_mark>#math788#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20057#</SPAN> and <tex2html_verbatim_mark>#math789#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20059#</SPAN> do coincide 
+at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20061#</SPAN>, and (b) <tex2html_verbatim_mark>#math790#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20063#</SPAN>, i.e., <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20065#</SPAN> does 
+indeed satisfy the equality constraints. 
+
+<P>
+Specially, consider the following two possible cases:
+
+<UL>
+<LI>If <tex2html_verbatim_mark>#math791#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20067#</SPAN>, then 
+  <tex2html_verbatim_mark>#math792#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20069#</SPAN>, 
+  indicating <tex2html_verbatim_mark>#math793#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20071#</SPAN> is an extremum independent of the constraint,
+  i.e., the constraint <tex2html_verbatim_mark>#math794#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20073#</SPAN> is inactive, and the optimization 
+  is unconstrained. 
+</LI>
+<LI>If <tex2html_verbatim_mark>#math795#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20075#</SPAN>, then <tex2html_verbatim_mark>#math796#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20077#</SPAN>
+  (as in general <tex2html_verbatim_mark>#math797#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20079#</SPAN>),
+  indicating <tex2html_verbatim_mark>#math798#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20081#</SPAN> is not an extremum without the constraint, 
+  i.e., the constraint is active, and the optimization is indeed
+  constrained.
+</LI>
+</UL>
+
+<P>
+The discussion above can be generalized from 2-D to an <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20083#</SPAN> dimensional
+space, in which the optimal solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20085#</SPAN> is to be found to
+extremize the objective <tex2html_verbatim_mark>#math799#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20087#</SPAN> subject to <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20089#</SPAN> equality 
+constraints <tex2html_verbatim_mark>#math800#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20091#</SPAN>, each representing a 
+contour surface in the N-D space. The solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20093#</SPAN> must 
+satisfy the following two conditions:
+
+<UL>
+<LI><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20095#</SPAN> is on all <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20097#</SPAN> contour surfaces so that
+  <tex2html_verbatim_mark>#math801#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20099#</SPAN>, i.e., it is on the 
+  intersection of these surfaces, a curve in the space (e.g.,
+  the intersection of two surfaces in 3-D space is a curve);
+</LI>
+<LI><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20101#</SPAN> is on a contour surface <tex2html_verbatim_mark>#math802#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20103#</SPAN>
+  (for some value <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20105#</SPAN>) so that <tex2html_verbatim_mark>#math803#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20107#</SPAN> is an extremum,
+  i.e., it does not increase or degrease in the neighborhood of 
+  <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20109#</SPAN> along the curve.
+</LI>
+</UL>
+Combining these conditions, we see that the intersection curve 
+of the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20111#</SPAN> surfaces <tex2html_verbatim_mark>#math804#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20113#</SPAN> must coincide with the contour
+surface <tex2html_verbatim_mark>#math805#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20115#</SPAN> at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20117#</SPAN>, i.e., the intersection of 
+the tangent surfaces of <tex2html_verbatim_mark>#math806#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20119#</SPAN> through <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20121#</SPAN> must
+lie on the tangent surface of <tex2html_verbatim_mark>#math807#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20123#</SPAN> at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20125#</SPAN>,
+therefore the gradient <tex2html_verbatim_mark>#math808#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20127#</SPAN> must 
+be a linear combination of the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20129#</SPAN> gradients 
+<tex2html_verbatim_mark>#math809#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20131#</SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math810#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20133#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">175</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+<IMG STYLE="" SRC="figures/Lagrange1.png"
+ ALT="Lagrange1.png">
+
+<P>
+To find such a solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20135#</SPAN> of the optimization problem, 
+we first construct the Lagrange function:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math811#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20137#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">176</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <tex2html_verbatim_mark>#math812#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20139#</SPAN> is a vector
+for <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20141#</SPAN> <#3967#><EM>Lagrange multipliers</EM><#3967#>, and then set its gradient to 
+zero: 
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math813#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20143#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">177</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+to get the following two equation systems of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20145#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20147#</SPAN> equations 
+repectively:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math814#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20149#<#1#>i.e.<#1#><tex2html_image_mark>#tex2html_wrap_indisplay20150#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">178</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math815#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20152#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">179</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The first set of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20154#</SPAN> equations indicates that the gradient 
+<tex2html_verbatim_mark>#math816#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20156#</SPAN> at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20158#</SPAN> is a 
+linear combination of the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20160#</SPAN> gradients 
+<tex2html_verbatim_mark>#math817#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20162#</SPAN>, while the second 
+set of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20164#</SPAN> equations guarantees that <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20166#</SPAN> also satisfy
+the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20168#</SPAN> equality constraints. Solving these equations we get 
+the desired soluton <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20170#</SPAN> together with the Lagrange
+multipliers <tex2html_verbatim_mark>#math818#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20172#</SPAN>. This is the 
+<#4006#><EM>Lagrange multiplier method</EM><#4006#>.
+
+<P>
+Specially, if <tex2html_verbatim_mark>#math819#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20174#</SPAN>, then the ith constraint is not active. 
+More specially if <tex2html_verbatim_mark>#math820#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20176#</SPAN> for all <tex2html_verbatim_mark>#math821#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20178#</SPAN>, then 
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math822#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20180#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">180</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+indicating <tex2html_verbatim_mark>#math823#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20182#</SPAN> is an extremum independent of any of
+the constraints, i.e., <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20184#</SPAN> is an unconstrained solution, 
+and the optimization problem is unconstrained.
+
+<P>

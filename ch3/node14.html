@@ -1,0 +1,375 @@
+
+<H2><A ID="SECTION00032000000000000000">
+Optimization with Inequality Constraints</A>
+</H2>
+
+<P>
+The optimization problems subject to inequality constraints can
+be generally formulated as:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math824#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20187#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">181</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Again, to visualize the problem we first consider an example with 
+<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20189#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20191#</SPAN>, as shown in the figure below for the minimization 
+(left) and maximization (right) of <tex2html_verbatim_mark>#math825#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20193#</SPAN> subject to 
+<tex2html_verbatim_mark>#math826#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20195#</SPAN>. The constrained solution <tex2html_verbatim_mark>#math827#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20197#</SPAN> 
+is on the boundary of the feasible region satisfying <tex2html_verbatim_mark>#math828#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20199#</SPAN>, 
+while the unconstrained extremum is outside the feasible region.
+
+<P>
+<IMG STYLE="" SRC="figures/KKT0a.png"
+ ALT="KKT0a.png">
+
+<P>
+Consider the following two possible cases.
+
+<UL>
+<LI>First, if the unconstrained extremum at which 
+  <tex2html_verbatim_mark>#math829#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20201#</SPAN> is outside the feasible
+  region, i.e., the inequality constraint is active, then the 
+  constrained solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20203#</SPAN> must be
+  
+<UL>
+<LI>on the boundary of the feasible region, i.e., <tex2html_verbatim_mark>#math830#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20205#</SPAN>,
+</LI>
+<LI>different from the unconstrained solution, i.e., 
+    <tex2html_verbatim_mark>#math831#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20207#</SPAN>;
+  
+</LI>
+</UL>
+  The problem becomes the same as an equality constrained problem 
+  considered before, which requires the objective function <tex2html_verbatim_mark>#math832#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20209#</SPAN>
+  and the constraining function <tex2html_verbatim_mark>#math833#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20211#</SPAN> to have the same tangent
+  at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20213#</SPAN>, or parallel gradients: 
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math834#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20215#<#1#>or<#1#><tex2html_image_mark>#tex2html_wrap_indisplay20216#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">182</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  However, different from before, now we are also concerned with whether
+  the two gradients have the same or opposite directions, corresponding to 
+  <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20218#</SPAN> or <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20220#</SPAN>, respectively, as illustrated in the 1-D examples in 
+  the figure below:
+
+<P>
+<IMG STYLE="" SRC="figures/KKT1a.png"
+ ALT="KKT1a.png">
+
+<P>
+Depending on whether <tex2html_verbatim_mark>#math835#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20222#</SPAN> is to be maximized or minimized, 
+  and whether the constraint is <tex2html_verbatim_mark>#math836#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20224#</SPAN> or <tex2html_verbatim_mark>#math837#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20226#</SPAN>,
+  there exist four possible cases in terms of the sign of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20228#</SPAN>, as 
+  summarized in the table below: 
+
+<P>
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="PolarityTable"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math838#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20230#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">183</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  These cases can also be summarized in terms of the product of
+  the coeficient <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20232#</SPAN> and the constraining function <tex2html_verbatim_mark>#math839#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20234#</SPAN>:
+  <P></P>
+<DIV CLASS="mathdisplay"><A ID="mugminmax"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math840#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20236#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">184</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+</LI>
+<LI>Second, if the unconstrained extremum is inside the feasible 
+  region, i.e., the inequality constraint is inactive, then the problem 
+  is actually unconstrained and its solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20238#</SPAN> is 
+  
+<UL>
+<LI>the same as the unconstrained solution, i.e.,
+    <tex2html_verbatim_mark>#math841#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20240#</SPAN>;
+</LI>
+<LI>not on the boundary of the feasible region, i.e., 
+    <tex2html_verbatim_mark>#math842#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20242#</SPAN>;
+  
+</LI>
+</UL>
+  This solution can still be found by solving the same equation 
+  <tex2html_verbatim_mark>#math843#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20244#</SPAN> with <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20246#</SPAN>. 
+</LI>
+</UL>
+
+<P>
+Summarizing the two cases above, we see that <tex2html_verbatim_mark>#math844#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20248#</SPAN> but
+<tex2html_verbatim_mark>#math845#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20250#</SPAN> in the first case, <tex2html_verbatim_mark>#math846#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20252#</SPAN> but <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20254#</SPAN>
+in the second case, i.e., the following holds in either case:
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="mugeqz"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math847#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20256#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">185</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+The discussion above can be generalized from 2-D to <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20258#</SPAN> dimensional
+space, in which the optimal solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20260#</SPAN> is to be found 
+to extremize the objective <tex2html_verbatim_mark>#math848#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20262#</SPAN> subject to <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20264#</SPAN> inequality 
+constraints <tex2html_verbatim_mark>#math849#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20266#</SPAN>. To solve this inequality
+constrained optimization problem, we first construct the Lagrangian:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math850#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20268#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">186</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Here we note that in some literatures, a plus sign is used in front of 
+the summation of the second term. This is equivalent to our discussion
+here so long as the sign of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20270#</SPAN> indicated in Table <A HREF=<tex2html_cr_mark>#PolarityTable#4117><tex2html_cr_mark></A>
+is negated. 
+
+<P>
+We now set the gradient of the Lagrangian to zero: 
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math851#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20272#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">187</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and get two equation systems of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20274#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20276#</SPAN> equations,
+respectively:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math852#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20278#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">188</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math853#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20280#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">189</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+The result above for the inequality constrained problems is the same 
+as that for the equality constrained problems considered before. However,
+we note that there is an additional requirement regarding the sign of the
+scaling coifficients. For an equality constrained problem, the direction 
+of the gradient <tex2html_verbatim_mark>#math854#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20282#</SPAN> is of no concern, i.e., the
+sign of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20284#</SPAN> is unrestricted; but here for an inequality constrained 
+problem, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20286#</SPAN> is required to be either positive or negative, depending
+on whether the gradients of <tex2html_verbatim_mark>#math855#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20288#</SPAN> and <tex2html_verbatim_mark>#math856#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20290#</SPAN> are in the
+same or opposite directions, as shown in Table <A HREF=<tex2html_cr_mark>#PolarityTable#4146><tex2html_cr_mark></A>. For 
+example, to minimize <tex2html_verbatim_mark>#math857#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20292#</SPAN> subject to <tex2html_verbatim_mark>#math858#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20294#</SPAN>, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20296#</SPAN> 
+needs to be positive, but to maximize <tex2html_verbatim_mark>#math859#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20298#</SPAN> subject to 
+<tex2html_verbatim_mark>#math860#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20300#</SPAN>, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20302#</SPAN> needs to be negative.
+
+<P>
+In principle, we can find the solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20304#</SPAN> that optimizes 
+<tex2html_verbatim_mark>#math861#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20306#</SPAN> while also satisfying the inequality constraints by
+solving the equation system above for <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20308#</SPAN> as well as <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20310#</SPAN>
+with the required sign.
+
+<P>
+We can now address the general optimization of an N-D objective function
+<tex2html_verbatim_mark>#math862#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20312#</SPAN> subject to multiple constraints of both equalities and 
+inequalities:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math863#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20314#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">190</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+For notational convenience, we represent the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20316#</SPAN> equality and 
+inequality constraints in vector form as: 
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math864#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20318#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">191</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <tex2html_verbatim_mark>#math865#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20320#</SPAN> and 
+<tex2html_verbatim_mark>#math866#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20322#</SPAN>.
+
+<P>
+To solve this optimization problem, we first construct the Lagrangian
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math867#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20324#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">192</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where the Lagrange multipliers in <tex2html_verbatim_mark>#math868#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20326#</SPAN> 
+and <tex2html_verbatim_mark>#math869#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20328#</SPAN> are for the <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20330#</SPAN> equality and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20332#</SPAN> 
+non-negative constraints, respectively, and then set its gradient with 
+respect to both <tex2html_verbatim_mark>#math870#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20334#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20336#</SPAN> as well as <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20338#</SPAN> to 
+zero. The solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20340#</SPAN> can then be obtained by solving the 
+resulting equation system, with <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20342#</SPAN> taking the proper sign depending
+on whether <tex2html_verbatim_mark>#math871#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20344#</SPAN> is to be maximized or minimized, and whether the
+inequality constraints are <tex2html_verbatim_mark>#math872#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20346#</SPAN> or <tex2html_verbatim_mark>#math873#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20348#</SPAN>, 
+as specified in Table <A HREF=<tex2html_cr_mark>#PolarityTable#4226><tex2html_cr_mark></A>. Also, the solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20350#</SPAN>
+should satisfy the generalized version of Eq. (<A HREF=<tex2html_cr_mark>#mugeqz#4228><tex2html_cr_mark></A>):
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="mugeqz1"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math874#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20352#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">193</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+<#4233#><B>Example</B><#4233#> 
+
+<P>
+Find the extremum of <tex2html_verbatim_mark>#math875#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20354#</SPAN> subject to each of 
+the three different constraints: <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20356#</SPAN>, <tex2html_verbatim_mark>#math876#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20358#</SPAN>, and 
+<tex2html_verbatim_mark>#math877#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20360#</SPAN>. 
+
+<UL>
+<LI><tex2html_verbatim_mark>#math878#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20362#</SPAN>:
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math879#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20364#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+  The Lagrangian is:
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math880#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20366#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+  Solving the following equations 
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math881#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20368#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+  we get <tex2html_verbatim_mark>#math882#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20370#</SPAN> and the optimal solution <tex2html_verbatim_mark>#math883#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20372#</SPAN> 
+  (satisfying <tex2html_verbatim_mark>#math884#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20374#</SPAN>), at which the function is minimized to 
+  be <tex2html_verbatim_mark>#math885#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20376#</SPAN>. We also note that <tex2html_verbatim_mark>#math886#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20378#</SPAN> and <tex2html_verbatim_mark>#math887#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20380#</SPAN> 
+  have the same gradients
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math888#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20382#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+</LI>
+<LI>The following two problems
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math889#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20384#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+  and
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math890#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20386#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+  have the same Lagrangian:
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math891#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20388#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">194</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  Solving the following equations 
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math892#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20390#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+  we still get the same results <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20392#</SPAN> and <tex2html_verbatim_mark>#math893#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20394#</SPAN>, 
+  at which the function reaches minimum or maximum <tex2html_verbatim_mark>#math894#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20396#</SPAN> 
+  subject to the corresponding constraint <tex2html_verbatim_mark>#math895#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20398#</SPAN> or 
+  <tex2html_verbatim_mark>#math896#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20400#</SPAN>.
+</LI>
+<LI>We could also consider the following two problems:
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math897#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20402#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>  
+  and
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math898#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#displaymath20404#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+  The Lagrangian is the same as before, however, now we need to
+  consider the case where <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20406#</SPAN> and
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math899#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay20408#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+  Solving these we get <tex2html_verbatim_mark>#math900#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20410#</SPAN>, corresponding to the solution
+  for the first problem, the absolute minimum of <tex2html_verbatim_mark>#math901#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline20412#</SPAN>,
+  independent of any constraint, i.e, the minimization problem is 
+  unconstrained. However, as the function is not bounded from above,
+  its maximum does not exist, i.e., the second problem has no
+  solution.
+</LI>
+</UL>
+
+<P>

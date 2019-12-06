@@ -1,0 +1,685 @@
+
+<H2><A ID="SECTION00027000000000000000">
+Quasi-Newton Methods</A>
+</H2>
+
+<P>
+As we have seen above, Newton's methods can be used to solve both 
+nonlinear systems to find roots of a set of simultaneous equations,
+and optimization problems to minimize a scalar-valued objective function
+based on the iterations of the same form. Specifically, 
+
+<UL>
+<LI>Solving equations <tex2html_verbatim_mark>#math507#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19099#</SPAN>:
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math508#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19101#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">78</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  where <tex2html_verbatim_mark>#math509#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19103#</SPAN> is the Jacobian matrix of 
+  <tex2html_verbatim_mark>#math510#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19105#</SPAN>, 
+</LI>
+<LI>Minimizing <tex2html_verbatim_mark>#math511#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19107#</SPAN>:
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math512#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19109#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">79</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  where <tex2html_verbatim_mark>#math513#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19111#</SPAN> and 
+  <tex2html_verbatim_mark>#math514#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19113#</SPAN> are the gradient vector and 
+  Hessian matrix of <tex2html_verbatim_mark>#math515#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19115#</SPAN> at <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19117#</SPAN>, respectively. 
+</LI>
+</UL>
+
+<P>
+If the Jacobian <tex2html_verbatim_mark>#math516#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19119#</SPAN> or the Hessian matrix <tex2html_verbatim_mark>#math517#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19121#</SPAN>
+is not available, or if it is too computationally costly to calculate
+its inverse (of complexity <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19123#</SPAN>), the quasi-Newton methods can be 
+used to approximate the Hessian matrix or its inverse based only on 
+the first order derivative, the gradient <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19125#</SPAN> of <tex2html_verbatim_mark>#math518#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19127#</SPAN> 
+(with complexity <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19129#</SPAN>), similar to the Broyden's method considered 
+<A ID="tex2html11"
+  HREF="../ch2/node6.html">here</A>.
+
+<P>
+In the following, we consider the minimization of a function <tex2html_verbatim_mark>#math519#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19131#</SPAN>.
+Its Taylor expansion around point <tex2html_verbatim_mark>#math520#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19133#</SPAN> is
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math521#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19135#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">80</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Taking derivetive with respect to <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19137#</SPAN>, we get
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math522#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19139#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">81</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Evaluating at <tex2html_verbatim_mark>#math523#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19141#</SPAN>, we have <tex2html_verbatim_mark>#math524#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19143#</SPAN>, 
+and the above can be written as
+<BR>
+<DIV CLASS="mathdisplay">
+<tex2html_verbatim_mark>#math525#
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><tex2html_image_mark>#tex2html_wrap_indisplay19146#</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay19148#</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay19150#</TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay19152#</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay19154#</TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">82</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+where matrix <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19156#</SPAN> is the secant approximation of the Hessian
+matrix <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19158#</SPAN>, and the last eqality is called the 
+<#1738#><EM>secant equation</EM><#1738#>. For convenience, we further define:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math526#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19160#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">83</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+so that the equation above can be written as
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math527#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19162#<#1#>or<#1#><tex2html_image_mark>#tex2html_wrap_indisplay19163#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">84</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+This is the <#1761#><EM>quasi-Newton equation</EM><#1761#>, which is the 
+<#1762#><EM>secant condition</EM><#1762#> that must be satisfied by matrix 
+<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19165#</SPAN>, or its inverse <tex2html_verbatim_mark>#math528#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19167#</SPAN>, in any of the 
+quasi-Newton algorithms, all taking the follow general steps:
+
+<OL>
+<LI>Initialize <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19169#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19171#</SPAN>, set <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19173#</SPAN>; 
+</LI>
+<LI>Compute gradient <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19175#</SPAN> and the search direction 
+  <tex2html_verbatim_mark>#math529#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19177#</SPAN>;
+</LI>
+<LI>Get <tex2html_verbatim_mark>#math530#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19179#</SPAN> with step
+  size <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19181#</SPAN> satisfying the 
+  <A ID="tex2html12"
+  HREF="https://en.wikipedia.org/wiki/Wolfe_conditions">Wolfe conditions</A>.
+</LI>
+<LI>update <tex2html_verbatim_mark>#math531#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19183#</SPAN> or
+
+<tex2html_verbatim_mark>#math532#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19185#</SPAN>,
+  that satisfies the quasi-Newton equation;
+</LI>
+<LI>If termination condition is not satisfied, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19187#</SPAN>, go back 
+  to second step.
+</LI>
+</OL>
+For this iteration to converge to a local minimum of <tex2html_verbatim_mark>#math533#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19189#</SPAN>,
+<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19191#</SPAN> must be positive definite matrix, same as the Hessian
+matrix <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19193#</SPAN> it approximates. Specially, if <tex2html_verbatim_mark>#math534#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19195#</SPAN>, 
+then <tex2html_verbatim_mark>#math535#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19197#</SPAN>, the algorithm becomes the gradient 
+descent method; also, if <tex2html_verbatim_mark>#math536#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19199#</SPAN> is the Hessian matrix, 
+then the algorithm becomes the Newton's method.
+
+<P>
+In a quasi-Newton method, we can choose to update either <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19201#</SPAN> 
+or its inverse <tex2html_verbatim_mark>#math537#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19203#</SPAN> based on one of the two forms of 
+the quasi-Newton equation. We note that there is a dual relationship 
+between the two ways to update, i.e., by swapping <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19205#</SPAN> and 
+<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19207#</SPAN>, an update formula for <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19209#</SPAN> can be directly 
+applied to its inverse and vice versa.
+
+<P>
+
+<UL>
+<LI>The <#1808#><EM>Symmetric Rank 1 (SR1)</EM><#1808#> Algorithm
+
+<P>
+Here matrix <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19211#</SPAN> is updated by an additional term:
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math538#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19213#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">85</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  where <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19215#</SPAN> a vector and <tex2html_verbatim_mark>#math539#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19217#</SPAN> is a matrix of rank 1.
+  Imposing the secant condition, we get
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math540#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19219#<#1#>i.e.,<#1#><tex2html_image_mark>#tex2html_wrap_indisplay19220#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">86</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  This equation indicats <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19222#</SPAN> is in the same direction as 
+  <tex2html_verbatim_mark>#math541#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19224#</SPAN>, and can therefore
+  be written as <tex2html_verbatim_mark>#math542#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19226#</SPAN>. Substituting this back we get
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math543#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19228#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">87</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  Solving this we get <tex2html_verbatim_mark>#math544#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19230#</SPAN>,
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math545#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19232#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">88</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  and the iteration of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19234#</SPAN> becomes
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math546#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19236#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">89</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  Applying the
+  <A ID="tex2html13"
+  HREF="../appendices/node7.html">Sherman-Morrison formula</A>,
+
+we can further get the inverse <tex2html_verbatim_mark>#math547#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19238#</SPAN>:
+  <BR>
+<DIV CLASS="mathdisplay">
+<tex2html_verbatim_mark>#math548#
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><tex2html_image_mark>#tex2html_wrap_indisplay19241#</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay19243#</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay19245#</TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay19247#</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay19249#</TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">90</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+  We note that this equation is dual to the previous one, and it
+  can also be obtained based on the duality between the secant 
+  conditions for <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19251#</SPAN> and <tex2html_verbatim_mark>#math549#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19253#</SPAN>. Specifically, 
+  same as above, we impose the secant condition for the inverse 
+  <tex2html_verbatim_mark>#math550#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19255#</SPAN> of the following form
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math551#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19257#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">91</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  and get
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math552#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19259#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">92</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  Then by repeating the same process above, we get the same update
+  formula for <tex2html_verbatim_mark>#math553#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19261#</SPAN>.
+
+<P>
+This is the formula for directly updating <tex2html_verbatim_mark>#math554#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19263#</SPAN>. 
+  For the iteration to converge to a local minimum, matrix 
+  <tex2html_verbatim_mark>#math555#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19265#</SPAN> needs to be positive definite as well as 
+  <tex2html_verbatim_mark>#math556#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19267#</SPAN>, we therefore require
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math557#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19269#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">93</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  It may be difficult to maintain this requirement through out the
+  iteration. This problem can be avoided in the following DFP and 
+  BFGS methods.
+
+<P>
+</LI>
+<LI>The <#1978#><EM>BFGS (Broyden-Fletcher-Goldfarb-Shanno)</EM><#1978#> algorithm
+
+<P>
+This is a rank 2 algorithm in which matrix <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19271#</SPAN> is updated 
+  by two rank-1 terms:
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math558#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19273#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">94</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  Imposing the secant condition for <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19275#</SPAN>, we get
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math559#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19277#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">95</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  or
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math560#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19279#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">96</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  which can be satisfied if we let
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math561#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19281#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">97</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  Substituting these into 
+  <tex2html_verbatim_mark>#math562#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19283#</SPAN>
+  we get
+  <P></P>
+<DIV CLASS="mathdisplay"><A ID="BFGSupdateB"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math563#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19285#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">98</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  Given this update formula for <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19287#</SPAN>, we can further find its
+  inverse <tex2html_verbatim_mark>#math564#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19289#</SPAN> and then the search direction 
+  <tex2html_verbatim_mark>#math565#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19291#</SPAN>.
+
+<P>
+Alternatively, given <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19293#</SPAN>, we can further derive an update 
+  formula directly for the inverse matrix <tex2html_verbatim_mark>#math566#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19295#</SPAN>, so that 
+  the search direction <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19297#</SPAN> can be obtained without carrying 
+  out the inversion computation. Specifically, we first define 
+  <tex2html_verbatim_mark>#math567#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19299#</SPAN> and <tex2html_verbatim_mark>#math568#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19301#</SPAN>,
+  where
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math569#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19303#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">99</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  so that the expression above can be written as:
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math570#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19305#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">100</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  and then apply the
+  <A ID="tex2html14"
+  HREF="../appendices/node7.html">Sherman-Morrison formula</A>,
+
+to get:
+  <BR>
+<DIV CLASS="mathdisplay">
+<tex2html_verbatim_mark>#math571#
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><tex2html_image_mark>#tex2html_wrap_indisplay19308#</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay19310#</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay19312#</TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay19314#</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay19316#</TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">101</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+  where we have defined
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math572#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19318#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">102</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  with
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math573#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19320#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">103</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math574#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19322#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">104</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math575#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19324#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">105</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math576#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19326#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">106</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math577#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19328#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">107</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  Substituting this <tex2html_verbatim_mark>#math578#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19330#</SPAN> into the expression for
+  <tex2html_verbatim_mark>#math579#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19332#</SPAN>, we get:
+  <BR>
+<DIV CLASS="mathdisplay"><A ID="BFGSinverseBexpression"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math580#
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><tex2html_image_mark>#tex2html_wrap_indisplay19335#</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay19337#</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay19339#</TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay19341#</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay19343#</TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">108</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+  where
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math581#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19345#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">109</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math582#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19347#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">110</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  <BR>
+<DIV CLASS="mathdisplay">
+<tex2html_verbatim_mark>#math583#
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><tex2html_image_mark>#tex2html_wrap_indisplay19350#</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay19352#</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay19354#</TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><tex2html_image_mark>#tex2html_wrap_indisplay19356#</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><tex2html_image_mark>#tex2html_wrap_indisplay19358#</TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">111</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+  Substituting these three terms back into Eq. (<A HREF=<tex2html_cr_mark>#BFGSinverseBexpression#2430><tex2html_cr_mark></A>),
+  we get the update formula for <tex2html_verbatim_mark>#math584#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19360#</SPAN>:
+  <P></P>
+<DIV CLASS="mathdisplay"><A ID="BFGSupdateInvB"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math585#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19362#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">112</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  In summary, <tex2html_verbatim_mark>#math586#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19364#</SPAN> can be found by either Eq. 
+  (<A HREF=<tex2html_cr_mark>#BFGSupdateB#2464><tex2html_cr_mark></A>) for <tex2html_verbatim_mark>#math587#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19366#</SPAN> followed by an additional 
+  inversion operation, or Eq. (<A HREF=<tex2html_cr_mark>#BFGSupdateInvB#2467><tex2html_cr_mark></A>) directly for 
+  <tex2html_verbatim_mark>#math588#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19368#</SPAN>. The results obtained by these methods are
+  equivalent.
+
+<P>
+</LI>
+<LI>The <#2471#><EM>DFP (Davidon-Fletcher-Powell)</EM><#2471#> Algorithm
+
+<P>
+Same as the BFGS algorithm, the DFP algorithm is also a rank 2 
+  algorithm, where instead of <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19370#</SPAN>, the inverse matrix 
+  <tex2html_verbatim_mark>#math589#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19372#</SPAN> is updated by two rank-1 terms:
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math590#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19374#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">113</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  where <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19376#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19378#</SPAN> are real scalars, <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19380#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19382#</SPAN>
+  are vectors. Imposing the secant condition for the inverse of 
+  <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19384#</SPAN>, we get
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math591#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19386#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">114</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  or
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math592#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19388#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">115</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  which can be satisfied if we let
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math593#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19390#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">116</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  Substituting these into 
+  <tex2html_verbatim_mark>#math594#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19392#</SPAN>
+  we get
+  <P></P>
+<DIV CLASS="mathdisplay"><A ID="DFPupdateInvB"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math595#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19394#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">117</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  Following the same procedure used for the BFGS method, we can also
+  obtain the update formular of matrix <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19396#</SPAN> for the DFP method:
+  <P></P>
+<DIV CLASS="mathdisplay"><A ID="DFPupdateB"><tex2html_anchor_mark></A><tex2html_verbatim_mark>#math596#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19398#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">118</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+We note that Eqs. (<A HREF=<tex2html_cr_mark>#DFPupdateInvB#2596><tex2html_cr_mark></A>) and (<A HREF=<tex2html_cr_mark>#BFGSupdateB#2597><tex2html_cr_mark></A>) form 
+  a duality pair, and Eqs. (<A HREF=<tex2html_cr_mark>#DFPupdateB#2598><tex2html_cr_mark></A>) and (<A HREF=<tex2html_cr_mark>#BFGSupdateInvB#2599><tex2html_cr_mark></A>) 
+  form another duality pair. In other words, the BFGS and FDP methods
+  are dual of each other.
+
+<P>
+</LI>
+</UL>
+
+<P>
+In both the DFP and BFGS methods, matrix <tex2html_verbatim_mark>#math597#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19400#</SPAN>, as 
+well as <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19402#</SPAN>, must be positive definite, i.e., 
+<tex2html_verbatim_mark>#math598#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19404#</SPAN> must hold for any <tex2html_verbatim_mark>#math599#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19406#</SPAN>.
+We now prove that this requirement is satisfied if the curvature
+condition of the <A ID="tex2html15"
+  HREF="node7.html">Wolfe conditions</A>
+is satisfied:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math600#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19408#<#1#>i.e.<#1#><tex2html_image_mark>#tex2html_wrap_indisplay19409#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">119</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Replacing the search direction <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19411#</SPAN> by
+<tex2html_verbatim_mark>#math601#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19413#</SPAN>, we get:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math602#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19415#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">120</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+We also have
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math603#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19417#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">121</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Substracting the first equation from the second, we get
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math604#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19419#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">122</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The last inequality is due to the fact that<tex2html_verbatim_mark>#math605#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19421#</SPAN> 
+and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19423#</SPAN>. We therefore have
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math606#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19425#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">123</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Given  <tex2html_verbatim_mark>#math607#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19427#</SPAN>, we can further prove by 
+induction that both <tex2html_verbatim_mark>#math608#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19429#</SPAN> and <tex2html_verbatim_mark>#math609#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19431#</SPAN> 
+based repectively on the update formulae in Eqs. 
+(<A HREF=<tex2html_cr_mark>#BFGSupdateB#2682><tex2html_cr_mark></A>) and (<A HREF=<tex2html_cr_mark>#DFPupdateInvB#2683><tex2html_cr_mark></A>) are positive 
+definite. We first assume <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19433#</SPAN> and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19435#</SPAN> are both 
+positive definite, and express <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19437#</SPAN> in terms of its 
+Cholesky decomposition, <tex2html_verbatim_mark>#math610#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19439#</SPAN>. We further 
+define <tex2html_verbatim_mark>#math611#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19441#</SPAN>, <tex2html_verbatim_mark>#math612#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19443#</SPAN>, 
+and get
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math613#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19445#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">124</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Now we can show that the sum of the first and third terms of
+Eq. (<A HREF=<tex2html_cr_mark>#BFGSupdateInvB#2712><tex2html_cr_mark></A>) is positive definite:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math614#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19447#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">125</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The last step is due to the Cauchy-Schwarz inequality. Also, as
+<tex2html_verbatim_mark>#math615#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19449#</SPAN>, the second term of Eq. (<A HREF=<tex2html_cr_mark>#BFGSupdateB#2742><tex2html_cr_mark></A>) 
+is positive definite
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math616#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19451#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">126</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Combining these two results, we get
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math617#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay19453#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">127</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+i.e., <tex2html_verbatim_mark>#math618#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19455#</SPAN> based on the update formular Eq. (<A HREF=<tex2html_cr_mark>#BFGSupdateB#2775><tex2html_cr_mark></A>) 
+is positive definite. Following the same steps, we can also show that
+<tex2html_verbatim_mark>#math619#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline19457#</SPAN> based on Eq. (<A HREF=<tex2html_cr_mark>#DFPupdateInvB#2779><tex2html_cr_mark></A>) is positive definite.
+
+<P>
+<#2780#><B>Examples:</B><#2780#>
+
+<P>
+The figures below shows the search path of the DFP and BPGS methods
+when applied to find the minimum of the Rosenbrock function.
+
+<P>
+<IMG STYLE="" SRC="figures/RosenbrockSR1.png"
+ ALT="RosenbrockSR1.png">
+<IMG STYLE="" SRC="figures/RosenbrockDFP.png"
+ ALT="RosenbrockDFP.png">
+<IMG STYLE="" SRC="figures/RosenbrockBFGS.png"
+ ALT="RosenbrockBFGS.png">
+
+<P>

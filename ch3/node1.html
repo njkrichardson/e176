@@ -1,0 +1,228 @@
+
+<H1><A ID="SECTION00010000000000000000">
+Optimization</A>
+</H1>
+
+<P>
+The goal of mathematical optimization or mathematical programming
+is to solve an optimization problem of a given real multivariate 
+function <tex2html_verbatim_mark>#math177#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17894#</SPAN> by searching its domain, 
+an N-dimensional space, to find the optimal point 
+<tex2html_verbatim_mark>#math178#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17896#</SPAN> at which the 
+corresponding function value <tex2html_verbatim_mark>#math179#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17898#</SPAN> is either maximized or
+minimized. As maximizing <tex2html_verbatim_mark>#math180#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17900#</SPAN> is equivalent to minimizing 
+<tex2html_verbatim_mark>#math181#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17902#</SPAN>, we can only consider minimization problems.
+
+<P>
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math182#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay17904#<#1#>i.e.,<#1#><tex2html_image_mark>#tex2html_wrap_indisplay17905#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">1</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+If the independent variables in <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17907#</SPAN> are allowed to take 
+any values inside the function domain <tex2html_verbatim_mark>#math183#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17909#</SPAN>, then the 
+optimization problem is unconstrained, otherwise if <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17911#</SPAN> has
+to be inside a subset of <tex2html_verbatim_mark>#math184#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17913#</SPAN>, the problem is constrained.
+
+<P>
+Typically the real function <tex2html_verbatim_mark>#math185#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17915#</SPAN> is an <#33#><EM>objective</EM><#33#> or 
+<#34#><EM>cost function</EM><#34#> which is to be either minimized or maximized. 
+For example, in machine learning, we need to carry out regression 
+analysis and classification, and we may need to develop a model 
+<tex2html_verbatim_mark>#math186#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17917#</SPAN> to fit a set of observed data points 
+<tex2html_verbatim_mark>#math187#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17919#</SPAN>, by estimating
+the parameters in <tex2html_verbatim_mark>#math188#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17921#</SPAN> of the function.
+Typically the function is assumed to be known, such as the linear
+model <tex2html_verbatim_mark>#math189#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17923#</SPAN>, containing two model parameters <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17925#</SPAN> (slope)
+and <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17927#</SPAN> (intercept), to be estimated based on the observed data.
+
+<P>
+Different methods can be used to solve this parameter estimation
+problem. If the least square method is used, the objective function 
+can be the squared error, the difference between the model and the 
+given data, which is to be minimized:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math190#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay17929#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">2</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Alternatively, if the Bayesian method is used, the objective 
+functioin can be the likelihood function of the parameters in
+<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17931#</SPAN>, which is to be maximized:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math191#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay17933#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">3</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Solving suth optimization problems we get the optimal model 
+parameters in <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17935#</SPAN>.
+
+<P>
+If an optimization problem is unconstrained, and the analytical 
+expression of the objective function is explicitly given, then the 
+solution <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17937#</SPAN> at which the objective function <tex2html_verbatim_mark>#math192#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17939#</SPAN> 
+is minimized may be found by solving the following equation system 
+obtained by setting the gradient of the <tex2html_verbatim_mark>#math193#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17941#</SPAN> to be zero:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math194#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay17943#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">4</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <tex2html_verbatim_mark>#math195#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17945#</SPAN> 
+denotes the gradient vector of a scalar function <tex2html_verbatim_mark>#math196#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17947#</SPAN> with
+respect to its vector argument <tex2html_verbatim_mark>#math197#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17949#</SPAN>.
+The root <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17951#</SPAN> of the equation <tex2html_verbatim_mark>#math198#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17953#</SPAN> is called a 
+<#85#><EM>critical, stationary, or stable point</EM><#85#> of <tex2html_verbatim_mark>#math199#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17955#</SPAN>.
+
+<P>
+Whether the function value <tex2html_verbatim_mark>#math200#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17957#</SPAN> at this stationary point 
+is a maximum, minimum, or saddle point, depending on its Hessian 
+matrix for its second order derivatives:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math201#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay17959#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+
+<UL>
+<LI>If <tex2html_verbatim_mark>#math202#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17961#</SPAN> is positive definite (all eigenvalues are positive),
+  <tex2html_verbatim_mark>#math203#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17963#</SPAN> is a minimum;
+</LI>
+<LI>If <tex2html_verbatim_mark>#math204#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17965#</SPAN> is negative definite (all eigenvalues are negative), 
+  <tex2html_verbatim_mark>#math205#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17967#</SPAN> is a maximum;
+</LI>
+<LI>If <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17969#</SPAN> is indefinite (with both positive and negative 
+  eigenvalues), <tex2html_verbatim_mark>#math206#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17971#</SPAN> is a saddle point (maximum in some directions,
+  but minimum in others). 
+</LI>
+</UL>
+
+<P>
+For  example, the gradient vectors and Hessian matrices of three 
+functions <tex2html_verbatim_mark>#math207#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17973#</SPAN>, <tex2html_verbatim_mark>#math208#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17975#</SPAN>, and <tex2html_verbatim_mark>#math209#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17977#</SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math210#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay17979#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+<P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math211#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay17981#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+;SPMnbsp;;SPMnbsp;;SPMnbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+At the common stationary point <tex2html_verbatim_mark>#math212#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17983#</SPAN> for all three 
+functions at which <tex2html_verbatim_mark>#math213#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17985#</SPAN>, <tex2html_verbatim_mark>#math214#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17987#</SPAN> is 
+a minimum, <tex2html_verbatim_mark>#math215#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17989#</SPAN> is a maximum, and <tex2html_verbatim_mark>#math216#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17991#</SPAN> is a 
+saddle point, i.e., <tex2html_verbatim_mark>#math217#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17993#</SPAN> is a minimum in <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17995#</SPAN> direction but 
+a maximum in <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17997#</SPAN> direction.
+
+<P>
+We show that the problems of minimization and equation solving can be
+converted to each other.
+
+<P>
+
+<UL>
+<LI>First, the problem of minimizing an objective function <tex2html_verbatim_mark>#math218#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline17999#</SPAN>
+  is equivalent to solving the following equation system:
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math219#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18001#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">5</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  If its root <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18003#</SPAN> is not a saddle point, it is the solution of the
+  optimization problem that either maximizes or minimizes <tex2html_verbatim_mark>#math220#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18005#</SPAN>. 
+
+<P>
+This equation system can be solved by any of the methods discussed previously,
+  such as the <A ID="tex2html1"
+  HREF="../ch2/node6.html">Newton-Raphson method</A>,
+
+which finds the root of a general equation <tex2html_verbatim_mark>#math221#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18007#</SPAN> by the 
+  iteration <tex2html_verbatim_mark>#math222#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18009#</SPAN>. 
+  Here, specifically, to solve the equation <tex2html_verbatim_mark>#math223#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18011#</SPAN>, we
+  first get the Jacobian <tex2html_verbatim_mark>#math224#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18013#</SPAN> of the gradient
+  <tex2html_verbatim_mark>#math225#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18015#</SPAN> of <tex2html_verbatim_mark>#math226#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18017#</SPAN>, which is the Hessian of <tex2html_verbatim_mark>#math227#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18019#</SPAN>, 
+  and then carry out the iteration below to eventually find <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18021#</SPAN> that 
+  minimizes <tex2html_verbatim_mark>#math228#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18023#</SPAN>:
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math229#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18025#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">6</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  The second equality is due to the fact that the Jacobian of the gradient
+  <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18027#</SPAN> of function <tex2html_verbatim_mark>#math230#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18029#</SPAN> is the Hessian of the function,
+  i.e., <tex2html_verbatim_mark>#math231#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18031#</SPAN>.
+
+<P>
+</LI>
+<LI>On the other hand, to solve the equation system 
+  <tex2html_verbatim_mark>#math232#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18033#</SPAN>, 
+  we can minimize the objective function defined as
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math233#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18035#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">7</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  To solve this minimization problem, we solve the equations:
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math234#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18037#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">8</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  Combining all <SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18039#</SPAN> of such equations we get the gradient vector of
+  function <tex2html_verbatim_mark>#math235#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18041#</SPAN>:
+  <P></P>
+<DIV CLASS="mathdisplay"><tex2html_verbatim_mark>#math236#<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_indisplay18043#</SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">9</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  where <tex2html_verbatim_mark>#math237#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18045#</SPAN> is the Jicobian of <tex2html_verbatim_mark>#math238#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18047#</SPAN>.
+  As in general <tex2html_verbatim_mark>#math239#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18049#</SPAN> has full rank, the homogeneous 
+  equation above only has a zero solution <tex2html_verbatim_mark>#math240#<SPAN CLASS="MATH"><tex2html_image_mark>#tex2html_wrap_inline18051#</SPAN>. 
+
+<P>
+</LI>
+</UL>
+
+<P>
