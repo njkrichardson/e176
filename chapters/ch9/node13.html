@@ -1,0 +1,1270 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Gaussian Process Classifier - Multi-Class</TITLE>
+<META NAME="description" CONTENT="Gaussian Process Classifier - Multi-Class">
+<META NAME="keywords" CONTENT="ch9">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch9.css">
+
+<LINK REL="previous" HREF="node12.html">
+<LINK REL="next" HREF="node14.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node14.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node11.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node12.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node14.html">Hierarchical (Tree) Classifiers</A>
+<B> Up:</B> <A
+ HREF="node11.html">Gaussian Process Classification (GPC)</A>
+<B> Previous:</B> <A
+ HREF="node12.html">Gaussian Process Classifier -</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION00062000000000000000">
+Gaussian Process Classifier - Multi-Class</A>
+</H2>
+
+<P>
+The binary GPC considered previously can be generalized to multi-class 
+GPC, similar to the how binary classification based on logistic function
+is generalized to multi-class classification based on softmax function.
+First of all, we define the following variables for each class <!-- MATH
+ $C_k,\;
+(k=1,\cdots,K)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img814.svg"
+ ALT="$C_k,\;
+(k=1,\cdots,K)$"></SPAN> of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> classes <!-- MATH
+ $\{C_1,\cdots,C_K\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img5.svg"
+ ALT="$\{C_1,\cdots,C_K\}$"></SPAN>:
+
+<UL>
+<LI><B>Class labeling:</B>
+
+<P>
+Binary labeling vector <!-- MATH
+ ${\bf y}_k=[y_1^k,\cdots,y_N^k]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.76ex; " SRC="img815.svg"
+ ALT="${\bf y}_k=[y_1^k,\cdots,y_N^k]^T$"></SPAN> 
+  indicating whether each of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="$N$"></SPAN> samples in the training set 
+  <!-- MATH
+ ${\bf X}=\{{\bf x}_1,\cdots,{\bf x}_N\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img816.svg"
+ ALT="${\bf X}=\{{\bf x}_1,\cdots,{\bf x}_N\}$"></SPAN> belongs to <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN>:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+y_n^k=\left\{\begin{array}{ll}1 & \mbox{if ${\bf x}_n\in C_k$}\\
+    0 & \mbox{if ${\bf x}_n\notin C_k$}\end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img817.svg"
+ ALT="$\displaystyle y_n^k=\left\{\begin{array}{ll}1 &amp; \mbox{if ${\bf x}_n\in C_k$}\\
+0 &amp; \mbox{if ${\bf x}_n\notin C_k$}\end{array}\right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">214</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+</LI>
+<LI><B>Latent functions:</B>
+
+<P>
+Latent function <!-- MATH
+ ${\bf f}_k=[f_1^k,\cdots,f_N^k]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.76ex; " SRC="img818.svg"
+ ALT="${\bf f}_k=[f_1^k,\cdots,f_N^k]^T$"></SPAN> evaluated at the
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="$N$"></SPAN> training samples in <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img651.svg"
+ ALT="${\bf X}$"></SPAN>, where <!-- MATH
+ $f_n^k=f^k({\bf x}_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img819.svg"
+ ALT="$f_n^k=f^k({\bf x}_n)$"></SPAN>.
+
+<P>
+</LI>
+<LI><B>Probability modeling:</B>
+
+<P>
+Vector <!-- MATH
+ ${\bf p}_k=[p_1^k,\cdots,p_N^k]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.76ex; " SRC="img820.svg"
+ ALT="${\bf p}_k=[p_1^k,\cdots,p_N^k]^T$"></SPAN>, of which the nth component
+  <!-- MATH
+ $p_n^k\;(n=1,\cdots,N)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img821.svg"
+ ALT="$p_n^k\;(n=1,\cdots,N)$"></SPAN> is the probability for <!-- MATH
+ ${\bf x}_n\in C_k$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img822.svg"
+ ALT="${\bf x}_n\in C_k$"></SPAN>,
+  modeled by the solftmax function based on <!-- MATH
+ $f_n^k,\;(k=1,\cdots,K,\;
+  n=1,\cdots,N)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img823.svg"
+ ALT="$f_n^k,\;(k=1,\cdots,K,\;
+n=1,\cdots,N)$"></SPAN>:
+  <P></P>
+<DIV CLASS="mathdisplay"><A ID="SoftmaxGPC"></A><!-- MATH
+ \begin{equation}
+p_n^k=p(y_n^k=1|f_n^1,\cdots,f_n^K)
+    =\frac{\exp(f_n^k)}{\sum_{l=1}^K\exp(f_n^l)}
+    =\left\{\begin{array}{ll}1 & \mbox{if $f_n^k=\infty$}\\
+    0 & \mbox{if $f_n^k=-\infty$}\end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.50ex; vertical-align: -2.84ex; " SRC="img824.svg"
+ ALT="$\displaystyle p_n^k=p(y_n^k=1\vert f_n^1,\cdots,f_n^K)
+=\frac{\exp(f_n^k)}{\sum...
+...1 &amp; \mbox{if $f_n^k=\infty$}\\
+0 &amp; \mbox{if $f_n^k=-\infty$}\end{array}\right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">215</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Note that if <SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img825.svg"
+ ALT="$y_n^k=1$"></SPAN> then necessarily <SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img826.svg"
+ ALT="$y_n^l=0$"></SPAN> for all 
+  <!-- MATH
+ $l=1,\cdots,K$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img827.svg"
+ ALT="$l=1,\cdots,K$"></SPAN> but <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img828.svg"
+ ALT="$l\ne k$"></SPAN>, i.e., the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> variables 
+  <!-- MATH
+ $y_n^1,\cdots,y_n^K$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img829.svg"
+ ALT="$y_n^1,\cdots,y_n^K$"></SPAN> are not independent.
+</LI>
+</UL>
+
+<P>
+Based on <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img830.svg"
+ ALT="${\bf y}_k$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img831.svg"
+ ALT="${\bf f}_k$"></SPAN>, and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img832.svg"
+ ALT="${\bf p}_k$"></SPAN> for all <!-- MATH
+ $k=1,\cdots,K$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img36.svg"
+ ALT="$k=1,\cdots,K$"></SPAN>,
+we further define the following <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img833.svg"
+ ALT="$KN$"></SPAN> dimensional vectors:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf y}=\left[\begin{array}{c}{\bf y}_1\\\vdots\\{\bf y}_K\end{array}\right]
+  =\left[\begin{array}{c}y_1^1\\\vdots\\y_N^1\\\vdots\\y_1^K\\\vdots\\y_N^K\end{array}\right],\,\;\;\;\;\;
+  {\bf f}=\left[\begin{array}{c}{\bf f}_1\\\vdots\\{\bf f}_K\end{array}\right]
+  =\left[\begin{array}{c}f_1^1\\\vdots\\f_N^1\\\vdots\\f_1^K\\\vdots\\f_N^K\end{array}\right],\,\;\;\;\;\;
+  {\bf p}=\left[\begin{array}{c}{\bf p}_1\\\vdots\\{\bf p}_K\end{array}\right]
+  =\left[\begin{array}{c}p_1^1\\\vdots\\p_N^1\\\vdots\\p_1^K\\\vdots\\p_N^K\end{array}\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 24.39ex; vertical-align: -11.61ex; " SRC="img834.svg"
+ ALT="$\displaystyle {\bf y}=\left[\begin{array}{c}{\bf y}_1\\ \vdots\\ {\bf y}_K\end{...
+...y}{c}p_1^1\\ \vdots\\ p_N^1\\ \vdots\\ p_1^K\\ \vdots\\ p_N^K\end{array}\right]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">216</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+We also consider the posterior of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img692.svg"
+ ALT="${\bf f}$"></SPAN> given the training 
+set <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img674.svg"
+ ALT="${\cal D}$"></SPAN>, same as in Eq. (<A HREF="node12.html#PosteriorBayesGaussian">187</A>) in
+the binary case:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p({\bf f}|{\cal D})=p({\bf f}|{\bf X},{\bf y})
+  \propto p({\bf y}|{\bf f})\; p({\bf f}|{\bf X})
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img835.svg"
+ ALT="$\displaystyle p({\bf f}\vert{\cal D})=p({\bf f}\vert{\bf X},{\bf y})
+\propto p({\bf y}\vert{\bf f})\; p({\bf f}\vert{\bf X})$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">217</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+We first find the likelihood based on all <SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img836.svg"
+ ALT="$p_n^k$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p({\bf y}|{\bf f})=\prod_{n=1}^N\prod_{k=1}^K (p_n^k)^{y_n^k}
+  =\prod_{n=1}^N\prod_{k=1}^K
+  \left( \frac{\exp(f_n^k)}{\sum_{h=1}^K\exp(f_n^h)}\right)^{y_n^k}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.36ex; vertical-align: -3.14ex; " SRC="img837.svg"
+ ALT="$\displaystyle p({\bf y}\vert{\bf f})=\prod_{n=1}^N\prod_{k=1}^K (p_n^k)^{y_n^k}...
+...\prod_{k=1}^K
+\left( \frac{\exp(f_n^k)}{\sum_{h=1}^K\exp(f_n^h)}\right)^{y_n^k}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">218</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+As each sample <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img31.svg"
+ ALT="${\bf x}_n$"></SPAN> belongs to only one of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> classes, 
+only one of <!-- MATH
+ $\{y_n^1,\cdots,y_n^K\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img838.svg"
+ ALT="$\{y_n^1,\cdots,y_n^K\}$"></SPAN> can be 1 while all others are
+0, consequently, the product above contains only <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="$N$"></SPAN> probabilities 
+raised to the power of <SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img825.svg"
+ ALT="$y_n^k=1$"></SPAN>, each for one of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="$N$"></SPAN> samples
+belonging to a certain class, while all other probabilities raised
+to the power of <SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img839.svg"
+ ALT="$y_n^k=0$"></SPAN> become 1 and not considered.
+
+<P>
+We next assume the prior probability of the latent function 
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img831.svg"
+ ALT="${\bf f}_k$"></SPAN> for each class <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN> to be a zero-mean Gaussian 
+process <!-- MATH
+ $p({\bf f}_k|{\bf X})={\cal N}({\bf0},{\bf\Sigma}_k)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img840.svg"
+ ALT="$p({\bf f}_k\vert{\bf X})={\cal N}({\bf0},{\bf\Sigma}_k)$"></SPAN>, 
+where the covariance matrix <!-- MATH
+ ${\bf\Sigma}_k$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img43.svg"
+ ALT="${\bf\Sigma}_k$"></SPAN> is constructed based
+on the squared exponential (SE) for its mn-th component:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+cov(f_k({\bf x}_m),f_k({\bf x}_n))=cov(f^k_m,f^k_n)
+  =k({\bf x}_m,{\bf x}_n)
+  =\exp\left(-\frac{1}{a^2}||{\bf x}_m-{\bf x}_n||^2\right),
+  \;\;\;\;\;\;(m,n=1,\cdots,N)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img841.svg"
+ ALT="$\displaystyle cov(f_k({\bf x}_m),f_k({\bf x}_n))=cov(f^k_m,f^k_n)
+=k({\bf x}_m,...
+...}\vert\vert{\bf x}_m-{\bf x}_n\vert\vert^2\right),
+\;\;\;\;\;\;(m,n=1,\cdots,N)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">219</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Then the prior of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img692.svg"
+ ALT="${\bf f}$"></SPAN> for <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img692.svg"
+ ALT="${\bf f}$"></SPAN> containing all 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> such latent functions is also a Gaussian 
+<!-- MATH
+ $p({\bf f}|{\bf X})={\cal N}({\bf0},{\bf K})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img842.svg"
+ ALT="$p({\bf f}\vert{\bf X})={\cal N}({\bf0},{\bf K})$"></SPAN>, where <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img843.svg"
+ ALT="${\bf0}$"></SPAN> 
+is a KN-dimensional zero vector and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img797.svg"
+ ALT="${\bf K}$"></SPAN> is a <!-- MATH
+ $KN \times KN$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img844.svg"
+ ALT="$KN \times KN$"></SPAN>
+block diagonal matrix
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf K}=\left[\begin{array}{cccc}{\bf K}_1 & {\bf0} &\cdots &{\bf0}\\
+    {\bf0} & {\bf K}_2 & \cdots & {\bf0}\\
+    \vdots & \vdots & \ddots & \vdots \\
+    {\bf0} & \cdots & {\bf0} &{\bf K}_K\end{array}\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 13.01ex; vertical-align: -5.88ex; " SRC="img845.svg"
+ ALT="$\displaystyle {\bf K}=\left[\begin{array}{cccc}{\bf K}_1 &amp; {\bf0} &amp;\cdots &amp;{\bf...
+...ots &amp; \ddots &amp; \vdots \\
+{\bf0} &amp; \cdots &amp; {\bf0} &amp;{\bf K}_K\end{array}\right]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">220</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+All off-diagonal blocks are zero as the latent functions of 
+different classes are uncorrelated. 
+
+<P>
+Having found both <!-- MATH
+ $p({\bf y}|{\bf f})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img698.svg"
+ ALT="$p({\bf y}\vert{\bf f})$"></SPAN> and <!-- MATH
+ $p({\bf f}|{\bf X})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img696.svg"
+ ALT="$p({\bf f}\vert{\bf X})$"></SPAN>,
+we can write the posterior as
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p({\bf f}|{\cal D})
+  =p({\bf f}|{\bf X},{\bf y})\propto p({\bf y}|{\bf f})\; p({\bf f}|{\bf X})
+  \propto\prod_{n=1}^N\prod_{k=1}^K
+  \left( \frac{\exp(f_n^k)}{\sum_{h=1}^K\exp(f_n^h)} \right)^{y_n^k} 
+       {\cal N}({\bf0},\,{\bf K})
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.36ex; vertical-align: -3.14ex; " SRC="img846.svg"
+ ALT="$\displaystyle p({\bf f}\vert{\cal D})
+=p({\bf f}\vert{\bf X},{\bf y})\propto p(...
+...exp(f_n^k)}{\sum_{h=1}^K\exp(f_n^h)} \right)^{y_n^k}
+{\cal N}({\bf0},\,{\bf K})$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">221</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+We note that the likelihood function <!-- MATH
+ $p({\bf y}|{\bf f})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img698.svg"
+ ALT="$p({\bf y}\vert{\bf f})$"></SPAN> is not
+Gaussian, as <!-- MATH
+ $y_n^k \in\{0,\,1\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img847.svg"
+ ALT="$y_n^k \in\{0,\,1\}$"></SPAN> is a binary labeling, instead 
+of a continuous function. As a product of the Gaussian prior and
+non-Gaussian likelihood, the posterior <!-- MATH
+ $p({\bf f}|{\cal D})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img690.svg"
+ ALT="$p({\bf f}\vert{\cal D})$"></SPAN> is
+not a Gaussian process either. However, for convnience, we will 
+still approximate it by a Gaussian
+<!-- MATH
+ $p({\bf f}|{\cal D})\approx {\cal N}({\bf f},\,{\bf m}_{f|D},\,{\bf\Sigma}_{f|D})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.94ex; " SRC="img848.svg"
+ ALT="$p({\bf f}\vert{\cal D})\approx {\cal N}({\bf f},\,{\bf m}_{f\vert D},\,{\bf\Sigma}_{f\vert D})$"></SPAN>.
+
+<P>
+To find the mean <!-- MATH
+ ${\bf m}_{f|D}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.94ex; " SRC="img728.svg"
+ ALT="${\bf m}_{f\vert D}$"></SPAN> and covariance <!-- MATH
+ ${\bf\Sigma}_{f|D}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.94ex; " SRC="img729.svg"
+ ALT="${\bf\Sigma}_{f\vert D}$"></SPAN>,
+we first find the log posterior
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+\psi({\bf f})&=&\log p({\bf f}|{\cal D})
+  =\log p({\bf y}|{\bf f}) + \log p({\bf f}|{\bf X})
+  =\sum_{n=1}^N\sum_{k=1}^K y_n^k\left(f_n^k-\log\sum_{h=1}^K\exp(f_n^h)\right)
+  +\log {\cal N}({\bf0},{\bf K})
+  \nonumber\\
+  &=&{\bf y}^T{\bf f}-\sum_{n=1}^N\sum_{k=1}^K \log \sum_{h=1}^K\exp(f_n^h)
+  -\frac{N}{2}\log(2\pi)-\frac{1}{2}\log|{\bf K}|
+  -\frac{1}{2}{\bf f}^T {\bf K}^{-1}{\bf f}
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img849.svg"
+ ALT="$\displaystyle \psi({\bf f})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img850.svg"
+ ALT="$\displaystyle \log p({\bf f}\vert{\cal D})
+=\log p({\bf y}\vert{\bf f}) + \log ...
+...^k\left(f_n^k-\log\sum_{h=1}^K\exp(f_n^h)\right)
++\log {\cal N}({\bf0},{\bf K})$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img851.svg"
+ ALT="$\displaystyle {\bf y}^T{\bf f}-\sum_{n=1}^N\sum_{k=1}^K \log \sum_{h=1}^K\exp(f...
+...\pi)-\frac{1}{2}\log\vert{\bf K}\vert
+-\frac{1}{2}{\bf f}^T {\bf K}^{-1}{\bf f}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">222</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+and its gradient
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+{\bf g}_\psi&=&
+  \frac{d}{d{\bf f}} \psi({\bf f})=\frac{d}{d{\bf f}} \left(
+    {\bf y}^T{\bf f}-\sum_{n=1}^N\sum_{k=1}^K \log \sum_{h=1}^K\exp(f_n^h)
+    -\frac{N}{2}\log(2\pi)-\frac{1}{2}\log|{\bf K}|
+    -\frac{1}{2}{\bf f}^T {\bf K}^{-1}{\bf f}\right)
+  \nonumber\\
+  &=&{\bf y}-{\bf p}-{\bf K}^{-1}{\bf f}
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img852.svg"
+ ALT="$\displaystyle {\bf g}_\psi$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img853.svg"
+ ALT="$\displaystyle \frac{d}{d{\bf f}} \psi({\bf f})=\frac{d}{d{\bf f}} \left(
+{\bf y...
+...rac{1}{2}\log\vert{\bf K}\vert
+-\frac{1}{2}{\bf f}^T {\bf K}^{-1}{\bf f}\right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.79ex; vertical-align: -0.57ex; " SRC="img854.svg"
+ ALT="$\displaystyle {\bf y}-{\bf p}-{\bf K}^{-1}{\bf f}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">223</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+where the second term <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img855.svg"
+ ALT="${\bf p}$"></SPAN> comes from
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="ppp"></A><!-- MATH
+ \begin{equation}
+\sum_{n=1}^N\sum_{k=1}^K \frac{d}{d{\bf f}} \log \sum_{h=1}^K\exp(f_n^h)
+  =\sum_{n=1}^N\sum_{k=1}^K \left[\begin{array}{c}0\\\vdots\\0\\
+      \frac{\exp(f_n^k)}{\sum_{h=1}^K\exp(f_n^h)}\\0\\\vdots\\0\end{array}\right]
+  =\sum_{n=1}^N\sum_{k=1}^K \left[\begin{array}{c}0\\\vdots\\0\\
+      p_n^k\\0\\\vdots\\0\end{array}\right]={\bf p}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 24.39ex; vertical-align: -11.55ex; " SRC="img856.svg"
+ ALT="$\displaystyle \sum_{n=1}^N\sum_{k=1}^K \frac{d}{d{\bf f}} \log \sum_{h=1}^K\exp...
+...gin{array}{c}0\\ \vdots\\ 0\\
+p_n^k\\ 0\\ \vdots\\ 0\end{array}\right]={\bf p}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">224</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Note that <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img855.svg"
+ ALT="${\bf p}$"></SPAN> is a function of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img692.svg"
+ ALT="${\bf f}$"></SPAN>.
+
+<P>
+As the posterior
+<!-- MATH
+ $p({\bf f}|{\cal D})\approx{\cal N}({\bf m}_{f|D},{\bf\Sigma}_{f|D})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.94ex; " SRC="img857.svg"
+ ALT="$p({\bf f}\vert{\cal D})\approx{\cal N}({\bf m}_{f\vert D},{\bf\Sigma}_{f\vert D})$"></SPAN>
+is approximated as a Gaussian, which reaches maximum at its mean 
+<!-- MATH
+ ${\bf m}_{f|D}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.94ex; " SRC="img728.svg"
+ ALT="${\bf m}_{f\vert D}$"></SPAN>, and so does the log prior 
+<!-- MATH
+ $\psi({\bf f})=\log p({\bf f}|{\cal D})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img746.svg"
+ ALT="$\psi({\bf f})=\log p({\bf f}\vert{\cal D})$"></SPAN>, and 
+the gradient of <!-- MATH
+ $psi({\bf f})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img730.svg"
+ ALT="$\psi({\bf f})$"></SPAN> is zero at <!-- MATH
+ ${\bf f}={\bf m}_{f|D}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.94ex; " SRC="img759.svg"
+ ALT="${\bf f}={\bf m}_{f\vert D}$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf g}_\psi({\bf f})\bigg|_{{\bf f}={\bf m}_{f|D}}
+  ={\bf y}-{\bf p}-{\bf K}^{-1}{\bf f}\bigg|_{{\bf f}={\bf m}_{f|D}}
+  ={\bf y}-{\bf p}_{m_f}-{\bf K}^{-1}{\bf m}_{f|D}={\bf0},
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.50ex; vertical-align: -3.04ex; " SRC="img858.svg"
+ ALT="$\displaystyle {\bf g}_\psi({\bf f})\bigg\vert _{{\bf f}={\bf m}_{f\vert D}}
+={\...
+...bf m}_{f\vert D}}
+={\bf y}-{\bf p}_{m_f}-{\bf K}^{-1}{\bf m}_{f\vert D}={\bf0},$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">225</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+i.e.,
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="MeanFMC"></A><!-- MATH
+ \begin{equation}
+{\bf m}_{f|D}={\bf K}({\bf y}-{\bf p}_{m_f})
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.94ex; " SRC="img859.svg"
+ ALT="$\displaystyle {\bf m}_{f\vert D}={\bf K}({\bf y}-{\bf p}_{m_f})$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">226</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <!-- MATH
+ ${\bf p}_{m_f}=E_f({\bf p})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.94ex; " SRC="img860.svg"
+ ALT="${\bf p}_{m_f}=E_f({\bf p})$"></SPAN> is the vector defined above 
+evaluated at <!-- MATH
+ ${\bf f}={\bf m}_{f|D}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.94ex; " SRC="img759.svg"
+ ALT="${\bf f}={\bf m}_{f\vert D}$"></SPAN>.
+
+<P>
+We further get the Hessian matrix of <!-- MATH
+ $\psi({\bf f})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img730.svg"
+ ALT="$\psi({\bf f})$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf H}_\psi({\bf f})=\frac{d^2}{d{\bf f}^2} \psi({\bf f})
+  =\frac{d}{d{\bf f}} {\bf g}_\psi
+  =\frac{d}{d{\bf f}}\left( {\bf y}-{\bf K}^{-1}{\bf f}-{\bf p} \right)
+  =-{\bf K}^{-1} -{\bf W}=-{\bf\Sigma}_{f|D}^{-1}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.34ex; vertical-align: -1.71ex; " SRC="img861.svg"
+ ALT="$\displaystyle {\bf H}_\psi({\bf f})=\frac{d^2}{d{\bf f}^2} \psi({\bf f})
+=\frac...
+...-1}{\bf f}-{\bf p} \right)
+=-{\bf K}^{-1} -{\bf W}=-{\bf\Sigma}_{f\vert D}^{-1}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">227</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The last equality is due to the property of the Gaussian distribution
+(see <A ID="tex2html27"
+  HREF="../probability/node4.html">Appendix</A>), from
+which we get the KN by KN covariance matrix of <!-- MATH
+ $p({\bf f}|{\cal D})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img690.svg"
+ ALT="$p({\bf f}\vert{\cal D})$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="SigmaF"></A><!-- MATH
+ \begin{equation}
+{\bf\Sigma}_{f|D}=-{\bf H}^{-1}_\psi({\bf f})=({\bf K}^{-1}+{\bf W})^{-1}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.48ex; vertical-align: -1.13ex; " SRC="img862.svg"
+ ALT="$\displaystyle {\bf\Sigma}_{f\vert D}=-{\bf H}^{-1}_\psi({\bf f})=({\bf K}^{-1}+{\bf W})^{-1}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">228</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Here <!-- MATH
+ ${\bf W}=d{\bf p}/d{\bf f}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img863.svg"
+ ALT="${\bf W}=d{\bf p}/d{\bf f}$"></SPAN> is a <!-- MATH
+ $KN\times KN$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img844.svg"
+ ALT="$KN \times KN$"></SPAN> Jacobian matrix
+of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img855.svg"
+ ALT="${\bf p}$"></SPAN>, of which the <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img864.svg"
+ ALT="$ijkl$"></SPAN>-th component 
+<!-- MATH
+ $(i,j=1,\cdots,N,\;\;k,l=1,\cdots,K)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img865.svg"
+ ALT="$(i,j=1,\cdots,N,\;\;k,l=1,\cdots,K)$"></SPAN> is:
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+\frac{\partial}{\partial f_j^l} p_i^k
+  &=&\frac{\partial}{\partial f_j^l}\left[\frac{\exp(f_i^k)}{\sum_{h=1}^K\exp(f_i^h)}\right]
+  =\frac{\exp(f_i^k)\left(\sum_{h=1}^K\exp(f_i^h)\right)\delta_{kl}
+    -\exp(f_i^k)\exp(f_j^l)}{\left(\sum_{h=1}^K\exp(f_i^h)\right)^2}\delta_{ij}
+  \nonumber\\
+  &=&\left[\frac{\exp(f_i^k)}{\sum_{h=1}^K\exp(f_i^h)}\delta_{kl}
+    -\frac{\exp(f_i^k)\exp(f_j^l)}{\left(\sum_{h=1}^K\exp(f_i^h)\right)^2}\right]
+  \delta_{ij}
+  =(p_i^k\delta_{kl}-p_i^k p_j^l)\delta_{ij},
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 6.04ex; vertical-align: -2.75ex; " SRC="img866.svg"
+ ALT="$\displaystyle \frac{\partial}{\partial f_j^l} p_i^k$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 9.75ex; vertical-align: -4.51ex; " SRC="img867.svg"
+ ALT="$\displaystyle \frac{\partial}{\partial f_j^l}\left[\frac{\exp(f_i^k)}{\sum_{h=1...
+...kl}
+-\exp(f_i^k)\exp(f_j^l)}{\left(\sum_{h=1}^K\exp(f_i^h)\right)^2}\delta_{ij}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 10.22ex; vertical-align: -4.51ex; " SRC="img868.svg"
+ ALT="$\displaystyle \left[\frac{\exp(f_i^k)}{\sum_{h=1}^K\exp(f_i^h)}\delta_{kl}
+-\fr...
+...f_i^h)\right)^2}\right]
+\delta_{ij}
+=(p_i^k\delta_{kl}-p_i^k p_j^l)\delta_{ij},$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">229</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img592.svg"
+ ALT="${\bf W}$"></SPAN> can be written also in two terms:
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="WWW"></A><!-- MATH
+ \begin{equation}
+{\bf W}=diag({\bf p})-{\bf PP}^T
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img869.svg"
+ ALT="$\displaystyle {\bf W}=diag({\bf p})-{\bf PP}^T$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">230</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where the first term <!-- MATH
+ $diag({\bf p})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img870.svg"
+ ALT="$diag({\bf p})$"></SPAN> is a diagnal matrix containing 
+all <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img833.svg"
+ ALT="$KN$"></SPAN> components of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img855.svg"
+ ALT="${\bf p}$"></SPAN> along the diagnal, and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img871.svg"
+ ALT="${\bf P}$"></SPAN> 
+in the second term is a KN by N matrix composed of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img872.svg"
+ ALT="$N\times N$"></SPAN> 
+diagonal matrices <!-- MATH
+ $diag({\bf p}_k)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img873.svg"
+ ALT="$diag({\bf p}_k)$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf P}=\left[\begin{array}{c}diag({\bf p}_1)\\
+      \vdots\\diag({\bf p}_K)\end{array}\right],\;\;\;\;\;
+  diag({\bf p}_k)=\left[\begin{array}{cccc}p_1^k & 0 & \cdots & 0\\
+      0 & p_2^k & \cdots & 0\\\vdots & \vdots & \ddots & \vdots\\
+      0 & \cdots & 0 & p_N^k
+    \end{array}\right],\;\;\;\;\;(k=1,\cdots,K)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 13.01ex; vertical-align: -5.91ex; " SRC="img874.svg"
+ ALT="$\displaystyle {\bf P}=\left[\begin{array}{c}diag({\bf p}_1)\\
+\vdots\\ diag({\...
+... &amp; \vdots\\
+0 &amp; \cdots &amp; 0 &amp; p_N^k
+\end{array}\right],\;\;\;\;\;(k=1,\cdots,K)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">231</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+so that
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf PP}^T=\left[\begin{array}{c}diag({\bf p}_1)\\
+      \vdots\\diag({\bf p}_K)\end{array}\right]
+  \left[diag({\bf p}_1),\cdots,diag({\bf p}_K)\right]
+  =\left[\begin{array}{ccc}diag({\bf p}_1^2) & \cdots & diag({\bf p}_1) diag({\bf p}_K)\\
+      \vdots & \ddots & \vdots \\
+      diag({\bf p}_K) diag({\bf p}_1) & \cdots & diag({\bf p}_K^2)
+    \end{array}\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 10.22ex; vertical-align: -4.49ex; " SRC="img875.svg"
+ ALT="$\displaystyle {\bf PP}^T=\left[\begin{array}{c}diag({\bf p}_1)\\
+\vdots\\ diag...
+...diag({\bf p}_K) diag({\bf p}_1) &amp; \cdots &amp; diag({\bf p}_K^2)
+\end{array}\right]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">232</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+with
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+diag({\bf p}_k) diag({\bf p}_l)=\left[\begin{array}{cccc}
+    p_1^kp_1^l & 0 & \cdots & 0\\
+    0 & p_1^kp_1^l & \cdots & 0\\
+    \vdots & \vdots & \ddots & \vdots \\
+    0 & \cdots & 0 & p_N^kp_N^l \end{array}\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 13.01ex; vertical-align: -5.91ex; " SRC="img876.svg"
+ ALT="$\displaystyle diag({\bf p}_k) diag({\bf p}_l)=\left[\begin{array}{cccc}
+p_1^kp_...
+...s &amp; \vdots &amp; \ddots &amp; \vdots \\
+0 &amp; \cdots &amp; 0 &amp; p_N^kp_N^l \end{array}\right]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">233</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+Having found both the gradient
+<!-- MATH
+ ${\bf g}_\psi={\bf y}-{\bf p}-{\bf K}^{-1}{\bf f}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img877.svg"
+ ALT="${\bf g}_\psi={\bf y}-{\bf p}-{\bf K}^{-1}{\bf f}$"></SPAN> and Hessian 
+<!-- MATH
+ ${\bf H}_\psi=-({\bf K}^{-1}+{\bf W})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img878.svg"
+ ALT="${\bf H}_\psi=-({\bf K}^{-1}+{\bf W})$"></SPAN>, we can further find the
+mean <!-- MATH
+ ${\bf m}_{f|D}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.94ex; " SRC="img728.svg"
+ ALT="${\bf m}_{f\vert D}$"></SPAN> at which <!-- MATH
+ $\psi({\bf f})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img730.svg"
+ ALT="$\psi({\bf f})$"></SPAN> achieves maximum by 
+the following iteration of 
+<A ID="tex2html28"
+  HREF="../ch3/node6.html">Newton's method</A>:
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+{\bf f}_{n+1}&=&{\bf f}_n-{\bf H}_\psi^{-1}{\bf g}_\psi
+  ={\bf f}_n+({\bf K}^{-1}+{\bf W})^{-1}({\bf y}-{\bf K}^{-1}{\bf f}_n-{\bf p})
+  \nonumber\\
+  &=&{\bf f}_n+({\bf K}^{-1}+{\bf W})^{-1}(-({\bf K}^{-1}+{\bf W}){\bf f}_n+{\bf W}{\bf f}_n+{\bf y}-{\bf p})
+  \nonumber\\
+  &=&({\bf K}^{-1}+{\bf W})^{-1}({\bf W}{\bf f}_n+{\bf y}-{\bf p})
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img755.svg"
+ ALT="$\displaystyle {\bf f}_{n+1}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.48ex; vertical-align: -1.13ex; " SRC="img879.svg"
+ ALT="$\displaystyle {\bf f}_n-{\bf H}_\psi^{-1}{\bf g}_\psi
+={\bf f}_n+({\bf K}^{-1}+{\bf W})^{-1}({\bf y}-{\bf K}^{-1}{\bf f}_n-{\bf p})$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img880.svg"
+ ALT="$\displaystyle {\bf f}_n+({\bf K}^{-1}+{\bf W})^{-1}(-({\bf K}^{-1}+{\bf W}){\bf f}_n+{\bf W}{\bf f}_n+{\bf y}-{\bf p})$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img881.svg"
+ ALT="$\displaystyle ({\bf K}^{-1}+{\bf W})^{-1}({\bf W}{\bf f}_n+{\bf y}-{\bf p})$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">234</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+We note that during the iteration, we need to update not only 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img692.svg"
+ ALT="${\bf f}$"></SPAN>, but also <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img855.svg"
+ ALT="${\bf p}$"></SPAN> as a functions of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img692.svg"
+ ALT="${\bf f}$"></SPAN> given 
+in Eq. (<A HREF="#ppp">224</A>).
+
+<P>
+Now that we have got both <!-- MATH
+ ${\bf m}_{f|D}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.94ex; " SRC="img728.svg"
+ ALT="${\bf m}_{f\vert D}$"></SPAN> and <!-- MATH
+ ${\bf\Sigma}_{f|D}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.94ex; " SRC="img729.svg"
+ ALT="${\bf\Sigma}_{f\vert D}$"></SPAN> of
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img692.svg"
+ ALT="${\bf f}$"></SPAN>, we can further get <!-- MATH
+ ${\bf m}_{f_*}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img766.svg"
+ ALT="${\bf m}_{f_*}$"></SPAN> and <!-- MATH
+ ${\bf\Sigma}_{f_*}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img767.svg"
+ ALT="${\bf\Sigma}_{f_*}$"></SPAN>
+of <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img785.svg"
+ ALT="${\bf f}_*$"></SPAN>:
+
+<P>
+
+<UL>
+<LI>Get mean <!-- MATH
+ ${\bf m}_{f_*}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img766.svg"
+ ALT="${\bf m}_{f_*}$"></SPAN>:
+
+<P>
+Similar to Eq. (<A HREF="node12.html#MeanFsY">209</A>) in the binary case, we have 
+  the following based on <!-- MATH
+ ${\bf f}={\bf K}({\bf y}-{\bf p})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img882.svg"
+ ALT="${\bf f}={\bf K}({\bf y}-{\bf p})$"></SPAN> in 
+  Eq. (<A HREF="#MeanFMC">226</A>):
+  <BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+{\bf m}_{f_*} &=& E_f({\bf m}_{f_*|f})
+    =E_f ({\bf K}_*^T{\bf K}^{-1}{\bf f})={\bf K}_*^T{\bf K}^{-1}E_f({\bf f})
+    \nonumber\\
+    &=&{\bf K}_*^T{\bf K}^{-1}\,[{\bf K}({\bf y}-{\bf p}_{m_f})]
+    ={\bf K}_*^T({\bf y}-{\bf p}_{m_f})
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img776.svg"
+ ALT="$\displaystyle {\bf m}_{f_*}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.25ex; vertical-align: -0.94ex; " SRC="img883.svg"
+ ALT="$\displaystyle E_f({\bf m}_{f_*\vert f})
+=E_f ({\bf K}_*^T{\bf K}^{-1}{\bf f})={\bf K}_*^T{\bf K}^{-1}E_f({\bf f})$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.25ex; vertical-align: -0.94ex; " SRC="img884.svg"
+ ALT="$\displaystyle {\bf K}_*^T{\bf K}^{-1}\,[{\bf K}({\bf y}-{\bf p}_{m_f})]
+={\bf K}_*^T({\bf y}-{\bf p}_{m_f})$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">235</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+  As the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> classes are uncorrelated, i.e., <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img797.svg"
+ ALT="${\bf K}$"></SPAN> is block-diagonal,
+  the above can be separated into <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> equations each for one of the classes:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf m}_{f_*^k}=({\bf K}_*^k)^T({\bf y}^k-{\bf p}^k),
+    \;\;\;\;\;\;(k=1,\cdots,K)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -1.05ex; " SRC="img885.svg"
+ ALT="$\displaystyle {\bf m}_{f_*^k}=({\bf K}_*^k)^T({\bf y}^k-{\bf p}^k),
+\;\;\;\;\;\;(k=1,\cdots,K)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">236</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+</LI>
+<LI>Get covariance <!-- MATH
+ ${\bf\Sigma}_{f_*}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img767.svg"
+ ALT="${\bf\Sigma}_{f_*}$"></SPAN>:
+
+<P>
+Similar to Eq. (<A HREF="node12.html#CovarianceFsY">211</A>) in the binary case, we have
+  the following based on <!-- MATH
+ ${\bf\Sigma}_{f|D}=({\bf K}^{-1}+{\bf W})^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.94ex; " SRC="img886.svg"
+ ALT="${\bf\Sigma}_{f\vert D}=({\bf K}^{-1}+{\bf W})^{-1}$"></SPAN> 
+  in Eq. (<A HREF="#SigmaF">228</A>):
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf\Sigma}_{m_{f_*|f}}
+    ={\bf K}_*^T {\bf K}^{-1}\,{\bf\Sigma}_{f|D} \,{\bf K}^{-1}{\bf K}_*
+    ={\bf K}_*^T {\bf K}^{-1} ({\bf K}^{-1}+{\bf W})^{-1} {\bf K}^{-1}{\bf K}_*
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -1.07ex; " SRC="img887.svg"
+ ALT="$\displaystyle {\bf\Sigma}_{m_{f_*\vert f}}
+={\bf K}_*^T {\bf K}^{-1}\,{\bf\Sigm...
+...}_*
+={\bf K}_*^T {\bf K}^{-1} ({\bf K}^{-1}+{\bf W})^{-1} {\bf K}^{-1}{\bf K}_*$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">237</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <!-- MATH
+ ${\bf W}=diag({\bf p})-{\bf PP}^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img888.svg"
+ ALT="${\bf W}=diag({\bf p})-{\bf PP}^T$"></SPAN> is given in Eq. (<A HREF="#WWW">230</A>) 
+  with <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img855.svg"
+ ALT="${\bf p}$"></SPAN> evaluated at <!-- MATH
+ ${\bf m}_{f|D}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.94ex; " SRC="img728.svg"
+ ALT="${\bf m}_{f\vert D}$"></SPAN>. Then, similar to
+  Eq. (<A HREF="node12.html#CovarianceFsY">211</A>), we get
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf\Sigma}_{f_*}={\bf K}_{**}-{\bf K}_*^T({\bf K}+{\bf W}^{-1})^{-1}{\bf K}_*
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img889.svg"
+ ALT="$\displaystyle {\bf\Sigma}_{f_*}={\bf K}_{**}-{\bf K}_*^T({\bf K}+{\bf W}^{-1})^{-1}{\bf K}_*$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">238</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+</LI>
+</UL>
+
+<P>
+Now we can further get the probability for <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img676.svg"
+ ALT="${\bf x}_*$"></SPAN> to belong to
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN> based on the softmax function in Eq. (<A HREF="#SoftmaxGPC">215</A>) 
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p_*^k=\frac{\exp(m_{f_*}^k)}{\sum_{l=1}^K\exp(m_{f_*}^l)},
+  \;\;\;\;\;\;(k=1,\cdots,K)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.20ex; vertical-align: -3.16ex; " SRC="img890.svg"
+ ALT="$\displaystyle p_*^k=\frac{\exp(m_{f_*}^k)}{\sum_{l=1}^K\exp(m_{f_*}^l)},
+\;\;\;\;\;\;(k=1,\cdots,K)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">239</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and classifiy <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img676.svg"
+ ALT="${\bf x}_*$"></SPAN> to class <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN> if 
+<!-- MATH
+ $p_*^k=\max\{ p_*^1,\cdots,p_*^K \}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img891.svg"
+ ALT="$p_*^k=\max\{ p_*^1,\cdots,p_*^K \}$"></SPAN>.
+
+<P>
+Moreover, the certainty or confidence of this classification result 
+can be found from <!-- MATH
+ ${\bf\Sigma}_{f_*}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img767.svg"
+ ALT="${\bf\Sigma}_{f_*}$"></SPAN>.
+
+<P>
+The Matlab code for the essential parts of the algorithm is 
+listed below. First, the following code segment carries out the 
+classification of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img372.svg"
+ ALT="$n$"></SPAN> given test samples based on the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="$N$"></SPAN> training 
+set <!-- MATH
+ ${\cal D}=\{{\bf X},{\bf y}\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img796.svg"
+ ALT="${\cal D}=\{{\bf X},{\bf y}\}$"></SPAN>. 
+
+<P>
+<PRE>
+    K=Kernel(X,X);                        % covariance of prior of p(f|X)
+    Ks=Kernel(X,Xs);
+    Kss=Kernel(Xs,Xs);
+    [meanf Sigmaf p W]=findPosteriorMeanMC(K,y,C);  
+                                          % find mean and covariance of p(f|D), and W, p
+    Sigmafy=Kss-Ks'*inv(K+inv(W))*Ks;     % covariance of p(f|D) 
+    p=reshape(p,N,C);
+    y=reshape(y,N,C);
+    for k=1:C
+        meanfD(:,k)=Ks'*(y(:,k)-p(:,k);   % mean of p(f_*|X_*,D) for kth class
+    end
+    for i=1:n                             % for each of n test samples
+        d=sum(exp(meanfD(i,:)));          % denominator of softmax function
+        [pmax k]=max(exp(meanfD(i,:))/d); % find class with max probability
+        ys(i)=k;                          % label ith sample as member of kth class
+        pr(i,k)=pmax;                     % probility of ith sample belonging to kth class 
+    end
+</PRE>
+
+<P>
+The code segment above calls the following function which computes the
+mean and covariance of <!-- MATH
+ $p({\bf f}|{\bf X},{\bf y})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img800.svg"
+ ALT="$p({\bf f}\vert{\bf X},{\bf y})$"></SPAN> by Newton's method:
+
+<P>
+<PRE>
+function [meanf Sigmaf p W]=findPosteriorMeanMC(K,y,C)     
+    % find mean and covariance of p(f|X,y) by Newton's method, based on D={X,y}
+    N=length(y);                    % number of training samples
+    f0=zeros(n,1);                  % initial value of latent function
+    f=zeros(n,1);        
+    er=1;
+    k=0;  
+    while er &gt; 10^(-9)              % find f that maximizes p(f|X,y)
+        k=k+1;
+        [p W]=findp(f,N,C);         % call function findp to find vector p and matrix W
+        f=inv(inv(K)+W)*(W*f0+y-p); % iteratively update value of f
+        er=norm(f-f0);              % difference between consecutive iterations
+        f0=f;                       % update f
+    end
+    meanf=f;
+    Sigmaf=inv(inv(K)+W);            
+end
+</PRE>
+
+<P>
+The following function called by the previous function finds vector 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img855.svg"
+ ALT="${\bf p}$"></SPAN> and matrix <!-- MATH
+ ${\bf W}=diag({\bf p})-{\bf PP}^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img888.svg"
+ ALT="${\bf W}=diag({\bf p})-{\bf PP}^T$"></SPAN>:
+
+<P>
+<PRE>
+function [p W]=findp(f,N,C)         % find vector p and matrix W=diag(p)-P*P'
+    F=reshape(f,N,C)';              % kth row contains N samples of class k
+    for i=1:N                       % for each of N training samples
+        d=sum(exp(F(:,i)));         % sum of all C terms in denominator
+        for k=1:C                   % for all C classes 
+            p(k,i)=exp(F(k,i))/d;
+        end
+    end
+    P=[];
+    for k=1:C                       % generate P
+        P=[P; diag(p(k,:))];        % stack C diagonal matrices
+    end
+    p=reshape(p',N*C,1);            % turn p into a vertical vector
+    W=diag(p)-P*P';                 % generate W matrix
+end
+</PRE>
+
+<P>
+<B>Example 1:</B>
+
+<P>
+This example shows the classification result of the same dataset of
+three classes used before. The top two panels show the distributions
+of the three classes in the training data set. The bottom two panels
+show the classification results in terms of the partitioning of the
+feature space (bottom left) and the posterior distribution
+<!-- MATH
+ $p({\bf f}_*|{\bf X},{\bf y},{\bf X}_*)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img892.svg"
+ ALT="$p({\bf f}_*\vert{\bf X},{\bf y},{\bf X}_*)$"></SPAN> (bottom right), which can be
+compared with the distribution of the training set (top right). The 
+confusion matrix of the classification result is shown below, with the
+error rate <!-- MATH
+ $30/600=0.045$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img893.svg"
+ ALT="$30/600=0.045$"></SPAN>:
+
+<P>
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left[\begin{array}{rrr}
+ 197 &    3 &    0   \\
+   0 &  195 &    5   \\
+   1 &   21 &  178   \\
+\end{array}\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img894.svg"
+ ALT="$\displaystyle \left[\begin{array}{rrr}
+197 &amp; 3 &amp; 0 \\
+0 &amp; 195 &amp; 5 \\
+1 &amp; 21 &amp; 178 \\
+\end{array}\right]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">240</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+<IMG STYLE="" SRC="../figures/GPMCexample1.png"
+ ALT="GPMCexample1.png">
+
+<P>
+<B>Example 2:</B>
+
+<P>
+This example shows the classification of the XOR data set. The confusion
+matrix of the classification result is shown below, with the error rate 
+<!-- MATH
+ $13/400=0.0325$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img895.svg"
+ ALT="$13/400=0.0325$"></SPAN>:
+
+<P>
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left[\begin{array}{rr}
+ 193 &    7   \\
+   6 &  194   
+\end{array}\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img896.svg"
+ ALT="$\displaystyle \left[\begin{array}{rr}
+193 &amp; 7 \\
+6 &amp; 194
+\end{array}\right]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">241</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+<IMG STYLE="" SRC="../figures/GPMCexample1a.png"
+ ALT="GPMCexample1a.png">
+
+<P>
+We see that in both examples, the error rates of the GPC method are lower
+than those of the naive Bayesian method. However, the naive Bayesian method
+does not have the overfitting problem, while in the method of GPC, we may 
+need to carefully adjust the parameter of squared exponential for the kernel
+functions to make proper tradeoff between overfitting and error rate.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node14.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node11.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node12.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node14.html">Hierarchical (Tree) Classifiers</A>
+<B> Up:</B> <A
+ HREF="node11.html">Gaussian Process Classification (GPC)</A>
+<B> Previous:</B> <A
+ HREF="node12.html">Gaussian Process Classifier -</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

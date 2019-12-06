@@ -1,0 +1,617 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Linear Models for Binary Classification</TITLE>
+<META NAME="description" CONTENT="Linear Models for Binary Classification">
+<META NAME="keywords" CONTENT="ch9">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch9.css">
+
+<LINK REL="next" HREF="node20.html">
+<LINK REL="previous" HREF="node15.html">
+<LINK REL="next" HREF="node20.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node20.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="ch9.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node18.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node20.html">About this document ...</A>
+<B> Up:</B> <A
+ HREF="ch9.html">ch9</A>
+<B> Previous:</B> <A
+ HREF="node18.html">Mixture of Bernoulli</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00090000000000000000">
+Linear Models for Binary Classification</A>
+</H1>
+
+<P>
+We first consider binary classification based on the same
+linear model <!-- MATH
+ $y=f({\bf x})+r={\bf x}^T{\bf w}+r$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1111.svg"
+ ALT="$y=f({\bf x})+r={\bf x}^T{\bf w}+r$"></SPAN> used in 
+linear regression considered before. Any test sample <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN>
+is classified into one of the two classes <!-- MATH
+ $\{C_0,\,C_1\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1112.svg"
+ ALT="$\{C_0,\,C_1\}$"></SPAN> 
+depending on whether <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img578.svg"
+ ALT="$f({\bf x})$"></SPAN> is greater or smaller than 
+zero:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\mbox{if}\;\;f({\bf x})={\bf w}^T{\bf x}\left\{\begin{array}{l}<0\\>0
+  \end{array}\right.,\;\;\;\;\;\;\;\mbox{then}\;\;\;\;
+       {\bf x}\in \left\{\begin{array}{c}  C_0 \\C_1\end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH">if<IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img1113.svg"
+ ALT="$\displaystyle \;\;f({\bf x})={\bf w}^T{\bf x}\left\{\begin{array}{l}&lt;0\\ &gt;0
+\end{array}\right.,\;\;\;\;\;\;\;$">then<IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img1114.svg"
+ ALT="$\displaystyle \;\;\;\;
+{\bf x}\in \left\{\begin{array}{c} C_0 \\ C_1\end{array}\right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">317</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Here <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img248.svg"
+ ALT="${\bf w}$"></SPAN> is a model parameter to be determined based on
+the training set 
+<!-- MATH
+ ${\cal D}=\{({\bf x}_n,\,y_n)|n=1,\cdots,N\}=\{{\bf X},{\bf y}\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1115.svg"
+ ALT="${\cal D}=\{({\bf x}_n,\,y_n)\vert n=1,\cdots,N\}=\{{\bf X},{\bf y}\}$"></SPAN>,
+where <!-- MATH
+ ${\bf X}=[{\bf x}_1,\cdots,{\bf x}_N]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img9.svg"
+ ALT="${\bf X}=[{\bf x}_1,\cdots,{\bf x}_N]$"></SPAN>, <!-- MATH
+ ${\bf y}=[y_1,\cdots,y_N]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img10.svg"
+ ALT="${\bf y}=[ y_1,\cdots,y_N]^T$"></SPAN>,
+and <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img1116.svg"
+ ALT="$y_i=1$"></SPAN> if <!-- MATH
+ ${\bf x}_i\in C_1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img1117.svg"
+ ALT="${\bf x}_i\in C_1$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img1118.svg"
+ ALT="$y_i=-1$"></SPAN> if <!-- MATH
+ ${\bf x}_i\in C_0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img1119.svg"
+ ALT="${\bf x}_i\in C_0$"></SPAN>,
+so that <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img248.svg"
+ ALT="${\bf w}$"></SPAN> fits all data points optimally in certain sense.
+
+<P>
+While in the previously considered least square classification 
+method, we find the optimal <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img248.svg"
+ ALT="${\bf w}$"></SPAN> that minimizes the squared 
+error <!-- MATH
+ $\varepsilon({\bf w})=||{\bf r}||^2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1120.svg"
+ ALT="$\varepsilon({\bf w})=\vert\vert{\bf r}\vert\vert^2$"></SPAN>, here we find the optimal
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img248.svg"
+ ALT="${\bf w}$"></SPAN> based on a probabilistic model. Specifically, we now 
+convert the linear function <!-- MATH
+ $f({\bf x})={\bf x}^T{\bf w}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img672.svg"
+ ALT="$f({\bf x})={\bf x}^T{\bf w}$"></SPAN> into 
+the probability for <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> to belong to either class:
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+p({\bf x}\in C_1|{\bf w})&=&p(y=1|{\bf x},{\bf w})
+  \nonumber\\
+  p({\bf x}\in C_0|{\bf w})&=&p(y=-1|{\bf x},{\bf w})
+  =1-p(y=1|{\bf x},{\bf w})
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1121.svg"
+ ALT="$\displaystyle p({\bf x}\in C_1\vert{\bf w})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1122.svg"
+ ALT="$\displaystyle p(y=1\vert{\bf x},{\bf w})$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1123.svg"
+ ALT="$\displaystyle p({\bf x}\in C_0\vert{\bf w})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1124.svg"
+ ALT="$\displaystyle p(y=-1\vert{\bf x},{\bf w})
+=1-p(y=1\vert{\bf x},{\bf w})$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">318</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+This is done by a sigmoid function defined as either a logistic or 
+cumulative Gaussian (error function, erf):
+<BR>
+<DIV CLASS="mathdisplay"><A ID="sigmoid"></A><!-- MATH
+ \begin{eqnarray}
+\mbox{logistic:} \;\;\;\; & \sigma(z)=&\frac{1}{1+e^{-z}}=\frac{e^z}{1+e^z}
+  \nonumber\\
+  \mbox{erf:} \;\;\;\; & \phi(z)=&\int_{-\infty}^z {\cal N}(u|0,1)\,du
+  =\frac{1}{\sqrt{2\pi}} \int_{-\infty}^z \exp\left(-\frac{1}{2} u^2\right)\,du
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">logistic:<IMG STYLE="height: 0.23ex; vertical-align: -0.12ex; " SRC="img1125.svg"
+ ALT="$\displaystyle \;\;\;\;$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1126.svg"
+ ALT="$\displaystyle \sigma(z)=$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.34ex; vertical-align: -1.90ex; " SRC="img1127.svg"
+ ALT="$\displaystyle \frac{1}{1+e^{-z}}=\frac{e^z}{1+e^z}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">erf:<IMG STYLE="height: 0.23ex; vertical-align: -0.12ex; " SRC="img1125.svg"
+ ALT="$\displaystyle \;\;\;\;$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1128.svg"
+ ALT="$\displaystyle \phi(z)=$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.04ex; vertical-align: -2.43ex; " SRC="img1129.svg"
+ ALT="$\displaystyle \int_{-\infty}^z {\cal N}(u\vert,1)\,du
+=\frac{1}{\sqrt{2\pi}} \int_{-\infty}^z \exp\left(-\frac{1}{2} u^2\right)\,du$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">319</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+In either case, we have
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\sigma(z)=\left\{\begin{array}{ll}0 & z=-\infty\\
+  1 & z=\infty\end{array}\right.
+  \;\;\;\;\;\;\;\mbox{and}\;\;\;\;\;\;\sigma(-z)=1-\sigma(z)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img1130.svg"
+ ALT="$\displaystyle \sigma(z)=\left\{\begin{array}{ll}0 &amp; z=-\infty\\
+1 &amp; z=\infty\end{array}\right.
+\;\;\;\;\;\;\;$">and<IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1131.svg"
+ ALT="$\displaystyle \;\;\;\;\;\;\sigma(-z)=1-\sigma(z)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">320</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Using this sigmoid function, <!-- MATH
+ $f={\bf x}^T{\bf w}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.57ex; " SRC="img1132.svg"
+ ALT="$f={\bf x}^T{\bf w}$"></SPAN> in the range of 
+<!-- MATH
+ $(-\infty,\;\infty)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1133.svg"
+ ALT="$(-\infty,\;\infty)$"></SPAN> is mapped to <!-- MATH
+ $\sigma(f({\bf x}))$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1134.svg"
+ ALT="$\sigma(f({\bf x}))$"></SPAN> in the range 
+of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1135.svg"
+ ALT="$(0,\;1)$"></SPAN>, which can be used as the probability for <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> to
+belong to either class:
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+p(y=1|{\bf x},{\bf w})&=&\sigma({\bf x}^T{\bf w})=\sigma(f)
+  \nonumber\\
+  p(y=-1|{\bf x},{\bf w})&=&1-p(y=1|{\bf x},{\bf w})
+  =1-\sigma(f)=\sigma(-f)
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1122.svg"
+ ALT="$\displaystyle p(y=1\vert{\bf x},{\bf w})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img1136.svg"
+ ALT="$\displaystyle \sigma({\bf x}^T{\bf w})=\sigma(f)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1137.svg"
+ ALT="$\displaystyle p(y=-1\vert{\bf x},{\bf w})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1138.svg"
+ ALT="$\displaystyle 1-p(y=1\vert{\bf x},{\bf w})
+=1-\sigma(f)=\sigma(-f)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">321</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+The two cases can be combined:
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="CombinedSigmoid"></A><!-- MATH
+ \begin{equation}
+p(y|{\bf x},{\bf w})=\sigma(y\;{\bf x}^T{\bf w})=\sigma(yf),
+  \;\;\;\;\mbox{or}\;\;\;\;
+  p(y|{\bf x},{\bf w})=\phi(y{\bf x}^T{\bf w})=\phi(yf)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img1139.svg"
+ ALT="$\displaystyle p(y\vert{\bf x},{\bf w})=\sigma(y\;{\bf x}^T{\bf w})=\sigma(yf),
+\;\;\;\;$">or<IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img1140.svg"
+ ALT="$\displaystyle \;\;\;\;
+p(y\vert{\bf x},{\bf w})=\phi(y{\bf x}^T{\bf w})=\phi(yf)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">322</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+<IMG STYLE="" SRC="../figures/SigmoidSigma.png"
+ ALT="SigmoidSigma.png">
+
+<P>
+The binary classification problem can now be treated as a regression 
+problem to find the model parameter <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img248.svg"
+ ALT="${\bf w}$"></SPAN> that best fits the data 
+in the training set <!-- MATH
+ ${\cal D}=\{{\bf X},{\bf y}\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img796.svg"
+ ALT="${\cal D}=\{{\bf X},{\bf y}\}$"></SPAN>. Such a regression 
+problem is called <EM>logistic regression</EM> if <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1141.svg"
+ ALT="$\sigma(z)$"></SPAN> is used, or 
+<EM>probit regression</EM> if <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1142.svg"
+ ALT="$\phi(z)$"></SPAN> is used.
+
+<P>
+Same as in the case of Bayesian regression, we assume the prior 
+distribution of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img248.svg"
+ ALT="${\bf w}$"></SPAN> to be a zero-mean Gaussian 
+<!-- MATH
+ $p({\bf w})={\cal N}({\bf0},{\bf\Sigma}_w)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1143.svg"
+ ALT="$p({\bf w})={\cal N}({\bf0},{\bf\Sigma}_w)$"></SPAN>, and for simplicity
+we further assume <!-- MATH
+ ${\bf\Sigma}_w={\bf I}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img1144.svg"
+ ALT="${\bf\Sigma}_w={\bf I}$"></SPAN>, and find the likelihood of
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img248.svg"
+ ALT="${\bf w}$"></SPAN> based on the linear model applied to the observed data set
+<!-- MATH
+ ${\cal D}=\{({\bf x}_n,\,y_n)|n=1,\cdots,N\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img670.svg"
+ ALT="${\cal D}=\{ ({\bf x}_n,\,y_n)\vert n=1,\cdots,N\}$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\cal L}({\bf w}|{\cal D})=p({\cal D}|{\bf w})
+  =p({\bf y}|{\bf X},{\bf w})=\prod_{n=1}^N p(y_n|{\bf x}_n,{\bf w})
+  =\prod_{n=1}^N \sigma(y_if_i)=\prod_{n=1}^N \sigma(y_n{\bf x}_n^T{\bf w})
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img1145.svg"
+ ALT="$\displaystyle {\cal L}({\bf w}\vert{\cal D})=p({\cal D}\vert{\bf w})
+=p({\bf y}...
+...f w})
+=\prod_{n=1}^N \sigma(y_if_i)=\prod_{n=1}^N \sigma(y_n{\bf x}_n^T{\bf w})$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">323</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Note that this likelihood is not Gaussian (as in the case of 
+Eq. (<A HREF="#BayesLH"><IMG  ALT="[*]" SRC="crossref.png"></A>)), because <!-- MATH
+ ${\bf y}=\pm 1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img1146.svg"
+ ALT="${\bf y}=\pm 1$"></SPAN> is the binary class 
+labeling of the training samples in <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img651.svg"
+ ALT="${\bf X}$"></SPAN>, instead of a continuous 
+function as in the case of regression.
+
+<P>
+The posterior of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img248.svg"
+ ALT="${\bf w}$"></SPAN> can now be expressed in terms of the 
+prior <!-- MATH
+ $p({\bf w})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1147.svg"
+ ALT="$p({\bf w})$"></SPAN> and the likelihood <!-- MATH
+ $p({\bf y}|{\bf X},{\bf w})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1148.svg"
+ ALT="$p({\bf y}\vert{\bf X},{\bf w})$"></SPAN>:
+<BR>
+<DIV CLASS="mathdisplay"><A ID="PosteriorGaussianLinear"></A><!-- MATH
+ \begin{eqnarray}
+p({\bf w}|{\cal D})&=&p({\bf w}|{\bf X},{\bf y})
+  =\frac{p({\bf y},{\bf w}|{\bf X})}{p({\bf y})}
+  =\frac{p({\bf y}|{\bf X},{\bf w})\; p({\bf w})}{p({\bf y}|{\bf X})}
+  \propto p({\bf y}|{\bf X},{\bf w})\;p({\bf w}|{\bf X})
+  \nonumber\\
+  &=&\prod_{n=1}^Np(y_n|{\bf x}_n,{\bf w})\;{\cal N}({\bf0},{\bf\Sigma}_w)
+  =\prod_{n=1}^N\sigma(y_nf_n)\;
+  \frac{1}{(2\pi)^{d/2}|{\bf\Sigma}_w|^{1/2}}
+  \exp\left(-\frac{1}{2}{\bf w}^T{\bf\Sigma}_w^{-1}{\bf w}\right)
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1149.svg"
+ ALT="$\displaystyle p({\bf w}\vert{\cal D})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.81ex; vertical-align: -2.29ex; " SRC="img1150.svg"
+ ALT="$\displaystyle p({\bf w}\vert{\bf X},{\bf y})
+=\frac{p({\bf y},{\bf w}\vert{\bf ...
+...y}\vert{\bf X})}
+\propto p({\bf y}\vert{\bf X},{\bf w})\;p({\bf w}\vert{\bf X})$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img1151.svg"
+ ALT="$\displaystyle \prod_{n=1}^Np(y_n\vert{\bf x}_n,{\bf w})\;{\cal N}({\bf0},{\bf\S...
+...}_w\vert^{1/2}}
+\exp\left(-\frac{1}{2}{\bf w}^T{\bf\Sigma}_w^{-1}{\bf w}\right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">324</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+where the denominator <!-- MATH
+ $p({\bf y}|{\bf X})=p({\cal D})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1152.svg"
+ ALT="$p({\bf y}\vert{\bf X})=p({\cal D})$"></SPAN> is dropped as 
+it is a constant independent of the variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img248.svg"
+ ALT="${\bf w}$"></SPAN> of interest. 
+We can further find the log posterior denoted by <!-- MATH
+ $\psi({\bf w})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1153.svg"
+ ALT="$\psi({\bf w})$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="PsiLogPL"></A><!-- MATH
+ \begin{equation}
+\psi({\bf w})=\log \;p({\bf w}|{\cal D})
+  =\sum_{n=1}^N \log \sigma(y_n\,f_n)
+  -\frac{N}{2}\log(2\pi)-\frac{1}{2}\log|{\bf\Sigma}_w|
+  -\frac{1}{2}{\bf w}^T{\bf\Sigma}_w^{-1}{\bf w}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img1154.svg"
+ ALT="$\displaystyle \psi({\bf w})=\log \;p({\bf w}\vert{\cal D})
+=\sum_{n=1}^N \log \...
+...1}{2}\log\vert{\bf\Sigma}_w\vert
+-\frac{1}{2}{\bf w}^T{\bf\Sigma}_w^{-1}{\bf w}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">325</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+The optimal <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img248.svg"
+ ALT="${\bf w}$"></SPAN> that best fits the training set
+<!-- MATH
+ ${\cal D}=\{{\bf X},{\bf y}\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img796.svg"
+ ALT="${\cal D}=\{{\bf X},{\bf y}\}$"></SPAN> can now be found as the one that 
+maximizes this posterior <!-- MATH
+ $p({\bf w}|{\cal D})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1155.svg"
+ ALT="$p({\bf w}\vert{\cal D})$"></SPAN>, or, equivalently, 
+the log posterior <!-- MATH
+ $\psi({\bf w})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1153.svg"
+ ALT="$\psi({\bf w})$"></SPAN>, by setting the derivative of 
+<!-- MATH
+ $\psi({\bf w})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1153.svg"
+ ALT="$\psi({\bf w})$"></SPAN> to zero and solving the resulting equation below
+by Newton's method or conjugate gradient ascent method:
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+{\bf g}_{\psi}({\bf w})
+  &=&\frac{d}{d{\bf w}} \left(\sum_{n=1}^N\log \sigma(y_nf_n) \right)
+  -\frac{d}{d{\bf w}}\left(\frac{1}{2}{\bf w}^T{\bf\Sigma}_w^{-1}{\bf w}\right)
+  \nonumber\\
+  &=&\sum_{n=1}^N\frac{d}{d{\bf w}}
+  \left(\log \frac{1}{1+e^{-y_n{\bf x}_n^T{\bf w}}}\right)
+  -{\bf\Sigma}_w^{-1}{\bf w}
+  \nonumber\\
+  &=&\sum_{n=1}^N\frac{y_n{\bf x}_n }{1+e^{y_n{\bf x}_n^T{\bf w}}}
+  -{\bf\Sigma}_w^{-1}{\bf w} ={\bf0}
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img1156.svg"
+ ALT="$\displaystyle {\bf g}_{\psi}({\bf w})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img1157.svg"
+ ALT="$\displaystyle \frac{d}{d{\bf w}} \left(\sum_{n=1}^N\log \sigma(y_nf_n) \right)
+-\frac{d}{d{\bf w}}\left(\frac{1}{2}{\bf w}^T{\bf\Sigma}_w^{-1}{\bf w}\right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img1158.svg"
+ ALT="$\displaystyle \sum_{n=1}^N\frac{d}{d{\bf w}}
+\left(\log \frac{1}{1+e^{-y_n{\bf x}_n^T{\bf w}}}\right)
+-{\bf\Sigma}_w^{-1}{\bf w}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img1159.svg"
+ ALT="$\displaystyle \sum_{n=1}^N\frac{y_n{\bf x}_n }{1+e^{y_n{\bf x}_n^T{\bf w}}}
+-{\bf\Sigma}_w^{-1}{\bf w} ={\bf0}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">326</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+Having found the optimal <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img248.svg"
+ ALT="${\bf w}$"></SPAN>, we can classify any test pattern 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img676.svg"
+ ALT="${\bf x}_*$"></SPAN> in terms of the posterior of its corresponding labeling <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img1160.svg"
+ ALT="$y_*$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p(y_*=1|{\bf x}_*,{\bf w})=\sigma({\bf x}_*^T{\bf w})
+  =\sigma(f({\bf x}_*))=\frac{1}{1+\exp({\bf x}_*^T{\bf w})}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.57ex; vertical-align: -2.29ex; " SRC="img1161.svg"
+ ALT="$\displaystyle p(y_*=1\vert{\bf x}_*,{\bf w})=\sigma({\bf x}_*^T{\bf w})
+=\sigma(f({\bf x}_*))=\frac{1}{1+\exp({\bf x}_*^T{\bf w})}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">327</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+In a multi-class case with <!-- MATH
+ $(C_1,\cdots,C_K)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1162.svg"
+ ALT="$(C_1,\cdots,C_K)$"></SPAN>, we can still use a vector
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1163.svg"
+ ALT="${\bf w}_i$"></SPAN> <!-- MATH
+ $(i=1,\cdots,K)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1164.svg"
+ ALT="$(i=1,\cdots,K)$"></SPAN> to represent each class <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img95.svg"
+ ALT="$C_i$"></SPAN>, the direction 
+of the class with respect to the origin in the feature space, and the inner 
+product <!-- MATH
+ ${\bf x}^T{\bf w}_i$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.46ex; " SRC="img1165.svg"
+ ALT="${\bf x}^T{\bf w}_i$"></SPAN> proportional to the projection of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN>
+onto vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1163.svg"
+ ALT="${\bf w}_i$"></SPAN> measures the extent to which <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> belongs to
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img95.svg"
+ ALT="$C_i$"></SPAN>. Similar to the logistic function used in the two-class case, here 
+the <EM>soflmax function</EM> defined below is used to convert 
+<!-- MATH
+ $-\infty<{\bf x}^T{\bf w}_i<\infty\,(i=1,\cdots,K)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1166.svg"
+ ALT="$-\infty&lt;{\bf x}^T{\bf w}_i&lt;\infty\,(i=1,\cdots,K)$"></SPAN> into the probability 
+that <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> belongs to <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img95.svg"
+ ALT="$C_i$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p(y\in C_i|{\bf x},{\bf W})
+  =\frac{\exp({\bf x}^T{\bf w}_i)}{\sum_{k=1}^K\exp({\bf x}^T{\bf w}_k)}
+  =\left\{\begin{array}{cc}
+  0 & {\bf x}^T{\bf w}_i=-\infty\\1 & {\bf x}^T{\bf w}_i=\infty\end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.50ex; vertical-align: -2.84ex; " SRC="img1167.svg"
+ ALT="$\displaystyle p(y\in C_i\vert{\bf x},{\bf W})
+=\frac{\exp({\bf x}^T{\bf w}_i)}{...
+... &amp; {\bf x}^T{\bf w}_i=-\infty\\ 1 &amp; {\bf x}^T{\bf w}_i=\infty\end{array}\right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">328</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <!-- MATH
+ ${\bf W}=[{\bf w}_1,\cdots,{\bf w}_K]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1168.svg"
+ ALT="${\bf W}=[{\bf w}_1,\cdots,{\bf w}_K]$"></SPAN>.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node20.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="ch9.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node18.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node20.html">About this document ...</A>
+<B> Up:</B> <A
+ HREF="ch9.html">ch9</A>
+<B> Previous:</B> <A
+ HREF="node18.html">Mixture of Bernoulli</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

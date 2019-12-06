@@ -1,0 +1,452 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Hierarchical (Tree) Classifiers</TITLE>
+<META NAME="description" CONTENT="Hierarchical (Tree) Classifiers">
+<META NAME="keywords" CONTENT="ch9">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch9.css">
+
+<LINK REL="next" HREF="node15.html">
+<LINK REL="previous" HREF="node11.html">
+<LINK REL="next" HREF="node15.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node15.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="ch9.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node13.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node15.html">Clustering Analysis</A>
+<B> Up:</B> <A
+ HREF="ch9.html">ch9</A>
+<B> Previous:</B> <A
+ HREF="node13.html">Gaussian Process Classifier -</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00070000000000000000">
+Hierarchical (Tree) Classifiers</A>
+</H1>
+
+<P>
+Both supervised classification and unsupervised clustering can be carried
+out in a hierarchical fashion to classify the input patterns or group them
+into clusters, very much like the hierarchy of biological classifications
+with different 
+<A ID="tex2html29"
+  HREF="https://en.wikipedia.org/wiki/Taxonomic_rank">taxonomic ranks</A>
+(domain, kingdom, phylum, class, order, family, genus, and species). 
+
+<P>
+
+<UL>
+<LI><B>Unsupervised clustering</B>
+
+<P>
+The hierarchical clustering can be obtained in either a top-down or bottom 
+  up manner. 
+
+<P>
+
+<UL>
+<LI>Top-down method:
+
+<P>
+All patterns in the data set are initially 
+    treated as a single cluster as the root of the tree, which is then 
+    subdivided (split) into a set of two or more smaller clusters, each 
+    represented as a node in the tree structure. This process is carried 
+    out recursively until eventually each cluster contains only one pattern, 
+    represented as a leaf node of the tree. 
+
+<P>
+</LI>
+<LI>Bottom-up method:
+
+<P>
+every pattern in the data set is initially 
+    treated as a cluster as a leaf node of the tree, which will then be merged 
+    to form larger clusters. Again, this process is carried out recursively 
+    until eventually all patterns are merged into a single cluster at the root 
+    of the tree. 
+
+<P>
+</LI>
+</UL>
+
+<P>
+In either the top-down or the bottom-up method, the specific method for 
+  the splitting or merging at each tree node is based on certain similarity
+  measurement such as the distance between two clusters. The resulting tree
+  structure obtained by either method can then be truncated at any level
+  between the root and the leaf nodes to obtain a set of clusters, depending
+  on the desired number and sizes of these clusters.  
+
+<P>
+</LI>
+<LI><B>Supervised classification</B>
+
+<P>
+If labeled training data are available, both the top-down and the bottom-up 
+  clustering methods can also be used in the training stage of the supervised 
+  classification methods, with the only difference that now the splitting or
+  merging is applied to labeled classes instead of individual patterns, and 
+  each leaf node represents one of the classes, rather than a single pattern. 
+  After the tree structure is obtained, the training is complete and any 
+  unlabeled pattern can be classified at the tree root and then subsequently 
+  the tree nodes at lower levels until it is classified into one of the leaf 
+  nodes of the tree, corresponding to a specific class.
+
+<P>
+This hierarchical classification method is especially useful when the number 
+  of classes and the number <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img897.svg"
+ ALT="$D$"></SPAN> of feature are both large. In this case it may
+  be very difficult to select a subset of <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img898.svg"
+ ALT="$d&lt;D$"></SPAN> features good for separating 
+  all classes for a single-level classifier, by which <EM>all</EM> classes need 
+  to be classified at the same time, requiring, most likely, all <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="$N$"></SPAN> features. 
+  However, for a tree classifier, since each node is a two-class classifier, 
+  it is possible to select a small number of <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img899.svg"
+ ALT="$d\ll D$"></SPAN> features that are most 
+  relevant and suitable to represent the two subsets of classes. 
+
+<P>
+</LI>
+</UL>
+
+<P>
+In the following we consider both the bottom-up and top-down methods for 
+hierarchical clustering/classification.
+
+<P>
+<B>Bottom-Up method</B>
+
+<P>
+The bottom-up hierarchical classifier is trained based on <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> classes 
+  <!-- MATH
+ $C_1,\cdots,C_K$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img28.svg"
+ ALT="$C_1,\cdots,C_K$"></SPAN>, each containing <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img900.svg"
+ ALT="$n_k$"></SPAN> (<!-- MATH
+ $k=1,\cdots,K$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img36.svg"
+ ALT="$k=1,\cdots,K$"></SPAN>) labeled
+  patterns <!-- MATH
+ ${\bf x}\in C_k$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img7.svg"
+ ALT="${\bf x}\in C_k$"></SPAN>.
+
+<P>
+
+<OL>
+<LI>Compute the <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img584.svg"
+ ALT="$K(K-1)/2$"></SPAN> pairwise Bhattacharyya distances between
+    every two classes <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img95.svg"
+ ALT="$C_i$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img96.svg"
+ ALT="$C_j$"></SPAN>:
+    <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+d_B(C_i,C_j)
+    =\frac{1}{4}({\bf m}_i-{\bf m}_j)^T\left[\frac{{\bf\Sigma}_i+{\bf\Sigma}_j}{2}\right]^{-1}({\bf m}_i-{\bf m}_j)+\log\left[\frac{\left|\frac{{\bf\Sigma}_i+{\bf\Sigma}_j}{2}
+        \right|}{(\left|{\bf\Sigma}_i\right|\;\left|{\bf\Sigma}_j\right|)^{1/2}}\right]
+    
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 9.06ex; vertical-align: -3.72ex; " SRC="img901.svg"
+ ALT="$\displaystyle d_B(C_i,C_j)
+=\frac{1}{4}({\bf m}_i-{\bf m}_j)^T\left[\frac{{\bf\...
+...vert{\bf\Sigma}_i\right\vert\;\left\vert{\bf\Sigma}_j\right\vert)^{1/2}}\right]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">242</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+</LI>
+<LI>Merge the two classes corresponding to the smallest <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img902.svg"
+ ALT="$d_B$"></SPAN> to form 
+    a new class <!-- MATH
+ $C_i \cup C_j = C_k$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img903.svg"
+ ALT="$C_i \cup C_j = C_k$"></SPAN>, compute its mean and covariance:
+    <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf m}_k=\frac{1}{n_i+n_j}[n_i {\bf m}_i+n_j {\bf m}_j]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.57ex; vertical-align: -2.37ex; " SRC="img904.svg"
+ ALT="$\displaystyle {\bf m}_k=\frac{1}{n_i+n_j}[n_i {\bf m}_i+n_j {\bf m}_j]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">243</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and
+    <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf\Sigma}_k=\frac{1}{n_i+n_j}
+      [n_i (\Sigma_i+({\bf m}_i-{\bf m}_k)({\bf m}_i-{\bf m}_k)^T)+
+        n_j (\Sigma_j+({\bf m}_j-{\bf m}_k)({\bf m}_j-{\bf m}_k)^T ) ]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.57ex; vertical-align: -2.37ex; " SRC="img905.svg"
+ ALT="$\displaystyle {\bf\Sigma}_k=\frac{1}{n_i+n_j}
+[n_i (\Sigma_i+({\bf m}_i-{\bf m}...
+...i-{\bf m}_k)^T)+
+n_j (\Sigma_j+({\bf m}_j-{\bf m}_k)({\bf m}_j-{\bf m}_k)^T ) ]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">244</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Delete the old classes <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img95.svg"
+ ALT="$C_i$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img96.svg"
+ ALT="$C_j$"></SPAN>. Now there are <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img581.svg"
+ ALT="$K-1$"></SPAN> 
+    classes left.
+
+<P>
+</LI>
+<LI>Compute the distance between the new class <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN> and all <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img906.svg"
+ ALT="$K-2$"></SPAN>
+    remaining classes.
+
+<P>
+</LI>
+<LI>Repeat the previous steps until eventually all classes are merged 
+    into a single group containing all <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> classes, the binary tree 
+    structure is thus obtained.
+
+<P>
+</LI>
+</OL>
+
+<P>
+<B>Top-Down method</B>
+
+<P>
+Generate a binary tree by recursively partitioning all classes
+  into two sub-groups with the maximum Bhattacharyya distance
+
+<P>
+
+<OL>
+<LI>Compute the between-class scatter matrix <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img907.svg"
+ ALT="${\bf S}_B$"></SPAN> of the 
+    <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> classes, find its maximum eigenvalue <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img908.svg"
+ ALT="$\lambda_i$"></SPAN> and the 
+    corresponding eigenvectors <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img909.svg"
+ ALT="${\bf v}_i$"></SPAN>;
+
+<P>
+</LI>
+<LI>Project all data points onto <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img910.svg"
+ ALT="${\bf v}_1$"></SPAN>:
+    <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+y_n={\bf x}^T_n {\bf v}\;\;\;\;\;\;(n=1,\cdots,N)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img911.svg"
+ ALT="$\displaystyle y_n={\bf x}^T_n {\bf v}\;\;\;\;\;\;(n=1,\cdots,N)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">245</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+</LI>
+<LI>Sort all data points <!-- MATH
+ $\{y_1,\cdots,y_N\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img30.svg"
+ ALT="$\{ y_1,\cdots,y_N\}$"></SPAN> along this 1-D space
+    and partition them into two subgroups with maximum Bhattacharyya
+    (between-group) distance.
+
+<P>
+</LI>
+<LI>Carry out the steps above recursively to each of the two
+    subgroups, until eventually every subgroup contains only one 
+    classes
+
+<P>
+</LI>
+</OL>
+
+<P>
+Once the hierarchical structure is constructed by either the bottom-up
+or top-down method, we need to build a binary classifier at each node
+of structure, by which any given pattern is classified into either the
+left group <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img912.svg"
+ ALT="$G_l$"></SPAN> or right group <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img913.svg"
+ ALT="$G_r$"></SPAN>:
+
+<P>
+
+<UL>
+<LI>According to the specific classification method used, find
+  the discriminant functions <!-- MATH
+ $D_l({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img914.svg"
+ ALT="$D_l({\bf x})$"></SPAN> and <!-- MATH
+ $D_r({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img915.svg"
+ ALT="$D_r({\bf x})$"></SPAN> for the
+  two subgroups based on the training data.
+
+<P>
+</LI>
+<LI>Select the best <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img898.svg"
+ ALT="$d&lt;D$"></SPAN> features most suitable for separating the 
+  two groups <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img912.svg"
+ ALT="$G_l$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img913.svg"
+ ALT="$G_r$"></SPAN>, based on any of the feature selection 
+  methods such as those listed below:
+  
+<UL>
+<LI>Choosing <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1.svg"
+ ALT="$d$"></SPAN> features directly from the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img897.svg"
+ ALT="$D$"></SPAN> original ones using 
+    between-class distance (Bhattacharrya distance) as the criterion,
+
+<P>
+</LI>
+<LI>Carry out KLT based on the between-class scatter matrix <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img907.svg"
+ ALT="${\bf S}_B$"></SPAN>
+    and use the first <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1.svg"
+ ALT="$d$"></SPAN> principal components for the binary classification.
+  
+</LI>
+</UL>
+  As here only two groups of classes need to be distinguished, the number
+  of features <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img916.svg"
+ ALT="$M$"></SPAN> can be expected to be small.
+
+<P>
+</LI>
+<LI>Any unlabeled pattern <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> enters the classifier at the root of
+    the tree and is classified to either the left or the right sub-group
+    of the node according to the discriminant function
+    <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf x} \in \left\{ \begin{array}{ll} G_l & if \;\;D_l({\bf x}) > D_r({\bf x}) \\
+        G_r & if \;\;D_r({\bf x}) < D_l({\bf x}) \end{array} \right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img917.svg"
+ ALT="$\displaystyle {\bf x} \in \left\{ \begin{array}{ll} G_l &amp; if \;\;D_l({\bf x}) &gt; D_r({\bf x}) \\
+G_r &amp; if \;\;D_r({\bf x}) &lt; D_l({\bf x}) \end{array} \right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">246</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+This process is carried out recursively at each of the subsequent nodes
+    until eventually <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> reaches one of the leaf nodes corresponding 
+    to a single class, to which the sample <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> is therefore classified. 
+</LI>
+</UL>
+
+<P>
+<B>Example</B>
+
+<P>
+The hierarchical clustering method is applied to a dataset composed of
+seven normally distributed clusters each containing 25 sample vectors in an <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img918.svg"
+ ALT="$N=4$"></SPAN>
+dimensional space. The PCA method is used to project the data in 4-D space into 
+a 2-D space spanned by the first two principal components, as shown below:
+
+<P>
+<IMG STYLE="" SRC="../figures/TreeClustering1.png"
+ ALT="TreeClustering1.png">
+
+<P>
+The clustering result is shown below. Each column in the display represents the
+four components of a 4-D vector, color coded by a spectrum from red (low values)
+through green (middle) to blue (high values).
+
+<P>
+<IMG STYLE="" SRC="../figures/TreeClustering.png"
+ ALT="TreeClustering.png">
+
+<P>
+See 
+<A ID="tex2html30"
+  HREF="http://fourier.eng.hmc.edu/bioinformatics/intro/index.html">more examples</A>
+in clustering analysis applied to gene data analysis in bioinformatics.
+
+<P>
+An example of this method is available <A ID="tex2html31"
+  HREF="http://fourier.eng.hmc.edu/bioinformatics/intro/node12.html">here</A>.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node15.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="ch9.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node13.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node15.html">Clustering Analysis</A>
+<B> Up:</B> <A
+ HREF="ch9.html">ch9</A>
+<B> Previous:</B> <A
+ HREF="node13.html">Gaussian Process Classifier -</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

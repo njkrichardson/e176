@@ -1,0 +1,280 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>ch9</TITLE>
+<META NAME="description" CONTENT="ch9">
+<META NAME="keywords" CONTENT="ch9">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch9.css">
+
+<LINK REL="next" HREF="node1.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node1.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up_g.png"> 
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev_g.png">   
+<BR>
+<B> Next:</B> <A
+ HREF="node1.html">K Nearest Neighbor and</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<P>
+As one of the most important tasks in <EM>machine learning</EM>, 
+<EM>pattern classification</EM> is to classify some objects of interest, 
+generically referred to as <EM>patterns</EM> and described by a set of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1.svg"
+ ALT="$d$"></SPAN> 
+<EM>features</EM> or <EM>attributes</EM> that characterizes the patterns, 
+to one of some <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> <EM>classes</EM> or <EM>categories</EM>. Each pattern is
+represented by a vector (or a point) <!-- MATH
+ ${\bf x}=[x_1,\cdots,x_d]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img3.svg"
+ ALT="${\bf x}=[x_1,\cdots,x_d]^T$"></SPAN> in 
+a d-dimensional <EM>feature space</EM>, where <!-- MATH
+ $x_i\;(i=1,\cdots,d)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img4.svg"
+ ALT="$x_i\;(i=1,\cdots,d)$"></SPAN> is a 
+variable for the measurement of the ith feature. Symbolically, the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> 
+classes can be denoted <!-- MATH
+ $\{C_1,\cdots,C_K\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img5.svg"
+ ALT="$\{C_1,\cdots,C_K\}$"></SPAN>, and a pattern <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> 
+belonging to the kth class is denoted by <!-- MATH
+ ${\bf x}\in C_k$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img7.svg"
+ ALT="${\bf x}\in C_k$"></SPAN>. Pattern 
+classification can therefore be considered as the process by which 
+the d-dimensional feature space is partitioned into <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> regions each 
+corresponding to one of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> classes. The boundaries between these 
+regions, called <EM>decision boundaries</EM>, are to be determined by the 
+specific algorithm, called a classifier, used for the classification.
+
+<P>
+Pattern classification can be carried out as either a <EM>supervised</EM>
+or <EM>unsupervised learning</EM> process, depending on the availability
+of a <EM>training set</EM> containing patterns of known class identities.
+Specifically, the training set contains a set of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="$N$"></SPAN> patterns in 
+<!-- MATH
+ ${\bf X}=[{\bf x}_1,\cdots,{\bf x}_N]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img9.svg"
+ ALT="${\bf X}=[{\bf x}_1,\cdots,{\bf x}_N]$"></SPAN>, labeled respectively by the
+corresponding component in <!-- MATH
+ ${\bf y}=[ y_1,\cdots,y_N]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img10.svg"
+ ALT="${\bf y}=[ y_1,\cdots,y_N]^T$"></SPAN> representing 
+the class identities of the corresponding patterns in some way. For
+example, we can use <!-- MATH
+ $y_k \in \{1,\cdots,K\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img11.svg"
+ ALT="$y_k \in \{1,\cdots,K\}$"></SPAN> to indicate <!-- MATH
+ ${\bf x}_k
+\in C_{y_k}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img12.svg"
+ ALT="${\bf x}_k
+\in C_{y_k}$"></SPAN>. Alternatively, in the special case when <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img13.svg"
+ ALT="$K=2$"></SPAN>, there are 
+only two classes <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img14.svg"
+ ALT="$C_+$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img15.svg"
+ ALT="$C_-$"></SPAN>, and the classifier becomes binary 
+based on training pattern <!-- MATH
+ ${\bf x}_j\;(j=1,\cdots,N)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img16.svg"
+ ALT="${\bf x}_j\;(j=1,\cdots,N)$"></SPAN>, each labeled by 
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img17.svg"
+ ALT="$y_j=1$"></SPAN> if <!-- MATH
+ ${\bf x}_j\in C+$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img18.svg"
+ ALT="${\bf x}_j\in C+$"></SPAN> or <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img19.svg"
+ ALT="$y_j=-1$"></SPAN> if <!-- MATH
+ ${\bf x}_j\in C_-$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img20.svg"
+ ALT="${\bf x}_j\in C_-$"></SPAN>.
+
+<P>
+We assume there are <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img21.svg"
+ ALT="$N_k$"></SPAN> training samples 
+<!-- MATH
+ $\{{\bf x}_1^{(k)},\cdots,{\bf x}_{N_k}^{(k)}\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.72ex; vertical-align: -1.05ex; " SRC="img22.svg"
+ ALT="$\{{\bf x}_1^{(k)},\cdots,{\bf x}_{N_k}^{(k)}\}$"></SPAN> all labeled to belong 
+to <!-- MATH
+ $C_k,\;\;(k=1,\cdots,K)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img23.svg"
+ ALT="$C_k,\;\;(k=1,\cdots,K)$"></SPAN>, and in total <!-- MATH
+ $N=\sum_{k=1}^K N_k$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.81ex; " SRC="img24.svg"
+ ALT="$N=\sum_{k=1}^K N_k$"></SPAN> samples in 
+the training set. If the training set is a fair representation of all 
+patterns of different classes in the entire dataset, then <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img25.svg"
+ ALT="$P_k=N_k/N$"></SPAN> can 
+be treated as an estimate of the <EM>a priori</EM> probability that any 
+randomly selected pattern <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> happens to belong to class <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN>, 
+without any prior knowledge of the pattern.
+
+<P>
+Once a classifier is properly trained according to a specific algorithm 
+based on the traning set, the feature space is partitioned into regions 
+corresponding to the different classes and any unlabeled pattern of unknown 
+class as a vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> in the feature space can be classified into 
+one of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> classes. 
+
+<P>
+Supervised classification can be considered as a process of 
+establishing the corresponding relationship between the patterns 
+<!-- MATH
+ ${\bf x}_1,\cdots, {\bf x}_N$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img27.svg"
+ ALT="${\bf x}_1,\cdots, {\bf x}_N$"></SPAN> treated as the independent or input 
+variables to the classifier, and the classes <!-- MATH
+ $C_1,\cdots,C_K$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img28.svg"
+ ALT="$C_1,\cdots,C_K$"></SPAN> the 
+input patterns belong, treated as the dependent or output variables.
+Therefore regression and classification can be considered as the
+same supervised learning process: modeling the relationship between 
+the data points in <!-- MATH
+ $\{ {\bf x}_1,\cdots,{\bf x}_N\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img29.svg"
+ ALT="$\{ {\bf x}_1,\cdots,{\bf x}_N\}$"></SPAN> and their 
+corresponding labelings (or targets) in <!-- MATH
+ $\{ y_1,\cdots,y_N\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img30.svg"
+ ALT="$\{ y_1,\cdots,y_N\}$"></SPAN>. This
+process is regression when the labelings take continous real values, 
+but it is classification when they are discrete categorical 
+representing different classes. Some methods in the previous chapter
+on regression analysis are actually used as classifiers, such as 
+logistic and solfmax regressions, and the method of Gaussian process 
+can also be used for classification.
+
+<P>
+The model output error, bias vs variance...
+
+<P>
+If the training data of labeled patterns are unavailable, various
+<EM>unsupervised learning</EM> methods can be used to assign each unlabeled 
+patterns into one of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> different groups, called <EM>clusters</EM>, 
+according to its position in the feature space, based on the overall
+spatial structure and distribution of the data set in the feature
+space. This process is called <EM>clustering analysis</EM> or simply 
+<EM>clustering</EM>. 
+
+<P>
+In the following, methods for both supervised classification and 
+unsupervised clustering will be discussed.
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A ID="CHILD_LINKS"></A>
+
+<UL CLASS="ChildLinks">
+<LI><A ID="tex2html36"
+  HREF="node1.html">K Nearest Neighbor and Minimum Distance Classifiers</A>
+<LI><A ID="tex2html37"
+  HREF="node2.html">Naive Bayes Classification</A>
+<LI><A ID="tex2html38"
+  HREF="node3.html">AdaBoost</A>
+<LI><A ID="tex2html39"
+  HREF="node4.html">Support Vector machine</A>
+<UL>
+<LI><A ID="tex2html40"
+  HREF="node5.html">Maximal Margin and Support Vectors</A>
+<LI><A ID="tex2html41"
+  HREF="node6.html">Kernel Mapping</A>
+<LI><A ID="tex2html42"
+  HREF="node7.html">Soft Margin SVM</A>
+<LI><A ID="tex2html43"
+  HREF="node8.html">Sequential Minimal Optimization (SMO) Algorithm</A>
+<LI><A ID="tex2html44"
+  HREF="node9.html">Multi-Class Classification</A>
+</UL>
+<BR>
+<LI><A ID="tex2html45"
+  HREF="node10.html">Kernelized Bayes classifier</A>
+<LI><A ID="tex2html46"
+  HREF="node11.html">Gaussian Process Classification (GPC)</A>
+<UL>
+<LI><A ID="tex2html47"
+  HREF="node12.html">Gaussian Process Classifier - Binary</A>
+<LI><A ID="tex2html48"
+  HREF="node13.html">Gaussian Process Classifier - Multi-Class</A>
+</UL>
+<BR>
+<LI><A ID="tex2html49"
+  HREF="node14.html">Hierarchical (Tree) Classifiers</A>
+<LI><A ID="tex2html50"
+  HREF="node15.html">Clustering Analysis</A>
+<UL>
+<LI><A ID="tex2html51"
+  HREF="node16.html">K-means clustering</A>
+<LI><A ID="tex2html52"
+  HREF="node17.html">Gaussian mixture model</A>
+<LI><A ID="tex2html53"
+  HREF="node18.html">Mixture of Bernoulli</A>
+</UL>
+<BR>
+<LI><A ID="tex2html54"
+  HREF="node19.html">Linear Models for Binary Classification</A>
+<LI><A ID="tex2html55"
+  HREF="node20.html">About this document ...</A>
+</UL>
+<!--End of Table of Child-Links-->
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node1.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up_g.png"> 
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev_g.png">   
+<BR>
+<B> Next:</B> <A
+ HREF="node1.html">K Nearest Neighbor and</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

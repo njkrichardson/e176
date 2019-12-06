@@ -1,0 +1,248 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Multi-Class Classification</TITLE>
+<META NAME="description" CONTENT="Multi-Class Classification">
+<META NAME="keywords" CONTENT="ch9">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch9.css">
+
+<LINK REL="previous" HREF="node8.html">
+<LINK REL="next" HREF="node10.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node10.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node4.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node8.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node10.html">Kernelized Bayes classifier</A>
+<B> Up:</B> <A
+ HREF="node4.html">Support Vector machine</A>
+<B> Previous:</B> <A
+ HREF="node8.html">Sequential Minimal Optimization (SMO)</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION00045000000000000000">
+Multi-Class Classification</A>
+</H2>
+
+<P>
+Although the SVM method is inherently a binary classifier, it can
+be adapted to classification problems of more than two classes. 
+
+<P>
+First of all, One-Vs-Rest (1VR) is a method that can be used to
+convert any binary classifier, such as the SVM, into a multi-class 
+classifier. This is done by converting a K-class problem (<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img575.svg"
+ ALT="$K&gt;2$"></SPAN>)
+into K binary problems. Specifically, we regroup the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> classes 
+<!-- MATH
+ $C_1,\cdots,C_K$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img28.svg"
+ ALT="$C_1,\cdots,C_K$"></SPAN> into two classes <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img576.svg"
+ ALT="$C_+=C_i$"></SPAN> and 
+<!-- MATH
+ $C_-=\{C_j|j=1,\cdots,K,\;j\ne i\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img577.svg"
+ ALT="$C_-=\{C_j\vert j=1,\cdots,K,\;j\ne i\}$"></SPAN>, and get the corresponding 
+decision function <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img578.svg"
+ ALT="$f({\bf x})$"></SPAN> of the binary problem:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\mbox{if   } f_i({\bf x})\; \left\{\begin{array}{l}>0 \\<0 \end{array}\right.,
+  \mbox{   then   } \left\{\begin{array}{l}{\bf x}\in C_+\\
+  {\bf x}\in C_-\end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH">if <IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img579.svg"
+ ALT="$\displaystyle f_i({\bf x})\; \left\{\begin{array}{l}&gt;0 \\ &lt;0 \end{array}\right.,$">&nbsp; &nbsp; then <IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img580.svg"
+ ALT="$\displaystyle \left\{\begin{array}{l}{\bf x}\in C_+\\
+{\bf x}\in C_-\end{array}\right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">158</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+which represents quantitatively the extent to which a given 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> belongs to class <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img576.svg"
+ ALT="$C_+=C_i$"></SPAN>, instead of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img15.svg"
+ ALT="$C_-$"></SPAN> containing 
+all remaining <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img581.svg"
+ ALT="$K-1$"></SPAN> classes. After this process is carried out <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> 
+times for all <!-- MATH
+ $i=1,\cdots,K$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img582.svg"
+ ALT="$i=1,\cdots,K$"></SPAN>, we find the maximum one
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f_k({\bf x})=\max\{f_1({\bf x}),\cdots,f_K({\bf x})\},
+  \;\;\;\;\;\;(k=1,\cdots,K)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img583.svg"
+ ALT="$\displaystyle f_k({\bf x})=\max\{f_1({\bf x}),\cdots,f_K({\bf x})\},
+\;\;\;\;\;\;(k=1,\cdots,K)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">159</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and classify <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> to class <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN>.
+
+<P>
+Alternatively, One-Vs-One (1V1) is another method to convert a
+binary classifier to a multi-class classifier. In this method, an
+unlabeled <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> is classified to a class which receives the
+maximum votes out of the <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img584.svg"
+ ALT="$K(K-1)/2$"></SPAN> binary classifications between 
+every pair of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> classes. 
+
+<P>
+In the following we consider yet another method to adapt the SVM 
+is adapted to multi-class problems, by generalizing the decision 
+function <!-- MATH
+ $f({\bf x})={\bf w}^T{\bf x}+b$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img252.svg"
+ ALT="$f({\bf x})={\bf w}^T{\bf x}+b$"></SPAN> for binary classification
+to <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> functions each for one of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> classes:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f_i({\bf x})={\bf w}_i^T{\bf x}+b_i\;\;\;\;\;(i=1,\cdots,K)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img585.svg"
+ ALT="$\displaystyle f_i({\bf x})={\bf w}_i^T{\bf x}+b_i\;\;\;\;\;(i=1,\cdots,K)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">160</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+We can redefine <!-- MATH
+ ${\bf x}=[x_0=1,\,x_1,\cdots,x_n]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img586.svg"
+ ALT="${\bf x}=[x_0=1,\,x_1,\cdots,x_n]^T$"></SPAN> and 
+<!-- MATH
+ ${\bf w}_i=[w_{i0}=b_i,\,w_{i1},\cdots,w_{in}]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img587.svg"
+ ALT="${\bf w}_i=[w_{i0}=b_i,\,w_{i1},\cdots,w_{in}]^T$"></SPAN>, then the 
+decision function can be written as <!-- MATH
+ $f_i({\bf x})={\bf w}_i^T{\bf x}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.72ex; " SRC="img588.svg"
+ ALT="$f_i({\bf x})={\bf w}_i^T{\bf x}$"></SPAN>,
+or in vector form
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf f}({\bf x})={\bf W}^T{\bf x}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img589.svg"
+ ALT="$\displaystyle {\bf f}({\bf x})={\bf W}^T{\bf x}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">161</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf W}=[{\bf w}_1,\cdots,{\bf w}_K]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img590.svg"
+ ALT="$\displaystyle {\bf W}=[{\bf w}_1,\cdots,{\bf w}_K]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">162</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+An unlabeled sample <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> is classified to class <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img95.svg"
+ ALT="$C_i$"></SPAN> if
+<!-- MATH
+ $f_i({\bf x})=\max(f_1({\bf x}),\cdots,f_K({\bf x}))$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img591.svg"
+ ALT="$f_i({\bf x})=\max(f_1({\bf x}),\cdots,f_K({\bf x}))$"></SPAN>. 
+
+<P>
+The training of the classifier is to find all weight vectors in
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img592.svg"
+ ALT="${\bf W}$"></SPAN> based on the training dataset. To do so, we first define
+a cost function
+
+<P>
+////
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node10.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node4.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node8.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node10.html">Kernelized Bayes classifier</A>
+<B> Up:</B> <A
+ HREF="node4.html">Support Vector machine</A>
+<B> Previous:</B> <A
+ HREF="node8.html">Sequential Minimal Optimization (SMO)</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

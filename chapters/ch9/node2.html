@@ -1,0 +1,1255 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Naive Bayes Classification</TITLE>
+<META NAME="description" CONTENT="Naive Bayes Classification">
+<META NAME="keywords" CONTENT="ch9">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch9.css">
+
+<LINK REL="next" HREF="node3.html">
+<LINK REL="previous" HREF="node1.html">
+<LINK REL="next" HREF="node3.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node3.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="ch9.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node1.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node3.html">AdaBoost</A>
+<B> Up:</B> <A
+ HREF="ch9.html">ch9</A>
+<B> Previous:</B> <A
+ HREF="node1.html">K Nearest Neighbor and</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00020000000000000000">
+Naive Bayes Classification</A>
+</H1>
+
+<P>
+The method of naive Bayes classification is a classical supervised
+classification algorithm, which is first trained by a training set 
+of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="$N$"></SPAN> samples <!-- MATH
+ ${\bf X}=[{\bf x}_1,\cdots,{\bf x}_N]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img9.svg"
+ ALT="${\bf X}=[{\bf x}_1,\cdots,{\bf x}_N]$"></SPAN> and their 
+corresponding labelings <!-- MATH
+ ${\bf y}=[y_1,\cdots,y_N]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img10.svg"
+ ALT="${\bf y}=[ y_1,\cdots,y_N]^T$"></SPAN>, and then used 
+to classify any unlabeled sample <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> into class <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN> with the
+maximumm <EM>posterior probability</EM>. As indicated by the name, naive
+Bayes classification is based on <A ID="tex2html1"
+  HREF="../probability/node8.html">Bayes' theorem</A>:
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="posteriorNB"></A><!-- MATH
+ \begin{equation}
+P(C_k|{\bf x})=\frac{p({\bf x},C_k)}{p({\bf x})}
+  =\frac{p({\bf x}|C_k)P(C_k)}{p({\bf x})}  
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.29ex; " SRC="img70.svg"
+ ALT="$\displaystyle P(C_k\vert{\bf x})=\frac{p({\bf x},C_k)}{p({\bf x})}
+=\frac{p({\bf x}\vert C_k)P(C_k)}{p({\bf x})}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">7</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where 
+
+<UL>
+<LI><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img71.svg"
+ ALT="$P(C_k)$"></SPAN> is the <EM>prior probability</EM> that any data sample
+  belongs to class <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN> without observing its values, more briefly 
+  denoted by <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img72.svg"
+ ALT="$P_k$"></SPAN>, which can be estimated by
+  <P></P>
+<DIV CLASS="mathdisplay"><A ID="priorNB"></A><!-- MATH
+ \begin{equation}
+P_k=\frac{N_k}{N}=\frac{N_k}{\sum_{l=1}^K N_l},
+    \;\;\;\;\;\;\;(k=1,\cdots,K)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.27ex; vertical-align: -2.84ex; " SRC="img73.svg"
+ ALT="$\displaystyle P_k=\frac{N_k}{N}=\frac{N_k}{\sum_{l=1}^K N_l},
+\;\;\;\;\;\;\;(k=1,\cdots,K)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">8</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img21.svg"
+ ALT="$N_k$"></SPAN> is the number of data samples in the training set 
+  labeled to belong to class <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN>. This estimation is based on 
+  the assumption that the training samples are evenly drawn from 
+  the entire population, and are therefore a fair representation 
+  of all <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> classes.
+
+<P>
+</LI>
+<LI><!-- MATH
+ $p({\bf x}|C_k)=L(C_k|{\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img74.svg"
+ ALT="$p({\bf x}\vert C_k)=L(C_k\vert{\bf x})$"></SPAN> is the <EM>likelihood</EM> for 
+  any observed <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> to belong to class <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN>, which is the 
+  conditional probability of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> given that <!-- MATH
+ ${\bf x}\in C_k$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img7.svg"
+ ALT="${\bf x}\in C_k$"></SPAN>, 
+  assumed to be a 
+  <A ID="tex2html2"
+  HREF="../probability/node4.html">Gaussian</A>
+in 
+  terms of the mean vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img42.svg"
+ ALT="${\bf m}_k$"></SPAN> and covariance matrix 
+  <!-- MATH
+ ${\bf\Sigma}_k$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img43.svg"
+ ALT="${\bf\Sigma}_k$"></SPAN>:
+  <P></P>
+<DIV CLASS="mathdisplay"><A ID="likelihoodNB"></A><!-- MATH
+ \begin{equation}
+p({\bf x}|C_k)=N({\bf x},{\bf m}_k,{\bf\Sigma}_k)
+    =\frac{1}{(2\pi)^{d/2} \left| {\bf\Sigma}_k\right|^{1/2}}
+    \exp\left[-\frac{1}{2}({\bf x}-{\bf m}_k)^T{\bf\Sigma}_k^{-1}
+      ({\bf x}-{\bf m}_k)\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.50ex; vertical-align: -2.83ex; " SRC="img75.svg"
+ ALT="$\displaystyle p({\bf x}\vert C_k)=N({\bf x},{\bf m}_k,{\bf\Sigma}_k)
+=\frac{1}{...
+...[-\frac{1}{2}({\bf x}-{\bf m}_k)^T{\bf\Sigma}_k^{-1}
+({\bf x}-{\bf m}_k)\right]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">9</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+This assumption is based on the fact that the Gaussian distribution
+  has the maximum entropy (uncertainty) among all probability density 
+  functions with the same covariance, i.e., it imposes the least amount 
+  of unsupported constraint on the model for the dataset.
+
+<P>
+</LI>
+<LI><!-- MATH
+ $p({\bf x},C_k)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img76.svg"
+ ALT="$p({\bf x},C_k)$"></SPAN> is the joint probability of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN>:
+  <P></P>
+<DIV CLASS="mathdisplay"><A ID="jointprobNB"></A><!-- MATH
+ \begin{equation}
+p({\bf x},C_k)=p({\bf x}|C_k)P(C_k)=P(C_k|{\bf x})p({\bf x})
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img77.svg"
+ ALT="$\displaystyle p({\bf x},C_k)=p({\bf x}\vert C_k)P(C_k)=P(C_k\vert{\bf x})p({\bf x})$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">10</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+</LI>
+<LI><!-- MATH
+ $p({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img78.svg"
+ ALT="$p({\bf x})$"></SPAN> is the distribution of any data sample in the dataset, 
+  independent of its classe identity, the weighted sum of all 
+  likelihood <!-- MATH
+ $p({\bf x}|C_k)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img79.svg"
+ ALT="$p({\bf x}\vert C_k)$"></SPAN> for <!-- MATH
+ $k=1,\cdots,K$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img36.svg"
+ ALT="$k=1,\cdots,K$"></SPAN>, i.e., the joint
+  probability <!-- MATH
+ $p({\bf x},C_k)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img76.svg"
+ ALT="$p({\bf x},C_k)$"></SPAN> marginalized over all <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> classes:
+  <P></P>
+<DIV CLASS="mathdisplay"><A ID="pofxNB"></A><!-- MATH
+ \begin{equation}
+p({\bf x})=\sum_{k=1}^K p({\bf x},C_k)=\sum_{k=1}^K P_k \,p({\bf x}|C_k)
+    =\sum_{k=1}^K P_k \,
+    \frac{1}{(2\pi)^{d/2} \left| {\bf\Sigma}_k\right|^{1/2}}
+    \exp\left[-\frac{1}{2}({\bf x}-{\bf m}_k)^T{\bf\Sigma}_k^{-1}
+      ({\bf x}-{\bf m}_k)\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img80.svg"
+ ALT="$\displaystyle p({\bf x})=\sum_{k=1}^K p({\bf x},C_k)=\sum_{k=1}^K P_k \,p({\bf ...
+...[-\frac{1}{2}({\bf x}-{\bf m}_k)^T{\bf\Sigma}_k^{-1}
+({\bf x}-{\bf m}_k)\right]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">11</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+</LI>
+<LI><!-- MATH
+ $P(C_k|{\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img81.svg"
+ ALT="$P(C_k\vert{\bf x})$"></SPAN> is the posterior probability that a data sample 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> belongs to class <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN> based on the observed values in 
+  <!-- MATH
+ ${\bf x}=[x_1,\cdots,x_d]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img3.svg"
+ ALT="${\bf x}=[x_1,\cdots,x_d]^T$"></SPAN>.
+</LI>
+</UL>
+
+<P>
+Based on Bayes' theorem discussed above, the naive Bayes method 
+classifies an unlabeled data sample <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> to class <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN> with 
+the maximum posterior probability (<EM>maximum a posteriori (MAP)</EM>):
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="BayesClassifier"></A><!-- MATH
+ \begin{equation}
+\mbox{if}\;\;P(C_k|{\bf x})=\max_l\{ P(C_l|{\bf x}),\;(l=1,\cdots,K)\},
+  \;\;\;\;\mbox{then}\;\;{\bf x}\in C_k
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH">if<IMG STYLE="height: 3.72ex; vertical-align: -1.86ex; " SRC="img82.svg"
+ ALT="$\displaystyle \;\;P(C_k\vert{\bf x})=\max_l\{ P(C_l\vert{\bf x}),\;(l=1,\cdots,K)\},
+\;\;\;\;$">then<IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img40.svg"
+ ALT="$\displaystyle \;\;{\bf x}\in C_k$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">12</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+As <!-- MATH
+ $p({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img78.svg"
+ ALT="$p({\bf x})$"></SPAN> is common to all <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> classes (independent of 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img33.svg"
+ ALT="$k$"></SPAN>), it plays no role in the relative comparison among the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> 
+classes, and can therefore be dropped, i.e., <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> is classified
+to <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN> with maximal <!-- MATH
+ $p({\bf x}|C_k)\,P_k$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img83.svg"
+ ALT="$p({\bf x}\vert C_k)\,P_k$"></SPAN>.
+
+<P>
+The naive Bayes classifier is an optimal classifier in the sense 
+that the classification error is minimum. To illustrate this,
+consider an arbitrary boundary between two classes <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img51.svg"
+ ALT="$C_1$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img53.svg"
+ ALT="$C_2$"></SPAN> 
+that partitions the 1-D feature space into two regions <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img84.svg"
+ ALT="$R_1$"></SPAN> and
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img85.svg"
+ ALT="$R_2$"></SPAN>, as shown below. The probability of a misclassification is
+the joint probability <!-- MATH
+ $P( {\bf x}\in C_i \cap {\bf x}\in R_j)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img86.svg"
+ ALT="$P( {\bf x}\in C_i \cap {\bf x}\in R_j)$"></SPAN>
+for a sample <!-- MATH
+ ${\bf x}\in C_i$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img87.svg"
+ ALT="${\bf x}\in C_i$"></SPAN> but falling in <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img88.svg"
+ ALT="$R_j$"></SPAN>. The total 
+probability of error due to misclassification can be expressed as:
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+P(error) & = & P(({\bf x}\in R_2) \cap ({\bf x}\in C_1))
+  +P(({\bf x}\in R_1) \cap ({\bf x}\in C_2)) \nonumber \\
+  & = & P({\bf x} \in R_2/C_1)\,P_1
+  +P({\bf x} \in R_1/C_2)\,P_2 \nonumber \\
+  &=& P_1 \int_{R_2}p({\bf x}/C_1)d{\bf x}
+  +P_2\int_{R_1}p({\bf x}/C_2)d{\bf x}
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img89.svg"
+ ALT="$\displaystyle P(error)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img91.svg"
+ ALT="$\displaystyle P(({\bf x}\in R_2) \cap ({\bf x}\in C_1))
++P(({\bf x}\in R_1) \cap ({\bf x}\in C_2))$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img92.svg"
+ ALT="$\displaystyle P({\bf x} \in R_2/C_1)\,P_1
++P({\bf x} \in R_1/C_2)\,P_2$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.81ex; vertical-align: -2.46ex; " SRC="img93.svg"
+ ALT="$\displaystyle P_1 \int_{R_2}p({\bf x}/C_1)d{\bf x}
++P_2\int_{R_1}p({\bf x}/C_2)d{\bf x}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">13</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+<IMG STYLE="" SRC="../figures/MLerror1.png"
+ ALT="MLerror1.png">
+
+<P>
+It is obvious that the Bayes classifier is indeed optimal, due to 
+the fact that its boundary <!-- MATH
+ $p({\bf x}|C_i)P_i=p({\bf x}|C_j)P_j$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img94.svg"
+ ALT="$p({\bf x}\vert C_i)P_i=p({\bf x}\vert C_j)P_j$"></SPAN>
+between classes <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img95.svg"
+ ALT="$C_i$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img96.svg"
+ ALT="$C_j$"></SPAN> (the bottom plot) guarantees the 
+classification error (shaded area) to be minimum.
+
+<P>
+To find the likelihood function
+<!-- MATH
+ $p({\bf x}|C_k)={\cal N}({\bf x},{\bf m}_k,{\bf\Sigma}_k)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img97.svg"
+ ALT="$p({\bf x}\vert C_k)={\cal N}({\bf x},{\bf m}_k,{\bf\Sigma}_k)$"></SPAN>, we need
+to find <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img42.svg"
+ ALT="${\bf m}_k$"></SPAN> and <!-- MATH
+ ${\bf\Sigma}_k$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img43.svg"
+ ALT="${\bf\Sigma}_k$"></SPAN> based on the training set 
+<!-- MATH
+ ${\cal D}=\{{\bf X},\,{\bf y}\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img98.svg"
+ ALT="${\cal D}=\{{\bf X},\,{\bf y}\}$"></SPAN>, based on the <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img21.svg"
+ ALT="$N_k$"></SPAN> training samples 
+in class <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN> by the method of 
+<A ID="tex2html3"
+  HREF="../probability/node11.html">maximum likelihood estimation</A>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf m}_k=\frac{1}{N_k}\sum_{i=1}^{N_k} {\bf x}_i,
+  \;\;\;\;\;\;
+  {\bf\Sigma}_k=\frac{1}{N_k}\sum_{i=1}^{N_k}
+  ({\bf x}_i-{\bf m}_k)({\bf x}_i-{\bf m}_k)^T,
+  \;\;\;\;\;\;({\bf x}_i\in C_k)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.09ex; " SRC="img99.svg"
+ ALT="$\displaystyle {\bf m}_k=\frac{1}{N_k}\sum_{i=1}^{N_k} {\bf x}_i,
+\;\;\;\;\;\;
+{...
+...k}
+({\bf x}_i-{\bf m}_k)({\bf x}_i-{\bf m}_k)^T,
+\;\;\;\;\;\;({\bf x}_i\in C_k)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">14</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+Once both <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img25.svg"
+ ALT="$P_k=N_k/N$"></SPAN> and 
+<!-- MATH
+ $p({\bf x}|C_k)={\cal N}({\bf x},{\bf m}_k,{\bf\Sigma}_k)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img97.svg"
+ ALT="$p({\bf x}\vert C_k)={\cal N}({\bf x},{\bf m}_k,{\bf\Sigma}_k)$"></SPAN>
+are available, the classifier is trained, and the posterior 
+<!-- MATH
+ $P(C_k|{\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img81.svg"
+ ALT="$P(C_k\vert{\bf x})$"></SPAN> can be calculated for the classification in 
+Eq. (<A HREF="#BayesClassifier">12</A>).
+
+<P>
+As the classification is based on the relative comparison of the 
+posterior <!-- MATH
+ $P(C_k|{\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img81.svg"
+ ALT="$P(C_k\vert{\bf x})$"></SPAN>, any monotonic mapping of the posterior 
+can be equivalently used to simplify the computation, such as the 
+logarithmic function:
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+\log P(C_k|{\bf x})&=&\log \left[ p({\bf x}|C_k) P_k/p({\bf x}) \right]
+  =\log p({\bf x}|C_k) +\log P_k-\log p({\bf x})
+  \nonumber\\
+  &=&-\frac{1}{2}({\bf x}-{\bf m}_k)^T{\bf\Sigma}_k^{-1}({\bf x}-{\bf m}_k)
+  -\frac{N}{2}\log(2\pi)-\frac{1}{2}\log|{\bf\Sigma}_k|
+  +\log P_k-\log p({\bf x})
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img100.svg"
+ ALT="$\displaystyle \log P(C_k\vert{\bf x})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img101.svg"
+ ALT="$\displaystyle \log \left[ p({\bf x}\vert C_k) P_k/p({\bf x}) \right]
+=\log p({\bf x}\vert C_k) +\log P_k-\log p({\bf x})$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.11ex; vertical-align: -1.71ex; " SRC="img102.svg"
+ ALT="$\displaystyle -\frac{1}{2}({\bf x}-{\bf m}_k)^T{\bf\Sigma}_k^{-1}({\bf x}-{\bf ...
+...}{2}\log(2\pi)-\frac{1}{2}\log\vert{\bf\Sigma}_k\vert
++\log P_k-\log p({\bf x})$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">15</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+Dropping the constant terms <!-- MATH
+ $\log p({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img103.svg"
+ ALT="$\log p({\bf x})$"></SPAN> and <!-- MATH
+ $N \log(2\pi)/2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img104.svg"
+ ALT="$N \log(2\pi)/2$"></SPAN> 
+that are independent of the index <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img33.svg"
+ ALT="$k$"></SPAN> and therefore play no role in
+the comparison above, we get the <EM>quadratic discriminant function</EM>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+D_k({\bf x})=-\frac{1}{2}({\bf x}-{\bf m}_k)^T{\bf\Sigma}_k^{-1}({\bf x}-{\bf m}_k)
+  -\frac{1}{2}\log|{\bf\Sigma}_k|+\log P_k
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img105.svg"
+ ALT="$\displaystyle D_k({\bf x})=-\frac{1}{2}({\bf x}-{\bf m}_k)^T{\bf\Sigma}_k^{-1}({\bf x}-{\bf m}_k)
+-\frac{1}{2}\log\vert{\bf\Sigma}_k\vert+\log P_k$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">16</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Now the classification can be represented by
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\mbox{if}\;\; D_l({\bf x})=\max \{ D_k({\bf x}),\;(k=1,\cdots,K)\},
+  \;\;\;\;\;\mbox{then}\;\;{\bf x}\in C_l
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH">if<IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img106.svg"
+ ALT="$\displaystyle \;\; D_l({\bf x})=\max \{ D_k({\bf x}),\;(k=1,\cdots,K)\},
+\;\;\;\;\;$">then<IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img107.svg"
+ ALT="$\displaystyle \;\;{\bf x}\in C_l$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">17</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Equivalently, we can also treat the negative of this discriminant 
+function as a distance measurement:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+d_k({\bf x})=({\bf x}-{\bf m}_k)^T{\bf\Sigma}_k^{-1}({\bf x}-{\bf m}_k)
+  +\log|{\bf\Sigma}_k|-2\,\log P_k
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.82ex; " SRC="img108.svg"
+ ALT="$\displaystyle d_k({\bf x})=({\bf x}-{\bf m}_k)^T{\bf\Sigma}_k^{-1}({\bf x}-{\bf m}_k)
++\log\vert{\bf\Sigma}_k\vert-2\,\log P_k$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">18</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+for minimum distance classification. We note that the first term is the
+Mohalanobis distance defined previously. However, the additonal terms in 
+the expression contribute to better classification performance.
+
+<P>
+Geometrically, the feature space is partitioned into regions corresponding 
+to the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> classes by the <EM>decision boundaries</EM> between every pair of 
+classes <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img95.svg"
+ ALT="$C_i$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img96.svg"
+ ALT="$C_j$"></SPAN>, represented by the equation <!-- MATH
+ $D_i({\bf x})=D_j({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img109.svg"
+ ALT="$D_i({\bf x})=D_j({\bf x})$"></SPAN>,
+i.e.,
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+&&-\frac{1}{2}({\bf x}-{\bf m}_i)^T{\bf\Sigma}_i^{-1}({\bf x}-{\bf m}_i)
+  -\frac{1}{2}\;\log\,|{\bf\Sigma}_i | + \log\, P_i
+  \nonumber\\
+  &=&-\frac{1}{2}({\bf x}-{\bf m}_j)^T{\bf\Sigma}_j^{-1}({\bf x}-{\bf m}_j)
+  -\frac{1}{2}\;\log\,|{\bf\Sigma}_j | + \log\, P_j 
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img110.svg"
+ ALT="$\displaystyle -\frac{1}{2}({\bf x}-{\bf m}_i)^T{\bf\Sigma}_i^{-1}({\bf x}-{\bf m}_i)
+-\frac{1}{2}\;\log\,\vert{\bf\Sigma}_i \vert + \log\, P_i$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img111.svg"
+ ALT="$\displaystyle -\frac{1}{2}({\bf x}-{\bf m}_j)^T{\bf\Sigma}_j^{-1}({\bf x}-{\bf m}_j)
+-\frac{1}{2}\;\log\,\vert{\bf\Sigma}_j \vert + \log\, P_j$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">19</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+which can be written as
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf x}^T{\bf W}{\bf x}+{\bf w}^T{\bf x}+w=0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.31ex; " SRC="img112.svg"
+ ALT="$\displaystyle {\bf x}^T{\bf W}{\bf x}+{\bf w}^T{\bf x}+w=0$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">20</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where
+<BR>
+<DIV CLASS="mathdisplay"><A ID="Www2"></A><!-- MATH
+ \begin{eqnarray}
+{\bf W}&=&-\frac{1}{2}({\bf\Sigma}_i^{-1}-{\bf\Sigma}_j^{-1})
+  \nonumber\\
+  {\bf w}&=&{\bf\Sigma}_i^{-1}{\bf m}_i-{\bf\Sigma}_j^{-1}{\bf m}_j
+  \nonumber\\
+  w&=&-\frac{1}{2}({\bf m}_i^T{\bf\Sigma}_i^{-1}{\bf m}_i-{\bf m}_j^T{\bf\Sigma}_j^{-1}{\bf m}_j)
+  -\frac{1}{2}\log\,\frac{|{\bf\Sigma}_i|}{|{\bf\Sigma}_j|}
+  +\log\,\frac{P_i}{P_j}
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img113.svg"
+ ALT="$\displaystyle {\bf W}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img114.svg"
+ ALT="$\displaystyle -\frac{1}{2}({\bf\Sigma}_i^{-1}-{\bf\Sigma}_j^{-1})$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img115.svg"
+ ALT="$\displaystyle {\bf w}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.25ex; vertical-align: -1.08ex; " SRC="img116.svg"
+ ALT="$\displaystyle {\bf\Sigma}_i^{-1}{\bf m}_i-{\bf\Sigma}_j^{-1}{\bf m}_j$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img117.svg"
+ ALT="$\displaystyle w$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.81ex; vertical-align: -2.37ex; " SRC="img118.svg"
+ ALT="$\displaystyle -\frac{1}{2}({\bf m}_i^T{\bf\Sigma}_i^{-1}{\bf m}_i-{\bf m}_j^T{\...
+...,\frac{\vert{\bf\Sigma}_i\vert}{\vert{\bf\Sigma}_j\vert}
++\log\,\frac{P_i}{P_j}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">21</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+In general, this decision boundary is a quadratic hypersurface
+(hypersphere, hyperellipsoid, hyperparabola, or hyperhyperbola), by 
+which an unlabeled data sample <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> is classified into either of 
+the two classes <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img95.svg"
+ ALT="$C_i$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img96.svg"
+ ALT="$C_j$"></SPAN> based on whether it is on the positive
+or negative side of the surface::
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="MLdiscriminant"></A><!-- MATH
+ \begin{equation}
+\mbox{if}\;\;{\bf x}^T{\bf W}{\bf x}+{\bf w}^T{\bf x}+w
+  \left\{\begin{array}{l}>0\\<0\end{array}\right.,\;\;\;\;\;
+  \mbox{then}\;\;\; {\bf x}\in \left\{\begin{array}{c}
+  C_i\\C_j  \end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH">if<IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img119.svg"
+ ALT="$\displaystyle \;\;{\bf x}^T{\bf W}{\bf x}+{\bf w}^T{\bf x}+w
+\left\{\begin{array}{l}&gt;0\\ &lt;0\end{array}\right.,\;\;\;\;\;$">&nbsp; &nbsp;then<IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img120.svg"
+ ALT="$\displaystyle \;\;\; {\bf x}\in \left\{\begin{array}{c}
+C_i\\ C_j \end{array}\right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">22</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+We further consider several special cases:
+
+<UL>
+<LI>All classes have the same prior:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+P_i=P_j\;\;\;\;(i,j=1,\cdots,K)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img121.svg"
+ ALT="$\displaystyle P_i=P_j\;\;\;\;(i,j=1,\cdots,K)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">23</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+then the last term of <!-- MATH
+ $D_i({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img122.svg"
+ ALT="$D_i({\bf x})$"></SPAN> is zero, and we have
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+D_i({\bf x})=-\frac{1}{2}({\bf x}-{\bf m}_i)^T{\bf\Sigma}_i^{-1}({\bf x}-{\bf m}_i)
+    -\frac{1}{2}\;\log\,|{\bf\Sigma}_i |
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img123.svg"
+ ALT="$\displaystyle D_i({\bf x})=-\frac{1}{2}({\bf x}-{\bf m}_i)^T{\bf\Sigma}_i^{-1}({\bf x}-{\bf m}_i)
+-\frac{1}{2}\;\log\,\vert{\bf\Sigma}_i \vert$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">24</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+We can reconsider Example 2 in the previous section but now based on 
+  the negative of the discriminant function above treated as a distance
+  <!-- MATH
+ $d({\bf x},\,C_i)=({\bf x}-{\bf m}_i)^T{\bf\Sigma}_i^{-1}({\bf x}-{\bf m}_i)
+  +\log\,|{\bf\Sigma}_i |$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.76ex; " SRC="img124.svg"
+ ALT="$d({\bf x},\,C_i)=({\bf x}-{\bf m}_i)^T{\bf\Sigma}_i^{-1}({\bf x}-{\bf m}_i)
++\log\,\vert{\bf\Sigma}_i \vert$"></SPAN>, and get
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left\{ \begin{array}{l}
+      d(x_1,\,C_1)=0.69+\log(1.2^2)=1.06,   \;\;\;\;\;\;\;\;\;\;\;\;\;\;
+      d_M(x_1,\,C_2)=0.11+\log(3^2)=2.31\\
+      d_M(x_2,\,C_1)=6.25+\log(1.2^2)=6.61,  \;\;\;\;\;\;\;\;\;\;\;\;\;\;
+      d_M(x_1,\,C_2)=1+\log(3^2)=3.20
+    \end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img125.svg"
+ ALT="$\displaystyle \left\{ \begin{array}{l}
+d(x_1,\,C_1)=0.69+\log(1.2^2)=1.06, \;\;...
+...\;\;\;\;\;\;\;\;\;\;\;\;\;\;
+d_M(x_1,\,C_2)=1+\log(3^2)=3.20
+\end{array}\right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">25</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Now we see that <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img66.svg"
+ ALT="$x_1$"></SPAN> is classified into class <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img51.svg"
+ ALT="$C_1$"></SPAN>, while <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img67.svg"
+ ALT="$x_2$"></SPAN> into <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img53.svg"
+ ALT="$C_2$"></SPAN>,
+  as desired. The misclassification of <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img66.svg"
+ ALT="$x_1$"></SPAN> to <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img53.svg"
+ ALT="$C_2$"></SPAN> by the Mahalanobis 
+  distance, the first term, is corrected, due to the addition of the second 
+  term <!-- MATH
+ $\log(\sigma^2)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img126.svg"
+ ALT="$\log(\sigma^2)$"></SPAN>. The plot below shows the partitioning of the 1-D
+  space for the two classes <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img51.svg"
+ ALT="$C_1$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img53.svg"
+ ALT="$C_2$"></SPAN>:
+
+<P>
+<IMG STYLE="" SRC="../figures/GaussianPlot2.png"
+ ALT="GaussianPlot2.png">
+
+<P>
+</LI>
+<LI>All classes have the same covariance matrix <!-- MATH
+ ${\bf\Sigma}_i={\bf\Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img127.svg"
+ ALT="${\bf\Sigma}_i={\bf\Sigma}$"></SPAN>,
+  the discriminant function becomes:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+D_i({\bf x})=-\frac{1}{2}({\bf x}-{\bf m}_i)^T{\bf\Sigma}^{-1}({\bf x}-{\bf m}_i)
+    +\log\,P_i
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img128.svg"
+ ALT="$\displaystyle D_i({\bf x})=-\frac{1}{2}({\bf x}-{\bf m}_i)^T{\bf\Sigma}^{-1}({\bf x}-{\bf m}_i)
++\log\,P_i$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">26</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Moreover, if all <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img129.svg"
+ ALT="$P_i$"></SPAN> are the same and the second term is dropped,
+  <!-- MATH
+ $D_i({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img122.svg"
+ ALT="$D_i({\bf x})$"></SPAN> becomes the negative <EM>Mahalanobis distance</EM>.
+
+<P>
+The boundary equation <!-- MATH
+ $D_i({\bf x})=D_j({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img109.svg"
+ ALT="$D_i({\bf x})=D_j({\bf x})$"></SPAN> between <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img95.svg"
+ ALT="$C_i$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img96.svg"
+ ALT="$C_j$"></SPAN>
+  becomes
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+-\frac{1}{2}({\bf x}-{\bf m}_i)^T{\bf\Sigma}^{-1}({\bf x}-{\bf m}_i)+\log\,P_i
+    =-\frac{1}{2}({\bf x}-{\bf m}_j)^T{\bf\Sigma}^{-1}({\bf x}-{\bf m}_j)+\log\,P_j
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img130.svg"
+ ALT="$\displaystyle -\frac{1}{2}({\bf x}-{\bf m}_i)^T{\bf\Sigma}^{-1}({\bf x}-{\bf m}...
+...=-\frac{1}{2}({\bf x}-{\bf m}_j)^T{\bf\Sigma}^{-1}({\bf x}-{\bf m}_j)+\log\,P_j$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">27</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+As the quadratic terms <!-- MATH
+ ${\bf x}^T{\bf\Sigma}^{-1}{\bf x}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img131.svg"
+ ALT="${\bf x}^T{\bf\Sigma}^{-1}{\bf x}$"></SPAN> on both sides
+  of the equation are the same, it becomes a linear equation:
+  <P></P>
+<DIV CLASS="mathdisplay"><A ID="LDF"></A><!-- MATH
+ \begin{equation}
+{\bf w}^T{\bf x}+w=0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.31ex; " SRC="img132.svg"
+ ALT="$\displaystyle {\bf w}^T{\bf x}+w=0$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">28</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf w}={\bf\Sigma}^{-1}({\bf m}_i-{\bf m}_j)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img133.svg"
+ ALT="$\displaystyle {\bf w}={\bf\Sigma}^{-1}({\bf m}_i-{\bf m}_j)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">29</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and 
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+w=-\frac{1}{2}({\bf m}_i^T{\bf\Sigma}^{-1}{\bf m}_i
+    -{\bf m}_j^T{\bf\Sigma}^{-1}{\bf m}_j)+\log\,\frac{P_i}{P_j}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.37ex; " SRC="img134.svg"
+ ALT="$\displaystyle w=-\frac{1}{2}({\bf m}_i^T{\bf\Sigma}^{-1}{\bf m}_i
+-{\bf m}_j^T{\bf\Sigma}^{-1}{\bf m}_j)+\log\,\frac{P_i}{P_j}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">30</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+This linear equation represents a hyperplane between the two points
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img135.svg"
+ ALT="${\bf m}_i$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img136.svg"
+ ALT="${\bf m}_j$"></SPAN> and perpendicular to the straight line
+  <!-- MATH
+ ${\bf\Sigma}^{-1}({\bf m}_i-{\bf m}_j)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img137.svg"
+ ALT="${\bf\Sigma}^{-1}({\bf m}_i-{\bf m}_j)$"></SPAN>
+  (the straight line <!-- MATH
+ ${\bf m}_i-{\bf m}_j$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.78ex; " SRC="img138.svg"
+ ALT="${\bf m}_i-{\bf m}_j$"></SPAN> rotated by matrix <!-- MATH
+ ${\bf\Sigma}^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img139.svg"
+ ALT="${\bf\Sigma}^{-1}$"></SPAN>).
+
+<P>
+</LI>
+<LI>All classes have the same isotropic distribution:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf\Sigma}_i={\bf\sigma}^2\,{\bf I}=diag[\sigma^2,\cdots,\sigma^2]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img140.svg"
+ ALT="$\displaystyle {\bf\Sigma}_i={\bf\sigma}^2\,{\bf I}=diag[\sigma^2,\cdots,\sigma^2]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">31</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+then <!-- MATH
+ $|{\bf\Sigma}_i|=\sigma^{2d}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img141.svg"
+ ALT="$\vert{\bf\Sigma}_i\vert=\sigma^{2d}$"></SPAN> and <!-- MATH
+ $D_i({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img122.svg"
+ ALT="$D_i({\bf x})$"></SPAN> becomes
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+D_i({\bf x})=-\frac{|| {\bf x}-{\bf m}_i ||^2}{2\sigma^2}+\log\,P_i
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.34ex; vertical-align: -1.71ex; " SRC="img142.svg"
+ ALT="$\displaystyle D_i({\bf x})=-\frac{\vert\vert {\bf x}-{\bf m}_i \vert\vert^2}{2\sigma^2}+\log\,P_i$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">32</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Note that the term <!-- MATH
+ $\log\,|{\bf\Sigma}_i|$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img143.svg"
+ ALT="$\log\,\vert{\bf\Sigma}_i\vert$"></SPAN> has been dropped from the original 
+  expression of <!-- MATH
+ $D_i({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img122.svg"
+ ALT="$D_i({\bf x})$"></SPAN> as it is now the same for all classes.
+
+<P>
+The boundary equation <!-- MATH
+ $D_i({\bf x})=D_j({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img109.svg"
+ ALT="$D_i({\bf x})=D_j({\bf x})$"></SPAN> becomes:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\frac{|| {\bf x}-{\bf m}_i ||^2}{2\sigma^2}-\log\,P_i
+    =\frac{|| {\bf x}-{\bf m}_j ||^2}{2\sigma^2}-\log\,P_j
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.34ex; vertical-align: -1.71ex; " SRC="img144.svg"
+ ALT="$\displaystyle \frac{\vert\vert {\bf x}-{\bf m}_i \vert\vert^2}{2\sigma^2}-\log\,P_i
+=\frac{\vert\vert {\bf x}-{\bf m}_j \vert\vert^2}{2\sigma^2}-\log\,P_j$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">33</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+which can be simplified to a linear equation:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf w}^T{\bf x}+w=0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.31ex; " SRC="img132.svg"
+ ALT="$\displaystyle {\bf w}^T{\bf x}+w=0$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">34</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf w}={\bf m}_i-{\bf m}_j,\;\;\;\;\;
+    w=-({\bf m}_i^T{\bf m}_i-{\bf m}_j^T{\bf m}_j)+2\sigma^2\;\log\,\frac{P_i}{P_j}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.37ex; " SRC="img145.svg"
+ ALT="$\displaystyle {\bf w}={\bf m}_i-{\bf m}_j,\;\;\;\;\;
+w=-({\bf m}_i^T{\bf m}_i-{\bf m}_j^T{\bf m}_j)+2\sigma^2\;\log\,\frac{P_i}{P_j}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">35</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+This linear equation represents a hyperplane between the two points <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img135.svg"
+ ALT="${\bf m}_i$"></SPAN> 
+  and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img136.svg"
+ ALT="${\bf m}_j$"></SPAN> and perpendicular to the straight line passing through these
+  points.
+
+<P>
+</LI>
+<LI>Further, if all classes have the same <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img129.svg"
+ ALT="$P_i$"></SPAN>, <!-- MATH
+ $D_i({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img122.svg"
+ ALT="$D_i({\bf x})$"></SPAN> becomes
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+D_i({\bf x})=-({\bf x}-{\bf m}_i)^T({\bf x}-{\bf m}_i)=-||{\bf x}-{\bf m}_i||^2
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img146.svg"
+ ALT="$\displaystyle D_i({\bf x})=-({\bf x}-{\bf m}_i)^T({\bf x}-{\bf m}_i)=-\vert\vert{\bf x}-{\bf m}_i\vert\vert^2$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">36</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and the Bayes classifier becomes minimum distance classifier based on
+  Euclidean distance (maximizing <!-- MATH
+ $D_i({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img122.svg"
+ ALT="$D_i({\bf x})$"></SPAN> is equivalent to minimizing
+  <!-- MATH
+ $||{\bf x}-{\bf m}_i||^2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img147.svg"
+ ALT="$\vert\vert{\bf x}-{\bf m}_i\vert\vert^2$"></SPAN>.
+
+<P>
+</LI>
+</UL>
+
+<P>
+<B>Example 1:</B>
+
+<P>
+This example shows the classification of two cocentric classes with one
+surrounding the other. They are separated by an ellipse with 9 out of 
+200 samples misclassified, i.e., the error rate of <!-- MATH
+ $9/200=4.5\%$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img148.svg"
+ ALT="$9/200=4.5\%$"></SPAN>. The 
+confusion matrix is shown below:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left[\begin{array}{rrr}
+    92 &   8   \\
+     1 &  99   \\
+\end{array}\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img149.svg"
+ ALT="$\displaystyle \left[\begin{array}{rrr}
+92 &amp; 8 \\
+1 &amp; 99 \\
+\end{array}\right]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">37</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+indicating 8 of the 100 samples belonging to class 1 are misclassified
+to class 2, and 1 of the 100 samples belonging to class 2 is misclassified
+to class 1.
+
+<P>
+<IMG STYLE="" SRC="../figures/MLexample3.png"
+ ALT="MLexample3.png">
+
+<P>
+<B>Example 2:</B>
+
+<P>
+This example shows the classification of a 2-class exclusive-or (XOR)
+data set with significant overlap, in terms of the confusion matrix and 
+the error rate of <!-- MATH
+ $61/400=15.25\%$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img150.svg"
+ ALT="$61/400=15.25\%$"></SPAN>. Note that the decision boundaries
+are a pair of hyperbolas. The confusion matrix is 
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left[\begin{array}{rrr}
+ 175 &   25   \\
+  36 &  164   \\
+\end{array}\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img151.svg"
+ ALT="$\displaystyle \left[\begin{array}{rrr}
+175 &amp; 25 \\
+36 &amp; 164 \\
+\end{array}\right]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">38</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+<IMG STYLE="" SRC="../figures/MLexample2.png"
+ ALT="MLexample2.png">
+
+<P>
+<B>Example 3:</B>
+
+<P>
+The first two panels in the figure below show three classes in the 2-D
+space, while the third one shows the partitioning of the space corresponding
+to the three classes. Note that the boundaries between the classes are all 
+quadratic. The confusion matrix of the classification result is shown below, 
+with the error rate <!-- MATH
+ $49/600=8.17\%$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img152.svg"
+ ALT="$49/600=8.17\%$"></SPAN>.
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left[\begin{array}{rrr}
+    196 & 3 & 1   \\
+    0 & 191 & 9   \\
+    3 & 33 & 164  \\
+\end{array}\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img153.svg"
+ ALT="$\displaystyle \left[\begin{array}{rrr}
+196 &amp; 3 &amp; 1 \\
+0 &amp; 191 &amp; 9 \\
+3 &amp; 33 &amp; 164 \\
+\end{array}\right]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">39</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+<IMG STYLE="" SRC="../figures/MLexample1.png"
+ ALT="MLexample1.png">
+
+<P>
+<B>Example 4</B>
+
+<P>
+The figure below shows some sub-samples of ten sets digits from 0 to 9, 
+each is hand-written 224 times by different students. Each hand-written
+digit is represented as an 16 by 16 image containing 256 pixels, treated
+as an <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img154.svg"
+ ALT="$N=256$"></SPAN> dimensional vector. 
+
+<P>
+<IMG STYLE="" SRC="../figures/Data123Samples.png"
+ ALT="Data123Samples.png">
+
+<P>
+The dataset can be visualized by applying the KLT transform to map all
+data points in the 256-D space into a 3-D space spanned by the three 
+eigenvectors corresponding to the three greatest eigenvalues of the 
+covariance matrix of the dataset, as shown below:
+
+<P>
+<IMG STYLE="" SRC="../figures/Data123_3D.png"
+ ALT="Data123_3D.png">
+
+<P>
+Then a Bayes classifier trained on the dataset is used to classify the 
+same dataset into ten classes. The resulting confusion matrix as shown 
+below, indicating 158 out of the 2240 samples are misclassified with an
+error rate of 5.63%.
+
+<P>
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left[ \begin{array}{rrrrrrrrrr}
+   215 &   0 &   0 &   0 &   0 &   2 &   4 &   0 &   3  &  0 \\
+     0 & 216 &   0 &   0 &   1 &   0 &   1 &   3 &   1  &  2 \\
+     2 &   0 & 219 &   0 &   0 &   0 &   0 &   1 &   2  &  0 \\
+     1 &   0 &   0 & 212 &   0 &   1 &   0 &   3 &   4  &  3 \\
+     1 &   0 &   1 &   0 & 213 &   0 &   0 &   0 &   4  &  5 \\
+     1 &   0 &   2 &   1 &   0 & 211 &   0 &   0 &   9  &  0 \\
+     2 &   6 &   0 &   0 &   0 &   0 & 213 &   0 &   3  &  0 \\
+     2 &   0 &   3 &   0 &   0 &   0 &   1 & 205 &   3  & 10 \\
+     1 &   0 &   2 &   4 &   0 &   8 &   1 &   4 & 200  &  4 \\
+     0 &   0 &   1 &   1 &   8 &   0 &   0 &   2 &   2  &210 \\
+\end{array} \right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 28.10ex; vertical-align: -13.47ex; " SRC="img155.svg"
+ ALT="$\displaystyle \left[ \begin{array}{rrrrrrrrrr}
+215 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 2 &amp; 4 &amp; 0 ...
+... 4 &amp; 200 &amp; 4 \\
+0 &amp; 0 &amp; 1 &amp; 1 &amp; 8 &amp; 0 &amp; 0 &amp; 2 &amp; 2 &amp;210 \\
+\end{array} \right]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">40</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node3.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="ch9.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node1.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node3.html">AdaBoost</A>
+<B> Up:</B> <A
+ HREF="ch9.html">ch9</A>
+<B> Previous:</B> <A
+ HREF="node1.html">K Nearest Neighbor and</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

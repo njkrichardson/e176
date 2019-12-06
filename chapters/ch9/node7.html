@@ -1,0 +1,617 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Soft Margin SVM</TITLE>
+<META NAME="description" CONTENT="Soft Margin SVM">
+<META NAME="keywords" CONTENT="ch9">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch9.css">
+
+<LINK REL="next" HREF="node8.html">
+<LINK REL="previous" HREF="node6.html">
+<LINK REL="next" HREF="node8.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node8.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node4.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node6.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node8.html">Sequential Minimal Optimization (SMO)</A>
+<B> Up:</B> <A
+ HREF="node4.html">Support Vector machine</A>
+<B> Previous:</B> <A
+ HREF="node6.html">Kernel Mapping</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION00043000000000000000">
+Soft Margin SVM</A>
+</H2>
+
+<P>
+When the two classes <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img15.svg"
+ ALT="$C_-$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img14.svg"
+ ALT="$C_+$"></SPAN> are not linearly separable, the 
+condition for the optimal hyperplane in Eq. (<A HREF="node5.html#SVMcondition">72</A>) can 
+be relaxed by including an extra error term <!-- MATH
+ $\zeta_n \ge 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img410.svg"
+ ALT="$\zeta_n \ge 0$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+y_n ({\bf x}_n^T{\bf w} +b) \ge 1-\xi_n,\;\;\;(n=1,\cdots,N)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img411.svg"
+ ALT="$\displaystyle y_n ({\bf x}_n^T{\bf w} +b) \ge 1-\xi_n,\;\;\;(n=1,\cdots,N)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">115</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+For better classification result, this error <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img412.svg"
+ ALT="$\xi_n$"></SPAN> needs to be 
+minimized as well as <!-- MATH
+ $||{\bf w}||$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img270.svg"
+ ALT="$\vert\vert{\bf w}\vert\vert$"></SPAN>. Now the primal problem in 
+Eq. (<A HREF="node5.html#SVMprimal">73</A>) can be modified to the following minimization 
+problem with an objective function and two sets of inequality 
+(non-negative) constraints:
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+\mbox{minimize} \;\;\; && {\bf w}^T {\bf w}+C\sum_{n=1}^N \xi_n
+  \nonumber \\
+  \mbox{subject to} \;\;\; && y_n ({\bf x}_n^T {\bf w}+b)+\xi_n-1 \ge 0,
+  \;\;\;\mbox{and}\;\;\;\xi_n \ge 0;\;\;\;(n=1,\cdots,N)
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">minimize<IMG STYLE="height: 0.23ex; vertical-align: -0.12ex; " SRC="img274.svg"
+ ALT="$\displaystyle \;\;\;$"></TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img413.svg"
+ ALT="$\displaystyle {\bf w}^T {\bf w}+C\sum_{n=1}^N \xi_n$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">subject to<IMG STYLE="height: 0.23ex; vertical-align: -0.12ex; " SRC="img274.svg"
+ ALT="$\displaystyle \;\;\;$"></TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img414.svg"
+ ALT="$\displaystyle y_n ({\bf x}_n^T {\bf w}+b)+\xi_n-1 \ge 0,
+\;\;\;$">and<IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img415.svg"
+ ALT="$\displaystyle \;\;\;\xi_n \ge 0;\;\;\;(n=1,\cdots,N)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">116</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+Here <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img416.svg"
+ ALT="$C$"></SPAN> is a parameter controlling the trade-off between the global 
+distribution of the data points of the two classes and the local 
+points close to the class boundary. A large <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img416.svg"
+ ALT="$C$"></SPAN> value emphasizes the
+minimization of the error term in the objective function, so that the 
+decision boundary <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img246.svg"
+ ALT="$H_0$"></SPAN> that maximizes the margin is mostly dictated 
+by a small number of local support vectors in the region between the 
+two class, including possibly some outliers. The corresponding result 
+is similar to that of a hard margin SVM considered previously, with 
+the potential problem of overfitting the data. On the other hand, a 
+small <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img416.svg"
+ ALT="$C$"></SPAN> value deemphasizes the error term, allowing greater errors
+and more data points to become support vectors based on which <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img246.svg"
+ ALT="$H_0$"></SPAN>
+is determined. The resulting desicion boundary is a better reflection
+of the overall distribution of the data points of the two classes. 
+
+<P>
+The constrained minimization problem can be converted into the 
+minimization of the corresponding Lagrangian:
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="1NormSoftMargin"></A><!-- MATH
+ \begin{equation}
+L_p({\bf w},b,{\bf\xi},{\bf\alpha},{\bf\mu})
+  =\frac{1}{2}{\bf w}^T{\bf w}+C\sum_{n=1}^N\xi_n
+  -\sum_{n=1}^N \alpha_n[y_n({\bf w}^T{\bf x}+b)+\xi_n-1]-\sum_{n=1}^N\mu_n\xi_n
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img417.svg"
+ ALT="$\displaystyle L_p({\bf w},b,{\bf\xi},{\bf\alpha},{\bf\mu})
+=\frac{1}{2}{\bf w}^...
+...
+-\sum_{n=1}^N \alpha_n[y_n({\bf w}^T{\bf x}+b)+\xi_n-1]-\sum_{n=1}^N\mu_n\xi_n$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">117</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img418.svg"
+ ALT="$\mu_n$"></SPAN> as well as <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img307.svg"
+ ALT="$\alpha_n$"></SPAN> are the Lagrange multipliers for 
+the two sets of constraints. As they are non-negative (instead of 
+non-positive as in previous section), minus sign is used in front of 
+the last two terms for the constraints, so that the Lagrange multipliers 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img307.svg"
+ ALT="$\alpha_n$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img418.svg"
+ ALT="$\mu_n$"></SPAN> are still required to be positive (in consistent 
+with Table <A HREF="#PolarityTable"><IMG  ALT="[*]" SRC="crossref.png"></A>). The 
+<A ID="tex2html12"
+  HREF="../ch3/node15.html">KKT conditions</A>
+(Eq. (<A HREF="#KKTConditions"><IMG  ALT="[*]" SRC="crossref.png"></A>)) of 
+this minimization problem are listed below (for all <!-- MATH
+ $n=1,\cdots,N$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img176.svg"
+ ALT="$n=1,\cdots,N$"></SPAN>):
+
+<UL>
+<LI>Stationarity:
+  <BR>
+<DIV CLASS="mathdisplay"><A ID="KKT1"></A><!-- MATH
+ \begin{eqnarray}
+&&\frac{\partial L_p}{\partial {\bf w}}={\bf w}-\sum_{n=1}^N y_n\alpha_n{\bf x}_n=0,
+    \;\;\;\;\mbox{i.e.}\;\;\;\;{\bf w}=\sum_{n=1}^N y_n\alpha_n{\bf x}_n;
+\\
+    &&\frac{\partial L_p}{\partial b}=\sum_{n=1}^N y_n\alpha_n=0;\\
+    &&\frac{\partial L_p}{\partial \xi_n}=C-\alpha_n-\mu_n=0;
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img419.svg"
+ ALT="$\displaystyle \frac{\partial L_p}{\partial {\bf w}}={\bf w}-\sum_{n=1}^N y_n\alpha_n{\bf x}_n=0,
+\;\;\;\;$">i.e.<IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img420.svg"
+ ALT="$\displaystyle \;\;\;\;{\bf w}=\sum_{n=1}^N y_n\alpha_n{\bf x}_n;$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">118</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img421.svg"
+ ALT="$\displaystyle \frac{\partial L_p}{\partial b}=\sum_{n=1}^N y_n\alpha_n=0;$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">119</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.57ex; vertical-align: -2.16ex; " SRC="img422.svg"
+ ALT="$\displaystyle \frac{\partial L_p}{\partial \xi_n}=C-\alpha_n-\mu_n=0;$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">120</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+</LI>
+<LI>Primal feasibility:
+  <P></P>
+<DIV CLASS="mathdisplay"><A ID="KKT2"></A><!-- MATH
+ \begin{equation}
+y_n({\bf w}^T{\bf x}+b)+\xi_n-1\ge 0,\;\;\;\;\xi_n\ge 0,
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img423.svg"
+ ALT="$\displaystyle y_n({\bf w}^T{\bf x}+b)+\xi_n-1\ge 0,\;\;\;\;\xi_n\ge 0,$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">121</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+</LI>
+<LI>Complementarity:
+  <P></P>
+<DIV CLASS="mathdisplay"><A ID="KKT3"></A><!-- MATH
+ \begin{equation}
+\alpha_n[y_n({\bf w}^T{\bf x}+b)+\xi_n-1]=0,\;\;\;\;\mu_n\xi_n=0,
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img424.svg"
+ ALT="$\displaystyle \alpha_n[y_n({\bf w}^T{\bf x}+b)+\xi_n-1]=0,\;\;\;\;\mu_n\xi_n=0,$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">122</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+</LI>
+<LI>Dual feasibility:
+  <P></P>
+<DIV CLASS="mathdisplay"><A ID="KKT4"></A><!-- MATH
+ \begin{equation}
+\alpha_n\ge 0,\;\;\;\;\;\mu_n\ge 0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img425.svg"
+ ALT="$\displaystyle \alpha_n\ge 0,\;\;\;\;\;\mu_n\ge 0$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">123</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+</LI>
+</UL>
+Depending on the value of <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img307.svg"
+ ALT="$\alpha_n$"></SPAN>, there exist three possible cases, 
+due to the complementarity (Eq. (<A HREF="#KKT3">122</A>)):
+
+<UL>
+<LI>If <!-- MATH
+ $\alpha_n=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img311.svg"
+ ALT="$\alpha_n=0$"></SPAN>, then <!-- MATH
+ $\mu_n=C-\alpha_n=C>0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img426.svg"
+ ALT="$\mu_n=C-\alpha_n=C&gt;0$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img427.svg"
+ ALT="$\xi_n=0$"></SPAN>, and 
+  we have
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+y_n({\bf w}^T{\bf x}_n+b)-1\ge 0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img428.svg"
+ ALT="$\displaystyle y_n({\bf w}^T{\bf x}_n+b)-1\ge 0$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">124</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+</LI>
+<LI>If <!-- MATH
+ $0<\alpha_n<C$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img429.svg"
+ ALT="$0&lt;\alpha_n&lt;C$"></SPAN>, i.e., <!-- MATH
+ $\alpha_n\ne 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img430.svg"
+ ALT="$\alpha_n\ne 0$"></SPAN>, then we have
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+y_n({\bf w}^T{\bf x}_n+b)+\xi_n-1=0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img431.svg"
+ ALT="$\displaystyle y_n({\bf w}^T{\bf x}_n+b)+\xi_n-1=0$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">125</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+But as <!-- MATH
+ $\mu_n=C-\alpha_n>0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img432.svg"
+ ALT="$\mu_n=C-\alpha_n&gt;0$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img427.svg"
+ ALT="$\xi_n=0$"></SPAN> and the equation above 
+  becomes
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+y_n({\bf w}^T{\bf x}_n+b)-1=0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img433.svg"
+ ALT="$\displaystyle y_n({\bf w}^T{\bf x}_n+b)-1=0$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">126</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+</LI>
+<LI>If <!-- MATH
+ $\alpha_n=C\ne 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img434.svg"
+ ALT="$\alpha_n=C\ne 0$"></SPAN>, then we have 
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+y_n({\bf w}^T{\bf x}_n+b)+\xi_n-1=0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img431.svg"
+ ALT="$\displaystyle y_n({\bf w}^T{\bf x}_n+b)+\xi_n-1=0$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">127</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+But as <!-- MATH
+ $\mu_n=C-\alpha_n=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img435.svg"
+ ALT="$\mu_n=C-\alpha_n=0$"></SPAN>, <!-- MATH
+ $\xi_n\ge 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img436.svg"
+ ALT="$\xi_n\ge 0$"></SPAN> and the equation above
+  becomes
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+y_n({\bf w}^T{\bf x}_n+b)-1\le 0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img437.svg"
+ ALT="$\displaystyle y_n({\bf w}^T{\bf x}_n+b)-1\le 0$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">128</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+</LI>
+</UL>
+The expression <!-- MATH
+ $y_n({\bf w}^T{\bf x}_n+b)-1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img438.svg"
+ ALT="$y_n({\bf w}^T{\bf x}_n+b)-1$"></SPAN> in all three cases
+above can be rewritten as
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+y_n({\bf w}^T{\bf x}_n+b)-1=y_n({\bf w}^T{\bf x}_n+b)-y_n^2
+  =y_n[({\bf w}^T{\bf x}_n+b)-y_n]=y_n\,E_n
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img439.svg"
+ ALT="$\displaystyle y_n({\bf w}^T{\bf x}_n+b)-1=y_n({\bf w}^T{\bf x}_n+b)-y_n^2
+=y_n[({\bf w}^T{\bf x}_n+b)-y_n]=y_n\,E_n$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">129</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <!-- MATH
+ $E_n=({\bf w}^T{\bf x}_n+b)-y_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img440.svg"
+ ALT="$E_n=({\bf w}^T{\bf x}_n+b)-y_n$"></SPAN> is the error, or the 
+difference between the actual and desired output defined in 
+Eq. (<A HREF="#SVMerror"><IMG  ALT="[*]" SRC="crossref.png"></A>), when <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img31.svg"
+ ALT="${\bf x}_n$"></SPAN> is the input. Now we
+can summarize all three cases above to get:
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="KKTsoftmargin"></A><!-- MATH
+ \begin{equation}
+y_n\,E_n \left\{\begin{array}{ll}\ge 0 & \mbox{if }\alpha_n=0\\
+  = 0 & \mbox{if }0<\alpha_n<C\\\le 0 & \mbox{if }\alpha_n=C
+  \end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img441.svg"
+ ALT="$\displaystyle y_n\,E_n \left\{\begin{array}{ll}\ge 0 &amp; \mbox{if }\alpha_n=0\\
+= 0 &amp; \mbox{if }0&lt;\alpha_n&lt;C\\ \le 0 &amp; \mbox{if }\alpha_n=C
+\end{array}\right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">130</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+These results derived from the KKT conditions in Eqs. (<A HREF="#KKT1">118</A>) 
+through (<A HREF="#KKT4">123</A>) are an alternative form of the KKT conditions,
+which will be used in SMO algorithm to check if the KKT conditions
+are violated by any <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img307.svg"
+ ALT="$\alpha_n$"></SPAN>.
+
+<P>
+The dual of the primal problem in Eq. (<A HREF="#1NormSoftMargin">117</A>) can be 
+obtained by substituting the first set of equations (stationarity) 
+into the primal Lagrangian:
+<BR>
+<DIV CLASS="mathdisplay"><A ID="SVMSM"></A><!-- MATH
+ \begin{eqnarray}
+& \mbox{maximize} & L_d({\bf\alpha})=\sum_{n=1}^N\alpha_n
+  -\frac{1}{2}\sum_{n=1}^N\sum_{m=1}^N \alpha_n\alpha_m y_ny_m{\bf x}_m^T{\bf x}_n
+  +C\sum_{n=1}^N \xi_n-\sum_{n=1}^N \alpha_n\xi_n-\sum_{n=1}^N  \mu_n\xi_n
+  \nonumber \\
+  && =\sum_{n=1}^N \alpha_n
+  -\frac{1}{2}\sum_{n=1}^N \sum_{m=1}^N \alpha_n\alpha_my_ny_m {\bf x}_m^T{\bf x}_n
+  \nonumber \\
+  & \mbox{subject to} & 0 \le \alpha_n \le C,\;\;\;\;
+  \sum_{n=1}^N \alpha_n y_n=0
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP>maximize</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img442.svg"
+ ALT="$\displaystyle L_d({\bf\alpha})=\sum_{n=1}^N\alpha_n
+-\frac{1}{2}\sum_{n=1}^N\su...
+...bf x}_n
++C\sum_{n=1}^N \xi_n-\sum_{n=1}^N \alpha_n\xi_n-\sum_{n=1}^N \mu_n\xi_n$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img443.svg"
+ ALT="$\displaystyle =\sum_{n=1}^N \alpha_n
+-\frac{1}{2}\sum_{n=1}^N \sum_{m=1}^N \alpha_n\alpha_my_ny_m {\bf x}_m^T{\bf x}_n$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP>subject to</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img444.svg"
+ ALT="$\displaystyle 0 \le \alpha_n \le C,\;\;\;\;
+\sum_{n=1}^N \alpha_n y_n=0$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">131</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+Note that due to the condition <!-- MATH
+ $C=\alpha_n+\mu_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img445.svg"
+ ALT="$C=\alpha_n+\mu_n$"></SPAN>, the Lagrangian 
+multipliers <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img412.svg"
+ ALT="$\xi_n$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img418.svg"
+ ALT="$\mu_n$"></SPAN> no longer appear in the Lagrangian 
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img446.svg"
+ ALT="$L_d$"></SPAN> of the dual problem, which happens to be identical to that of 
+the linearly separable problem discussed in previous section. Also, 
+since <!-- MATH
+ $\alpha_n \ge 0,\;\mu_n \ge 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img447.svg"
+ ALT="$\alpha_n \ge 0,\;\mu_n \ge 0$"></SPAN> and <!-- MATH
+ $C=\alpha_n+\mu_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img445.svg"
+ ALT="$C=\alpha_n+\mu_n$"></SPAN>, we have 
+<!-- MATH
+ $0 \le \alpha_n =C-\mu_n \le C$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img448.svg"
+ ALT="$0 \le \alpha_n =C-\mu_n \le C$"></SPAN>. Having solved this QP problem for 
+<!-- MATH
+ $\alpha_1,\cdots,\alpha_N$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img306.svg"
+ ALT="$\alpha_1,\cdots,\alpha_N$"></SPAN>, we get the optimal decision plane in
+terms of the normal vector of the decision plane
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf w}=\sum_{n=1}^Ny_n\alpha_n{\bf x}_n
+  =\sum_{n\in sv} y_n\alpha_n{\bf x}_n
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img449.svg"
+ ALT="$\displaystyle {\bf w}=\sum_{n=1}^Ny_n\alpha_n{\bf x}_n
+=\sum_{n\in sv} y_n\alpha_n{\bf x}_n$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">132</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+based on Eq. (<A HREF="node5.html#FindW">86</A>), and the bais term <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img249.svg"
+ ALT="$b$"></SPAN> based on
+Eq. (<A HREF="node5.html#FindB">88</A>):
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="FindBkernel"></A><!-- MATH
+ \begin{equation}
+b=y_n-\sum_{i\in sv} y_i\alpha_i{\bf x}_i^T{\bf x}_n
+  =y_n-\sum_{i\in sv} y_i\alpha_iK({\bf x}_i,{\bf x}_n),
+  \;\;\;\;\;(n\in sv)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -3.21ex; " SRC="img450.svg"
+ ALT="$\displaystyle b=y_n-\sum_{i\in sv} y_i\alpha_i{\bf x}_i^T{\bf x}_n
+=y_n-\sum_{i\in sv} y_i\alpha_iK({\bf x}_i,{\bf x}_n),
+\;\;\;\;\;(n\in sv)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">133</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where the inner product <!-- MATH
+ ${\bf x}_k^T{\bf x}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.77ex; " SRC="img451.svg"
+ ALT="${\bf x}_k^T{\bf x}$"></SPAN> is replaced by the 
+kernel function <!-- MATH
+ $K({\bf x}_k,{\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img452.svg"
+ ALT="$K({\bf x}_k,{\bf x})$"></SPAN> if it is nonlinear. 
+Computationally, we take the average of such <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img249.svg"
+ ALT="$b$"></SPAN> values of all 
+support vectors as the offset term.
+
+<P>
+Given <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img248.svg"
+ ALT="${\bf w}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img249.svg"
+ ALT="$b$"></SPAN>, any unlabeled point <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> can be
+classified into either of the two classes depending on whether it
+is on the positive or negative side of the decision plane:
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="ClassifyKernel"></A><!-- MATH
+ \begin{equation}
+{\bf w}^T{\bf x}+b=\sum_{i\in sv} y_i\alpha_i {\bf x}_i^T{\bf x}+b
+  =\sum_{i\in sv} y_i\alpha_i K({\bf x}_i,{\bf x})+b\;
+  \left\{ \begin{array}{ll}>0, & {\bf x}\in C_+\\
+    <0, & {\bf x}\in C_-\end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.74ex; vertical-align: -3.21ex; " SRC="img453.svg"
+ ALT="$\displaystyle {\bf w}^T{\bf x}+b=\sum_{i\in sv} y_i\alpha_i {\bf x}_i^T{\bf x}+...
+...\begin{array}{ll}&gt;0, &amp; {\bf x}\in C_+\\
+&lt;0, &amp; {\bf x}\in C_-\end{array}\right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">134</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where the inner product is replaced by a kernel function if it is
+nonlinear.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node8.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node4.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node6.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node8.html">Sequential Minimal Optimization (SMO)</A>
+<B> Up:</B> <A
+ HREF="node4.html">Support Vector machine</A>
+<B> Previous:</B> <A
+ HREF="node6.html">Kernel Mapping</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

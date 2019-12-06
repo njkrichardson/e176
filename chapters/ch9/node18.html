@@ -1,0 +1,725 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Mixture of Bernoulli</TITLE>
+<META NAME="description" CONTENT="Mixture of Bernoulli">
+<META NAME="keywords" CONTENT="ch9">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch9.css">
+
+<LINK REL="previous" HREF="node17.html">
+<LINK REL="next" HREF="node19.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node19.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node15.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node17.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node19.html">Linear Models for Binary</A>
+<B> Up:</B> <A
+ HREF="node15.html">Clustering Analysis</A>
+<B> Previous:</B> <A
+ HREF="node17.html">Gaussian mixture model</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION00083000000000000000">
+Mixture of Bernoulli</A>
+</H2>
+
+<P>
+If the data are binary, i.e., each data point <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img52.svg"
+ ALT="$x$"></SPAN> is treated 
+as a discrete random variable that takes either of two binary 
+values <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1063.svg"
+ ALT="$1$"></SPAN> and <SPAN CLASS="MATH">0</SPAN> with probabilities <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img1064.svg"
+ ALT="$\mu$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img1065.svg"
+ ALT="$1-\mu$"></SPAN>, then 
+the <EM>probability mass function (pmf)</EM> is the Bernoulli 
+distribution:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\cal B}(x|\mu)=\mu^x(1-\mu)^{1-x}=\left\{\begin{array}{cl}
+  \mu & \mbox{if $x=1$} \\1-\mu & \mbox{if $x=0$} \end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img1066.svg"
+ ALT="$\displaystyle {\cal B}(x\vert\mu)=\mu^x(1-\mu)^{1-x}=\left\{\begin{array}{cl}
+\mu &amp; \mbox{if $x=1$} \\ 1-\mu &amp; \mbox{if $x=0$} \end{array}\right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">294</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The mean and variance of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img52.svg"
+ ALT="$x$"></SPAN> are
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+E(x)&=&1\;P(x=1)+0\;P(x=0)=1\;\mu+0\;(1-\mu)=\mu
+  \\
+  Var(x)&=&E[(x-E(x))^2]=E(x^2)-E(x)^2
+  \nonumber\\
+  &=&1^2\;P(x=1)+0^2\;P(x=0)-\mu^2=\mu-\mu^2=\mu(1-\mu)
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1067.svg"
+ ALT="$\displaystyle E(x)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1068.svg"
+ ALT="$\displaystyle 1\;P(x=1)+0\;P(x=0)=1\;\mu+0\;(1-\mu)=\mu$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">295</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1069.svg"
+ ALT="$\displaystyle Var(x)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img1070.svg"
+ ALT="$\displaystyle E[(x-E(x))^2]=E(x^2)-E(x)^2$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img1071.svg"
+ ALT="$\displaystyle 1^2\;P(x=1)+0^2\;P(x=0)-\mu^2=\mu-\mu^2=\mu(1-\mu)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">296</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+A set of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1.svg"
+ ALT="$d$"></SPAN> independent binary variables can be represented 
+as a random vector <!-- MATH
+ ${\bf x}=[x_1,\cdots,x_d]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img3.svg"
+ ALT="${\bf x}=[x_1,\cdots,x_d]^T$"></SPAN> with mean vector
+and covariance matrix as shown below:
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+E({\bf x})&=&{\bf m}=[\mu_1,\cdots,\mu_N]^T
+  \\
+  Cov({\bf x})&=&{\bf\Sigma}=diag( \mu_i(1-\mu_i) )
+  =\left[ \begin{array}{ccc}
+      \mu_1(1-\mu_1) & & 0 \\& \ddots & \\
+      0 & & \mu_d(1-\mu_d)\end{array}\right]
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1072.svg"
+ ALT="$\displaystyle E({\bf x})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img1073.svg"
+ ALT="$\displaystyle {\bf m}=[\mu_1,\cdots,\mu_N]^T$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">297</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1074.svg"
+ ALT="$\displaystyle Cov({\bf x})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 10.22ex; vertical-align: -4.49ex; " SRC="img1075.svg"
+ ALT="$\displaystyle {\bf\Sigma}=diag( \mu_i(1-\mu_i) )
+=\left[ \begin{array}{ccc}
+\mu_1(1-\mu_1) &amp; &amp; 0 \\ &amp; \ddots &amp; \\
+0 &amp; &amp; \mu_d(1-\mu_d)\end{array}\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">298</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+Note that the covariance matrix <!-- MATH
+ ${\bf\Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1059.svg"
+ ALT="${\bf\Sigma}$"></SPAN> is solely determined 
+by the means <!-- MATH
+ $\{\mu_1,\cdots,\mu_N\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1076.svg"
+ ALT="$\{\mu_1,\cdots,\mu_N\}$"></SPAN>.
+
+<P>
+Now we can get the pmf of the a binary random vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\cal B}({\bf x}|{\bf m})=\prod_{i=1}^d {\cal B}(x_i|\mu_i)
+  =\prod_{i=1}^d \mu_i^{x_i}(1-\mu_i)^{1-x_i}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.09ex; " SRC="img1077.svg"
+ ALT="$\displaystyle {\cal B}({\bf x}\vert{\bf m})=\prod_{i=1}^d {\cal B}(x_i\vert\mu_i)
+=\prod_{i=1}^d \mu_i^{x_i}(1-\mu_i)^{1-x_i}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">299</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and the log pmf:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\log {\cal B}({\bf x}|{\bf m})
+  =\log\left(\prod_{i=1}^d {\cal B}(x_i|\mu_i)\right)
+  =\sum_{i=1}^d \left[ x_i\log\mu_i+(1-x_i)\log(1-\mu_i) \right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.09ex; " SRC="img1078.svg"
+ ALT="$\displaystyle \log {\cal B}({\bf x}\vert{\bf m})
+=\log\left(\prod_{i=1}^d {\cal...
+...ert\mu_i)\right)
+=\sum_{i=1}^d \left[ x_i\log\mu_i+(1-x_i)\log(1-\mu_i) \right]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">300</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Similar to the Gaussian mixture model, the Bernoulli mixture model 
+of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> multivariate Bernoulli distributions is defined as:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p({\bf x}|{\bf m}_k,P_k,(k=1,\cdots,K))=p({\bf x}|{\bf\theta})
+  =\sum_{k=1}^K P_k {\cal B}({\bf x},{\bf m}_k)
+  =\sum_{k=1}^K P_k \prod_{i=1}^d \mu_{ki}^{x_i}(1-\mu_{ki})^{1-x_i}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img1079.svg"
+ ALT="$\displaystyle p({\bf x}\vert{\bf m}_k,P_k,(k=1,\cdots,K))=p({\bf x}\vert{\bf\th...
+...},{\bf m}_k)
+=\sum_{k=1}^K P_k \prod_{i=1}^d \mu_{ki}^{x_i}(1-\mu_{ki})^{1-x_i}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">301</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <!-- MATH
+ ${\bf\theta}=\{{\bf m}_k,P_k,(k=1,\cdots,K)\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1080.svg"
+ ALT="${\bf\theta}=\{{\bf m}_k,P_k,(k=1,\cdots,K)\}$"></SPAN> denotes 
+all parameters of the mixture model to be estimated based on 
+the given dataset, and <!-- MATH
+ ${\bf m}_k=E_k({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1081.svg"
+ ALT="${\bf m}_k=E_k({\bf x})$"></SPAN> respect to 
+<!-- MATH
+ ${\cal B}({\bf x}|{\bf m}_k)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1082.svg"
+ ALT="${\cal B}({\bf x}\vert{\bf m}_k)$"></SPAN>. The mean of this mixture model is
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf m}=E({\bf x})=\sum_{k=1}^KP_k E_k({\bf x})=\sum_{k=1}^K P_k{\bf m}_k
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img1083.svg"
+ ALT="$\displaystyle {\bf m}=E({\bf x})=\sum_{k=1}^KP_k E_k({\bf x})=\sum_{k=1}^K P_k{\bf m}_k$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">302</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+Also similar to the Gaussian mixture model, we introduce a set of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN>
+latent binary random variables <!-- MATH
+ ${\bf z}=[z_1,\cdots,z_K]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img962.svg"
+ ALT="${\bf z}=[z_1,\cdots,z_K]^T$"></SPAN> with binary 
+conponents<!-- MATH
+ $z_k\in\{0,\;1\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1084.svg"
+ ALT="$z_k\in\{0,\;1\}$"></SPAN> and <!-- MATH
+ $\sum_{k=1}^K z_k=1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.81ex; " SRC="img965.svg"
+ ALT="$\sum_{k=1}^K z_k=1$"></SPAN>, and get the prior 
+probability of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img387.svg"
+ ALT="${\bf z}$"></SPAN>, the conditional probability of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> given 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img387.svg"
+ ALT="${\bf z}$"></SPAN>, and the joint probability of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="${\bf x}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img387.svg"
+ ALT="${\bf z}$"></SPAN> as the
+following
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+p({\bf z}|{\bf\theta})&=&\prod_{k=1}^KP_k^{z_k}  \\
+  p({\bf x}|{\bf z},{\bf\theta})&=&\prod_{k=1}^K {\cal B}({\bf x},{\bf m}_k)^{z_k}  \\
+  p({\bf x},{\bf z}|{\bf\theta})
+  &=&p({\bf z}|{\bf\theta})\;p({\bf x}|{\bf z},{\bf\theta})
+  =\prod_{k=1}^K \left(P_k\;{\cal B}({\bf x},{\bf m}_k)\right)^{z_k}
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img973.svg"
+ ALT="$\displaystyle p({\bf z}\vert{\bf\theta})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img974.svg"
+ ALT="$\displaystyle \prod_{k=1}^K P_k^{z_k}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">303</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img975.svg"
+ ALT="$\displaystyle p({\bf x}\vert{\bf z},{\bf\theta})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img1085.svg"
+ ALT="$\displaystyle \prod_{k=1}^K {\cal B}({\bf x},{\bf m}_k)^{z_k}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">304</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img977.svg"
+ ALT="$\displaystyle p({\bf x},{\bf z}\vert{\bf\theta})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img1086.svg"
+ ALT="$\displaystyle p({\bf z}\vert{\bf\theta})\;p({\bf x}\vert{\bf z},{\bf\theta})
+=\prod_{k=1}^K \left(P_k\;{\cal B}({\bf x},{\bf m}_k)\right)^{z_k}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">305</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+Given the dataset <!-- MATH
+ ${\bf X}=[{\bf x}_1,\cdots,{\bf x}_N]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img9.svg"
+ ALT="${\bf X}=[{\bf x}_1,\cdots,{\bf x}_N]$"></SPAN> containing 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img8.svg"
+ ALT="$N$"></SPAN> i.i.d. samples, we introduce the corresponding latent variables 
+in <!-- MATH
+ ${\bf Z}=[{\bf z}_1,\cdots,{\bf z}_N]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img979.svg"
+ ALT="${\bf Z}=[{\bf z}_1,\cdots,{\bf z}_N]$"></SPAN>, of which each 
+<!-- MATH
+ ${\bf z}_n=[z_{n1},\cdots,z_{nK}]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img980.svg"
+ ALT="${\bf z}_n=[z_{n1},\cdots,z_{nK}]^T$"></SPAN> is for the labeling of <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img31.svg"
+ ALT="${\bf x}_n$"></SPAN>.
+Then we can find the likelihood function of the Bernoulli mixture model
+parameters <!-- MATH
+ ${\bf\theta}=\{P_k,{\bf m}_k,\;(k=1,\cdots,K)\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1087.svg"
+ ALT="${\bf\theta}=\{P_k,{\bf m}_k,\;(k=1,\cdots,K)\}$"></SPAN>:
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+L({\bf\theta}|{\bf X},{\bf Z})=p({\bf X},{\bf Z}|\theta)
+  &=&p([{\bf x}_1,\cdots,{\bf x}_N],[{\bf z}_1,\cdots,{\bf z}_N]
+  |{\bf m}_k,P_k(k=1,\cdots,K))
+  \nonumber\\
+  &=&\prod_{n=1}^N p({\bf x}_n,{\bf z}_n|{\bf\theta})
+  =\prod_{n=1}^N \prod_{k=1}^K \left(P_k{\cal B}({\bf x}_n,{\bf m}_k)\right)^{z_{nk}}
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1088.svg"
+ ALT="$\displaystyle L({\bf\theta}\vert{\bf X},{\bf Z})=p({\bf X},{\bf Z}\vert\theta)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1089.svg"
+ ALT="$\displaystyle p([{\bf x}_1,\cdots,{\bf x}_N],[{\bf z}_1,\cdots,{\bf z}_N]
+\vert{\bf m}_k,P_k(k=1,\cdots,K))$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img1090.svg"
+ ALT="$\displaystyle \prod_{n=1}^N p({\bf x}_n,{\bf z}_n\vert{\bf\theta})
+=\prod_{n=1}^N \prod_{k=1}^K \left(P_k{\cal B}({\bf x}_n,{\bf m}_k)\right)^{z_{nk}}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">306</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+and the log likelihood function:
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+\log\;L({\bf\theta}|{\bf X},{\bf Z})&=&\log p({\bf X},{\bf Z}|\theta)
+  =\log\prod_{n=1}^N \prod_{k=1}^K \left(P_k{\cal B}({\bf x}_n,{\bf m}_k)\right)^{z_{nk}}
+  \nonumber\\
+  &=&\sum_{n=1}^N \sum_{k=1}^K {z_{nk}} \left[ \log P_k
+    +\log {\cal B}({\bf x}_n,{\bf m}_k)\right]
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1091.svg"
+ ALT="$\displaystyle \log\;L({\bf\theta}\vert{\bf X},{\bf Z})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img1092.svg"
+ ALT="$\displaystyle \log p({\bf X},{\bf Z}\vert\theta)
+=\log\prod_{n=1}^N \prod_{k=1}^K \left(P_k{\cal B}({\bf x}_n,{\bf m}_k)\right)^{z_{nk}}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img1093.svg"
+ ALT="$\displaystyle \sum_{n=1}^N \sum_{k=1}^K {z_{nk}} \left[ \log P_k
++\log {\cal B}({\bf x}_n,{\bf m}_k)\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">307</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+Based on the same EM method used in Gaussian mixture model, we can 
+find the opptimal parameters that maximize the expectation of the
+log likelihood function in the following two steps:
+
+<UL>
+<LI><B>E-step:</B> Find the expectation of the likelihood function.
+
+<P>
+We first find the posterior probability for any sample 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img31.svg"
+ ALT="${\bf x}_n$"></SPAN> to belong to cluster <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img26.svg"
+ ALT="$C_k$"></SPAN>, denoted by <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img999.svg"
+ ALT="$P_{nk}$"></SPAN>:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+P_{nk}=P(z_{nk}=1|{\bf x}_n,{\bf\theta})
+    =\frac{p({\bf x}_n,z_{nk}=1|{\bf\theta})}{p({\bf x}_n)|{\bf\theta}}
+    =\frac{P_k\,{\cal B}({\bf x}_n;{\bf m}_k)}
+    {\sum_{l=1}^K P_l\,{\cal B}({\bf x}_n;{\bf m}_l)}
+    \;\;\;\;\;\;\;\;\;\;\;(n=1,\cdots,N;\;\;k=1,\cdots,K)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.27ex; vertical-align: -2.84ex; " SRC="img1094.svg"
+ ALT="$\displaystyle P_{nk}=P(z_{nk}=1\vert{\bf x}_n,{\bf\theta})
+=\frac{p({\bf x}_n,z...
+... B}({\bf x}_n;{\bf m}_l)}
+\;\;\;\;\;\;\;\;\;\;\;(n=1,\cdots,N;\;\;k=1,\cdots,K)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">308</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+which is the expectation of <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1095.svg"
+ ALT="$z_{nk}$"></SPAN>:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+E(z_{nk})=1\;P(z_{nk}=1|{\bf x}_n)+0\;P(z_{nk}=0|{\bf x}_n)
+    =P(z_{nk}=1|{\bf x}_n)=P_{nk}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1008.svg"
+ ALT="$\displaystyle E(z_{nk})=1\;P(z_{nk}=1\vert{\bf x}_n)+0\;P(z_{nk}=0\vert{\bf x}_n)
+=P(z_{nk}=1\vert{\bf x}_n)=P_{nk}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">309</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Now we can find the expectation of the log likelihood with respect to 
+  the latent variables in <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img985.svg"
+ ALT="${\bf Z}$"></SPAN>:
+  <BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+E_{\bf Z} \left(\log L({\bf\theta}|{\bf X},{\bf Z})\right)
+    &=&E_{\bf Z}\;\sum_{n=1}^N \sum_{k=1}^K z_{nk}\left[\log P_k
+      +\log {\cal B}({\bf x}_n,{\bf m}_k)\right]
+    \nonumber\\
+    &=&\sum_{n=1}^N \sum_{k=1}^K E(z_{nk}) \left[\log P_k
+      +\log \prod_{i=1}^d \mu_{ki}^{x_{ni}} (1-\mu_{ki})^{1-x_{ni}} \right]
+    \nonumber\\
+    &=&\sum_{n=1}^N \sum_{k=1}^K P_{nk}   \left[\log P_k
+      +\sum_{i=1}^d \left[ x_{ni}\log\mu_{ki}+(1-x_{ni})\log(1-\mu_{ki}) \right]\right]
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1096.svg"
+ ALT="$\displaystyle E_{\bf Z} \left(\log L({\bf\theta}\vert{\bf X},{\bf Z})\right)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img1097.svg"
+ ALT="$\displaystyle E_{\bf Z}\;\sum_{n=1}^N \sum_{k=1}^K z_{nk}\left[\log P_k
++\log {\cal B}({\bf x}_n,{\bf m}_k)\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img1098.svg"
+ ALT="$\displaystyle \sum_{n=1}^N \sum_{k=1}^K E(z_{nk}) \left[\log P_k
++\log \prod_{i=1}^d \mu_{ki}^{x_{ni}} (1-\mu_{ki})^{1-x_{ni}} \right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img1099.svg"
+ ALT="$\displaystyle \sum_{n=1}^N \sum_{k=1}^K P_{nk} \left[\log P_k
++\sum_{i=1}^d \left[ x_{ni}\log\mu_{ki}+(1-x_{ni})\log(1-\mu_{ki}) \right]\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">310</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+</LI>
+<LI><B>M-step:</B> Find the optimal model parameters that maximize 
+  the expectation of the log likelihood function.
+
+<P>
+We first set to zero the derivatives of the expectation of 
+  the log likelihood with respect to each of the parameters in 
+  <!-- MATH
+ ${\bf\theta}=\{P_k,\;{\bf m}_k\;(k=1,\cdots,K)\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1009.svg"
+ ALT="${\bf\theta}=\{P_k,\;{\bf m}_k\;(k=1,\cdots,K)\}$"></SPAN>, and then solve
+  the resulting equations to get the optimal parameters.
+
+<P>
+
+<UL>
+<LI>Find <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img72.svg"
+ ALT="$P_k$"></SPAN>: same as in the case of the GMM model:
+    <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+P_k=\frac{N_k}{N}=\frac{1}{N}\sum_{n=1}^N P_{nk}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img1100.svg"
+ ALT="$\displaystyle P_k=\frac{N_k}{N}=\frac{1}{N}\sum_{n=1}^N P_{nk}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">311</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+</LI>
+<LI>Find <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img42.svg"
+ ALT="${\bf m}_k$"></SPAN>:
+    <BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+&& \frac{\partial}{\partial{\bf m}_k}
+      E_{\bf Z}\left( \log p({\bf X},{\bf Z}|\theta) \right)
+      \nonumber\\
+      &=&\frac{\partial}{\partial{\bf m}_k}     
+      \sum_{n=1}^N \sum_{k=1}^K P_{nk}   \left[\log P_k
+        +\sum_{i=1}^d \left[ x_{ni}\log\mu_{ki}+(1-x_{ni})\log(1-\mu_{ki}) \right]\right]
+      \nonumber\\
+      &=&\sum_{n=1}^N P_{nk} \frac{\partial}{\partial{\bf m}_k}
+      \sum_{i=1}^d\left[ x_{ni}\log\mu_{ki}+(1-x_{ni})\log(1-\mu_{ki}) \right]={\bf0}
+    
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.34ex; vertical-align: -2.06ex; " SRC="img1101.svg"
+ ALT="$\displaystyle \frac{\partial}{\partial{\bf m}_k}
+E_{\bf Z}\left( \log p({\bf X},{\bf Z}\vert\theta) \right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img1102.svg"
+ ALT="$\displaystyle \frac{\partial}{\partial{\bf m}_k}
+\sum_{n=1}^N \sum_{k=1}^K P_{n...
+...sum_{i=1}^d \left[ x_{ni}\log\mu_{ki}+(1-x_{ni})\log(1-\mu_{ki}) \right]\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.66ex; vertical-align: -3.09ex; " SRC="img1103.svg"
+ ALT="$\displaystyle \sum_{n=1}^N P_{nk} \frac{\partial}{\partial{\bf m}_k}
+\sum_{i=1}^d\left[ x_{ni}\log\mu_{ki}+(1-x_{ni})\log(1-\mu_{ki}) \right]={\bf0}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">312</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+    The ith component of the equation is
+    <BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+&&\sum_{n=1}^N P_{nk}\frac{d}{d\mu_{ki}}
+      \left[ x_{ni}\log \mu_{ki}+(1-x_{ni})\log(1-\mu_{ki})\right]
+      \nonumber\\
+      &=&\sum_{n=1}^N P_{nk}\left(\frac{x_{ni}}{\mu_{ki}}-\frac{1-x_{ni}}{1-\mu_{ki}}\right)=0
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img1104.svg"
+ ALT="$\displaystyle \sum_{n=1}^N P_{nk}\frac{d}{d\mu_{ki}}
+\left[ x_{ni}\log \mu_{ki}+(1-x_{ni})\log(1-\mu_{ki})\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img1105.svg"
+ ALT="$\displaystyle \sum_{n=1}^N P_{nk}\left(\frac{x_{ni}}{\mu_{ki}}-\frac{1-x_{ni}}{1-\mu_{ki}}\right)=0$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">313</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+    i.e.,
+    <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+(1-\mu_{ki})\sum_{n=1}^N P_{nk} x_{ni}=\mu_{ki}\sum_{n=1}^N P_{nk}(1-x_{ni})
+      =\mu_{ki}N_k-\mu_{ki} \sum_{n=1}^N P_{nk}x_{ni}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img1106.svg"
+ ALT="$\displaystyle (1-\mu_{ki})\sum_{n=1}^N P_{nk} x_{ni}=\mu_{ki}\sum_{n=1}^N P_{nk}(1-x_{ni})
+=\mu_{ki}N_k-\mu_{ki} \sum_{n=1}^N P_{nk}x_{ni}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">314</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Solving for <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img1107.svg"
+ ALT="$\mu_{ki}$"></SPAN> we get
+    <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\mu_{ki}=\frac{1}{N_k}\sum_{n=1}^N P_{nk}x_{ni}\;\;\;\;\;\;(i=1,\cdots,d)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img1108.svg"
+ ALT="$\displaystyle \mu_{ki}=\frac{1}{N_k}\sum_{n=1}^N P_{nk}x_{ni}\;\;\;\;\;\;(i=1,\cdots,d)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">315</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+or, in vector form,
+    <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf m}_k=\frac{1}{N_k}\sum_{n=1}^N P_{nk}{\bf x}_n
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img1029.svg"
+ ALT="$\displaystyle {\bf m}_k=\frac{1}{N_k}\sum_{n=1}^N P_{nk}{\bf x}_n$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">316</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+</LI>
+</UL>
+
+<P>
+<B>Example:</B>
+
+<P>
+Clustering results of hand-written digits with <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1109.svg"
+ ALT="$K=10$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1110.svg"
+ ALT="$K=12$"></SPAN>. The mean
+vectors <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img42.svg"
+ ALT="${\bf m}_k$"></SPAN> of each of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$K$"></SPAN> clusters are visualized as shown:
+
+<P>
+<IMG STYLE="" SRC="../figures/BernoulliDigits10.png"
+ ALT="BernoulliDigits10.png">
+
+<P>
+<IMG STYLE="" SRC="../figures/BernoulliDigits12.png"
+ ALT="BernoulliDigits12.png">
+
+<P>
+</LI>
+</UL>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node19.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node15.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node17.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node19.html">Linear Models for Binary</A>
+<B> Up:</B> <A
+ HREF="node15.html">Clustering Analysis</A>
+<B> Previous:</B> <A
+ HREF="node17.html">Gaussian mixture model</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>
