@@ -1,0 +1,580 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Hopfield Network</TITLE>
+<META NAME="description" CONTENT="Hopfield Network">
+<META NAME="keywords" CONTENT="ch10">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch10.css">
+
+<LINK REL="next" HREF="node4.html">
+<LINK REL="previous" HREF="node2.html">
+<LINK REL="next" HREF="node4.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node4.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="ch10.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node2.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node4.html">Perceptron Network</A>
+<B> Up:</B> <A
+ HREF="ch10.html">ch10</A>
+<B> Previous:</B> <A
+ HREF="node2.html">Hebbian Learning</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00030000000000000000">
+Hopfield Network</A>
+</H1>
+
+<P>
+The <A ID="tex2html4"
+  HREF="http://en.wikipedia.org/wiki/Hopfield_network">Hopfield network</A>
+is a supervised method, based on the Hebbian learning rule. As a
+supervised method, the Hopfield network is trained based on a set 
+of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img60.svg"
+ ALT="$K$"></SPAN> patterns in dataset <!-- MATH
+ ${\bf X}=[{\bf x}_1,\cdots,{\bf x}_K]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img86.svg"
+ ALT="${\bf X}=[{\bf x}_1,\cdots,{\bf x}_K]$"></SPAN>, 
+where each data point <!-- MATH
+ ${\bf x}_k=[x_1,\cdots,x_d]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img87.svg"
+ ALT="${\bf x}_k=[x_1,\cdots,x_d]^T$"></SPAN> is a d-dimensional 
+binary vector containing <!-- MATH
+ $x_i \in\{-1,\;1\},\;(i=1,\cdots,d)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img88.svg"
+ ALT="$x_i \in\{-1,\;1\},\;(i=1,\cdots,d)$"></SPAN>, 
+representing one of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img60.svg"
+ ALT="$K$"></SPAN> different of patterns of interest. Once the
+network is completely trained, a weight matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img89.svg"
+ ALT="${\bf W}$"></SPAN> of the network
+is obtained in which the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img60.svg"
+ ALT="$K$"></SPAN> patterns are stored. Given an input 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN>, an iterative computation is carried out until convergence, 
+when one of the pre-stored complete pattern that most closely resemble
+the input <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN> is produced as the output. The Hopfield network 
+can therefore be considered as an auto-associator (a content addressable
+memory), by which a pre-stored pattern can be retrieved based on its
+association to the input pattern established by the network.
+
+<P>
+Structurally, the Hopfield network is a <EM>recurrent</EM> 
+network, in the sense that the outputs of its single layer of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$d$"></SPAN>
+nodes are fed back to these nodes in an iterative process. 
+
+<P>
+<IMG STYLE="" SRC="../figures/recurrentnet1.png"
+ ALT="recurrentnet1.png">
+
+<P>
+
+<UL>
+<LI><B>Training:</B>
+
+<P>
+The training process is essentially the same as the Hebbian learning, 
+  except here the two associated patterns in each pair are the same 
+  (self-association). The weight matrix of the network is obtained as 
+  the sum of the outer-products of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img60.svg"
+ ALT="$K$"></SPAN> patterns to be stored:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf W}_{d\times d}=\frac{1}{d}\sum_{k=1}^K {\bf x}_k {\bf x}_k^T
+    = \frac{1}{d}\sum_{k=1}^K
+    \left[ \begin{array}{c} x_1^{(k)} \\\vdots \\x_d^{(k)} \end{array} \right]
+         [ x_1^{(k)}, \cdots, x_d^{(k)} ]	
+  
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 11.38ex; vertical-align: -5.11ex; " SRC="img91.svg"
+ ALT="$\displaystyle {\bf W}_{d\times d}=\frac{1}{d}\sum_{k=1}^K {\bf x}_k {\bf x}_k^T...
+...k)} \\ \vdots \\ x_d^{(k)} \end{array} \right]
+[ x_1^{(k)}, \cdots, x_d^{(k)} ]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">20</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The weight connecting node i and node j is defined as
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+w_{ij}=\frac{1}{d}\sum_{k=1}^K x_i^{(k)} x_j^{(k)}=w_{ji}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img92.svg"
+ ALT="$\displaystyle w_{ij}=\frac{1}{d}\sum_{k=1}^K x_i^{(k)} x_j^{(k)}=w_{ji}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">21</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+We assume no self-connection exists <!-- MATH
+ $w_{ii}=0\;(i=1,\cdots,d)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img93.svg"
+ ALT="$w_{ii}=0\;(i=1,\cdots,d)$"></SPAN>
+
+<P>
+</LI>
+<LI><B>Autoassociation:</B>
+
+<P>
+Once the weight matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img89.svg"
+ ALT="${\bf W}$"></SPAN> is obtained by the training process, 
+  the network can be used as a self-associator. When an input pattern 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN> is presented to the network, the outputs of the network are
+  updated <EM>iteratively</EM> and <EM>asynchronously</EM>, one randomly 
+  selected node at a time:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+x_i^{(n+1)}=sgn \left(\sum_{j=1}^d w_{ij}x_j^{(n)}\right)
+    =\left\{ \begin{array}{ll}
+      +1, & \mbox{if}\;\;\;\sum_{j=1}^d w_{ij}x_j^{(n)} \geq 0 \\
+      -1, & \mbox{if}\;\;\;\sum_{j=1}^d w_{ij}x_j^{(n)}  < 0 \end{array} \right.
+  
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img94.svg"
+ ALT="$\displaystyle x_i^{(n+1)}=sgn \left(\sum_{j=1}^d w_{ij}x_j^{(n)}\right)
+=\left\...
+...0 \\
+-1, &amp; \mbox{if}\;\;\;\sum_{j=1}^d w_{ij}x_j^{(n)} &lt; 0 \end{array} \right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">22</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <SPAN CLASS="MATH"><IMG STYLE="height: 3.48ex; vertical-align: -0.76ex; " SRC="img95.svg"
+ ALT="$x_i^{(n)}$"></SPAN> and <!-- MATH
+ $x_i^{(n+1)}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.48ex; vertical-align: -0.76ex; " SRC="img96.svg"
+ ALT="$x_i^{(n+1)}$"></SPAN> are the output <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img97.svg"
+ ALT="$x_i$"></SPAN> of the ith node
+  before and after the nth iteration, respectively. As shown below, this
+  iteration will always converge to one of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img60.svg"
+ ALT="$K$"></SPAN> pre-stored patterns.
+</LI>
+</UL>
+
+<P>
+We first define the <EM>Energy function</EM> of any two nodes <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img97.svg"
+ ALT="$x_i$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img7.svg"
+ ALT="$x_j$"></SPAN> 
+of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN> as
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+e_{ij}=-w_{ij}x_ix_j
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.78ex; " SRC="img98.svg"
+ ALT="$\displaystyle e_{ij}=-w_{ij}x_ix_j$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">23</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and the total <EM>energy</EM> of all <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$d$"></SPAN> nodes in the network as the sum 
+of all pair-wise energies:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\cal E}({\bf x}) = \frac{1}{2}\sum_{i=1}^d\sum_{j=1}^d e_{ij}
+  =-\frac{1}{2}\sum_{i=1}^d \sum_{j=1}^d w_{ij} x_i x_j
+  =-\frac{1}{2}{\bf x}^T{\bf Wx}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.90ex; vertical-align: -3.40ex; " SRC="img99.svg"
+ ALT="$\displaystyle {\cal E}({\bf x}) = \frac{1}{2}\sum_{i=1}^d\sum_{j=1}^d e_{ij}
+=-\frac{1}{2}\sum_{i=1}^d \sum_{j=1}^d w_{ij} x_i x_j
+=-\frac{1}{2}{\bf x}^T{\bf Wx}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">24</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+The interaction between these two nodes is summarized below:
+
+<P>
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{tabular}{ c | r | r || c | c} \hline
+    & $x_j$	& $x_i$	& $w_{ij}>0$\  	& $w_{ij}<0$	\\\hline\hline
+    1 & -1 & -1	& $e_{ij}<0$	& $e_{ij}>0$	\\\hline
+    2 & -1 &  1	& $e_{ij}>0$	& $e_{ij}<0$	\\\hline
+    3 &  1 & -1	& $e_{ij}>0$	& $e_{ij}<0$	\\\hline
+    4 &  1 &  1	& $e_{ij}<0$	& $e_{ij}>0$	\\\hline
+  \end{tabular}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 15.33ex; vertical-align: -7.01ex; " SRC="img100.svg"
+ ALT="$\displaystyle \begin{tabular}{ c \vert r \vert r \vert\vert c \vert c} \hline
+&amp;...
+...e_{ij}&lt;0$ \\ \hline
+4 &amp; 1 &amp; 1 &amp; $e_{ij}&lt;0$ &amp; $e_{ij}&gt;0$ \\ \hline
+\end{tabular}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">25</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+We make two observations.
+
+<UL>
+<LI>When the two nodes i and j reinforce each other's state,
+  <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img101.svg"
+ ALT="$e_{ij}&lt;0$"></SPAN>:
+
+<P>
+
+<UL>
+<LI>If <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img102.svg"
+ ALT="$w_{ij}&gt;0$"></SPAN> (in cases 1 and 4), <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img103.svg"
+ ALT="$x_j=\mp 1$"></SPAN> tends to
+    keep <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img97.svg"
+ ALT="$x_i$"></SPAN> to stay at the same state <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img104.svg"
+ ALT="$\mp 1$"></SPAN> in the iteration.
+
+<P>
+</LI>
+<LI>If <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img105.svg"
+ ALT="$w_{ij}&lt;0$"></SPAN> (in cases 2 and 3), <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img103.svg"
+ ALT="$x_j=\mp 1$"></SPAN> tends to
+    keep <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img97.svg"
+ ALT="$x_i$"></SPAN> to stay at the same state <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img106.svg"
+ ALT="$\pm 1$"></SPAN>. 
+  
+</LI>
+</UL>
+
+<P>
+</LI>
+<LI>When the two nodes i and j change each other's state, <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img107.svg"
+ ALT="$e_{ij}&gt;0$"></SPAN>:
+
+<P>
+
+<UL>
+<LI>If <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img105.svg"
+ ALT="$w_{ij}&lt;0$"></SPAN> (in cases 1 and 4), <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img103.svg"
+ ALT="$x_j=\mp 1$"></SPAN> tends to
+    reverse <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img97.svg"
+ ALT="$x_i$"></SPAN> from its previous state <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img104.svg"
+ ALT="$\mp 1$"></SPAN> to <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img106.svg"
+ ALT="$\pm 1$"></SPAN>.
+
+<P>
+</LI>
+<LI>If <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img102.svg"
+ ALT="$w_{ij}&gt;0$"></SPAN> (in cases 2 and 3), <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img103.svg"
+ ALT="$x_j=\mp 1$"></SPAN> tends to
+    reverse <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img97.svg"
+ ALT="$x_i$"></SPAN> from its previous state <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img106.svg"
+ ALT="$\pm 1$"></SPAN> to <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img104.svg"
+ ALT="$\mp 1$"></SPAN>.
+  
+</LI>
+</UL>
+
+<P>
+</LI>
+</UL>
+We note that low energy <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img108.svg"
+ ALT="$e_{ij}$"></SPAN> corresponds to a stable interaction 
+between <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img97.svg"
+ ALT="$x_i$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img7.svg"
+ ALT="$x_j$"></SPAN>, i.e., they tend to remain unchanged, and high 
+energy corresponds to an unstable interaction, i.e., they tend to change
+their states. As the result, low total <!-- MATH
+ ${\cal E}({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img109.svg"
+ ALT="${\cal E}({\bf x})$"></SPAN> corresponds 
+to more stable condition of the network, while high <!-- MATH
+ ${\cal E}({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img109.svg"
+ ALT="${\cal E}({\bf x})$"></SPAN>
+corresponds to less stable condition.
+
+<P>
+We further show that the total energy <!-- MATH
+ ${\cal E}({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img109.svg"
+ ALT="${\cal E}({\bf x})$"></SPAN> always decreases 
+whenever the state of any node changes. Assume <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img110.svg"
+ ALT="$x_k$"></SPAN> has just been changeed,
+i.e.,<!-- MATH
+ $x_k^{(n+1)} \neq x_k^{(n)}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.48ex; vertical-align: -0.82ex; " SRC="img111.svg"
+ ALT="$x_k^{(n+1)} \neq x_k^{(n)}$"></SPAN> (<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img112.svg"
+ ALT="$x_k=\pm 1$"></SPAN> but <!-- MATH
+ $x_k^{(n+1)}=\mp 1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.48ex; vertical-align: -0.82ex; " SRC="img113.svg"
+ ALT="$x_k^{(n+1)}=\mp 1$"></SPAN>), while
+all others remain the same <!-- MATH
+ $x_{l \neq k}^{(n+1)}=x_{l \neq k}^{(n)}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.72ex; vertical-align: -1.13ex; " SRC="img114.svg"
+ ALT="$x_{l \neq k}^{(n+1)}=x_{l \neq k}^{(n)}$"></SPAN>. The
+energy before <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img110.svg"
+ ALT="$x_k$"></SPAN> changes state is
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+{\cal E}^{(n)}({\bf x})&=&-\frac{1}{2}
+  \left[ \sum_{i\neq k}\sum_{j\neq k}w_{ij}x_i^{(n)}x_j^{(n)}
+    +\sum_i w_{ik}x_i^{(n)}x_k^{(n)}+\sum_j w_{kj}x_k^{(n)}x_j^{(n)} \right]
+  \nonumber\\
+  &=& -\frac{1}{2} \sum_{i\neq k}\sum_{j\neq k}w_{ij}x_ix_j
+  - \sum_i w_{ik}x_i^{(n)}x_k^{(n)}
+  \nonumber
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img115.svg"
+ ALT="$\displaystyle {\cal E}^{(n)}({\bf x})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img116.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img117.svg"
+ ALT="$\displaystyle -\frac{1}{2}
+\left[ \sum_{i\neq k}\sum_{j\neq k}w_{ij}x_i^{(n)}x_j^{(n)}
++\sum_i w_{ik}x_i^{(n)}x_k^{(n)}+\sum_j w_{kj}x_k^{(n)}x_j^{(n)} \right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img116.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.74ex; vertical-align: -3.46ex; " SRC="img118.svg"
+ ALT="$\displaystyle -\frac{1}{2} \sum_{i\neq k}\sum_{j\neq k}w_{ij}x_ix_j
+- \sum_i w_{ik}x_i^{(n)}x_k^{(n)}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+and the energy after <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img110.svg"
+ ALT="$x_k$"></SPAN> changes state is
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\cal E}^{(n+1)}({\bf x})= -\frac{1}{2} \sum_{i\neq k}\sum_{j\neq k}w_{ij}x_ix_j
+  - \sum_i w_{ik}x_i^{(n+1)}x^{(n+1)}_k
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.74ex; vertical-align: -3.46ex; " SRC="img119.svg"
+ ALT="$\displaystyle {\cal E}^{(n+1)}({\bf x})= -\frac{1}{2} \sum_{i\neq k}\sum_{j\neq k}w_{ij}x_ix_j
+- \sum_i w_{ik}x_i^{(n+1)}x^{(n+1)}_k$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">26</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The energy difference is
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\bigtriangleup {\cal E}=(x_k^{(n)}-x_k^{(n+1)}) \sum_i w_{ik}x_i
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -3.09ex; " SRC="img120.svg"
+ ALT="$\displaystyle \bigtriangleup {\cal E}=(x_k^{(n)}-x_k^{(n+1)}) \sum_i w_{ik}x_i$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">27</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Consider two cases:
+
+<UL>
+<LI>Case 1:  if <!-- MATH
+ $x_k^{(n)}=-1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.48ex; vertical-align: -0.82ex; " SRC="img121.svg"
+ ALT="$x_k^{(n)}=-1$"></SPAN>, but <!-- MATH
+ $\sum_i w_{ik}x_i \geq 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.81ex; " SRC="img122.svg"
+ ALT="$\sum_i w_{ik}x_i \geq 0$"></SPAN> and 
+  <!-- MATH
+ $x_k^{(n+1)}=1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.48ex; vertical-align: -0.82ex; " SRC="img123.svg"
+ ALT="$x_k^{(n+1)}=1$"></SPAN>, we have <!-- MATH
+ $(x_k^{(n)}-x_k^{(n+1)})=-2 \le 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.48ex; vertical-align: -0.82ex; " SRC="img124.svg"
+ ALT="$(x_k^{(n)}-x_k^{(n+1)})=-2 \le 0$"></SPAN> and 
+  <!-- MATH
+ $\bigtriangleup {\cal E} \leq 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img125.svg"
+ ALT="$\bigtriangleup {\cal E} \leq 0$"></SPAN>.
+</LI>
+<LI>Case 2: if <!-- MATH
+ $x_k^{(n)}=1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.48ex; vertical-align: -0.82ex; " SRC="img126.svg"
+ ALT="$x_k^{(n)}=1$"></SPAN>, but <!-- MATH
+ $\sum_i w_{ik}x_i < 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.81ex; " SRC="img127.svg"
+ ALT="$\sum_i w_{ik}x_i &lt; 0$"></SPAN> and 
+  <!-- MATH
+ $x_k^{(n+1)}=-1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.48ex; vertical-align: -0.82ex; " SRC="img128.svg"
+ ALT="$x_k^{(n+1)}=-1$"></SPAN>, we have <!-- MATH
+ $(x_k^{(n)}-x_k^{(n+1)})=2 \ge 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.48ex; vertical-align: -0.82ex; " SRC="img129.svg"
+ ALT="$(x_k^{(n)}-x_k^{(n+1)})=2 \ge 0$"></SPAN> and 
+  <!-- MATH
+ $\bigtriangleup {\cal E} \leq 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img125.svg"
+ ALT="$\bigtriangleup {\cal E} \leq 0$"></SPAN>.
+</LI>
+</UL>
+As in either case, <!-- MATH
+ $\bigtriangleup {\cal E}({\bf x}) \leq 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img130.svg"
+ ALT="$\bigtriangleup {\cal E}({\bf x}) \leq 0$"></SPAN> is always 
+true throughout the iteration, we conclude that <!-- MATH
+ ${\cal E}({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img109.svg"
+ ALT="${\cal E}({\bf x})$"></SPAN> will 
+eventually reach one of the minima of the <EM>energy landscape</EM>, i.e., 
+the iteration will always converge.
+
+<P>
+<IMG STYLE="" SRC="../figures/energylandscape.gif"
+ ALT="energylandscape.gif">
+<IMG STYLE="" SRC="../figures/attractors.gif"
+ ALT="attractors.gif">
+
+<P>
+We further show that each one of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img60.svg"
+ ALT="$K$"></SPAN> pre-stored patterns corresponds
+to one of the minima of the energy function. The energy function 
+<!-- MATH
+ ${\cal E}({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img109.svg"
+ ALT="${\cal E}({\bf x})$"></SPAN> corresponding to any <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN> can be written as
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\cal E}({\bf x}) = -\frac{1}{2}{\bf x}^T{\bf Wx}
+  =-\frac{1}{2}{\bf x}^T\left[\frac{1}{d}\sum_{k=1}^K {\bf x}_k{\bf x}_k^T\right]{\bf x}
+  =-\frac{1}{2d}\sum_{k=1}^K {\bf x}^T{\bf x}_k{\bf x}_k^T{\bf x}
+  =-\frac{1}{2d}\sum_{k=1}^K ({\bf x}^T{\bf x}_k)^2
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img131.svg"
+ ALT="$\displaystyle {\cal E}({\bf x}) = -\frac{1}{2}{\bf x}^T{\bf Wx}
+=-\frac{1}{2}{\...
+...^T{\bf x}_k{\bf x}_k^T{\bf x}
+=-\frac{1}{2d}\sum_{k=1}^K ({\bf x}^T{\bf x}_k)^2$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">28</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+If <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN> different (ideally orthogonal to) from any of the stored 
+patterns, all <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img60.svg"
+ ALT="$K$"></SPAN> terms of the summation will be small (ideally zero). 
+But if <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN> is the same as any one of the stored patterns, their 
+inner product reaches maximum, causing the total energy to be minimized 
+to reach one of the minima. In other words, the patterns stored in the 
+network correspond to the local minima of the energy function. i.e., 
+these patterns become <EM>attractors</EM>. 
+
+<P>
+Note that it is possible to have other local minima, called <EM>spurious 
+states</EM>, which do not represent any of the stored patterns, i.e., the 
+associative memory is not perfect.
+
+<P>
+<IMG STYLE="" SRC="../figures/hopfieldexample.gif"
+ ALT="hopfieldexample.gif">
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node4.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="ch10.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node2.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node4.html">Perceptron Network</A>
+<B> Up:</B> <A
+ HREF="ch10.html">ch10</A>
+<B> Previous:</B> <A
+ HREF="node2.html">Hebbian Learning</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

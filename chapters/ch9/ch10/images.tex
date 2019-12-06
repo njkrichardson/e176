@@ -1,0 +1,2509 @@
+\batchmode
+
+\documentclass{article}
+\RequirePackage{ifthen}
+
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphics}
+\usepackage{html}%
+\providecommand{\sign}{{\mathrm{sign}}}
+
+
+\usepackage{xcolor}
+
+\usepackage[]{inputenc}
+
+
+
+\makeatletter
+
+\makeatletter
+\count@=\the\catcode`\_ \catcode`\_=8 
+\newenvironment{tex2html_wrap}{}{}%
+\catcode`\<=12\catcode`\_=\count@
+\newcommand{\providedcommand}[1]{\expandafter\providecommand\csname #1\endcsname}%
+\newcommand{\renewedcommand}[1]{\expandafter\providecommand\csname #1\endcsname{}%
+  \expandafter\renewcommand\csname #1\endcsname}%
+\newcommand{\newedenvironment}[1]{\newenvironment{#1}{}{}\renewenvironment{#1}}%
+\let\newedcommand\renewedcommand
+\let\renewedenvironment\newedenvironment
+\makeatother
+\let\mathon=$
+\let\mathoff=$
+\ifx\AtBeginDocument\undefined \newcommand{\AtBeginDocument}[1]{}\fi
+\newbox\sizebox
+\setlength{\hoffset}{0pt}\setlength{\voffset}{0pt}
+\addtolength{\textheight}{\footskip}\setlength{\footskip}{0pt}
+\addtolength{\textheight}{\topmargin}\setlength{\topmargin}{0pt}
+\addtolength{\textheight}{\headheight}\setlength{\headheight}{0pt}
+\addtolength{\textheight}{\headsep}\setlength{\headsep}{0pt}
+\setlength{\textwidth}{349pt}
+\newwrite\lthtmlwrite
+\makeatletter
+\let\realnormalsize=\normalsize
+\global\topskip=2sp
+\def\preveqno{}\let\real@float=\@float \let\realend@float=\end@float
+\def\@float{\let\@savefreelist\@freelist\real@float}
+\def\liih@math{\ifmmode$\else\bad@math\fi}
+\def\end@float{\realend@float\global\let\@freelist\@savefreelist}
+\let\real@dbflt=\@dbflt \let\end@dblfloat=\end@float
+\let\@largefloatcheck=\relax
+\let\if@boxedmulticols=\iftrue
+\def\@dbflt{\let\@savefreelist\@freelist\real@dbflt}
+\def\adjustnormalsize{\def\normalsize{\mathsurround=0pt \realnormalsize
+ \parindent=0pt\abovedisplayskip=0pt\belowdisplayskip=0pt}%
+ \def\phantompar{\csname par\endcsname}\normalsize}%
+\def\lthtmltypeout#1{{\let\protect\string \immediate\write\lthtmlwrite{#1}}}%
+\usepackage[tightpage,active]{preview}
+\newbox\lthtmlPageBox
+\newdimen\lthtmlCropMarkHeight
+\newdimen\lthtmlCropMarkDepth
+\long\def\lthtmlTightVBox#1#2{%
+    \setbox\lthtmlPageBox\vbox{\hbox{\catcode`\_=8 #2}}%
+    \lthtmlCropMarkHeight=\ht\lthtmlPageBox \advance \lthtmlCropMarkHeight 6pt
+    \lthtmlCropMarkDepth=\dp\lthtmlPageBox
+    \lthtmltypeout{^^J:#1:lthtmlCropMarkHeight:=\the\lthtmlCropMarkHeight}%
+    \lthtmltypeout{^^J:#1:lthtmlCropMarkDepth:=\the\lthtmlCropMarkDepth:1ex:=\the \dimexpr 1ex}%
+    \begin{preview}\copy\lthtmlPageBox\end{preview}}}%
+\long\def\lthtmlTightFBox#1#2{%
+    \adjustnormalsize\setbox\lthtmlPageBox=\vbox\bgroup %
+    \let\ifinner=\iffalse \let\)\liih@math %
+    {\catcode`\_=8 #2}%
+    \@next\next\@currlist{}{\def\next{\voidb@x}}%
+    \expandafter\box\next\egroup %
+    \lthtmlCropMarkHeight=\ht\lthtmlPageBox \advance \lthtmlCropMarkHeight 6pt
+    \lthtmlCropMarkDepth=\dp\lthtmlPageBox
+    \lthtmltypeout{^^J:#1:lthtmlCropMarkHeight:=\the\lthtmlCropMarkHeight}%
+    \lthtmltypeout{^^J:#1:lthtmlCropMarkDepth:=\the\lthtmlCropMarkDepth:1ex:=\the \dimexpr 1ex}%
+    \begin{preview}\copy\lthtmlPageBox\end{preview}}%
+    \long\def\lthtmlinlinemathA#1#2\lthtmlindisplaymathZ{\lthtmlTightVBox{#1}{#2}}
+    \def\lthtmlinlineA#1#2\lthtmlinlineZ{\lthtmlTightVBox{#1}{#2}}
+    \long\def\lthtmldisplayA#1#2\lthtmldisplayZ{\lthtmlTightVBox{#1}{#2}}
+    \long\def\lthtmlinlinemathA#1#2\lthtmlindisplaymathZ{\lthtmlTightVBox{#1}{#2}}
+    \def\lthtmlinlineA#1#2\lthtmlinlineZ{\lthtmlTightVBox{#1}{#2}}
+    \long\def\lthtmldisplayA#1#2\lthtmldisplayZ{\lthtmlTightVBox{#1}{#2}}
+    \long\def\lthtmldisplayB#1#2\lthtmldisplayZ{\\edef\preveqno{(\theequation)}%
+        \lthtmlTightVBox{#1}{\let\@eqnnum\relax#2}}
+    \long\def\lthtmlfigureA#1#2\lthtmlfigureZ{\let\@savefreelist\@freelist
+        \lthtmlTightFBox{#1}{#2}\global\let\@freelist\@savefreelist}
+    \long\def\lthtmlpictureA#1#2\lthtmlpictureZ{\let\@savefreelist\@freelist
+        \lthtmlTightVBox{#1}{#2}\global\let\@freelist\@savefreelist}
+\def\lthtmlcheckvsize{\ifdim\ht\sizebox<\vsize 
+  \ifdim\wd\sizebox<\hsize\expandafter\hfill\fi \expandafter\vfill
+  \else\expandafter\vss\fi}%
+\providecommand{\selectlanguage}[1]{}%
+\makeatletter \tracingstats = 1 
+\providecommand{\Alpha}{\textrm{A}}
+\providecommand{\Mu}{\textrm{M}}
+\providecommand{\Chi}{\textrm{X}}
+\providecommand{\Tau}{\textrm{T}}
+\providecommand{\Zeta}{\textrm{Z}}
+\providecommand{\Nu}{\textrm{N}}
+\providecommand{\Kappa}{\textrm{K}}
+\providecommand{\Omicron}{\textrm{O}}
+\providecommand{\Eta}{\textrm{H}}
+\providecommand{\omicron}{\textrm{o}}
+\providecommand{\Rho}{\textrm{R}}
+\providecommand{\Iota}{\textrm{J}}
+\providecommand{\Beta}{\textrm{B}}
+\providecommand{\Epsilon}{\textrm{E}}
+
+
+\begin{document}
+\pagestyle{empty}\thispagestyle{empty}\lthtmltypeout{}%
+\lthtmltypeout{latex2htmlLength hsize=\the\hsize}\lthtmltypeout{}%
+\lthtmltypeout{latex2htmlLength vsize=\the\vsize}\lthtmltypeout{}%
+\lthtmltypeout{latex2htmlLength hoffset=\the\hoffset}\lthtmltypeout{}%
+\lthtmltypeout{latex2htmlLength voffset=\the\voffset}\lthtmltypeout{}%
+\lthtmltypeout{latex2htmlLength topmargin=\the\topmargin}\lthtmltypeout{}%
+\lthtmltypeout{latex2htmlLength topskip=\the\topskip}\lthtmltypeout{}%
+\lthtmltypeout{latex2htmlLength headheight=\the\headheight}\lthtmltypeout{}%
+\lthtmltypeout{latex2htmlLength headsep=\the\headsep}\lthtmltypeout{}%
+\lthtmltypeout{latex2htmlLength parskip=\the\parskip}\lthtmltypeout{}%
+\lthtmltypeout{latex2htmlLength oddsidemargin=\the\oddsidemargin}\lthtmltypeout{}%
+\makeatletter
+\if@twoside\lthtmltypeout{latex2htmlLength evensidemargin=\the\evensidemargin}%
+\else\lthtmltypeout{latex2htmlLength evensidemargin=\the\oddsidemargin}\fi%
+\lthtmltypeout{}%
+\makeatother
+\setcounter{page}{1}
+\onecolumn
+
+% !!! IMAGES START HERE !!!
+
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4256}%
+$ 10^{11}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4258}%
+$ 10^{14}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4260}%
+$ 10^{15}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4262}%
+$ n$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4264}%
+$\displaystyle a=\sum_{j=1}^n w_j x_j+b$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4266}%
+$ b$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4268}%
+$ x_j$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4270}%
+$ w_j$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4272}%
+$\displaystyle w_j\;\left\{ \begin{array}{ll}
+> 0	& \mbox{excitatory input}	\\
+< 0	& \mbox{inhibitory input}	\\
+= 0	& \mbox{no connection}
+\end{array} \right.$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4274}%
+$ x_0=1$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4276}%
+$ w_0=b$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4278}%
+$\displaystyle a=\sum_{j=1}^n w_j x_j+b=\sum_{j=0}^n w_j x_j={\bf w}^T{\bf x}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4280}%
+$\displaystyle y=g(a)=g\left(\sum_{j=0}^n w_j x_j+b\right)=g({\bf w}^T{\bf x}+b)$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4282}%
+$ {\bf x}=[x_0=1,\,x_1,\cdots,x_n]^T$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4284}%
+$ {\bf w}=[w_0=b,\,,w_1,\cdots,w_n]^T$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4286}%
+$ g(x)$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4288}%
+$\displaystyle g(x,a)=\frac{1}{1+e^{-ax}}=\frac{e^{ax}}{1+e^{ax}}=\left\{\begin{array}{rl}
+0 & x=-\infty \\1/2 & x=0 \\1 & x=\infty\end{array}\right.,
+\;\;\;\;\;\;
+\frac{d\,g(x)}{dx}=\frac{a\,e^{-ax}}{(1+e^{-ax})^2}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4290}%
+$\displaystyle g(x,a)=\frac{2}{1+e^{-ax}}-1=\frac{e^{ax}-1}{e^{ax}+1}
+=\left\{\begin{array}{rl}-1 & x=-\infty \\0 & x=0 \\1 & x=\infty
+\end{array}\right.,
+\;\;\;\;\;\;
+\frac{d\,g(x)}{dx}=\frac{2a\,e^{-ax}}{(1+e^{-ax})^2}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4292}%
+$ a$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4296}%
+$ a\rightarrow 0$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4298}%
+$ g(x,a)$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4300}%
+$ a\rightarrow 
+  \infty$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4304}%
+$\displaystyle \lim_{a\rightarrow\infty} g(x,a)=\left\{ \begin{array}{cl} 0\mbox{ or }-1 & x<0\\
+1 & x>0 \end{array} \right.$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4306}%
+$\displaystyle g(x)=\max(0,\,x)=\left\{\begin{array}{ll}0 & x<0\\x & x>0\end{array}\right.$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4308}%
+$ N$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4310}%
+$ \{ ({\bf x}_n,{\bf y}_n),
+    \;n=1,\cdots,N\}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4312}%
+$\displaystyle f: {\bf x} \in {\cal R}^d \Longrightarrow {\bf y} \in {\cal R}^m$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4314}%
+$ {\bf x}_n$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4316}%
+$ {\bf y}_n$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4318}%
+$ E=mc^2$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4320}%
+$ \{{\bf x}_1,\cdots,{\bf x}_N\}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4322}%
+$ {\bf x}\in{\cal R}^d$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4324}%
+$ y\in{\cal R}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4326}%
+$ y=f({\bf x})$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4328}%
+$ \{ ({\bf x}_n,\;y_n),\;
+    n=1,\cdots,N\}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4330}%
+$ {\bf x}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4334}%
+$ \{C_1,\cdots,C_K\}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4336}%
+$\displaystyle f: {\bf x} \in {\cal R}^d \Longrightarrow y \in \{C_1,\cdots,C_K\}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4339}%
+$ F \rightarrow S$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4341}%
+$ F \cap B \rightarrow S$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4343}%
+$ B \rightarrow S$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4345}%
+$ \{{\bf x}_1,\cdots,{\bf x}_K \}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4347}%
+$ \{{\bf y}_1,\cdots,{\bf y}_K\}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4351}%
+$ {\bf x}=[x_1,\cdots,x_n]^T$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4353}%
+$ m$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4355}%
+$ {\bf y}=[y_1,\cdots,y_m]^T$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4357}%
+$\displaystyle y_i=\sum_{j=1}^n w_{ij} x_j={\bf w}_i^T{\bf x}\;\;\;\;(i=1,\cdots,m),
+\;\;\;\;\;\;$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4358}%
+$\displaystyle \;\;\;\;\;	{\bf y}={\bf W}{\bf x}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4360}%
+$ {\bf w}_i=[w_{i1},\cdots,w_{in}]^T$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4362}%
+$ {\bf W}=[{\bf w}_1,\cdots,{\bf w}_m]^T$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4364}%
+$\displaystyle w_{ij}^{new}=w_{ij}^{old}+\eta\;x_j y_i\;\;\;\;(i=1,\cdots,m,\;j=1,\cdots,n)$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4366}%
+$\displaystyle {\bf W}^{new}={\bf W}^{old}+\eta\; {\bf y} {\bf x}^T$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4368}%
+$ \eta$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4372}%
+$ y_i$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4374}%
+$ w_{ij}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4376}%
+$ w_{ij}=0$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4378}%
+$ \eta=1$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4382}%
+$ \{ ({\bf x}_k,{\bf y}_k),\;\;
+  k=1,\cdots,N\}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4384}%
+$\displaystyle w_{ij}=\sum_{k=1}^Nx_j^{(k)}y_i^{(k)}\;\;\;\;(i=1,\cdots,m,\;\;j=1,\cdots,n)$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4386}%
+$ K$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4388}%
+$\displaystyle {\bf W}_{m\times n}=\sum_{k=1}^N {\bf y}_k {\bf x}_k^T = \sum_{k=1}^N
+\left[ \begin{array}{c} y_1^{(k)} \\\vdots \\y_m^{(k)} \end{array} \right]
+[ x_1^{(k)}, \cdots, x_n^{(k)} ]$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4390}%
+$ {\bf x}_l$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4392}%
+$\displaystyle {\bf y}={\bf W}{\bf x}_l=\left(\sum_{k=1}^K {\bf y}_k {\bf x}_k^T\right)\;{\bf x}_l
+={\bf y}_l({\bf x}_l^T{\bf x}_l)+\sum_{k\neq l}{\bf y}_k({\bf x}_k^T{\bf x}_l)$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4394}%
+$ {\bf y}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4400}%
+$\displaystyle {\bf x}_i^T{\bf x}_j=||{\bf x}_i||\;||{\bf x}_j|| \cos \phi
+= \delta_{ij}=\left\{ \begin{array}{ll} 1 & i=j \\0 & i\ne j \end{array}
+\right.$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4402}%
+$ \phi$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4404}%
+$ {\bf x}_i$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4406}%
+$ {\bf x}_j$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4408}%
+$\displaystyle \cos\phi = \frac{{\bf x}^T{\bf y}}{||{\bf x}||\,||{\bf y}||}
+=\frac{\sum_i x_i y_i}{\sqrt{\sum_i x_i^2}\sqrt{\sum_i y_i^2} }$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4410}%
+$ r_{xy}=\sigma_{xy}^2/\sigma_x\sigma_y$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4416}%
+$ 0 < r_{xy} \leq 1$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4422}%
+$ r_{xy}=1$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4424}%
+$ {\bf x}={\bf y}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4426}%
+$ r_{xy} =0 $%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4432}%
+$ -1 \leq r_{xy} \leq 0$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4438}%
+$ r_{xy}=-1$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4440}%
+$ {\bf x}=-{\bf y}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4442}%
+$ n \geq N$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4450}%
+$\displaystyle {\bf y}={\bf y}_l({\bf x}_l^T{\bf x}_l)+\sum_{k\neq l}{\bf y}_k({\bf x}_k^T{\bf x}_l)
+={\bf y}_l$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4452}%
+$ k \ne l$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4454}%
+$ {\bf x}_k^T {\bf x}_l=0$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4456}%
+$ {\bf x}_k$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4458}%
+$ {\bf y}_k$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4460}%
+$ k=1,\cdots,N$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4462}%
+$ {\bf y}-{\bf y}_l \neq 0$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4467}%
+$ {\bf X}=[{\bf x}_1,\cdots,{\bf x}_K]$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4469}%
+$ {\bf x}_k=[x_1,\cdots,x_d]^T$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4471}%
+$ x_i \in\{-1,\;1\},\;(i=1,\cdots,d)$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4475}%
+$ {\bf W}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4483}%
+$ d$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4487}%
+$\displaystyle {\bf W}_{d\times d}=\frac{1}{d}\sum_{k=1}^K {\bf x}_k {\bf x}_k^T
+= \frac{1}{d}\sum_{k=1}^K
+\left[ \begin{array}{c} x_1^{(k)} \\\vdots \\x_d^{(k)} \end{array} \right]
+[ x_1^{(k)}, \cdots, x_d^{(k)} ]$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4489}%
+$\displaystyle w_{ij}=\frac{1}{d}\sum_{k=1}^K x_i^{(k)} x_j^{(k)}=w_{ji}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4491}%
+$ w_{ii}=0\;(i=1,\cdots,d)$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4497}%
+$\displaystyle x_i^{(n+1)}=sgn \left(\sum_{j=1}^d w_{ij}x_j^{(n)}\right)
+=\left\{ \begin{array}{ll}
++1, & \mbox{if}\;\;\;\sum_{j=1}^d w_{ij}x_j^{(n)} \geq 0 \\
+-1, & \mbox{if}\;\;\;\sum_{j=1}^d w_{ij}x_j^{(n)}  < 0 \end{array} \right.$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4499}%
+$ x_i^{(n)}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4501}%
+$ x_i^{(n+1)}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4503}%
+$ x_i$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4513}%
+$\displaystyle e_{ij}=-w_{ij}x_ix_j$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4517}%
+$\displaystyle {\cal E}({\bf x}) = \frac{1}{2}\sum_{i=1}^d\sum_{j=1}^d e_{ij}
+=-\frac{1}{2}\sum_{i=1}^d \sum_{j=1}^d w_{ij} x_i x_j
+=-\frac{1}{2}{\bf x}^T{\bf Wx}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4519}%
+$\displaystyle \begin{tabular}{ c | r | r || c | c} \hline
+& $x_j$	& $x_i$	& $w_{ij}>0$\  	& $w_{ij}<0$	\\\hline\hline
+1 & -1 & -1	& $e_{ij}<0$	& $e_{ij}>0$	\\\hline
+2 & -1 &  1	& $e_{ij}>0$	& $e_{ij}<0$	\\\hline
+3 &  1 & -1	& $e_{ij}>0$	& $e_{ij}<0$	\\\hline
+4 &  1 &  1	& $e_{ij}<0$	& $e_{ij}>0$	\\\hline
+\end{tabular}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4521}%
+$ e_{ij}<0$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4523}%
+$ w_{ij}>0$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4525}%
+$ x_j=\mp 1$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4529}%
+$ \mp 1$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4531}%
+$ w_{ij}<0$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4537}%
+$ \pm 1$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4539}%
+$ e_{ij}>0$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4561}%
+$ e_{ij}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4567}%
+$ {\cal E}({\bf x})$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4573}%
+$ x_k$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4575}%
+$ x_k^{(n+1)} \neq x_k^{(n)}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4577}%
+$ x_k=\pm 1$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4579}%
+$ x_k^{(n+1)}=\mp 1$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4581}%
+$ x_{l \neq k}^{(n+1)}=x_{l \neq k}^{(n)}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4586}%
+$\displaystyle {\cal E}^{(n)}({\bf x})$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4588}%
+$\displaystyle =$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4590}%
+$\displaystyle -\frac{1}{2}
+\left[ \sum_{i\neq k}\sum_{j\neq k}w_{ij}x_i^{(n)}x_j^{(n)}
++\sum_i w_{ik}x_i^{(n)}x_k^{(n)}+\sum_j w_{kj}x_k^{(n)}x_j^{(n)} \right]$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4594}%
+$\displaystyle -\frac{1}{2} \sum_{i\neq k}\sum_{j\neq k}w_{ij}x_ix_j
+- \sum_i w_{ik}x_i^{(n)}x_k^{(n)}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4598}%
+$\displaystyle {\cal E}^{(n+1)}({\bf x})= -\frac{1}{2} \sum_{i\neq k}\sum_{j\neq k}w_{ij}x_ix_j
+- \sum_i w_{ik}x_i^{(n+1)}x^{(n+1)}_k$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4600}%
+$\displaystyle \bigtriangleup {\cal E}=(x_k^{(n)}-x_k^{(n+1)}) \sum_i w_{ik}x_i$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4602}%
+$ x_k^{(n)}=-1$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4604}%
+$ \sum_i w_{ik}x_i \geq 0$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4606}%
+$ x_k^{(n+1)}=1$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4608}%
+$ (x_k^{(n)}-x_k^{(n+1)})=-2 \le 0$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4610}%
+$ \bigtriangleup {\cal E} \leq 0$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4612}%
+$ x_k^{(n)}=1$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4614}%
+$ \sum_i w_{ik}x_i < 0$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4616}%
+$ x_k^{(n+1)}=-1$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4618}%
+$ (x_k^{(n)}-x_k^{(n+1)})=2 \ge 0$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4622}%
+$ \bigtriangleup {\cal E}({\bf x}) \leq 0$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4632}%
+$\displaystyle {\cal E}({\bf x}) = -\frac{1}{2}{\bf x}^T{\bf Wx}
+=-\frac{1}{2}{\bf x}^T\left[\frac{1}{d}\sum_{k=1}^K {\bf x}_k{\bf x}_k^T\right]{\bf x}
+=-\frac{1}{2d}\sum_{k=1}^K {\bf x}^T{\bf x}_k{\bf x}_k^T{\bf x}
+=-\frac{1}{2d}\sum_{k=1}^K ({\bf x}^T{\bf x}_k)^2$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4643}%
+$ {\bf X}=[{\bf x}_1,\cdots,{\bf x}_N]$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4645}%
+$ {\bf y}=[y_1,\cdots,y_N]^T$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4647}%
+$ m=1$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4651}%
+$ C_+$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4653}%
+$ C_-$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4655}%
+$ m>1$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4657}%
+$ {\bf x}=[x_1,\cdots,x_d]^T$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4659}%
+$ y=1$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4661}%
+$ {\bf x}\in C_+$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4665}%
+$ y=-1$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4667}%
+$ {\bf x}\in C_-$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4673}%
+$ f({\bf x})={\bf w}^T{\bf x}+b$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4675}%
+$\displaystyle \;\; f({\bf x})={\bf w}^T{\bf x}+b \;
+\left\{ \begin{array}{l} > 0\\<0 \end{array} \right.,
+\;\;\;$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4676}%
+$\displaystyle \;\;\;
+\hat{y}=\sign (f({\bf x}))
+=\left\{ \begin{array}{rl} 1 & \mbox{for } {\bf x}\in C_+\\
+-1 & \mbox{for } {\bf x}\in C_-\end{array} \right.$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4678}%
+$ \hat{y}=1$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4682}%
+$ \hat{y}=-1$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4686}%
+$ \delta=y-\hat{y}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4688}%
+$ y$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4690}%
+$ \hat{y}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4692}%
+$ {\bf w}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4696}%
+$ ||{\bf w}||$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4698}%
+$\displaystyle p_{\bf w}({\bf x})=\frac{{\bf w}^T{\bf x}}{||{\bf w}||}
+> -\frac{b}{||{\bf w}||}=b'\;\;\;\;\;\;\;\;\;
+p_{\bf w}({\bf x})=\frac{{\bf w}^T{\bf x}}{||{\bf w}||}
+< -\frac{b}{||{\bf w}||}=b'$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4700}%
+$ p_{\bf w}({\bf x})$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4706}%
+$ b'=-b/||{\bf w}||$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4710}%
+$ {\bf w}^T{\bf x}+b=0$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4720}%
+$ r=\delta=y-\hat{y}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4726}%
+$ \delta$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4728}%
+$ {\bf x}=[x_0=1,x_1,\cdots,x_n]^T$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4730}%
+$ {\bf w}=[w_0=b,w_1,\cdots,w_n]^T$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4732}%
+$ f({\bf x})={\bf w}^T{\bf x}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4738}%
+$\displaystyle {\bf w}^{new}={\bf w}^{old}+\eta(y-\hat{y})\,{\bf x}
+={\bf w}^{old}+\eta\,\delta{\bf x}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4740}%
+$ \eta>0$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4748}%
+$ y\pm 1$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4750}%
+$ \hat{y}=\sign (f({\bf x}))$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4754}%
+$\displaystyle \begin{tabular}{c|l|l|l} \hline
+& $y$\  & $f({\bf x})={\bf w}^T{\bf x},\,\hat{y}
+=\sign (f({\bf x}))$\  & $\delta=y-\hat{y}$\\\hline \hline
+1 & $y= 1$\  & $f({\bf x})>0,\;\hat{y}= 1$\  & $\delta=0$\   \\\hline
+2 & $y=-1$\  & $f({\bf x})>0,\;\hat{y}= 1$\  & $\delta=-2$\  \\\hline
+3 & $y= 1$\  & $f({\bf x})<0,\;\hat{y}=-1$\  & $\delta=2$\   \\\hline
+4 & $y=-1$\  & $f({\bf x})<0,\;\hat{y}=-1$\  & $\delta=0$\   \\\hline
+\end{tabular}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4756}%
+$ y f({\bf x})>0$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4758}%
+$ \delta=y-\hat{y}=0$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4760}%
+$ {\bf w}^{new}={\bf w}^{old}+\delta{\bf x}={\bf w}^{old}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4762}%
+$ y f({\bf x})<0$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4764}%
+$ \delta=y-\hat{y}=1$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4772}%
+$ y\,f({\bf x})<0$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4774}%
+$ \delta=-2$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4776}%
+$\displaystyle {\bf w}^{new}={\bf w}^{old}-2{\bf x}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4780}%
+$\displaystyle f({\bf x})={\bf x}^T{\bf w}^{new}={\bf x}^T{\bf w}^{old}-2{\bf x}^T{\bf x}
+< {\bf x}^T{\bf w}^{old}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4792}%
+$ \delta=2$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4794}%
+$\displaystyle {\bf w}^{new}={\bf w}^{old}+2{\bf x}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4798}%
+$\displaystyle f({\bf x})={\bf x}^T{\bf w}^{new}={\bf x}^T{\bf x}^{old}+2{\bf x}^T{\bf x}
+> {\bf x}^T{\bf w}^{old}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4808}%
+$ {\bf w}^{new}={\bf w}^{old}+2 y {\bf x}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4810}%
+$ 2$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4814}%
+$\displaystyle \;\;\;\;y\,f({\bf x})\left\{\begin{array}{c}
+>0\\<0 \end{array}\right.
+\;\;\;$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4815}%
+$\displaystyle \;\;\;\;\;
+\left\{\begin{array}{l}  {\bf w}^{new}={\bf w}^{old} \\
+{\bf w}^{new}={\bf w}^{old}+y\,{\bf x}
+\end{array}\right.$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4833}%
+$ {\bf W}=[{\bf w}_1,\cdots,{\bf w}_m]$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4837}%
+$ y_i\in\{-1,\,1\},\;(i=1,\cdots,m)$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4841}%
+$ K=m$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4843}%
+$ y_k=1$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4845}%
+$ y_l=-1$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4847}%
+$ l\ne k$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4849}%
+$ K=2^m$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4851}%
+$ K=4$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4853}%
+$ 4$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4855}%
+$\displaystyle \begin{tabular}{l||r|r|r|r} \hline
+\mbox{binary output} & ${\bf y}_0$\  & ${\bf y}_1$\  & ${\bf y}_2$\  & ${\bf y}_3$\  \\\hline\hline
+$y_1$\  &  1 & -1 & -1 & -1 \\\hline
+$y_2$\  & -1 & 1 & -1 & -1 \\\hline
+$y_3$\  & -1 & -1 & 1 & -1 \\\hline
+$y_4$\  & -1 & -1 & -1 & 1 \\\hline
+\end{tabular}
+\;\;\;\;\;\;$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4856}%
+$\displaystyle \;\;\;\;\;\;\;
+\begin{tabular}{l||r|r|r|r} \hline
+\mbox{binary output} & ${\bf y}_0$\  & ${\bf y}_1$\  & ${\bf y}_2$\  & ${\bf y}_3$\  \\\hline\hline
+$y_1$\  & -1 & -1 & 1 & 1 \\\hline
+$y_2$\  & -1 & 1 & -1 & 1 \\\hline
+\end{tabular}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4860}%
+$ \hat{\bf y}=[\hat{y}_1,\cdots,\hat{y}_m]^T$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4866}%
+$ \delta=||{\bf y}-\hat{\bf y}||$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4876}%
+$ \hat{\bf y}=[-1\;1\;-1\;1]^T$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4882}%
+$ X$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4890}%
+$ W$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4892}%
+$ d+1$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4898}%
+$ n=2$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4900}%
+$ m=2$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4902}%
+$ 2^2=4$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4904}%
+$ {\bf y}=[y_1,\,y_2]$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4906}%
+$ {\bf w}_1$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4908}%
+$ {\bf w}_2$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4910}%
+$ \delta=y-\hat{y}\ne 0$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4912}%
+$ \delta\ne 0$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4914}%
+$ n=3$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4916}%
+$ m=3$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4918}%
+$ 2^3=8$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4924}%
+$ {\bf w}_3$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4928}%
+$ {\bf w}^{new}={\bf w}^{old}+y_n{\bf x}_n$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4932}%
+$ y_n$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4934}%
+$ \delta=y_n-\hat{y}_n\ne 0$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4936}%
+$ {\bf w}=0$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4940}%
+$\displaystyle {\bf w}=\sum_{n=1}^N \alpha_n y_n {\bf x}_n$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4942}%
+$ \alpha_n$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4950}%
+$ y_l$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4952}%
+$\displaystyle f({\bf x}_l)= {\bf w}^T{\bf x}_l=\sum_{n=1}^N \alpha_n y_n {\bf x}_n^T{\bf x}_l,
+\;\;\;\;\;\;$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4953}%
+$\displaystyle \;\;\;\;\;\;  \hat{y}_l=\sign (f({\bf x}_l))$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4959}%
+$\displaystyle \;\;\delta=y_l-\hat{y}_l \ne 0$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4962}%
+$\displaystyle {\bf w}^{new}={\bf w}^{old}+ y_l\, {\bf x}_l
+=\sum_{n=1}^N \alpha_n y_n {\bf x}_n+ y_l\, {\bf x}_l$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4964}%
+$\displaystyle \;\;\;$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4965}%
+$\displaystyle \;\;\; \alpha_l^{new}=\alpha_l^{old}+1$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4967}%
+$ \{\alpha_1,\cdots,\alpha_N\}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4979}%
+$\displaystyle \;\;\; {\bf w}^T{\bf x}=\sum_{n=1}^N \alpha_n y_n {\bf x}_n^T{\bf x}
+\left\{\begin{array}{l} >0\\<0\end{array}\right.,
+\;\;\;\;\;$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay4980}%
+$\displaystyle \;\;\;\;\;
+{\bf x}\in\left\{\begin{array}{l}C_-\\C_+\end{array}\right.$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4982}%
+$ {\bf x}_n^T{\bf x}_m$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4984}%
+$ k({\bf x}_n,{\bf x}_m)$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4991}%
+$ \{({\bf x}_i, {\bf y}_i),\,i=1,...,N\}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline4995}%
+$ {\bf y}_i$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5005}%
+$ l$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5013}%
+$ \hat{\bf y}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5029}%
+$ ||{\bf y}-\hat{\bf y}||$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5037}%
+$ \varepsilon$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay5045}%
+$\displaystyle z_j=g(a^h_j)=g\left(\sum_{k=1}^d w_{jk}^h x_k+b_j^h\right)
+=g\left(\sum_{k=0}^d w_{jk}^h x_k\right)=g({\bf x}^T{\bf w}^h_j)
+\;\;\;\;\;\;(j=1,\cdots,l)$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5047}%
+$ {\bf x}=[x_0=1,x_1,\cdots,x_d]^T$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5049}%
+$ {\bf w}_j^h=[w_{j0}^h=b_j^h,w_{j1}^h,\cdots,w_{jd}^h]^T$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5051}%
+$ a^h_j={\bf x}^T{\bf w}^h_j$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay5053}%
+$\displaystyle {\bf z}={\bf g}\left({\bf W}_h^T{\bf x}\right)$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5055}%
+$ {\bf z}=[z_1,\cdots,z_l]^T$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5057}%
+$ {\bf W}_h=[{\bf w}^h_1,\cdots,{\bf w}^h_l]$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay5059}%
+$\displaystyle \hat{y}_i=g(a_i^o)=g\left(\sum_{j=1}^l w_{ij}^o z_j+b_i^o\right)
+=g\left(\sum_{j=0}^l w_{ij}^o z_j\right)=g({\bf z}^T{\bf w}^o_i)
+\;\;\;\;\;\;(i=1,\cdots,m)$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5061}%
+$ {\bf z}=[z_0=1,z_1,\cdots,z_l]^T$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5063}%
+$ {\bf w}_i^o=[w_{i0}^o=b_i^o,w_{i1}^o,\cdots,w_{il}^o]^T$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5065}%
+$ a^o_i={\bf z}^T{\bf w}^o_i$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay5067}%
+$\displaystyle \hat{\bf y}={\bf g}\left( {\bf W}_o^T{\bf z} \right)$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5069}%
+$ {\bf W}_o=[{\bf w}^o_1,\cdots,{\bf w}^o_m]$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5071}%
+$ \hat{\bf y}=[\hat{y}_1,\cdots,y_m]^T$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5073}%
+$ w_{ij}^o\;(i=1,\cdots,m,\;j=0,1,\cdots,l)$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5075}%
+$ w_{jk}^h\;(j=1,\cdots,l,\;k=0,1,\cdots,d)$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay5078}%
+$\displaystyle \varepsilon$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay5082}%
+$\displaystyle \frac{1}{2}||{\bf y}-\hat{\bf y}||^2
+=\frac{1}{2}\sum_{i=1}^m(\hat{y}_i-y_i)^2=\frac{1}{2}\sum_{i=1}^m[g(a^o_i)-y_i]^2
+=\frac{1}{2}\sum_{i=1}^m\left[g\left(\sum_{j=0}^lw_{ij}^{o}z_j\right)-y_i\right]^2$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay5086}%
+$\displaystyle \frac{1}{2}\sum_{i=1}^m\left[g\left(w_{i0}^o+\sum_{j=1}^l w_{ij}^o\,
+g(a_j^h)\right)-y_i\right]^2
+=\frac{1}{2}\sum_{i=1}^m\left[g\left(w_{i0}^o+\sum_{j=1}^l w_{ij}^o\,
+g\left(\sum_{k=0}^n w_{jk}^hx_k\right)\right)-y_i\right]^2$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5092}%
+$ w_{ij}^{o}\;\;(i=1,\cdots,m,\;j=0,1,\cdots,l)$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay5094}%
+$\displaystyle \frac{\partial\,\varepsilon}{\partial\, w_{ij}^o}
+=\frac{\partial\,\varepsilon}{\partial\, \hat{y}_i}\;
+\frac{\partial\, \hat{y}_i}{\partial\, a^o_i}\;
+\frac{\partial\, a^o_i}{\partial\, w_{ij}^{o}}
+=(\hat{y}_i-y_i)\;g'(a^o_i)\;z_j=-\delta_i\;g'(a^o_i)\;z_j$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5096}%
+$ \delta_i=y_i-\hat{y}_i$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5098}%
+$ w_{ij}^{o}\;(i=1,\cdots,m,\;j=0,1,\cdots,l)$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay5102}%
+$\displaystyle w_{ij}^{o(new)}=w_{ij}^{o(old)}-\eta\;\frac{\partial e}{\partial w_{ij}^o}
+=w_{ij}^{o(old)} +\eta\;\delta_i\;g'(a^o_i)\;z_j$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay5106}%
+$\displaystyle {\bf W}^{o(new)}_{m\times (l+1)}
+={\bf W}^{o(old)}_{m\times (l+1)}+\eta\;{\bf d}^o_{m\times 1}({\bf z}^T)_{1\times (l+1)}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5108}%
+$ {\bf d}^o_{m\times 1}=[\delta_1 g'(a^o_1),\cdots,\delta_m g'(a^o_m)]^T$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5110}%
+$ [\delta_1,\cdots,\delta_m]^T$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5112}%
+$ [g'(a_1^o),\cdots,g'(a_m^o)]^T$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5114}%
+$ {\bf z}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5118}%
+$ w_{jk}^h\;\;(j=1,\cdots,l,\;k=0,1,\cdots,d)$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay5121}%
+$\displaystyle \frac{\partial\,\varepsilon}{\partial\, w_{jk}^h}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay5125}%
+$\displaystyle \frac{\partial\,\varepsilon}{\partial\, \hat{y}_i}\;
+\frac{\partial\, \hat{y}_i}{\partial\, a^o_i}\;
+\frac{\partial\, a^o_i}{\partial\, z_j}\;
+\frac{\partial\, z_j}{\partial\, a^h_j}\;
+\frac{\partial\, a^h_j}{\partial\, w_{jk}^h}
+=\sum_{i=1}^m\;(\hat{y}_i-y_i)\;\frac{\partial\, \hat{y}_i}{\partial\, a^o_i}\;
+\frac{\partial\, a^o_i}{\partial\, z_j}\;
+\frac{\partial\, z_j}{\partial\, a^h_j}\;
+\frac{\partial\, a^h_j}{\partial\, w_{jk}^h}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay5129}%
+$\displaystyle -\sum_{i=1}^m \delta_ig'(a^o_i)w_{ij}^o\;g'(a^h_j)x_k
+=-\delta_j^{h}\;g'(a^h_j)x_k$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay5131}%
+$\displaystyle \delta_j^h=\sum_{i=1}^m \delta_i^o g'(a^o_i)w_{ij}^o
+=\sum_{i=1}^m d_i^o w_{ij}^o      \;\;\;\;(j=1,\cdots,l)$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5133}%
+$ d_i^o=\delta_i^o g'(a^o_i)$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay5135}%
+$\displaystyle \left[\begin{array}{l}\delta_1^h\\\vdots\\\delta_l^h\end{array}\right]
+=\left[\begin{array}{ccc}w_{11}^o & \cdots &w_{1m}^o\\
+\vdots & \ddots & \vdots \\w_{l1}^o & \cdots & w_{lm}^o
+\end{array}\right]
+\left[\begin{array}{c}\delta_1^og'(a_1^o)\\\vdots\\\delta_m^og'(a_m^o)
+\end{array}\right]
+={\bf W}^{oT}_{l\times m}{\bf d}^o_{m\times 1}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5137}%
+$ {\bf W}^o$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5139}%
+$ l\times m$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5141}%
+$ b_j$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5143}%
+$ {\bf d}^o=[d_1,\cdots,d_m]^T$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5145}%
+$ {\bf y}-\hat{\bf y}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5147}%
+$ {\bf g}'({\bf a}^o)$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5149}%
+$ {\bf d}^o=({\bf y}-\hat{\bf y})\odot {\bf g}'({\bf a}^o)$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5151}%
+$ w_{jk}^{h}\;\;(j=1,\cdots,l,\;k=0,1,\cdots,d)$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay5155}%
+$\displaystyle w_{jk}^{h(new)}=w_{jk}^{h(old)} -\eta\;\frac{\partial \varepsilon}{\partial w_{jk}}
+=w_{jk}^{h(old)}+\eta\;\delta_j^h\;g'(a^h_j)x_k
+=w_{jk}^{h(old)}+\eta\;d_j^hx_k$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5157}%
+$ d^h_j=\delta^h_jg'(a_j^h)$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay5159}%
+$\displaystyle {\bf W}^{h(new)}_{l\times (d+1)}={\bf W}^{h(old)}_{l\times (d+1)}
++\eta\;{\bf d}^h_{l\times 1} {\bf x}^T_{1\times (d+1)}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5161}%
+$ {\bf d}^h={\bf W}^{oT}_{l\times m}{\bf d}^o_{m\times 1}\odot {\bf g}'({\bf a}^h)$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5163}%
+$ {\bf d}^h_{l\times 1}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5165}%
+$ {\bf x}_{n\times 1}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5167}%
+$ [x_1,\cdots,x_n]^T$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5171}%
+$ {\bf x}=[1,x_1,\cdots,x_d]^T$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5173}%
+$ {\bf z}={\bf g}({\bf W}^h{\bf x})$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5175}%
+$ l+1$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5177}%
+$ {\bf z} \leftarrow [1,{\bf z}]$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5179}%
+$ \hat{\bf y}={\bf g}({\bf W}^o{\bf z});$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5183}%
+$ {\bf d}^h={\bf W}^{oT}_{l\times m}{\bf d}^o \odot {\bf g}'({\bf a}^h)$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5185}%
+$ {\bf W}^o_{m\times l}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5189}%
+$ {\bf W}^o\leftarrow {\bf W}^o+\eta\;{\bf d}^o{\bf z}^T$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5191}%
+$ {\bf W}^h\leftarrow {\bf W}^h+\eta\;{\bf d}^h{\bf x}^T$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5193}%
+$ \varepsilon=||{\bf y}-\hat{\bf y}||^2/2$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5197}%
+$ C$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5201}%
+$ Y$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5203}%
+$ C*K$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5207}%
+$ N+1$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5209}%
+$ M$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5211}%
+$ \{({\bf x}_i,\,{\bf y}_i),\;(i=1,\cdots,N)\}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay5213}%
+$\displaystyle {\bf y}={\bf f}({\bf x},{\bf W}^h,{\bf W}^o)$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5215}%
+$ {\bf W}_h$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5219}%
+$ {\bf r}={\bf y}-\hat{\bf y}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5221}%
+$ 13\%$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5223}%
+$ 11.5\%$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay5225}%
+$\displaystyle \left[ \begin{array}{rrr}
+185 & 14 &  1 \\5 & 181 & 14 \\11 & 33 &156
+\end{array}\right]
+\;\;\;\;\;\;\;
+\left[ \begin{array}{rr}176 & 24 \\22 & 178 \end{array}\right]$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay5227}%
+$\displaystyle \left[ \begin{array}{rrrrrrrrrr}
+216 & 0 & 2 & 1 & 0 & 0 & 4 & 0 & 1 &  0 \\
+0 & 212 & 0 & 1 & 0 & 1 & 3 & 0 & 7 & 0 \\
+0 & 0 & 221 & 0 & 0 & 0 & 1 & 0 & 2 & 0 \\
+1 & 0 & 1 & 203 & 0 & 0 & 0 & 0 & 14& 5 \\
+0 & 0 & 0 & 0 & 221 & 0 & 1 & 0 & 2 & 0 \\
+0 & 0 & 0 & 2 & 2 & 214 & 0 & 0 & 6 & 0 \\
+0 & 1 & 0 & 0 & 0 & 0 & 221 & 0 & 2 & 0 \\
+0 & 0 & 4 & 0 & 0 & 0 & 0 & 214 & 4 & 2 \\
+0 & 0 & 1 & 0 & 0 & 1 & 1 & 0 & 221 & 0 \\
+0 & 0 & 0 & 1 & 2 & 0 & 0 & 0 & 4 & 217 \\
+\end{array}\right]$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5236}%
+$ {\bf y}=[y_1,\cdots,y_K]^T$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5242}%
+$ y_i\in\{0,\;1\}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5246}%
+$ {\bf X}=[{\bf x}_1,\cdots,{\bf x}_N\}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5248}%
+$ {\bf w}_i$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay5252}%
+$\displaystyle a_i=\sum_{j=1}^n w_{ij} x_j={\bf w}_i^T{\bf x}
+=||{\bf w}_i||\;||{\bf x}||\;\cos\theta
+\;\;\;\;\;(i=1,\cdots,K)$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5254}%
+$ \theta$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5262}%
+$ ||{\bf x}||^2=1$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5266}%
+$ ||{\bf w}_i||=1$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay5270}%
+$\displaystyle y_i=\left\{ \begin{array}{ll} 1 & \mbox{if}\;\;
+a_i={\bf w}_i^T{\bf x}=\max_j {\bf w}_j^T{\bf x} \\0 & \mbox{otherwise}
+\end{array} \right.\;\;\;\;\;\;(i=1,\cdots,K)$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5272}%
+$ {\bf w}_i^T{\bf x}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5274}%
+$ d({\bf x},\,{\bf w})=||{\bf w}_i-{\bf x}||$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay5277}%
+$\displaystyle d^2({\bf w}_i,{\bf x})$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay5281}%
+$\displaystyle ||{\bf w}_i-{\bf x}||^2
+=({\bf w}_i-{\bf x})^T({\bf w}_i-{\bf x})
+={\bf w}_i^T{\bf w}-2{\bf w}_i^T{\bf x}+{\bf x}^T{\bf x}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay5285}%
+$\displaystyle ||{\bf w}_i||^2+||{\bf x}||^2-2{\bf w}_i^T{\bf x}
+=||{\bf w}_i||^2+||{\bf x}||^2-2||{\bf w}_i||\,||{\bf x}||\;\cos\,\theta$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5291}%
+$ a_i={\bf w}_i^T{\bf x}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5293}%
+$ ||{\bf w}_i-{\bf x}||$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay5297}%
+$\displaystyle y_i=\left\{ \begin{array}{ll}
+1 & \mbox{if } ||{\bf w}_i-{\bf x}||=\min_j||{\bf w}_j-{\bf x}||
+\\0 & \mbox{otherwise} \end{array}  \right.\;\;\;\;\;\;(i=1,\cdots,K)$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay5299}%
+$\displaystyle {\bf w}_i^{new}={\bf w}_i^{old}+y_i\,\eta\;({\bf x}-{\bf w}_i^{old})
+=\left\{\begin{array}{ll}(1-\eta){\bf w}_i^{old}
++\eta {\bf x}& \mbox{if }y_i=1\\{\bf w}_i^{old}& \mbox{if }y_i=0
+\end{array} \right.$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5301}%
+$ 0<\eta<1$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5305}%
+$ \eta_0=0.9$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5307}%
+$ \alpha$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5309}%
+$ \alpha=0.99$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5311}%
+$ \eta_l=\alpha \eta_{l-1}
+=\cdots=\alpha^l\eta_0 $%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5315}%
+$ {\bf w}_i^{new}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5319}%
+$ {\bf w}_j^{old}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5325}%
+$ {\bf w}_1^{(0)},\;{\bf w}_2^{(0)},\cdots,{\bf w}_m^{(0)}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5327}%
+$ l=1$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay5331}%
+$\displaystyle a_i={\bf w}_i^T{\bf x}\;\;\;\;\;\;\;(i=1,\cdots,m)$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5333}%
+$ a_j\ge a_i\;\;\;(i=1,\cdots,n)$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay5335}%
+$\displaystyle {\bf w}_j^{(l+1)}={\bf w}_j^{(l)} +\eta ({\bf x}-{\bf w}_i^{(l)})$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5337}%
+$ \eta\leftarrow \alpha \eta$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5339}%
+$ {\bf w}_j^{(l+1)}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5343}%
+$ \eta_0$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5345}%
+$ l \leftarrow l+1 $%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay5355}%
+$\displaystyle a_i={\bf w}_i^T{\bf x}+b_i$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5357}%
+$ b_i$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5359}%
+$ 1/m$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay5361}%
+$\displaystyle b_i=c\;\left(\frac{1}{K}
+-\frac{\mbox{number of winnings of node $i$}}{\mbox{total number iterations so far}}\right)$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5365}%
+$ b_i<0$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5367}%
+$ b_i>0$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5369}%
+$ c$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5383}%
+$ d=2$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5389}%
+$ tr{\bf S}_T^{-1}{\bf S}_B$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5391}%
+$ K=5$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5394}%
+$ n_k$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay5396}%
+$\displaystyle {\bf w}_i^{new}={\bf w}_i^{old}+u_{ik}\eta \,({\bf x}-{\bf w}_i^{old})
+\;\;\;\;\;\;i=1,\cdots,K$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5398}%
+$ u_{ik}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay5400}%
+$\displaystyle u_{ik}=exp\left( -\frac{d^2_{ik}}{2\sigma^2} \right)
+\left\{ \begin{array}{ll} =1 & \mbox{if $i=k$\  and $d_{ik}=0$}\\
+<1 & \mbox{else }  \end{array}\right.$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5402}%
+$ \sigma$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5404}%
+$ d_{ik}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5406}%
+$ n_i$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5410}%
+$ d_{kk}=0$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5412}%
+$ u_{kk}=1$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5418}%
+$ y_i={\bf w}^T_i{\bf x}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5420}%
+$ y_k\ge y_i$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5422}%
+$ T$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5428}%
+$ {\bf w}=[w_1,\,w_2]^T$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5434}%
+$ {\bf w}^T_i{\bf x}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5440}%
+$ d=3$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline5443}%
+$ N\times N\times 3$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+
+\end{document}
