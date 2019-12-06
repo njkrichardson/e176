@@ -1,0 +1,381 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Self-Organizing Map (SOM)</TITLE>
+<META NAME="description" CONTENT="Self-Organizing Map (SOM)">
+<META NAME="keywords" CONTENT="ch10">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch10.css">
+
+<LINK REL="next" HREF="node8.html">
+<LINK REL="previous" HREF="node6.html">
+<LINK REL="next" HREF="node8.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node8.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="ch10.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node6.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node8.html">Convolutional Neural Networks (CNNs)</A>
+<B> Up:</B> <A
+ HREF="ch10.html">ch10</A>
+<B> Previous:</B> <A
+ HREF="node6.html">Competitive Learning Networks</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00070000000000000000">
+Self-Organizing Map (SOM)</A>
+</H1>
+
+<P>
+The <A ID="tex2html9"
+  HREF="http://en.wikipedia.org/wiki/Self-organizing_map"><EM>Self-organizing map (SOM)</EM></A>
+is a process that 
+maps the input patterns, vectors in a high d-dimensional space, to a 
+low-dimensional output space, which is typically 2-D grid (a lattice)
+called a <EM>feature map</EM>, although 1-D and 3-D can also be used, so 
+that the nodes in the neighborhood of this map respond collectively to 
+a group of similar input patterns. The idea of SOM is motivated by the 
+mapping process in the brain, by which signals from various sensory 
+(e.g., visual and auditory) system are projected (mapped) to different 
+2-D cortical areas and responded to by the neurons wherein.
+
+<P>
+<IMG STYLE="" SRC="../figures/SOM.gif"
+ ALT="SOM.gif">
+
+<P>
+The output nodes of a SOM network are typically organized in a 2-D 
+grid, the feature map, and the competitive learning algorithm discussed 
+above is modified so that the learning takes place not only at the winning 
+node <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img354.svg"
+ ALT="$n_k$"></SPAN>, but also at a set of output nodes in the neighborhood of the 
+winner. The weight vectors of all such nodes are modified:
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="SOMweightUpdate"></A><!-- MATH
+ \begin{equation}
+{\bf w}_i^{new}={\bf w}_i^{old}+u_{ik}\eta \,({\bf x}-{\bf w}_i^{old})
+  \;\;\;\;\;\;i=1,\cdots,K
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img355.svg"
+ ALT="$\displaystyle {\bf w}_i^{new}={\bf w}_i^{old}+u_{ik}\eta \,({\bf x}-{\bf w}_i^{old})
+\;\;\;\;\;\;i=1,\cdots,K$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">67</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img356.svg"
+ ALT="$u_{ik}$"></SPAN> is some weighting function centered at the winning node, 
+such as a Gaussian function:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+u_{ik}=exp\left( -\frac{d^2_{ik}}{2\sigma^2} \right)
+  \left\{ \begin{array}{ll} =1 & \mbox{if $i=k$\  and $d_{ik}=0$}\\
+    <1 & \mbox{else }  \end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.32ex; " SRC="img357.svg"
+ ALT="$\displaystyle u_{ik}=exp\left( -\frac{d^2_{ik}}{2\sigma^2} \right)
+\left\{ \beg...
+...l} =1 &amp; \mbox{if $i=k$\ and $d_{ik}=0$}\\
+&lt;1 &amp; \mbox{else } \end{array}\right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">68</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img358.svg"
+ ALT="$\sigma$"></SPAN> is a parameter for the width of the Gaussian function, 
+and <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img359.svg"
+ ALT="$d_{ik}$"></SPAN> is the Euclidean distance from any node <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img360.svg"
+ ALT="$n_i$"></SPAN> to the winning 
+node <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img354.svg"
+ ALT="$n_k$"></SPAN> in the 2-D map. For the winner with <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img361.svg"
+ ALT="$d_{kk}=0$"></SPAN> and therefore 
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img362.svg"
+ ALT="$u_{kk}=1$"></SPAN>, the learning rate is maximally <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img53.svg"
+ ALT="$\eta$"></SPAN>, while all other nodes 
+also learn and modify their weights but with lower rates. Those closer 
+to the winner will learn more than those farther away, in the sense that
+their weight vectors are modified to be closer to the current input 
+pattern vector. 
+
+<P>
+Different from the previously considered competitive learning network, 
+where the output nodes each learn individually and independently to 
+respond to a cluster of similar patterns, here in the SOM network the 
+output nodes are locked into a 2-D map and the nodes in a neighborhood
+learn together collectively to respond to similar patterns. 
+
+<P>
+Here are the steps of the SOM learning algorithm:
+
+<OL>
+<LI>Initialize weights of a set of output nodes arranged in a 2-D map.
+</LI>
+<LI>Choose an input pattern <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN> from the high-dimensional vector 
+  space and calculate the activation <!-- MATH
+ $y_i={\bf w}^T_i{\bf x}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.72ex; " SRC="img363.svg"
+ ALT="$y_i={\bf w}^T_i{\bf x}$"></SPAN> for each of 
+  the output nodes.
+</LI>
+<LI>Find the winning node with maximum activation <!-- MATH
+ $y_k\ge y_i$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img364.svg"
+ ALT="$y_k\ge y_i$"></SPAN> and update
+  the weights of all nodes in its neighborhood by Eq. (<A HREF="#SOMweightUpdate">67</A>).
+</LI>
+<LI>Go back to step 2 until the feature map is no longer changing or a set
+  maximum number of iterations is reached.  
+</LI>
+</OL>
+
+<P>
+In the training process, both the size of the neighborhood (<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img365.svg"
+ ALT="$T$"></SPAN> or <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img358.svg"
+ ALT="$\sigma$"></SPAN>) 
+and the learning rate <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img53.svg"
+ ALT="$\eta$"></SPAN> will be gradually reduced.
+
+<P>
+We see that the SOM is a discrete approximation of the patterns defined in 
+a continuous d-dimensional feature space, i.e., the infinite number of 
+patterns in the feature space are quantified and approximated by a finite 
+set of d-dimensional vectors each represented by an output node in the 2-D 
+map. Also, as the nodes in the map are spatially related, they present a 
+visualization of the clustering structure of the high-dimensional data.
+Therefore one of the most important applications of the SOM is to visualize
+the data in high-dimensional space and discover the potential struction of
+the data.
+
+<P>
+<PRE>
+    [d N]=size(X);                         % dataset of N sample vectors
+    W=rand(d,M,M);                         % initialization of weights
+    for i=1:M
+        for j=1:M
+            w=reshape(W(:,i,j),[d 1]);
+            W(i,j,:)=W(:,i,j)/norm(w);     % normalize all weight vectors
+        end
+    end
+    eta=0.9;                               % initial learning rate
+    sgm=M;                                 % width of Gaussian neighborhood
+    decay=0.999;                           % rate of decay
+    for it=1:nt                            % training iterations
+        n=randi([1 N]);                  
+        x=X(:,n);                          % pick randomly an input
+        amax=-inf;
+        for i=1:M                          % find the winner 
+            for j=1:M 
+                w=reshape(W(:,i,j),[d 1]);
+                a=x'*w;                    % activation as inner product
+                if a&gt;amax
+                    amax=a;  wi=i;  wj=j;  % record winner so far
+                end
+            end
+        end
+        for i=1:M
+            for j=1:M
+                dist=(wi-i)^2+(wj-j)^2;    % distance to winner
+                c=exp(-dist/sgm);          % Gaussian weights
+                w=reshape(W(:,i,j),[d 1]); % get a weight vector
+                w=w+eta*c*(x-w);           % modify weights
+                w=w/norm(w);               % normalize weight vectors
+                W(:,i,j)=w;                % save modified weight vector
+            end
+        end
+        eta=eta*decay;                     % reduce learning rate
+        sgm=sgm*decay;                     % reduce width of Gaussian
+    end
+</PRE>
+
+<P>
+<B>Example 1:</B> 
+
+<P>
+This example illustrates the &ldquo;self-organizing map&rdquo; nature of the 
+SOM algorithm. The output nodes are organized into a 2-D map and 
+they learn to respond to the positions of a set of random dots in a 
+2-D space. When the SOM hase been trained, due to the spatial correlation 
+nature of the algorithm, the output nodes close to each other in the
+2-D map respond to a local neighborhood in the 2-D space, thereby 
+forming a self-organized spatial map, a roughly regular network.
+
+<P>
+The 2-D map of the output nodes is visualized as shown in the 
+figure below, where each node is connected to its four neighbors 
+to indicate the spatial structure of the array. The position of 
+each node is determined by the two components of its weight vector 
+<!-- MATH
+ ${\bf w}=[w_1,\,w_2]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img366.svg"
+ ALT="${\bf w}=[w_1,\,w_2]^T$"></SPAN> treated as its x-y positions in the 2-D 
+map.
+
+<P>
+In this case, the competition is based on the distance between the 
+weight vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img313.svg"
+ ALT="${\bf w}_i$"></SPAN> and the input <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN>, instead of their 
+inner product <!-- MATH
+ ${\bf w}^T_i{\bf x}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.72ex; " SRC="img367.svg"
+ ALT="${\bf w}^T_i{\bf x}$"></SPAN>. The node with the shortest 
+distance <!-- MATH
+ $||{\bf w}_i-{\bf x}||$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img325.svg"
+ ALT="$\vert\vert{\bf w}_i-{\bf x}\vert\vert$"></SPAN> becomes the winner, and is pulled 
+even closer to the input, dragging along with it neighboring nodes.
+
+<P>
+The figure below shows the iterative modification of the weights. In
+each of the 16 iterations, the output node (blue dot) is closest to 
+the input vector (red dot) and it becomes the winner
+
+<P>
+<IMG STYLE="" SRC="../figures/SOMgrid1.png"
+ ALT="SOMgrid1.png">
+
+<P>
+The figure below shows the subsequent iterations in every 50 iterations.
+The resulting configuration of the output nodes is roughly a regular 2-D
+grid, a self-organized map in the 2-D feature space.
+
+<P>
+<IMG STYLE="" SRC="../figures/SOMgrid2.png"
+ ALT="SOMgrid2.png">
+
+<P>
+<B>Example 2:</B> 
+
+<P>
+In this example the output nodes of the SOM are arranged into a 1-D loop 
+and they respond to a set of US/Canadian cities represented by their 
+coordinates (longitudes and latitudes), for the purpose of finding a 
+reasonably short path that goes through all of these cities (the
+traveling salesman problem). These nodes are visualized in terms of 
+their weight vectors as points in a 2-D map. The weights are either
+randomly initialized, or they can take an arbitrary shape such as a
+circle around the cities. During the iteration, they learn to respond 
+to the 2-D city coordinates as the input, and they are gradually pulled 
+toward the cities, thereby forming eventually a path through all the
+cities. In this case, the inner product <!-- MATH
+ ${\bf w}_i^T{\bf x}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.72ex; " SRC="img319.svg"
+ ALT="${\bf w}_i^T{\bf x}$"></SPAN> is used
+to determine the winner of each iteration.
+
+<P>
+The figure below shows the results of the first 16 iterations:
+
+<P>
+<IMG STYLE="" SRC="../figures/SOMTSP1.png"
+ ALT="SOMTSP1.png">
+
+<P>
+The figure below shows the subsequent iterations in every 50 iterations.
+The resulting configuration of the output nodes approaches the desired 
+path that passes through all cities. Although this result does not garantee 
+the path to be the shortest, it is reasonably close to such a solution 
+required by the traveling salesman problem. The final result is unaffected
+by how the weights are initalized.
+
+<P>
+<IMG STYLE="" SRC="../figures/SOMTSP2.png"
+ ALT="SOMTSP2.png">
+
+<P>
+<B>Example 3:</B> 
+
+<P>
+In this example, the output nodes in the 2-D map learn to respond 
+to different colors treated as vectors in a 3-D space spanned by the 
+three primary colors red, green and blue (RGB). When the SOM is trained, 
+neighboring output nodes respond to similar colors. The resulting weight
+vectors can be visualized by encoding their <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img368.svg"
+ ALT="$d=3$"></SPAN> components by the RGB 
+colors, indicating the colors they respond to maximally. As shown in the
+figure below, a self-organized spatial color map is formed reflecting the 
+favored colors of these nodes.
+
+<P>
+In this example, all input vectors are normalized (the hue of a color
+is fully determined by the ratios of the three primaries), and so are
+the weight vectors, which are always renormalized in each iteration.
+
+<P>
+The left panel in the figure bolew shows the RGB color-coded weight vectors
+when they are randomly initialized. The middle one shows the weight vectors
+when the SOM is fully trained. The right panel shows the winners encoded by
+the input colors they win. The black areas are composed of the output nodes
+that never win but learn along with their neighboring winners. Interestingly,
+the winners seem to form some structure in the 2-D space. More detailed
+discussion can be found 
+<A ID="tex2html10"
+  HREF="http://fourier.eng.hmc.edu/e161/lectures/NeuralNetworks/node15.html">here</A>.
+
+<P>
+<IMG STYLE="" SRC="../figures/SOMColorMap.png"
+ ALT="SOMColorMap.png">
+
+<P>
+More examples of SOM can be found <A ID="tex2html11"
+  HREF="https://en.wikipedia.org/wiki/Self-organizing_map">here</A>.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node8.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="ch10.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node6.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node8.html">Convolutional Neural Networks (CNNs)</A>
+<B> Up:</B> <A
+ HREF="ch10.html">ch10</A>
+<B> Previous:</B> <A
+ HREF="node6.html">Competitive Learning Networks</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>
