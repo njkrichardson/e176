@@ -1,0 +1,141 @@
+\documentclass[12pt,letterpaper]{hmcpset}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{amsmath, cancel}
+
+\input{macros.tex}
+
+% info for header block in upper right hand corner
+\name{Joseph Gardi}
+\class{Differential Geometry}
+\assignment{Notes}
+\duedate{Monday, September 23 2019}
+
+\renewcommand{\labelenumi}{{(\alph{enumi})}}
+
+
+\begin{document}
+\underline{Review}
+\begin{itemize}
+\item $\alpha(s)$ is a regular cuve if $\alpha(s)$ is parameterized by arclength
+  ($||\alpha'(s)||$ = 1)
+\item $\alpha(s) \perp \alpha''(s)$
+\item $\vec{t}(s) = \alpha'(s)$
+\item $\vec{n}(s) = \frac{\alpha''(s)}{||\alpha''(s)||} = \frac{\alpha''(s)}{\alpha(s)}$ \\
+  where $k(s) \triangleq ||\alpha''(s)|| = \frac{1}{R(s)}$
+\item Define $\vec{b}(s) = \vec{t}(s) \times \vec{n}(s)$
+\end{itemize}
+\underline{Inverse Function Theorem:} Monotonic functions are invertable. \\
+\underline{Theorem} If $\alpha$ is a regular curve in $R^3$ then there exists a
+reparameterization $\beta$ of $\alpha$ such that $\beta$ has unit speed. \\
+\underline{Proof:} Let $\alpha: I \rightarrow R^3$ be a regular curve Let $s(t) =
+\int_{t_0}^t||\alpha'(t)|| dt$.
+Then $s'(t) = ||\alpha'(t)||$. \\
+Since $\alpha$ is regular, $\alpha'(t) \neq 0$. Then $s'(t) = ||\alpha'(t)|| \neq 0$. Since the
+derivative never corsses zero and $s$ is continuous the function must be
+monotonic. Therefore, $s$ has an inverse $t(s)$. 
+\begin{align*}
+  \frac{dt}{ds} &= \frac{1}{\frac{ds}{dt}} \\
+                &= \frac{1}{s'(t)} \\
+                &= \frac{1}{||\alpha'(t)||}
+\end{align*}
+Then $\frac{dt}{ds}$ is always greater than 0. Let $\beta$ be the
+reparameeterizatoin,
+\begin{align*}
+  \beta(s) = \alpha(t(s))
+\end{align*}
+I calim $\beta$ has unit speed,
+\begin{align*}
+  \beta'(s) &= \alpha'(t(s))t'(s) \\
+  ||\beta'(s)|| &= ||\alpha'(t(s))|| ||t'(s)|| \\
+        &= \cancel{||\alpha'(t(s))||} ||\frac{1}{\cancel{\alpha'(t(s))}}|| \\
+        &= 1
+\end{align*}
+So $\beta$ is parameterized by arclength.
+
+\underline{Example of this theorem:} Consider a helix,
+\begin{align*}
+  \alpha&: R \rightarrow R^3 \\
+  t &\mapsto (cos t, sin t, t) = \alpha(t) \\ 
+  \alpha'(t) &= (-sin t, cos t, 1) \\
+  ||\alpha'(t)|| &= \sqrt{(-sin t)^2 + (cos t)^2 + 1} = \sqrt{2} \\
+  s(t) &= \int_0^t||\alpha'(t)||dt - \int_0^t \sqrt{2}dt = \sqrt{2} t \\
+  &\implies t = s/\sqrt{2}
+\end{align*}
+So $\beta(s) = (cos \frac{s}{\sqrt{2}}, sin \frac{s}{\sqrt{2}}, \frac{s}{\sqrt{2}})$
+\\
+From now on we can say wihtout loss of generality, we can assume a regualr
+curve is parameterized by arclength. \\
+\underline{Example:} A regualr parameterized curve $\alpha$ has the property that all
+its tangent lines go through a fixed point. 
+a) prove that the trace is a straight line segment. \\
+\underline{Proof:} Without loss of generality prove that parameterized by
+arclength. \\
+Let $p$ be the fixed point. A tangent line at $\alpha(s)$ is the line with direction
+$\alpha'(s)$ and
+passing throguht the point $\alpha(s)$. The equation for the line is $l(t) = \alpha(s) + t
+\alpha'(s)$. \\
+By hypothesis, for each choice of $s$ there exists $t(s)$ such that
+\begin{align*}
+  \alpha(s) + \alpha'(s)t(s) &= p \\
+\end{align*}
+Notice $t(s)$ is differentiable,
+\begin{align*}
+  \alpha(s) + \alpha'(s)t(s) &= p \\
+  \implies \alpha'(s) \cdot \alpha(s) + \alpha'(s) \cdot \alpha'(s) t(s) &= p \cdot \alpha'(s) \\
+  \implies t(s) &= \frac{\ \cdot \alpha'(s) - \alpha'(s) \cdot \alpha(s)}{||\alpha'(s)||^2}
+\end{align*}
+Since $\alpha$ iks regular, $||\alpha'(s)|| \neq$ so this is a valid expression and $t(s)$ is
+differentiable. So then we take the derivative of both sides,
+\begin{align*}
+  \alpha(s) + \alpha'(s)t(s) &= p \\
+  \implies \alpha'(s) + \alpha''(s)t(s) + \alpha'(s)t'(s) &= 0 & \text{(take derivative of both sides)} \\
+\end{align*}
+
+There are application to UAV autonomous vehicles and cellphones
+\underline{Definition} $\{v_1, v_2, v_3\}$ is right hand sided if and only if
+$det([v_1\; v_2\; v_3]) > 0$ \\
+\underline{Recall the definition of a group} A group $G$ is a finite or infinite set of elements together with a binary
+operation (called the group operation) that together satisfy the four
+fundamental properties of closure, associativity, the identity property, and the
+inverse property. The operation with respect to which a group is defined is
+often called the "group operation," and a set is said to be a group "under" this
+operation. Elements $A$, $B$, $C$, ... with binary operation between A and B denoted
+AB form a group if
+
+1. Closure: If $A$ and $B$ are two elements in $G$, then the product $AB$ is also in $G$.
+
+2. Associativity: The defined multiplication is associative, i.e., for all $A$,$B$,$C$ in $G$, $(AB)C=A(BC)$.
+
+3. Identity: There is an identity element I (a.k.a. $1$, $E$, or $e$) such that $IA=AI=A$ for every element A in G.
+
+4. Inverse: There must be an inverse (a.k.a. reciprocal) of each element.
+Therefore, for each element A of G, the set contains an element $B=A^{-1}$ such
+that $AA^{-1}=A^{-1A}=I$.
+
+\underline{Claim:} The set of all $3\times3$ orthonormal matrices forms a group
+denoted $O(3)$:
+\begin{align*}
+  O(3) = \{ A \in M_{3\times 3}(R) : A^TA = I \}
+\end{align*}
+Then there is $SO(3) = \{ A \in O(3) : det A = 1 \} < O(3)$.
+Define he matrix multiplicationi operator as
+\begin{align*}
+  O(3) \times O(3) \rightarrow O(3) \\
+  A, B \mapsto AB \\
+  A \in O(3) \implies (A^TTA) = I and det A = 1 \\
+  B \in O(3) \implies B^TB = I and det B = 1
+\end{align*}
+Now we show $AB \in O(3)$,
+\begin{align*}
+  (AB)^T(AB) = B^TA^TAB = B^TB = I \in O(3)
+\end{align*}
+So it is.
+Now we show that $A^{-1} \in O(3)$.
+\begin{align*}
+  A^{-1}(A^{-1})^T = A^{-1}A = I
+\end{align*}
+\end{document}
+

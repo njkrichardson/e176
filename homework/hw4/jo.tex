@@ -1,0 +1,212 @@
+
+% HMC Math dept HW template example
+% v0.04 by Eric J. Malm, 10 Mar 2005
+\documentclass[12pt,letterpaper,boxed]{hmcpset}
+
+% set 1-inch margins in the document
+\usepackage[margin=1in]{geometry}
+
+% include this if you want to import graphics files with /includegraphics
+\usepackage{graphicx,siunitx,cancel,scrextend,amsthm, amssymb, enumerate,
+  hyperref, parskip, mathtools, xcolor, amsfonts, xcolor}
+
+\input{macros.tex}
+
+\DeclareSIUnit\year{yr}
+\newcommand{\inden}{\begin{addmargin}[2em]{0em}}
+\renewcommand{\mod}[3]{#1 \equiv #2 \ (\mbox{mod } #3)}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+
+\newcommand{\highlight}[1]{%
+  \colorbox{red!50}{$\displaystyle#1$}}
+
+\newcommand{\cmmt}[1]{%
+  \text{\phantom{(#1)}} \tag{#1}
+}
+
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\name{Joseph Gardi}					%% insert your name
+\class{Math142} 		%% replace spaces (\ \ \ ) with section #
+\assignment{Homework 4}
+\duedate{Due: Monday, Octoboer 7, 2019}
+
+\begin{document}
+\paragraph{A: Problems on Reviewing of Rigid Motions in $R^3$.}
+\begin{itemize}
+
+{\item a) Show that the set of rigid motions $E(3)$ forms a group. 
+(Later, we will see that  $E(3)$ is in fact a Lie group.)} 
+ 
+\end{itemize}
+
+\begin{solution}
+ For this problem, I referenced an explanation of $E(3)$ given in a PDF by John Baez on the UCR \href{http://math.ucr.edu/home/baez/classical/galilei_pro.pdf}{Classical Mechanics} website.
+
+The set of rigid motions $E(3)$ contains all pairs $(R, t)$ such that $R \in 0(3)$ is an orthogonal transformation (a rotation) and $t \in \RR^3$  is a translation vector. Each element $(R, t)$ gives a transformation of $3$-dimensional Euclidean space built from an orthogonal transformation and a translation:
+\[
+f_{(R, t)} \colon \RR^3 \to \RR^3
+\]
+defined by 
+\[
+f_{(R, t)}(x) = Rx + t
+\]
+
+
+Recall that a set is a group if it is equipped with a binary operation that satisfies the axioms of closure, associativity, identity, and invertibility.
+
+\textbf{Closure}
+
+Given elements $(R, t) , (R', t') \in E(3)$, the composition of the transformations is 
+\begin{align*}
+    f_{(R, t)} \circ f_{(R', t')}(x) 
+    &= R (R' x + t') + t\\
+    &= RR'x + Rt' + t.
+\end{align*}
+Since $RR' \in O(3)$ and $Rt' + t \in \RR^n$, the composed transformation is also in $E(3)$ and thus $E(3)$ is closed under composition. 
+
+\textbf{Associativity}
+
+We assert that, given elements $(R,t), (R',t'), (R'', t'') \in E(3)$, then
+\[
+f_{(R, t)} \circ \Big(f_{(R', t')} \circ f_{(R', t')}\Big) = \Big(f_{(R, t)} \circ f_{(R', t')}\Big) \circ f_{(R', t')}.
+\]
+\begin{proof}
+As a function of $x$, the left hand side of the above composition is given by
+\begin{align*}
+   f_{(R, t)} \circ \Big(f_{(R', t')} \circ f_{(R', t')}\Big)(x)
+   &= R (R' (R''x + t'') + t') + t\\
+   &= R(R'R'')x + R(R't'' + t') + t \\
+   &= (RR')R''x + (RR')t'' + (Rt' + t)\\
+   &= \Big(f_{(R, t)} \circ f_{(R', t')}\Big) \circ f_{(R', t')}(x)
+\end{align*}
+\end{proof}
+
+\textbf{Identity}
+
+The pair $(I_3, 0) \in E(3)$ is the identity element. The proof is left as an exercise to the grader.
+
+\textbf{Invertibility}
+
+Any element $(R, t)$ in $E(3)$ has an inverse $(R^T, -R^Tt)$ in $E(3)$.
+
+\begin{proof}
+\begin{align*}
+    f_{(R, t)} \circ f_{(R^T, -t)} 
+    &= f_{(RR^T, -RR^Tt + t)} \\
+    &= f_{(I_3, 0)}.
+\end{align*}
+Similarly,
+\begin{align*}
+    f_{(R^T, R^Tt)} \circ f_{(R, t)} 
+    &= f_{(R^TR, R^TRt - t)} \\
+    &= f_{(I_3, 0)}.
+\end{align*}
+As the composition of the two transformations has resulted in the identity element, the inverse exists and $(R^T, -R^Tt)$ is the proper inverse. 
+
+\end{proof}
+
+As all of the group axioms hold, $E(3)$ is a group.
+
+ 
+\end{solution}
+\medskip
+\paragraph{B: Problems from Lectures}
+
+\begin{itemize}
+{\item a) Show that of all simple closed curves in the plane with 
+given length $l$, a circle bounds the largest area.}
+\begin{solution}
+See The isoperimetric inequality on Do Carmo page 33.
+\end{solution}
+\end{itemize}
+
+\paragraph{C: Other Problems}
+\begin{itemize}
+{\item a) Problem 2 on page 29, Section 1-6, Baby Do Carmo.}
+\begin{solution}
+  a) The osculating plane is the unique plane containing $\alpha(s), \alpha(s) + \alpha'(s), \alpha(s)
+  + \alpha''(s)$. Let $P_{h_1, h_2}$ be the plane containing $\alpha(s), \alpha(s + h_1), \alpha(s +
+  h_2)$.  It is given that $\alpha(s) \in P_{h_1, h_2}$.\\
+  Now we show $\alpha(s) + \alpha'(s) \in P_{h_1, h_2}$. All affine combinations of those points are contained in $P_{h_1, h_2}$ so
+  $\alpha(s) + \alpha'(s) = \alpha(s) + \frac{1}{h_1}(\alpha(s + h_1) - \alpha(s)) \in P_{h_1, h_2}$. 
+  Now we show $\alpha(s) + \alpha''(s) \in P_{h_1, h_2}$.
+  \begin{align*}
+    \alpha(s) + \alpha''(s) &= \alpha(s) + \frac{1}{h_2}(\alpha'(s + h_2) - \alpha'(s)) \\
+                  &= \alpha(s) + \frac{1}{h_2}(\frac{\alpha(s + h_2) - \alpha(s + h_1)}{h_2 - h_1} - \alpha'(s)) \\
+                  &\in P_{h_1, h_2} \cmmt{Since this is an affine combination of poitns in the plane} \\
+  \end{align*}
+  b) Let $a$ be the center of this circle. Let $r$ be the radius so $r = ||\alpha(s)
+  - a|| = ||\alpha(s + h_1) - a|| = ||\alpha(s + h_2) - a||$. We know that $a$ must lie in
+  the osculating plane since we just showed in part a that $\alpha(s), \alpha(s + h_1),
+  \alpha(s + h_2)$ all lie in the osculating plane. The line through $\alpha(s)$ and $\alpha(s
+  + h_1)$ is tangent to the circle. $n(s)$  is in the osculating plane and
+  orthogonal to the tangent line so it must be pointed towards the center of the
+  circle. Let's make a pameterization for our circle and use the osculating
+  plane as our coordinate system with the origin at $a$: $\beta(t) = (r cos
+  \frac{t}{r}, r sin \frac{t}{r})$. This is already parameterized by arc length.
+  The curvature is,
+\begin{align*}
+  ||\beta''(t)|| &= \sqrt{(-\frac{1}{r} cos \frac{t}{r})^2 +
+    (-\frac{1}{r} sin \frac{t}{r})^2} \\
+             &= \frac{1}{r} \sqrt{cos^2 \frac{t}{r} + sin^2 \frac{t}{r}} \\
+             &= \frac{1}{r}
+  \end{align*}
+  The curvature of the circle $||\beta''(t)||$ is equal to the curvature of the
+  given curve $||\alpha''(s)||$ because they share those 3 points. So we get
+  $\frac{1}{r} = k(s) \implies r = \frac{1}{k(s)}$.
+\end{solution}
+{\item b) Problem 1 on page 47, Section 1-7, Baby Do Carmo.}
+\begin{solution}
+  No. That would violate the isoperimetric inequality. \\\\
+\end{solution}
+{\item c) Problem 2 on page 47, Section 1-7, Baby Do Carmo.}
+\begin{solution}
+Suppose that we have a curve $E$ of length $l$ from $A$ to $B$ that is part of a larger circle $D$ with length $g$. We know from the isoperimetric
+inequality that this circle is the closed cuve of length $g$ that bounds the
+largest possible area. If there was a curve $C$ of length $l$ from $A$ to $B$ that together
+with $\overline{AB}$ bounds a larger area than $E$ with $\overline{AB}$ that would
+contradict the isoperimetric theorem because that would imply that replaceing
+$E$ with $C$ in the circle $D$ would create a shape with length $g$ that bounds
+more area than the circle $D$.
+\end{solution}
+{\item d) Problem 3 on page 65, Section 2-2, Baby Do Carmo.}
+\begin{solution}
+ It was shown in the book that a one sheeted cone is not a regular surface. The
+ double sheeted cone contains the one sheeted cone so it can't be a regular
+ surface.
+ It would still have the issue of not being a differentiable function in any
+ form at $(0, 0, 0)$.
+\end{solution}
+{\item e) Problem 5 on page 65, Section 2-2, Baby Do Carmo.} \\
+It is a parameterization. $x$ is surjective to to the neighborhood $V =
+B_{.1}((1, 1, 0))$. 
+{\item f) Problem 10 on page 66, Section 2-2, Baby Do Carmo.} \\
+no. There is a ciritical point at the part where the loops meet.
+{\item g) Problem 16 on page 67, Section 2-2, Baby Do Carmo.}\\
+Given $u, v$ we want to find $\pi^{-1}(u, v)$.
+We know the following
+\begin{align*}
+  ||\pi^{-1}(u, v) - (0, 0, 1)|| &= 1 \\
+  \exists \alpha, (0, 0, 2) + \alpha(\pi^{-1}(u, v) - (0, 0, 2)) &= (u, v, 0) 
+\end{align*}
+Therefore,
+\begin{align*}
+  \pi^{-1}(u, v) &= \frac{1}{\alpha}(u, v, -2) + (0, 0, 2) \tag*{eq 1} \\
+  ||\pi^{-1}(u, v) - (0, 0, 1)|| &= ||\frac{1}{\alpha}(u, v, -2) + (0, 0, 1)|| \\
+               &= \sqrt{(u/\alpha)^2 + (v/\alpha)^2 + (1  - \frac{2}{\alpha})^2} = 1 \\
+  \implies \frac{u^2 + v^2}{\alpha^2} + 1 - 4/\alpha + 4/\alpha^2 &= 1 \\
+  \implies \frac{u^2 + v^2 + 4}{\alpha} - 4 &= 0 \\
+  \implies \alpha &= \frac{u^2 + v^2 + 4}{4} \tag*{eq 2}
+\end{align*}
+By plugging in equation 2 for $\alpha$ into equation 1 for $\pi^{-1}(u, )$ we get the desired result
+\end{itemize}
+
+\paragraph{D: Extra Credit Problems}
+\begin{itemize}
+{\item Give a different solution to B a).}
+\end{itemize}
+
+\end{document}

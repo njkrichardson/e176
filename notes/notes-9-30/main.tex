@@ -1,0 +1,109 @@
+\documentclass[12pt,letterpaper]{hmcpset}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{amsmath, cancel}
+
+\input{macros.tex}
+
+% info for header block in upper right hand corner
+\name{Joseph Gardi}
+\class{Differential Geometry}
+\assignment{Notes}
+\duedate{Monday, September 30 2019}
+
+\renewcommand{\labelenumi}{{(\alph{enumi})}}
+
+
+\begin{document}
+\underline{Preliminary Definitions}
+\begin{itemize}
+\item A neighborhood around a point $p$ is $\{ x: ||x - p|| \leq r\}$ for some
+  radius $r$. This set is shaped like a ball and denotoed $B_r(p)$.
+\item If we say something is true locally around $x$ we mean it is true for all
+  points in some sufficiently small neighborhood around $x$.
+\item A homeomorphism is a continuous function with a coninuous inverse.
+\item Intuition for continuous funcions. If $f$ is continuous then $a$ close to
+  $b$ implies that $f(a)$ close $f(b)$. To illustrate consider my body. My wrist
+  is close to my hand. So if we apply a continuous transformationsto the position
+  of each of my body parts theen my wrist will still be close to my hand. All
+  the movements I normally do are continuous transformations.
+  But if I cut off my own hand then my hand won't be close to my wrist anymore.
+  That is a discontinuous transformation. There is a discontinuous jump from my
+  wrist after cutting to my hand after cutting.
+\item The differential matrix for a function $f(x, y)$:
+  \begin{align*}
+    Df \triangleq \begin{bmatrix}
+    \frac{\partial f_1}{\partial x} & \frac{\partial f_1}{\partial y} \\
+    \frac{\partial f_2}{\partial x} & \frac{\partial f_2}{\partial y}  
+    \end{bmatrix}
+  \end{align*}
+\end{itemize}
+It will also be helpful to remember the first order taylor expansion for a
+continuous differentiable function $f: R^2 \rightarrow R^2$,
+\begin{align*}
+  f(x, y) = f(u, v) + Df(u, v)\begin{bmatrix}x - u \\ x - v\end{bmatrix}
+\end{align*}
+\underline{Theorem:} Inverse function theorem in high dimension \\
+Let $\rho: (u, v) \rightarrow (x(u, v), y(u, v))$ be a differentiable function. \\
+$\rho$ is locally (i.e. for some sufficiently small neighborhood) invertable around
+$(a, b)$ if and only if $D\rho((a, b))$ is an
+invertable matrix. Recall,
+\begin{align*}
+  D\rho =
+  \begin{bmatrix}
+    \frac{\partial x}{\partial u} & \frac{\partial x}{\partial v} \\
+    \frac{\partial y}{\partial u} & \frac{\partial y}{\partial v}  
+  \end{bmatrix}
+\end{align*}
+Also, $\rho^{-1}$ is differentiable.  
+\begin{align*}
+
+\end{align*}
+
+We will first define regular surface. Then we take characteristic properties of
+regular surfaces to define manifolds. Manifolds are like a generalization of
+regular surfaces. \\
+We will put the reimennian matric on each tangent space. \\
+
+This is similar to how we generalized $R^3$ to metric spaces in analysis.
+
+Suppose we are interested in the miotion of a particle. Then we take, as the
+state oof the particle, the pair of 3 dimensional vectoros $(x, v)$ where $x$ is
+the position and $v$ is the velocity. If we know the particle must stay on a
+sphere $M$ then we it follows that $v$ must always be tangent to $M$. Then our
+state space $S$ is not all pairs of 3-vectors but he tangent bundle of $M$ which
+is a manifold.
+\begin{align*}
+  S = \{ (x, v) : v\text{ is tangent to }M\}
+\end{align*}
+\underline{Definition:} $S \subset R^3$ is a regular surface if for each $p \in S$ there
+exists a neighborhood $V$ in $R^3$ and a map $x: U \rightarrow V \bigcap S$ of an open set $U
+\subset R^2$ onto $V \bigcap S \subset R^3$ such that,
+\begin{itemize}
+\item $x$ is differentiable (so we can use calculus)
+\item $x$ is a homeomoorphism (so we can use analysis)
+\item $x$ is regular (so we can use linear algebra). Since $x$ is regular there
+  is a tangent plane at each point in $S$.
+\end{itemize}
+
+Suppose we have a regular surface $V \subseteq R^3$ with a mapping $x: (u, v) \rightarrow (x(u, v)
+y(u, v), z(u, v))$. Then the tangent plane at a point $q$ is spanned by the
+columns of $Dx_q = \begin{bmatrix}\frac{\partial x}{\partial u} & \frac{\partial x}{\partial v} \\
+\frac{\partial y}{\partial u} & \frac{\partial y}{\partial v} \\
+\frac{\partial z}{\partial u} & \frac{\partial z}{\partial v} \\
+\end{bmatrix}$.  \\
+\underline{Notation:}
+\begin{align*}
+  \frac{\partial(x, y)}{\partial(u, v)} \triangleq \begin{bmatrix}\frac{\partial x}{\partial u} & \frac{\partial x}{\partial v} \\
+    \frac{\partial u}{\partial u} & \frac{\partial y}{\partial v}
+  \end{bmatrix}
+\end{align*}
+$\{(x, y, f(x, y)) : x, y \in R \}$ is a surface.\\
+The parameterization for this surface is $a(x, y) = (x, y, f(x, y))$ \\
+Now we willl prove his is a regular surface. $da = \begin{bmatrix}1 ^ 0 \\ 0 &
+  1 \\ \frac{\partial f}{\partial x} & \frac{\partial f}{\partial y}\end{bmatrix}$. This is invertable so
+$a$ has a continuous inverse. So it is homeomorphic.
+\underline{Definition:} For a differentible function $f: U \subset R^3 \rightarow R$. 
+\end{document}

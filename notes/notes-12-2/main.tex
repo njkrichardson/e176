@@ -1,0 +1,55 @@
+\documentclass[12pt,letterpaper]{hmcpset}
+\usepackage[margin=1in]{geometry}
+\DeclareMathOperator{\Tr}{Tr}
+\usepackage{graphicx}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{amsmath, cancel}
+
+\input{macros.tex}
+
+% info for header block in upper right hand corner
+\name{Joseph Gardi}
+\class{Differential Geometry}
+\assignment{Notes}
+\duedate{Monday, Dec 12th 2019}
+
+\renewcommand{\labelenumi}{{(\alph{enumi})}}
+
+\begin{document}
+\underline{Today}
+\begin{enumerate}
+\item  Covariant derivative
+\item Parallel transport
+\item Geodesic
+\item G-B Theorem
+\end{enumerate}
+Intrinsic geometry means we are looking at just surfaces.
+It lies in this coordinate. \\
+$w$ is a vector field on a surface. $w(u, v) = a(u, v)x_u + b(u, v)x_v$ \\
+Let's restrict $w$ onto the curve $\alpha(t) = (u(t), v(t))$. Then $w(t) = a(\alpha(t))x_u + b(\alpha(t))x_v$ and
+\begin{align*}
+  w'(t) &= a'(\alpha(t)) \alpha'(t) x_u\\& + a(\alpha(t))(x_{uu}u'(t) + x_{vv}v'(t))\\& + b'(\alpha(t)) 
+  \alpha'(t) x_v\\& + b(\alpha(t))(x_{vu}u'(t) + x_{vv}v'(t)) \\
+        &= qx_u + rx_v + sN &\tag{for some $q, r, s \in R$}
+\end{align*}
+If $Dw/dt = 0$ then that means the vector field is paralell to $\alpha'(t)$.\\
+A vector field $w$ along a parameterized curve $\alpha: I \rightarrow S$ is said to be parallel
+if $Dw/dt = 0$ for every $t \in I$. \\
+Parallel transport in $R^2$ means  all the vectors are parallel.\\
+\underline{Proposition} If $w, v$ are parallel vector fields then $<w(t), v(t)>$
+is constant. \\
+\underline{Definition} a nonconstant parameterized curve $\gamma: I \rightarrow S$ is said to
+be geodesic at $t \in I$ if the field of its tangent vectors $\gamma'(t)$ is parallel
+along $\gamma$ at $t$. That is,
+\begin{align*}
+  \frac{D\gamma'(t)}{dt} = 0
+\end{align*}
+$\gamma$ is a parameterized geodesic if it is geodesic for all $t \in I$. \\
+\underline{Gauss-Bonnet} \\
+\begin{align*}
+  \int\int_S k\; ds = 2\pi \chi(S)
+\end{align*}
+$\chi$ is the euler number for the surface. $\chi(S) = #vertices - #edges + #faces$ \\
+
+\end{document}

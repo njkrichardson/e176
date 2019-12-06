@@ -1,0 +1,386 @@
+\documentclass{beamer}
+
+%%BEGIN HEADER
+\usepackage{amsmath,amssymb,amsthm,framed}
+\usepackage{multirow,color,multicol}
+\usepackage{fancyhdr,ifthen,lastpage}
+\usepackage{verbatim,enumerate,cancel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+ 
+% --------------------------------------------------------------------
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem{fct}{Fact}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\B}{\mathcal{B}}
+\renewcommand{\P}{\mathcal{P}}
+\renewcommand{\L}{\mathcal{L}}
+\newcommand{\F}{\mathbf{F}}
+\newcommand{\x}{\mathbf{x}}
+\newcommand{\y}{\mathbf{y}}
+
+\newcommand{\sm}{\setminus}
+\newcommand{\es}{\emptyset}
+\newcommand{\ol}{\overline}
+\newcommand{\inv}{^{-1}}
+\newcommand{\seq}[1]{\{ {#1}_n\}}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\mbf}{\mathbf}
+\renewcommand{\=}{&=&}
+\newcommand{\<}{\langle}
+\renewcommand{\>}{\rangle}
+
+\newcommand{\bmat}{\begin{bmatrix}}
+\newcommand{\emat}{\end{bmatrix}}
+\newcommand{\beq}{\begin{eqnarray*}}
+\newcommand{\eeq}{\end{eqnarray*}}
+
+\DeclareMathOperator{\repart}{Re}
+\DeclareMathOperator{\impart}{Im}
+\DeclareMathOperator{\Arg}{Arg}
+\DeclareMathOperator{\trace}{tr}
+\DeclareMathOperator{\rk}{rank}
+\DeclareMathOperator{\nullsp}{null}
+\DeclareMathOperator{\range}{range}
+\DeclareMathOperator{\vspan}{span}
+\DeclareMathOperator{\nullity}{nullity}
+%%%%%END HEADER
+
+%\usetheme{Berlin}
+%\usecolortheme{orchid}
+ 
+\title{Topic 1: Linear Algebra Review}
+\author{Prof. Weiqing Gu}
+\date{}
+\institute{Math 142:\\Differential Geometry}
+
+%--------------------
+\begin{document}
+
+\begin{frame}[t]
+\frametitle{Real insight of lienar transformation}
+Let $V^n$ be a vector space with basis $\{ v_1, v_2, \cdots, v_n \}$ \\
+Let $W^n$ be another wector space with basis $\{ w_1, w_2, \cdots, w_n \}$ \\
+
+\underline{Definition} A function $L: V^n \rightarrow W^m$ is linear if and only if,
+for all $x \in V^n$,
+\begin{align*}
+  L(x + y) &= L(x) + L(y) \\
+  L(\gamma x) = \gamma L(x), \forall \gamma \in \mathbb{R}
+\end{align*}
+All linear transformations have a matrix reprresentation.
+The matrix for $L$ is $(L(v_1), L(v_2), \cdots, L(v_n))$
+The matrix just tells where the basis vectors will go and the other vectors
+follow in a linear way. if you don't see this visually please see the animation
+at https://youtu.be/kYB8IZa5AuE?t=72
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Diagonalization}
+\begin{block}{When can we diagonalize $A$ over $\R$?}
+	When do there exist $n$ linearly independent eigenvectors of $A$ in $\R$?
+	\pause
+	\begin{enumerate}
+		\item Find all eigenvalues of $A$
+		\pause
+		\item If there is an eigenvalue of $A$ that is not in $\R$, \underline{stop}! $A$ is not
+		diagonalizable \underline{over $\R$}.
+		\pause
+		\item If all the eigenvalues of $A$ ($n$ many, counting multiplicity) are in $\R$, then 
+		for each eigenvalue $\lambda$, find $\rk (A-\lambda I)$. \pause If there exists a 
+		$\lambda$ such that
+		\[
+			\text{multiplicity of }\lambda \ne n - \rk(A-\lambda I) = \nullity(A-\lambda I),
+		\]
+		\underline{stop}! $A$ is not diagonalizable over $\R$.
+		\pause
+		\item Otherwise, $A$ \underline{is} diagonalizable over $\R$.
+	\end{enumerate}
+\end{block}
+\end{frame}
+
+
+%----------
+\begin{frame}[t]
+\frametitle{Diagonalization}
+\begin{block}{Why?}
+	Let
+	\begin{align*}
+		V_\lambda &= \{x \in \R^n \mid Ax = \lambda x \} \\
+		&= \{x \in \R^n \mid (A-\lambda I)x = 0\} \\
+		&= \nullsp(A-\lambda I).
+	\end{align*}
+	Thus, 
+	\begin{align*}
+		\dim V_\lambda &= \dim \nullsp(A-\lambda I) \\
+		&= n-\rk(A-\lambda I) \\
+		&= \nullity(A-\lambda I).
+	\end{align*}
+\end{block}
+\end{frame}
+
+
+%----------
+\begin{frame}[t]
+\frametitle{Eigenvalues and Eigenvectors}
+\begin{block}{Facts}
+\begin{itemize}
+	\item $\dim V_\lambda \ge 1$
+	\item $\dim V_\lambda \le$ the multiplicity of $\lambda$ (i.e. geometric multiplicity $\le$
+	algebraic multiplicity)
+	\item Eigenvectors belonging to different eigenvalues must be linearly independent
+\end{itemize}
+\end{block}
+\pause
+\vspace{-5mm}
+\begin{thm}
+An $n \times n$ matrix $A$ is similar to a diagonal matrix $D$ if and only if $\R^n$ has a basis of
+eigenvectors of $A$. Moreover, the elements on the main diagonal of $D$ are the eigenvalues of
+$A$.
+\end{thm}
+\pause
+Thus, to find $n$ linearly independent eigenvectors, for each $\lambda$ we must have $\dim 
+V_\lambda = $ mult($\lambda$).
+\pause
+\begin{thm}
+An $n\times n$ matrix $A$ is diagonalizable if all the roots of its characteristic polynomial are
+real and distinct.
+\end{thm}
+\end{frame}
+
+%----------
+\begin{frame}[t]
+\frametitle{Eigenvalues and Eigenvectors}
+In the case that $A$ is diagonalizable, to find $P$ such that $P\inv A P = D$ we need
+\begin{enumerate}
+	\item For each $\lambda_i$, find a basis for $V_{\lambda_i}$, i.e. solve
+	\[
+		(A-\lambda_i I) x = 0
+	\]
+	and find a basis for $\nullsp(A-\lambda_i I)$. Say you find a basis $x_{i1}, \ldots, x_{ik_i}$,
+	where $k_i$ is the multiplicity of $\lambda_i$.
+	
+	\item Let $P = (x_{11}, \ldots, x_{1k_1}, \ldots, x_{i1}, \ldots, x_{ik_i}, \ldots, x_{r1}, \ldots, 
+	x_{rk_r})$. Then
+	\[
+		P\inv A P = \bmat 
+		\lambda_1 I_{k_1} & & & &\\
+		& \ddots & & & \\
+		& & \lambda_i I_{k_i} & & \\
+		& & & \ddots & \\
+		& & & & \lambda_r I_{k_r}
+		\emat.
+	\]
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[t]
+  \frametitle{Steps to visualize diagonalization}
+  A matrix $A \in \mathbb{R}^{n\times n}$ is diagonalizable if it can be written in the form $A = PDP^{-1}$
+  where $P$ is a invertable $n$ by $n$ matrix, and $D$ is a diagonal matrix.
+  \begin{enumerate}
+  \item If you can't already visualize the eigenvectors watch at least the first
+    5 minutes and 15 seconds of https://youtu.be/PFDu9oVAE-g.
+  \item $P$ always has the eigenvectors of $A$ as the columns. So it is a change of basis into the eigenbasis. That is, it moves the
+    original basis vectors (e.g. the x and y axes) to the eigenvectors.
+  \item $D$ is a diagonal matrix with the eigenvalues along it's diagonal. That
+    means it has the affect of stretching alongst the eigenvectors.
+  \item $P^{-1}$ just moves us back into our original basis. That is, it moves
+    the eigenvectors to the original basis vectors (e.g. the x and y axes).
+  \end{enumerate}
+\end{frame}
+\begin{frame}[t]
+\frametitle{Symetric matrices are diagonalizable}
+Let $A \in \mathbb{R}^n$ be a symmetric matrix.
+Symmetric matrices are orthogonally diagonalizable so $A$ has $n$ distinct real
+eigenvectors which are all orthogonal to one another.
+So let the eigenvalues of $A$ be $\lambda_1, \lambda_2, \cdots, \lambda_n$. The proof of this involves
+first showing algebraicly that it works for 2 by 2 symetric matrices and then using
+induction to show it works for larger symetric matrices. \\
+\end{frame}
+\begin{frame}[t]
+\frametitle{Eigenvalues of $A^{-1}$}
+Given an eigenvalue and eigenvector for $A$ we can find a corresponding
+eigenvalue and eigenvector for $A^{-1}$. Suppose that $\lambda, x$ are an eigenvalue
+and eigenvector of $A$. Then 
+\begin{align*}
+  Ax &= \lambda x \\
+  \implies A^{-1}A x &= \lambda A^{-1} x \\
+  \implies A^{-1} x &= \frac{1}{\lambda} x
+\end{align*}
+So $x$ is also an eigenvector of $A^{-1}$ and the corresponding eigenvalue is $1/\lambda$.
+Repeat this process for each of the $n$ eigenvectors of $A$ to find that the $n$
+eigenvalues of $A^{-1}$ are $1/\lambda_1, 1/\lambda_2, \cdots, 1/\lambda_n$.
+This fact should also be pretty intuitive since eigenvalues are used to multiply
+and division is the inverse of mulitplication.
+\end{frame}
+\begin{frame}[t]
+\frametitle{the determinant of $A^{-1}$}
+The determinant of a matrix is equal to the product of the eigenvalues. To gain an
+intuition for why this is true you must recall that the determinant is the
+volume of the parallelotype sppaned by the columns of the matrix. You also need
+a visual understanding of the eigenvalues. By using
+this fact in combination with the last slide we derive this useful formula,
+\begin{align*}
+  det(A^{-1}) = \frac{1}{\lambda_1}\frac{1}{\lambda_2}\cdots\frac{1}{\lambda_n} = \frac{1}{\lambda_1\lambda_2\cdots\lambda_n} = \frac{1}{det(A)}
+\end{align*}
+
+\end{frame}
+\begin{frame}[t]
+\frametitle{Eigenvalues of $A^2$}
+This is very similar to what we did for $A^{-1}$
+\begin{align*}
+  AAx = A \lambda x = \lambda \lambda x = \lambda^2 x
+\end{align*}
+Therefore, the corresponding eigenvalues of $A^2$ is $\lambda_1^2, \lambda_2^2, \cdots, \lambda_n^2$.
+
+More generally, $A^k x = \lambda^k x$. In fact, we can generalize this to any
+polynomial of $A$.
+Let $P$ be a function that takes some polynomial.
+So $P(A) = a_0 I + a_1A + a_2A^2 + \cdots + a_nA^n$.
+Then the eigenvalues of $P(A)$ are $P(\lambda_1), P(\lambda_2), \cdots, P(\lambda_n)$
+\end{frame}
+\begin{frame}[t]
+
+
+\underline{Matrix exponent}
+Suppose $A$ is diagonalized with $A=PDP^{-1}$.
+Then $A^n = (PD\cancel{P^{-1})(P}DP^{-1})\cdots(PDP^{-1}) = PD^nP^{-1}$
+\underline{Similar matrices} Matrices $A, B$ are similar if there exists $P$
+such that $B = P^{-1}AP$. Then $det(B) = det(P^{-1}AP) = det(P^{-1})det(A)det(P)
+= \frac{1}{det(P)}det(A) det(P) = det(A)$. Then the determinant of $A$ is the
+product of the eigenvalues of $A$.  
+\underline{inner product}
+once you define the inner product on a vector space, the angles and norm
+follow. $||v|| = v \cdot v$. Angle between vectors $u, v$ is $cos^{-1}(\frac{u \cdot v}{||u|| \cdot ||v||})$
+
+\end{frame}
+\begin{frame}[t]
+A tensor can take multiple vectors as input and is
+\href{https://en.wikipedia.org/wiki/Multilinear_map}{multilinear}. \\
+ For example $T: \mathbb{R}^n \times \mathbb{R}^n \times
+\mathbb{R}^n \rightarrow \mathbb{R}$ is a tensor. The inner product is also a tensor.\\
+
+We call a finite dimensional vector space with an inner product a euclidean
+space.
+
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Matrix representation of dot product with any basis}
+Let $V^2$ be a vector space with basis vectors $v_1, v_2$.
+For all, $v, w \in V^2$ where $v = a_1 v_1 + a_2 v_2, w = b_1 v_1 + b_2 v_2$,
+\begin{align*}
+  <v, w> &= <a_1 v_1 + a_2 v_2, w> \\
+         &= a_1<v_1, w> + a_2<v_2, w> \\
+         &= (a_1, a_2) \boxed{\begin{pmatrix}<v_1, v_1> & <v_1, V_2> \\ <v_2, v_1> & <v_2,
+v_2>\end{pmatrix}} \begin{pmatrix}b_1 \\ b_2\end{pmatrix}
+\end{align*}
+The boxed matrix is the matrix representation of the dot product with respect to 
+the basis vectors $\{v_1, v_2\}$. Let's call this matrix $C$
+\end{frame}
+\begin{frame}[t]
+\underline{Theorem} The eigenvalues of $C$ are all greater than 0:  \\
+Proof: First we show that $C$ is positive definite. Suppose $v = w$ so that $a_1 = b_1,
+a_2 = b_2$. Then,
+\begin{align*}
+  <v, w> = <v, v> = v^TCv
+\end{align*}
+Suppose $v > 0$. Then $<v, v> = |v| > 0$. Then for all $v > 0$,
+\begin{align*}
+  v^TCv > 0
+\end{align*}
+So $C$ is positive definite. Therefore, $C$ has all positive eigenvalues.
+Recall that all positive definite matrices have only positive
+eigenvalues. You should be able to see why visually. 
+\end{frame}
+\begin{frame}[t]
+\frametitle{Advantage of orthonormal basis}
+The orthonormal basis is more convenient because the matrix representation of
+the dot product becomes,
+\begin{align*}
+  \begin{pmatrix}<v_1, v_1> & <v_1, V_2> \\ <v_2, v_1> & <v_2,
+v_2>\end{pmatrix} = \begin{pmatrix}1 & 0 \\ 0 & 1\end{pmatrix}
+\end{align*}
+
+So then the dot product between $v$ and $w$ becomes just what you'd expect:
+$a_1b_1 + a_2b_2$.
+\end{frame}
+\begin{frame}[t]
+\frametitle{ Projective geometry}
+Projective geometry is the study of geometric properties that are invariant
+with respect to projective transformations. For computer visions this means
+properties
+of an image that don't depend on the viewpoint of the camera.
+
+In projective space, parallel lines meet at infinity. \\
+\underline{Definition} A projective space of dimension $n$ is the set of the
+vector lines (that is, vector subspaces of dimension one) in a vector space $V$
+of dimension $n+1$. Equilvalently, it is the quotient set of $V \backslash \{0\}$ by the
+equivalence relation of being on the same vector line. As a vector line
+intersects the unit sphere of $V$ in two antipodal points, projective spaces can
+be equivalently defined as spheres in which antipodal points are identified. A
+projective space of dimension 1 is a projective line. A projective space of
+dimension 2 is a projective plane. 
+
+Q: How many lines pass through the origin $\mathbb{R}^n$?.
+The number of lines is equal to $|\mathbb{R}^1|$.
+\end{frame}
+\begin{frame}[t]
+In homogeneous coordinates, vectors that diiffer only by scale are considered
+to be equivalent. In homogeneous coordinates you can always use rotations
+instead of translations. To convert a homegenous vector to an inhomogenous
+vector just divide by the last element of the vector.  So given a homogenous
+vectors $\widetilde{x} = (x_1, x_2, w)$, the inhmoegnous coordinate is $(x_1/w, x_2/w)$.\\
+\underline{Definition} A projective (or homogenous) transformation is any
+invertable  matrix $\widetilde{H}$ applied to a homogenous coordinate.
+Homogeneous coordinates are ubiquitous in 3d graphics. Here's a link to an 
+\href{https://hackernoon.com/programmers-guide-to-homogeneous-coordinates-73cbfd2bcc65}{alternate
+explanation of homogenous coordinates along with an explanation of it's use in
+3d computer graphics.}
+ There is a 
+\href{http://wordsandbuttons.online/interactive_guide_to_homogeneous_coordinates.html}{related set of interactive demos for homogenous coordinates}
+
+\end{frame}
+\begin{frame}[t]
+\frametitle{closest point on the line derived geometriclly and then with calculus}
+We can normalize the equation for any line in order to derive the normal vector
+and distance to the origin,
+$ax + by + c = 0 \implies \frac{a}{\sqrt{a^2 + b^2}}x + \frac{b}{\sqrt{a^2 +
+    b^2}}y + \frac{c}{\sqrt{a^2 + b^2}} = 0$.
+Let $v = (\frac{a}{\sqrt{a^2 + b^2}},
+\frac{b}{\sqrt{a^2 + b^2}})$. I claim that $v$ is the normal vector to the
+plain. This is true because the plane is parallel to the kernel space of $v$.
+Recall, the kernel space is orthogonal.
+\underline{Theorem} The distance from the line to the origin is
+$\frac{c}{\sqrt{a^2 + b^2}}$. \\
+Proof: We want to find the point on the line $(x, y)$ that is closest to the
+origin. Then the distance from the origin to the line is just $||(x, y)||$. We
+can find this by using the lagrange multiplier to minimize $||(x, y)||$ under
+the constraint that $ax + by + c = 0$. Then the closest point is $(\frac{ac}{(a^2 +
+    b^2)}, \frac{bc}{(a^2 + b^2)})$. So the distance to the line is,
+\begin{align*}
+  \sqrt{\frac{a^2c^2}{(a^2 +
+    b^2)^2} + \frac{b^2c^2}{(a^2 + b^2)^2}} = \frac{c}{\sqrt{a^2 + b^2}}
+\end{align*}
+\end{frame}
+\begin{frame}[t]
+Make sure to notice how this proof is totally consistent with what we found geometrically on
+the previous slide.
+This can be generlized to hyperplanes in higher dimension.
+\end{frame}
+\end{document}

@@ -1,0 +1,63 @@
+\documentclass[12pt,letterpaper]{hmcpset}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{amsmath, cancel}
+
+\input{macros.tex}
+
+% info for header block in upper right hand corner
+\name{Joseph Gardi}
+\class{Differential Geometry}
+\assignment{Notes}
+\duedate{Monday, October 10th 2019}
+
+\renewcommand{\labelenumi}{{(\alph{enumi})}}
+
+
+\begin{document}
+\underline{Big Ideas}
+\begin{enumerate}[label=\arabic*]
+\item Differential geometry is concerend with those properties of surface which
+  depend on their behavior in a neighborhood of a point
+\item Accoding to our definition, each point $p$ of a regular surface belongs to
+  a coordinate neighborhood
+\item The point of such a neighborhood are characterized by their coodinates and
+  we should be able to define the local properties of interest in terms of these coordinates
+\end{enumerate}
+
+A \textbf{diffeomorphism} is a differentiable function with a differentiable
+inverse. \\
+
+\underline{Change of parameters}
+Let $p$ be a point of a regular surface $S$ and let $x: U \subset R^2 \rightarrow S, y: V \subset R^2
+\rightarrow S$
+be 2 paremterizations of $S$ such that $p \in x(U) \bigcap y(V) = W$. Then the change of
+coodinates $h = x^{-1} \circ y: y^{-1}(W) \rightarrow x^{-1}(W)$ is a diffeomorphism. \\\\
+
+To check that a function is differentiable check that the differential is
+invertable. \\
+\begin{center}
+************ 
+\end{center}
+Ladies and gentlemen! The times has come to give the definition of
+\underline{\textbf{MANIFOLD}}: \\
+An abstract surface (differentiable manifold of dimension 2) is a set $S$
+together with a family of one-to-one maps $x_{\alpha}: U_{\alpha} \rightarrow S$ of open sets $U_\alpha
+\subset R^2$ into $S$ such that,
+\begin{enumerate}[label=\arabic*]
+\item $\bigcup_{\alpha} x_{\alpha}(U_{\alpha}) = S$. That is, the union over the images of the maps
+  in our family of maps is the set $S$. So $S$ is covered collectivley by our
+  family of maps.
+\item For each pair $\alpha, \beta$ with $x_{\alpha}(U_{\alpha})
+  \bigcap x_{\beta}(U_{\beta}) = W = \emptyset$, we have that $x_{\alpha}^{-1}, x_{\beta}^{-1}(W)$ are open
+  sets in $R^2$, and $x_{\beta}^{-1}(W)$ are open sets in $R^2$, and $xx_{\beta}^{-1} \circ
+  x_{\alpha}, x_{\alpha}^{-1} \circ x_{\beta}$ are differentaible maps
+\end{enumerate}
+The pair $(U_{\alpha}, x_{\alpha})$ is called a differentiable structure on the manifold.
+\\
+
+\underline{The Tangent Plane}
+The tangent plane is the set of tangent vectors at a point in a surface. 
+\end{document}

@@ -1,0 +1,82 @@
+\documentclass[12pt,letterpaper]{hmcpset}
+\usepackage[margin=1in]{geometry}
+\DeclareMathOperator{\Tr}{Tr}
+\usepackage{graphicx}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{amsmath, cancel}
+
+\input{macros.tex}
+
+% info for header block in upper right hand corner
+\name{Joseph Gardi}
+\class{Differential Geometry}
+\assignment{Notes}
+\duedate{Monday, Nov 4th 2019}
+
+\renewcommand{\labelenumi}{{(\alph{enumi})}}
+
+
+\begin{document}
+\underline{Definition} A diffeomorphism $\phi: S \rightarrow \bar{S}$ is an isometry if for
+all $p \in S$ and all pairs $w_1, w_2 \in T_p(S)$ we have,
+\begin{align*}
+  <w_1, w_2>_p = <d\phi_p(w_1), d\phi_p(w_2)>_{\phi(p)}
+\end{align*}
+$S$ and $\bar{S}$ are isometric. \\
+The surface of a cylindar and the plane have the same first fundamental form. So they are
+isometric.  \\
+
+Let $\bar{u} = u, \bar{v} = \bar{a} \sinh v$.  \\
+Let $x(\bar{u}, \bar{v}) = (\bar{v} \cos \bar{u}, \bar{v} \sin \bar{u}, a
+\bar{v}) = (\bar{a} \sinh v \cos u, \bar{a} \sinh v \sin u, au)$. \\
+Then $x_u = (-\bar{a} \sinh v \sin u, \bar{a} \sinh v \cos u, \bar{a})$, \\
+$x_v = (\bar{a} \cosh v \cos u, \bar{a} \cosh v \sin u, 0)$. \\
+Then $E = \bar{a}^2 \sinh^2 v + \bar{a}^2 = \bar{a}^2\cosh^2 v, F = 0, G =
+\bar{a}^2 \cosh^2 v$.\\
+\underline{Gauss Map}
+Gauss Map is a map $S \rightarrow S^2 (\text{a unit sphere}), p \mapsto N(p)$ where $N(p)$ is the
+unit normal vector to the surface at point $p$.\\
+\underline{Self adjoint:} A linear map $L: V^n \rightarrow V^n$ is self adjoint if $<L(v),
+w> = <v, L(w)>$. A matrix is self adjoint if and only if it is symetric. \\
+\begin{enumerate}
+\item $ll_p(v) \triangleq $ Normal curvature along $v$
+\item $k_1, k_2 \triangleq$ Principal curvaure
+\item $\det\; dN_p \triangleq$ gaussian curvature
+\item $-\frac{1}{2} tr(dN_p) \triangleq$ mean curvature
+\end{enumerate}
+\underline{Theorem: } The differential $dN_p$ is a map from the tangent plane on
+the sphere to the tangent plane on the surface. The planes are parallel. So
+$dN_p(x_u) = N_u, dN_p(x_v) = N_v$. \\
+The normal vector is orthogonal to $x_u, x_v$. Therefore,
+\begin{align*}
+  <N, x_u> &= 0 \\
+  <N, x_v> &= 0 \\
+  \implies <N_v, x_u> + <N, x_{uv}> &= 0 \\
+  <N_u, x_v> + <N, x_{vu}> &= 0 \\
+  \implies <N_u, x_v> &= <N_v, x_u> \\
+  \implies <dN_p(x_u), x_v> = <x_u, dN_p(x_v)>
+\end{align*}
+Since $dN_p$ and the inner product are linear we only have to show it holds true
+for basis vectors $x_u, x_v$.  \\
+\underline{The second fundamental form: } The fact that $dN_p: T_p(S) \rightarrow T_p(S)$
+is a self adjoint means we can associate to $dN_p$ a quadratic form $Q$ in
+$T_p(S)$ given by $Q(v) = <dN_pv, v>, v \in T_p(S)$. To obtain a geometic
+interpretation of the equadratic form, we need  a few definitions. For rerasons
+that will soon become clear, we shall use the quadratic fomr $Q$. \\
+\underline{Definition of second fundamental form:} It is the quadratic form
+$ll_p$ defined in $T_p(S)$ by $ll_p(v) = -<dN_pv, v>$. \\
+Let $C$ be a regular cuve in $S$ passing through $p \in S$,. Let $k$ be the
+ curvature of $C$ at $p$ and let $\cos \theta = <N, n>$. $k_n = k \cos \theta$ is the
+ normal curvature of $C$ at $p$. \\
+ \underline{Pf of Euler's formula:} Normal cuvature along a given direction in
+ $T_p(S)$ can be calculated from the principal curvaturees, $k_n = k_1 \cos^2 \theta
+ + k_2 \sin^2 \theta$.  \\
+ $k_n = -<dN_p(v), v> = -<dN_p(\cos \theta e_1 + \sin \theta e_2), v> = -<\cos \theta dN_p(e_1)
+ + \sin \theta dN_p(e_2), v> = <k_1 \cos \theta e_1 + k_2 \sin \theta e_2, \cos \theta e_1 + \sin \theta
+ e_2> = k_1\cos^2 \theta + k_2 \sin^2 \theta$. \\
+ \underline{Gaussian curvature: } $k_1k_2$ \\
+ \underline{Mean curvature: } $\frac{k_1 + k_2}{2}$ \\
+ A point is elliptic if $\det dN_p > 0$, hyperbolic if $\det dN_p < 0$,
+ parabolic if $\det dN_p = 0$ with $dN_p \neq 0$, and planar if $dN_p = 0$.
+\end{document}

@@ -1,0 +1,133 @@
+\documentclass[12pt,letterpaper]{hmcpset}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{amsmath, cancel}
+
+\input{macros.tex}
+
+% info for header block in upper right hand corner
+\name{Joseph Gardi}
+\class{Differential Geometry}
+\assignment{Notes}
+\duedate{Monday, October 14th 2019}
+
+\renewcommand{\labelenumi}{{(\alph{enumi})}}
+
+
+\begin{document}
+$\rho$ is differentable at $p$, if $y^{-1} \circ \rho \circ x$ is differentible and well
+defined. So this means compositions of differentible functions are differentible.\\\\
+
+The differential map is a linear map. It maps $span([1, 0, 0], [0, 1, 0])$ to
+the tangent plane. We can use it to change into the local cordinates system. \\
+
+Consider a vector space $V$ of finite dimension. then having an inner product on
+$V$ is equivalent to having a norm on $V$. $||v + w||^2 = <v+w, v+w> = <v, v> +
+2<v, w> + <w, w> \implies <v, w> = ||v+w||^2 - ||v||^2 - ||w||^2$.
+We've already shown in a previous lecture that we can get a norm from an inner
+product. Now we've shown that we can get an inner product from a norm. So
+they're equivalent. \\\\
+
+Now we put a measurement on a manifold. We call a manifold with a measurement on
+it a riemannian manifold. For a reegular surface, the measurement is just the
+norm squared. \\\\
+
+\underline{First fundamental form} \\
+Anything that eats a vector and spits out a number is a form.
+We can use the first fundamental form to find lengths and angles on the
+manifold.
+
+The \textbf{first fundamental form}  of $\mathbb{R}^3 \supset S$ induces on each
+tangent plane $T_p(S)$ of a regualr surface $S$ an inner product, to be denoted
+by $< , >_p$. If $w_1, w_2 \in T_p(S) \subset \mathbb{R}^3$, then $<w_1, w_2>$ is equal
+to the innner product of $w_1, w_2$ as vectors in $\mathbb{R}^3$Since this inner
+product is a symmetric bilinear form therre is a corresponding quadratic form
+$I_p: T_p(S) \rightarrow \mathbb{R}$ given by,
+\begin{align*}
+  I_p(w) = <w, w>_p = ||w||^2 \geq 0
+\end{align*}
+The quadratic fom $I_p$ on $T_p(S)$ defined above is called the firsst
+fundamental form of the regular surface $S$ at $p \in S$. 
+
+\underline{Second fundamental form} \\
+Let $S'$ be the set of curves tangent to some $v \in S$.  $k_1$ is defined as the
+largeset curvature of any curve in $S'$. $k_2$ is defined as the smallest
+curvature of any curve in $S'$.
+Gaussian cuvature is defind as $k_1k_2$. Meean curvature iss $\frac{k_1 + k_2}{2}$
+
+The second fundamental form is equivalent to gaussian curvature in
+$\mathbb{R}^3$. \\\\
+
+\underline{How to find first fundmanet form in local coordinates} \\
+Given $w \in T_p(S)$, find a curve $\alpha(t)$ on $S$ such that $\alpha(t) = x(u(t), v(t))$
+with $\alpha'(t) = x_uu'(t) + x_v v'(t)$ , $\alpha'(0) = x_u u'(0) + x_v v'(0) = [x_u,
+x_v]\begin{bmatrix}u'(0)\\v'(0)\end{bmatrix}$\\
+Then,
+\begin{align*}
+  I_p(w) &= ||w||^2 \\
+  &= <u'(0)x_u + v'(0)x_v, u'(0)x_u + v'(0)x_v> \\
+  &= u'(0)^2<x_u, x_u> + 2u'(0)v'(0)<x_u, x_v> + v'(0)^2<x_v, x_v> \\
+  &= [u'(0), v'(0)]\begin{bmatrix}<x_u, x_u> & <x_u, x_v>\\<x_u, x_v>&<x_v, x_v>\end{bmatrix}[u'(0), v'(0)]
+\end{align*}
+$E=<x_u, x_u>, F=<x_u, x_v>, G=<x_v, x_v>$ are called the first fundamental
+cooeficients. \\
+We can generlize this to a manifold. Let $n$ be the dimension of the manifold. Let $p$ be a point on the manifold. Let
+$\{u_1, \cdots, u_{n-1}\}$ be a basis for the tangent space at $p$. Then the
+riemmani metric on the manifold is,
+\begin{align*}
+  ||w||_{riemmani}^2 = w^T \begin{bmatrix}<x_{u_1}, x_{u_1}> & \cdots & <x_{u_1}, x_{u_{n-1}}>\\
+    & \ddots & \\
+    <x_{u_{n-1}}, x_{u_1}> & \cdots & <x_{u_{n-1}}, x_{u_{n-1}}>
+\end{bmatrix}
+\end{align*}
+Angle at which two curves intersect can be calculated with,
+\begin{align*}
+  \cos \theta = \frac{<\alpha'(t_0), \beta'(t_0)>}{||\alpha'(t_0)|| ||\beta'(t_0)||}
+\end{align*}
+The area of a bounded region $R \in S$ on a regular surface $S$ with
+parameterization $x$ is,
+\begin{align*}
+  \int\int_{x^{-1}(R)} ||x_u \times x_v|| du dv = \int\int_{x^{-1}(R)} \sqrt{EG - F} du dv
+\end{align*}
+$x_u = (-r \sin u \cos v, -r \sin u \sin v, r \cos u)$\\
+$x_v = (-(a + r \cos u) \sin v, (a + r \cos u) \cos v, 0)$ \\
+\begin{align*}
+  E &= r^2 (\sin^2 u \cos^2 v + \sin^2 u \sin^2 v + \cos^2 u) = r^2 \\
+  G &= (a + r \cos u)^2 \sin^2 v + (a + r \cos u)^2 \cos^2 v = (a + r \cos u)^2 \\
+  F &= r(a + r \cos u) \sin u \cos v \sin v - r (a + r \cos u) \sin u \sin v \cos v = 0
+\end{align*}
+\begin{align*}
+  Area &= \int_{u=0}^{2\pi}\int_{v=0}^{2\pi} \sqrt{EG - F}\;du\;dv \\
+       &= \int\int \sqrt{r^2(a + r \cosu)^2 - 0}\; du\; dv \\
+       &= \int\int r(a + r \cosu)\;du\;dv \\
+       &= \int\int ra\;du\;dv + \int\int r^2 \cos u\;du\;dv
+       &= 2\pi(ra + (\sin 2\pi - \sin 0)) \\
+       &= 2\pi(ra + (0 - 0)) \\
+       &= 2\pi ra 
+  \end{align*}
+  
+
+\underline{Why unit quaternion multiplicaiton represents a rotation in
+  $\mathbb{R}^3$} \\
+
+Let $H$ be $\mathbb{R}^4$.
+Let $q \in S^3 = \{ q \in H : ||q||=1 \}$. For each $q$ dfeine a map $H \rightarrow H, x \mapsto q \times
+\bar{q}$.
+Note that $||q|| = 1\ implies ||q||^2 = 1 \implies q\bar{q} = 1 \implies q^{-1}
+= \bar{q}$ \\
+So $R_q(x) = q x \bar{q}$.
+We claim $R_q$ is a rotation in $\mathbb{R}^3$. \\
+To show $R_q$ is a rotation we show $R_q$ is linear and preserves the
+the norm. First we show $R_q$ is a linear map. $R_q(cx + y) = q(cx + y)\bar{q} =
+cqx\bar{q} + qy\bar{q} = cR_q(x) + R_q(y)$.\\
+Now we show that $||R_q(x)|| = ||x||$,
+\begin{align*}
+  ||R_q(x)|| &= ||qx\bar{q}|| \\
+             &= ||q||||x||||\bar{q}|| \\
+             &= ||x||
+\end{align*}
+On the homework we will find matrix representation of $R_q$. It is
+$[R_q(\vec{i}), R_q(\vec{j}), R_q(\vec{k})]$
+\end{document}

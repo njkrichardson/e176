@@ -1,0 +1,177 @@
+\documentclass[12pt,letterpaper]{hmcpset}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx, cancel}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{changepage}
+\usepackage{breqn}
+\setlength{\parindent}{0 pt}
+\setlength{\parskip}{1 em}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+ 
+\input{macros.tex}
+
+\DeclareMathOperator{\atan}{atan}
+\DeclareMathOperator{\acos}{acos}
+\DeclareMathOperator{\R}{\mathbb{R}}
+% info for header block in upper right hand corner
+\name{-----------------------------------------}
+\class{Differential Geometry}
+\assignment{Homework 7}
+\duedate{Monday, November 11 2019}
+
+\renewcommand{\labelenumi}{{(\alph{enumi})}}
+
+\begin{document}
+
+\begin{problem}[A.a) Write up a proof for the Key Theorem on page 216, Baby Do
+Carmo.]
+\end{problem}
+\begin{solution}
+\end{solution}
+
+\medskip
+
+\newpage
+\begin{problem}[B.a) Carry out the details for Example 5, page 162, Baby Do
+  Carmo.  (Including the application to a geometric interpretation 
+of the Dupin indicatrix, that is from page 164 to 165, Baby Do Carmo.)]
+\end{problem}
+\begin{solution}
+\end{solution}
+
+\newpage
+\begin{problem}[C.a) Problem 2 on page 151, Section 3-2, Baby Do Carmo.]
+\\ \\
+Show that if a surface is tangent to a plane along a curve, then the points of this curve are either parabolic or planar
+\end{problem}
+\begin{solution}
+  Let $S$ be the surface, let $N(p)$ be the orientation at a point $p \in T_p(S)$.
+Let the curve be $\alpha(t)$. This curve is in the intersection of our surface and
+  our plane. For any point $\alpha(t_0)$ on the curve the tangent plane
+  is always the same.  Therefore $dN(\alpha(t_0))_{\alpha'(t_0)} = \vec{0}$. Then let
+  $a=\frac{\alpha''(t_0)}{||\alpha''(t_0)||}$ . So $a$ is a unit vector in $T_{\alpha(t_0)}(S)$
+  perpindicular to $\alpha'(t_0)$. Then let $b = dN(\alpha(t_0))_{a}$. Then gaussian
+  curvature is $det(dN(\alpha(t_0))) = 0$. Therefore, the curve is either parabolic
+  or planar. 
+\end{solution}
+
+\newpage
+\begin{problem}[C.b) Problem 6 on page 151, Section 3-2, Baby Do Carmo.]
+\\ \\
+Show that the sum of the normal curvatures for any pair of orthogonal directions, at a point $p\in S$, is constant.
+\end{problem}
+\begin{solution}
+ Let $\mathbf{x}_u, \mathbf{x}_v \in T_p(S)$ be an orthonormal basis for $T_p(S)$.
+Let $a, b = a_1\mathbf{x}_u + a_2\mathbf{x}_v, b_1\mathbf{x}_u + b_2\mathbf{x}_v
+\in T_p(S)$ be a pair of orthogonal vectors.
+%Assume without loss of generality that
+%they are unit length since normal curvature is invariant under lengths of the
+%vectors.  Let $N_p(v), v \in T_p(S)$ be the gauss map. Let $c = N_p(0)$. Then $b = c \land a$. We use second fundamental
+%form to compute their normal curvatures. Since $a, b$ are orthogonal,
+%$a_1b_1<\mathbf{x}_u, \mathbf{x}_u> + a_1b_2<\mathbf{x}_u, \mathbf{x}_v> +
+%a_2b_1<\mathbf{x}_u, \mathbf{x}_v> + a_2^2<\mathbf{x}_v, \mathbf{x}_v> = 0$.
+The sum of their normal curvatures
+is, \\
+\begin{align*}
+  -<dN_p(a), a> - <dN_p(b), b> &= -<a_1dN_p(\mathbf{x}_u) + a_2
+                                 dN_p(\mathbf{x}_v), a_1\mathbf{x}_u + a_2\mathbf{x}_v> \\
+                               & -<b_1dN_p(\mathbf{x}_u) + b_2
+                                 dN_p(\mathbf{x}_v), b_1\mathbf{x}_u + b_2\mathbf{x}_v> \\
+                               = -(a_1^2&<dN_p(\mathbf{x}_u), \mathbf{x}_u> + \\
+                                 a_1a_2&<dN_p(\mathbf{x}_u), \mathbf{x}_v> + \\
+                                 a_2a_1&<dN_p(\mathbf{x}_v), \mathbf{x}_u> + \\
+                                 a_2^2 &<dN_p(\mathbf{x}_v), \mathbf{x}_v> + \\
+                                 b_1^2 &<dN_p(\mathbf{x}_u), \mathbf{x}_u> + \\
+                                 b_1b_2&<dN_p(\mathbf{x}_u), \mathbf{x}_v> + \\
+                                 b_2b_1&<dN_p(\mathbf{x}_v), \mathbf{x}_u> + \\
+                                 b_2^2 &<dN_p(\mathbf{x}_v), \mathbf{x}_v>
+                                         ) \\
+                              = -((a_1^2 + b_1^2)<dN_p(\mathbf{x}_u), \mathbf{x}_u> + 
+                                 2(a_1a_2 + b_1b_2)&<dN_p(\mathbf{x}_u), \mathbf{x}_v> + 
+                                                     (a_2^2 + b_2^2)<dN_p(\mathbf{x}_v), \mathbf{x}_v>) \\
+  = -((a_1^2 + a_2^2)<dN_p(\mathbf{x}_u), \mathbf{x}_u> + 
+                                 2(\cancel{a_1a_2 - a_2a_1})&<dN_p(\mathbf{x}_u), \mathbf{x}_v> + 
+                                                     (a_2^2 + a_1^2)<dN_p(\mathbf{x}_v), \mathbf{x}_v>) \\
+ = -(<dN_p(\mathbf{x}_u), \mathbf{x}_u> + <dN_p(\mathbf{x}_v), \mathbf{x}_v>)
+\end{align*}
+So the sum of the curvatures does not depend on the pair chosen. 
+  % &= 
+%  -<dN_p(a), a> - <dN_p(b), b> &= -<dN_p(a), a> - <dN_p(c \land a), c \land a> \\
+%                               &= -(<dN_p(a), a> + <dN_p(c) \land dN_p(a), c \land a>) \\
+%                               &= -(<dN_p(a), a> + <dN_p(c), c> \cdot <dN_p(a), 
+%                                 a> \\
+%                               & -<dN_p(c), a> \cdot <dN_p(a), c>) \\
+%  -<dN_p(a), a> - <dN_p(b), b> &= -<a_1dN_p(\mathbf{x}_u) + a_2
+%                                 dN_p(\mathbf{x}_v), a_1\mathbf{x}_u + a_2\mathbf{x}_v> \\
+%                               & -<b_1dN_p(\mathbf{x}_u) + b_2
+%                                 dN_p(\mathbf{x}_v), b_1\mathbf{x}_u + b_2\mathbf{x}_v> \\
+%                               = -(a_1^2&<dN_p(\mathbf{x}_u), \mathbf{x}_u> + \\
+%                                 a_1a_2&<dN_p(\mathbf{x}_u), \mathbf{x}_v> + \\
+%                                 a_2a_1&<dN_p(\mathbf{x}_v), \mathbf{x}_u> + \\
+%                                 a_2^2 &<dN_p(\mathbf{x}_v), \mathbf{x}_v> + \\
+%                                 b_1^2 &<dN_p(\mathbf{x}_u), \mathbf{x}_u> + \\
+%                                 b_1b_2&<dN_p(\mathbf{x}_u), \mathbf{x}_v> + \\
+%                                 b_2b_1&<dN_p(\mathbf{x}_v), \mathbf{x}_u> + \\
+%                                 b_2^2 &<dN_p(\mathbf{x}_v), \mathbf{x}_v>
+%                                         ) \\
+%                              = -((a_1^2 + b_1^2)<dN_p(\mathbf{x}_u), \mathbf{x}_u> + 
+%                                 2(a_1a_2 + b_1b_2)&<dN_p(\mathbf{x}_u), \mathbf{x}_v> + 
+%                                 (a_2^2 + b_2^2)<dN_p(\mathbf{x}_v), \mathbf{x}_v>)
+\end{solution}
+\newpage
+\begin{problem}[C.c) Problem 8 on page 151, Section 3-2, Baby Do Carmo.]
+\\ \\
+Desribe the region of the unit sphere covered by the Gauss map of the following surfaces:  
+\begin{enumerate}
+    \item Paraboloid of revolution $z=x^2+y^2$
+    \item Hyperboloid of revolution $x^2+y^2 -z^2 = 1$
+    \item Catenoid $x^2+y^2 = cosh^2z$
+\end{enumerate}
+\end{problem}
+\begin{solution}
+  \begin{enumerate}
+  \item The bottom hemisphere
+  \item the entire sphere
+  \end{enumerate}
+\end{solution}
+
+\newpage
+\begin{problem}[C.d) Problem 17 on page 152, Section 3-2, Baby Do Carmo.]
+\\ \\
+Show that if $H\equiv 0$ on $S$ and $S$ has no planar points, then the Gauss map $N:S\to S^2$ has the following property
+$$\langle dN_p(w_1), dN_p(w_2)\rangle = -K(p)\langle w_1,w_2\rangle,\; \text{for all}\;p\in S \; \text{and all}\; w_1,w_2\in T_p(S)$$  
+Show that the above condition implies that the angle of two intersecting curves on S and the angle of their spherical images (cf. Exercise 9) are equal up to a sign.\\
+\\ 
+For reference\\ \\
+\textbf{Exercise 9:} Prove that 
+\begin{enumerate}
+    \item The image $N\circ \alpha$ by the Gauss map $N:S\to S^2$ of a parametrized regular curve $\alpha :I\to S$ which contains no planar or parabolic points is a parametrized regular curve on the sphere $S^2$ (called the \textit{spherical image} of $\alpha$).
+    \item If $\alpha$ is a line of curvature, and $k$ is its curvature at $p$, then 
+    $$k = |k_nK_N|$$
+    where $k_n$ is the normal curvature at $p$ along the tangent line of $C$ and $k_N$ is the curvature of the spherical image $N(C)\subset S^2$ at $N(p)$.  
+\end{enumerate}
+
+
+\end{problem}
+\begin{solution}
+\end{solution}
+
+\end{document}
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,179 @@
+\documentclass[10pt,letterpaper]{hmcpset}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsthm}
+\usepackage[shortlabels]{enumitem}
+\usepackage{amsmath}
+\setlength{\parindent}{0 pt}
+\setlength{\parskip}{1 em}
+\usepackage{hyperref}
+\hypersetup{
+colorlinks=true,
+linkcolor=blue,
+filecolor=magenta,      
+urlcolor=cyan,
+}
+
+\input{macros.tex}
+
+% info for header block in upper right hand corner
+\name{Joseph Gardi}
+\class{Differential Geometry}
+\assignment{Homework 6}
+\duedate{Monday, November 4 2019}
+
+\renewcommand{\labelenumi}{{(\alph{enumi})}}
+
+\begin{document}
+\section*{A: Read: } 
+
+\begin{itemize}
+\item{Baby Do Carmo, Differential Geometry
+    of Curves and Surfaces:  
+Sections 2-4, 2-5, 2-6 and Section 5-10 on Abstract surfaces (starting 
+on page 425)} 
+\item{Handouts 8 and 9}
+\item{Lecture Notes}
+\end{itemize}
+
+\textbf{B: Problems from Lectures}
+
+
+\begin{problem}
+a) Let $S$ be a subset of $R^3$.  Show that $S$ is a
+regular surface if and only if S is locally diffeomorphic 
+to $R^2$.
+\end{problem}
+
+\newpage
+\begin{problem}
+b) Find five examples of regular surfaces such that each of 
+them can be represented as a surface of revolution.  Write down
+specifically for each example the generating curve, the rotation 
+axis, and the parameterization (as a map) for the surface (including
+the domain of the map).
+\end{problem}
+
+\newpage
+\textbf{C: Other Problems}
+
+\begin{problem}
+a) Problem 10 on page 81, Section 2-3, Baby Do Carmo.
+
+\includegraphics[scale=0.7]{Ca.png}
+\end{problem}
+
+\newpage
+\begin{problem}
+ b) Problem 9 on page 89, Section 2-4, Baby Do Carmo.
+ 
+ \includegraphics[scale=0.7]{Cb.png}
+\end{problem}
+\newpage
+\begin{problem}
+c) Problem 15 on page 90, Section 2-4, Baby Do Carmo.
+
+\includegraphics[scale=0.7]{Cc.png}
+\end{problem}
+
+\newpage
+\begin{problem}
+d) Problem 18 on page 90, Section 2-4, Baby Do Carmo.
+
+\includegraphics[scale=0.7]{Cd.png}
+\end{problem}
+
+\newpage
+\begin{problem}
+e) Problem 1 on page 99, Section 2-5, Baby Do Carmo.
+
+\includegraphics[scale=0.7]{Ce.png}
+\end{problem}
+\begin{solution}
+We will find the $\textbf{x}_u, \textbf{x}_v$ for each problem. From there we
+find $E=<\textbf{x}_u, \textbf{x}_u>, F - <\textbf{x}_u, \textbf{x}_v>,
+G=<\textbf{u}_v, \textbf{u}_v>$. Then the first fundamental form is,
+\begin{align*}
+  I_p((u', v')) = E (u')^2 + 2Fu'v' + G(v')^2
+\end{align*}
+where $p$ is a point on the surface. \\
+\begin{enumerate}[(a)]
+\item $\textbf{x}_u = (a \cos u \cos v, b \cos u \sin v, -c \sin u),
+  \textbf{x}_v = (-a \sin u \sin v, \sin u \cos v, 0)$.
+\item $\textbf{x}_u = (a \cos v, b \sin v, 2u), \textbf{x}_v = (-au \sin v, bu
+  \cos v, 0)$
+\end{enumerate}
+\end{solution}
+
+\newpage
+\begin{problem}
+f) Problem 3 on page 99, Section 2-5, Baby Do Carmo.
+
+\includegraphics[scale=0.7]{Cf.png}
+\end{problem}
+The parameterization for the surface is,
+\begin{align*}
+  \pi^{-1}(u, v) = \begin{bmatrix}
+    \frac{4u}{u^2 + v^2 + 4} \\
+    \frac{4v}{u^2 + v^2 + 4} \\
+    \frac{2(u^2 + v^2)}{u^2 + v^2 + 4}
+    \end{bmatrix}
+\end{align*}
+Then,
+\begin{align*}
+  \boldsymbol{\pi^{-1}}_u = \begin{bmatrix}
+    \frac{4}{u^2 + v^2 + 4} - \frac{4u}{(u^2 + v^2 + 4)^2} \cdot 2u \\
+    -\frac{4v}{(u^2 + v^2 + 4)^2} \cdot 2u \\
+    \frac{4u}{u^2 + v^2 + 4} - \frac{2(u^2 + v^2)}{(u^2 + v^2 + 4)^2} \cdot 2u
+  \end{bmatrix} \\
+  \boldsymbol{\pi^{-1}}_v = \begin{bmatrix}
+    -\frac{4u}{(u^2 + v^2 + 4)^2} \cdot 2v \\
+    \frac{4}{u^2 + v^2 + 4} - \frac{4v}{(u^2 + v^2 + 4)^2} \cdot 2v \\
+    \frac{4v}{u^2 + v^2 + 4} - \frac{2(u^2 + v^2)}{(u^2 + v^2 + 4)^2} \cdot 2v
+  \end{bmatrix}
+\end{align*}
+Then calcualate the first fundamental form as described in the last problem. 
+\newpage
+\begin{problem}
+g) Problem 9 on page 100, Section 2-5, Baby Do Carmo.
+
+\includegraphics[scale=0.7]{Cg.png}
+\end{problem}
+%Consider a function $f: R \rightarrow R$ that we want to revolve around the x axis in
+%order to obtain a surface of revolution. Then the parameterization for the
+%surface would be,
+%\begin{align*}
+%  \mathbf{x}(u, v) = (f(u) \cos \frac{v}{f(u)}, f(u) \sin \frac{v}{f(u)}, u) 
+%\end{align*}
+%
+%So,
+%\begin{align*}
+%  \textbf{x}_u = \begin{bmatrix}
+%
+%    f'(u) \cos \frac{v}{f(u)} - \sin (\frac{v}{f(u)}) \frac{v}{f(u)}f'(u) \\
+%    1
+%   \end{bmatrix}
+%\end{align*}
+%for $u \in [0, z_f], v \in [0, 2\pi]$. Then $E=<\textbf{x}_u, \textbf{x}_u> = E(u) $
+\newpage
+\textbf{D: Extra Credit Problems}
+
+\begin{problem}
+a) Let $T\subset R^3$ be a torus of revolution with center in 
+$(0,0,0)\in R^3$ and let $A(x,y,z)=(-x,-y,-z)$.
+Let $K$ be the quotient space of the torus $T$ by the equivalence 
+relation $p\sim A(p)$.  Can you tell what surface $K$ is? 
+\end{problem}
+
+\newpage
+\begin{problem}
+b) Show that $K$ is a differentiable 2-dimensional manifold.
+\end{problem}
+
+\newpage
+\begin{problem}
+c) Show that $K$ is non orientable in two different ways.
+\end{problem}
+
+\end{document}
+

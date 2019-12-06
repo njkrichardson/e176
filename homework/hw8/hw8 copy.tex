@@ -1,0 +1,147 @@
+\documentclass[12pt,letterpaper]{hmcpset}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{changepage}
+\usepackage{breqn}
+\setlength{\parindent}{0 pt}
+\setlength{\parskip}{1 em}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+ 
+\input{macros.tex}
+
+\DeclareMathOperator{\atan}{atan}
+\DeclareMathOperator{\acos}{acos}
+\DeclareMathOperator{\R}{\mathbb{R}}
+
+% info for header block in upper right hand corner
+\name{----------------------}
+\class{Differential Geometry}
+\assignment{Homework 8}
+\duedate{Monday, November 18 2019}
+
+\renewcommand{\labelenumi}{{(\alph{enumi})}}
+
+\begin{document}
+
+\begin{problem}[C.a) Problem 5 on page 168, Section 3-3, Baby Do Carmo.]
+\\ \\
+Consider the parametrized surface (Enneper’s surface)  
+$$x(u,v) = \left(u-\frac{u^3}{3}+ uv^2,v-\frac{v^3}{3}+ vu^2, u^2-v^2 \right)$$
+Show that 
+\begin{enumerate}
+    \item The coefficients of the first fundamental form are
+    $$E=G=(1+u^2+v^2)^2, \quad F=0$$
+    \item The coefficients of the second fundamental form are 
+    $$e = 2,\quad g=-2,\quad f=0$$
+    \item The principal curvatures are  
+    $$k_1 = \frac{2}{(1+u^2+v^2)^2}, \quad k_2 = \frac{-2}{(1+u^2+v^2)^2}$$\\
+\end{enumerate}
+\end{problem}
+\begin{solution}
+Done compuationally. See
+https://weiqinggu.github.io/Math142/homework/hw8/curvature.pdf
+\end{solution}
+
+\begin{problem}[C.b) Problem 1 on page 185, Section 3-4, Baby Do Carmo.]
+\\ \\
+Prove that the differentiability of a vector field does not depend on the choice of a coordinate system.\\
+\end{problem}
+\begin{solution}
+  A change of coordinates is just a matrix multiplication. A matrix
+  multiplication is multiplying by constants and then summing. Differentiable
+  functions are closed under addition and multicplication so a differentiable
+  vector field will still be differentialbe after a change of coordinates. \\
+  Let $M$ be a change of coordinates for a vector field $w(a, b) = (w_1(a, b),
+\cdots)$. Then for all $i$,
+  \begin{align*}
+    \nabla w_i(M(a, b)) &= M \nabla w_i 
+  \end{align*}
+  So we still have a derivative everywhere. So it is still diferentiable. 
+\end{solution}
+
+\begin{problem}[C.c) Problem 2 on page 185, Section 3-4, Baby Do Carmo.]
+\\ \\
+Prove that the vector field obtained on the torus by parametrizing all its meridians by arc length and taking their tangent vectors (Example 1) is differentiable.\\
+\end{problem}
+\begin{solution}
+  The tangent vector for a curve paramterized by arclength is just the
+  derivative of the curve. So the problem is reduced to showing that the
+  merdians parameterized by arclength are twice differentiable. Reparameterizing
+  a curve does not change that it is twice differentiable. So we can just take
+  some arbitrary parameterization of a meridian like $\alpha(a, b) = \sqrt{a^2 +
+    b^2}$. This is twice differentiable. 
+\end{solution}
+
+\begin{problem}[C.d) Problem 5 on page 186, Section 3-4, Baby Do Carmo.]
+\\ \\
+Let $S$ be a surface and let $x:U\to S$ be a parametrization of $S$. If $ac-b^2 <0$, show that 
+$$a(u,v)(u')^2+2b(u,v)u'v'+c(u,v)(v')^2=0$$
+can be factored into two distinct equations, each of which determines a field of directions on $X(U)\subset S$. Prove that these two fields of directions are orthogonal if and only if 
+$$Ec-2Fb+Ga = 0$$\\
+\end{problem}
+\begin{solution}
+\end{solution}
+
+\begin{problem}[C.e) Problem 8 on page 187, Section 3-4, Baby Do Carmo.]
+\\ \\
+Show that if $w$ is a differentiable vector field on a surface $S$ and $w(p)\neq 0$ for some $p\in S$, then it is possible to parametrize a neighborhood of $p$ by $x(u,v)$ in such a way that $x_u = w$. 
+\end{problem}
+\begin{solution}
+  Let $M: R^2 \rightarrow R^3$ be a linear transformation. Let $y = x(M(u, v))$.
+  Then $y_u = Mx_u$. Since $w \neq 0$ and $x_u \neq 0$ there exists some $M$ such that
+  $Mx_u = w$. So by choosing the right $M$ we can always get a parameterization
+  of $S$ where $y_u = w$.
+\end{solution}
+
+\newpage 
+\textbf{Extra Credit Problems} \\
+\\
+\begin{problem}[D.a) Problem 10 on page 187, Section 3-4, Baby Do Carmo.]
+\\ \\
+Let $T$ be the Torus of Example 6 of Sec. 2-2 and define a map $\phi:\R^2\to T$ by 
+$$\phi(u,v) = ((r\cos u+a)\cos v, (r\cos u + a)\sin v, r\sin u),$$
+where $u$ and $v$ are the Cartesian coordinates of $\R^2$. Let $u=at, v=bt$ be a straight line in $\R^2$, passing by $(0,0) \in \R^2$, and consider the curve in $T$ $\alpha(t) = \phi(at,bt)$. Prove that 
+\begin{enumerate}
+    \item $\phi$ is a local diffeomorphism. 
+    \item The curve $\alpha(t)$ is a regular curve; $\alpha(t)$ is a closed curve if and only if $b/a$ is a rational number.
+    \item If $b/a$ is irrational, the curve $\alpha(t)$ is dense in $T$; that is, in each neighborhood of a point $p\in T$ there exists a point of $\alpha(t)$\\
+\end{enumerate}
+\end{problem}
+\begin{solution}
+\end{solution}
+
+\begin{problem}[D.b) Problem 11 on page 187, Section 3-4, Baby Do Carmo.]
+\\ \\
+Use the local uniqueness of trajectories of a vector field $w$ in $U\subset S$ to prove the following result. Given $p\in U$, there exists a unique trajectory $\alpha:I\to U$ of $w$, with $\alpha(0) = p$, which is maximal in the following sense: Any other trajectory $\beta:J\to U$, with $\beta(0) = p$, is the restriction of $\alpha$ to $J$ (i.e $J\subset I$ and $\alpha|_J = \beta$)\\
+\end{problem}
+\begin{solution}
+\end{solution}
+
+\begin{problem}[D.c) Problem 12 on page 187, Section 3-4, Baby Do Carmo.]
+\\ \\
+Prove that if $w$ is a differentiable vector field on a compact surface $S$ and $\alpha(t)$ is the maximal trajectory of $w$ with $\alpha(0) = p \in S$, then $\alpha(t)$ is defined for all $t\in \R$. 
+\end{problem}
+\begin{solution}
+\end{solution}
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
