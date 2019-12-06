@@ -1,16 +1,12 @@
-# Mathematics of Big Data Summer 2017  
-Taught by Professor Weiqing Gu
-
-This page is created for the Mathematics of Big Data course Summer 2017.
-
+# Machine Learning
+Taught by Professor Ruye Wang
 
 # References:
-  1. math189r
-      * https://math189r.github.ios
-      * This is the page created for Mathematics of Big Data Fall 2016 by
-      Conner DiPaolo, the head grutor of that course.
-      * Most of the information in syllabus and course schedule are obtained
-      from the original page.
+  1. math142
+      * https://math142.github.ios
+      * This is the page created for Mathematics of Big Data Fall 2019 by
+      Joseph Gardi, the head grutor of that course. I used his site sourcecode as 
+      a template. 
   2. TEMPLATED.co
       * https://templated.co/solarize
       * The html template and css files are obtained from `template.co`, and
