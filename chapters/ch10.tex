@@ -1,0 +1,1989 @@
+%\documentstyle[12pt]{article}
+\documentclass{article}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphics}
+\usepackage{html}
+\DeclareMathOperator{\sign}{sign}
+\begin{document}
+
+{\bf\Large Neural Networks}
+
+\section{Biological and Artificial Neural Networks}
+
+In machine learning, the artificial neural networks are a category 
+of algorithms that are inspired by the biological neural networks in 
+the brain, and designed to carry out both supervised and unsupervised 
+learning tasks, such as classification and clustering. To understand 
+how such neural network algorithms work, we first consider some basic 
+concepts in biological neural system.
+
+The human brain consists of $10^{11}$ 
+\htmladdnormallink{neurons}{../../../e180/lectures/signal1/node1.html}
+interconnected through about $10^{14}$ to $10^{15}$ {\em synaptic junctions} 
+to form millions of neural networks. Hundreds specialized cortical areas 
+are formed based on these networks for different information processing 
+tasks. 
+
+Functionally, a neuron consists of the following three parts:
+\begin{itemize}
+\item The {\em cell body or soma} containing the nucleus of the cell;
+\item The {\em dendrites} that receive electrochemical stimulations
+  (input impulses) from other neurons and propagate them to the cell
+  body;
+\item The {\em axon:} that conducts the impulses (output) away from
+  the cell body to other cells; 
+\item The {\em synapse} is the point at which impulses pass from one 
+  cell to another.
+\end{itemize}
+
+\htmladdimg{../figures/neuron.png}
+
+The function of a neuron can be modeled mathematically. Each neuron,
+modeled as a {\em node} in the neural network, receives input signal
+or stimulus from $n$ neurons and its {\em activation} or the 
+{\em net input} is the weighted sum of all such inputs:
+\begin{equation}
+  a=\sum_{j=1}^n w_j x_j+b
+\end{equation}
+where $b$ is the offset or bias, $x_j$ is the input signal from the jth
+node, $w_j$ is the synaptic connectivity to the jth input node:
+\begin{equation}
+  w_j\;\left\{ \begin{array}{ll}
+    > 0	& \mbox{excitatory input}	\\
+    < 0	& \mbox{inhibitory input}	\\
+    = 0	& \mbox{no connection}
+  \end{array} \right.
+\end{equation}
+For convenience, we could define $x_0=1$ and $w_0=b$, so that the above 
+can also be written as
+\begin{equation}
+  a=\sum_{j=1}^n w_j x_j+b=\sum_{j=0}^n w_j x_j={\bf w}^T{\bf x}
+\end{equation}
+The output signal or response of the neuron is a function of its
+activation:
+\begin{equation} 	
+  y=g(a)=g\left(\sum_{j=0}^n w_j x_j+b\right)=g({\bf w}^T{\bf x}+b)
+\end{equation}
+with ${\bf x}=[x_0=1,\,x_1,\cdots,x_n]^T$ and ${\bf w}=[w_0=b,\,,w_1,\cdots,w_n]^T$.
+
+\htmladdimg{../figures/neuronModel.png}
+
+Here $g(x)$ is an activation function, which typically take one of the
+following forms:
+\begin{itemize}
+\item 
+\item Logistic sigmoid function:
+  \begin{equation}  
+  g(x,a)=\frac{1}{1+e^{-ax}}=\frac{e^{ax}}{1+e^{ax}}=\left\{\begin{array}{rl}
+  0 & x=-\infty \\ 1/2 & x=0 \\ 1 & x=\infty\end{array}\right.,
+  \;\;\;\;\;\;
+  \frac{d\,g(x)}{dx}=\frac{a\,e^{-ax}}{(1+e^{-ax})^2} 
+  \end{equation}
+\item Tanh (hyperbolic tangent) function:
+  \begin{equation}
+    g(x,a)=\frac{2}{1+e^{-ax}}-1=\frac{e^{ax}-1}{e^{ax}+1}
+    =\left\{\begin{array}{rl}-1 & x=-\infty \\ 0 & x=0 \\ 1 & x=\infty
+    \end{array}\right.,
+    \;\;\;\;\;\;
+    \frac{d\,g(x)}{dx}=\frac{2a\,e^{-ax}}{(1+e^{-ax})^2} 
+  \end{equation}
+  where $a$ is a parameter that controls the slop of $g(x)$. Specially, 
+  when $a\rightarrow 0$, $g(x,a)$ becomes linear, but whn $a\rightarrow 
+  \infty$, $g(x,a)$ becomes a threshold function:
+  \begin{equation} 
+    \lim_{a\rightarrow\infty} g(x,a)=\left\{ \begin{array}{cl} 0\mbox{ or }-1 & x<0\\
+      1 & x>0 \end{array} \right.
+  \end{equation}
+
+\item Rectified linear unit (ReLU):
+  \begin{equation}
+    g(x)=\max(0,\,x)=\left\{\begin{array}{ll}0 & x<0\\x & x>0\end{array}\right.    
+  \end{equation}
+\end{itemize}
+
+\htmladdimg{../figures/ReLU.png}
+%\htmladdimg{../figures/sigmoid.png}
+
+The function of a neural network can be modeled mathematically as 
+a hierarchical structure shown below containing multiple layers of 
+neurons:
+\begin{itemize}
+\item The {\em input layer}: receives inputs from external sources;
+\item The {\em output layer}: generates output to the external world;
+\item The {\em hidden layer(s)}: between of the input and output layers, 
+  not visible from outside the network.
+\end{itemize}
+The purpose is to train the network according to certain mathematical
+rules, the {\em Learning laws}, by modifying the weights of a network 
+iteratively based on the inputs (and the desired outputs if the learning 
+is supervised), so that given the input of the network as the stimulus, 
+the network will produce the desired output as the response.
+
+\htmladdimg{../figures/threelayernet.gif}
+
+The learning paradigms of the neural networks are listed below, 
+depending on the interpretations of the input and output of the 
+neural network.
+
+\begin{enumerate}
+
+\item {\em Pattern Associator}
+
+  This is the most general form of neural networks that learns and stores 
+  the associative relationship between two sets of patterns represented by
+  vectors.
+  \begin{itemize}
+  \item Training: A set of $N$ pairs of patterns $\{ ({\bf x}_n,{\bf y}_n),
+    \;n=1,\cdots,N\}$ is presented to the network which then learns to 
+    establish the associative relationship between two sets of patterns:
+    \begin{equation}
+      f: {\bf x} \in {\cal R}^d \Longrightarrow {\bf y} \in {\cal R}^m
+    \end{equation}
+
+  \item Testing: When a pattern ${\bf x}_n$ in a pair is presented as the
+    input, the network produces an output pattern ${\bf y}_n$ associated to
+    the output.
+  \end{itemize}
+
+  Human memory is associative in the sense that given one pattern, some 
+  associated pattern(s) may be produced. Examples include: (Evolution, Darwin), 
+  (Einstein, $E=mc^2$), (food, sounding bell, salivation).
+
+\item {\em Auto-associator}
+
+  As a special pattern associator, auto-associator associates a prestored 
+  pattern to an incomplete or noisy version of the pattern.
+  \begin{itemize}
+  \item Training: A set of patterns $\{{\bf x}_1,\cdots,{\bf x}_N\}$ 
+    is presented to the network for it to learn and remember, i.e., the 
+    patterns are stored in the network.
+
+  \item Testing: When an incomplete or noisy version of one of the 
+    patterns stored in the network is presented as the input to the 
+    network, the original pattern is retrieved by the network as the 
+    outpupt.  
+
+  \end{itemize}
+
+\item {\em Regression}
+
+  This is another special kind of pattern associator which takes a vector
+  input ${\bf x}\in{\cal R}^d$ and produces a real value $y\in{\cal R}$ as
+  a multivariable function $y=f({\bf x})$ at its only output node.
+  
+  \begin{itemize}
+  \item Training: trained by a set of observed data samples, the independent
+    vectors and their corresponding function values $\{ ({\bf x}_n,\;y_n),\;
+    n=1,\cdots,N\}$, the network is model the function.
+
+  \item Testing: given any vector ${\bf x}$, the output value produced 
+    by the single output node is an estimated function value $y=f({\bf x})$.
+
+  \end{itemize}
+
+\item {\em Pattern Classifier}
+
+  This is a variation of the pattern associator of which the output 
+  patterns are a set of categorical symbols representing different 
+  classes $\{C_1,\cdots,C_K\}$, i.e., each input pattern is classified
+  by the network into one of the classes
+
+  \begin{equation}
+    f: {\bf x} \in {\cal R}^d \Longrightarrow y \in \{C_1,\cdots,C_K\}
+  \end{equation}
+
+
+\item {\em Regularity Detector}	
+
+  This is an unsupervised learning process. The network discovers 
+  automatically the regularity in the inputs so that similar patterns
+  are automatically detected and grouped together in the same cluster
+  or class.	
+
+\end{enumerate}
+
+
+\section{Hebbian Learning}
+
+Donald Hebb (1949) speculated that ``When neuron A repeatedly and 
+persistently takes part in exciting neuron B, the synaptic connection 
+from A to B will be strengthened.'' In other words, simultaneous 
+activation of neurons leads to pronounced increases in synaptic 
+strength between them, or ``neurons that fire together wire together; 
+neurons that fire out of sync, fail to link". 
+
+For example, the well known 
+\htmladdnormallink{{\em classical conditioning} (Pavlov, 1927)}
+{https://en.wikipedia.org/wiki/Classical_conditioning} could be 
+explained by Hebbian learning. Consider the following three patterns
+(see 
+\htmladdnormallink{here}
+{https://www.verywellmind.com/classical-conditioning-2794859}):
+\begin{itemize}
+\item Unconditioned stimulus: sight of food F
+\item Conditioned stimulus: sound of bell B
+\item Response: salivation S 
+\end{itemize}
+The unconditioned response is: $F \rightarrow S$. Due to the repeated
+and persistent conditioning process $F \cap B \rightarrow S$, the 
+synaptic connections between patterns B and S are strengthened as both
+are repeatedly excited simultaneously, i.e., the two patternss become 
+associated, resulting the conditioned response $B \rightarrow S$.
+
+The Hebbian network is based on this theory to model the associative 
+or Hebbian learning to establish the association between two sets of 
+patterns $\{{\bf x}_1,\cdots,{\bf x}_K \}$ and $\{{\bf y}_1,\cdots,{\bf y}_K\}$.
+This is a 2-layer network with $n$ nodes in the input layer 
+${\bf x}=[x_1,\cdots,x_n]^T$ and $m$ nodes in the output layer 
+${\bf y}=[y_1,\cdots,y_m]^T$. Each output node is fully connected to 
+all input nodes:
+\begin{equation}
+y_i=\sum_{j=1}^n w_{ij} x_j={\bf w}_i^T{\bf x}\;\;\;\;(i=1,\cdots,m),
+\;\;\;\;\;\;\mbox{or}\;\;\;\;\;	{\bf y}={\bf W}{\bf x}
+\end{equation}
+where ${\bf w}_i=[w_{i1},\cdots,w_{in}]^T$, 
+${\bf W}=[{\bf w}_1,\cdots,{\bf w}_m]^T$.
+
+\htmladdimg{../figures/twolayernet.gif}
+
+The Hebbian learning law is:
+\begin{equation}
+w_{ij}^{new}=w_{ij}^{old}+\eta\;x_j y_i\;\;\;\;(i=1,\cdots,m,\;j=1,\cdots,n)
+\end{equation}
+or in matrix form:
+\begin{equation}
+  {\bf W}^{new}={\bf W}^{old}+\eta\; {\bf y} {\bf x}^T	
+\end{equation}
+Here $\eta$ is the {\em learning rate}, a parameter that controls how fast 
+the weights get modified. The reasoning for this learning law is that when 
+both $x_j$ and $y_i$ are high (activated), the weight $w_{ij}$ (synaptic 
+connectivity) between them is enhanced according to Hebb's theory.
+
+This is a supervised learning composed of the following two stages:
+\begin{itemize}
+\item {\bf Training:} Let $w_{ij}=0$ initially and $\eta=1$, then train
+  the network by a set of $N$ pairs of patterns $\{ ({\bf x}_k,{\bf y}_k),\;\;
+  k=1,\cdots,N\}$ based on the learning law:
+  \begin{equation}
+  w_{ij}=\sum_{k=1}^Nx_j^{(k)}y_i^{(k)}\;\;\;\;(i=1,\cdots,m,\;\;j=1,\cdots,n)
+  \end{equation}
+  or in matrix form, the weight matrix is the sum of the outer-products of all
+  $K$ pairs of patterns:
+  \begin{equation}
+    {\bf W}_{m\times n}=\sum_{k=1}^N {\bf y}_k {\bf x}_k^T = \sum_{k=1}^N 
+    \left[ \begin{array}{c} y_1^{(k)} \\ \vdots \\ y_m^{(k)} \end{array} \right]
+         [ x_1^{(k)}, \cdots, x_n^{(k)} ]	
+  \end{equation}
+\item {\bf Association:} When one of the patterns ${\bf x}_l$ is presented
+  to the network, it produces the output:
+  \begin{equation}
+    {\bf y}={\bf W}{\bf x}_l=\left(\sum_{k=1}^K {\bf y}_k {\bf x}_k^T\right)\;{\bf x}_l
+    ={\bf y}_l({\bf x}_l^T{\bf x}_l)+\sum_{k\neq l}{\bf y}_k({\bf x}_k^T{\bf x}_l)
+  \end{equation}
+\end{itemize}
+
+To interpret the output pattern ${\bf y}$, we first consider the ideal case 
+where the following two conditions are satisfied:
+\begin{itemize}
+\item The $N$ patterns ${\bf x}$'s are orthogonal to each other, i.e., 
+  they are totally uncorrelated to each other: 
+  \begin{equation}
+    {\bf x}_i^T{\bf x}_j=||{\bf x}_i||\;||{\bf x}_j|| \cos \phi 
+    = \delta_{ij}=\left\{ \begin{array}{ll} 1 & i=j \\ 0 & i\ne j \end{array} 
+    \right. 
+  \end{equation}
+  where $\phi$ is the angle between vectors ${\bf x}_i$ and ${\bf x}_j$,
+  representing how much the two vectors are similar or correlated to each 
+  other:
+  \begin{equation} 
+  \cos\phi = \frac{{\bf x}^T{\bf y}}{||{\bf x}||\,||{\bf y}||}
+  =\frac{\sum_i x_i y_i}{\sqrt{\sum_i x_i^2}\sqrt{\sum_i y_i^2} }	
+  \end{equation}
+  which can be interpreted as the {\em correlation coefficient} 
+  $r_{xy}=\sigma_{xy}^2/\sigma_x\sigma_y$ between ${\bf x}$ and ${\bf y}$ 
+  treated as random variables
+  \begin{itemize}
+    \item If $0 < r_{xy} \leq 1$, ${\bf x}$ and ${\bf y}$ are positively 
+      correlated ($r_{xy}=1$ \mbox{iff} ${\bf x}={\bf y}$)
+    \item If $ r_{xy} =0 $, ${\bf x}$ and ${\bf y}$ are not correlated
+    \item If $ -1 \leq r_{xy} \leq 0$, ${\bf x}$ and ${\bf y}$ are negatively
+      correlated ($r_{xy}=-1$ \mbox{iff} ${\bf x}=-{\bf y}$) 
+  \end{itemize}
+
+\item The number of input nodes is greater than the number of pattern pairs:
+  $n \geq N$, i.e., the capacity of the network is large enough for representing
+  $N$ different patterns (as there can be no more than $n$ orthogonal vectors in 
+  an n-D space). 
+
+\end{itemize}
+
+If these conditions are true, then the response of the network to ${\bf x}_l$
+will be 
+\begin{equation}
+  {\bf y}={\bf y}_l({\bf x}_l^T{\bf x}_l)+\sum_{k\neq l}{\bf y}_k({\bf x}_k^T{\bf x}_l)
+  ={\bf y}_l 
+\end{equation}
+as all other terms ($k \ne l$) ${\bf x}_k^T {\bf x}_l=0$ are zero.
+In other words, a one-to-one correspondence relationship between 
+${\bf x}_k$ and ${\bf y}_k$ has been established for all $k=1,\cdots,N$.
+In non-ideal cases, the summation term is non-zero and there is an error
+${\bf y}-{\bf y}_l \neq 0$.
+
+
+\section*{Hopfield Network}
+
+%https://www.youtube.com/watch?v=LtGdn9h5OSQ
+%https://courses.cs.ut.ee/MTAT.03.277/2014_fall/uploads/Main/deep-learning-lecture-10-hopfield-nets-and-boltzmann-machines-tambet%20matiisen.pdf
+%http://page.mi.fu-berlin.de/rojas/neural/chapter/K13.pdf
+
+The \htmladdnormallink{Hopfield network}
+{http://en.wikipedia.org/wiki/Hopfield_network}
+is a supervised method, based on the Hebbian learning rule. As a
+supervised method, the Hopfield network is trained based on a set 
+of $K$ patterns in dataset ${\bf X}=[{\bf x}_1,\cdots,{\bf x}_K]$, 
+where each data point ${\bf x}_k=[x_1,\cdots,x_d]^T$ is a d-dimensional 
+binary vector containing $x_i \in\{-1,\;1\},\;(i=1,\cdots,d)$, 
+representing one of $K$ different of patterns of interest. Once the
+network is completely trained, a weight matrix ${\bf W}$ of the network
+is obtained in which the $K$ patterns are stored. Given an input 
+${\bf x}$, an iterative computation is carried out until convergence, 
+when one of the pre-stored complete pattern that most closely resemble
+the input ${\bf x}$ is produced as the output. The Hopfield network 
+can therefore be considered as an auto-associator (a content addressable
+memory), by which a pre-stored pattern can be retrieved based on its
+association to the input pattern established by the network.
+
+Structurally, the Hopfield network is a {\em recurrent} 
+network, in the sense that the outputs of its single layer of $d$
+nodes are fed back to these nodes in an iterative process. 
+
+
+\htmladdimg{../figures/recurrentnet1.png}
+
+\begin{itemize}
+\item {\bf Training:}
+
+  The training process is essentially the same as the Hebbian learning, 
+  except here the two associated patterns in each pair are the same 
+  (self-association). The weight matrix of the network is obtained as 
+  the sum of the outer-products of the $K$ patterns to be stored:
+  \begin{equation} 
+    {\bf W}_{d\times d}=\frac{1}{d}\sum_{k=1}^K {\bf x}_k {\bf x}_k^T
+    = \frac{1}{d}\sum_{k=1}^K 
+    \left[ \begin{array}{c} x_1^{(k)} \\ \vdots \\ x_d^{(k)} \end{array} \right]
+         [ x_1^{(k)}, \cdots, x_d^{(k)} ]	
+  \end{equation}
+  The weight connecting node i and node j is defined as
+  \begin{equation}	
+    w_{ij}=\frac{1}{d}\sum_{k=1}^K x_i^{(k)} x_j^{(k)}=w_{ji}	
+  \end{equation}
+  We assume no self-connection exists $w_{ii}=0\;(i=1,\cdots,d)$
+
+\item {\bf Autoassociation:}
+
+  Once the weight matrix ${\bf W}$ is obtained by the training process, 
+  the network can be used as a self-associator. When an input pattern 
+  ${\bf x}$ is presented to the network, the outputs of the network are
+  updated {\em iteratively} and {\em asynchronously}, one randomly 
+  selected node at a time:
+  \begin{equation}
+    x_i^{(n+1)}=sgn \left(\sum_{j=1}^d w_{ij}x_j^{(n)}\right)
+    =\left\{ \begin{array}{ll} 
+      +1, & \mbox{if}\;\;\;\sum_{j=1}^d w_{ij}x_j^{(n)} \geq 0 \\ 
+      -1, & \mbox{if}\;\;\;\sum_{j=1}^d w_{ij}x_j^{(n)}  < 0 \end{array} \right.
+  \end{equation}
+  where $x_i^{(n)}$ and $x_i^{(n+1)}$ are the output $x_i$ of the ith node
+  before and after the nth iteration, respectively. As shown below, this
+  iteration will always converge to one of the $K$ pre-stored patterns.
+\end{itemize}
+
+We first define the {\em Energy function} of any two nodes $x_i$ and $x_j$ 
+of ${\bf x}$ as
+\begin{equation}
+  e_{ij}=-w_{ij}x_ix_j	
+\end{equation}
+and the total {\em energy} of all $d$ nodes in the network as the sum 
+of all pair-wise energies:
+\begin{equation}
+  {\cal E}({\bf x}) = \frac{1}{2}\sum_{i=1}^d\sum_{j=1}^d e_{ij}
+  =-\frac{1}{2}\sum_{i=1}^d \sum_{j=1}^d w_{ij} x_i x_j 
+  =-\frac{1}{2}{\bf x}^T{\bf Wx}
+\end{equation}
+
+The interaction between these two nodes is summarized below:
+
+\begin{equation} 
+  \begin{tabular}{ c | r | r || c | c} \hline
+    & $x_j$	& $x_i$	& $w_{ij}>0$ 	& $w_{ij}<0$	\\  \hline\hline
+    1 & -1 & -1	& $e_{ij}<0$	& $e_{ij}>0$	\\\hline
+    2 & -1 &  1	& $e_{ij}>0$	& $e_{ij}<0$	\\\hline
+    3 &  1 & -1	& $e_{ij}>0$	& $e_{ij}<0$	\\\hline
+    4 &  1 &  1	& $e_{ij}<0$	& $e_{ij}>0$	\\  \hline
+  \end{tabular} 
+\end{equation}
+We make two observations.
+\begin{itemize}
+\item When the two nodes i and j reinforce each other's state,
+  $e_{ij}<0$:
+  
+  \begin{itemize}
+  \item If $w_{ij}>0$ (in cases 1 and 4), $x_j=\mp 1$ tends to
+    keep $x_i$ to stay at the same state $\mp 1$ in the iteration.
+
+  \item If $w_{ij}<0$ (in cases 2 and 3), $x_j=\mp 1$ tends to
+    keep $x_i$ to stay at the same state $\pm 1$. 
+  \end{itemize}
+
+\item When the two nodes i and j change each other's state, $e_{ij}>0$:
+
+  \begin{itemize}
+  \item If $w_{ij}<0$ (in cases 1 and 4), $x_j=\mp 1$ tends to
+    reverse $x_i$ from its previous state $\mp 1$ to $\pm 1$.
+
+  \item If $w_{ij}>0$ (in cases 2 and 3), $x_j=\mp 1$ tends to
+    reverse $x_i$ from its previous state $\pm 1$ to $\mp 1$.
+  \end{itemize}
+
+\end{itemize}
+We note that low energy $e_{ij}$ corresponds to a stable interaction 
+between $x_i$ and $x_j$, i.e., they tend to remain unchanged, and high 
+energy corresponds to an unstable interaction, i.e., they tend to change
+their states. As the result, low total ${\cal E}({\bf x})$ corresponds 
+to more stable condition of the network, while high ${\cal E}({\bf x})$
+corresponds to less stable condition.
+
+We further show that the total energy ${\cal E}({\bf x})$ always decreases 
+whenever the state of any node changes. Assume $x_k$ has just been changeed,
+i.e.,$x_k^{(n+1)} \neq x_k^{(n)}$ ($x_k=\pm 1$ but $x_k^{(n+1)}=\mp 1$), while
+all others remain the same $x_{l \neq k}^{(n+1)}=x_{l \neq k}^{(n)}$. The
+energy before $x_k$ changes state is
+\begin{eqnarray}
+  {\cal E}^{(n)}({\bf x})&=&-\frac{1}{2}
+  \left[ \sum_{i\neq k}\sum_{j\neq k}w_{ij}x_i^{(n)}x_j^{(n)}
+    +\sum_i w_{ik}x_i^{(n)}x_k^{(n)}+\sum_j w_{kj}x_k^{(n)}x_j^{(n)} \right]
+  \nonumber\\
+  &=& -\frac{1}{2} \sum_{i\neq k}\sum_{j\neq k}w_{ij}x_ix_j
+  - \sum_i w_{ik}x_i^{(n)}x_k^{(n)} 
+  \nonumber
+\end{eqnarray}
+and the energy after $x_k$ changes state is
+\begin{equation}
+  {\cal E}^{(n+1)}({\bf x})= -\frac{1}{2} \sum_{i\neq k}\sum_{j\neq k}w_{ij}x_ix_j
+  - \sum_i w_{ik}x_i^{(n+1)}x^{(n+1)}_k 
+\end{equation}
+The energy difference is
+\begin{equation}
+  \bigtriangleup {\cal E}=(x_k^{(n)}-x_k^{(n+1)}) \sum_i w_{ik}x_i
+\end{equation}
+Consider two cases:
+\begin{itemize}
+\item Case 1:  if $x_k^{(n)}=-1$, but $\sum_i w_{ik}x_i \geq 0$ and 
+  $x_k^{(n+1)}=1$, we have $(x_k^{(n)}-x_k^{(n+1)})=-2 \le 0$ and 
+  $\bigtriangleup {\cal E} \leq 0$.
+\item Case 2: if $x_k^{(n)}=1$, but $\sum_i w_{ik}x_i < 0$ and 
+  $x_k^{(n+1)}=-1$, we have $(x_k^{(n)}-x_k^{(n+1)})=2 \ge 0$ and 
+  $\bigtriangleup {\cal E} \leq 0$.
+\end{itemize}
+As in either case, $\bigtriangleup {\cal E}({\bf x}) \leq 0$ is always 
+true throughout the iteration, we conclude that ${\cal E}({\bf x})$ will 
+eventually reach one of the minima of the {\em energy landscape}, i.e., 
+the iteration will always converge.
+
+\htmladdimg{../figures/energylandscape.gif}
+\htmladdimg{../figures/attractors.gif}
+
+We further show that each one of the $K$ pre-stored patterns corresponds
+to one of the minima of the energy function. The energy function 
+${\cal E}({\bf x})$ corresponding to any ${\bf x}$ can be written as
+\begin{equation}
+  {\cal E}({\bf x}) = -\frac{1}{2}{\bf x}^T{\bf Wx}
+  =-\frac{1}{2}{\bf x}^T\left[\frac{1}{d}\sum_{k=1}^K {\bf x}_k{\bf x}_k^T\right]{\bf x}
+  =-\frac{1}{2d}\sum_{k=1}^K {\bf x}^T{\bf x}_k{\bf x}_k^T{\bf x}  
+  =-\frac{1}{2d}\sum_{k=1}^K ({\bf x}^T{\bf x}_k)^2
+\end{equation}
+If ${\bf x}$ different (ideally orthogonal to) from any of the stored 
+patterns, all $K$ terms of the summation will be small (ideally zero). 
+But if ${\bf x}$ is the same as any one of the stored patterns, their 
+inner product reaches maximum, causing the total energy to be minimized 
+to reach one of the minima. In other words, the patterns stored in the 
+network correspond to the local minima of the energy function. i.e., 
+these patterns become {\em attractors}. 
+
+Note that it is possible to have other local minima, called {\em spurious 
+states}, which do not represent any of the stored patterns, i.e., the 
+associative memory is not perfect.
+
+\htmladdimg{../figures/hopfieldexample.gif}
+
+\section{Perceptron Network}
+
+The perceptron network (\htmladdnormallink{F. Rosenblatt}
+{https://en.wikipedia.org/wiki/Frank_Rosenblatt}, 1957), is a
+two-layer learning network containing a d-node input layer and an
+m-node output layer. The perceptron is a supervised method trained 
+by a set of $N$ samples in the training set 
+${\bf X}=[{\bf x}_1,\cdots,{\bf x}_N]$ labeled by 
+${\bf y}=[y_1,\cdots,y_N]^T$ in some way. In the following, we will 
+first consider the special case where the output layer has only $m=1$
+nodes, and the perceptron becomes a binary classifier by which each
+input pattern ${\bf x}$ is classified into either of the two classes
+$C_+$ and $C_-$, then generalize this binary classifier into a
+multiclass classifiers when $m>1$. 
+
+Specifically, let ${\bf x}=[x_1,\cdots,x_d]^T$ be a randomly selected
+training sample labeled by $y=1$ if ${\bf x}\in C_+$ if $y=1$ or 
+$y=-1$ if ${\bf x}\in C_-$. When this ${\bf x}$ is presented to the
+$d$ input nodes of the perceptron network, the only output node will
+generate a binary output depending on whether the decision function 
+$f({\bf x})={\bf w}^T{\bf x}+b$ is greater or smaller than zero:
+\begin{equation}
+  \mbox{If} \;\; f({\bf x})={\bf w}^T{\bf x}+b \; 
+  \left\{ \begin{array}{l} > 0\\ <0 \end{array} \right.,
+  \;\;\;\mbox{then}\;\;\;
+  \hat{y}=\sign(f({\bf x}))
+  =\left\{ \begin{array}{rl} 1 & \mbox{for } {\bf x}\in C_+\\
+    -1 & \mbox{for } {\bf x}\in C_-\end{array} \right.
+\end{equation}
+The binary output is either $\hat{y}=1$ indicating ${\bf x}\in C_+$, 
+or $\hat{y}=-1$ indicating ${\bf x}\in C_-$. The difference 
+$\delta=y-\hat{y}$ between the lable $y$ and the actual output $\hat{y}$ 
+is the error or residual, which is to be reduced by modifying the model 
+parameters ${\bf w}$ and $b$ iteratively during the training process based 
+on all samples in the training set.
+
+If we divide the inequalities above by $||{\bf w}||$ and rewrite 
+them as:
+\begin{equation}
+  p_{\bf w}({\bf x})=\frac{{\bf w}^T{\bf x}}{||{\bf w}||}
+  > -\frac{b}{||{\bf w}||}=b'\;\;\;\;\;\;\;\;\;
+  p_{\bf w}({\bf x})=\frac{{\bf w}^T{\bf x}}{||{\bf w}||}
+  < -\frac{b}{||{\bf w}||}=b'
+\end{equation}
+we see that the binary classification is based on the projection 
+$p_{\bf w}({\bf x})$ of ${\bf x}$ onto the normal direction ${\bf w}$,
+which is either greater or smaller than the bias $b'=-b/||{\bf w}||$
+(distance of the hyperplane to the origin), corresponding to whether 
+${\bf x}$ is on the positive or negative side of the plane.
+
+As a binary classifier, the single output node perceptron partitions 
+the d-dimensional feature space into two halves for the two classes by
+a hyperplane ${\bf w}^T{\bf x}+b=0$, with the normal direction ${\bf w}$ 
+and bias (intercept) $b$. This is similar to the binary classifier based 
+on linear regression, and also the support vector machine. All these 
+methods share the common goal of finding the optimal parameters ${\bf w}$
+and $b$, so that error or residual $r=\delta=y-\hat{y}$ is minimized. 
+However, these methods take different approaches. The weight vector 
+${\bf w}$ is obtained by the least squares method in linear regression, 
+or by solving a quadratic programming problem in SVM, while here in the
+perceptron ${\bf w}$ is obtained iteratively by a very simple learning 
+law called the $\delta$-rule, as discussed below. 
+
+As always, we assume ${\bf x}=[x_0=1,x_1,\cdots,x_n]^T$ and 
+${\bf w}=[w_0=b,w_1,\cdots,w_n]^T$ in the following, so that the 
+decision function can be more conveniently written as an inner product 
+$f({\bf x})={\bf w}^T{\bf x}$ without the additional bias term.
+
+During the training process, the randomly initialized weight vector 
+${\bf w}$ is iteratively updated based on the following mistake driven:
+$\delta$-rule:
+\begin{equation} 
+  {\bf w}^{new}={\bf w}^{old}+\eta(y-\hat{y})\,{\bf x}
+  ={\bf w}^{old}+\eta\,\delta{\bf x}
+  \label{deltaRulePerceptron}
+\end{equation}
+where $\eta>0$ is the learning rate, which is assumed to be 1 in the
+following for simplicity. We can show that by the iteration above, 
+${\bf w}$ is modified in such a way that the error $\delta$ is always 
+reduced.
+
+When a training sample ${\bf x}$ labeled by $y\pm 1$ is presented to the
+input layer of the perceptron, its output $\hat{y}=\sign(f({\bf x}))$ may
+or may not match the the label $y$, as shown in the table:
+\begin{equation}
+  \begin{tabular}{c|l|l|l} \hline
+    & $y$ & $f({\bf x})={\bf w}^T{\bf x},\,\hat{y}
+    =\sign(f({\bf x}))$ & $\delta=y-\hat{y}$\\ \hline \hline
+    1 & $y= 1$ & $f({\bf x})>0,\;\hat{y}= 1$ & $\delta=0$  \\ \hline
+    2 & $y=-1$ & $f({\bf x})>0,\;\hat{y}= 1$ & $\delta=-2$ \\ \hline
+    3 & $y= 1$ & $f({\bf x})<0,\;\hat{y}=-1$ & $\delta=2$  \\ \hline
+    4 & $y=-1$ & $f({\bf x})<0,\;\hat{y}=-1$ & $\delta=0$  \\ \hline
+  \end{tabular} 
+\end{equation}
+In both the first and last cases, $y f({\bf x})>0$, and $\delta=y-\hat{y}=0$, 
+the weight vector ${\bf w}^{new}={\bf w}^{old}+\delta{\bf x}={\bf w}^{old}$ is 
+not modified. But in cases 2 and 3 $y f({\bf x})<0$, and $\delta=y-\hat{y}=1$, 
+the weight vector ${\bf w}$ is modified: 
+\begin{itemize}
+\item In case 2, $y=-1$, but $\hat{y}=1$, then $y\,f({\bf x})<0$ and
+  $\delta=-2$, we have
+  \begin{equation} 
+    {\bf w}^{new}={\bf w}^{old}-2{\bf x}	
+    \label{learningLaw0}
+  \end{equation}
+  When the same ${\bf x}$ is presented again, the function is smaller
+  than its previous value
+  \begin{equation}	
+    f({\bf x})={\bf x}^T{\bf w}^{new}={\bf x}^T{\bf w}^{old}-2{\bf x}^T{\bf x} 
+    < {\bf x}^T{\bf w}^{old}	
+  \end{equation}
+  and the output $\hat{y}$ is more likely to be the same as the desired 
+  $y=-1$.
+
+\item In case 3, $y=1$, but $\hat{y}=-1$, then $y\,f({\bf x})<0$ and
+  $\delta=2$, we have
+  \begin{equation} 
+    {\bf w}^{new}={\bf w}^{old}+2{\bf x}	
+    \label{learningLaw1}
+  \end{equation}
+  When the same ${\bf x}$ is presented again, the function is greater
+  than its previoius value
+  \begin{equation}	
+    f({\bf x})={\bf x}^T{\bf w}^{new}={\bf x}^T{\bf x}^{old}+2{\bf x}^T{\bf x}
+    > {\bf x}^T{\bf w}^{old}	
+  \end{equation}
+  and the output $\hat{y}$ is more likely to be the same as the desired
+  $y=1$.
+\end{itemize}
+The update equations in Eq. (\ref{learningLaw0}) for $y=-1$ and 
+Eq. (\ref{learningLaw1}) for $y=-1$ can be combined to become
+${\bf w}^{new}={\bf w}^{old}+2 y {\bf x}$, of which the scaling 
+constant $2$ can be dropped as it can be absorbed into the learning 
+rate $\eta$. Now  the learning law can be rewritten as:
+\begin{equation}
+  \mbox{If}\;\;\;\;y\,f({\bf x})\left\{\begin{array}{c}
+  >0\\<0 \end{array}\right.
+  \;\;\;\mbox{then}\;\;\;\;\;
+  \left\{\begin{array}{l}  {\bf w}^{new}={\bf w}^{old} \\
+  {\bf w}^{new}={\bf w}^{old}+y\,{\bf x}
+  \end{array}\right.
+\end{equation}
+
+In summary, the learning law guarantees that the weight vector ${\bf w}$ 
+is modified in such way that the performance of the network is always 
+improved with reduced error $\delta=y-\hat{y}$. The perceptron convergence 
+theorem states that if $C_+$ and $C_-$ are linearly saperable, then a 
+perceptron will always produce ${\bf w}$ in finite number of iterations 
+to saperate them.
+%http://www.cems.uvm.edu/~rsnapp/teaching/cs295ml/notes/perceptron.pdf
+
+
+This binary classifier with $m=1$ output node can be genrealized to 
+multiclass classifier with $m>1$ output nodes, and each of the $m$ 
+weight vectors in ${\bf W}=[{\bf w}_1,\cdots,{\bf w}_m]$ is modified 
+by the same learning law considered above. The $m$ outputs 
+$y_i\in\{-1,\,1\},\;(i=1,\cdots,m)$ can encode multiple classes in two
+different ways. First, by {\em one-hot} method, the $m$ binary output 
+can encode $K=m$ classes, i.e., the kth class is represented by an
+m-bit output with $y_k=1$ while all others $y_l=-1$ for $l\ne k$. 
+Alternatively, binary encoding can also be used so that as many as 
+$K=2^m$ classes can be represented. For example, $K=4$ classes can be
+labeled by $4$ binary vector of either 4 or 2 bits:
+\begin{equation}
+  \begin{tabular}{l||r|r|r|r} \hline
+    \mbox{binary output} & ${\bf y}_0$ & ${\bf y}_1$ & ${\bf y}_2$ & ${\bf y}_3$ \\ \hline\hline
+    $y_1$ &  1 & -1 & -1 & -1 \\ \hline
+    $y_2$ & -1 & 1 & -1 & -1 \\ \hline
+    $y_3$ & -1 & -1 & 1 & -1 \\ \hline
+    $y_4$ & -1 & -1 & -1 & 1 \\ \hline
+  \end{tabular} 
+  \;\;\;\;\;\;\mbox{or}\;\;\;\;\;\;\;
+  \begin{tabular}{l||r|r|r|r} \hline
+    \mbox{binary output} & ${\bf y}_0$ & ${\bf y}_1$ & ${\bf y}_2$ & ${\bf y}_3$ \\ \hline\hline
+    $y_1$ & -1 & -1 & 1 & 1 \\ \hline
+    $y_2$ & -1 & 1 & -1 & 1 \\ \hline
+  \end{tabular} 
+\end{equation}
+The outputs of the $m$ output nodes form an m-dimensional binary vector
+$\hat{\bf y}=[\hat{y}_1,\cdots,\hat{y}_m]^T$, which is to be compared 
+with the labeling ${\bf y}$ of the current input ${\bf x}$ with error 
+(or residual) $\delta=||{\bf y}-\hat{\bf y}||$. When the training is 
+complete, an unlabeled input ${\bf x}$ is classified to one of the $K$
+classes with a matching label to the perceptron's output. In the case
+of one-hot encoding, it is possible for the binary output ${\bf y}$ to 
+not match any of the $K$ one-hot encoded classes (e.g., 
+$\hat{\bf y}=[-1\;1\;-1\;1]^T$. In this case, the input ${\bf x}$ can be
+classified to the class corresponding to the node with the greatest output
+value $f({\bf x})={\bf w}^T{\bf x}$. 
+
+The Matlab code for the essential part of the algorithm is listed below.
+Array $X$ contains $K$ classes, array $y$ are the labelings of the $N$ 
+training samples, array $W$ contains the $d+1$ dimensional weight vectors 
+for the $m$ output nodes.
+
+\begin{verbatim}
+
+    [X Y]=DataOneHot;           % get data
+    K=length(unique(Y','rows')) % number of classes
+    X=[ones(1,N); X];           % data augmentation
+    [d N]=size(X);              % number of dimensions and number of samples
+    m=size(Y,1);                % number of output nodes
+    W=2*rand(d,m)-1;            % random initialization of weights
+    eta=1;
+    nt=10^4;                    % maximum number of iteration
+    for it=1:nt       
+        n=randi([1 N]);         % random index
+        x=X(:,n);               % pick a training sample x
+        y=Y(:,n);               % label of x
+        yhat=sign(W'*x);        % binary output
+        delta=y-yhat;           % error between desired and actual outputs
+        for i=1:m
+            W(:,i)=W(:,i)+eta*delta(i)*x;   % update weights for all K output nodes
+        end
+        if ~mod(it,N)           % test for every epoch
+            er=test(X,Y,W);
+            if er<10^(-9)
+                break
+            end
+        end
+        
+    end
+
+\end{verbatim}
+
+This is the function that test the training set based on estimated weight
+vectors in ${\bf W}$:
+
+\begin{verbatim}
+function er=test(X,Y,W)          % test based on estimated W, 
+    [d N]=size(X);
+    Ne=0;                        % number of misclassifications
+    for n=1:N
+        x=X(:,n);
+        yhat=sign(W'*x);
+        delta=Y(:,n)-yhat;
+        if any(delta)            % if misclassification occurs to some output nodes
+            Ne=Ne+1;             % update number of misclassifications
+        end
+    end
+    er=Ne/N;                     % error percentage
+end
+\end{verbatim}
+
+This is the code that generates the training set labeled by either
+one-hot or binary encoding method:
+
+\begin{verbatim}
+function [X,Y]=DataOneHot
+    d=3;
+    K=8;
+    onehot=1;           % onehot=0 for binary encoding
+    Means=[ -1 -1 -1 -1 1 1 1 1;
+        -1 -1 1 1 -1 -1 1 1;
+        -1 1 -1 1 -1 1 -1 1];
+    Nk=50*ones(1,K);
+    N=sum(Nk);          % total number of samples
+    X=[];
+    Y=[];
+    s=0.4;
+    s=0.2;
+    for k=1:K           % for each of the K classes
+        Xk=Means(:,k)+s*randn(d,Nk(k));
+        if onehot
+            Yk=-ones(K,Nk(k)); 
+            Yk(k,:)=1;        
+        else            % binary encoding
+            dy=ceil(log2(K));
+            y=2*de2bi(k-1,dy)-1;
+            Yk=repmat(y',1,Nk(k));
+         end
+        X=[X Xk];
+        Y=[Y Yk];
+    end
+    Visualize(X,Y)        
+end
+
+\end{verbatim}
+
+
+\begin{comment}
+    [X y]=getData;         % get the training data X and their labeling y
+    [d C K]=size(X);       % dimension, number of classes, number of samples/class
+    [C M]=size(y);         % number of classes, number of output nodes
+    W=rand(d+1,M);         % random initialization of M weight vectors
+    nt=10^6;               % maximum number of iterations
+    for it=1:nt            % nt is maximum number of iterations
+        c=randi([1 C]);    % pick a random class
+        k=randi([1 K]);    % pick a random sample in the class
+        x=[X(:,c,k);1];    % d+1 dimensional training sample
+        modified=0;
+        for m=1:M          % for each of the M output nodes
+            w=W(:,m);      % take the mth weight vector
+            delta=y(c,m)-sign(w'*x);   % get delta the error
+            if delta~=0
+                W(:,m)=w+eta*delta*x;  % modify the weight vector
+                modified=1; % weights modified
+            end
+        end
+        if modified         % some weight vector is modified
+            er=test(X,y,W); % test for all training samples 
+            if er==0        % if error is zero
+                break       % the iteration is terminated
+            end
+        end
+    end
+
+This is the function that checks if the output of the perceptron matches
+the labeling of each of the training samples. The number of mismatched
+samples is returned.
+
+function er=test(X,y,W)     % return number of mismatcing training samples
+    [d C1 K]=size(X);
+    [C M]=size(y);
+    [d M]=size(W);
+    er=0;                   % initialization of number of errors
+    for c=1:C               % for all C classes
+        for k=1:K           % for all K samples in each class
+            x=[X(:,c,k);1]; % get the sample
+            wrong=0;
+            for m=1:M;      % for all output nodes
+                if sign(W(:,m)'*x)~=y(c,m); 
+                    wrong=1;
+                end            
+            end
+            if wrong
+                er=er+1;    % number of mismatching samples
+            end
+        end
+    end
+end
+
+As the decision function $f({\bf x})={\bf w}^T{\bf x}+b$ of the 
+perceptron is linear, it is only capable of classifying classes that
+are not linearly saperable by a hyperplane in the n-D space. A typical 
+example of two classes not linearly saperable is the XOR problem, where 
+the 2-D space is divided into four regions for two classes (like the
+Karnaugh map for the exclusive-OR of two logical variables $x\oplus y$).
+
+\end{comment}
+
+
+The limitation of linear saperation could be overcome by having more 
+than one learning layer in the network. However, the learning law for 
+the single-layer perceptron network no longer applies. New training
+method will be needed, as to be discussed in the next section.
+
+{\bf Examples}
+
+The figure below shows the classification results of a perceptron 
+network with $n=2$ input nodes and $m=2$ output nodes. The two output
+nodes encode $2^2=4$ classes in a 2-D space. The training set contains
+100 samples for each of the four classes labeled by ${\bf y}=[y_1,\,y_2]$.
+The two weight vectors ${\bf w}_1$ and ${\bf w}_2$ are initialized 
+randomly. During the training iteration, when $\delta=y-\hat{y}\ne 0$, the 
+weight vector for the output node is modified, otherwise, nothing needs 
+to be done. After nine such modifications, the four classes are completely 
+saperated by the two straight lines normal to the two weight vectors.
+The first panel shows the initial stage, while the subsequent panels 
+show how the weight vectors are modified each time when $\delta\ne 0$.
+The darker and bigger dots represent the samples presented to the 
+network when one of the weight vectors is modified.
+
+\htmladdimg{../figures/PerceptronEx2.png}
+
+The figure below shows the classification results of a perceptron of
+$n=3$ input nodes and $m=3$ output nodes encoding $2^3=8$ classes.
+After 35 modifications the weight vectors, the perceptron is completely
+trained to classify all eight classes correctly. The first panel shows
+the initial stage, the following three panels show the weight vectors,
+${\bf w}_1$, ${\bf w}_2$ and ${\bf w}_3$, also the normal vectors of
+the decision planes, from some three different viewing angles. We see 
+that the eight classes are indeed saperated by the three planes normal 
+to the weight vectors.
+
+\htmladdimg{../figures/PerceptronEx3.png}
+
+%https://www.cs.cmu.edu/~mgormley/courses/10601-s17/slides/lecture11-kernels.pdf
+%https://alex.smola.org/teaching/pune2007/pune_3.pdf
+
+A major limitation of the perceptron algorithm is the requirement that
+the classes are linear saperabe. This can be overcome by the kernel
+method, once the algorithm is modified in such a way that all data 
+samples appear in the form of an inner product. Consider first the 
+training process in which the $N$ training samples are repeatedly 
+presented to the network, and the weight vector is modified to become 
+${\bf w}^{new}={\bf w}^{old}+y_n{\bf x}_n$ whenever a sample ${\bf x}_n$ 
+labeled by $y_n$ is misclassified with $\delta=y_n-\hat{y}_n\ne 0$. If 
+the weight vector is initialized to zero ${\bf w}=0$, then the weight 
+vector by the updating rule above can be written as a linear combination
+of the $N$ training samples:
+\begin{equation}
+  {\bf w}=\sum_{n=1}^N \alpha_n y_n {\bf x}_n
+  \label{KernelPerceptronW}
+\end{equation}
+where $\alpha_n$ is the number of times sample ${\bf x}_n$ labeled by 
+$y_n$ is misclassified. Upon receiving a new training sample ${\bf x}_l$
+labeled by $y_l$, we have
+\begin{equation}
+  f({\bf x}_l)= {\bf w}^T{\bf x}_l=\sum_{n=1}^N \alpha_n y_n {\bf x}_n^T{\bf x}_l,
+  \;\;\;\;\;\;\mbox{and}\;\;\;\;\;\;  \hat{y}_l=\sign(f({\bf x}_l))
+\end{equation}
+and the weight vector ${\bf w}$ is updated by the learning law:
+\begin{eqnarray}
+  \mbox{If} & & \;\;\delta=y_l-\hat{y}_l \ne 0
+  \nonumber \\
+  \mbox{then} & & {\bf w}^{new}={\bf w}^{old}+ y_l\, {\bf x}_l
+  =\sum_{n=1}^N \alpha_n y_n {\bf x}_n+ y_l\, {\bf x}_l
+  \nonumber \\
+  & & \;\;\;\mbox{i.e.}  \;\;\; \alpha_l^{new}=\alpha_l^{old}+1
+\end{eqnarray}
+We see that only $\{\alpha_1,\cdots,\alpha_N\}$ need to be updated 
+during the training process, while the weight vector ${\bf w}$ in Eq. 
+(\ref{KernelPerceptronW}) no longer needs to be explicitly calculated.
+Once the training process is complete, any unlabeled ${\bf x}$ can be
+classified into either of the two classes $C_-$ and $C_+$ based on 
+$\{\alpha_1,\cdots,\alpha_N\}$:
+\begin{equation}
+  \mbox{If}\;\;\; {\bf w}^T{\bf x}=\sum_{n=1}^N \alpha_n y_n {\bf x}_n^T{\bf x}
+  \left\{\begin{array}{l} >0\\<0\end{array}\right.,
+  \;\;\;\;\;\mbox{then}\;\;\;\;\;
+  {\bf x}\in\left\{\begin{array}{l}C_-\\C_+\end{array}\right.
+\end{equation}
+
+As all data samples appear in the form of an inner product in both 
+the training and testing phase, the kernel method can be applied to 
+replace the inner product ${\bf x}_n^T{\bf x}_m$ by a kernel function 
+$k({\bf x}_n,{\bf x}_m)$. Also, the discussion above for $m=1$ output
+nodes can be generalized to $m>1$ output nodes.
+
+Here is the Matlab code segment for the most essential parts of the 
+kernel perceptron algorithm:
+
+\begin{verbatim}
+    [X Y]=Data;                     % get dataset
+    [d N]=size(X);                  % d: dimension, N: number of training samples
+    X=[ones(1,N); X];               % augmented data
+    m=size(Y,1);                    % number of output nodes
+    A=zeros(m,N);                   % initialize alpha for all m output nodes and N samples
+    K=Kernel(X,X);                  % get kernel matrix of all N samples
+    for it=1:nt                     
+        n=randi([1 N]);             % random index
+        x=X(:,n);                   % pick a training sample     
+        y=Y(:,n);                   % and its label
+        yhat=sign((A.*Y)*K(:,n));   % get yhat
+        delta=Y(:,n)-yhat;     	    % error between desired and actual output
+        for i=1:m                   % for each output node
+           if delta(i)~=0           % if a misclassification
+               A(i,n)=A(i,n)+1;     % update the corresponding alpha
+           end
+        end    
+        if ~mod(it,N)               % test for every epoch
+            er=test(X,Y,A);         % percentage of misclassification
+            if er<10^(-9)           
+                break
+            end
+        end
+    end
+\end{verbatim}
+
+
+\begin{verbatim}
+function er=test(X,Y,A)             % function for testing
+    [d N]=size(X);                  % d: dimension, N: number of training samples
+    m=size(Y,1);
+    Ne=0;                           % initialize number of misclassifications
+    for n=1:N                       % for all N training samples
+        x=X(:,n);                   % get the nth sample
+        y=Y(:,n);                   % and its label
+        f=(A.*Y)*Kernel(X,x);       % f(x)
+        yhat=sign(f);               % yhat=sign(f(x))
+        if norm(y-yhat)~=0          % misclassification at some output nodes 
+            Ne=Ne+1;                % increase number of misclassification
+        end
+    end
+    er=Ne/N;                        % percentage of misclassification
+end
+\end{verbatim}
+
+
+\section{Back Propagation Network}
+
+The back propagation network (BPN) is a powerful and popular 
+learning algorithm that finds many applications in practice. 
+Similar to the perceptron network, the BPN can also be used
+as a supervised classifier based on a training set 
+$\{({\bf x}_i, {\bf y}_i),\,i=1,...,N\}$, where ${\bf x}_i$ is a
+d-dimensional sample vector in the training set, and its lable
+${\bf y}_i$ is an m-dimensional vector, indicating to which of the 
+$K$ classs $\{C_1,\cdots,C_K\}$ pattern ${\bf x}_i$ belongs. 
+
+The BPN is a three-layer hierarchical structure composed of the 
+input, hidden, and output layers containing respectively $n$, $l$, 
+and $m$ nodes. Each node in the hidden and output layers is fully 
+connected to all nodes in the previous layer. Due to the two-level 
+learning taking place at both the hidden and output layers, the BPN 
+is much more powerful than the two-layer perceptron network as it 
+can handle nonlinear as well as linear classification problems.
+
+When one of the $N$ training patterns ${\bf x}$ is presented to 
+the input layer of the BPN, an m-D vector $\hat{\bf y}$ is produced
+at the output layer as the corresponding response, representing the 
+class to which ${\bf x}$ has been assigned. Similar to the perceptron 
+network, the $m$ output nodes can represent $K=m$ classes based on 
+the one-hot method, or, alternatively, they can encode as many as 
+$K=2^m$ classes based on binary encoded. The goal of the BPG learning
+is to modify the weights of both the hidden and output layers based on
+the training set so that its output $\hat{\bf y}$ matches the desired
+output, the label ${\bf y}$, the true class identity of the current 
+input ${\bf x}$, with minimum $||{\bf y}-\hat{\bf y}||$.
+
+\htmladdimg{../figures/threelayernet.gif}
+
+Specifically, the training of the BPN is an iteration of a two-phase 
+process:
+\begin{itemize}
+\item {\bf The feedforward pass:} 
+
+  A randomly selected sample ${\bf x}$ labeled by ${\bf y}$ is presented 
+  to the input layer and forwarded through the weighted connections to 
+  the hidden layer and then the output layer to produce output $\hat{\bf y}$. 
+
+\item {\bf The backward error backpropagation:} 
+
+  The error $\varepsilon$ measuring the difference between the desired 
+  output ${\bf y}$ and the actual output $\hat{\bf y}$ is propagated 
+  backward from the output layer through the hidden layer to the input 
+  layer, during which the weights of both the output and hidden layers
+  are modified so that the error $\varepsilon$ will be reduced when the 
+  same or similar pattern is presented in the future.
+\end{itemize}
+This two-phase process is iterated untill eventually the error is
+minimized and BPN is properly trained. 
+
+We now consider the specific computation taking place in both the 
+forward and backward passes.
+\begin{itemize}
+\item The forward pass:
+
+  \begin{itemize}
+  \item From input layer to hidden layer:
+    \begin{equation}
+      z_j=g(a^h_j)=g\left(\sum_{k=1}^d w_{jk}^h x_k+b_j^h\right)
+      =g\left(\sum_{k=0}^d w_{jk}^h x_k\right)=g({\bf x}^T{\bf w}^h_j)
+      \;\;\;\;\;\;(j=1,\cdots,l) 
+      \label{BPNHidden}
+    \end{equation}
+    where ${\bf x}=[x_0=1,x_1,\cdots,x_d]^T$,
+    ${\bf w}_j^h=[w_{j0}^h=b_j^h,w_{j1}^h,\cdots,w_{jd}^h]^T$, and
+    $a^h_j={\bf x}^T{\bf w}^h_j$ is the activation of the jth hidden 
+    layer node. In vector form we have
+    \begin{equation}
+      {\bf z}={\bf g}\left({\bf W}_h^T{\bf x}\right)
+    \end{equation}
+    where ${\bf z}=[z_1,\cdots,z_l]^T$, and
+    ${\bf W}_h=[{\bf w}^h_1,\cdots,{\bf w}^h_l]$.
+
+  \item From hidden layer to output layer:
+    \begin{equation}
+      \hat{y}_i=g(a_i^o)=g\left(\sum_{j=1}^l w_{ij}^o z_j+b_i^o\right)
+      =g\left(\sum_{j=0}^l w_{ij}^o z_j\right)=g({\bf z}^T{\bf w}^o_i)
+      \;\;\;\;\;\;(i=1,\cdots,m) 
+      \label{BPNOutput}
+    \end{equation}
+    where ${\bf z}=[z_0=1,z_1,\cdots,z_l]^T$, 
+    ${\bf w}_i^o=[w_{i0}^o=b_i^o,w_{i1}^o,\cdots,w_{il}^o]^T$, and 
+    $a^o_i={\bf z}^T{\bf w}^o_i$ is the activation of the jth hidden 
+    layer node. In vector form we have
+    \begin{equation}
+      \hat{\bf y}={\bf g}\left( {\bf W}_o^T{\bf z} \right)
+    \end{equation}
+    where ${\bf W}_o=[{\bf w}^o_1,\cdots,{\bf w}^o_m]$, and
+    $\hat{\bf y}=[\hat{y}_1,\cdots,y_m]^T$. 
+  \end{itemize}
+
+\item The backward error propagation:
+
+  Define the total error as an energy function of the output weights
+  $w_{ij}^o\;(i=1,\cdots,m,\;j=0,1,\cdots,l)$ and hidden layer weights 
+  $w_{jk}^h\;(j=1,\cdots,l,\;k=0,1,\cdots,d)$:
+  \begin{eqnarray}
+    \varepsilon &=&\frac{1}{2}||{\bf y}-\hat{\bf y}||^2 
+    =\frac{1}{2}\sum_{i=1}^m(\hat{y}_i-y_i)^2=\frac{1}{2}\sum_{i=1}^m[g(a^o_i)-y_i]^2
+    =\frac{1}{2}\sum_{i=1}^m\left[g\left(\sum_{j=0}^lw_{ij}^{o}z_j\right)-y_i\right]^2
+    \nonumber \\
+    &=&\frac{1}{2}\sum_{i=1}^m\left[g\left(w_{i0}^o+\sum_{j=1}^l w_{ij}^o\,
+      g(a_j^h)\right)-y_i\right]^2
+    =\frac{1}{2}\sum_{i=1}^m\left[g\left(w_{i0}^o+\sum_{j=1}^l w_{ij}^o\,
+      g\left(\sum_{k=0}^n w_{jk}^hx_k\right)\right)-y_i\right]^2
+  \end{eqnarray}
+
+  To reduce the error function $\varepsilon$ treated as a function of 
+  the weights of both output and hidden layers, the gradient descent 
+  method is used to iteratively modifying first the output layer weights 
+  and then the hidden layer weights, as shown in the following steps:
+  \begin{itemize}
+
+  \item Find the gradient of $\varepsilon$ with respect to the output
+    layer weights $w_{ij}^{o}\;\;(i=1,\cdots,m,\;j=0,1,\cdots,l)$ by 
+    chain rule:
+    \begin{equation}
+      \frac{\partial\,\varepsilon}{\partial\, w_{ij}^o}
+      =\frac{\partial\,\varepsilon}{\partial\, \hat{y}_i}\;
+      \frac{\partial\, \hat{y}_i}{\partial\, a^o_i}\;
+      \frac{\partial\, a^o_i}{\partial\, w_{ij}^{o}}
+      =(\hat{y}_i-y_i)\;g'(a^o_i)\;z_j=-\delta_i\;g'(a^o_i)\;z_j
+    \end{equation}
+    where $\delta_i=y_i-\hat{y}_i$.
+
+  \item Update $w_{ij}^{o}\;(i=1,\cdots,m,\;j=0,1,\cdots,l)$ to reduce 
+    $\varepsilon$ by gradient descent method:
+    \begin{equation}
+      w_{ij}^{o(new)}=w_{ij}^{o(old)}-\eta\;\frac{\partial e}{\partial w_{ij}^o}
+      =w_{ij}^{o(old)} +\eta\;\delta_i\;g'(a^o_i)\;z_j    
+    \end{equation}
+    where $\eta$ is the learning rate or step size, or in matrix form:
+    \begin{equation}
+      {\bf W}^{o(new)}_{m\times (l+1)}
+      ={\bf W}^{o(old)}_{m\times (l+1)}+\eta\;{\bf d}^o_{m\times 1}({\bf z}^T)_{1\times (l+1)}
+    \end{equation}
+    where the second term is an outer product of 
+    ${\bf d}^o_{m\times 1}=[\delta_1 g'(a^o_1),\cdots,\delta_m g'(a^o_m)]^T$,
+    the pair-wise product of $[\delta_1,\cdots,\delta_m]^T$ and
+    $[g'(a_1^o),\cdots,g'(a_m^o)]^T$, and ${\bf z}$.
+
+  \item Find the gradient of $\varepsilon$ with respect to the hidden
+    layer weights $w_{jk}^h\;\;(j=1,\cdots,l,\;k=0,1,\cdots,d)$ by
+    chain rule:
+
+    \begin{eqnarray}
+      \frac{\partial\,\varepsilon}{\partial\, w_{jk}^h}
+      & = &\frac{\partial\,\varepsilon}{\partial\, \hat{y}_i}\;
+      \frac{\partial\, \hat{y}_i}{\partial\, a^o_i}\; 
+      \frac{\partial\, a^o_i}{\partial\, z_j}\;
+      \frac{\partial\, z_j}{\partial\, a^h_j}\;
+      \frac{\partial\, a^h_j}{\partial\, w_{jk}^h}
+      =\sum_{i=1}^m\;(\hat{y}_i-y_i)\;\frac{\partial\, \hat{y}_i}{\partial\, a^o_i}\;
+      \frac{\partial\, a^o_i}{\partial\, z_j}\;
+      \frac{\partial\, z_j}{\partial\, a^h_j}\;
+      \frac{\partial\, a^h_j}{\partial\, w_{jk}^h}
+      \nonumber \\
+      &=& -\sum_{i=1}^m \delta_ig'(a^o_i)w_{ij}^o\;g'(a^h_j)x_k 
+      =-\delta_j^{h}\;g'(a^h_j)x_k 
+      \nonumber
+    \end{eqnarray}
+    where 
+    \begin{equation}
+      \delta_j^h=\sum_{i=1}^m \delta_i^o g'(a^o_i)w_{ij}^o
+      =\sum_{i=1}^m d_i^o w_{ij}^o      \;\;\;\;(j=1,\cdots,l)
+    \end{equation}
+    where $d_i^o=\delta_i^o g'(a^o_i)$, or in matrix form:
+    \begin{equation}
+      \left[\begin{array}{l}\delta_1^h\\\vdots\\\delta_l^h\end{array}\right]
+      =\left[\begin{array}{ccc}w_{11}^o & \cdots &w_{1m}^o\\
+          \vdots & \ddots & \vdots \\ w_{l1}^o & \cdots & w_{lm}^o
+          \end{array}\right]
+      \left[\begin{array}{c}\delta_1^og'(a_1^o)\\\vdots\\\delta_m^og'(a_m^o)
+          \end{array}\right]
+      ={\bf W}^{oT}_{l\times m}{\bf d}^o_{m\times 1}
+    \end{equation}
+    where ${\bf W}^o$ is an $l\times m$ matrix, the same as defined 
+    above but with the first row of $b_j$'s removed, and 
+    ${\bf d}^o=[d_1,\cdots,d_m]^T$ is the elementwise (Hadamard)
+    product of vectors ${\bf y}-\hat{\bf y}$ and ${\bf g}'({\bf a}^o)$
+    denoted by ${\bf d}^o=({\bf y}-\hat{\bf y})\odot {\bf g}'({\bf a}^o)$.
+
+  \item Update $w_{jk}^{h}\;\;(j=1,\cdots,l,\;k=0,1,\cdots,d)$ to reduce
+    $\varepsilon$ by gradient descent method:
+    \begin{equation}
+      w_{jk}^{h(new)}=w_{jk}^{h(old)} -\eta\;\frac{\partial \varepsilon}{\partial w_{jk}}
+      =w_{jk}^{h(old)}+\eta\;\delta_j^h\;g'(a^h_j)x_k    
+      =w_{jk}^{h(old)}+\eta\;d_j^hx_k    
+    \end{equation}
+    where $d^h_j=\delta^h_jg'(a_j^h)$, or in matrix form:
+    \begin{equation}
+      {\bf W}^{h(new)}_{l\times (d+1)}={\bf W}^{h(old)}_{l\times (d+1)}
+      +\eta\;{\bf d}^h_{l\times 1} {\bf x}^T_{1\times (d+1)}
+    \end{equation}
+    where 
+    ${\bf d}^h={\bf W}^{oT}_{l\times m}{\bf d}^o_{m\times 1}\odot {\bf g}'({\bf a}^h)$, 
+    and the second term is an outer product of 
+    ${\bf d}^h_{l\times 1}$ and ${\bf x}_{n\times 1}$.
+
+  \end{itemize}
+
+\end{itemize}
+
+Here are the steps in each iteration:
+
+\begin{enumerate}
+\item Input a randomly selected pattern $[x_1,\cdots,x_n]^T$,
+  construct $d+1$ dimensional vector ${\bf x}=[1,x_1,\cdots,x_d]^T$;
+
+\item Compute ${\bf z}={\bf g}({\bf W}^h{\bf x})$,
+  and construct $l+1$ dimensional vector 
+  ${\bf z} \leftarrow [1,{\bf z}]$;
+
+\item Compute $\hat{\bf y}={\bf g}({\bf W}^o{\bf z});$
+
+\item Get elementwise product
+  ${\bf d}^o=({\bf y}-\hat{\bf y})\odot {\bf g}'({\bf a}^o)$;
+  
+\item Get elementwise product
+  ${\bf d}^h={\bf W}^{oT}_{l\times m}{\bf d}^o \odot {\bf g}'({\bf a}^h)$,
+  where ${\bf W}^o_{m\times l}$ is the same as ${\bf W}^o$ but with
+  its first row removed.
+
+\item Update output weights
+  ${\bf W}^o\leftarrow {\bf W}^o+\eta\;{\bf d}^o{\bf z}^T$;
+
+\item Update hidden weights
+  ${\bf W}^h\leftarrow {\bf W}^h+\eta\;{\bf d}^h{\bf x}^T$;
+
+\item Terminate the iteration if the error
+  $\varepsilon=||{\bf y}-\hat{\bf y}||^2/2$ is acceptably small for 
+  all of the training patterns. Otherwise repeat the above with 
+  another pattern in the training set.
+\end{enumerate}
+
+
+The Matlab code for the essential part of the BPN algorithm is listed 
+below. Array $X$ contains $C$ classes each with $K$ samples, array $Y$
+are the labelings of the $C*K$ training samples, array $W$ contains the
+$N+1$ dimensional weight vectors for the $M$ output nodes.
+
+\begin{verbatim}
+
+    syms x 
+    g=1/(1+exp(-x));          % Sigmoid activation function
+    dg=diff(g);               % its derivative function
+    g=matlabFunction(g);
+    dg=matlabFunction(dg);
+    
+    [X Y]=getData;            % get the training data
+    [N,K]=size(X)             % number of inputs and total number of samples
+    L=20;                     % number of hidden nodes
+    eta=0.1;                  % learning rate (0,1)
+     
+    for n=1:N
+        xmin=min(X(n,:));
+        xmax=max(X(n,:));
+        s=1/(xmax-xmin);
+        for i=1:K
+            X(n,i)=(X(n,i)-xmin)*s;  % Convert to entire dynamic range  
+        end
+    end
+    X=[ones(1,K);X];          % augment X by including a row of x0=1  
+    Wh=1-2*rand(L,N+1);       % Initialize hidden layer weights and biases
+    Wo=1-2*rand(M,L+1);       % Initialize output layer weights and biases
+    it=0;                     % initialize iteration index
+    ie=0;
+    er=1;
+    while er>0.01
+        n=randi(N,1);         % pick a randome number between 1 and N
+        x=X(:,n);             % pick a training sample      
+        y=Y(:,n);             % and its class labeling
+        ah=Wh*x;              % activation of hidden layer  
+        z=[1; g(ah)];         % output of hidden layer (augmented) (eq. 44)
+        ao=Wo*z;              % activation to output layer
+        yhat=g(ao);           % output of output layer (eq. 46)
+        do=(y-yhat).*dg(ao);  % Find d of output layer 
+        dh=(Wo(:, 2:L+1)'*do).*dg(ah);    % delta of hidden layer (eq. 52)
+        Wo=Wo+eta*do*z';      % update output layer weights (eq. 50)
+        Wh=Wh+eta*dh*x';      % update hidden layer weights (eq. 54)
+        it=it+1;              % increment of iteration index
+        if ~mod(it,1000)      % check error every 1000 iterations
+            Yp=g(Wo*[ones(1,K); g(Wh*X)]);    % feed forward to get output Y given X
+            [Cm er]=ConfusionMatrix(yhat,y);
+            fprintf('epoch %d:  %.4f\n', ie,er);
+        end
+    end
+\end{verbatim}
+
+The function \verb|ConfusionMatrix| generates the confusion matrix:
+
+\begin{verbatim}
+function [Cm er]=ConfusionMatrix(yhat,ytrain)
+    K=length(unique(ytrain));         % number of classes
+    N=length(ytrain);                 % number of test samples
+    Cm=zeros(K);
+    for n=1:N
+        i=ytrain(n);
+        j=yhat(n);
+        Cm(i,j)=Cm(i,j)+1;                
+    end
+    er=1-sum(diag(Cm))/N;
+    fprintf('%d/%d\n',N-sum(diag(Cm)),N)
+end
+\end{verbatim}
+
+
+The training process of BP network can also be considered as a 
+\htmladdnormallink{data modeling}{../ch7/node8.html} problem to fit
+the given data $\{({\bf x}_i,\,{\bf y}_i),\;(i=1,\cdots,N)\}$ by a
+function with the weights of both the hidden and output layers as the
+parameters:
+\begin{equation}
+  {\bf y}={\bf f}({\bf x},{\bf W}^h,{\bf W}^o) 
+\end{equation}
+The goal is to find the optimal parameters ${\bf W}_h$ and ${\bf W}^o$
+that minimize the difference ${\bf r}={\bf y}-\hat{\bf y}$ between the 
+desired and the actual outputs. The Levenberg-Marquardt algorithm discussed
+previously can be used to obtain the parameters, such as Matlab function
+\htmladdnormallink{trainlm}{http://www.mathworks.com/help/nnet/ref/trainlm.html}.
+
+{\bf Example 1:} The classification results of two previously used 2-D 
+data sets are shown below. The error rates are respectively $13\%$ and 
+$11.5\%$, and the confusion matrices are:
+\begin{equation}
+\left[ \begin{array}{rrr}
+    185 & 14 &  1 \\  5 & 181 & 14 \\ 11 & 33 &156 
+  \end{array}\right]
+\;\;\;\;\;\;\;
+\left[ \begin{array}{rr}176 & 24 \\ 22 & 178 \end{array}\right]
+\end{equation}
+
+\htmladdimg{../figures/BPNexample2.png}
+\htmladdimg{../figures/BPNexample1.png}
+
+{\bf Example 2:}
+
+The back propagation network trained by the dataset of ten digits from 
+0 to 9 used previously is used to classify the same dataset, with the
+resulting confusion matrix shown below. Out of the 2240 samples, 80 are
+misclassified, i.e., the error rate is 3.57\%. Note that this error 
+rate is lower than that of the naive Bayes classifier previously 
+considered, due to the fact that the classification surfaces of the
+back propagation network can be more sophisticated than the quadratic
+surfaces of the Bayes classifier.
+
+\begin{equation}
+\left[ \begin{array}{rrrrrrrrrr}
+216 & 0 & 2 & 1 & 0 & 0 & 4 & 0 & 1 &  0 \\
+  0 & 212 & 0 & 1 & 0 & 1 & 3 & 0 & 7 & 0 \\
+  0 & 0 & 221 & 0 & 0 & 0 & 1 & 0 & 2 & 0 \\
+  1 & 0 & 1 & 203 & 0 & 0 & 0 & 0 & 14& 5 \\
+  0 & 0 & 0 & 0 & 221 & 0 & 1 & 0 & 2 & 0 \\
+  0 & 0 & 0 & 2 & 2 & 214 & 0 & 0 & 6 & 0 \\
+  0 & 1 & 0 & 0 & 0 & 0 & 221 & 0 & 2 & 0 \\
+  0 & 0 & 4 & 0 & 0 & 0 & 0 & 214 & 4 & 2 \\
+  0 & 0 & 1 & 0 & 0 & 1 & 1 & 0 & 221 & 0 \\
+  0 & 0 & 0 & 1 & 2 & 0 & 0 & 0 & 4 & 217 \\
+  \end{array}\right]
+\end{equation}
+
+
+
+\section{Competitive Learning Networks}
+
+\htmladdimg{../figures/twolayernet.gif}
+
+Competitive learning is a neural network algorithm for unsupervised 
+learning, similar to the clustering methods of k-means considered 
+above. The competitive learning network is composed of an input
+layer of $d$ nodes that receives an input pattern 
+${\bf x}=[x_1,\cdots,x_d]^T$ for a point in the d-dimensional feature
+space, and an output layer of $K$ nodes that produces an output
+pattern ${\bf y}=[y_1,\cdots,y_K]^T$ representing $K$ clusters of 
+interest. Each input variable $x_i$ may be either a continuous or 
+binary value depending on the specific application, the outputs
+$y_i\in\{0,\;1\}$ are binary, of which only one is 1 while all others
+are 0, as the result of a winner-take-all completition based on their 
+activation values.
+
+In each iteration of the learning process, a randomly chosen sample
+${\bf x}$ from the dataset ${\bf X}=[{\bf x}_1,\cdots,{\bf x}_N\}$
+is presented to the input layer of the network, while each node of 
+the output layer gets an activation value, the inner product of its 
+weight vector ${\bf w}_i$ and the current input ${\bf x}$:
+\begin{equation}	
+  a_i=\sum_{j=1}^n w_{ij} x_j={\bf w}_i^T{\bf x}
+  =||{\bf w}_i||\;||{\bf x}||\;\cos\theta
+  \;\;\;\;\;(i=1,\cdots,K)
+\end{equation}
+where $\theta$ is the angle between vectors ${\bf w}_i$ and ${\bf x}$
+in the d-dimensinal feature space. Typically the data vectors ${\bf x}$ 
+are normalized with unit length $||{\bf x}||^2=1$, i.e., they are points 
+on the unit hypersphere in the space. Optionally if the weight vectors 
+${\bf w}_i$ is also normalized with $||{\bf w}_i||=1$, then their inner 
+product above is only affected by the angle $\theta$ between them.
+
+The output of the network is determined by a winner-take-all competition. 
+The node in the output layer that is maximally activated will output 1 
+while all others output 0:
+\begin{equation}
+  y_i=\left\{ \begin{array}{ll} 1 & \mbox{if}\;\;
+    a_i={\bf w}_i^T{\bf x}=\max_j {\bf w}_j^T{\bf x} \\ 0 & \mbox{otherwise}
+  \end{array} \right.\;\;\;\;\;\;(i=1,\cdots,K)
+\end{equation}
+The inner product ${\bf w}_i^T{\bf x}$ is closely related to the 
+Euclidean distance $d({\bf x},\,{\bf w})=||{\bf w}_i-{\bf x}||$:
+\begin{eqnarray}
+  d^2({\bf w}_i,{\bf x})&=&||{\bf w}_i-{\bf x}||^2
+  =({\bf w}_i-{\bf x})^T({\bf w}_i-{\bf x})
+  ={\bf w}_i^T{\bf w}-2{\bf w}_i^T{\bf x}+{\bf x}^T{\bf x}
+  \nonumber\\
+  &=&||{\bf w}_i||^2+||{\bf x}||^2-2{\bf w}_i^T{\bf x}
+  =||{\bf w}_i||^2+||{\bf x}||^2-2||{\bf w}_i||\,||{\bf x}||\;\cos\,\theta 
+\end{eqnarray}
+If both ${\bf x}$ and ${\bf w}_i$ are normalized, the winning node 
+receiving the maximum activation $a_i={\bf w}_i^T{\bf x}$ also has 
+the minimum Euclidean distance $||{\bf w}_i-{\bf x}||$ and anglular
+distance $\theta$. Therefore the competition above can also be 
+expressed as the following:
+\begin{equation}
+  y_i=\left\{ \begin{array}{ll} 
+    1 & \mbox{if } ||{\bf w}_i-{\bf x}||=\min_j||{\bf w}_j-{\bf x}||
+    \\ 0 & \mbox{otherwise} \end{array}  \right.\;\;\;\;\;\;(i=1,\cdots,K)
+\end{equation}
+The only winning node that receives the highest activation gets to modify 
+its weight vector:
+\begin{equation} 
+  {\bf w}_i^{new}={\bf w}_i^{old}+y_i\,\eta\;({\bf x}-{\bf w}_i^{old})
+  =\left\{\begin{array}{ll}(1-\eta){\bf w}_i^{old}
+  +\eta {\bf x}& \mbox{if }y_i=1\\{\bf w}_i^{old}& \mbox{if }y_i=0
+  \end{array} \right. 
+\end{equation}
+where $0<\eta<1$ is the learning rate (step size). Optionally the new 
+weight vector is also renormalized. For the iteration process to gradually 
+approach a stable clustering result, the learning rate $\eta$ needs to be 
+reduced through the iterations from its initial value (e.g., $\eta_0=0.9$) 
+toward 0 by a certain decay factor $\alpha$ (e.g., $\alpha=0.99$). This 
+way the learning rate at the lth iteration $\eta_l=\alpha \eta_{l-1}
+=\cdots=\alpha^l\eta_0 $ decays exponentially for the learning process 
+to slow down as it progresses. Obviously the decay factor $\alpha$ 
+depends on the size of the dataset, and it may need to be determined 
+heuristically and experimentally.
+
+\htmladdimg{../figures/competitive1.gif}
+
+As illustrated in the figure above, the modified weight vector of the
+winner ${\bf w}_i^{new}$ is between ${\bf x}$ and the old${\bf w}_j^{old}$,
+i.e., the effect of the learning process is to pull the winner's weight 
+vector which is already closest to the current input pattern ${\bf x}$ 
+even closer to it.
+
+Here are the steps of each iteration of the competitive learning:
+\begin{itemize}
+\item Step 0: Normalize all data vectors, initialize randomly the weight
+  vectors for the output nodes, such as any $m$ samples of the dataset:
+  ${\bf w}_1^{(0)},\;{\bf w}_2^{(0)},\cdots,{\bf w}_m^{(0)}$, set iteration
+  index to zero $l=1$;
+
+\item Step 1: Choose randomly an input pattern ${\bf x}$ from the dataset 
+  and calculate the activation for each of the output nodes:
+  \begin{equation}
+  a_i={\bf w}_i^T{\bf x}\;\;\;\;\;\;\;(i=1,\cdots,m)
+  \end{equation}
+
+\item Step 2: Update its weights of the winning node with
+  $a_j\ge a_i\;\;\;(i=1,\cdots,n)$:
+  \begin{equation}
+  {\bf w}_j^{(l+1)}={\bf w}_j^{(l)} +\eta ({\bf x}-{\bf w}_i^{(l)})
+  \end{equation}
+  Reduce learning rate $\eta\leftarrow \alpha \eta$.
+  Optionally, renormalize ${\bf w}_j^{(l+1)}$. 
+
+\item Step 3: Terminate the iteration if the clustering result has
+  gradually stablized, when the learning rate $\eta$ is reduced from
+  its initial value $\eta_0$ to some small value (e.g., 0.1) and the 
+  weight vectors no longer change significantly. Otherwise 
+  $l \leftarrow l+1 $, go back to Step 1.
+\end{itemize}
+
+Every time a sample ${\bf x}$ is presented to the input layer, one of
+the output nodes will become the winner and its weight vector is drawn 
+closer to the current input ${\bf x}$. After all sample vectors in the
+dataset have been repeatedly presented to the network, each cluster
+of similar points in the space draws one of the weight vectors to its 
+center, and the corresponding output node will always win and output 1
+whenever any member of the cluster is presented to the network in the 
+future. In other words, after this unsupervised learning, the feature
+space is partitioned into $K$ regions each corresponding to one of the 
+$K$ clusters, represented by one of the output nodes, whose weight vector
+is in the central area of the region. 
+
+\htmladdimg{../figures/competitive2a.gif}
+
+It is possible that the data samples are not distributed in such a way
+that they form clearly saperable clusters. In the extreme case, they may 
+even form a continuum in the feature space. In such cases, a small number 
+of output nodes (possibly even just one) may become frequent winners, 
+while others become ``dead nodes'' as they never win and consequently 
+never get the chance to learn. To avoid such meaningless outcome, a 
+mechanism is needed to ensure that all nodes have some chance to win. 
+Specifically, we could modify the learning law so that it contains an 
+extra term:
+\begin{equation}
+  a_i={\bf w}_i^T{\bf x}+b_i
+\end{equation}
+where $b_i$ is the bias term proportional to the difference between the 
+``fair share'' of winning $1/m$ and the actual winning frequency:
+\begin{equation}
+  b_i=c\;\left(\frac{1}{K}
+  -\frac{\mbox{number of winnings of node $i$}}{\mbox{total number iterations so far}}\right)
+\end{equation}
+The value of the bias term $b_i$ will change the winning frequency of the
+ith node. If the node is winning more than its share, $b_i<0$ and it becomes
+harder for it to win in the future. On the other hand if the node rarely 
+wins, $b_i>0$ and its chance to win in the future is increased. Here $c$ 
+is some scaling coefficient. The greater $c$, the competition will be more 
+strongly balanced. It needs to be fine tuned based on the specific nature 
+of the data being analyzed.
+
+This process of competitive learning process is also be viewed as a
+{\em vector quantization} process, by which the continuous vector space 
+is quantized to become a set of $K$ discrete regions, called 
+\htmladdnormallink{\em Voronoi diagram (tessellation)}
+{http://en.wikipedia.org/wiki/Voronoi_diagram}. 
+Vector quantization can be used for data compression. A cluster of similar
+signals ${\bf x}$ in the vector space can all be approximately represented 
+by the weight vector ${\bf w}$ of one of a small number of $K$ output nodes 
+in the neighborhood of ${\bf x}$, thereby the data size can be significantly 
+reduced. 
+
+The Matlab code for the iteration loop of the algorithm is listed below,
+
+\begin{verbatim}
+
+    [N L]=size(X);                 % dataset containing L samples
+    b=zeros(1,K);                  % bias terms
+    freq=zeros(1,K);               % winning frequencies
+    eta=0.9;                       % initial learning rate
+    decay=0.99;                    % decay rate
+    it=0;
+    while eta>0.1                  % main training iterations
+        it=it+1;
+        W0=W;                      % initial weight vectors          
+        x=X(:,randi(L,1));         % select a random input sample
+        dmin=inf;
+        for k=1:K                  % find winner in all K output nodes
+            d=norm(x-W(:,k))-b(k);
+            if dmin>d
+                dmin=d; m=k;       % mth node is the winner
+            end
+        end   
+        w=W(:,m)+eta*(x-W(:,m));   % modify winner's weights
+        W(:,m)=w/norm(w);          % renormalize its weights   
+        share(m)=share(m)+1;
+        b(m)=c*(1/K-share(m)/it);  % modify winner's bias 
+        eta=eta*decay;             % reduce learning rate 
+    end
+
+\end{verbatim}
+
+
+{\bf Examples}
+
+The competitive learning method is applied to a set of simulated 2-D
+data of four clusters. The network has $d=2$ input nodes and $K=4$ output
+nodes. The first 16 iterations are shown in the figure below, where open
+circles represent the data points, while the solid back squares represent
+the weight vectors. Also, the blud and red squares represent the weight
+vector of the winner before and after its modification, visualized by the
+straight line connecting the two squares. We see that the $K=4$ weight
+vectors randomly initialized are iteratively modified one at a time, and
+after these 16 iterations, they each move to the center of one of the
+four clusters. The saperability of the clustering result measured by
+$tr{\bf S}_T^{-1}{\bf S}_B$ is 1.0. When the number of output nodes is
+reduced to 3 and 2, the saperability is also reduced to 0.76 and 0.46,
+respectively. When $K=5$ output nodes are used, one of the four clusters
+is represented by two output nodes.
+
+\htmladdimg{../figures/competitiveEx2.png}
+
+The same method is applied to a set of 3-D data of eight clusters. The
+results are shown in the figure below, where the top and bottom rows
+show the data and weight vectors before and after clustering, respectively.
+The left column shows the 2-D space spanned by the first two principal
+components, while the right column shows the original 2-D space. Again
+we see that the weight vectors move from their random initial locations
+to the centers of the eight clusters as the result of the clustering.
+
+\htmladdimg{../figures/competitiveEx3.png}
+
+\begin{comment}
+As shown on the left of the figure, a set of $C=7$ clusters are formed 
+by $7\times 40$ data points (blue circles) in $N=4$ dimensional space. A 
+competitive learning network with $M=C=7$ output nodes is then used to do 
+clustering of the dataset. The $M$ weight vectors (red dots) are randomly 
+generated in the 4-D space. After competitive learning, they moved from 
+their initial positions (left) to the means of the clusters (right), 
+thereby representing the clusters. To visualize the data points and the
+weight vectors in the 4-D space is projected by the
+\htmladdnormallink{PCA (KLT) transform}{http://fourier.eng.hmc.edu/e161/lectures/klt/index.html}
+to 3-D and 2-D spaces:
+
+\htmladdimg{../figures/CompetitiveKLTmapping3.png}
+
+Ideally, the number of output nodes $m$ should be the same as the number 
+of clusters that exist in the dataset, so that each cluster of the dataset
+can be represented by one of the nodes after the competitive learning is 
+complete. However, the number of clusters is typically unknown ahead of 
+time. In such cases, one can carry out the competitive learning multiple 
+times, each time using a different $m$, and then compare the clustering
+results to see which $m$ value fits the data the best. Specifically, how 
+well the clustering results reflect the intrisic structure of the dataset,
+and, in general, how well the data points are clustered can be 
+quantitatively measured in terms of the scatteredness of the data point 
+belonging to each cluster, in comparison to the total scatteredness of 
+the entire dataset, as discussed \htmladdnormallink{here}{node1.html}.
+Such quantitative measurement can be used as a criterion for the results 
+of different clustering algorithms.
+\end{comment}
+
+\section{Self-Organizing Map (SOM)}
+
+The \htmladdnormallink{{\em Self-organizing map (SOM)}}
+{http://en.wikipedia.org/wiki/Self-organizing_map} is a process that 
+maps the input patterns, vectors in a high d-dimensional space, to a 
+low-dimensional output space, which is typically 2-D grid (a lattice)
+called a {\em feature map}, although 1-D and 3-D can also be used, so 
+that the nodes in the neighborhood of this map respond collectively to 
+a group of similar input patterns. The idea of SOM is motivated by the 
+mapping process in the brain, by which signals from various sensory 
+(e.g., visual and auditory) system are projected (mapped) to different 
+2-D cortical areas and responded to by the neurons wherein.
+
+\begin{comment}
+For example, sound signals of different frequencies are mapped to the 
+primary auditory cortex in which neighboring neurons respond to similar 
+frequencies. 
+Similarly, due to the \htmladdnormallink{retinotopic mapping}
+{http://fourier.eng.hmc.edu/e180/lectures/v1/node3.html} in the visual 
+system, the visual signals received by the retina are topographically 
+mapped to the primary and then subsequent higher visual cortical areas. 
+For example, the visual edges/lines of different orientations are also 
+mapped to the primary visual cortex where neighboring neurons respond 
+to similar orientations.
+\htmladdimg{../figures/AuditoryCortex.gif}
+\htmladdimg{../figures/VisualCortex.png}
+\htmladdimg{../figures/orientationocculardominance.gif}
+\htmladdimg{../figures/ColumnarMT.png}
+\end{comment}
+
+\htmladdimg{../figures/SOM.gif}
+
+The output nodes of a SOM network are typically organized in a 2-D 
+grid, the feature map, and the competitive learning algorithm discussed 
+above is modified so that the learning takes place not only at the winning 
+node $n_k$, but also at a set of output nodes in the neighborhood of the 
+winner. The weight vectors of all such nodes are modified:
+\begin{equation} 
+  {\bf w}_i^{new}={\bf w}_i^{old}+u_{ik}\eta \,({\bf x}-{\bf w}_i^{old})
+  \;\;\;\;\;\;i=1,\cdots,K 
+  \label{SOMweightUpdate}
+\end{equation}
+where $u_{ik}$ is some weighting function centered at the winning node, 
+such as a Gaussian function:
+\begin{equation} 
+  u_{ik}=exp\left( -\frac{d^2_{ik}}{2\sigma^2} \right)
+  \left\{ \begin{array}{ll} =1 & \mbox{if $i=k$ and $d_{ik}=0$}\\
+    <1 & \mbox{else }  \end{array}\right.
+\end{equation}
+where $\sigma$ is a parameter for the width of the Gaussian function, 
+and $d_{ik}$ is the Euclidean distance from any node $n_i$ to the winning 
+node $n_k$ in the 2-D map. For the winner with $d_{kk}=0$ and therefore 
+$u_{kk}=1$, the learning rate is maximally $\eta$, while all other nodes 
+also learn and modify their weights but with lower rates. Those closer 
+to the winner will learn more than those farther away, in the sense that
+their weight vectors are modified to be closer to the current input 
+pattern vector. 
+
+Different from the previously considered competitive learning network, 
+where the output nodes each learn individually and independently to 
+respond to a cluster of similar patterns, here in the SOM network the 
+output nodes are locked into a 2-D map and the nodes in a neighborhood
+learn together collectively to respond to similar patterns. 
+
+Here are the steps of the SOM learning algorithm:
+\begin{enumerate}
+\item Initialize weights of a set of output nodes arranged in a 2-D map.
+\item Choose an input pattern ${\bf x}$ from the high-dimensional vector 
+  space and calculate the activation $y_i={\bf w}^T_i{\bf x}$ for each of 
+  the output nodes.
+\item Find the winning node with maximum activation $y_k\ge y_i$ and update
+  the weights of all nodes in its neighborhood by Eq. (\ref{SOMweightUpdate}).
+\item Go back to step 2 until the feature map is no longer changing or a set
+  maximum number of iterations is reached.  
+\end{enumerate}
+
+In the training process, both the size of the neighborhood ($T$ or $\sigma$) 
+and the learning rate $\eta$ will be gradually reduced.
+
+We see that the SOM is a discrete approximation of the patterns defined in 
+a continuous d-dimensional feature space, i.e., the infinite number of 
+patterns in the feature space are quantified and approximated by a finite 
+set of d-dimensional vectors each represented by an output node in the 2-D 
+map. Also, as the nodes in the map are spatially related, they present a 
+visualization of the clustering structure of the high-dimensional data.
+Therefore one of the most important applications of the SOM is to visualize
+the data in high-dimensional space and discover the potential struction of
+the data.
+
+\begin{verbatim}
+
+    [d N]=size(X);                         % dataset of N sample vectors
+    W=rand(d,M,M);                         % initialization of weights
+    for i=1:M
+        for j=1:M
+            w=reshape(W(:,i,j),[d 1]);
+            W(i,j,:)=W(:,i,j)/norm(w);     % normalize all weight vectors
+        end
+    end
+    eta=0.9;                               % initial learning rate
+    sgm=M;                                 % width of Gaussian neighborhood
+    decay=0.999;                           % rate of decay
+    for it=1:nt                            % training iterations
+        n=randi([1 N]);                  
+        x=X(:,n);                          % pick randomly an input
+        amax=-inf;
+        for i=1:M                          % find the winner 
+            for j=1:M 
+                w=reshape(W(:,i,j),[d 1]);
+                a=x'*w;                    % activation as inner product
+                if a>amax
+                    amax=a;  wi=i;  wj=j;  % record winner so far
+                end
+            end
+        end
+        for i=1:M
+            for j=1:M
+                dist=(wi-i)^2+(wj-j)^2;    % distance to winner
+                c=exp(-dist/sgm);          % Gaussian weights
+                w=reshape(W(:,i,j),[d 1]); % get a weight vector
+                w=w+eta*c*(x-w);           % modify weights
+                w=w/norm(w);               % normalize weight vectors
+                W(:,i,j)=w;                % save modified weight vector
+            end
+        end
+        eta=eta*decay;                     % reduce learning rate
+        sgm=sgm*decay;                     % reduce width of Gaussian
+    end
+\end{verbatim}
+
+{\bf Example 1:} 
+
+This example illustrates the ``self-organizing map'' nature of the 
+SOM algorithm. The output nodes are organized into a 2-D map and 
+they learn to respond to the positions of a set of random dots in a 
+2-D space. When the SOM hase been trained, due to the spatial correlation 
+nature of the algorithm, the output nodes close to each other in the
+2-D map respond to a local neighborhood in the 2-D space, thereby 
+forming a self-organized spatial map, a roughly regular network.
+
+The 2-D map of the output nodes is visualized as shown in the 
+figure below, where each node is connected to its four neighbors 
+to indicate the spatial structure of the array. The position of 
+each node is determined by the two components of its weight vector 
+${\bf w}=[w_1,\,w_2]^T$ treated as its x-y positions in the 2-D 
+map.
+
+In this case, the competition is based on the distance between the 
+weight vector ${\bf w}_i$ and the input ${\bf x}$, instead of their 
+inner product ${\bf w}^T_i{\bf x}$. The node with the shortest 
+distance $||{\bf w}_i-{\bf x}||$ becomes the winner, and is pulled 
+even closer to the input, dragging along with it neighboring nodes.
+
+The figure below shows the iterative modification of the weights. In
+each of the 16 iterations, the output node (blue dot) is closest to 
+the input vector (red dot) and it becomes the winner
+
+
+\htmladdimg{../figures/SOMgrid1.png}
+
+The figure below shows the subsequent iterations in every 50 iterations.
+The resulting configuration of the output nodes is roughly a regular 2-D
+grid, a self-organized map in the 2-D feature space.
+
+\htmladdimg{../figures/SOMgrid2.png}
+
+
+{\bf Example 2:} 
+
+In this example the output nodes of the SOM are arranged into a 1-D loop 
+and they respond to a set of US/Canadian cities represented by their 
+coordinates (longitudes and latitudes), for the purpose of finding a 
+reasonably short path that goes through all of these cities (the
+traveling salesman problem). These nodes are visualized in terms of 
+their weight vectors as points in a 2-D map. The weights are either
+randomly initialized, or they can take an arbitrary shape such as a
+circle around the cities. During the iteration, they learn to respond 
+to the 2-D city coordinates as the input, and they are gradually pulled 
+toward the cities, thereby forming eventually a path through all the
+cities. In this case, the inner product ${\bf w}_i^T{\bf x}$ is used
+to determine the winner of each iteration.
+
+The figure below shows the results of the first 16 iterations:
+
+\htmladdimg{../figures/SOMTSP1.png}
+
+The figure below shows the subsequent iterations in every 50 iterations.
+The resulting configuration of the output nodes approaches the desired 
+path that passes through all cities. Although this result does not garantee 
+the path to be the shortest, it is reasonably close to such a solution 
+required by the traveling salesman problem. The final result is unaffected
+by how the weights are initalized.
+
+\htmladdimg{../figures/SOMTSP2.png}
+
+{\bf Example 3:} 
+
+In this example, the output nodes in the 2-D map learn to respond 
+to different colors treated as vectors in a 3-D space spanned by the 
+three primary colors red, green and blue (RGB). When the SOM is trained, 
+neighboring output nodes respond to similar colors. The resulting weight
+vectors can be visualized by encoding their $d=3$ components by the RGB 
+colors, indicating the colors they respond to maximally. As shown in the
+figure below, a self-organized spatial color map is formed reflecting the 
+favored colors of these nodes.
+
+In this example, all input vectors are normalized (the hue of a color
+is fully determined by the ratios of the three primaries), and so are
+the weight vectors, which are always renormalized in each iteration.
+
+The left panel in the figure bolew shows the RGB color-coded weight vectors
+when they are randomly initialized. The middle one shows the weight vectors
+when the SOM is fully trained. The right panel shows the winners encoded by
+the input colors they win. The black areas are composed of the output nodes
+that never win but learn along with their neighboring winners. Interestingly,
+the winners seem to form some structure in the 2-D space. More detailed
+discussion can be found 
+\htmladdnormallink{here}{http://fourier.eng.hmc.edu/e161/lectures/NeuralNetworks/node15.html}.
+
+
+\htmladdimg{../figures/SOMColorMap.png}
+
+More examples of SOM can be found \htmladdnormallink{here}{https://en.wikipedia.org/wiki/Self-organizing_map}.
+
+
+
+\section{Convolutional Neural Networks (CNNs)}
+
+% http://cs229.stanford.edu/syllabus.html
+
+% https://en.wikipedia.org/wiki/Convolutional_neural_network
+
+% http://vision.stanford.edu/teaching/cs231b_spring1415/slides/alexnet_tugce_kyunghee.pdf
+
+
+Deep learning, hierarchical learning..
+\begin{itemize}
+\item deep neural networks
+\item deep belief networks
+\item recurrent neural networks
+\end{itemize}
+Applications include:
+
+\begin{itemize}
+\item computer vision, visual object recognition based on images CNN
+\item speech recognition, natural language processing, machine translation, 
+based on spectrograms RNN, long short-term memory (LSTM)
+\item bioinformatics based on microarray data
+\end{itemize}
+
+
+
+CNN achieves translation, rotation and distortion invariance by
+\begin{itemize}
+\item local receptitve field
+\item shared weights (weight replication)
+\item subsampling (pooling)
+\end{itemize}
+
+Different from conventional (shallow) neural networks which depend on a 
+set of hand-selected features, the CNN relies directly on the raw data, 
+such as images for visual recognition or spectrograms for sound recognition,
+from which features are automatically extracted by the network.
+
+Application in speech recognition: spectrogram
+
+
+Convolutional neural network (CNN, or ConvNet) is a class of multilayer,
+feed-forward artificial neural network algorithm that has successfully 
+been applied to image analysis and computer vision, such as image object 
+recognition specifically.
+
+Convolutional networks were inspired by biological processes in the brain.
+The connectivity pattern between neurons resembles the organization of the 
+visual cortex. Individual cortical neurons respond to stimuli only in a 
+restricted region of the visual field known as the
+
+
+
+CNNs use a variation of multilayer perceptrons designed to require minimal 
+preprocessing. They are also known as shift invariant or space invariant 
+artificial neural networks (SIANN), based on their shared-weights architecture
+and translation invariance characteristics.
+
+
+CNNs use relatively little pre-processing compared to conventional image 
+classification algorithms. The network learns the filters that in traditional
+algorithms were hand-engineered. This independence from prior knowledge and 
+human effort in feature design is a major advantage.
+
+
+3D volumes of neurons. The layers of a CNN have neurons arranged in 3 dimensions: width, height and depth. The neurons inside a layer are connected to only a small region of the layer before it, called a receptive field. Distinct types of layers, both locally and completely connected, are stacked to form a CNN architecture.
+
+Local connectivity: following the concept of receptive fields, CNNs exploit spatial locality by enforcing a local connectivity pattern between neurons of adjacent layers. The architecture thus ensures that the learnt "filters" produce the strongest response to a spatially local input pattern. Stacking many such layers leads to non-linear filters that become increasingly global (i.e. responsive to a larger region of pixel space) so that the network first creates representations of small parts of the input, then from them assembles representations of larger areas.
+
+Shared weights: In CNNs, each filter is replicated across the entire visual field. These replicated units share the same parameterization (weight vector and bias) and form a feature map. This means that all the neurons in a given convolutional layer respond to the same feature within their specific response field. Replicating units in this way allows for features to be detected regardless of their position in the visual field, thus constituting the property of translation invariance.
+
+%https://www.cs.toronto.edu/~fritz/absps/imagenet.pdf
+%https://www.youtube.com/watch?v=FmpDIaiMIeA
+
+%https://en.wikipedia.org/wiki/ImageNet
+%https://en.wikipedia.org/wiki/List_of_datasets_for_machine_learning_research
+%https://adeshpande3.github.io/adeshpande3.github.io/A-Beginner's-Guide-To-Understanding-Convolutional-Neural-Networks/
+%http://ufldl.stanford.edu/tutorial/
+
+neurons with limited receptive field
+\begin{itemize}
+\item {\em Hierarchical structure of multiple layers}
+
+  \htmladdimg{../figures/CNNfig1.png}
+  \htmladdimg{../figures/CNNfig2.png}
+  \htmladdimg{../figures/CNNfig3.png}
+
+\item {\em receptive field}.
+  The receptive fields of different neurons partially overlap such that they
+  cover the entire visual field. In other words, a neuron is connected to a
+  subset of the neurons in the previous layer inside its receptive field, 
+  instead of being fully connected to all neurons.
+  
+\end{itemize}
+
+layers of different functions 
+\begin{itemize}
+\item Image input: $N\times N\times 3$ pixels in the image of three planes for 
+  red, green and blue (RGB).
+\item Neurons in the convolution layers are locally connected to neurons inside 
+  its receptive field in the previous layer. In particular, each neuron in the
+  first layer takes as input the pixel values inside its receptive field, a 
+  subregion in the image. The weights of each neuron form a {\em kernel}, and 
+  the activation of the neuron is the weighted sum of all pixel values inside 
+  the receptive field, called
+  \htmladdnormallink{\em convolution}{../../../e161/lectures/convolution/index.html}.
+  Each of such neurons functions as a filter that extract one of a set of 
+  different features describng different aspects of the visual objects of 
+  interest. All neurons in a column along the depth dimension respond to the
+  same spatial local region in the visual field.
+\item sigmoid or ReLU function 
+\item A pooling layer performs down-sampling by taking either the maximum or the
+  average of the output values from a local region of the previous layer. The
+  distance between the receptive field centers of neighboring neurons is called
+  {\em stride}. Down sampling serves two purposes: (a) local shift and rotational
+  invariance and (b) computation reduction.
+\item Dropout
+\item Neurons in the fully connected (FC) layers are fully connected to 
+  all neurons in the previous layer. Neurons in this highest layer are
+  responsible for the final recognition of various visual objects.
+\item The convolution layers can be considered as feature extraction and the
+  fully connected layers carry out the final recognition based on the features
+  extracted by the convolution layers.
+\item The weights of all neurons at all layers are iteratively updated based
+  on backpropagation.
+\end{itemize}
+
+\htmladdnormallink{ImageNet}{https://en.wikipedia.org/wiki/ImageNet}
+
+\htmladdnormallink{AlexNet}{http://vision.stanford.edu/teaching/cs231b_spring1415/slides/alexnet_tugce_kyunghee.pdf}
+
+\htmladdnormallink{An example}{https://www.cs.toronto.edu/~fritz/absps/imagenet.pdf}
+
+\htmladdnormallink{A CNN course at Stanford}{http://cs231n.github.io/convolutional-networks}
+
+\end{document}
+
+http://www.deeplearningbook.org/
+
+https://www.youtube.com/watch?v=IHZwWFHWa-w

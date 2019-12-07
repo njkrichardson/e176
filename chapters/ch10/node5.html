@@ -1,0 +1,997 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Back Propagation Network</TITLE>
+<META NAME="description" CONTENT="Back Propagation Network">
+<META NAME="keywords" CONTENT="ch10">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch10.css">
+
+<LINK REL="next" HREF="node6.html">
+<LINK REL="previous" HREF="node4.html">
+<LINK REL="next" HREF="node6.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node6.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="ch10.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node4.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node6.html">Competitive Learning Networks</A>
+<B> Up:</B> <A
+ HREF="ch10.html">ch10</A>
+<B> Previous:</B> <A
+ HREF="node4.html">Perceptron Network</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00050000000000000000">
+Back Propagation Network</A>
+</H1>
+
+<P>
+The back propagation network (BPN) is a powerful and popular 
+learning algorithm that finds many applications in practice. 
+Similar to the perceptron network, the BPN can also be used
+as a supervised classifier based on a training set 
+<!-- MATH
+ $\{({\bf x}_i, {\bf y}_i),\,i=1,...,N\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img230.svg"
+ ALT="$\{({\bf x}_i, {\bf y}_i),\,i=1,...,N\}$"></SPAN>, where <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img67.svg"
+ ALT="${\bf x}_i$"></SPAN> is a
+d-dimensional sample vector in the training set, and its lable
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img231.svg"
+ ALT="${\bf y}_i$"></SPAN> is an m-dimensional vector, indicating to which of the 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img60.svg"
+ ALT="$K$"></SPAN> classs <!-- MATH
+ $\{C_1,\cdots,C_K\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img37.svg"
+ ALT="$\{C_1,\cdots,C_K\}$"></SPAN> pattern <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img67.svg"
+ ALT="${\bf x}_i$"></SPAN> belongs. 
+
+<P>
+The BPN is a three-layer hierarchical structure composed of the 
+input, hidden, and output layers containing respectively <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img4.svg"
+ ALT="$n$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img232.svg"
+ ALT="$l$"></SPAN>, 
+and <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img45.svg"
+ ALT="$m$"></SPAN> nodes. Each node in the hidden and output layers is fully 
+connected to all nodes in the previous layer. Due to the two-level 
+learning taking place at both the hidden and output layers, the BPN 
+is much more powerful than the two-layer perceptron network as it 
+can handle nonlinear as well as linear classification problems.
+
+<P>
+When one of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img25.svg"
+ ALT="$N$"></SPAN> training patterns <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN> is presented to 
+the input layer of the BPN, an m-D vector <!-- MATH
+ $\hat{\bf y}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img233.svg"
+ ALT="$\hat{\bf y}$"></SPAN> is produced
+at the output layer as the corresponding response, representing the 
+class to which <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN> has been assigned. Similar to the perceptron 
+network, the <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img45.svg"
+ ALT="$m$"></SPAN> output nodes can represent <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img185.svg"
+ ALT="$K=m$"></SPAN> classes based on 
+the one-hot method, or, alternatively, they can encode as many as 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img189.svg"
+ ALT="$K=2^m$"></SPAN> classes based on binary encoded. The goal of the BPG learning
+is to modify the weights of both the hidden and output layers based on
+the training set so that its output <!-- MATH
+ $\hat{\bf y}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img233.svg"
+ ALT="$\hat{\bf y}$"></SPAN> matches the desired
+output, the label <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img64.svg"
+ ALT="${\bf y}$"></SPAN>, the true class identity of the current 
+input <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN>, with minimum <!-- MATH
+ $||{\bf y}-\hat{\bf y}||$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img234.svg"
+ ALT="$\vert\vert{\bf y}-\hat{\bf y}\vert\vert$"></SPAN>.
+
+<P>
+<IMG STYLE="" SRC="../figures/threelayernet.gif"
+ ALT="threelayernet.gif">
+
+<P>
+Specifically, the training of the BPN is an iteration of a two-phase 
+process:
+
+<UL>
+<LI><B>The feedforward pass:</B> 
+
+<P>
+A randomly selected sample <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN> labeled by <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img64.svg"
+ ALT="${\bf y}$"></SPAN> is presented 
+  to the input layer and forwarded through the weighted connections to 
+  the hidden layer and then the output layer to produce output <!-- MATH
+ $\hat{\bf y}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img233.svg"
+ ALT="$\hat{\bf y}$"></SPAN>. 
+
+<P>
+</LI>
+<LI><B>The backward error backpropagation:</B> 
+
+<P>
+The error <!-- MATH
+ $\varepsilon$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img235.svg"
+ ALT="$\varepsilon$"></SPAN> measuring the difference between the desired 
+  output <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img64.svg"
+ ALT="${\bf y}$"></SPAN> and the actual output <!-- MATH
+ $\hat{\bf y}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img233.svg"
+ ALT="$\hat{\bf y}$"></SPAN> is propagated 
+  backward from the output layer through the hidden layer to the input 
+  layer, during which the weights of both the output and hidden layers
+  are modified so that the error <!-- MATH
+ $\varepsilon$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img235.svg"
+ ALT="$\varepsilon$"></SPAN> will be reduced when the 
+  same or similar pattern is presented in the future.
+</LI>
+</UL>
+This two-phase process is iterated untill eventually the error is
+minimized and BPN is properly trained. 
+
+<P>
+We now consider the specific computation taking place in both the 
+forward and backward passes.
+
+<UL>
+<LI>The forward pass:
+
+<P>
+
+<UL>
+<LI>From input layer to hidden layer:
+    <P></P>
+<DIV CLASS="mathdisplay"><A ID="BPNHidden"></A><!-- MATH
+ \begin{equation}
+z_j=g(a^h_j)=g\left(\sum_{k=1}^d w_{jk}^h x_k+b_j^h\right)
+      =g\left(\sum_{k=0}^d w_{jk}^h x_k\right)=g({\bf x}^T{\bf w}^h_j)
+      \;\;\;\;\;\;(j=1,\cdots,l)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img236.svg"
+ ALT="$\displaystyle z_j=g(a^h_j)=g\left(\sum_{k=1}^d w_{jk}^h x_k+b_j^h\right)
+=g\lef...
+..._{k=0}^d w_{jk}^h x_k\right)=g({\bf x}^T{\bf w}^h_j)
+\;\;\;\;\;\;(j=1,\cdots,l)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">43</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <!-- MATH
+ ${\bf x}=[x_0=1,x_1,\cdots,x_d]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img237.svg"
+ ALT="${\bf x}=[x_0=1,x_1,\cdots,x_d]^T$"></SPAN>,
+    <!-- MATH
+ ${\bf w}_j^h=[w_{j0}^h=b_j^h,w_{j1}^h,\cdots,w_{jd}^h]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -1.09ex; " SRC="img238.svg"
+ ALT="${\bf w}_j^h=[w_{j0}^h=b_j^h,w_{j1}^h,\cdots,w_{jd}^h]^T$"></SPAN>, and
+    <!-- MATH
+ $a^h_j={\bf x}^T{\bf w}^h_j$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -1.04ex; " SRC="img239.svg"
+ ALT="$a^h_j={\bf x}^T{\bf w}^h_j$"></SPAN> is the activation of the jth hidden 
+    layer node. In vector form we have
+    <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf z}={\bf g}\left({\bf W}_h^T{\bf x}\right)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.93ex; " SRC="img240.svg"
+ ALT="$\displaystyle {\bf z}={\bf g}\left({\bf W}_h^T{\bf x}\right)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">44</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <!-- MATH
+ ${\bf z}=[z_1,\cdots,z_l]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img241.svg"
+ ALT="${\bf z}=[z_1,\cdots,z_l]^T$"></SPAN>, and
+    <!-- MATH
+ ${\bf W}_h=[{\bf w}^h_1,\cdots,{\bf w}^h_l]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.77ex; " SRC="img242.svg"
+ ALT="${\bf W}_h=[{\bf w}^h_1,\cdots,{\bf w}^h_l]$"></SPAN>.
+
+<P>
+</LI>
+<LI>From hidden layer to output layer:
+    <P></P>
+<DIV CLASS="mathdisplay"><A ID="BPNOutput"></A><!-- MATH
+ \begin{equation}
+\hat{y}_i=g(a_i^o)=g\left(\sum_{j=1}^l w_{ij}^o z_j+b_i^o\right)
+      =g\left(\sum_{j=0}^l w_{ij}^o z_j\right)=g({\bf z}^T{\bf w}^o_i)
+      \;\;\;\;\;\;(i=1,\cdots,m)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img243.svg"
+ ALT="$\displaystyle \hat{y}_i=g(a_i^o)=g\left(\sum_{j=1}^l w_{ij}^o z_j+b_i^o\right)
+...
+..._{j=0}^l w_{ij}^o z_j\right)=g({\bf z}^T{\bf w}^o_i)
+\;\;\;\;\;\;(i=1,\cdots,m)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">45</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <!-- MATH
+ ${\bf z}=[z_0=1,z_1,\cdots,z_l]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img244.svg"
+ ALT="${\bf z}=[z_0=1,z_1,\cdots,z_l]^T$"></SPAN>, 
+    <!-- MATH
+ ${\bf w}_i^o=[w_{i0}^o=b_i^o,w_{i1}^o,\cdots,w_{il}^o]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.77ex; " SRC="img245.svg"
+ ALT="${\bf w}_i^o=[w_{i0}^o=b_i^o,w_{i1}^o,\cdots,w_{il}^o]^T$"></SPAN>, and 
+    <!-- MATH
+ $a^o_i={\bf z}^T{\bf w}^o_i$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.72ex; " SRC="img246.svg"
+ ALT="$a^o_i={\bf z}^T{\bf w}^o_i$"></SPAN> is the activation of the jth hidden 
+    layer node. In vector form we have
+    <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\hat{\bf y}={\bf g}\left( {\bf W}_o^T{\bf z} \right)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.93ex; " SRC="img247.svg"
+ ALT="$\displaystyle \hat{\bf y}={\bf g}\left( {\bf W}_o^T{\bf z} \right)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">46</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <!-- MATH
+ ${\bf W}_o=[{\bf w}^o_1,\cdots,{\bf w}^o_m]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img248.svg"
+ ALT="${\bf W}_o=[{\bf w}^o_1,\cdots,{\bf w}^o_m]$"></SPAN>, and
+    <!-- MATH
+ $\hat{\bf y}=[\hat{y}_1,\cdots,y_m]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img249.svg"
+ ALT="$\hat{\bf y}=[\hat{y}_1,\cdots,y_m]^T$"></SPAN>. 
+  
+</LI>
+</UL>
+
+<P>
+</LI>
+<LI>The backward error propagation:
+
+<P>
+Define the total error as an energy function of the output weights
+  <!-- MATH
+ $w_{ij}^o\;(i=1,\cdots,m,\;j=0,1,\cdots,l)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -1.04ex; " SRC="img250.svg"
+ ALT="$w_{ij}^o\;(i=1,\cdots,m,\;j=0,1,\cdots,l)$"></SPAN> and hidden layer weights 
+  <!-- MATH
+ $w_{jk}^h\;(j=1,\cdots,l,\;k=0,1,\cdots,d)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -1.09ex; " SRC="img251.svg"
+ ALT="$w_{jk}^h\;(j=1,\cdots,l,\;k=0,1,\cdots,d)$"></SPAN>:
+  <BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+\varepsilon &=&\frac{1}{2}||{\bf y}-\hat{\bf y}||^2
+    =\frac{1}{2}\sum_{i=1}^m(\hat{y}_i-y_i)^2=\frac{1}{2}\sum_{i=1}^m[g(a^o_i)-y_i]^2
+    =\frac{1}{2}\sum_{i=1}^m\left[g\left(\sum_{j=0}^lw_{ij}^{o}z_j\right)-y_i\right]^2
+    \nonumber \\
+    &=&\frac{1}{2}\sum_{i=1}^m\left[g\left(w_{i0}^o+\sum_{j=1}^l w_{ij}^o\,
+      g(a_j^h)\right)-y_i\right]^2
+    =\frac{1}{2}\sum_{i=1}^m\left[g\left(w_{i0}^o+\sum_{j=1}^l w_{ij}^o\,
+      g\left(\sum_{k=0}^n w_{jk}^hx_k\right)\right)-y_i\right]^2
+  
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img252.svg"
+ ALT="$\displaystyle \varepsilon$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img116.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 9.06ex; vertical-align: -3.72ex; " SRC="img253.svg"
+ ALT="$\displaystyle \frac{1}{2}\vert\vert{\bf y}-\hat{\bf y}\vert\vert^2
+=\frac{1}{2}...
+...rac{1}{2}\sum_{i=1}^m\left[g\left(\sum_{j=0}^lw_{ij}^{o}z_j\right)-y_i\right]^2$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img116.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 9.06ex; vertical-align: -3.72ex; " SRC="img254.svg"
+ ALT="$\displaystyle \frac{1}{2}\sum_{i=1}^m\left[g\left(w_{i0}^o+\sum_{j=1}^l w_{ij}^...
+...m_{j=1}^l w_{ij}^o\,
+g\left(\sum_{k=0}^n w_{jk}^hx_k\right)\right)-y_i\right]^2$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">47</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+To reduce the error function <!-- MATH
+ $\varepsilon$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img235.svg"
+ ALT="$\varepsilon$"></SPAN> treated as a function of 
+  the weights of both output and hidden layers, the gradient descent 
+  method is used to iteratively modifying first the output layer weights 
+  and then the hidden layer weights, as shown in the following steps:
+  
+<UL>
+<LI>Find the gradient of <!-- MATH
+ $\varepsilon$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img235.svg"
+ ALT="$\varepsilon$"></SPAN> with respect to the output
+    layer weights <!-- MATH
+ $w_{ij}^{o}\;\;(i=1,\cdots,m,\;j=0,1,\cdots,l)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -1.04ex; " SRC="img255.svg"
+ ALT="$w_{ij}^{o}\;\;(i=1,\cdots,m,\;j=0,1,\cdots,l)$"></SPAN> by 
+    chain rule:
+    <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\frac{\partial\,\varepsilon}{\partial\, w_{ij}^o}
+      =\frac{\partial\,\varepsilon}{\partial\, \hat{y}_i}\;
+      \frac{\partial\, \hat{y}_i}{\partial\, a^o_i}\;
+      \frac{\partial\, a^o_i}{\partial\, w_{ij}^{o}}
+      =(\hat{y}_i-y_i)\;g'(a^o_i)\;z_j=-\delta_i\;g'(a^o_i)\;z_j
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.67ex; " SRC="img256.svg"
+ ALT="$\displaystyle \frac{\partial\,\varepsilon}{\partial\, w_{ij}^o}
+=\frac{\partial...
+...artial\, w_{ij}^{o}}
+=(\hat{y}_i-y_i)\;g'(a^o_i)\;z_j=-\delta_i\;g'(a^o_i)\;z_j$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">48</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <!-- MATH
+ $\delta_i=y_i-\hat{y}_i$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img257.svg"
+ ALT="$\delta_i=y_i-\hat{y}_i$"></SPAN>.
+
+<P>
+</LI>
+<LI>Update <!-- MATH
+ $w_{ij}^{o}\;(i=1,\cdots,m,\;j=0,1,\cdots,l)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -1.04ex; " SRC="img258.svg"
+ ALT="$w_{ij}^{o}\;(i=1,\cdots,m,\;j=0,1,\cdots,l)$"></SPAN> to reduce 
+    <!-- MATH
+ $\varepsilon$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img235.svg"
+ ALT="$\varepsilon$"></SPAN> by gradient descent method:
+    <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+w_{ij}^{o(new)}=w_{ij}^{o(old)}-\eta\;\frac{\partial e}{\partial w_{ij}^o}
+      =w_{ij}^{o(old)} +\eta\;\delta_i\;g'(a^o_i)\;z_j
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.67ex; " SRC="img259.svg"
+ ALT="$\displaystyle w_{ij}^{o(new)}=w_{ij}^{o(old)}-\eta\;\frac{\partial e}{\partial w_{ij}^o}
+=w_{ij}^{o(old)} +\eta\;\delta_i\;g'(a^o_i)\;z_j$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">49</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img53.svg"
+ ALT="$\eta$"></SPAN> is the learning rate or step size, or in matrix form:
+    <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf W}^{o(new)}_{m\times (l+1)}
+      ={\bf W}^{o(old)}_{m\times (l+1)}+\eta\;{\bf d}^o_{m\times 1}({\bf z}^T)_{1\times (l+1)}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.95ex; vertical-align: -1.31ex; " SRC="img260.svg"
+ ALT="$\displaystyle {\bf W}^{o(new)}_{m\times (l+1)}
+={\bf W}^{o(old)}_{m\times (l+1)}+\eta\;{\bf d}^o_{m\times 1}({\bf z}^T)_{1\times (l+1)}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">50</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where the second term is an outer product of 
+    <!-- MATH
+ ${\bf d}^o_{m\times 1}=[\delta_1 g'(a^o_1),\cdots,\delta_m g'(a^o_m)]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.89ex; " SRC="img261.svg"
+ ALT="${\bf d}^o_{m\times 1}=[\delta_1 g'(a^o_1),\cdots,\delta_m g'(a^o_m)]^T$"></SPAN>,
+    the pair-wise product of <!-- MATH
+ $[\delta_1,\cdots,\delta_m]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img262.svg"
+ ALT="$[\delta_1,\cdots,\delta_m]^T$"></SPAN> and
+    <!-- MATH
+ $[g'(a_1^o),\cdots,g'(a_m^o)]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img263.svg"
+ ALT="$[g'(a_1^o),\cdots,g'(a_m^o)]^T$"></SPAN>, and <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img264.svg"
+ ALT="${\bf z}$"></SPAN>.
+
+<P>
+</LI>
+<LI>Find the gradient of <!-- MATH
+ $\varepsilon$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img235.svg"
+ ALT="$\varepsilon$"></SPAN> with respect to the hidden
+    layer weights <!-- MATH
+ $w_{jk}^h\;\;(j=1,\cdots,l,\;k=0,1,\cdots,d)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -1.09ex; " SRC="img265.svg"
+ ALT="$w_{jk}^h\;\;(j=1,\cdots,l,\;k=0,1,\cdots,d)$"></SPAN> by
+    chain rule:
+
+<P>
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+\frac{\partial\,\varepsilon}{\partial\, w_{jk}^h}
+      & = &\frac{\partial\,\varepsilon}{\partial\, \hat{y}_i}\;
+      \frac{\partial\, \hat{y}_i}{\partial\, a^o_i}\;
+      \frac{\partial\, a^o_i}{\partial\, z_j}\;
+      \frac{\partial\, z_j}{\partial\, a^h_j}\;
+      \frac{\partial\, a^h_j}{\partial\, w_{jk}^h}
+      =\sum_{i=1}^m\;(\hat{y}_i-y_i)\;\frac{\partial\, \hat{y}_i}{\partial\, a^o_i}\;
+      \frac{\partial\, a^o_i}{\partial\, z_j}\;
+      \frac{\partial\, z_j}{\partial\, a^h_j}\;
+      \frac{\partial\, a^h_j}{\partial\, w_{jk}^h}
+      \nonumber \\
+      &=& -\sum_{i=1}^m \delta_ig'(a^o_i)w_{ij}^o\;g'(a^h_j)x_k 
+      =-\delta_j^{h}\;g'(a^h_j)x_k 
+      \nonumber
+    
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 6.27ex; vertical-align: -2.81ex; " SRC="img266.svg"
+ ALT="$\displaystyle \frac{\partial\,\varepsilon}{\partial\, w_{jk}^h}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img116.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.20ex; vertical-align: -3.09ex; " SRC="img267.svg"
+ ALT="$\displaystyle \frac{\partial\,\varepsilon}{\partial\, \hat{y}_i}\;
+\frac{\parti...
+...partial\, z_j}{\partial\, a^h_j}\;
+\frac{\partial\, a^h_j}{\partial\, w_{jk}^h}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img116.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.20ex; vertical-align: -3.09ex; " SRC="img268.svg"
+ ALT="$\displaystyle -\sum_{i=1}^m \delta_ig'(a^o_i)w_{ij}^o\;g'(a^h_j)x_k
+=-\delta_j^{h}\;g'(a^h_j)x_k$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+    where 
+    <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\delta_j^h=\sum_{i=1}^m \delta_i^o g'(a^o_i)w_{ij}^o
+      =\sum_{i=1}^m d_i^o w_{ij}^o      \;\;\;\;(j=1,\cdots,l)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.20ex; vertical-align: -3.09ex; " SRC="img269.svg"
+ ALT="$\displaystyle \delta_j^h=\sum_{i=1}^m \delta_i^o g'(a^o_i)w_{ij}^o
+=\sum_{i=1}^m d_i^o w_{ij}^o \;\;\;\;(j=1,\cdots,l)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">51</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <!-- MATH
+ $d_i^o=\delta_i^o g'(a^o_i)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.72ex; " SRC="img270.svg"
+ ALT="$d_i^o=\delta_i^o g'(a^o_i)$"></SPAN>, or in matrix form:
+    <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left[\begin{array}{l}\delta_1^h\\\vdots\\\delta_l^h\end{array}\right]
+      =\left[\begin{array}{ccc}w_{11}^o & \cdots &w_{1m}^o\\
+          \vdots & \ddots & \vdots \\w_{l1}^o & \cdots & w_{lm}^o
+          \end{array}\right]
+      \left[\begin{array}{c}\delta_1^og'(a_1^o)\\\vdots\\\delta_m^og'(a_m^o)
+          \end{array}\right]
+      ={\bf W}^{oT}_{l\times m}{\bf d}^o_{m\times 1}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 10.22ex; vertical-align: -4.51ex; " SRC="img271.svg"
+ ALT="$\displaystyle \left[\begin{array}{l}\delta_1^h\\ \vdots\\ \delta_l^h\end{array}...
+..._m^og'(a_m^o)
+\end{array}\right]
+={\bf W}^{oT}_{l\times m}{\bf d}^o_{m\times 1}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">52</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img272.svg"
+ ALT="${\bf W}^o$"></SPAN> is an <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img273.svg"
+ ALT="$l\times m$"></SPAN> matrix, the same as defined 
+    above but with the first row of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img274.svg"
+ ALT="$b_j$"></SPAN>'s removed, and 
+    <!-- MATH
+ ${\bf d}^o=[d_1,\cdots,d_m]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img275.svg"
+ ALT="${\bf d}^o=[d_1,\cdots,d_m]^T$"></SPAN> is the elementwise (Hadamard)
+    product of vectors <!-- MATH
+ ${\bf y}-\hat{\bf y}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img276.svg"
+ ALT="${\bf y}-\hat{\bf y}$"></SPAN> and <!-- MATH
+ ${\bf g}'({\bf a}^o)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img277.svg"
+ ALT="${\bf g}'({\bf a}^o)$"></SPAN>
+    denoted by <!-- MATH
+ ${\bf d}^o=({\bf y}-\hat{\bf y})\odot {\bf g}'({\bf a}^o)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img278.svg"
+ ALT="${\bf d}^o=({\bf y}-\hat{\bf y})\odot {\bf g}'({\bf a}^o)$"></SPAN>.
+
+<P>
+</LI>
+<LI>Update <!-- MATH
+ $w_{jk}^{h}\;\;(j=1,\cdots,l,\;k=0,1,\cdots,d)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -1.09ex; " SRC="img279.svg"
+ ALT="$w_{jk}^{h}\;\;(j=1,\cdots,l,\;k=0,1,\cdots,d)$"></SPAN> to reduce
+    <!-- MATH
+ $\varepsilon$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img235.svg"
+ ALT="$\varepsilon$"></SPAN> by gradient descent method:
+    <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+w_{jk}^{h(new)}=w_{jk}^{h(old)} -\eta\;\frac{\partial \varepsilon}{\partial w_{jk}}
+      =w_{jk}^{h(old)}+\eta\;\delta_j^h\;g'(a^h_j)x_k
+      =w_{jk}^{h(old)}+\eta\;d_j^hx_k    
+    
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.37ex; " SRC="img280.svg"
+ ALT="$\displaystyle w_{jk}^{h(new)}=w_{jk}^{h(old)} -\eta\;\frac{\partial \varepsilon...
+...=w_{jk}^{h(old)}+\eta\;\delta_j^h\;g'(a^h_j)x_k
+=w_{jk}^{h(old)}+\eta\;d_j^hx_k$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">53</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <!-- MATH
+ $d^h_j=\delta^h_jg'(a_j^h)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -1.04ex; " SRC="img281.svg"
+ ALT="$d^h_j=\delta^h_jg'(a_j^h)$"></SPAN>, or in matrix form:
+    <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf W}^{h(new)}_{l\times (d+1)}={\bf W}^{h(old)}_{l\times (d+1)}
+      +\eta\;{\bf d}^h_{l\times 1} {\bf x}^T_{1\times (d+1)}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.95ex; vertical-align: -1.31ex; " SRC="img282.svg"
+ ALT="$\displaystyle {\bf W}^{h(new)}_{l\times (d+1)}={\bf W}^{h(old)}_{l\times (d+1)}
++\eta\;{\bf d}^h_{l\times 1} {\bf x}^T_{1\times (d+1)}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">54</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where 
+    <!-- MATH
+ ${\bf d}^h={\bf W}^{oT}_{l\times m}{\bf d}^o_{m\times 1}\odot {\bf g}'({\bf a}^h)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.97ex; " SRC="img283.svg"
+ ALT="${\bf d}^h={\bf W}^{oT}_{l\times m}{\bf d}^o_{m\times 1}\odot {\bf g}'({\bf a}^h)$"></SPAN>, 
+    and the second term is an outer product of 
+    <!-- MATH
+ ${\bf d}^h_{l\times 1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.97ex; " SRC="img284.svg"
+ ALT="${\bf d}^h_{l\times 1}$"></SPAN> and <!-- MATH
+ ${\bf x}_{n\times 1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.66ex; " SRC="img285.svg"
+ ALT="${\bf x}_{n\times 1}$"></SPAN>.
+
+<P>
+</LI>
+</UL>
+
+<P>
+</LI>
+</UL>
+
+<P>
+Here are the steps in each iteration:
+
+<P>
+
+<OL>
+<LI>Input a randomly selected pattern <!-- MATH
+ $[x_1,\cdots,x_n]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img286.svg"
+ ALT="$[x_1,\cdots,x_n]^T$"></SPAN>,
+  construct <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img199.svg"
+ ALT="$d+1$"></SPAN> dimensional vector <!-- MATH
+ ${\bf x}=[1,x_1,\cdots,x_d]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img287.svg"
+ ALT="${\bf x}=[1,x_1,\cdots,x_d]^T$"></SPAN>;
+
+<P>
+</LI>
+<LI>Compute <!-- MATH
+ ${\bf z}={\bf g}({\bf W}^h{\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img288.svg"
+ ALT="${\bf z}={\bf g}({\bf W}^h{\bf x})$"></SPAN>,
+  and construct <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img289.svg"
+ ALT="$l+1$"></SPAN> dimensional vector 
+  <!-- MATH
+ ${\bf z} \leftarrow [1,{\bf z}]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img290.svg"
+ ALT="${\bf z} \leftarrow [1,{\bf z}]$"></SPAN>;
+
+<P>
+</LI>
+<LI>Compute <!-- MATH
+ $\hat{\bf y}={\bf g}({\bf W}^o{\bf z});$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img291.svg"
+ ALT="$\hat{\bf y}={\bf g}({\bf W}^o{\bf z});$"></SPAN>
+
+<P>
+</LI>
+<LI>Get elementwise product
+  <!-- MATH
+ ${\bf d}^o=({\bf y}-\hat{\bf y})\odot {\bf g}'({\bf a}^o)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img278.svg"
+ ALT="${\bf d}^o=({\bf y}-\hat{\bf y})\odot {\bf g}'({\bf a}^o)$"></SPAN>;
+
+<P>
+</LI>
+<LI>Get elementwise product
+  <!-- MATH
+ ${\bf d}^h={\bf W}^{oT}_{l\times m}{\bf d}^o \odot {\bf g}'({\bf a}^h)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.97ex; " SRC="img292.svg"
+ ALT="${\bf d}^h={\bf W}^{oT}_{l\times m}{\bf d}^o \odot {\bf g}'({\bf a}^h)$"></SPAN>,
+  where <!-- MATH
+ ${\bf W}^o_{m\times l}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.97ex; " SRC="img293.svg"
+ ALT="${\bf W}^o_{m\times l}$"></SPAN> is the same as <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img272.svg"
+ ALT="${\bf W}^o$"></SPAN> but with
+  its first row removed.
+
+<P>
+</LI>
+<LI>Update output weights
+  <!-- MATH
+ ${\bf W}^o\leftarrow {\bf W}^o+\eta\;{\bf d}^o{\bf z}^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.57ex; " SRC="img294.svg"
+ ALT="${\bf W}^o\leftarrow {\bf W}^o+\eta\;{\bf d}^o{\bf z}^T$"></SPAN>;
+
+<P>
+</LI>
+<LI>Update hidden weights
+  <!-- MATH
+ ${\bf W}^h\leftarrow {\bf W}^h+\eta\;{\bf d}^h{\bf x}^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.57ex; " SRC="img295.svg"
+ ALT="${\bf W}^h\leftarrow {\bf W}^h+\eta\;{\bf d}^h{\bf x}^T$"></SPAN>;
+
+<P>
+</LI>
+<LI>Terminate the iteration if the error
+  <!-- MATH
+ $\varepsilon=||{\bf y}-\hat{\bf y}||^2/2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img296.svg"
+ ALT="$\varepsilon=\vert\vert{\bf y}-\hat{\bf y}\vert\vert^2/2$"></SPAN> is acceptably small for 
+  all of the training patterns. Otherwise repeat the above with 
+  another pattern in the training set.
+</LI>
+</OL>
+
+<P>
+The Matlab code for the essential part of the BPN algorithm is listed 
+below. Array <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img197.svg"
+ ALT="$X$"></SPAN> contains <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img297.svg"
+ ALT="$C$"></SPAN> classes each with <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img60.svg"
+ ALT="$K$"></SPAN> samples, array <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img298.svg"
+ ALT="$Y$"></SPAN>
+are the labelings of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img299.svg"
+ ALT="$C*K$"></SPAN> training samples, array <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img198.svg"
+ ALT="$W$"></SPAN> contains the
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img300.svg"
+ ALT="$N+1$"></SPAN> dimensional weight vectors for the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img301.svg"
+ ALT="$M$"></SPAN> output nodes.
+
+<P>
+<PRE>
+    syms x 
+    g=1/(1+exp(-x));          % Sigmoid activation function
+    dg=diff(g);               % its derivative function
+    g=matlabFunction(g);
+    dg=matlabFunction(dg);
+    
+    [X Y]=getData;            % get the training data
+    [N,K]=size(X)             % number of inputs and total number of samples
+    L=20;                     % number of hidden nodes
+    eta=0.1;                  % learning rate (0,1)
+     
+    for n=1:N
+        xmin=min(X(n,:));
+        xmax=max(X(n,:));
+        s=1/(xmax-xmin);
+        for i=1:K
+            X(n,i)=(X(n,i)-xmin)*s;  % Convert to entire dynamic range  
+        end
+    end
+    X=[ones(1,K);X];          % augment X by including a row of x0=1  
+    Wh=1-2*rand(L,N+1);       % Initialize hidden layer weights and biases
+    Wo=1-2*rand(M,L+1);       % Initialize output layer weights and biases
+    it=0;                     % initialize iteration index
+    ie=0;
+    er=1;
+    while er&gt;0.01
+        n=randi(N,1);         % pick a randome number between 1 and N
+        x=X(:,n);             % pick a training sample      
+        y=Y(:,n);             % and its class labeling
+        ah=Wh*x;              % activation of hidden layer  
+        z=[1; g(ah)];         % output of hidden layer (augmented) (eq. 44)
+        ao=Wo*z;              % activation to output layer
+        yhat=g(ao);           % output of output layer (eq. 46)
+        do=(y-yhat).*dg(ao);  % Find d of output layer 
+        dh=(Wo(:, 2:L+1)'*do).*dg(ah);    % delta of hidden layer (eq. 52)
+        Wo=Wo+eta*do*z';      % update output layer weights (eq. 50)
+        Wh=Wh+eta*dh*x';      % update hidden layer weights (eq. 54)
+        it=it+1;              % increment of iteration index
+        if ~mod(it,1000)      % check error every 1000 iterations
+            Yp=g(Wo*[ones(1,K); g(Wh*X)]);    % feed forward to get output Y given X
+            [Cm er]=ConfusionMatrix(yhat,y);
+            fprintf('epoch %d:  %.4f\n', ie,er);
+        end
+    end
+</PRE>
+
+<P>
+The function <code>ConfusionMatrix</code> generates the confusion matrix:
+
+<P>
+<PRE>
+function [Cm er]=ConfusionMatrix(yhat,ytrain)
+    K=length(unique(ytrain));         % number of classes
+    N=length(ytrain);                 % number of test samples
+    Cm=zeros(K);
+    for n=1:N
+        i=ytrain(n);
+        j=yhat(n);
+        Cm(i,j)=Cm(i,j)+1;                
+    end
+    er=1-sum(diag(Cm))/N;
+    fprintf('%d/%d\n',N-sum(diag(Cm)),N)
+end
+</PRE>
+
+<P>
+The training process of BP network can also be considered as a 
+<A ID="tex2html6"
+  HREF="../ch7/node8.html">data modeling</A>
+problem to fit
+the given data <!-- MATH
+ $\{({\bf x}_i,\,{\bf y}_i),\;(i=1,\cdots,N)\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img302.svg"
+ ALT="$\{({\bf x}_i,\,{\bf y}_i),\;(i=1,\cdots,N)\}$"></SPAN> by a
+function with the weights of both the hidden and output layers as the
+parameters:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf y}={\bf f}({\bf x},{\bf W}^h,{\bf W}^o)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img303.svg"
+ ALT="$\displaystyle {\bf y}={\bf f}({\bf x},{\bf W}^h,{\bf W}^o)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">55</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The goal is to find the optimal parameters <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img304.svg"
+ ALT="${\bf W}_h$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img272.svg"
+ ALT="${\bf W}^o$"></SPAN>
+that minimize the difference <!-- MATH
+ ${\bf r}={\bf y}-\hat{\bf y}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img305.svg"
+ ALT="${\bf r}={\bf y}-\hat{\bf y}$"></SPAN> between the 
+desired and the actual outputs. The Levenberg-Marquardt algorithm discussed
+previously can be used to obtain the parameters, such as Matlab function
+<A ID="tex2html7"
+  HREF="http://www.mathworks.com/help/nnet/ref/trainlm.html">trainlm</A>.
+
+<P>
+<B>Example 1:</B> The classification results of two previously used 2-D 
+data sets are shown below. The error rates are respectively <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.25ex; " SRC="img306.svg"
+ ALT="$13\%$"></SPAN> and 
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.25ex; " SRC="img307.svg"
+ ALT="$11.5\%$"></SPAN>, and the confusion matrices are:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left[ \begin{array}{rrr}
+    185 & 14 &  1 \\5 & 181 & 14 \\11 & 33 &156
+  \end{array}\right]
+\;\;\;\;\;\;\;
+\left[ \begin{array}{rr}176 & 24 \\22 & 178 \end{array}\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img308.svg"
+ ALT="$\displaystyle \left[ \begin{array}{rrr}
+185 &amp; 14 &amp; 1 \\ 5 &amp; 181 &amp; 14 \\ 11 &amp; 33...
+...
+\;\;\;\;\;\;\;
+\left[ \begin{array}{rr}176 &amp; 24 \\ 22 &amp; 178 \end{array}\right]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">56</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+<IMG STYLE="" SRC="../figures/BPNexample2.png"
+ ALT="BPNexample2.png">
+<IMG STYLE="" SRC="../figures/BPNexample1.png"
+ ALT="BPNexample1.png">
+
+<P>
+<B>Example 2:</B>
+
+<P>
+The back propagation network trained by the dataset of ten digits from 
+0 to 9 used previously is used to classify the same dataset, with the
+resulting confusion matrix shown below. Out of the 2240 samples, 80 are
+misclassified, i.e., the error rate is 3.57%. Note that this error 
+rate is lower than that of the naive Bayes classifier previously 
+considered, due to the fact that the classification surfaces of the
+back propagation network can be more sophisticated than the quadratic
+surfaces of the Bayes classifier.
+
+<P>
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left[ \begin{array}{rrrrrrrrrr}
+216 & 0 & 2 & 1 & 0 & 0 & 4 & 0 & 1 &  0 \\
+  0 & 212 & 0 & 1 & 0 & 1 & 3 & 0 & 7 & 0 \\
+  0 & 0 & 221 & 0 & 0 & 0 & 1 & 0 & 2 & 0 \\
+  1 & 0 & 1 & 203 & 0 & 0 & 0 & 0 & 14& 5 \\
+  0 & 0 & 0 & 0 & 221 & 0 & 1 & 0 & 2 & 0 \\
+  0 & 0 & 0 & 2 & 2 & 214 & 0 & 0 & 6 & 0 \\
+  0 & 1 & 0 & 0 & 0 & 0 & 221 & 0 & 2 & 0 \\
+  0 & 0 & 4 & 0 & 0 & 0 & 0 & 214 & 4 & 2 \\
+  0 & 0 & 1 & 0 & 0 & 1 & 1 & 0 & 221 & 0 \\
+  0 & 0 & 0 & 1 & 2 & 0 & 0 & 0 & 4 & 217 \\
+  \end{array}\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 28.10ex; vertical-align: -13.47ex; " SRC="img309.svg"
+ ALT="$\displaystyle \left[ \begin{array}{rrrrrrrrrr}
+216 &amp; 0 &amp; 2 &amp; 1 &amp; 0 &amp; 0 &amp; 4 &amp; 0 ...
+... 0 &amp; 221 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 2 &amp; 0 &amp; 0 &amp; 0 &amp; 4 &amp; 217 \\
+\end{array}\right]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">57</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node6.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="ch10.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node4.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node6.html">Competitive Learning Networks</A>
+<B> Up:</B> <A
+ HREF="ch10.html">ch10</A>
+<B> Previous:</B> <A
+ HREF="node4.html">Perceptron Network</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

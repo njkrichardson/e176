@@ -1,0 +1,443 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Hebbian Learning</TITLE>
+<META NAME="description" CONTENT="Hebbian Learning">
+<META NAME="keywords" CONTENT="ch10">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch10.css">
+
+<LINK REL="next" HREF="node3.html">
+<LINK REL="previous" HREF="node1.html">
+<LINK REL="next" HREF="node3.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node3.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="ch10.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node1.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node3.html">Hopfield Network</A>
+<B> Up:</B> <A
+ HREF="ch10.html">ch10</A>
+<B> Previous:</B> <A
+ HREF="node1.html">Biological and Artificial Neural</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00020000000000000000">
+Hebbian Learning</A>
+</H1>
+
+<P>
+Donald Hebb (1949) speculated that &ldquo;When neuron A repeatedly and 
+persistently takes part in exciting neuron B, the synaptic connection 
+from A to B will be strengthened.&rdquo; In other words, simultaneous 
+activation of neurons leads to pronounced increases in synaptic 
+strength between them, or &ldquo;neurons that fire together wire together; 
+neurons that fire out of sync, fail to link". 
+
+<P>
+For example, the well known 
+<A ID="tex2html2"
+  HREF="https://en.wikipedia.org/wiki/Classical_conditioning"><EM>classical conditioning</EM> (Pavlov, 1927)</A>
+could be 
+explained by Hebbian learning. Consider the following three patterns
+(see 
+<A ID="tex2html3"
+  HREF="https://www.verywellmind.com/classical-conditioning-2794859">here</A>):
+
+<UL>
+<LI>Unconditioned stimulus: sight of food F
+</LI>
+<LI>Conditioned stimulus: sound of bell B
+</LI>
+<LI>Response: salivation S 
+</LI>
+</UL>
+The unconditioned response is: <!-- MATH
+ $F \rightarrow S$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img39.svg"
+ ALT="$F \rightarrow S$"></SPAN>. Due to the repeated
+and persistent conditioning process <!-- MATH
+ $F \cap B \rightarrow S$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img40.svg"
+ ALT="$F \cap B \rightarrow S$"></SPAN>, the 
+synaptic connections between patterns B and S are strengthened as both
+are repeatedly excited simultaneously, i.e., the two patternss become 
+associated, resulting the conditioned response <!-- MATH
+ $B \rightarrow S$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img41.svg"
+ ALT="$B \rightarrow S$"></SPAN>.
+
+<P>
+The Hebbian network is based on this theory to model the associative 
+or Hebbian learning to establish the association between two sets of 
+patterns <!-- MATH
+ $\{{\bf x}_1,\cdots,{\bf x}_K \}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img42.svg"
+ ALT="$\{{\bf x}_1,\cdots,{\bf x}_K \}$"></SPAN> and <!-- MATH
+ $\{{\bf y}_1,\cdots,{\bf y}_K\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img43.svg"
+ ALT="$\{{\bf y}_1,\cdots,{\bf y}_K\}$"></SPAN>.
+This is a 2-layer network with <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img4.svg"
+ ALT="$n$"></SPAN> nodes in the input layer 
+<!-- MATH
+ ${\bf x}=[x_1,\cdots,x_n]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img44.svg"
+ ALT="${\bf x}=[x_1,\cdots,x_n]^T$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img45.svg"
+ ALT="$m$"></SPAN> nodes in the output layer 
+<!-- MATH
+ ${\bf y}=[y_1,\cdots,y_m]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img46.svg"
+ ALT="${\bf y}=[y_1,\cdots,y_m]^T$"></SPAN>. Each output node is fully connected to 
+all input nodes:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+y_i=\sum_{j=1}^n w_{ij} x_j={\bf w}_i^T{\bf x}\;\;\;\;(i=1,\cdots,m),
+\;\;\;\;\;\;\mbox{or}\;\;\;\;\;	{\bf y}={\bf W}{\bf x}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.40ex; " SRC="img47.svg"
+ ALT="$\displaystyle y_i=\sum_{j=1}^n w_{ij} x_j={\bf w}_i^T{\bf x}\;\;\;\;(i=1,\cdots,m),
+\;\;\;\;\;\;$">or<IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img48.svg"
+ ALT="$\displaystyle \;\;\;\;\; {\bf y}={\bf W}{\bf x}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">11</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <!-- MATH
+ ${\bf w}_i=[w_{i1},\cdots,w_{in}]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img49.svg"
+ ALT="${\bf w}_i=[w_{i1},\cdots,w_{in}]^T$"></SPAN>, 
+<!-- MATH
+ ${\bf W}=[{\bf w}_1,\cdots,{\bf w}_m]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img50.svg"
+ ALT="${\bf W}=[{\bf w}_1,\cdots,{\bf w}_m]^T$"></SPAN>.
+
+<P>
+<IMG STYLE="" SRC="../figures/twolayernet.gif"
+ ALT="twolayernet.gif">
+
+<P>
+The Hebbian learning law is:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+w_{ij}^{new}=w_{ij}^{old}+\eta\;x_j y_i\;\;\;\;(i=1,\cdots,m,\;j=1,\cdots,n)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -1.01ex; " SRC="img51.svg"
+ ALT="$\displaystyle w_{ij}^{new}=w_{ij}^{old}+\eta\;x_j y_i\;\;\;\;(i=1,\cdots,m,\;j=1,\cdots,n)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">12</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+or in matrix form:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf W}^{new}={\bf W}^{old}+\eta\; {\bf y} {\bf x}^T
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.57ex; " SRC="img52.svg"
+ ALT="$\displaystyle {\bf W}^{new}={\bf W}^{old}+\eta\; {\bf y} {\bf x}^T$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">13</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Here <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img53.svg"
+ ALT="$\eta$"></SPAN> is the <EM>learning rate</EM>, a parameter that controls how fast 
+the weights get modified. The reasoning for this learning law is that when 
+both <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img7.svg"
+ ALT="$x_j$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img54.svg"
+ ALT="$y_i$"></SPAN> are high (activated), the weight <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img55.svg"
+ ALT="$w_{ij}$"></SPAN> (synaptic 
+connectivity) between them is enhanced according to Hebb's theory.
+
+<P>
+This is a supervised learning composed of the following two stages:
+
+<UL>
+<LI><B>Training:</B> Let <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img56.svg"
+ ALT="$w_{ij}=0$"></SPAN> initially and <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img57.svg"
+ ALT="$\eta=1$"></SPAN>, then train
+  the network by a set of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img25.svg"
+ ALT="$N$"></SPAN> pairs of patterns <!-- MATH
+ $\{ ({\bf x}_k,{\bf y}_k),\;\;
+  k=1,\cdots,N\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img58.svg"
+ ALT="$\{ ({\bf x}_k,{\bf y}_k),\;\;
+k=1,\cdots,N\}$"></SPAN> based on the learning law:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+w_{ij}=\sum_{k=1}^Nx_j^{(k)}y_i^{(k)}\;\;\;\;(i=1,\cdots,m,\;\;j=1,\cdots,n)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img59.svg"
+ ALT="$\displaystyle w_{ij}=\sum_{k=1}^Nx_j^{(k)}y_i^{(k)}\;\;\;\;(i=1,\cdots,m,\;\;j=1,\cdots,n)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">14</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+or in matrix form, the weight matrix is the sum of the outer-products of all
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img60.svg"
+ ALT="$K$"></SPAN> pairs of patterns:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf W}_{m\times n}=\sum_{k=1}^N {\bf y}_k {\bf x}_k^T = \sum_{k=1}^N
+    \left[ \begin{array}{c} y_1^{(k)} \\\vdots \\y_m^{(k)} \end{array} \right]
+         [ x_1^{(k)}, \cdots, x_n^{(k)} ]	
+  
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 11.38ex; vertical-align: -5.11ex; " SRC="img61.svg"
+ ALT="$\displaystyle {\bf W}_{m\times n}=\sum_{k=1}^N {\bf y}_k {\bf x}_k^T = \sum_{k=...
+...k)} \\ \vdots \\ y_m^{(k)} \end{array} \right]
+[ x_1^{(k)}, \cdots, x_n^{(k)} ]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">15</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+</LI>
+<LI><B>Association:</B> When one of the patterns <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img62.svg"
+ ALT="${\bf x}_l$"></SPAN> is presented
+  to the network, it produces the output:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf y}={\bf W}{\bf x}_l=\left(\sum_{k=1}^K {\bf y}_k {\bf x}_k^T\right)\;{\bf x}_l
+    ={\bf y}_l({\bf x}_l^T{\bf x}_l)+\sum_{k\neq l}{\bf y}_k({\bf x}_k^T{\bf x}_l)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.90ex; vertical-align: -3.46ex; " SRC="img63.svg"
+ ALT="$\displaystyle {\bf y}={\bf W}{\bf x}_l=\left(\sum_{k=1}^K {\bf y}_k {\bf x}_k^T...
+...
+={\bf y}_l({\bf x}_l^T{\bf x}_l)+\sum_{k\neq l}{\bf y}_k({\bf x}_k^T{\bf x}_l)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">16</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+</LI>
+</UL>
+
+<P>
+To interpret the output pattern <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img64.svg"
+ ALT="${\bf y}$"></SPAN>, we first consider the ideal case 
+where the following two conditions are satisfied:
+
+<UL>
+<LI>The <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img25.svg"
+ ALT="$N$"></SPAN> patterns <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN>'s are orthogonal to each other, i.e., 
+  they are totally uncorrelated to each other: 
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf x}_i^T{\bf x}_j=||{\bf x}_i||\;||{\bf x}_j|| \cos \phi
+    = \delta_{ij}=\left\{ \begin{array}{ll} 1 & i=j \\0 & i\ne j \end{array} 
+    \right. 
+  
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img65.svg"
+ ALT="$\displaystyle {\bf x}_i^T{\bf x}_j=\vert\vert{\bf x}_i\vert\vert\;\vert\vert{\b...
+... \delta_{ij}=\left\{ \begin{array}{ll} 1 &amp; i=j \\ 0 &amp; i\ne j \end{array}\right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">17</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img66.svg"
+ ALT="$\phi$"></SPAN> is the angle between vectors <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img67.svg"
+ ALT="${\bf x}_i$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img68.svg"
+ ALT="${\bf x}_j$"></SPAN>,
+  representing how much the two vectors are similar or correlated to each 
+  other:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\cos\phi = \frac{{\bf x}^T{\bf y}}{||{\bf x}||\,||{\bf y}||}
+  =\frac{\sum_i x_i y_i}{\sqrt{\sum_i x_i^2}\sqrt{\sum_i y_i^2} }
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.50ex; vertical-align: -2.74ex; " SRC="img69.svg"
+ ALT="$\displaystyle \cos\phi = \frac{{\bf x}^T{\bf y}}{\vert\vert{\bf x}\vert\vert\,\...
+...f y}\vert\vert}
+=\frac{\sum_i x_i y_i}{\sqrt{\sum_i x_i^2}\sqrt{\sum_i y_i^2} }$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">18</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+which can be interpreted as the <EM>correlation coefficient</EM> 
+  <!-- MATH
+ $r_{xy}=\sigma_{xy}^2/\sigma_x\sigma_y$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -1.01ex; " SRC="img70.svg"
+ ALT="$r_{xy}=\sigma_{xy}^2/\sigma_x\sigma_y$"></SPAN> between <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img64.svg"
+ ALT="${\bf y}$"></SPAN> 
+  treated as random variables
+  
+<UL>
+<LI>If <!-- MATH
+ $0 < r_{xy} \leq 1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img71.svg"
+ ALT="$0 &lt; r_{xy} \leq 1$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img64.svg"
+ ALT="${\bf y}$"></SPAN> are positively 
+      correlated (<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img72.svg"
+ ALT="$r_{xy}=1$"></SPAN> iff <!-- MATH
+ ${\bf x}={\bf y}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img73.svg"
+ ALT="${\bf x}={\bf y}$"></SPAN>)
+</LI>
+<LI>If <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img74.svg"
+ ALT="$r_{xy} =0 $"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img64.svg"
+ ALT="${\bf y}$"></SPAN> are not correlated
+</LI>
+<LI>If <!-- MATH
+ $-1 \leq r_{xy} \leq 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img75.svg"
+ ALT="$-1 \leq r_{xy} \leq 0$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img64.svg"
+ ALT="${\bf y}$"></SPAN> are negatively
+      correlated (<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img76.svg"
+ ALT="$r_{xy}=-1$"></SPAN> iff <!-- MATH
+ ${\bf x}=-{\bf y}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.57ex; " SRC="img77.svg"
+ ALT="${\bf x}=-{\bf y}$"></SPAN>) 
+  
+</LI>
+</UL>
+
+<P>
+</LI>
+<LI>The number of input nodes is greater than the number of pattern pairs:
+  <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.43ex; " SRC="img78.svg"
+ ALT="$n \geq N$"></SPAN>, i.e., the capacity of the network is large enough for representing
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img25.svg"
+ ALT="$N$"></SPAN> different patterns (as there can be no more than <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img4.svg"
+ ALT="$n$"></SPAN> orthogonal vectors in 
+  an n-D space). 
+
+<P>
+</LI>
+</UL>
+
+<P>
+If these conditions are true, then the response of the network to <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img62.svg"
+ ALT="${\bf x}_l$"></SPAN>
+will be 
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf y}={\bf y}_l({\bf x}_l^T{\bf x}_l)+\sum_{k\neq l}{\bf y}_k({\bf x}_k^T{\bf x}_l)
+  ={\bf y}_l
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -3.46ex; " SRC="img79.svg"
+ ALT="$\displaystyle {\bf y}={\bf y}_l({\bf x}_l^T{\bf x}_l)+\sum_{k\neq l}{\bf y}_k({\bf x}_k^T{\bf x}_l)
+={\bf y}_l$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">19</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+as all other terms (<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img80.svg"
+ ALT="$k \ne l$"></SPAN>) <!-- MATH
+ ${\bf x}_k^T {\bf x}_l=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.77ex; " SRC="img81.svg"
+ ALT="${\bf x}_k^T {\bf x}_l=0$"></SPAN> are zero.
+In other words, a one-to-one correspondence relationship between 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img82.svg"
+ ALT="${\bf x}_k$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img83.svg"
+ ALT="${\bf y}_k$"></SPAN> has been established for all <!-- MATH
+ $k=1,\cdots,N$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img84.svg"
+ ALT="$k=1,\cdots,N$"></SPAN>.
+In non-ideal cases, the summation term is non-zero and there is an error
+<!-- MATH
+ ${\bf y}-{\bf y}_l \neq 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img85.svg"
+ ALT="${\bf y}-{\bf y}_l \neq 0$"></SPAN>.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node3.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="ch10.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node1.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node3.html">Hopfield Network</A>
+<B> Up:</B> <A
+ HREF="ch10.html">ch10</A>
+<B> Previous:</B> <A
+ HREF="node1.html">Biological and Artificial Neural</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

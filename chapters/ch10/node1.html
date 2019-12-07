@@ -1,0 +1,518 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Biological and Artificial Neural Networks</TITLE>
+<META NAME="description" CONTENT="Biological and Artificial Neural Networks">
+<META NAME="keywords" CONTENT="ch10">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch10.css">
+
+<LINK REL="next" HREF="node2.html">
+<LINK REL="previous" HREF="ch10.html">
+<LINK REL="next" HREF="node2.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node2.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="ch10.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="ch10.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node2.html">Hebbian Learning</A>
+<B> Up:</B> <A
+ HREF="ch10.html">ch10</A>
+<B> Previous:</B> <A
+ HREF="ch10.html">ch10</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00010000000000000000">
+Biological and Artificial Neural Networks</A>
+</H1>
+
+<P>
+In machine learning, the artificial neural networks are a category 
+of algorithms that are inspired by the biological neural networks in 
+the brain, and designed to carry out both supervised and unsupervised 
+learning tasks, such as classification and clustering. To understand 
+how such neural network algorithms work, we first consider some basic 
+concepts in biological neural system.
+
+<P>
+The human brain consists of <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img1.svg"
+ ALT="$10^{11}$"></SPAN> 
+<A ID="tex2html1"
+  HREF="../../../e180/lectures/signal1/node1.html">neurons</A>
+interconnected through about <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$10^{14}$"></SPAN> to <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img3.svg"
+ ALT="$10^{15}$"></SPAN> <EM>synaptic junctions</EM> 
+to form millions of neural networks. Hundreds specialized cortical areas 
+are formed based on these networks for different information processing 
+tasks. 
+
+<P>
+Functionally, a neuron consists of the following three parts:
+
+<UL>
+<LI>The <EM>cell body or soma</EM> containing the nucleus of the cell;
+</LI>
+<LI>The <EM>dendrites</EM> that receive electrochemical stimulations
+  (input impulses) from other neurons and propagate them to the cell
+  body;
+</LI>
+<LI>The <EM>axon:</EM> that conducts the impulses (output) away from
+  the cell body to other cells; 
+</LI>
+<LI>The <EM>synapse</EM> is the point at which impulses pass from one 
+  cell to another.
+</LI>
+</UL>
+
+<P>
+<IMG STYLE="" SRC="../figures/neuron.png"
+ ALT="neuron.png">
+
+<P>
+The function of a neuron can be modeled mathematically. Each neuron,
+modeled as a <EM>node</EM> in the neural network, receives input signal
+or stimulus from <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img4.svg"
+ ALT="$n$"></SPAN> neurons and its <EM>activation</EM> or the 
+<EM>net input</EM> is the weighted sum of all such inputs:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+a=\sum_{j=1}^n w_j x_j+b
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.40ex; " SRC="img5.svg"
+ ALT="$\displaystyle a=\sum_{j=1}^n w_j x_j+b$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">1</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="$b$"></SPAN> is the offset or bias, <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img7.svg"
+ ALT="$x_j$"></SPAN> is the input signal from the jth
+node, <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img8.svg"
+ ALT="$w_j$"></SPAN> is the synaptic connectivity to the jth input node:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+w_j\;\left\{ \begin{array}{ll}
+    > 0	& \mbox{excitatory input}	\\
+    < 0	& \mbox{inhibitory input}	\\
+    = 0	& \mbox{no connection}
+  \end{array} \right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img9.svg"
+ ALT="$\displaystyle w_j\;\left\{ \begin{array}{ll}
+&gt; 0 &amp; \mbox{excitatory input} \\
+&lt; 0 &amp; \mbox{inhibitory input} \\
+= 0 &amp; \mbox{no connection}
+\end{array} \right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">2</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+For convenience, we could define <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img10.svg"
+ ALT="$x_0=1$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img11.svg"
+ ALT="$w_0=b$"></SPAN>, so that the above 
+can also be written as
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+a=\sum_{j=1}^n w_j x_j+b=\sum_{j=0}^n w_j x_j={\bf w}^T{\bf x}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.40ex; " SRC="img12.svg"
+ ALT="$\displaystyle a=\sum_{j=1}^n w_j x_j+b=\sum_{j=0}^n w_j x_j={\bf w}^T{\bf x}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">3</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The output signal or response of the neuron is a function of its
+activation:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+y=g(a)=g\left(\sum_{j=0}^n w_j x_j+b\right)=g({\bf w}^T{\bf x}+b)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img13.svg"
+ ALT="$\displaystyle y=g(a)=g\left(\sum_{j=0}^n w_j x_j+b\right)=g({\bf w}^T{\bf x}+b)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">4</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+with <!-- MATH
+ ${\bf x}=[x_0=1,\,x_1,\cdots,x_n]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img14.svg"
+ ALT="${\bf x}=[x_0=1,\,x_1,\cdots,x_n]^T$"></SPAN> and <!-- MATH
+ ${\bf w}=[w_0=b,\,,w_1,\cdots,w_n]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img15.svg"
+ ALT="${\bf w}=[w_0=b,\,,w_1,\cdots,w_n]^T$"></SPAN>.
+
+<P>
+<IMG STYLE="" SRC="../figures/neuronModel.png"
+ ALT="neuronModel.png">
+
+<P>
+Here <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img16.svg"
+ ALT="$g(x)$"></SPAN> is an activation function, which typically take one of the
+following forms:
+
+<UL>
+<LI>Logistic sigmoid function:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+g(x,a)=\frac{1}{1+e^{-ax}}=\frac{e^{ax}}{1+e^{ax}}=\left\{\begin{array}{rl}
+  0 & x=-\infty \\1/2 & x=0 \\1 & x=\infty\end{array}\right.,
+  \;\;\;\;\;\;
+  \frac{d\,g(x)}{dx}=\frac{a\,e^{-ax}}{(1+e^{-ax})^2}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img17.svg"
+ ALT="$\displaystyle g(x,a)=\frac{1}{1+e^{-ax}}=\frac{e^{ax}}{1+e^{ax}}=\left\{\begin{...
+...array}\right.,
+\;\;\;\;\;\;
+\frac{d\,g(x)}{dx}=\frac{a\,e^{-ax}}{(1+e^{-ax})^2}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">5</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+</LI>
+<LI>Tanh (hyperbolic tangent) function:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+g(x,a)=\frac{2}{1+e^{-ax}}-1=\frac{e^{ax}-1}{e^{ax}+1}
+    =\left\{\begin{array}{rl}-1 & x=-\infty \\0 & x=0 \\1 & x=\infty
+    \end{array}\right.,
+    \;\;\;\;\;\;
+    \frac{d\,g(x)}{dx}=\frac{2a\,e^{-ax}}{(1+e^{-ax})^2}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img18.svg"
+ ALT="$\displaystyle g(x,a)=\frac{2}{1+e^{-ax}}-1=\frac{e^{ax}-1}{e^{ax}+1}
+=\left\{\b...
+...rray}\right.,
+\;\;\;\;\;\;
+\frac{d\,g(x)}{dx}=\frac{2a\,e^{-ax}}{(1+e^{-ax})^2}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">6</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$a$"></SPAN> is a parameter that controls the slop of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img16.svg"
+ ALT="$g(x)$"></SPAN>. Specially, 
+  when <!-- MATH
+ $a\rightarrow 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="$a\rightarrow 0$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img21.svg"
+ ALT="$g(x,a)$"></SPAN> becomes linear, but whn <!-- MATH
+ $a\rightarrow
+  \infty$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$a\rightarrow
+\infty$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img21.svg"
+ ALT="$g(x,a)$"></SPAN> becomes a threshold function:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\lim_{a\rightarrow\infty} g(x,a)=\left\{ \begin{array}{cl} 0\mbox{ or }-1 & x<0\\
+      1 & x>0 \end{array} \right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img23.svg"
+ ALT="$\displaystyle \lim_{a\rightarrow\infty} g(x,a)=\left\{ \begin{array}{cl} 0\mbox{ or }-1 &amp; x&lt;0\\
+1 &amp; x&gt;0 \end{array} \right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">7</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+</LI>
+<LI>Rectified linear unit (ReLU):
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+g(x)=\max(0,\,x)=\left\{\begin{array}{ll}0 & x<0\\x & x>0\end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img24.svg"
+ ALT="$\displaystyle g(x)=\max(0,\,x)=\left\{\begin{array}{ll}0 &amp; x&lt;0\\ x &amp; x&gt;0\end{array}\right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">8</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+</LI>
+</UL>
+
+<P>
+<IMG STYLE="" SRC="../figures/ReLU.png"
+ ALT="ReLU.png">
+
+<P>
+The function of a neural network can be modeled mathematically as 
+a hierarchical structure shown below containing multiple layers of 
+neurons:
+
+<UL>
+<LI>The <EM>input layer</EM>: receives inputs from external sources;
+</LI>
+<LI>The <EM>output layer</EM>: generates output to the external world;
+</LI>
+<LI>The <EM>hidden layer(s)</EM>: between of the input and output layers, 
+  not visible from outside the network.
+</LI>
+</UL>
+The purpose is to train the network according to certain mathematical
+rules, the <EM>Learning laws</EM>, by modifying the weights of a network 
+iteratively based on the inputs (and the desired outputs if the learning 
+is supervised), so that given the input of the network as the stimulus, 
+the network will produce the desired output as the response.
+
+<P>
+<IMG STYLE="" SRC="../figures/threelayernet.gif"
+ ALT="threelayernet.gif">
+
+<P>
+The learning paradigms of the neural networks are listed below, 
+depending on the interpretations of the input and output of the 
+neural network.
+
+<P>
+
+<OL>
+<LI><EM>Pattern Associator</EM>
+
+<P>
+This is the most general form of neural networks that learns and stores 
+  the associative relationship between two sets of patterns represented by
+  vectors.
+  
+<UL>
+<LI>Training: A set of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img25.svg"
+ ALT="$N$"></SPAN> pairs of patterns <!-- MATH
+ $\{ ({\bf x}_n,{\bf y}_n),
+    \;n=1,\cdots,N\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img26.svg"
+ ALT="$\{ ({\bf x}_n,{\bf y}_n),
+\;n=1,\cdots,N\}$"></SPAN> is presented to the network which then learns to 
+    establish the associative relationship between two sets of patterns:
+    <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f: {\bf x} \in {\cal R}^d \Longrightarrow {\bf y} \in {\cal R}^m
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.57ex; " SRC="img27.svg"
+ ALT="$\displaystyle f: {\bf x} \in {\cal R}^d \Longrightarrow {\bf y} \in {\cal R}^m$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">9</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+</LI>
+<LI>Testing: When a pattern <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img28.svg"
+ ALT="${\bf x}_n$"></SPAN> in a pair is presented as the
+    input, the network produces an output pattern <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img29.svg"
+ ALT="${\bf y}_n$"></SPAN> associated to
+    the output.
+  
+</LI>
+</UL>
+
+<P>
+Human memory is associative in the sense that given one pattern, some 
+  associated pattern(s) may be produced. Examples include: (Evolution, Darwin), 
+  (Einstein, <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img30.svg"
+ ALT="$E=mc^2$"></SPAN>), (food, sounding bell, salivation).
+
+<P>
+</LI>
+<LI><EM>Auto-associator</EM>
+
+<P>
+As a special pattern associator, auto-associator associates a prestored 
+  pattern to an incomplete or noisy version of the pattern.
+  
+<UL>
+<LI>Training: A set of patterns <!-- MATH
+ $\{{\bf x}_1,\cdots,{\bf x}_N\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img31.svg"
+ ALT="$\{{\bf x}_1,\cdots,{\bf x}_N\}$"></SPAN> 
+    is presented to the network for it to learn and remember, i.e., the 
+    patterns are stored in the network.
+
+<P>
+</LI>
+<LI>Testing: When an incomplete or noisy version of one of the 
+    patterns stored in the network is presented as the input to the 
+    network, the original pattern is retrieved by the network as the 
+    outpupt.  
+
+<P>
+</LI>
+</UL>
+
+<P>
+</LI>
+<LI><EM>Regression</EM>
+
+<P>
+This is another special kind of pattern associator which takes a vector
+  input <!-- MATH
+ ${\bf x}\in{\cal R}^d$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.21ex; " SRC="img32.svg"
+ ALT="${\bf x}\in{\cal R}^d$"></SPAN> and produces a real value <!-- MATH
+ $y\in{\cal R}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img33.svg"
+ ALT="$y\in{\cal R}$"></SPAN> as
+  a multivariable function <!-- MATH
+ $y=f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img34.svg"
+ ALT="$y=f({\bf x})$"></SPAN> at its only output node.
+
+<P>
+
+<UL>
+<LI>Training: trained by a set of observed data samples, the independent
+    vectors and their corresponding function values <!-- MATH
+ $\{ ({\bf x}_n,\;y_n),\;
+    n=1,\cdots,N\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img35.svg"
+ ALT="$\{ ({\bf x}_n,\;y_n),\;
+n=1,\cdots,N\}$"></SPAN>, the network is model the function.
+
+<P>
+</LI>
+<LI>Testing: given any vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN>, the output value produced 
+    by the single output node is an estimated function value <!-- MATH
+ $y=f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img34.svg"
+ ALT="$y=f({\bf x})$"></SPAN>.
+
+<P>
+</LI>
+</UL>
+
+<P>
+</LI>
+<LI><EM>Pattern Classifier</EM>
+
+<P>
+This is a variation of the pattern associator of which the output 
+  patterns are a set of categorical symbols representing different 
+  classes <!-- MATH
+ $\{C_1,\cdots,C_K\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img37.svg"
+ ALT="$\{C_1,\cdots,C_K\}$"></SPAN>, i.e., each input pattern is classified
+  by the network into one of the classes
+
+<P>
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f: {\bf x} \in {\cal R}^d \Longrightarrow y \in \{C_1,\cdots,C_K\}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img38.svg"
+ ALT="$\displaystyle f: {\bf x} \in {\cal R}^d \Longrightarrow y \in \{C_1,\cdots,C_K\}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">10</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+</LI>
+<LI><EM>Regularity Detector</EM>	
+
+<P>
+This is an unsupervised learning process. The network discovers 
+  automatically the regularity in the inputs so that similar patterns
+  are automatically detected and grouped together in the same cluster
+  or class.	
+
+<P>
+</LI>
+</OL>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node2.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="ch10.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="ch10.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node2.html">Hebbian Learning</A>
+<B> Up:</B> <A
+ HREF="ch10.html">ch10</A>
+<B> Previous:</B> <A
+ HREF="ch10.html">ch10</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>
