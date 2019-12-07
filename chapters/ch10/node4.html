@@ -1,0 +1,999 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Perceptron Network</TITLE>
+<META NAME="description" CONTENT="Perceptron Network">
+<META NAME="keywords" CONTENT="ch10">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch10.css">
+
+<LINK REL="next" HREF="node5.html">
+<LINK REL="previous" HREF="node3.html">
+<LINK REL="next" HREF="node5.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node5.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="ch10.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node3.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node5.html">Back Propagation Network</A>
+<B> Up:</B> <A
+ HREF="ch10.html">ch10</A>
+<B> Previous:</B> <A
+ HREF="node3.html">Hopfield Network</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00040000000000000000">
+Perceptron Network</A>
+</H1>
+
+<P>
+The perceptron network (<A ID="tex2html5"
+  HREF="https://en.wikipedia.org/wiki/Frank_Rosenblatt">F. Rosenblatt</A>, 1957), is a
+two-layer learning network containing a d-node input layer and an
+m-node output layer. The perceptron is a supervised method trained 
+by a set of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img25.svg"
+ ALT="$N$"></SPAN> samples in the training set 
+<!-- MATH
+ ${\bf X}=[{\bf x}_1,\cdots,{\bf x}_N]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img132.svg"
+ ALT="${\bf X}=[{\bf x}_1,\cdots,{\bf x}_N]$"></SPAN> labeled by 
+<!-- MATH
+ ${\bf y}=[y_1,\cdots,y_N]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img133.svg"
+ ALT="${\bf y}=[y_1,\cdots,y_N]^T$"></SPAN> in some way. In the following, we will 
+first consider the special case where the output layer has only <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img134.svg"
+ ALT="$m=1$"></SPAN>
+nodes, and the perceptron becomes a binary classifier by which each
+input pattern <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN> is classified into either of the two classes
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img135.svg"
+ ALT="$C_+$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img136.svg"
+ ALT="$C_-$"></SPAN>, then generalize this binary classifier into a
+multiclass classifiers when <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.21ex; " SRC="img137.svg"
+ ALT="$m&gt;1$"></SPAN>. 
+
+<P>
+Specifically, let <!-- MATH
+ ${\bf x}=[x_1,\cdots,x_d]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img138.svg"
+ ALT="${\bf x}=[x_1,\cdots,x_d]^T$"></SPAN> be a randomly selected
+training sample labeled by <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img139.svg"
+ ALT="$y=1$"></SPAN> if <!-- MATH
+ ${\bf x}\in C_+$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img140.svg"
+ ALT="${\bf x}\in C_+$"></SPAN> if <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img139.svg"
+ ALT="$y=1$"></SPAN> or 
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img141.svg"
+ ALT="$y=-1$"></SPAN> if <!-- MATH
+ ${\bf x}\in C_-$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img142.svg"
+ ALT="${\bf x}\in C_-$"></SPAN>. When this <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN> is presented to the
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$d$"></SPAN> input nodes of the perceptron network, the only output node will
+generate a binary output depending on whether the decision function 
+<!-- MATH
+ $f({\bf x})={\bf w}^T{\bf x}+b$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img143.svg"
+ ALT="$f({\bf x})={\bf w}^T{\bf x}+b$"></SPAN> is greater or smaller than zero:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\mbox{If} \;\; f({\bf x})={\bf w}^T{\bf x}+b \;
+  \left\{ \begin{array}{l} > 0\\<0 \end{array} \right.,
+  \;\;\;\mbox{then}\;\;\;
+  \hat{y}=\sign (f({\bf x}))
+  =\left\{ \begin{array}{rl} 1 & \mbox{for } {\bf x}\in C_+\\
+    -1 & \mbox{for } {\bf x}\in C_-\end{array} \right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH">If<IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img144.svg"
+ ALT="$\displaystyle \;\; f({\bf x})={\bf w}^T{\bf x}+b \;
+\left\{ \begin{array}{l} &gt; 0\\ &lt;0 \end{array} \right.,
+\;\;\;$">then<IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img145.svg"
+ ALT="$\displaystyle \;\;\;
+\hat{y}=\sign (f({\bf x}))
+=\left\{ \begin{array}{rl} 1 &amp; \mbox{for } {\bf x}\in C_+\\
+-1 &amp; \mbox{for } {\bf x}\in C_-\end{array} \right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">29</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The binary output is either <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img146.svg"
+ ALT="$\hat{y}=1$"></SPAN> indicating <!-- MATH
+ ${\bf x}\in C_+$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img140.svg"
+ ALT="${\bf x}\in C_+$"></SPAN>, 
+or <!-- MATH
+ $\hat{y}=-1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img147.svg"
+ ALT="$\hat{y}=-1$"></SPAN> indicating <!-- MATH
+ ${\bf x}\in C_-$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img142.svg"
+ ALT="${\bf x}\in C_-$"></SPAN>. The difference 
+<!-- MATH
+ $\delta=y-\hat{y}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img148.svg"
+ ALT="$\delta=y-\hat{y}$"></SPAN> between the lable <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img149.svg"
+ ALT="$y$"></SPAN> and the actual output <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img150.svg"
+ ALT="$\hat{y}$"></SPAN> 
+is the error or residual, which is to be reduced by modifying the model 
+parameters <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img151.svg"
+ ALT="${\bf w}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="$b$"></SPAN> iteratively during the training process based 
+on all samples in the training set.
+
+<P>
+If we divide the inequalities above by <!-- MATH
+ $||{\bf w}||$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img152.svg"
+ ALT="$\vert\vert{\bf w}\vert\vert$"></SPAN> and rewrite 
+them as:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p_{\bf w}({\bf x})=\frac{{\bf w}^T{\bf x}}{||{\bf w}||}
+  > -\frac{b}{||{\bf w}||}=b'\;\;\;\;\;\;\;\;\;
+  p_{\bf w}({\bf x})=\frac{{\bf w}^T{\bf x}}{||{\bf w}||}
+  < -\frac{b}{||{\bf w}||}=b'
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.29ex; " SRC="img153.svg"
+ ALT="$\displaystyle p_{\bf w}({\bf x})=\frac{{\bf w}^T{\bf x}}{\vert\vert{\bf w}\vert...
+...bf x}}{\vert\vert{\bf w}\vert\vert}
+&lt; -\frac{b}{\vert\vert{\bf w}\vert\vert}=b'$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">30</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+we see that the binary classification is based on the projection 
+<!-- MATH
+ $p_{\bf w}({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img154.svg"
+ ALT="$p_{\bf w}({\bf x})$"></SPAN> of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN> onto the normal direction <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img151.svg"
+ ALT="${\bf w}$"></SPAN>,
+which is either greater or smaller than the bias <!-- MATH
+ $b'=-b/||{\bf w}||$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img155.svg"
+ ALT="$b'=-b/\vert\vert{\bf w}\vert\vert$"></SPAN>
+(distance of the hyperplane to the origin), corresponding to whether 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN> is on the positive or negative side of the plane.
+
+<P>
+As a binary classifier, the single output node perceptron partitions 
+the d-dimensional feature space into two halves for the two classes by
+a hyperplane <!-- MATH
+ ${\bf w}^T{\bf x}+b=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.31ex; " SRC="img156.svg"
+ ALT="${\bf w}^T{\bf x}+b=0$"></SPAN>, with the normal direction <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img151.svg"
+ ALT="${\bf w}$"></SPAN> 
+and bias (intercept) <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="$b$"></SPAN>. This is similar to the binary classifier based 
+on linear regression, and also the support vector machine. All these 
+methods share the common goal of finding the optimal parameters <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img151.svg"
+ ALT="${\bf w}$"></SPAN>
+and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img6.svg"
+ ALT="$b$"></SPAN>, so that error or residual <!-- MATH
+ $r=\delta=y-\hat{y}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img157.svg"
+ ALT="$r=\delta=y-\hat{y}$"></SPAN> is minimized. 
+However, these methods take different approaches. The weight vector 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img151.svg"
+ ALT="${\bf w}$"></SPAN> is obtained by the least squares method in linear regression, 
+or by solving a quadratic programming problem in SVM, while here in the
+perceptron <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img151.svg"
+ ALT="${\bf w}$"></SPAN> is obtained iteratively by a very simple learning 
+law called the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img158.svg"
+ ALT="$\delta$"></SPAN>-rule, as discussed below. 
+
+<P>
+As always, we assume <!-- MATH
+ ${\bf x}=[x_0=1,x_1,\cdots,x_n]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img159.svg"
+ ALT="${\bf x}=[x_0=1,x_1,\cdots,x_n]^T$"></SPAN> and 
+<!-- MATH
+ ${\bf w}=[w_0=b,w_1,\cdots,w_n]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img160.svg"
+ ALT="${\bf w}=[w_0=b,w_1,\cdots,w_n]^T$"></SPAN> in the following, so that the 
+decision function can be more conveniently written as an inner product 
+<!-- MATH
+ $f({\bf x})={\bf w}^T{\bf x}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img161.svg"
+ ALT="$f({\bf x})={\bf w}^T{\bf x}$"></SPAN> without the additional bias term.
+
+<P>
+During the training process, the randomly initialized weight vector 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img151.svg"
+ ALT="${\bf w}$"></SPAN> is iteratively updated based on the following mistake driven:
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img158.svg"
+ ALT="$\delta$"></SPAN>-rule:
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="deltaRulePerceptron"></A><!-- MATH
+ \begin{equation}
+{\bf w}^{new}={\bf w}^{old}+\eta(y-\hat{y})\,{\bf x}
+  ={\bf w}^{old}+\eta\,\delta{\bf x}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img162.svg"
+ ALT="$\displaystyle {\bf w}^{new}={\bf w}^{old}+\eta(y-\hat{y})\,{\bf x}
+={\bf w}^{old}+\eta\,\delta{\bf x}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">31</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img163.svg"
+ ALT="$\eta&gt;0$"></SPAN> is the learning rate, which is assumed to be 1 in the
+following for simplicity. We can show that by the iteration above, 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img151.svg"
+ ALT="${\bf w}$"></SPAN> is modified in such a way that the error <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img158.svg"
+ ALT="$\delta$"></SPAN> is always 
+reduced.
+
+<P>
+When a training sample <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN> labeled by <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img164.svg"
+ ALT="$y\pm 1$"></SPAN> is presented to the
+input layer of the perceptron, its output <!-- MATH
+ $\hat{y}=\sign (f({\bf x}))$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img165.svg"
+ ALT="$\hat{y}=\sign (f({\bf x}))$"></SPAN> may
+or may not match the the label <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img149.svg"
+ ALT="$y$"></SPAN>, as shown in the table:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{tabular}{c|l|l|l} \hline
+    & $y$\  & $f({\bf x})={\bf w}^T{\bf x},\,\hat{y}
+    =\sign (f({\bf x}))$\  & $\delta=y-\hat{y}$\\\hline \hline
+    1 & $y= 1$\  & $f({\bf x})>0,\;\hat{y}= 1$\  & $\delta=0$\   \\\hline
+    2 & $y=-1$\  & $f({\bf x})>0,\;\hat{y}= 1$\  & $\delta=-2$\  \\\hline
+    3 & $y= 1$\  & $f({\bf x})<0,\;\hat{y}=-1$\  & $\delta=2$\   \\\hline
+    4 & $y=-1$\  & $f({\bf x})<0,\;\hat{y}=-1$\  & $\delta=0$\   \\\hline
+  \end{tabular}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 15.33ex; vertical-align: -7.02ex; " SRC="img166.svg"
+ ALT="$\displaystyle \begin{tabular}{c\vert l\vert l\vert l} \hline
+&amp; $y$\ &amp; $f({\bf x...
+... &amp; $y=-1$\ &amp; $f({\bf x})&lt;0,\;\hat{y}=-1$\ &amp; $\delta=0$\ \\ \hline
+\end{tabular}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">32</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+In both the first and last cases, <!-- MATH
+ $y f({\bf x})>0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img167.svg"
+ ALT="$y f({\bf x})&gt;0$"></SPAN>, and <!-- MATH
+ $\delta=y-\hat{y}=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img168.svg"
+ ALT="$\delta=y-\hat{y}=0$"></SPAN>, 
+the weight vector <!-- MATH
+ ${\bf w}^{new}={\bf w}^{old}+\delta{\bf x}={\bf w}^{old}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.31ex; " SRC="img169.svg"
+ ALT="${\bf w}^{new}={\bf w}^{old}+\delta{\bf x}={\bf w}^{old}$"></SPAN> is 
+not modified. But in cases 2 and 3 <!-- MATH
+ $y f({\bf x})<0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img170.svg"
+ ALT="$y f({\bf x})&lt;0$"></SPAN>, and <!-- MATH
+ $\delta=y-\hat{y}=1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img171.svg"
+ ALT="$\delta=y-\hat{y}=1$"></SPAN>, 
+the weight vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img151.svg"
+ ALT="${\bf w}$"></SPAN> is modified: 
+
+<UL>
+<LI>In case 2, <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img141.svg"
+ ALT="$y=-1$"></SPAN>, but <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img146.svg"
+ ALT="$\hat{y}=1$"></SPAN>, then <!-- MATH
+ $y\,f({\bf x})<0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img172.svg"
+ ALT="$y\,f({\bf x})&lt;0$"></SPAN> and
+  <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img173.svg"
+ ALT="$\delta=-2$"></SPAN>, we have
+  <P></P>
+<DIV CLASS="mathdisplay"><A ID="learningLaw0"></A><!-- MATH
+ \begin{equation}
+{\bf w}^{new}={\bf w}^{old}-2{\bf x}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.31ex; " SRC="img174.svg"
+ ALT="$\displaystyle {\bf w}^{new}={\bf w}^{old}-2{\bf x}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">33</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+When the same <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN> is presented again, the function is smaller
+  than its previous value
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f({\bf x})={\bf x}^T{\bf w}^{new}={\bf x}^T{\bf w}^{old}-2{\bf x}^T{\bf x}
+    < {\bf x}^T{\bf w}^{old}	
+  
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img175.svg"
+ ALT="$\displaystyle f({\bf x})={\bf x}^T{\bf w}^{new}={\bf x}^T{\bf w}^{old}-2{\bf x}^T{\bf x}
+&lt; {\bf x}^T{\bf w}^{old}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">34</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and the output <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img150.svg"
+ ALT="$\hat{y}$"></SPAN> is more likely to be the same as the desired 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img141.svg"
+ ALT="$y=-1$"></SPAN>.
+
+<P>
+</LI>
+<LI>In case 3, <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img139.svg"
+ ALT="$y=1$"></SPAN>, but <!-- MATH
+ $\hat{y}=-1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img147.svg"
+ ALT="$\hat{y}=-1$"></SPAN>, then <!-- MATH
+ $y\,f({\bf x})<0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img172.svg"
+ ALT="$y\,f({\bf x})&lt;0$"></SPAN> and
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img176.svg"
+ ALT="$\delta=2$"></SPAN>, we have
+  <P></P>
+<DIV CLASS="mathdisplay"><A ID="learningLaw1"></A><!-- MATH
+ \begin{equation}
+{\bf w}^{new}={\bf w}^{old}+2{\bf x}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.31ex; " SRC="img177.svg"
+ ALT="$\displaystyle {\bf w}^{new}={\bf w}^{old}+2{\bf x}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">35</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+When the same <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN> is presented again, the function is greater
+  than its previoius value
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f({\bf x})={\bf x}^T{\bf w}^{new}={\bf x}^T{\bf x}^{old}+2{\bf x}^T{\bf x}
+    > {\bf x}^T{\bf w}^{old}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img178.svg"
+ ALT="$\displaystyle f({\bf x})={\bf x}^T{\bf w}^{new}={\bf x}^T{\bf x}^{old}+2{\bf x}^T{\bf x}
+&gt; {\bf x}^T{\bf w}^{old}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">36</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and the output <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img150.svg"
+ ALT="$\hat{y}$"></SPAN> is more likely to be the same as the desired
+  <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img139.svg"
+ ALT="$y=1$"></SPAN>.
+</LI>
+</UL>
+The update equations in Eq. (<A HREF="#learningLaw0">33</A>) for <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img141.svg"
+ ALT="$y=-1$"></SPAN> and 
+Eq. (<A HREF="#learningLaw1">35</A>) for <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img141.svg"
+ ALT="$y=-1$"></SPAN> can be combined to become
+<!-- MATH
+ ${\bf w}^{new}={\bf w}^{old}+2 y {\bf x}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.57ex; " SRC="img179.svg"
+ ALT="${\bf w}^{new}={\bf w}^{old}+2 y {\bf x}$"></SPAN>, of which the scaling 
+constant <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img180.svg"
+ ALT="$2$"></SPAN> can be dropped as it can be absorbed into the learning 
+rate <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img53.svg"
+ ALT="$\eta$"></SPAN>. Now  the learning law can be rewritten as:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\mbox{If}\;\;\;\;y\,f({\bf x})\left\{\begin{array}{c}
+  >0\\<0 \end{array}\right.
+  \;\;\;\mbox{then}\;\;\;\;\;
+  \left\{\begin{array}{l}  {\bf w}^{new}={\bf w}^{old} \\
+  {\bf w}^{new}={\bf w}^{old}+y\,{\bf x}
+  \end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH">If<IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img181.svg"
+ ALT="$\displaystyle \;\;\;\;y\,f({\bf x})\left\{\begin{array}{c}
+&gt;0\\ &lt;0 \end{array}\right.
+\;\;\;$">then<IMG STYLE="height: 6.04ex; vertical-align: -2.34ex; " SRC="img182.svg"
+ ALT="$\displaystyle \;\;\;\;\;
+\left\{\begin{array}{l} {\bf w}^{new}={\bf w}^{old} \\
+{\bf w}^{new}={\bf w}^{old}+y\,{\bf x}
+\end{array}\right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">37</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+In summary, the learning law guarantees that the weight vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img151.svg"
+ ALT="${\bf w}$"></SPAN> 
+is modified in such way that the performance of the network is always 
+improved with reduced error <!-- MATH
+ $\delta=y-\hat{y}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img148.svg"
+ ALT="$\delta=y-\hat{y}$"></SPAN>. The perceptron convergence 
+theorem states that if <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img135.svg"
+ ALT="$C_+$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img136.svg"
+ ALT="$C_-$"></SPAN> are linearly saperable, then a 
+perceptron will always produce <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img151.svg"
+ ALT="${\bf w}$"></SPAN> in finite number of iterations 
+to saperate them.
+
+<P>
+This binary classifier with <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img134.svg"
+ ALT="$m=1$"></SPAN> output node can be genrealized to 
+multiclass classifier with <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.21ex; " SRC="img137.svg"
+ ALT="$m&gt;1$"></SPAN> output nodes, and each of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img45.svg"
+ ALT="$m$"></SPAN> 
+weight vectors in <!-- MATH
+ ${\bf W}=[{\bf w}_1,\cdots,{\bf w}_m]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img183.svg"
+ ALT="${\bf W}=[{\bf w}_1,\cdots,{\bf w}_m]$"></SPAN> is modified 
+by the same learning law considered above. The <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img45.svg"
+ ALT="$m$"></SPAN> outputs 
+<!-- MATH
+ $y_i\in\{-1,\,1\},\;(i=1,\cdots,m)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img184.svg"
+ ALT="$y_i\in\{-1,\,1\},\;(i=1,\cdots,m)$"></SPAN> can encode multiple classes in two
+different ways. First, by <EM>one-hot</EM> method, the <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img45.svg"
+ ALT="$m$"></SPAN> binary output 
+can encode <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img185.svg"
+ ALT="$K=m$"></SPAN> classes, i.e., the kth class is represented by an
+m-bit output with <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img186.svg"
+ ALT="$y_k=1$"></SPAN> while all others <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img187.svg"
+ ALT="$y_l=-1$"></SPAN> for <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img188.svg"
+ ALT="$l\ne k$"></SPAN>. 
+Alternatively, binary encoding can also be used so that as many as 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img189.svg"
+ ALT="$K=2^m$"></SPAN> classes can be represented. For example, <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img190.svg"
+ ALT="$K=4$"></SPAN> classes can be
+labeled by <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img191.svg"
+ ALT="$4$"></SPAN> binary vector of either 4 or 2 bits:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\begin{tabular}{l||r|r|r|r} \hline
+    \mbox{binary output} & ${\bf y}_0$\  & ${\bf y}_1$\  & ${\bf y}_2$\  & ${\bf y}_3$\  \\\hline\hline
+    $y_1$\  &  1 & -1 & -1 & -1 \\\hline
+    $y_2$\  & -1 & 1 & -1 & -1 \\\hline
+    $y_3$\  & -1 & -1 & 1 & -1 \\\hline
+    $y_4$\  & -1 & -1 & -1 & 1 \\\hline
+  \end{tabular}
+  \;\;\;\;\;\;\mbox{or}\;\;\;\;\;\;\;
+  \begin{tabular}{l||r|r|r|r} \hline
+    \mbox{binary output} & ${\bf y}_0$\  & ${\bf y}_1$\  & ${\bf y}_2$\  & ${\bf y}_3$\  \\\hline\hline
+    $y_1$\  & -1 & -1 & 1 & 1 \\\hline
+    $y_2$\  & -1 & 1 & -1 & 1 \\\hline
+  \end{tabular} 
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 15.33ex; vertical-align: -7.01ex; " SRC="img192.svg"
+ ALT="$\displaystyle \begin{tabular}{l\vert\vert r\vert r\vert r\vert r} \hline
+\mbox{...
+... 1 &amp; -1 \\ \hline
+$y_4$\ &amp; -1 &amp; -1 &amp; -1 &amp; 1 \\ \hline
+\end{tabular}\;\;\;\;\;\;$">or<IMG STYLE="height: 9.52ex; vertical-align: -4.13ex; " SRC="img193.svg"
+ ALT="$\displaystyle \;\;\;\;\;\;\;
+\begin{tabular}{l\vert\vert r\vert r\vert r\vert r...
+...$\ &amp; -1 &amp; -1 &amp; 1 &amp; 1 \\ \hline
+$y_2$\ &amp; -1 &amp; 1 &amp; -1 &amp; 1 \\ \hline
+\end{tabular}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">38</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The outputs of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img45.svg"
+ ALT="$m$"></SPAN> output nodes form an m-dimensional binary vector
+<!-- MATH
+ $\hat{\bf y}=[\hat{y}_1,\cdots,\hat{y}_m]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img194.svg"
+ ALT="$\hat{\bf y}=[\hat{y}_1,\cdots,\hat{y}_m]^T$"></SPAN>, which is to be compared 
+with the labeling <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img64.svg"
+ ALT="${\bf y}$"></SPAN> of the current input <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN> with error 
+(or residual) <!-- MATH
+ $\delta=||{\bf y}-\hat{\bf y}||$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img195.svg"
+ ALT="$\delta=\vert\vert{\bf y}-\hat{\bf y}\vert\vert$"></SPAN>. When the training is 
+complete, an unlabeled input <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN> is classified to one of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img60.svg"
+ ALT="$K$"></SPAN>
+classes with a matching label to the perceptron's output. In the case
+of one-hot encoding, it is possible for the binary output <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img64.svg"
+ ALT="${\bf y}$"></SPAN> to 
+not match any of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img60.svg"
+ ALT="$K$"></SPAN> one-hot encoded classes (e.g., 
+<!-- MATH
+ $\hat{\bf y}=[-1\;1\;-1\;1]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img196.svg"
+ ALT="$\hat{\bf y}=[-1\;1\;-1\;1]^T$"></SPAN>. In this case, the input <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN> can be
+classified to the class corresponding to the node with the greatest output
+value <!-- MATH
+ $f({\bf x})={\bf w}^T{\bf x}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img161.svg"
+ ALT="$f({\bf x})={\bf w}^T{\bf x}$"></SPAN>. 
+
+<P>
+The Matlab code for the essential part of the algorithm is listed below.
+Array <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img197.svg"
+ ALT="$X$"></SPAN> contains <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img60.svg"
+ ALT="$K$"></SPAN> classes, array <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img149.svg"
+ ALT="$y$"></SPAN> are the labelings of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img25.svg"
+ ALT="$N$"></SPAN> 
+training samples, array <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img198.svg"
+ ALT="$W$"></SPAN> contains the <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img199.svg"
+ ALT="$d+1$"></SPAN> dimensional weight vectors 
+for the <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img45.svg"
+ ALT="$m$"></SPAN> output nodes.
+
+<P>
+<PRE>
+    [X Y]=DataOneHot;           % get data
+    K=length(unique(Y','rows')) % number of classes
+    X=[ones(1,N); X];           % data augmentation
+    [d N]=size(X);              % number of dimensions and number of samples
+    m=size(Y,1);                % number of output nodes
+    W=2*rand(d,m)-1;            % random initialization of weights
+    eta=1;
+    nt=10^4;                    % maximum number of iteration
+    for it=1:nt       
+        n=randi([1 N]);         % random index
+        x=X(:,n);               % pick a training sample x
+        y=Y(:,n);               % label of x
+        yhat=sign(W'*x);        % binary output
+        delta=y-yhat;           % error between desired and actual outputs
+        for i=1:m
+            W(:,i)=W(:,i)+eta*delta(i)*x;   % update weights for all K output nodes
+        end
+        if ~mod(it,N)           % test for every epoch
+            er=test(X,Y,W);
+            if er&lt;10^(-9)
+                break
+            end
+        end
+        
+    end
+</PRE>
+
+<P>
+This is the function that test the training set based on estimated weight
+vectors in <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img89.svg"
+ ALT="${\bf W}$"></SPAN>:
+
+<P>
+<PRE>
+function er=test(X,Y,W)          % test based on estimated W, 
+    [d N]=size(X);
+    Ne=0;                        % number of misclassifications
+    for n=1:N
+        x=X(:,n);
+        yhat=sign(W'*x);
+        delta=Y(:,n)-yhat;
+        if any(delta)            % if misclassification occurs to some output nodes
+            Ne=Ne+1;             % update number of misclassifications
+        end
+    end
+    er=Ne/N;                     % error percentage
+end
+</PRE>
+
+<P>
+This is the code that generates the training set labeled by either
+one-hot or binary encoding method:
+
+<P>
+<PRE>
+function [X,Y]=DataOneHot
+    d=3;
+    K=8;
+    onehot=1;           % onehot=0 for binary encoding
+    Means=[ -1 -1 -1 -1 1 1 1 1;
+        -1 -1 1 1 -1 -1 1 1;
+        -1 1 -1 1 -1 1 -1 1];
+    Nk=50*ones(1,K);
+    N=sum(Nk);          % total number of samples
+    X=[];
+    Y=[];
+    s=0.4;
+    s=0.2;
+    for k=1:K           % for each of the K classes
+        Xk=Means(:,k)+s*randn(d,Nk(k));
+        if onehot
+            Yk=-ones(K,Nk(k)); 
+            Yk(k,:)=1;        
+        else            % binary encoding
+            dy=ceil(log2(K));
+            y=2*de2bi(k-1,dy)-1;
+            Yk=repmat(y',1,Nk(k));
+         end
+        X=[X Xk];
+        Y=[Y Yk];
+    end
+    Visualize(X,Y)        
+end
+</PRE>
+
+<P>
+The limitation of linear saperation could be overcome by having more 
+than one learning layer in the network. However, the learning law for 
+the single-layer perceptron network no longer applies. New training
+method will be needed, as to be discussed in the next section.
+
+<P>
+<B>Examples</B>
+
+<P>
+The figure below shows the classification results of a perceptron 
+network with <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img200.svg"
+ ALT="$n=2$"></SPAN> input nodes and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img201.svg"
+ ALT="$m=2$"></SPAN> output nodes. The two output
+nodes encode <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img202.svg"
+ ALT="$2^2=4$"></SPAN> classes in a 2-D space. The training set contains
+100 samples for each of the four classes labeled by <!-- MATH
+ ${\bf y}=[y_1,\,y_2]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img203.svg"
+ ALT="${\bf y}=[y_1,\,y_2]$"></SPAN>.
+The two weight vectors <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img204.svg"
+ ALT="${\bf w}_1$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img205.svg"
+ ALT="${\bf w}_2$"></SPAN> are initialized 
+randomly. During the training iteration, when <!-- MATH
+ $\delta=y-\hat{y}\ne 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img206.svg"
+ ALT="$\delta=y-\hat{y}\ne 0$"></SPAN>, the 
+weight vector for the output node is modified, otherwise, nothing needs 
+to be done. After nine such modifications, the four classes are completely 
+saperated by the two straight lines normal to the two weight vectors.
+The first panel shows the initial stage, while the subsequent panels 
+show how the weight vectors are modified each time when <!-- MATH
+ $\delta\ne 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img207.svg"
+ ALT="$\delta\ne 0$"></SPAN>.
+The darker and bigger dots represent the samples presented to the 
+network when one of the weight vectors is modified.
+
+<P>
+<IMG STYLE="" SRC="../figures/PerceptronEx2.png"
+ ALT="PerceptronEx2.png">
+
+<P>
+The figure below shows the classification results of a perceptron of
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img208.svg"
+ ALT="$n=3$"></SPAN> input nodes and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img209.svg"
+ ALT="$m=3$"></SPAN> output nodes encoding <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img210.svg"
+ ALT="$2^3=8$"></SPAN> classes.
+After 35 modifications the weight vectors, the perceptron is completely
+trained to classify all eight classes correctly. The first panel shows
+the initial stage, the following three panels show the weight vectors,
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img204.svg"
+ ALT="${\bf w}_1$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img205.svg"
+ ALT="${\bf w}_2$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img211.svg"
+ ALT="${\bf w}_3$"></SPAN>, also the normal vectors of
+the decision planes, from some three different viewing angles. We see 
+that the eight classes are indeed saperated by the three planes normal 
+to the weight vectors.
+
+<P>
+<IMG STYLE="" SRC="../figures/PerceptronEx3.png"
+ ALT="PerceptronEx3.png">
+
+<P>
+A major limitation of the perceptron algorithm is the requirement that
+the classes are linear saperabe. This can be overcome by the kernel
+method, once the algorithm is modified in such a way that all data 
+samples appear in the form of an inner product. Consider first the 
+training process in which the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img25.svg"
+ ALT="$N$"></SPAN> training samples are repeatedly 
+presented to the network, and the weight vector is modified to become 
+<!-- MATH
+ ${\bf w}^{new}={\bf w}^{old}+y_n{\bf x}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.57ex; " SRC="img212.svg"
+ ALT="${\bf w}^{new}={\bf w}^{old}+y_n{\bf x}_n$"></SPAN> whenever a sample <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img28.svg"
+ ALT="${\bf x}_n$"></SPAN> 
+labeled by <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img213.svg"
+ ALT="$y_n$"></SPAN> is misclassified with <!-- MATH
+ $\delta=y_n-\hat{y}_n\ne 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img214.svg"
+ ALT="$\delta=y_n-\hat{y}_n\ne 0$"></SPAN>. If 
+the weight vector is initialized to zero <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img215.svg"
+ ALT="${\bf w}=0$"></SPAN>, then the weight 
+vector by the updating rule above can be written as a linear combination
+of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img25.svg"
+ ALT="$N$"></SPAN> training samples:
+<P></P>
+<DIV CLASS="mathdisplay"><A ID="KernelPerceptronW"></A><!-- MATH
+ \begin{equation}
+{\bf w}=\sum_{n=1}^N \alpha_n y_n {\bf x}_n
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img216.svg"
+ ALT="$\displaystyle {\bf w}=\sum_{n=1}^N \alpha_n y_n {\bf x}_n$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">39</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img217.svg"
+ ALT="$\alpha_n$"></SPAN> is the number of times sample <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img28.svg"
+ ALT="${\bf x}_n$"></SPAN> labeled by 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img213.svg"
+ ALT="$y_n$"></SPAN> is misclassified. Upon receiving a new training sample <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img62.svg"
+ ALT="${\bf x}_l$"></SPAN>
+labeled by <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img218.svg"
+ ALT="$y_l$"></SPAN>, we have
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f({\bf x}_l)= {\bf w}^T{\bf x}_l=\sum_{n=1}^N \alpha_n y_n {\bf x}_n^T{\bf x}_l,
+  \;\;\;\;\;\;\mbox{and}\;\;\;\;\;\;  \hat{y}_l=\sign (f({\bf x}_l))
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img219.svg"
+ ALT="$\displaystyle f({\bf x}_l)= {\bf w}^T{\bf x}_l=\sum_{n=1}^N \alpha_n y_n {\bf x}_n^T{\bf x}_l,
+\;\;\;\;\;\;$">and<IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img220.svg"
+ ALT="$\displaystyle \;\;\;\;\;\; \hat{y}_l=\sign (f({\bf x}_l))$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">40</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and the weight vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img151.svg"
+ ALT="${\bf w}$"></SPAN> is updated by the learning law:
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+\mbox{If} & & \;\;\delta=y_l-\hat{y}_l \ne 0
+  \nonumber \\
+  \mbox{then} & & {\bf w}^{new}={\bf w}^{old}+ y_l\, {\bf x}_l
+  =\sum_{n=1}^N \alpha_n y_n {\bf x}_n+ y_l\, {\bf x}_l
+  \nonumber \\
+  & & \;\;\;\mbox{i.e.}  \;\;\; \alpha_l^{new}=\alpha_l^{old}+1
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">If</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img221.svg"
+ ALT="$\displaystyle \;\;\delta=y_l-\hat{y}_l \ne 0$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">then</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img222.svg"
+ ALT="$\displaystyle {\bf w}^{new}={\bf w}^{old}+ y_l\, {\bf x}_l
+=\sum_{n=1}^N \alpha_n y_n {\bf x}_n+ y_l\, {\bf x}_l$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 0.23ex; vertical-align: -0.12ex; " SRC="img223.svg"
+ ALT="$\displaystyle \;\;\;$">i.e.<IMG STYLE="height: 3.02ex; vertical-align: -0.69ex; " SRC="img224.svg"
+ ALT="$\displaystyle \;\;\; \alpha_l^{new}=\alpha_l^{old}+1$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">41</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+We see that only <!-- MATH
+ $\{\alpha_1,\cdots,\alpha_N\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img225.svg"
+ ALT="$\{\alpha_1,\cdots,\alpha_N\}$"></SPAN> need to be updated 
+during the training process, while the weight vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img151.svg"
+ ALT="${\bf w}$"></SPAN> in Eq. 
+(<A HREF="#KernelPerceptronW">39</A>) no longer needs to be explicitly calculated.
+Once the training process is complete, any unlabeled <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN> can be
+classified into either of the two classes <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img136.svg"
+ ALT="$C_-$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img135.svg"
+ ALT="$C_+$"></SPAN> based on 
+<!-- MATH
+ $\{\alpha_1,\cdots,\alpha_N\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img225.svg"
+ ALT="$\{\alpha_1,\cdots,\alpha_N\}$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\mbox{If}\;\;\; {\bf w}^T{\bf x}=\sum_{n=1}^N \alpha_n y_n {\bf x}_n^T{\bf x}
+  \left\{\begin{array}{l} >0\\<0\end{array}\right.,
+  \;\;\;\;\;\mbox{then}\;\;\;\;\;
+  {\bf x}\in\left\{\begin{array}{l}C_-\\C_+\end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH">If<IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img226.svg"
+ ALT="$\displaystyle \;\;\; {\bf w}^T{\bf x}=\sum_{n=1}^N \alpha_n y_n {\bf x}_n^T{\bf x}
+\left\{\begin{array}{l} &gt;0\\ &lt;0\end{array}\right.,
+\;\;\;\;\;$">then<IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img227.svg"
+ ALT="$\displaystyle \;\;\;\;\;
+{\bf x}\in\left\{\begin{array}{l}C_-\\ C_+\end{array}\right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">42</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+As all data samples appear in the form of an inner product in both 
+the training and testing phase, the kernel method can be applied to 
+replace the inner product <!-- MATH
+ ${\bf x}_n^T{\bf x}_m$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img228.svg"
+ ALT="${\bf x}_n^T{\bf x}_m$"></SPAN> by a kernel function 
+<!-- MATH
+ $k({\bf x}_n,{\bf x}_m)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img229.svg"
+ ALT="$k({\bf x}_n,{\bf x}_m)$"></SPAN>. Also, the discussion above for <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img134.svg"
+ ALT="$m=1$"></SPAN> output
+nodes can be generalized to <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.21ex; " SRC="img137.svg"
+ ALT="$m&gt;1$"></SPAN> output nodes.
+
+<P>
+Here is the Matlab code segment for the most essential parts of the 
+kernel perceptron algorithm:
+
+<P>
+<PRE>
+    [X Y]=Data;                     % get dataset
+    [d N]=size(X);                  % d: dimension, N: number of training samples
+    X=[ones(1,N); X];               % augmented data
+    m=size(Y,1);                    % number of output nodes
+    A=zeros(m,N);                   % initialize alpha for all m output nodes and N samples
+    K=Kernel(X,X);                  % get kernel matrix of all N samples
+    for it=1:nt                     
+        n=randi([1 N]);             % random index
+        x=X(:,n);                   % pick a training sample     
+        y=Y(:,n);                   % and its label
+        yhat=sign((A.*Y)*K(:,n));   % get yhat
+        delta=Y(:,n)-yhat;     	    % error between desired and actual output
+        for i=1:m                   % for each output node
+           if delta(i)~=0           % if a misclassification
+               A(i,n)=A(i,n)+1;     % update the corresponding alpha
+           end
+        end    
+        if ~mod(it,N)               % test for every epoch
+            er=test(X,Y,A);         % percentage of misclassification
+            if er&lt;10^(-9)           
+                break
+            end
+        end
+    end
+</PRE>
+
+<P>
+<PRE>
+function er=test(X,Y,A)             % function for testing
+    [d N]=size(X);                  % d: dimension, N: number of training samples
+    m=size(Y,1);
+    Ne=0;                           % initialize number of misclassifications
+    for n=1:N                       % for all N training samples
+        x=X(:,n);                   % get the nth sample
+        y=Y(:,n);                   % and its label
+        f=(A.*Y)*Kernel(X,x);       % f(x)
+        yhat=sign(f);               % yhat=sign(f(x))
+        if norm(y-yhat)~=0          % misclassification at some output nodes 
+            Ne=Ne+1;                % increase number of misclassification
+        end
+    end
+    er=Ne/N;                        % percentage of misclassification
+end
+</PRE>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node5.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="ch10.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node3.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node5.html">Back Propagation Network</A>
+<B> Up:</B> <A
+ HREF="ch10.html">ch10</A>
+<B> Previous:</B> <A
+ HREF="node3.html">Hopfield Network</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

@@ -1,0 +1,238 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Convolutional Neural Networks (CNNs)</TITLE>
+<META NAME="description" CONTENT="Convolutional Neural Networks (CNNs)">
+<META NAME="keywords" CONTENT="ch10">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch10.css">
+
+<LINK REL="next" HREF="node9.html">
+<LINK REL="previous" HREF="node7.html">
+<LINK REL="next" HREF="node9.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node9.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="ch10.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node7.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node9.html">About this document ...</A>
+<B> Up:</B> <A
+ HREF="ch10.html">ch10</A>
+<B> Previous:</B> <A
+ HREF="node7.html">Self-Organizing Map (SOM)</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00080000000000000000">
+Convolutional Neural Networks (CNNs)</A>
+</H1>
+
+<P>
+Deep learning, hierarchical learning..
+
+<UL>
+<LI>deep neural networks
+</LI>
+<LI>deep belief networks
+</LI>
+<LI>recurrent neural networks
+</LI>
+</UL>
+Applications include:
+
+<P>
+
+<UL>
+<LI>computer vision, visual object recognition based on images CNN
+</LI>
+<LI>speech recognition, natural language processing, machine translation, 
+based on spectrograms RNN, long short-term memory (LSTM)
+</LI>
+<LI>bioinformatics based on microarray data
+</LI>
+</UL>
+
+<P>
+CNN achieves translation, rotation and distortion invariance by
+
+<UL>
+<LI>local receptitve field
+</LI>
+<LI>shared weights (weight replication)
+</LI>
+<LI>subsampling (pooling)
+</LI>
+</UL>
+
+<P>
+Different from conventional (shallow) neural networks which depend on a 
+set of hand-selected features, the CNN relies directly on the raw data, 
+such as images for visual recognition or spectrograms for sound recognition,
+from which features are automatically extracted by the network.
+
+<P>
+Application in speech recognition: spectrogram
+
+<P>
+Convolutional neural network (CNN, or ConvNet) is a class of multilayer,
+feed-forward artificial neural network algorithm that has successfully 
+been applied to image analysis and computer vision, such as image object 
+recognition specifically.
+
+<P>
+Convolutional networks were inspired by biological processes in the brain.
+The connectivity pattern between neurons resembles the organization of the 
+visual cortex. Individual cortical neurons respond to stimuli only in a 
+restricted region of the visual field known as the
+
+<P>
+CNNs use a variation of multilayer perceptrons designed to require minimal 
+preprocessing. They are also known as shift invariant or space invariant 
+artificial neural networks (SIANN), based on their shared-weights architecture
+and translation invariance characteristics.
+
+<P>
+CNNs use relatively little pre-processing compared to conventional image 
+classification algorithms. The network learns the filters that in traditional
+algorithms were hand-engineered. This independence from prior knowledge and 
+human effort in feature design is a major advantage.
+
+<P>
+3D volumes of neurons. The layers of a CNN have neurons arranged in 3 dimensions: width, height and depth. The neurons inside a layer are connected to only a small region of the layer before it, called a receptive field. Distinct types of layers, both locally and completely connected, are stacked to form a CNN architecture.
+
+<P>
+Local connectivity: following the concept of receptive fields, CNNs exploit spatial locality by enforcing a local connectivity pattern between neurons of adjacent layers. The architecture thus ensures that the learnt "filters" produce the strongest response to a spatially local input pattern. Stacking many such layers leads to non-linear filters that become increasingly global (i.e. responsive to a larger region of pixel space) so that the network first creates representations of small parts of the input, then from them assembles representations of larger areas.
+
+<P>
+Shared weights: In CNNs, each filter is replicated across the entire visual field. These replicated units share the same parameterization (weight vector and bias) and form a feature map. This means that all the neurons in a given convolutional layer respond to the same feature within their specific response field. Replicating units in this way allows for features to be detected regardless of their position in the visual field, thus constituting the property of translation invariance.
+
+<P>
+neurons with limited receptive field
+
+<UL>
+<LI><EM>Hierarchical structure of multiple layers</EM>
+
+<P>
+<IMG STYLE="" SRC="../figures/CNNfig1.png"
+ ALT="CNNfig1.png">
+  <IMG STYLE="" SRC="../figures/CNNfig2.png"
+ ALT="CNNfig2.png">
+  <IMG STYLE="" SRC="../figures/CNNfig3.png"
+ ALT="CNNfig3.png">
+
+<P>
+</LI>
+<LI><EM>receptive field</EM>.
+  The receptive fields of different neurons partially overlap such that they
+  cover the entire visual field. In other words, a neuron is connected to a
+  subset of the neurons in the previous layer inside its receptive field, 
+  instead of being fully connected to all neurons.
+
+<P>
+</LI>
+</UL>
+
+<P>
+layers of different functions 
+
+<UL>
+<LI>Image input: <!-- MATH
+ $N\times N\times 3$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img369.svg"
+ ALT="$N\times N\times 3$"></SPAN> pixels in the image of three planes for 
+  red, green and blue (RGB).
+</LI>
+<LI>Neurons in the convolution layers are locally connected to neurons inside 
+  its receptive field in the previous layer. In particular, each neuron in the
+  first layer takes as input the pixel values inside its receptive field, a 
+  subregion in the image. The weights of each neuron form a <EM>kernel</EM>, and 
+  the activation of the neuron is the weighted sum of all pixel values inside 
+  the receptive field, called
+  <A ID="tex2html12"
+  HREF="../../../e161/lectures/convolution/index.html"><EM>convolution</EM></A>.
+
+Each of such neurons functions as a filter that extract one of a set of 
+  different features describng different aspects of the visual objects of 
+  interest. All neurons in a column along the depth dimension respond to the
+  same spatial local region in the visual field.
+</LI>
+<LI>sigmoid or ReLU function 
+</LI>
+<LI>A pooling layer performs down-sampling by taking either the maximum or the
+  average of the output values from a local region of the previous layer. The
+  distance between the receptive field centers of neighboring neurons is called
+  <EM>stride</EM>. Down sampling serves two purposes: (a) local shift and rotational
+  invariance and (b) computation reduction.
+</LI>
+<LI>Dropout
+</LI>
+<LI>Neurons in the fully connected (FC) layers are fully connected to 
+  all neurons in the previous layer. Neurons in this highest layer are
+  responsible for the final recognition of various visual objects.
+</LI>
+<LI>The convolution layers can be considered as feature extraction and the
+  fully connected layers carry out the final recognition based on the features
+  extracted by the convolution layers.
+</LI>
+<LI>The weights of all neurons at all layers are iteratively updated based
+  on backpropagation.
+</LI>
+</UL>
+
+<P>
+<A ID="tex2html13"
+  HREF="https://en.wikipedia.org/wiki/ImageNet">ImageNet</A>
+<P>
+<A ID="tex2html14"
+  HREF="http://vision.stanford.edu/teaching/cs231b_spring1415/slides/alexnet_tugce_kyunghee.pdf">AlexNet</A>
+<P>
+<A ID="tex2html15"
+  HREF="https://www.cs.toronto.edu/~fritz/absps/imagenet.pdf">An example</A>
+<P>
+<A ID="tex2html16"
+  HREF="http://cs231n.github.io/convolutional-networks">A CNN course at Stanford</A>
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node9.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="ch10.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node7.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node9.html">About this document ...</A>
+<B> Up:</B> <A
+ HREF="ch10.html">ch10</A>
+<B> Previous:</B> <A
+ HREF="node7.html">Self-Organizing Map (SOM)</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

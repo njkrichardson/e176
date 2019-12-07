@@ -1,0 +1,584 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Competitive Learning Networks</TITLE>
+<META NAME="description" CONTENT="Competitive Learning Networks">
+<META NAME="keywords" CONTENT="ch10">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="ch10.css">
+
+<LINK REL="next" HREF="node7.html">
+<LINK REL="previous" HREF="node5.html">
+<LINK REL="next" HREF="node7.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node7.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="ch10.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node5.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node7.html">Self-Organizing Map (SOM)</A>
+<B> Up:</B> <A
+ HREF="ch10.html">ch10</A>
+<B> Previous:</B> <A
+ HREF="node5.html">Back Propagation Network</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00060000000000000000">
+Competitive Learning Networks</A>
+</H1>
+
+<P>
+<IMG STYLE="" SRC="../figures/twolayernet.gif"
+ ALT="twolayernet.gif">
+
+<P>
+Competitive learning is a neural network algorithm for unsupervised 
+learning, similar to the clustering methods of k-means considered 
+above. The competitive learning network is composed of an input
+layer of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img90.svg"
+ ALT="$d$"></SPAN> nodes that receives an input pattern 
+<!-- MATH
+ ${\bf x}=[x_1,\cdots,x_d]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img138.svg"
+ ALT="${\bf x}=[x_1,\cdots,x_d]^T$"></SPAN> for a point in the d-dimensional feature
+space, and an output layer of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img60.svg"
+ ALT="$K$"></SPAN> nodes that produces an output
+pattern <!-- MATH
+ ${\bf y}=[y_1,\cdots,y_K]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img310.svg"
+ ALT="${\bf y}=[y_1,\cdots,y_K]^T$"></SPAN> representing <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img60.svg"
+ ALT="$K$"></SPAN> clusters of 
+interest. Each input variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img97.svg"
+ ALT="$x_i$"></SPAN> may be either a continuous or 
+binary value depending on the specific application, the outputs
+<!-- MATH
+ $y_i\in\{0,\;1\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img311.svg"
+ ALT="$y_i\in\{0,\;1\}$"></SPAN> are binary, of which only one is 1 while all others
+are 0, as the result of a winner-take-all completition based on their 
+activation values.
+
+<P>
+In each iteration of the learning process, a randomly chosen sample
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN> from the dataset <!-- MATH
+ ${\bf X}=[{\bf x}_1,\cdots,{\bf x}_N\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img312.svg"
+ ALT="${\bf X}=[{\bf x}_1,\cdots,{\bf x}_N\}$"></SPAN>
+is presented to the input layer of the network, while each node of 
+the output layer gets an activation value, the inner product of its 
+weight vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img313.svg"
+ ALT="${\bf w}_i$"></SPAN> and the current input <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+a_i=\sum_{j=1}^n w_{ij} x_j={\bf w}_i^T{\bf x}
+  =||{\bf w}_i||\;||{\bf x}||\;\cos\theta
+  \;\;\;\;\;(i=1,\cdots,K)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.40ex; " SRC="img314.svg"
+ ALT="$\displaystyle a_i=\sum_{j=1}^n w_{ij} x_j={\bf w}_i^T{\bf x}
+=\vert\vert{\bf w}_i\vert\vert\;\vert\vert{\bf x}\vert\vert\;\cos\theta
+\;\;\;\;\;(i=1,\cdots,K)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">58</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img315.svg"
+ ALT="$\theta$"></SPAN> is the angle between vectors <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img313.svg"
+ ALT="${\bf w}_i$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN>
+in the d-dimensinal feature space. Typically the data vectors <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN> 
+are normalized with unit length <!-- MATH
+ $||{\bf x}||^2=1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img316.svg"
+ ALT="$\vert\vert{\bf x}\vert\vert^2=1$"></SPAN>, i.e., they are points 
+on the unit hypersphere in the space. Optionally if the weight vectors 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img313.svg"
+ ALT="${\bf w}_i$"></SPAN> is also normalized with <!-- MATH
+ $||{\bf w}_i||=1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img317.svg"
+ ALT="$\vert\vert{\bf w}_i\vert\vert=1$"></SPAN>, then their inner 
+product above is only affected by the angle <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img315.svg"
+ ALT="$\theta$"></SPAN> between them.
+
+<P>
+The output of the network is determined by a winner-take-all competition. 
+The node in the output layer that is maximally activated will output 1 
+while all others output 0:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+y_i=\left\{ \begin{array}{ll} 1 & \mbox{if}\;\;
+    a_i={\bf w}_i^T{\bf x}=\max_j {\bf w}_j^T{\bf x} \\0 & \mbox{otherwise}
+  \end{array} \right.\;\;\;\;\;\;(i=1,\cdots,K)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.37ex; " SRC="img318.svg"
+ ALT="$\displaystyle y_i=\left\{ \begin{array}{ll} 1 &amp; \mbox{if}\;\;
+a_i={\bf w}_i^T{\...
+...^T{\bf x} \\ 0 &amp; \mbox{otherwise}
+\end{array} \right.\;\;\;\;\;\;(i=1,\cdots,K)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">59</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The inner product <!-- MATH
+ ${\bf w}_i^T{\bf x}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.72ex; " SRC="img319.svg"
+ ALT="${\bf w}_i^T{\bf x}$"></SPAN> is closely related to the 
+Euclidean distance <!-- MATH
+ $d({\bf x},\,{\bf w})=||{\bf w}_i-{\bf x}||$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img320.svg"
+ ALT="$d({\bf x},\,{\bf w})=\vert\vert{\bf w}_i-{\bf x}\vert\vert$"></SPAN>:
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+d^2({\bf w}_i,{\bf x})&=&||{\bf w}_i-{\bf x}||^2
+  =({\bf w}_i-{\bf x})^T({\bf w}_i-{\bf x})
+  ={\bf w}_i^T{\bf w}-2{\bf w}_i^T{\bf x}+{\bf x}^T{\bf x}
+  \nonumber\\
+  &=&||{\bf w}_i||^2+||{\bf x}||^2-2{\bf w}_i^T{\bf x}
+  =||{\bf w}_i||^2+||{\bf x}||^2-2||{\bf w}_i||\,||{\bf x}||\;\cos\,\theta
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img321.svg"
+ ALT="$\displaystyle d^2({\bf w}_i,{\bf x})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img116.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img322.svg"
+ ALT="$\displaystyle \vert\vert{\bf w}_i-{\bf x}\vert\vert^2
+=({\bf w}_i-{\bf x})^T({\bf w}_i-{\bf x})
+={\bf w}_i^T{\bf w}-2{\bf w}_i^T{\bf x}+{\bf x}^T{\bf x}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img116.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img323.svg"
+ ALT="$\displaystyle \vert\vert{\bf w}_i\vert\vert^2+\vert\vert{\bf x}\vert\vert^2-2{\...
+...ert^2-2\vert\vert{\bf w}_i\vert\vert\,\vert\vert{\bf x}\vert\vert\;\cos\,\theta$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">60</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+If both <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img313.svg"
+ ALT="${\bf w}_i$"></SPAN> are normalized, the winning node 
+receiving the maximum activation <!-- MATH
+ $a_i={\bf w}_i^T{\bf x}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.72ex; " SRC="img324.svg"
+ ALT="$a_i={\bf w}_i^T{\bf x}$"></SPAN> also has 
+the minimum Euclidean distance <!-- MATH
+ $||{\bf w}_i-{\bf x}||$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img325.svg"
+ ALT="$\vert\vert{\bf w}_i-{\bf x}\vert\vert$"></SPAN> and anglular
+distance <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img315.svg"
+ ALT="$\theta$"></SPAN>. Therefore the competition above can also be 
+expressed as the following:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+y_i=\left\{ \begin{array}{ll}
+    1 & \mbox{if } ||{\bf w}_i-{\bf x}||=\min_j||{\bf w}_j-{\bf x}||
+    \\0 & \mbox{otherwise} \end{array}  \right.\;\;\;\;\;\;(i=1,\cdots,K)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img326.svg"
+ ALT="$\displaystyle y_i=\left\{ \begin{array}{ll}
+1 &amp; \mbox{if } \vert\vert{\bf w}_i-...
+...vert\vert
+\\ 0 &amp; \mbox{otherwise} \end{array} \right.\;\;\;\;\;\;(i=1,\cdots,K)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">61</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The only winning node that receives the highest activation gets to modify 
+its weight vector:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf w}_i^{new}={\bf w}_i^{old}+y_i\,\eta\;({\bf x}-{\bf w}_i^{old})
+  =\left\{\begin{array}{ll}(1-\eta){\bf w}_i^{old}
+  +\eta {\bf x}& \mbox{if }y_i=1\\{\bf w}_i^{old}& \mbox{if }y_i=0
+  \end{array} \right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.34ex; " SRC="img327.svg"
+ ALT="$\displaystyle {\bf w}_i^{new}={\bf w}_i^{old}+y_i\,\eta\;({\bf x}-{\bf w}_i^{ol...
+...{\bf x}&amp; \mbox{if }y_i=1\\ {\bf w}_i^{old}&amp; \mbox{if }y_i=0
+\end{array} \right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">62</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img328.svg"
+ ALT="$0&lt;\eta&lt;1$"></SPAN> is the learning rate (step size). Optionally the new 
+weight vector is also renormalized. For the iteration process to gradually 
+approach a stable clustering result, the learning rate <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img53.svg"
+ ALT="$\eta$"></SPAN> needs to be 
+reduced through the iterations from its initial value (e.g., <!-- MATH
+ $\eta_0=0.9$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img329.svg"
+ ALT="$\eta_0=0.9$"></SPAN>) 
+toward 0 by a certain decay factor <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img330.svg"
+ ALT="$\alpha$"></SPAN> (e.g., <!-- MATH
+ $\alpha=0.99$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img331.svg"
+ ALT="$\alpha=0.99$"></SPAN>). This 
+way the learning rate at the lth iteration <!-- MATH
+ $\eta_l=\alpha \eta_{l-1}
+=\cdots=\alpha^l\eta_0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.66ex; " SRC="img332.svg"
+ ALT="$\eta_l=\alpha \eta_{l-1}
+=\cdots=\alpha^l\eta_0 $"></SPAN> decays exponentially for the learning process 
+to slow down as it progresses. Obviously the decay factor <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img330.svg"
+ ALT="$\alpha$"></SPAN> 
+depends on the size of the dataset, and it may need to be determined 
+heuristically and experimentally.
+
+<P>
+<IMG STYLE="" SRC="../figures/competitive1.gif"
+ ALT="competitive1.gif">
+
+<P>
+As illustrated in the figure above, the modified weight vector of the
+winner <!-- MATH
+ ${\bf w}_i^{new}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.72ex; " SRC="img333.svg"
+ ALT="${\bf w}_i^{new}$"></SPAN> is between <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN> and the old<!-- MATH
+ ${\bf w}_j^{old}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -1.04ex; " SRC="img334.svg"
+ ALT="${\bf w}_j^{old}$"></SPAN>,
+i.e., the effect of the learning process is to pull the winner's weight 
+vector which is already closest to the current input pattern <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN> 
+even closer to it.
+
+<P>
+Here are the steps of each iteration of the competitive learning:
+
+<UL>
+<LI>Step 0: Normalize all data vectors, initialize randomly the weight
+  vectors for the output nodes, such as any <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img45.svg"
+ ALT="$m$"></SPAN> samples of the dataset:
+  <!-- MATH
+ ${\bf w}_1^{(0)},\;{\bf w}_2^{(0)},\cdots,{\bf w}_m^{(0)}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.48ex; vertical-align: -0.74ex; " SRC="img335.svg"
+ ALT="${\bf w}_1^{(0)},\;{\bf w}_2^{(0)},\cdots,{\bf w}_m^{(0)}$"></SPAN>, set iteration
+  index to zero <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img336.svg"
+ ALT="$l=1$"></SPAN>;
+
+<P>
+</LI>
+<LI>Step 1: Choose randomly an input pattern <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN> from the dataset 
+  and calculate the activation for each of the output nodes:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+a_i={\bf w}_i^T{\bf x}\;\;\;\;\;\;\;(i=1,\cdots,m)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img337.svg"
+ ALT="$\displaystyle a_i={\bf w}_i^T{\bf x}\;\;\;\;\;\;\;(i=1,\cdots,m)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">63</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+</LI>
+<LI>Step 2: Update its weights of the winning node with
+  <!-- MATH
+ $a_j\ge a_i\;\;\;(i=1,\cdots,n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img338.svg"
+ ALT="$a_j\ge a_i\;\;\;(i=1,\cdots,n)$"></SPAN>:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf w}_j^{(l+1)}={\bf w}_j^{(l)} +\eta ({\bf x}-{\bf w}_i^{(l)})
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.72ex; vertical-align: -1.08ex; " SRC="img339.svg"
+ ALT="$\displaystyle {\bf w}_j^{(l+1)}={\bf w}_j^{(l)} +\eta ({\bf x}-{\bf w}_i^{(l)})$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">64</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Reduce learning rate <!-- MATH
+ $\eta\leftarrow \alpha \eta$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img340.svg"
+ ALT="$\eta\leftarrow \alpha \eta$"></SPAN>.
+  Optionally, renormalize <!-- MATH
+ ${\bf w}_j^{(l+1)}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.72ex; vertical-align: -1.08ex; " SRC="img341.svg"
+ ALT="${\bf w}_j^{(l+1)}$"></SPAN>. 
+
+<P>
+</LI>
+<LI>Step 3: Terminate the iteration if the clustering result has
+  gradually stablized, when the learning rate <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img53.svg"
+ ALT="$\eta$"></SPAN> is reduced from
+  its initial value <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img342.svg"
+ ALT="$\eta_0$"></SPAN> to some small value (e.g., 0.1) and the 
+  weight vectors no longer change significantly. Otherwise 
+  <!-- MATH
+ $l \leftarrow l+1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img343.svg"
+ ALT="$l \leftarrow l+1 $"></SPAN>, go back to Step 1.
+</LI>
+</UL>
+
+<P>
+Every time a sample <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN> is presented to the input layer, one of
+the output nodes will become the winner and its weight vector is drawn 
+closer to the current input <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN>. After all sample vectors in the
+dataset have been repeatedly presented to the network, each cluster
+of similar points in the space draws one of the weight vectors to its 
+center, and the corresponding output node will always win and output 1
+whenever any member of the cluster is presented to the network in the 
+future. In other words, after this unsupervised learning, the feature
+space is partitioned into <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img60.svg"
+ ALT="$K$"></SPAN> regions each corresponding to one of the 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img60.svg"
+ ALT="$K$"></SPAN> clusters, represented by one of the output nodes, whose weight vector
+is in the central area of the region. 
+
+<P>
+<IMG STYLE="" SRC="../figures/competitive2a.gif"
+ ALT="competitive2a.gif">
+
+<P>
+It is possible that the data samples are not distributed in such a way
+that they form clearly saperable clusters. In the extreme case, they may 
+even form a continuum in the feature space. In such cases, a small number 
+of output nodes (possibly even just one) may become frequent winners, 
+while others become &ldquo;dead nodes&rdquo; as they never win and consequently 
+never get the chance to learn. To avoid such meaningless outcome, a 
+mechanism is needed to ensure that all nodes have some chance to win. 
+Specifically, we could modify the learning law so that it contains an 
+extra term:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+a_i={\bf w}_i^T{\bf x}+b_i
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.69ex; " SRC="img344.svg"
+ ALT="$\displaystyle a_i={\bf w}_i^T{\bf x}+b_i$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">65</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img345.svg"
+ ALT="$b_i$"></SPAN> is the bias term proportional to the difference between the 
+&ldquo;fair share&rdquo; of winning <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img346.svg"
+ ALT="$1/m$"></SPAN> and the actual winning frequency:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+b_i=c\;\left(\frac{1}{K}
+  -\frac{\mbox{number of winnings of node $i$}}{\mbox{total number iterations so far}}\right)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img347.svg"
+ ALT="$\displaystyle b_i=c\;\left(\frac{1}{K}
+-\frac{\mbox{number of winnings of node $i$}}{\mbox{total number iterations so far}}\right)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">66</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The value of the bias term <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img345.svg"
+ ALT="$b_i$"></SPAN> will change the winning frequency of the
+ith node. If the node is winning more than its share, <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img348.svg"
+ ALT="$b_i&lt;0$"></SPAN> and it becomes
+harder for it to win in the future. On the other hand if the node rarely 
+wins, <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img349.svg"
+ ALT="$b_i&gt;0$"></SPAN> and its chance to win in the future is increased. Here <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img350.svg"
+ ALT="$c$"></SPAN> 
+is some scaling coefficient. The greater <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img350.svg"
+ ALT="$c$"></SPAN>, the competition will be more 
+strongly balanced. It needs to be fine tuned based on the specific nature 
+of the data being analyzed.
+
+<P>
+This process of competitive learning process is also be viewed as a
+<EM>vector quantization</EM> process, by which the continuous vector space 
+is quantized to become a set of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img60.svg"
+ ALT="$K$"></SPAN> discrete regions, called 
+<A ID="tex2html8"
+  HREF="http://en.wikipedia.org/wiki/Voronoi_diagram"><EM>Voronoi diagram (tessellation)</EM></A>. 
+Vector quantization can be used for data compression. A cluster of similar
+signals <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN> in the vector space can all be approximately represented 
+by the weight vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img151.svg"
+ ALT="${\bf w}$"></SPAN> of one of a small number of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img60.svg"
+ ALT="$K$"></SPAN> output nodes 
+in the neighborhood of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img36.svg"
+ ALT="${\bf x}$"></SPAN>, thereby the data size can be significantly 
+reduced. 
+
+<P>
+The Matlab code for the iteration loop of the algorithm is listed below,
+
+<P>
+<PRE>
+    [N L]=size(X);                 % dataset containing L samples
+    b=zeros(1,K);                  % bias terms
+    freq=zeros(1,K);               % winning frequencies
+    eta=0.9;                       % initial learning rate
+    decay=0.99;                    % decay rate
+    it=0;
+    while eta&gt;0.1                  % main training iterations
+        it=it+1;
+        W0=W;                      % initial weight vectors          
+        x=X(:,randi(L,1));         % select a random input sample
+        dmin=inf;
+        for k=1:K                  % find winner in all K output nodes
+            d=norm(x-W(:,k))-b(k);
+            if dmin&gt;d
+                dmin=d; m=k;       % mth node is the winner
+            end
+        end   
+        w=W(:,m)+eta*(x-W(:,m));   % modify winner's weights
+        W(:,m)=w/norm(w);          % renormalize its weights   
+        share(m)=share(m)+1;
+        b(m)=c*(1/K-share(m)/it);  % modify winner's bias 
+        eta=eta*decay;             % reduce learning rate 
+    end
+</PRE>
+
+<P>
+<B>Examples</B>
+
+<P>
+The competitive learning method is applied to a set of simulated 2-D
+data of four clusters. The network has <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img351.svg"
+ ALT="$d=2$"></SPAN> input nodes and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img190.svg"
+ ALT="$K=4$"></SPAN> output
+nodes. The first 16 iterations are shown in the figure below, where open
+circles represent the data points, while the solid back squares represent
+the weight vectors. Also, the blud and red squares represent the weight
+vector of the winner before and after its modification, visualized by the
+straight line connecting the two squares. We see that the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img190.svg"
+ ALT="$K=4$"></SPAN> weight
+vectors randomly initialized are iteratively modified one at a time, and
+after these 16 iterations, they each move to the center of one of the
+four clusters. The saperability of the clustering result measured by
+<!-- MATH
+ $tr{\bf S}_T^{-1}{\bf S}_B$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.80ex; " SRC="img352.svg"
+ ALT="$tr{\bf S}_T^{-1}{\bf S}_B$"></SPAN> is 1.0. When the number of output nodes is
+reduced to 3 and 2, the saperability is also reduced to 0.76 and 0.46,
+respectively. When <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img353.svg"
+ ALT="$K=5$"></SPAN> output nodes are used, one of the four clusters
+is represented by two output nodes.
+
+<P>
+<IMG STYLE="" SRC="../figures/competitiveEx2.png"
+ ALT="competitiveEx2.png">
+
+<P>
+The same method is applied to a set of 3-D data of eight clusters. The
+results are shown in the figure below, where the top and bottom rows
+show the data and weight vectors before and after clustering, respectively.
+The left column shows the 2-D space spanned by the first two principal
+components, while the right column shows the original 2-D space. Again
+we see that the weight vectors move from their random initial locations
+to the centers of the eight clusters as the result of the clustering.
+
+<P>
+<IMG STYLE="" SRC="../figures/competitiveEx3.png"
+ ALT="competitiveEx3.png">
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node7.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="ch10.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node5.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node7.html">Self-Organizing Map (SOM)</A>
+<B> Up:</B> <A
+ HREF="ch10.html">ch10</A>
+<B> Previous:</B> <A
+ HREF="node5.html">Back Propagation Network</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>
