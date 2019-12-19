@@ -1,0 +1,1523 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Pseudo-Inverse Solutions Based on SVD</TITLE>
+<META NAME="description" CONTENT="Pseudo-Inverse Solutions Based on SVD">
+<META NAME="keywords" CONTENT="algebra">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="algebra.css">
+
+<LINK REL="next" HREF="node21.html">
+<LINK REL="previous" HREF="node19.html">
+<LINK REL="next" HREF="node21.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node21.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="algebra.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node19.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node21.html">Solving Over-Determined Linear Equations</A>
+<B> Up:</B> <A
+ HREF="algebra.html">algebra</A>
+<B> Previous:</B> <A
+ HREF="node19.html">The Fundamental Theorem of</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION000200000000000000000">
+Pseudo-Inverse Solutions Based on SVD</A>
+</H1>
+
+<P>
+In the previous section we obtained the solution of the equation 
+<!-- MATH
+ ${\bf Ax}={\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img269.svg"
+ ALT="${\bf Ax}={\bf b}$"></SPAN> together with the bases of the four subspaces 
+of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> based its rref. Here we will consider an alternative 
+and better way to solve the same equation and find a set of 
+orthogonal bases that also span the four subspaces, based on the 
+<A ID="tex2html22"
+  HREF="../algebra/node13.html">pseudo-inverse</A>
+and 
+the <A ID="tex2html23"
+  HREF="../algebra/node12.html">singular value decomposition (SVD)</A>
+of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>. The solution obtained this
+way is optimal in some certain sense as shown below.
+
+<P>
+Consider the SVD of an <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img968.svg"
+ ALT="$M\times N$"></SPAN> matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> of rank 
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1186.svg"
+ ALT="$R\le\min(M,N)$"></SPAN>: 
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}={\bf U\Sigma V}^T
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.55ex; vertical-align: -0.12ex; " SRC="img1187.svg"
+ ALT="$\displaystyle {\bf A}={\bf U\Sigma V}^T
+$"> 
+
+(<SPAN CLASS="arabic">361</SPAN>)
+</DIV>
+where 
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf\Sigma}=\left[\begin{array}{cccccc}\sigma_1&&&&&0\\
+      &\ddots&&&&\\&&\sigma_R &&&\\&&&0&&\\&&&&\ddots &\\0&&&&&0
+      \end{array}\right]_{M\times N}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 20.44ex; vertical-align: -9.75ex; " SRC="img1188.svg"
+ ALT="$\displaystyle {\bf\Sigma}=\left[\begin{array}{cccccc}\sigma_1&amp;&amp;&amp;&amp;&amp;0\\
+&amp;\ddots...
+...\sigma_R &amp;&amp;&amp;\\ &amp;&amp;&amp;0&amp;&amp;\\ &amp;&amp;&amp;&amp;\ddots &amp;\\ 0&amp;&amp;&amp;&amp;&amp;0
+\end{array}\right]_{M\times N}
+$"> 
+
+(<SPAN CLASS="arabic">362</SPAN>)
+</DIV>
+is an <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img968.svg"
+ ALT="$M\times N$"></SPAN> matrix with <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img694.svg"
+ ALT="$R$"></SPAN> non-zero <EM>singular values</EM> 
+<!-- MATH
+ $\sigma_i=\sqrt{\lambda_i} \;\;\;(i=1,\ldots,R)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img1189.svg"
+ ALT="$\sigma_i=\sqrt{\lambda_i} \;\;\;(i=1,\ldots,R)$"></SPAN> of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> along
+the diagonal (starting from the top-left corner), while all other 
+components are zero, and <!-- MATH
+ ${\bf U}=[{\bf u}_1,\cdots,{\bf u}_M]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1190.svg"
+ ALT="${\bf U}=[{\bf u}_1,\cdots,{\bf u}_M]$"></SPAN> and 
+<!-- MATH
+ ${\bf V}=[{\bf v}_1,\cdots,{\bf v}_N]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1191.svg"
+ ALT="${\bf V}=[{\bf v}_1,\cdots,{\bf v}_N]$"></SPAN> are two orthogonal matrices 
+of dimensions <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img1192.svg"
+ ALT="$M\times M$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img1193.svg"
+ ALT="$N\times N$"></SPAN> respectively. The column 
+vectors <!-- MATH
+ ${\bf u}_i\;(i=1,\cdots,M)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1194.svg"
+ ALT="${\bf u}_i\;(i=1,\cdots,M)$"></SPAN> and <!-- MATH
+ ${\bf v}_j\;(j=1,\cdots,N)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img1195.svg"
+ ALT="${\bf v}_j\;(j=1,\cdots,N)$"></SPAN>, 
+are called the left and right <EM>singular vectors</EM> of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>, 
+respectively, and they can be used as the orthonormal bases to span
+respectively <!-- MATH
+ $\mathbb{R}^M=C({\bf A})\oplus N({\bf A}^T)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1039.svg"
+ ALT="$\mathbb{R}^M=C({\bf A})\oplus N({\bf A}^T)$"></SPAN> and its
+subspaces <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img998.svg"
+ ALT="$C({\bf A})$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1026.svg"
+ ALT="$N({\bf A}^T)$"></SPAN>, and 
+<!-- MATH
+ $\mathbb{R}^N=C({\bf A})\oplus N({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1196.svg"
+ ALT="$\mathbb{R}^N=C({\bf A})\oplus N({\bf A})$"></SPAN> and its subspaces
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img998.svg"
+ ALT="$C({\bf A})$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1011.svg"
+ ALT="$N({\bf A})$"></SPAN>.
+
+<P>
+To see this, we rewrite the SVD of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> as:
+<BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+{\bf A}&=&[{\bf c}_1,\cdots,{\bf c}_N]={\bf U\Sigma V}^T
+  \nonumber \\
+  &=&[{\bf u}_1,\cdots\cdots\cdots,{\bf u}_M]
+  \left[\begin{array}{cccccc}\sigma_1&&&&&0\\
+      &\ddots&&&&\\&&\sigma_R &&&\\&&&0&&\\&&&&\ddots &\\0&&&&&0
+    \end{array}\right]_{M\times N}
+  \left[\begin{array}{c}{\bf v}_1^T\\\vdots\\\vdots\\\vdots\\{\bf v}_N^T\end{array}\right]
+  \nonumber \\
+  &=&\sum_{k=1}^R \sigma_k\;\left({\bf u}_k{\bf v}_k^T\right)
+  =\sum_{k=1}^R \sigma_k\;{\bf u}_k[v_{1k},\cdots,v_{Nk}]
+  =\left[\sum_{k=1}^R (\sigma_kv_{1k})\;{\bf u}_k,\cdots,
+         \sum_{k=1}^R (\sigma_kv_{Nk})\;{\bf u}_k\right]
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1197.svg"
+ ALT="$\displaystyle {\bf A}$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img161.svg"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img1198.svg"
+ ALT="$\displaystyle [{\bf c}_1,\cdots,{\bf c}_N]={\bf U\Sigma V}^T$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img161.svg"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 20.44ex; vertical-align: -9.75ex; " SRC="img1199.svg"
+ ALT="$\displaystyle [{\bf u}_1,\cdots\cdots\cdots,{\bf u}_M]
+\left[\begin{array}{cccc...
+...y}{c}{\bf v}_1^T\\  \vdots\\  \vdots\\  \vdots\\  {\bf v}_N^T\end{array}\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img161.svg"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img1200.svg"
+ ALT="$\displaystyle \sum_{k=1}^R \sigma_k\;\left({\bf u}_k{\bf v}_k^T\right)
+=\sum_{k...
+...gma_kv_{1k})\;{\bf u}_k,\cdots,
+\sum_{k=1}^R (\sigma_kv_{Nk})\;{\bf u}_k\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">363</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Each column vector of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> can be expressed as a linear 
+combination of the first <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img694.svg"
+ ALT="$R$"></SPAN> columns of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img285.svg"
+ ALT="${\bf U}$"></SPAN> corresponding
+to the non-zero singular values:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf c}_j=\sum_{k=1}^R (\sigma_k v_{jk})\;{\bf u}_k\;\;\;\;\;\;(j=1,\cdots,N),
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img1201.svg"
+ ALT="$\displaystyle {\bf c}_j=\sum_{k=1}^R (\sigma_k v_{jk})\;{\bf u}_k\;\;\;\;\;\;(j=1,\cdots,N),
+$"> 
+
+(<SPAN CLASS="arabic">364</SPAN>)
+</DIV>
+Taking transpose on both sides of the SVD we also get:
+<BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+\left({\bf A}^T\right)&=&[{\bf r}_1,\cdots,{\bf r}_M]
+  ={\bf V\Sigma}^T{\bf U}^T
+  \nonumber\\
+  &=&\sum_{k=1}^R \sigma_k\;\left({\bf v}_k{\bf u}_k^T\right)
+  =\sum_{k=1}^R \sigma_k\;{\bf v}_k[u_{1k},\cdots,u_{Mk}]
+  =\left[\sum_{k=1}^R (\sigma_ku_{1k})\;{\bf v}_k,\;\cdots,\;
+         \sum_{k=1}^R (\sigma_ku_{Mk})\;{\bf v}_k\right]
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG STYLE="height: 3.25ex; vertical-align: -0.93ex; " SRC="img1202.svg"
+ ALT="$\displaystyle \left({\bf A}^T\right)$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img161.svg"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img1203.svg"
+ ALT="$\displaystyle [{\bf r}_1,\cdots,{\bf r}_M]
+={\bf V\Sigma}^T{\bf U}^T$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img161.svg"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img1204.svg"
+ ALT="$\displaystyle \sum_{k=1}^R \sigma_k\;\left({\bf v}_k{\bf u}_k^T\right)
+=\sum_{k...
+...ku_{1k})\;{\bf v}_k,\;\cdots,\;
+\sum_{k=1}^R (\sigma_ku_{Mk})\;{\bf v}_k\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">365</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+i.e., each row vector of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> can be expressed as a linear 
+combination of the first <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img694.svg"
+ ALT="$R$"></SPAN> columns of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img23.svg"
+ ALT="${\bf V}$"></SPAN> corresponding
+to the non-zero singular values:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf r}_i=\sum_{k=1}^R (\sigma_k u_{ik})\;{\bf v}_k\;\;\;\;\;\;(i=1,\cdots,M)
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img1205.svg"
+ ALT="$\displaystyle {\bf r}_i=\sum_{k=1}^R (\sigma_k u_{ik})\;{\bf v}_k\;\;\;\;\;\;(i=1,\cdots,M)
+$"> 
+
+(<SPAN CLASS="arabic">366</SPAN>)
+</DIV>
+We therefore see that the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img694.svg"
+ ALT="$R$"></SPAN> columns of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img285.svg"
+ ALT="${\bf U}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img23.svg"
+ ALT="${\bf V}$"></SPAN> 
+corresponding to the non-zero singular values span respectively 
+the column space <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img998.svg"
+ ALT="$C({\bf A})$"></SPAN> and row space <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img560.svg"
+ ALT="$R({\bf A})$"></SPAN>:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+C({\bf A})=span({\bf u}_1,\cdots,{\bf u}_R),\;\;\;\;\;\;\;
+  R({\bf A})=span({\bf v}_1,\cdots,{\bf v}_R)
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1206.svg"
+ ALT="$\displaystyle C({\bf A})=span({\bf u}_1,\cdots,{\bf u}_R),\;\;\;\;\;\;\;
+R({\bf A})=span({\bf v}_1,\cdots,{\bf v}_R)
+$"> 
+
+(<SPAN CLASS="arabic">367</SPAN>)
+</DIV>
+and the remaining <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img1062.svg"
+ ALT="$M-R$"></SPAN> columns of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img285.svg"
+ ALT="${\bf U}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img1149.svg"
+ ALT="$N-R$"></SPAN> columns of
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img23.svg"
+ ALT="${\bf V}$"></SPAN> corresponding to the zero singular values span respectively
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1026.svg"
+ ALT="$N({\bf A}^T)$"></SPAN> orthogonal to <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img998.svg"
+ ALT="$C({\bf A})$"></SPAN>, and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1011.svg"
+ ALT="$N({\bf A})$"></SPAN> orthogonal
+to <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img560.svg"
+ ALT="$R({\bf A})$"></SPAN>:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+N({\bf A}^T)=span({\bf u}_{R+1},\cdots,{\bf u}_M),\;\;\;\;\;\;
+  N({\bf A})=span({\bf v}_{R+1},\cdots,{\bf v}_N) 
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img1207.svg"
+ ALT="$\displaystyle N({\bf A}^T)=span({\bf u}_{R+1},\cdots,{\bf u}_M),\;\;\;\;\;\;
+N({\bf A})=span({\bf v}_{R+1},\cdots,{\bf v}_N)
+$"> 
+
+(<SPAN CLASS="arabic">368</SPAN>)
+</DIV>
+
+<P>
+<TABLE class="PAD  BORDER" style="">
+<TR><TD CLASS="CENTER">Subspace</TD>
+<TD CLASS="CENTER">Definition</TD>
+<TD CLASS="CENTER">Dimension</TD>
+<TD CLASS="CENTER">Basis</TD>
+</TR>
+<TR><TD CLASS="CENTER"><!-- MATH
+ $C({\bf A})\subseteq R^M$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1208.svg"
+ ALT="$C({\bf A})\subseteq R^M$"></SPAN></TD>
+<TD CLASS="CENTER">column space (image) of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN></TD>
+<TD CLASS="CENTER"><SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img694.svg"
+ ALT="$R$"></SPAN></TD>
+<TD CLASS="CENTER"><SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img694.svg"
+ ALT="$R$"></SPAN> columns of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img285.svg"
+ ALT="${\bf U}$"></SPAN> corresponding to non-zero singular values</TD>
+</TR>
+<TR><TD CLASS="CENTER"><!-- MATH
+ $N({\bf A^T})\subseteq R^M$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1209.svg"
+ ALT="$N({\bf A^T})\subseteq R^M$"></SPAN></TD>
+<TD CLASS="CENTER">left null space of <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img219.svg"
+ ALT="${\bf A}^T$"></SPAN></TD>
+<TD CLASS="CENTER"><SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img1062.svg"
+ ALT="$M-R$"></SPAN></TD>
+<TD CLASS="CENTER"><SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img1062.svg"
+ ALT="$M-R$"></SPAN> columns of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img285.svg"
+ ALT="${\bf U}$"></SPAN> corresponding to zero singular values</TD>
+</TR>
+<TR><TD CLASS="CENTER"><!-- MATH
+ $R({\bf A})\subseteq \mathbb{R}^N$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1210.svg"
+ ALT="$R({\bf A})\subseteq \mathbb{R}^N$"></SPAN></TD>
+<TD CLASS="CENTER">row space (image) of <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img219.svg"
+ ALT="${\bf A}^T$"></SPAN></TD>
+<TD CLASS="CENTER"><SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img694.svg"
+ ALT="$R$"></SPAN></TD>
+<TD CLASS="CENTER"><SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img694.svg"
+ ALT="$R$"></SPAN> columns of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img23.svg"
+ ALT="${\bf V}$"></SPAN> corresponding to non-zero singular values</TD>
+</TR>
+<TR><TD CLASS="CENTER"><!-- MATH
+ $N({\bf A})\subseteq \mathbb{R}^N$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1211.svg"
+ ALT="$N({\bf A})\subseteq \mathbb{R}^N$"></SPAN></TD>
+<TD CLASS="CENTER">null space of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN></TD>
+<TD CLASS="CENTER"><SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img1149.svg"
+ ALT="$N-R$"></SPAN></TD>
+<TD CLASS="CENTER"><SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img1149.svg"
+ ALT="$N-R$"></SPAN> columns of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img23.svg"
+ ALT="${\bf V}$"></SPAN> corresponding to zero singular values</TD>
+</TR>
+<TR><TD CLASS="CENTER"><!-- MATH
+ ${\bf R}^N=N({\bf A}) \oplus R({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1212.svg"
+ ALT="${\bf R}^N=N({\bf A}) \oplus R({\bf A})$"></SPAN></TD>
+<TD CLASS="CENTER">domain of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN></TD>
+<TD CLASS="CENTER"><SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img976.svg"
+ ALT="$N$"></SPAN></TD>
+<TD CLASS="CENTER">all <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img976.svg"
+ ALT="$N$"></SPAN> columns of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img23.svg"
+ ALT="${\bf V}$"></SPAN></TD>
+</TR>
+<TR><TD CLASS="CENTER"><!-- MATH
+ ${\bf R}^M=N({\bf A}^T) \oplus C({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1213.svg"
+ ALT="${\bf R}^M=N({\bf A}^T) \oplus C({\bf A})$"></SPAN></TD>
+<TD CLASS="CENTER">codomain of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN></TD>
+<TD CLASS="CENTER"><SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img978.svg"
+ ALT="$M$"></SPAN></TD>
+<TD CLASS="CENTER">all <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img978.svg"
+ ALT="$M$"></SPAN> columns of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img285.svg"
+ ALT="${\bf U}$"></SPAN></TD>
+</TR>
+</TABLE>
+
+<P>
+The SVD method can be used to find the pseudo-inverse of an <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img968.svg"
+ ALT="$M\times N$"></SPAN>
+matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> of rank <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1186.svg"
+ ALT="$R\le\min(M,N)$"></SPAN>:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}^-={\bf V\Sigma}^-{\bf U}^T
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img1214.svg"
+ ALT="$\displaystyle {\bf A}^-={\bf V\Sigma}^-{\bf U}^T
+$"> 
+
+(<SPAN CLASS="arabic">369</SPAN>)
+</DIV>
+where both <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.12ex; " SRC="img696.svg"
+ ALT="${\bf A}^-$"></SPAN> and 
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf\Sigma}^-=\left[\begin{array}{cccccc}1/\sigma_1&&&&&0\\
+      &\ddots&&&&\\&&1/\sigma_R &&&\\&&&0&&\\&&&&\ddots &\\0&&&&&0
+    \end{array}\right]_{N\times M}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 20.44ex; vertical-align: -9.75ex; " SRC="img1215.svg"
+ ALT="$\displaystyle {\bf\Sigma}^-=\left[\begin{array}{cccccc}1/\sigma_1&amp;&amp;&amp;&amp;&amp;0\\
+&amp;\d...
+...\sigma_R &amp;&amp;&amp;\\ &amp;&amp;&amp;0&amp;&amp;\\ &amp;&amp;&amp;&amp;\ddots &amp;\\ 0&amp;&amp;&amp;&amp;&amp;0
+\end{array}\right]_{N\times M}
+$"> 
+
+(<SPAN CLASS="arabic">370</SPAN>)
+</DIV>
+are <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img1216.svg"
+ ALT="$N\times M$"></SPAN> matrices. 
+
+<P>
+We further note that matrices <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img285.svg"
+ ALT="${\bf U}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img23.svg"
+ ALT="${\bf V}$"></SPAN> are related to each
+other by:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\left\{\begin{array}{l}{\bf A}={\bf U}{\bf\Sigma}{\bf V}^T\\
+  {\bf A}^-={\bf V}{\bf\Sigma}^-{\bf U}^T\end{array}\right.
+  \;\;\;\;\;\;\;\mbox{or}\;\;\;\;\;\;\;
+  \left\{\begin{array}{l}{\bf A}{\bf V}={\bf U}{\bf\Sigma}\\
+  {\bf A}^-{\bf U}={\bf V}{\bf\Sigma}^-\end{array}\right.
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 5.81ex; vertical-align: -2.33ex; " SRC="img1217.svg"
+ ALT="$\displaystyle \left\{\begin{array}{l}{\bf A}={\bf U}{\bf\Sigma}{\bf V}^T\\
+{\...
+...{\bf U}{\bf\Sigma}\\
+{\bf A}^-{\bf U}={\bf V}{\bf\Sigma}^-\end{array}\right.
+$"> 
+
+(<SPAN CLASS="arabic">371</SPAN>)
+</DIV>
+or in vector form:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\left\{\begin{array}{ll}
+  {\bf A}{\bf v}_i=\sigma_i{\bf u}_i\;\;\;\;\;\;(i=1,\cdots,R)\\
+  {\bf A}^-{\bf u}_i={\bf v}_i/\sigma_i\;\;\;\;\;\;(i=1,\cdots,R)
+  \end{array}\right.\;\;\;\;\;\;\;\;\;\;
+  \left\{\begin{array}{ll}
+  {\bf A}{\bf v_i}=0\;\;\;\;\;(i=R+1,\cdots,N)\\
+  {\bf A}^-{\bf u_i}=0\;\;\;\;(i=R+1,\cdots,M)
+  \end{array}\right.
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img1218.svg"
+ ALT="$\displaystyle \left\{\begin{array}{ll}
+{\bf A}{\bf v}_i=\sigma_i{\bf u}_i\;\;\...
+...\cdots,N)\\
+{\bf A}^-{\bf u_i}=0\;\;\;\;(i=R+1,\cdots,M)
+\end{array}\right.
+$"> 
+
+(<SPAN CLASS="arabic">372</SPAN>)
+</DIV>
+indicating how the individual columns are related.
+We see that the last <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img1149.svg"
+ ALT="$N-R$"></SPAN> columns <!-- MATH
+ ${\bf v}_{R+1},\cdots,{\bf v}_N$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.66ex; " SRC="img1219.svg"
+ ALT="${\bf v}_{R+1},\cdots,{\bf v}_N$"></SPAN> of 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img23.svg"
+ ALT="${\bf V}$"></SPAN> form an orthogonal basis of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1011.svg"
+ ALT="$N({\bf A})$"></SPAN>; and the last <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img1062.svg"
+ ALT="$M-R$"></SPAN>
+columns <!-- MATH
+ ${\bf u}_{R+1},\cdots,{\bf u}_M$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.66ex; " SRC="img1220.svg"
+ ALT="${\bf u}_{R+1},\cdots,{\bf u}_M$"></SPAN> of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img285.svg"
+ ALT="${\bf U}$"></SPAN> form an orthogonal
+basis of <SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1026.svg"
+ ALT="$N({\bf A}^T)$"></SPAN>.
+
+<P>
+<IMG STYLE=""
+ SRC="../figures/FourSpacesSVD1.png"
+ ALT="FourSpacesSVD1.png">
+
+<P>
+We now show that the optimal solution of the linear system 
+<!-- MATH
+ ${\bf Ax}={\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img269.svg"
+ ALT="${\bf Ax}={\bf b}$"></SPAN> can be obtained based on the pseudo-inverse 
+of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf x}_{svd}={\bf A}^-{\bf b}={\bf V\Sigma}^-{\bf U}^T{\bf b}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.79ex; vertical-align: -0.46ex; " SRC="img1221.svg"
+ ALT="$\displaystyle {\bf x}_{svd}={\bf A}^-{\bf b}={\bf V\Sigma}^-{\bf U}^T{\bf b}
+$"> 
+
+(<SPAN CLASS="arabic">373</SPAN>)
+</DIV>
+Specially, if <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1178.svg"
+ ALT="$M=N=R$"></SPAN>, then <!-- MATH
+ ${\bf A}^-={\bf A}^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img1222.svg"
+ ALT="${\bf A}^-={\bf A}^{-1}$"></SPAN>, and
+<!-- MATH
+ ${\bf x}_{svd}={\bf A}^{-1}{\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.46ex; " SRC="img1223.svg"
+ ALT="${\bf x}_{svd}={\bf A}^{-1}{\bf b}$"></SPAN> is the unique and exact solution.
+In general when <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img1224.svg"
+ ALT="$M\ne N$"></SPAN> or <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1182.svg"
+ ALT="$R&lt;min(M,N)$"></SPAN>, the solution may not 
+exist, or it may not be unique, but <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1225.svg"
+ ALT="${\bf x}_{svd}$"></SPAN> is still an
+optimal solution in two ways, from the perspective of both the 
+domain and codomain of the linear mapping <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img876.svg"
+ ALT="${\bf Ax}$"></SPAN>, as shown below.
+
+<P>
+
+<UL>
+<LI>In domain <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img1003.svg"
+ ALT="$\mathbb{R}^N$"></SPAN>:
+
+<P>
+Pre-multiplying <!-- MATH
+ ${\bf V}^T={\bf V}^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img1226.svg"
+ ALT="${\bf V}^T={\bf V}^{-1}$"></SPAN> on both sides of the 
+  pseudo-inverse solution 
+  <!-- MATH
+ ${\bf x}_{svd}={\bf V}{\bf\Sigma}^-{\bf U}^T{\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.46ex; " SRC="img1227.svg"
+ ALT="${\bf x}_{svd}={\bf V}{\bf\Sigma}^-{\bf U}^T{\bf b}$"></SPAN> given above,
+  we get:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf V}^T{\bf x}_{svd}
+    =[{\bf v}_1,\cdots,{\bf v}_N]^T{\bf x}_{svd}
+    ={\bf\Sigma}^-{\bf U}^T{\bf b}
+    ={\bf\Sigma}^-[{\bf u}_1,\cdots,{\bf u}_M]^T{\bf b},
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img1228.svg"
+ ALT="$\displaystyle {\bf V}^T{\bf x}_{svd}
+=[{\bf v}_1,\cdots,{\bf v}_N]^T{\bf x}_{s...
+...igma}^-{\bf U}^T{\bf b}
+={\bf\Sigma}^-[{\bf u}_1,\cdots,{\bf u}_M]^T{\bf b},
+$"> 
+
+(<SPAN CLASS="arabic">374</SPAN>)
+</DIV>
+or in component form:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\left[\begin{array}{c}{\bf v}_1^T{\bf x}_{svd}\\\vdots\\
+      {\bf v}_R^T{\bf x}_{svd}\\{\bf v}_{R+1}^T{\bf x}_{svd}\\
+      \vdots\\{\bf v}_N^T{\bf x}_{svd}\end{array}\right]
+  =\left[\begin{array}{cccccc}1/\sigma_1&&&&&0\\
+      &\ddots&&&&\\&&1/\sigma_R &&&\\&&&0&&\\&&&&\ddots &\\0&&&&&0
+    \end{array}\right]
+  \left[\begin{array}{c}{\bf u}_1^T{\bf b}\\\vdots\\{\bf u}_R^T{\bf b}\\
+      {\bf u}_{R+1}^T{\bf b}\\\vdots\\{\bf u}_M^T{\bf b}\end{array}\right]
+  =\left[\begin{array}{c}{\bf u}_1^T{\bf b}/\sigma_1\\\vdots\\
+      {\bf u}_R^T{\bf b}/\sigma_R\\0\\\vdots\\0\end{array}\right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 20.21ex; vertical-align: -9.45ex; " SRC="img1229.svg"
+ ALT="$\displaystyle \left[\begin{array}{c}{\bf v}_1^T{\bf x}_{svd}\\ \vdots\\
+{\bf ...
+...1\\ \vdots\\
+{\bf u}_R^T{\bf b}/\sigma_R\\ 0\\ \vdots\\ 0\end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">375</SPAN>)
+</DIV>
+The first <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img694.svg"
+ ALT="$R$"></SPAN> components 
+  <!-- MATH
+ ${\bf v}_i^T{\bf x}_{svd}={\bf u}_i^T{\bf b}/\sigma_i\;(i=1,\cdots,R)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.72ex; " SRC="img1230.svg"
+ ALT="${\bf v}_i^T{\bf x}_{svd}={\bf u}_i^T{\bf b}/\sigma_i\;(i=1,\cdots,R)$"></SPAN>
+  are the projection of <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1225.svg"
+ ALT="${\bf x}_{svd}$"></SPAN> onto <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img560.svg"
+ ALT="$R({\bf A})$"></SPAN> spanned by 
+  <!-- MATH
+ $\{{\bf v}_1,\cdots,{\bf v}_R\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1231.svg"
+ ALT="$\{{\bf v}_1,\cdots,{\bf v}_R\}$"></SPAN> corresponding to the non-zero 
+  singular values, while the last <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img1149.svg"
+ ALT="$N-R$"></SPAN> components 
+  <!-- MATH
+ ${\bf v}_i^T{\bf x}_{svd}=0\;(i=R+1,\cdots,N)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.72ex; " SRC="img1232.svg"
+ ALT="${\bf v}_i^T{\bf x}_{svd}=0\;(i=R+1,\cdots,N)$"></SPAN> are the projection
+  of <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1225.svg"
+ ALT="${\bf x}_{svd}$"></SPAN> onto <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1011.svg"
+ ALT="$N({\bf A})$"></SPAN> spanned by 
+  <!-- MATH
+ $\{{\bf v}_{R+1},\cdots,{\bf v}_N\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1233.svg"
+ ALT="$\{{\bf v}_{R+1},\cdots,{\bf v}_N\}$"></SPAN> corresponding to the zero 
+  singular values. We see that the pseudo-inverse solution <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1225.svg"
+ ALT="${\bf x}_{svd}$"></SPAN> 
+  is entirely in <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img560.svg"
+ ALT="$R({\bf A})$"></SPAN>, containing no homogeneous component in 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1011.svg"
+ ALT="$N({\bf A})$"></SPAN>. In other words, <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1225.svg"
+ ALT="${\bf x}_{svd}$"></SPAN> has the minimum norm 
+  (closest to the origin) compared to any other possible solution
+  <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img1084.svg"
+ ALT="${\bf x}_p$"></SPAN>, such as those found previously based on the rref of 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>, containing a non-zero homogeneous component
+  <!-- MATH
+ ${\bf x}_h\in N({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1043.svg"
+ ALT="${\bf x}_h\in N({\bf A})$"></SPAN>:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf x}_{svd}||\le ||{\bf x}_p||=||{\bf x}_{svd}+{\bf x}_h||
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img1234.svg"
+ ALT="$\displaystyle \vert\vert{\bf x}_{svd}\vert\vert\le \vert\vert{\bf x}_p\vert\vert=\vert\vert{\bf x}_{svd}+{\bf x}_h\vert\vert
+$"> 
+
+(<SPAN CLASS="arabic">376</SPAN>)
+</DIV>
+As <!-- MATH
+ $N({\bf A})\perp R({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1020.svg"
+ ALT="$N({\bf A}) \perp R({\bf A})$"></SPAN>, <!-- MATH
+ ${\bf x}_{svd}\in R({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1235.svg"
+ ALT="${\bf x}_{svd}\in R({\bf A})$"></SPAN> is the
+  projection of any such solution <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img1084.svg"
+ ALT="${\bf x}_p$"></SPAN> onto <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img560.svg"
+ ALT="$R({\bf A})$"></SPAN>. The 
+  complete solution can be found as  
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf x}_c={\bf x}_{svd}+N({\bf A})={\bf x}_{svd}+\sum_{j=R+1}^N c_j{\bf v}_j
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 7.90ex; vertical-align: -3.44ex; " SRC="img1236.svg"
+ ALT="$\displaystyle {\bf x}_c={\bf x}_{svd}+N({\bf A})={\bf x}_{svd}+\sum_{j=R+1}^N c_j{\bf v}_j
+$"> 
+
+(<SPAN CLASS="arabic">377</SPAN>)
+</DIV>
+for any set of coefficients <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img187.svg"
+ ALT="$c_j$"></SPAN>.
+
+<P>
+</LI>
+<LI>In codomain <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img1033.svg"
+ ALT="$\mathbb{R}^M$"></SPAN>:
+
+<P>
+We now consider the result <!-- MATH
+ ${\bf b}_{svd}={\bf Ax}_{svd}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img1237.svg"
+ ALT="${\bf b}_{svd}={\bf Ax}_{svd}$"></SPAN> produced 
+  by the pseudo-inverse solution <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1225.svg"
+ ALT="${\bf x}_{svd}$"></SPAN>, which, as a linear 
+  combination of the columns of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>, is in its column space 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img998.svg"
+ ALT="$C({\bf A})$"></SPAN>:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf b}_{svd}={\bf Ax}_{svd}={\bf AA}^-{\bf b}
+    ={\bf U}{\bf\Sigma}{\bf V}^T{\bf V}{\bf\Sigma}^-{\bf U}^T{\bf b}
+    ={\bf U}{\bf\Sigma}{\bf\Sigma}^-{\bf U}^T{\bf b}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.79ex; vertical-align: -0.46ex; " SRC="img1238.svg"
+ ALT="$\displaystyle {\bf b}_{svd}={\bf Ax}_{svd}={\bf AA}^-{\bf b}
+={\bf U}{\bf\Sigm...
+...bf\Sigma}^-{\bf U}^T{\bf b}
+={\bf U}{\bf\Sigma}{\bf\Sigma}^-{\bf U}^T{\bf b}
+$"> 
+
+(<SPAN CLASS="arabic">378</SPAN>)
+</DIV>
+Pre-multiplying <!-- MATH
+ ${\bf U}^T={\bf U}^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img282.svg"
+ ALT="${\bf U}^T={\bf U}^{-1}$"></SPAN> on both sides we get:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf U}^T{\bf b}_{svd}={\bf\Sigma}{\bf\Sigma}^-{\bf U}^T{\bf b}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.79ex; vertical-align: -0.46ex; " SRC="img1239.svg"
+ ALT="$\displaystyle {\bf U}^T{\bf b}_{svd}={\bf\Sigma}{\bf\Sigma}^-{\bf U}^T{\bf b}
+$"> 
+
+(<SPAN CLASS="arabic">379</SPAN>)
+</DIV>
+or in component form:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\left[\begin{array}{c}{\bf u}_1^T{\bf b}_{svd}\\\vdots\\
+        {\bf u}_R^T{\bf b}_{svd}\\{\bf u}_{R+1}^T{\bf b}_{svd}\\\vdots\\
+        {\bf u}_M^T{\bf b}_{svd}\end{array}\right]
+    =\left[\begin{array}{cccccc}
+        1 &&&&&0\\
+        &\ddots&&&&\\
+        && 1 &&&\\
+        &&&0&&\\
+        &&&&\ddots &\\
+        0&&&&&0
+      \end{array}\right]
+    \left[\begin{array}{c}{\bf u}_1^T{\bf b}\\\vdots\\
+        {\bf u}_R^T{\bf b}\\{\bf u}_{R+1}^T{\bf b}\\\vdots\\{\bf u}_M^T{\bf b}
+      \end{array}\right]
+    =\left[\begin{array}{c}{\bf u}_1^T{\bf b}\\\vdots\\
+        {\bf u}_R^T{\bf b}\\0\\\vdots\\0\end{array}\right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 20.21ex; vertical-align: -9.45ex; " SRC="img1240.svg"
+ ALT="$\displaystyle \left[\begin{array}{c}{\bf u}_1^T{\bf b}_{svd}\\ \vdots\\
+{\bf ...
+...1^T{\bf b}\\ \vdots\\
+{\bf u}_R^T{\bf b}\\ 0\\ \vdots\\ 0\end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">380</SPAN>)
+</DIV>
+The first <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img694.svg"
+ ALT="$R$"></SPAN> components 
+  <!-- MATH
+ ${\bf u}_i^T{\bf b}_{svd}={\bf u}_i^T{\bf b}\;(i=1,\cdots,R)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.72ex; " SRC="img1241.svg"
+ ALT="${\bf u}_i^T{\bf b}_{svd}={\bf u}_i^T{\bf b}\;(i=1,\cdots,R)$"></SPAN> 
+  are the projection of <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img1242.svg"
+ ALT="${\bf b}_{svd}$"></SPAN> onto <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img998.svg"
+ ALT="$C({\bf A})$"></SPAN> spanned by
+  <!-- MATH
+ $\{{\bf u}_1,\cdots,{\bf u}_R\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1243.svg"
+ ALT="$\{{\bf u}_1,\cdots,{\bf u}_R\}$"></SPAN> corresponding to the non-zero 
+  singular values, while the last <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img1062.svg"
+ ALT="$M-R$"></SPAN> components 
+  <!-- MATH
+ ${\bf u}_i^T{\bf b}_{svd}=0\;(i=R+1,\cdots,M)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.72ex; " SRC="img1244.svg"
+ ALT="${\bf u}_i^T{\bf b}_{svd}=0\;(i=R+1,\cdots,M)$"></SPAN> are the projection
+  of <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img1242.svg"
+ ALT="${\bf b}_{svd}$"></SPAN> onto <SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1026.svg"
+ ALT="$N({\bf A}^T)$"></SPAN> spanned by 
+  <!-- MATH
+ $\{{\bf u}_{R+1},\cdots,{\bf u}_M\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1245.svg"
+ ALT="$\{{\bf u}_{R+1},\cdots,{\bf u}_M\}$"></SPAN> corresponding to 
+  the zero singular values. We see that <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img1242.svg"
+ ALT="${\bf b}_{svd}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1161.svg"
+ ALT="${\bf b}$"></SPAN>
+  have the same projection onto <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img998.svg"
+ ALT="$C({\bf A})$"></SPAN>. If <!-- MATH
+ ${\bf b}\in C({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img999.svg"
+ ALT="${\bf b}\in C({\bf A})$"></SPAN>,
+  i.e., <!-- MATH
+ ${\bf u}_i^T{\bf b}=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.72ex; " SRC="img1246.svg"
+ ALT="${\bf u}_i^T{\bf b}=0$"></SPAN> for all <!-- MATH
+ $i=R+1,\cdots,M$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img1247.svg"
+ ALT="$i=R+1,\cdots,M$"></SPAN>, then 
+  <!-- MATH
+ ${\bf b}_{svd}={\bf Ax}_{svd}={\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img1248.svg"
+ ALT="${\bf b}_{svd}={\bf Ax}_{svd}={\bf b}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1225.svg"
+ ALT="${\bf x}_{svd}$"></SPAN> is an exact 
+  solution. But if <!-- MATH
+ ${\bf b}\notin C({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1050.svg"
+ ALT="${\bf b}\notin C({\bf A})$"></SPAN>, as it contains non-zero 
+  components in <SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1026.svg"
+ ALT="$N({\bf A}^T)$"></SPAN>, then no solution exists. However, as 
+  <!-- MATH
+ $N({\bf A}^T)\perp C({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1249.svg"
+ ALT="$N({\bf A}^T)\perp C({\bf A})$"></SPAN>, <!-- MATH
+ ${\bf b}_{svd}\in C({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1250.svg"
+ ALT="${\bf b}_{svd}\in C({\bf A})$"></SPAN> is the
+  projection of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1161.svg"
+ ALT="${\bf b}$"></SPAN> onto <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img998.svg"
+ ALT="$C({\bf A})$"></SPAN>, the error 
+  <!-- MATH
+ $||{\bf b}-{\bf b}_{svd}||$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1251.svg"
+ ALT="$\vert\vert{\bf b}-{\bf b}_{svd}\vert\vert$"></SPAN> is minimized when compared with that of
+  any other approximate solution <!-- MATH
+ ${\bf x}_p\ne{\bf x}_{svd}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img1252.svg"
+ ALT="${\bf x}_p\ne{\bf x}_{svd}$"></SPAN>:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf b}-{\bf b}_{svd}||=||{\bf b}-{\bf A}{\bf x}_{svd}||
+    \le ||{\bf b}-{\bf Ax}_p||
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img1253.svg"
+ ALT="$\displaystyle \vert\vert{\bf b}-{\bf b}_{svd}\vert\vert=\vert\vert{\bf b}-{\bf A}{\bf x}_{svd}\vert\vert
+\le \vert\vert{\bf b}-{\bf Ax}_p\vert\vert
+$"> 
+
+(<SPAN CLASS="arabic">381</SPAN>)
+</DIV>
+In this sense, <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1225.svg"
+ ALT="${\bf x}_{svd}$"></SPAN> is the optimal.
+
+<P>
+</LI>
+</UL>
+
+<P>
+Summarizing the two aspects above, we see that the pseudo-inverse
+solution <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1225.svg"
+ ALT="${\bf x}_{svd}$"></SPAN> is optimal in the sense that both its
+norm <!-- MATH
+ $||{\bf x}_{svd}||$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1254.svg"
+ ALT="$\vert\vert{\bf x}_{svd}\vert\vert$"></SPAN> and its error <!-- MATH
+ $||{\bf Ax}_{svd}-{\bf b}||$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1255.svg"
+ ALT="$\vert\vert{\bf Ax}_{svd}-{\bf b}\vert\vert$"></SPAN> 
+are minimized. 
+
+<UL>
+<LI>If the solution <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1225.svg"
+ ALT="${\bf x}_{svd}$"></SPAN> is not unique because
+  <!-- MATH
+ $N({\bf A})\ne\emptyset$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1256.svg"
+ ALT="$N({\bf A})\ne\emptyset$"></SPAN>, then the complete solution can be 
+  found by adding the entire null space to it: 
+  <!-- MATH
+ ${\bf x}_c={\bf x}_{svd}+N({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1257.svg"
+ ALT="${\bf x}_c={\bf x}_{svd}+N({\bf A})$"></SPAN>. 
+</LI>
+<LI>If no solution exists because <!-- MATH
+ ${\bf b}\notin C({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1050.svg"
+ ALT="${\bf b}\notin C({\bf A})$"></SPAN>, 
+  then <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1225.svg"
+ ALT="${\bf x}_{svd}$"></SPAN> is the optimal approximate solution with 
+  minimum error.
+</LI>
+</UL>
+
+<P>
+<IMG STYLE="" SRC="../figures/SVDoptimal.png"
+ ALT="SVDoptimal.png">
+
+<P>
+<IMG STYLE=""
+ SRC="../figures/NoSolution.png"
+ ALT="NoSolution.png">
+
+<P>
+<IMG STYLE=""
+ SRC="../figures/FourSpaces2.png"
+ ALT="FourSpaces2.png">
+
+<P>
+<B>Example: </B> Given the same system considered in previous examples
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}{\bf x}=\left[\begin{array}{rccc}1&2&3&4\\4&3&2&1\\-2&1&4&7\end{array}\right]
+  \left[\begin{array}{c}x_1\\x_2\\x_3\\x_4\end{array}\right]
+  =\left[\begin{array}{r}3\\2\\4\end{array}\right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 11.38ex; vertical-align: -5.11ex; " SRC="img1258.svg"
+ ALT="$\displaystyle {\bf A}{\bf x}=\left[\begin{array}{rccc}1&amp;2&amp;3&amp;4\\ 4&amp;3&amp;2&amp;1\\ -2&amp;1&amp;...
+...3\\ x_4\end{array}\right]
+=\left[\begin{array}{r}3\\ 2\\ 4\end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">382</SPAN>)
+</DIV>
+we will now solve it using the pseudo-inverse method. We first find SVD of
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> in terms of the following matrices:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf U}=[{\bf u}_1,\;{\bf u}_2,\;{\bf u}_3]
+  =\left[\begin{array}{rrr}
+      -0.535 & -0.218 &  0.817 \\
+      -0.267 & -0.873 & -0.408 \\
+      -0.802 &  0.436 & -0.408 \end{array}\right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img1259.svg"
+ ALT="$\displaystyle {\bf U}=[{\bf u}_1,\;{\bf u}_2,\;{\bf u}_3]
+=\left[\begin{array}...
+... \\
+-0.267 &amp; -0.873 &amp; -0.408 \\
+-0.802 &amp; 0.436 &amp; -0.408 \end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">383</SPAN>)
+</DIV>
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf V}=[{\bf v}_1,\;{\bf v}_2,\;{\bf v}_3,\;{\bf v}_4]
+  =\left[\begin{array}{rrrr}
+       0.000 & -0.837 &  0.374 & -0.400 \\
+      -0.267 & -0.478 & -0.797 &  0.255 \\
+      -0.535 & -0.120 &  0.472 &  0.691 \\
+      -0.802 &  0.239 & -0.049 & -0.546 \end{array}\right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 11.38ex; vertical-align: -5.11ex; " SRC="img1260.svg"
+ ALT="$\displaystyle {\bf V}=[{\bf v}_1,\;{\bf v}_2,\;{\bf v}_3,\;{\bf v}_4]
+=\left[\...
+...0.120 &amp; 0.472 &amp; 0.691 \\
+-0.802 &amp; 0.239 &amp; -0.049 &amp; -0.546 \end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">384</SPAN>)
+</DIV>
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf\Sigma}=\left[\begin{array}{cccc}
+      10.0 & 0 & 0 & 0 \\
+      0 &  5.477 & 0 & 0 \\
+      0 &  0     & 0 & 0 \end{array}\right],\;\;\;\;\;\;\;
+  {\bf\Sigma}^-=\left[\begin{array}{ccc}
+      0.1 &   0   & 0 \\
+       0  & 0.183 & 0 \\
+       0  &   0   & 0 \\
+       0  &   0   & 0 \end{array}\right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 11.38ex; vertical-align: -5.11ex; " SRC="img1261.svg"
+ ALT="$\displaystyle {\bf\Sigma}=\left[\begin{array}{cccc}
+10.0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; ...
+....1 &amp; 0 &amp; 0 \\
+0 &amp; 0.183 &amp; 0 \\
+0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 \end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">385</SPAN>)
+</DIV>
+<BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+{\bf A}^-={\bf V}{\bf\Sigma}^-{\bf U}^T
+  &=&\left[\begin{array}{rrrr}
+        0.000 & -0.837 &  0.374 & -0.400 \\
+       -0.267 & -0.478 & -0.797 &  0.255 \\
+       -0.535 & -0.120 &  0.472 &  0.691 \\
+       -0.802 &  0.239 & -0.049 & -0.546 \end{array}\right]
+  \left[\begin{array}{lll}
+       0.100 & 0 & 0  \\
+       0 & 0.183 & 0  \\
+       0 &  0    & 0  \\
+       0 &  0    & 0  \end{array}\right]
+  \left[\begin{array}{rrr} 
+    -0.535 & -0.267 &  0.802 \\
+    -0.218 & -0.873 &  0.436 \\
+     0.817 & -0.408 & -0.408 \end{array}\right]
+  \nonumber \\
+  &=&\left[\begin{array}{rrr} 
+    0.033 &  0.133 & -0.067 \\
+    0.033 &  0.083 & -0.017 \\
+    0.033 &  0.033 &  0.033 \\
+    0.033 & -0.017 &  0.083 \end{array}\right]
+  \nonumber 
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img1262.svg"
+ ALT="$\displaystyle {\bf A}^-={\bf V}{\bf\Sigma}^-{\bf U}^T$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img161.svg"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 11.38ex; vertical-align: -5.11ex; " SRC="img1263.svg"
+ ALT="$\displaystyle \left[\begin{array}{rrrr}
+0.000 &amp; -0.837 &amp; 0.374 &amp; -0.400 \\
+-0....
+....802 \\
+-0.218 &amp; -0.873 &amp; 0.436 \\
+0.817 &amp; -0.408 &amp; -0.408 \end{array}\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img161.svg"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 11.38ex; vertical-align: -5.11ex; " SRC="img1264.svg"
+ ALT="$\displaystyle \left[\begin{array}{rrr}
+0.033 &amp; 0.133 &amp; -0.067 \\
+0.033 &amp; 0.083 &amp; -0.017 \\
+0.033 &amp; 0.033 &amp; 0.033 \\
+0.033 &amp; -0.017 &amp; 0.083 \end{array}\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+The particular solution of the system <!-- MATH
+ ${\bf A}{\bf x}={\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1117.svg"
+ ALT="${\bf A}{\bf x}={\bf b}$"></SPAN> with
+<!-- MATH
+ ${\bf b}=[3,\;2,\;4]^T\in C({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1265.svg"
+ ALT="${\bf b}=[3,\;2,\;4]^T\in C({\bf A})$"></SPAN> is
+<BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+{\bf x}_{svd}&=&{\bf A}^-{\bf b}=\left[\begin{array}{rrr}
+      0.033 &  0.133 & -0.067 \\
+      0.033 &  0.083 & -0.017 \\
+      0.033 &  0.033 &  0.033 \\
+      0.033 & -0.017 &  0.083 \end{array}\right]
+  \left[\begin{array}{r}3\\2\\4\end{array}\right]
+  =\left[\begin{array}{r}0.1\\0.2\\0.3\\0.4\end{array}\right] 
+  \nonumber\\
+  &=&-0.535\left[\begin{array}{r}0.000\\-0.267\\-0.535\\-0.802\end{array}\right]
+  -0.120\left[\begin{array}{r}-0.837\\-0.478\\-0.120\\0.239\end{array}\right]
+  =c_1{\bf v}_1+c_2{\bf v}_2
+  \nonumber
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1266.svg"
+ ALT="$\displaystyle {\bf x}_{svd}$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img161.svg"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 11.38ex; vertical-align: -5.11ex; " SRC="img1267.svg"
+ ALT="$\displaystyle {\bf A}^-{\bf b}=\left[\begin{array}{rrr}
+0.033 &amp; 0.133 &amp; -0.067 ...
+...array}\right]
+=\left[\begin{array}{r}0.1\\  0.2\\  0.3\\  0.4\end{array}\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img161.svg"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 11.38ex; vertical-align: -5.11ex; " SRC="img1268.svg"
+ ALT="$\displaystyle -0.535\left[\begin{array}{r}0.000\\  -0.267\\  -0.535\\  -0.802\e...
+...0.837\\  -0.478\\  -0.120\\  0.239\end{array}\right]
+=c_1{\bf v}_1+c_2{\bf v}_2$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+which is in <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img560.svg"
+ ALT="$R({\bf A})$"></SPAN> spanned by the first <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1071.svg"
+ ALT="$R=2$"></SPAN> columns 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1269.svg"
+ ALT="${\bf v}_1$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1270.svg"
+ ALT="${\bf v}_2$"></SPAN>, perpendicular to <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1011.svg"
+ ALT="$N({\bf A})$"></SPAN> spanned
+by the last <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img1169.svg"
+ ALT="$N-R=2$"></SPAN> columns <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1271.svg"
+ ALT="${\bf v}_3$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1272.svg"
+ ALT="${\bf v}_4$"></SPAN>. Note that 
+this solution <!-- MATH
+ ${\bf x}_{svd}=[0.1,\;0.2,\;0.3,\;0.4]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1273.svg"
+ ALT="${\bf x}_{svd}=[0.1,\;0.2,\;0.3,\;0.4]^T$"></SPAN> is actually 
+the first component <!-- MATH
+ ${\bf x}'_p\in R({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -1.01ex; " SRC="img1274.svg"
+ ALT="${\bf x}'_p\in R({\bf A})$"></SPAN> of the particular
+solution <!-- MATH
+ ${\bf x}_p=[-1,\,2,\,0,\,0]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img1275.svg"
+ ALT="${\bf x}_p=[-1,\,2,\,0,\,0]$"></SPAN> found in the previous section 
+by Gauss-Jordan elimination, which is not in <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img560.svg"
+ ALT="$R({\bf A})$"></SPAN>. Adding the
+null space to the particular solution, we get the complete solution:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf x}_c={\bf x}_{svd}+N({\bf A})={\bf x}_p+c_1{\bf v}_3+c_2{\bf v}_4
+  =\left[\begin{array}{r}0.1\\0.2\\0.3\\0.4\end{array}\right]
+  +c_1 \left[\begin{array}{r}0.374\\-0.797\\0.472\\-0.049\end{array}\right]
+  +c_2 \left[\begin{array}{r}-0.400\\0.255\\0.691\\-0.546\end{array}\right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 11.38ex; vertical-align: -5.11ex; " SRC="img1276.svg"
+ ALT="$\displaystyle {\bf x}_c={\bf x}_{svd}+N({\bf A})={\bf x}_p+c_1{\bf v}_3+c_2{\bf...
+...
++c_2 \left[\begin{array}{r}-0.400\\ 0.255\\ 0.691\\ -0.546\end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">386</SPAN>)
+</DIV>
+If the right-hand side is replaced by <!-- MATH
+ ${\bf b}=[1,\;3,\;5]^T \notin
+C({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1165.svg"
+ ALT="${\bf b}=[1,\;3,\;5]^T\notin C({\bf A})$"></SPAN>, no solution exists. However, we can still find the 
+pseudo-inverse solution as the optimal approximate solution:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf x}_{svd}={\bf A}^-{\bf b}=\left[\begin{array}{rrr}
+      0.033 &  0.133 & -0.067 \\
+      0.033 &  0.083 & -0.017 \\
+      0.033 &  0.033 &  0.033 \\
+      0.033 & -0.017 &  0.083 \end{array}\right]
+  \left[\begin{array}{r}1\\3\\5\end{array}\right]
+  =\left[\begin{array}{r}0.1\\0.2\\0.3\\0.4\end{array}\right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 11.38ex; vertical-align: -5.11ex; " SRC="img1277.svg"
+ ALT="$\displaystyle {\bf x}_{svd}={\bf A}^-{\bf b}=\left[\begin{array}{rrr}
+0.033 &amp;...
+...{array}\right]
+=\left[\begin{array}{r}0.1\\ 0.2\\ 0.3\\ 0.4\end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">387</SPAN>)
+</DIV>
+which is the same as the solution for <!-- MATH
+ ${\bf b}=[3,\;2,\;4]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1278.svg"
+ ALT="${\bf b}=[3,\;2,\;4]^T$"></SPAN>,
+indicating <SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1279.svg"
+ ALT="$[3,\;2,\;4]^T$"></SPAN> happens to be the projection of 
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1280.svg"
+ ALT="$[1,\;3,\;5]^T$"></SPAN> onto <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img998.svg"
+ ALT="$C({\bf A})$"></SPAN> spanned by <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img175.svg"
+ ALT="${\bf u}_1$"></SPAN> and 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img174.svg"
+ ALT="${\bf u}_2$"></SPAN>. The result produced by <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1225.svg"
+ ALT="${\bf x}_{svd}$"></SPAN> is
+<!-- MATH
+ ${\bf b}'={\bf Ax}_{svd}\in C({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1281.svg"
+ ALT="${\bf b}'={\bf Ax}_{svd}\in C({\bf A})$"></SPAN> is the projection of 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1161.svg"
+ ALT="${\bf b}$"></SPAN> onto <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img998.svg"
+ ALT="$C({\bf A})$"></SPAN>, with a minimum error distance 
+<!-- MATH
+ $||{\bf e}||=||{\bf b}-{\bf b}'||$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1282.svg"
+ ALT="$\vert\vert{\bf e}\vert\vert=\vert\vert{\bf b}-{\bf b}'\vert\vert$"></SPAN>, indicating <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1225.svg"
+ ALT="${\bf x}_{svd}$"></SPAN>
+is the optimal approximate solution.
+
+<P>
+<B>Homework 3:</B>
+
+<OL>
+<LI>Use Matlab function <code>svd(A)</code> to carry out the SVD of the coefficient 
+  matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> of the linear system in Homework 2 problem 3, 
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}=\left[\begin{array}{rrrr}-1 & 3 & 4 & 1\\
+        2 & -4 & 3 & 2\\1 & -1 & 7 & 3\end{array}\right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img1283.svg"
+ ALT="$\displaystyle {\bf A}=\left[\begin{array}{rrrr}-1 &amp; 3 &amp; 4 &amp; 1\\
+2 &amp; -4 &amp; 3 &amp; 2\\ 1 &amp; -1 &amp; 7 &amp; 3\end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">388</SPAN>)
+</DIV>
+Find <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img285.svg"
+ ALT="${\bf U}$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img23.svg"
+ ALT="${\bf V}$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img692.svg"
+ ALT="${\bf\Sigma}$"></SPAN>. Verify that <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img285.svg"
+ ALT="${\bf U}$"></SPAN> and 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img23.svg"
+ ALT="${\bf V}$"></SPAN> are orthogonal, i.e., <!-- MATH
+ ${\bf U}^T{\bf U}={\bf I}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img1284.svg"
+ ALT="${\bf U}^T{\bf U}={\bf I}$"></SPAN> and 
+  <!-- MATH
+ ${\bf V}^T{\bf V}={\bf I}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img1285.svg"
+ ALT="${\bf V}^T{\bf V}={\bf I}$"></SPAN>.
+</LI>
+<LI>Obtain <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.12ex; " SRC="img1286.svg"
+ ALT="${\bf\Sigma}^-$"></SPAN>, i.e, find the transpose of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img692.svg"
+ ALT="${\bf\Sigma}$"></SPAN>
+  and then replace each singular value by its reciprocal, verify that
+  <!-- MATH
+ ${\bf\Sigma}{\bf\Sigma}^-={\bf I}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.12ex; " SRC="img1287.svg"
+ ALT="${\bf\Sigma}{\bf\Sigma}^-={\bf I}$"></SPAN> and <!-- MATH
+ ${\bf\Sigma}^-{\bf\Sigma}={\bf I}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.12ex; " SRC="img1288.svg"
+ ALT="${\bf\Sigma}^-{\bf\Sigma}={\bf I}$"></SPAN>.
+  Then find the pseudo-inverse <!-- MATH
+ ${\bf A}^-={\bf U}{\bf\Sigma}^-{\bf V}^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img1289.svg"
+ ALT="${\bf A}^-={\bf U}{\bf\Sigma}^-{\bf V}^T$"></SPAN>.
+</LI>
+<LI>Use Matlab function <code>pinv(A)</code> to find the pseudo-inverse 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.12ex; " SRC="img1286.svg"
+ ALT="${\bf\Sigma}^-$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.12ex; " SRC="img696.svg"
+ ALT="${\bf A}^-$"></SPAN>. Compare them to what you obtained 
+  in the previous part.
+</LI>
+<LI>Identify the bases of the four subspaces <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img560.svg"
+ ALT="$R({\bf A})$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1011.svg"
+ ALT="$N({\bf A})$"></SPAN>,
+  <!-- MATH
+ $C({\bf A})=R({\bf A}^T)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1031.svg"
+ ALT="$C({\bf A})=R({\bf A}^T)$"></SPAN>, and <SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1026.svg"
+ ALT="$N({\bf A}^T)$"></SPAN> based on <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img285.svg"
+ ALT="${\bf U}$"></SPAN> and
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img23.svg"
+ ALT="${\bf V}$"></SPAN>. Verify that these bases and those you found previously (problem
+  3 of Homework 2) span the same spaces, i.e., the basis vectors of one basis 
+  can be written as a linear combination of those of the other, for each of
+  the four subspaces.
+</LI>
+<LI>Use the pseudo-inverse <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.12ex; " SRC="img696.svg"
+ ALT="${\bf A}^-$"></SPAN> found above to solve 
+  the system <!-- MATH
+ ${\bf A}{\bf x}={\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1117.svg"
+ ALT="${\bf A}{\bf x}={\bf b}$"></SPAN>. Find the two particular solutions 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img1290.svg"
+ ALT="${\bf x}_{p1}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img1291.svg"
+ ALT="${\bf x}_{p2}$"></SPAN> corresponding to two different right-hand
+  side <!-- MATH
+ ${\bf b}_1=[1,\;2,\;3]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1292.svg"
+ ALT="${\bf b}_1=[1,\;2,\;3]^T$"></SPAN> and <!-- MATH
+ ${\bf b}_2=[2,\;3,\;2]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1293.svg"
+ ALT="${\bf b}_2=[2,\;3,\;2]^T$"></SPAN>.
+</LI>
+<LI>How are the two results <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img1290.svg"
+ ALT="${\bf x}_{p1}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img1291.svg"
+ ALT="${\bf x}_{p2}$"></SPAN> related to
+  each other? Give your explanation. Why can't you find a solution when 
+  <!-- MATH
+ ${\bf b}=[2,\;3,\;2]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1294.svg"
+ ALT="${\bf b}=[2,\;3,\;2]^T$"></SPAN> but SVD method can?
+</LI>
+<LI>Verify that <!-- MATH
+ ${\bf x}_p \perp N({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img1295.svg"
+ ALT="${\bf x}_p \perp N({\bf A})$"></SPAN>. Also find the error (or 
+  residual) <!-- MATH
+ ${\bf e}={\bf b}-{\bf A}{\bf x}_p$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img1296.svg"
+ ALT="${\bf e}={\bf b}-{\bf A}{\bf x}_p$"></SPAN> for each of the two results 
+  above. Verify that <!-- MATH
+ ${\bf e}\perp C({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1297.svg"
+ ALT="${\bf e}\perp C({\bf A})$"></SPAN>, if <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img1298.svg"
+ ALT="${\bf e}\ne 0$"></SPAN>.
+</LI>
+<LI>In Homework 2 you used row reduction method to solve the system
+  <!-- MATH
+ ${\bf A}{\bf x}={\bf b}_1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img1299.svg"
+ ALT="${\bf A}{\bf x}={\bf b}_1$"></SPAN> and you should have found a particular solution 
+  <!-- MATH
+ ${\bf x}_1=[5,\;2,\;0,\;0,\;]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1300.svg"
+ ALT="${\bf x}_1=[5,\;2,\;0,\;0,\;]^T$"></SPAN>. Also it is obvious to see that another
+  solution is <!-- MATH
+ ${\bf x}_2=[0,\;0,\;0,\;1]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1301.svg"
+ ALT="${\bf x}_2=[0,\;0,\;0,\;1]^T$"></SPAN>. Show that the projection of
+  these solutions onto <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img560.svg"
+ ALT="$R({\bf A})$"></SPAN> spanned by the first two columns of 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img23.svg"
+ ALT="${\bf V}$"></SPAN> is the same as the particular solution <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img1084.svg"
+ ALT="${\bf x}_p$"></SPAN> found by 
+  the SVD method.
+
+<P>
+</LI>
+<LI>Show that <!-- MATH
+ ${\bf b}_1=[1,\;2,\;3]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1292.svg"
+ ALT="${\bf b}_1=[1,\;2,\;3]^T$"></SPAN> is the projection of 
+  <!-- MATH
+ ${\bf b}_2=[2,\;3,\;2]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1293.svg"
+ ALT="${\bf b}_2=[2,\;3,\;2]^T$"></SPAN> onto <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img998.svg"
+ ALT="$C({\bf A})$"></SPAN>, the 2-D subspace spanned by
+  the first two columns of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img285.svg"
+ ALT="${\bf U}$"></SPAN>. Can you also show that it is the 
+  projection of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1161.svg"
+ ALT="${\bf b}$"></SPAN> onto <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img998.svg"
+ ALT="$C({\bf A})$"></SPAN> spanned by the basis you obtained
+  in Homework 2 (not necessarily orthogonal)?
+
+<P>
+</LI>
+<LI>Give an expression of the null space <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1011.svg"
+ ALT="$N({\bf A})$"></SPAN>, and then write the 
+  complete solution in form of <!-- MATH
+ ${\bf x}_c={\bf x}_p+N({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img1302.svg"
+ ALT="${\bf x}_c={\bf x}_p+N({\bf A})$"></SPAN>. Verify any
+  complete solution so generated satisfies <!-- MATH
+ ${\bf A}{\bf x}_c={\bf b}_1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img1303.svg"
+ ALT="${\bf A}{\bf x}_c={\bf b}_1$"></SPAN>.
+</LI>
+</OL>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node21.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="algebra.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node19.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node21.html">Solving Over-Determined Linear Equations</A>
+<B> Up:</B> <A
+ HREF="algebra.html">algebra</A>
+<B> Previous:</B> <A
+ HREF="node19.html">The Fundamental Theorem of</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

@@ -1,0 +1,401 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Convexity and Jensen's Inequality</TITLE>
+<META NAME="description" CONTENT="Convexity and Jensen's Inequality">
+<META NAME="keywords" CONTENT="probability">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="probability.css">
+
+<LINK REL="next" HREF="node11.html">
+<LINK REL="previous" HREF="node9.html">
+<LINK REL="next" HREF="node11.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node11.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="probability.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node9.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node11.html">Student's t-test</A>
+<B> Up:</B> <A
+ HREF="probability.html">probability</A>
+<B> Previous:</B> <A
+ HREF="node9.html">Principal Component Analysis (PCA)</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION000100000000000000000">
+Convexity and Jensen's Inequality</A>
+</H1>
+
+<P>
+In an N-D space, a <EM>convex region</EM> is a region where every point on 
+the straight line between any pair of two points in the region is also 
+inside the region. A function <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img234.svg"
+ ALT="$f({\bf x})$"></SPAN> is <EM>convex</EM> if and only 
+if its <EM>epigraph</EM> or <EM>supergraph</EM>, the region above its graph, 
+is a convex set. If the Hessian matrix, the second order derivative, of
+<!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img234.svg"
+ ALT="$f({\bf x})$"></SPAN> exists and it is positive semidefinite, i.e., 
+<!-- MATH
+ ${\bf H}_f({\bf x})\ge 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img667.svg"
+ ALT="${\bf H}_f({\bf x})\ge 0$"></SPAN>, for its entire domain, then <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img234.svg"
+ ALT="$f({\bf x})$"></SPAN> is 
+convex. As simple examples in 1-D space, <!-- MATH
+ $f_1(x)=x^2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img668.svg"
+ ALT="$f_1(x)=x^2$"></SPAN> and <!-- MATH
+ $f_2(x)=e^x$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img669.svg"
+ ALT="$f_2(x)=e^x$"></SPAN> 
+are both convex, and their Hessian, the second order derivatives,
+<!-- MATH
+ $f''_1(x)=2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img670.svg"
+ ALT="$f''_1(x)=2$"></SPAN> and <!-- MATH
+ $f''_2(x)=e^x$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img671.svg"
+ ALT="$f''_2(x)=e^x$"></SPAN> are both greater than zero.
+
+<P>
+Specifically, let <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img321.svg"
+ ALT="${\bf x}_1$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img322.svg"
+ ALT="${\bf x}_2$"></SPAN> be any two points inside
+the domain of <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img234.svg"
+ ALT="$f({\bf x})$"></SPAN>. Then <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img234.svg"
+ ALT="$f({\bf x})$"></SPAN> is convex if for any
+<!-- MATH
+ $c\in[0,\;1]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img672.svg"
+ ALT="$c\in[0,\;1]$"></SPAN> the following holds:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f(c{\bf x}_1+(1-c){\bf x}_2)\le c\,f({\bf x}_1)+(1-c)f({\bf x}_2)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img673.svg"
+ ALT="$\displaystyle f(c{\bf x}_1+(1-c){\bf x}_2)\le c\,f({\bf x}_1)+(1-c)f({\bf x}_2)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">227</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <!-- MATH
+ $c{\bf x}_1+(1-c){\bf x}_2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img674.svg"
+ ALT="$c{\bf x}_1+(1-c){\bf x}_2$"></SPAN> is any point along the line segment
+between <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img321.svg"
+ ALT="${\bf x}_1$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img322.svg"
+ ALT="${\bf x}_2$"></SPAN>, at which the function value is
+less than the linear interpolation of the two function values
+<!-- MATH
+ $f({\bf x}_1)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img675.svg"
+ ALT="$f({\bf x}_1)$"></SPAN> and <!-- MATH
+ $f({\bf x}_2)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img676.svg"
+ ALT="$f({\bf x}_2)$"></SPAN>. If the equality does not hold,
+then <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img234.svg"
+ ALT="$f({\bf x})$"></SPAN> is <EM>strictly convex</EM>. If <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img234.svg"
+ ALT="$f({\bf x})$"></SPAN> is
+convex, then <!-- MATH
+ $g(x)=-f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img677.svg"
+ ALT="$g(x)=-f({\bf x})$"></SPAN> is said to be <EM>concave</EM>, for
+which the following inequality holds:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+g(c{\bf x}_1+(1-c){\bf x}_2)\ge c\,g({\bf x}_1)+(1-c)g({\bf x}_2)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img678.svg"
+ ALT="$\displaystyle g(c{\bf x}_1+(1-c){\bf x}_2)\ge c\,g({\bf x}_1)+(1-c)g({\bf x}_2)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">228</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+A convex function <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img234.svg"
+ ALT="$f({\bf x})$"></SPAN> has the property that any local minimum 
+is also a global minimum. Moreover, if <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img234.svg"
+ ALT="$f({\bf x})$"></SPAN> is strictly convex,
+then it has a single global minimum. Also, the following 
+<EM>Jensen's Inequality</EM> holds:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f\left(\sum_{i=1}^n \lambda_i{\bf x}_i\right) \le
+  \sum_{i=1}^n \lambda_if({\bf x}_i)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img679.svg"
+ ALT="$\displaystyle f\left(\sum_{i=1}^n \lambda_i{\bf x}_i\right) \le
+\sum_{i=1}^n \lambda_if({\bf x}_i)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">229</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+For a concave function <!-- MATH
+ $g({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img680.svg"
+ ALT="$g({\bf x})$"></SPAN>, the following holds:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+g\left(\sum_{i=1}^n \lambda_i{\bf x}_i\right) \ge
+  \sum_{i=1}^n \lambda_ig({\bf x}_i)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img681.svg"
+ ALT="$\displaystyle g\left(\sum_{i=1}^n \lambda_i{\bf x}_i\right) \ge
+\sum_{i=1}^n \lambda_ig({\bf x}_i)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">230</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+<B>Proof:</B> Let <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img682.svg"
+ ALT="$\lambda_1$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img683.svg"
+ ALT="$\lambda_2$"></SPAN> be two arbitrary nonnegative
+real numbers satisfying <!-- MATH
+ $\lambda_1+\lambda_2=1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img684.svg"
+ ALT="$\lambda_1+\lambda_2=1$"></SPAN>. Then by the definition 
+of convexity, we have
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f(\lambda_1{\bf x}_1+\lambda_2{\bf x}_2)
+\le \lambda_1f({\bf x}_1)+\lambda_2 f({\bf x}_2)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img685.svg"
+ ALT="$\displaystyle f(\lambda_1{\bf x}_1+\lambda_2{\bf x}_2)
+\le \lambda_1f({\bf x}_1)+\lambda_2 f({\bf x}_2)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">231</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+This results of two points can be generalized to <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img53.svg"
+ ALT="$n$"></SPAN> points by
+induction. We assume the inequality holds for <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img686.svg"
+ ALT="$k$"></SPAN> points:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f\left(\sum_{i=1}^k \lambda_i{\bf x}_i\right)
+\le \sum_{i=1}^k \lambda_if({\bf x}_i)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.09ex; " SRC="img687.svg"
+ ALT="$\displaystyle f\left(\sum_{i=1}^k \lambda_i{\bf x}_i\right)
+\le \sum_{i=1}^k \lambda_if({\bf x}_i)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">232</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Now we show it also holds for <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img688.svg"
+ ALT="$k+1$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f\left(\sum_{i=1}^{k+1} \lambda_i{\bf x}_i\right)
+=f\left(\lambda_a{\bf x}_1+(1-\lambda_1)\sum_{i=2}^{k+1}
+\frac{\lambda_i}{1-\lambda_1}{\bf x}_i\right)
+\le \lambda_1f({\bf x}_1)+(1-\lambda_1)f\left(\sum_{i=2}^{k+1} 
+\frac{\lambda_i}{1-\lambda_1}{\bf x}_i\right)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.09ex; " SRC="img689.svg"
+ ALT="$\displaystyle f\left(\sum_{i=1}^{k+1} \lambda_i{\bf x}_i\right)
+=f\left(\lambda...
+...\lambda_1)f\left(\sum_{i=2}^{k+1}
+\frac{\lambda_i}{1-\lambda_1}{\bf x}_i\right)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">233</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+But as 
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\sum_{i=2}^{k+1} \frac{\lambda_i}{1-\lambda_1}=1
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.09ex; " SRC="img690.svg"
+ ALT="$\displaystyle \sum_{i=2}^{k+1} \frac{\lambda_i}{1-\lambda_1}=1$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">234</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+we can apply the assumption for the case of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img686.svg"
+ ALT="$k$"></SPAN> to the function
+in the second term and get
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f\left(\sum_{i=2}^{k+1}
+\frac{\lambda_i}{1-\lambda_1}{\bf x}_i\right)\le
+\sum_{i=2}^{k+1}\frac{\lambda_i}{1-\lambda_1}f({\bf x}_i)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.09ex; " SRC="img691.svg"
+ ALT="$\displaystyle f\left(\sum_{i=2}^{k+1}
+\frac{\lambda_i}{1-\lambda_1}{\bf x}_i\right)\le
+\sum_{i=2}^{k+1}\frac{\lambda_i}{1-\lambda_1}f({\bf x}_i)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">235</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Substituting this back we get the desired inequality:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f\left(\sum_{i=1}^{k+1} \lambda_i {\bf x}_i\right)
+\le \lambda_1f({\bf x}_1)+(1-\lambda_1)\left(
+\sum_{i=2}^{k+1}\frac{\lambda_i}{1-\lambda_1}f({\bf x}_i)\right)
+=\sum_{i=1}^{k+1}\lambda_if({\bf x}_i)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.09ex; " SRC="img692.svg"
+ ALT="$\displaystyle f\left(\sum_{i=1}^{k+1} \lambda_i {\bf x}_i\right)
+\le \lambda_1f...
+...ambda_i}{1-\lambda_1}f({\bf x}_i)\right)
+=\sum_{i=1}^{k+1}\lambda_if({\bf x}_i)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">236</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+If <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}$"></SPAN> is a random vector taking values in the domain of 
+<!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img234.svg"
+ ALT="$f({\bf x})$"></SPAN>, then, as an extension of the equation above, we have
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f(E({\bf x})) \le E(f({\bf x}))
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img693.svg"
+ ALT="$\displaystyle f(E({\bf x})) \le E(f({\bf x}))$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">237</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+convex optimization
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node11.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="probability.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node9.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node11.html">Student's t-test</A>
+<B> Up:</B> <A
+ HREF="probability.html">probability</A>
+<B> Previous:</B> <A
+ HREF="node9.html">Principal Component Analysis (PCA)</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

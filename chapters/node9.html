@@ -1,0 +1,561 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Principal Component Analysis (PCA)</TITLE>
+<META NAME="description" CONTENT="Principal Component Analysis (PCA)">
+<META NAME="keywords" CONTENT="probability">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="probability.css">
+
+<LINK REL="next" HREF="node10.html">
+<LINK REL="previous" HREF="node8.html">
+<LINK REL="next" HREF="node10.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node10.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="probability.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node8.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node10.html">Convexity and Jensen's Inequality</A>
+<B> Up:</B> <A
+ HREF="probability.html">probability</A>
+<B> Previous:</B> <A
+ HREF="node8.html">Maximum Likelihood Estimation of</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00090000000000000000">
+Principal Component Analysis (PCA)</A>
+</H1>
+
+<P>
+Consider the eigenequations of the covariance matrix <!-- MATH
+ ${\bf\Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img133.svg"
+ ALT="${\bf\Sigma}$"></SPAN>
+of an N-D random vector <!-- MATH
+ ${\bf x}=[x_1,\cdots,x_N]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img630.svg"
+ ALT="${\bf x}=[x_1,\cdots,x_N]^T$"></SPAN>, now treated as 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img26.svg"
+ ALT="$N$"></SPAN> samples of a time signal:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf\Sigma}_x{\bf\phi}_n=\lambda_n{\bf\phi}_n\;\;\;\;\;(n=1,\cdots,N)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img631.svg"
+ ALT="$\displaystyle {\bf\Sigma}_x{\bf\phi}_n=\lambda_n{\bf\phi}_n\;\;\;\;\;(n=1,\cdots,N)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">211</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+As <!-- MATH
+ ${\bf\Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img133.svg"
+ ALT="${\bf\Sigma}$"></SPAN> is symmetric and positive semi-definite, its eigenvalues
+are real and non-negative, and the corresponding eigenvectors are 
+orthogonal to each other:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\lambda_N\ge\cdots\ge\lambda_1\ge 0,\;\;\;\;\;\;\;\;\;\;\;\;
+{\bf\phi}_i^T{\bf\phi}_j=\delta_{ij}
+=\left\{\begin{array}{ll}0 & i\ge j\\1 & i=j\end{array}\right.
+\;\;\;\;(i,j=1,\cdots,N)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img632.svg"
+ ALT="$\displaystyle \lambda_N\ge\cdots\ge\lambda_1\ge 0,\;\;\;\;\;\;\;\;\;\;\;\;
+{\bf...
+...begin{array}{ll}0 &amp; i\ge j\\ 1 &amp; i=j\end{array}\right.
+\;\;\;\;(i,j=1,\cdots,N)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">212</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+i.e., <!-- MATH
+ ${\bf\Phi}^T={\bf\Phi}^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img633.svg"
+ ALT="${\bf\Phi}^T={\bf\Phi}^{-1}$"></SPAN> is an orthogonal matrix. 
+The eigenequations above can  be expressed in matrix form:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf\Sigma}{\bf\Phi}={\bf\Phi}{\bf\Lambda},
+\;\;\;\;\;\mbox{or}\;\;\;\;\;
+{\bf\Phi}^{-1}{\bf\Sigma}{\bf\Phi}={\bf\Phi}^T{\bf\Sigma}{\bf\Phi}
+={\bf\Lambda}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img634.svg"
+ ALT="$\displaystyle {\bf\Sigma}{\bf\Phi}={\bf\Phi}{\bf\Lambda},
+\;\;\;\;\;$">or<IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img635.svg"
+ ALT="$\displaystyle \;\;\;\;\;
+{\bf\Phi}^{-1}{\bf\Sigma}{\bf\Phi}={\bf\Phi}^T{\bf\Sigma}{\bf\Phi}
+={\bf\Lambda}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">213</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where 
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf\Lambda}=diag(\lambda_1,\cdots,\lambda_N),\;\;\;\;\;
+{\bf\Phi}=[{\bf\phi}_1,\cdots,{\bf\phi}_N]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img636.svg"
+ ALT="$\displaystyle {\bf\Lambda}=diag(\lambda_1,\cdots,\lambda_N),\;\;\;\;\;
+{\bf\Phi}=[{\bf\phi}_1,\cdots,{\bf\phi}_N]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">214</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+are the eigenvalue and eigenvector matrix. 
+
+<P>
+Further consider the following orthogonal transform of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}$"></SPAN>, 
+called<EM>Karhunen-Loeve transform (KLT)</EM>, <EM>Hotelling Transform</EM> 
+or <EM>eigenvector Transform</EM> based on the eigenvector matrix
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img637.svg"
+ ALT="${\bf\Phi}$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf y}=\left[\begin{array}{c}y_1\\\vdots\\y_N\end{array}\right]
+  ={\bf\Phi}^T{\bf x}=\left[\begin{array}{c}
+    {\bf\phi}_1^T\\\vdots\\{\bf\phi}_N^T\end{array}\right]{\bf x}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 10.22ex; vertical-align: -4.49ex; " SRC="img638.svg"
+ ALT="$\displaystyle {\bf y}=\left[\begin{array}{c}y_1\\ \vdots\\ y_N\end{array}\right...
+...begin{array}{c}
+{\bf\phi}_1^T\\ \vdots\\ {\bf\phi}_N^T\end{array}\right]{\bf x}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">215</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where the nth component of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img159.svg"
+ ALT="${\bf y}$"></SPAN> is <!-- MATH
+ $y_n={\bf\phi}_n^T{\bf x}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img639.svg"
+ ALT="$y_n={\bf\phi}_n^T{\bf x}$"></SPAN>
+is the projection of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}$"></SPAN> onto the nth eigenvector <!-- MATH
+ ${\bf\phi}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img640.svg"
+ ALT="${\bf\phi}_n$"></SPAN>.
+Left multiplying both sides by <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img637.svg"
+ ALT="${\bf\Phi}$"></SPAN>, we get the inverse KLT:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf x}={\bf\Phi y}=[{\bf\phi}_1,\cdots,{\bf\phi}_N]
+\left[\begin{array}{c}y_1\\\vdots\\y_N\end{array}\right]
+=\sum_{n=1}^Ny_n{\bf\phi}_n
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 10.22ex; vertical-align: -4.49ex; " SRC="img641.svg"
+ ALT="$\displaystyle {\bf x}={\bf\Phi y}=[{\bf\phi}_1,\cdots,{\bf\phi}_N]
+\left[\begin{array}{c}y_1\\ \vdots\\ y_N\end{array}\right]
+=\sum_{n=1}^Ny_n{\bf\phi}_n$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">216</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+We see that <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}$"></SPAN> is expressed as a linear combination of 
+<!-- MATH
+ ${\bf\phi}_1,\cdots,{\bf\phi}_N$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img642.svg"
+ ALT="${\bf\phi}_1,\cdots,{\bf\phi}_N$"></SPAN> treated as an orthogonal basis
+that spans the N-D space. The KLT has two most favorable properties:
+
+<OL>
+<LI>It completely decorrelate the signal
+</LI>
+<LI>It maximally compact the signal energy
+</LI>
+</OL>
+To see the first property, we consider covariance matrix of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img159.svg"
+ ALT="${\bf y}$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf\Sigma}_y={\bf\Phi}^T{\bf\Sigma}_x{\bf\Phi}
+={\bf\Phi}^{-1}{\bf\Sigma}_x{\bf\Phi}={\bf\Lambda}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img643.svg"
+ ALT="$\displaystyle {\bf\Sigma}_y={\bf\Phi}^T{\bf\Sigma}_x{\bf\Phi}
+={\bf\Phi}^{-1}{\bf\Sigma}_x{\bf\Phi}={\bf\Lambda}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">217</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+i.e., 
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left[\begin{array}{ccc}\sigma_{11}^2 & \cdots & \sigma_{1N}^2\\
+    \vdots & \ddots & \vdots \\
+    \sigma_{N1}^2 & \cdots & \sigma_{NN}^2\end{array}\right]
+=\left[\begin{array}{ccc}\lambda_1 & \cdots & 0\\
+    \vdots & \ddots & \vdots \\
+    0 & \cdots & \lambda_N\end{array}\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 10.22ex; vertical-align: -4.49ex; " SRC="img644.svg"
+ ALT="$\displaystyle \left[\begin{array}{ccc}\sigma_{11}^2 &amp; \cdots &amp; \sigma_{1N}^2\\ ...
+...ts &amp; 0\\
+\vdots &amp; \ddots &amp; \vdots \\
+0 &amp; \cdots &amp; \lambda_N\end{array}\right]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">218</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The covariance of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img645.svg"
+ ALT="$y_i$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img646.svg"
+ ALT="$y_j$"></SPAN> of the random vector
+<!-- MATH
+ ${\bf y}={\bf\Phi}^T{\bf x}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.57ex; " SRC="img647.svg"
+ ALT="${\bf y}={\bf\Phi}^T{\bf x}$"></SPAN> is
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\sigma_{ij}^2=\left\{\begin{array}{ll}
+\lambda_i & i=j\\0 & i\ne j\end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img648.svg"
+ ALT="$\displaystyle \sigma_{ij}^2=\left\{\begin{array}{ll}
+\lambda_i &amp; i=j\\ 0 &amp; i\ne j\end{array}\right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">219</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+As <!-- MATH
+ $\sigma_{ij}^2=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -1.04ex; " SRC="img127.svg"
+ ALT="$\sigma_{ij}^2=0$"></SPAN> for any <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img218.svg"
+ ALT="$i\ne j$"></SPAN>, the components of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img159.svg"
+ ALT="${\bf y}$"></SPAN> are 
+completely decorrelized. after the KLT.
+
+<P>
+We next show that the KLT redistributes the dynamic energy contained in
+the signal so that it is maximally compacted into any <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img649.svg"
+ ALT="$M&lt;N$"></SPAN> components,
+while conserving the total energy. Let <!-- MATH
+ ${\bf A}=[{\bf a}_1,\cdots,{\bf a}_N]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img154.svg"
+ ALT="${\bf A}=[{\bf a}_1,\cdots,{\bf a}_N]$"></SPAN> 
+be an arbitrary orthogonal matrix, based on which an orthogonal transform 
+of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}$"></SPAN> can be defined as
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf y}=\left[ \begin{array}{c} y_1\\\vdots\\y_{N}\end{array} \right]
+  ={\bf A}^{T}{\bf x}=\left[ \begin{array}{c} {\bf a}_1^{T} \\\vdots\\
+      {\bf a}_{N}^{T} \end{array} \right]{\bf x}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 10.22ex; vertical-align: -4.49ex; " SRC="img650.svg"
+ ALT="$\displaystyle {\bf y}=\left[ \begin{array}{c} y_1\\ \vdots\\ y_{N}\end{array} \...
+...array}{c} {\bf a}_1^{T} \\ \vdots\\
+{\bf a}_{N}^{T} \end{array} \right]{\bf x}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">220</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <!-- MATH
+ $y_i={\bf a}_i^T{\bf x}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.72ex; " SRC="img651.svg"
+ ALT="$y_i={\bf a}_i^T{\bf x}$"></SPAN>. The inverse transform is:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf x}={\bf A}{\bf y}=[{\bf a}_1, \cdots, {\bf a}_{N}]
+  \left[ \begin{array}{c} y_1 \\\vdots \\y_{N} \end{array}\right]
+  =\sum_{i=1}^{N} y_i {\bf a}_i
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 10.22ex; vertical-align: -4.49ex; " SRC="img160.svg"
+ ALT="$\displaystyle {\bf x}={\bf A}{\bf y}=[{\bf a}_1, \cdots, {\bf a}_{N}]
+\left[ \b...
+...ray}{c} y_1 \\ \vdots \\ y_{N} \end{array}\right]
+=\sum_{i=1}^{N} y_i {\bf a}_i$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">221</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+As shown before, <!-- MATH
+ ${\bf\Sigma}_y={\bf A}^T{\bf\Sigma}_x{\bf A}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img652.svg"
+ ALT="${\bf\Sigma}_y={\bf A}^T{\bf\Sigma}_x{\bf A}$"></SPAN> and
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+tr {\bf\Sigma_y}=\sum_{i=1}^N\sigma_{y_i}^2=\sum_{i=1}^N\sigma_{x_i}^2
+  =tr {\bf\Sigma}_x
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img653.svg"
+ ALT="$\displaystyle tr {\bf\Sigma_y}=\sum_{i=1}^N\sigma_{y_i}^2=\sum_{i=1}^N\sigma_{x_i}^2
+=tr {\bf\Sigma}_x$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">222</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+i.e., the total dynamic energy (or information) contained in the signal
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}$"></SPAN> is conserved by the orthogonal transform. However, the energy 
+distribution among all <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img26.svg"
+ ALT="$N$"></SPAN> components can be very different before and 
+after the KLT transform. To see this, define the energy contained in the
+first <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img649.svg"
+ ALT="$M&lt;N$"></SPAN> components after the transform <!-- MATH
+ ${\bf y}={\bf A}^T{\bf x}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.57ex; " SRC="img172.svg"
+ ALT="${\bf y}={\bf A}^T{\bf x}$"></SPAN>,
+treated as an function of the transform matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img654.svg"
+ ALT="${\bf A}$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\varepsilon_M({\bf A})=\sum_{i=1}^M\sigma_{y_i}^2
+=\sum_{i=1}^M{\bf a}_i^T{\bf\Sigma}_x{\bf a}_i
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img655.svg"
+ ALT="$\displaystyle \varepsilon_M({\bf A})=\sum_{i=1}^M\sigma_{y_i}^2
+=\sum_{i=1}^M{\bf a}_i^T{\bf\Sigma}_x{\bf a}_i$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">223</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The optimal transform matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img654.svg"
+ ALT="${\bf A}$"></SPAN> that maximizes
+<!-- MATH
+ $\varepsilon_M({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img656.svg"
+ ALT="$\varepsilon_M({\bf A})$"></SPAN> can be found by solving the following 
+constrained maximization problem:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left\{	\begin{array}{l}
+  \mbox{maximize:  } \varepsilon_M({\bf A})
+  =\sum_{i=1}^M{\bf a}_i^T{\bf\Sigma}_x{\bf a}_i  \\
+  \mbox{subject to:  }\;\; {\bf a}_j^{T}{\bf a}_j=1 \;\;\;\;(j=1,\cdots,N)
+\end{array} \right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.27ex; vertical-align: -2.53ex; " SRC="img657.svg"
+ ALT="$\displaystyle \left\{ \begin{array}{l}
+\mbox{maximize: } \varepsilon_M({\bf A})...
+...t to: }\;\; {\bf a}_j^{T}{\bf a}_j=1 \;\;\;\;(j=1,\cdots,N)
+\end{array} \right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">224</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The constraint <!-- MATH
+ ${\bf a}_j^{T}{\bf a}_j=1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -1.04ex; " SRC="img658.svg"
+ ALT="${\bf a}_j^{T}{\bf a}_j=1$"></SPAN> is to guarantee that the 
+column vectors in <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img654.svg"
+ ALT="${\bf A}$"></SPAN> are normalized. Based on the Lagrange 
+multiplier method, we let:
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+& &\frac{\partial}{\partial {\bf a}_i}\left[S_M({\bf A})-\sum_{j=1}^{M}
+    \lambda_j({\bf a}_j^{T}{\bf a}_j-1)\right]
+  =\frac{\partial}{\partial {\bf a}_i}\left[\sum_{j=1}^{M}
+    ({\bf a}_j^{T}{\bf\Sigma}_x{\bf a}_j-\lambda_j {\bf a}_j^{T}{\bf a}_j+\lambda_j) \right]
+  \nonumber \\
+  &=&\frac{\partial}{\partial {\bf a}_i}
+  \left({\bf a}_i^{T}{\bf\Sigma}_x{\bf a}_i-\lambda_i{\bf a}_i^{T}{\bf a}_i\right)
+  \stackrel{*}{=} 2\left({\bf\Sigma}_x{\bf a}_i-\lambda_i{\bf a}_i\right)
+  =0, \;\;\;\;\;\;(i=1, \cdots, N)
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img659.svg"
+ ALT="$\displaystyle \frac{\partial}{\partial {\bf a}_i}\left[S_M({\bf A})-\sum_{j=1}^...
+...j^{T}{\bf\Sigma}_x{\bf a}_j-\lambda_j {\bf a}_j^{T}{\bf a}_j+\lambda_j) \right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.34ex; vertical-align: -2.06ex; " SRC="img660.svg"
+ ALT="$\displaystyle \frac{\partial}{\partial {\bf a}_i}
+\left({\bf a}_i^{T}{\bf\Sigma...
+...bf\Sigma}_x{\bf a}_i-\lambda_i{\bf a}_i\right)
+=0, \;\;\;\;\;\;(i=1, \cdots, N)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">225</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+(* <A ID="tex2html10"
+  HREF="../algebra/node7.html">review of linear algebra</A>.)
+For this to hold, <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img661.svg"
+ ALT="${\bf a}_i$"></SPAN> must be an eigen-vector <!-- MATH
+ ${\bf\phi}_i$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img662.svg"
+ ALT="${\bf\phi}_i$"></SPAN> of 
+<!-- MATH
+ ${\bf\Sigma}_x$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img165.svg"
+ ALT="${\bf\Sigma}_x$"></SPAN>, and we have thus proved that the optimal transform is 
+indeed KLT. To maximize <!-- MATH
+ $\varepsilon_M({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img656.svg"
+ ALT="$\varepsilon_M({\bf A})$"></SPAN>, we must have
+<!-- MATH
+ ${\bf A}={\bf\Phi}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img663.svg"
+ ALT="${\bf A}={\bf\Phi}$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\varepsilon_M({\bf A})=\varepsilon_M({\bf\Phi})
+=\sum_{i=1}^M{\bf\phi}_i^T{\bf\Sigma}_x{\bf\phi}_i
+=\sum_{i=1}^M\lambda_i
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img664.svg"
+ ALT="$\displaystyle \varepsilon_M({\bf A})=\varepsilon_M({\bf\Phi})
+=\sum_{i=1}^M{\bf\phi}_i^T{\bf\Sigma}_x{\bf\phi}_i
+=\sum_{i=1}^M\lambda_i$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">226</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+To maximize this, <!-- MATH
+ ${\bf\phi}_i$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img662.svg"
+ ALT="${\bf\phi}_i$"></SPAN>'s need to be the eigenvectors of 
+<!-- MATH
+ ${\bf\Sigma}_x$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img165.svg"
+ ALT="${\bf\Sigma}_x$"></SPAN> corresponding to <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img665.svg"
+ ALT="$M$"></SPAN> greatest eigenvalues of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img26.svg"
+ ALT="$N$"></SPAN>:
+<!-- MATH
+ $\lambda_1 \ge \cdots \ge \lambda_M \ge \cdots \ge \lambda_{N}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img666.svg"
+ ALT="$\lambda_1 \ge \cdots \ge \lambda_M \ge \cdots \ge \lambda_{N}$"></SPAN>.
+
+<P>
+Due to KLT's properties of signal decorrelation and energy compaction, it 
+is widely used for data compression by reducing the dimensionality of the 
+data set. 
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node10.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="probability.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node8.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node10.html">Convexity and Jensen's Inequality</A>
+<B> Up:</B> <A
+ HREF="probability.html">probability</A>
+<B> Previous:</B> <A
+ HREF="node8.html">Maximum Likelihood Estimation of</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

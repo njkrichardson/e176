@@ -1,0 +1,515 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Student's t-test</TITLE>
+<META NAME="description" CONTENT="Student's t-test">
+<META NAME="keywords" CONTENT="probability">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="probability.css">
+
+<LINK REL="next" HREF="node12.html">
+<LINK REL="previous" HREF="node10.html">
+<LINK REL="next" HREF="node12.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node12.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="probability.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node10.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node12.html">About this document ...</A>
+<B> Up:</B> <A
+ HREF="probability.html">probability</A>
+<B> Previous:</B> <A
+ HREF="node10.html">Convexity and Jensen's Inequality</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION000110000000000000000">
+Student's t-test</A>
+</H1>
+
+<P>
+Let <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN> be a random variable with a normal distribution
+<!-- MATH
+ ${\cal N}(\mu,\sigma^2)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img694.svg"
+ ALT="${\cal N}(\mu,\sigma^2)$"></SPAN>, and <!-- MATH
+ $\{x_1,\cdots,x_N\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img113.svg"
+ ALT="$\{x_1, \cdots, x_N \}$"></SPAN> be a set of
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img26.svg"
+ ALT="$N$"></SPAN> independent and identially distributed (iid) ssamples drawn
+from this distribution. Then the true mean of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN> can be estimated 
+by its <EM>sample mean</EM>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\bar{x}=\frac{1}{N}\sum_{i=1}^N x_i \;\;\sim\;\; {\cal N}(\mu, \sigma^2/N)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img695.svg"
+ ALT="$\displaystyle \bar{x}=\frac{1}{N}\sum_{i=1}^N x_i \;\;\sim\;\; {\cal N}(\mu, \sigma^2/N)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">238</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+i.e., <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.12ex; " SRC="img696.svg"
+ ALT="$\bar{x}$"></SPAN> is a normally distributed random variable with the
+same mean <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img697.svg"
+ ALT="$\mu$"></SPAN> as that of the original distribution and variance 
+<!-- MATH
+ $\sigma^2/N$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img698.svg"
+ ALT="$\sigma^2/N$"></SPAN>, which is the same as that of the original distribution
+if <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img699.svg"
+ ALT="$N=1$"></SPAN>, but approaches zero when <!-- MATH
+ $N\longrightarrow\infty$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img600.svg"
+ ALT="$N\longrightarrow\infty$"></SPAN>. We can 
+further define another random variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img700.svg"
+ ALT="$z$"></SPAN> as below with a standard 
+normal distribution (of zero mean and unit variance):
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+z=\frac{\bar{x}-\mu}{\sigma/\sqrt{N}} \;\;\sim\;\; {\cal N}(0,1)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.59ex; " SRC="img701.svg"
+ ALT="$\displaystyle z=\frac{\bar{x}-\mu}{\sigma/\sqrt{N}} \;\;\sim\;\; {\cal N}(0,1)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">239</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+If the standard deviation <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img702.svg"
+ ALT="$\sigma$"></SPAN> is not known, we can replace 
+it by the estimated <EM>sample standard deviation</EM> based on the 
+estimated <EM>sample variance</EM>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+S^2=\frac{1}{N-1}\sum_{i=1}^N e_i^2
+=\frac{1}{N-1}\sum_{i=1}^N (x_i-\bar{x})^2
+=\frac{1}{N-1}\left[\sum_{i=1}^N x_i-N\bar{x}\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img703.svg"
+ ALT="$\displaystyle S^2=\frac{1}{N-1}\sum_{i=1}^N e_i^2
+=\frac{1}{N-1}\sum_{i=1}^N (x_i-\bar{x})^2
+=\frac{1}{N-1}\left[\sum_{i=1}^N x_i-N\bar{x}\right]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">240</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Now random variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img704.svg"
+ ALT="$Z$"></SPAN> can be replaced by another random variable
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img705.svg"
+ ALT="$T$"></SPAN> based on <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1.svg"
+ ALT="$S$"></SPAN> instead of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img702.svg"
+ ALT="$\sigma$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+t=\frac{\bar{x}-\mu}{S/\sqrt{N}} \;\;\sim\;\; T_{\nu}(t)
+=\frac{\Gamma\left(\frac{\nu+1}{2}\right)}{\sqrt{\nu\pi}\Gamma\left(\frac{\nu}{2}\right)}
+\left(1+\frac{t^2}{\nu}\right)^{-(\nu+1)/2}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.97ex; vertical-align: -2.65ex; " SRC="img706.svg"
+ ALT="$\displaystyle t=\frac{\bar{x}-\mu}{S/\sqrt{N}} \;\;\sim\;\; T_{\nu}(t)
+=\frac{\...
+...i}\Gamma\left(\frac{\nu}{2}\right)}
+\left(1+\frac{t^2}{\nu}\right)^{-(\nu+1)/2}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">241</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <!-- MATH
+ $\Gamma(n)=(n-1)!$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img707.svg"
+ ALT="$\Gamma(n)=(n-1)!$"></SPAN> is the 
+<A ID="tex2html11"
+  HREF="https://en.wikipedia.org/wiki/Gamma_function">gamma function</A>.
+This is a random variable with Student's t-distribution of <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img708.svg"
+ ALT="$\nu=N-1$"></SPAN> 
+degrees of freedom. Specially
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+T_1(t)=\frac{1}{\pi(1+t^2)},\;\;\;
+  T_2(t)=\frac{1}{(2+t^2)^{3/2}},\;\;\;
+  T_3(t)=\frac{6\sqrt{3}}{\pi(3+t^2)^2},\;\;\;
+  T_\infty(t)=\frac{1}{\sqrt{2\pi}}e^{t^2/2}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.27ex; vertical-align: -2.33ex; " SRC="img709.svg"
+ ALT="$\displaystyle T_1(t)=\frac{1}{\pi(1+t^2)},\;\;\;
+T_2(t)=\frac{1}{(2+t^2)^{3/2}}...
+...frac{6\sqrt{3}}{\pi(3+t^2)^2},\;\;\;
+T_\infty(t)=\frac{1}{\sqrt{2\pi}}e^{t^2/2}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">242</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+When <!-- MATH
+ $\nu\rightarrow\infty$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img710.svg"
+ ALT="$\nu\rightarrow\infty$"></SPAN>, the t-distribution becomes the normal 
+distribution (the blue curve in the plots).
+
+<P>
+<IMG STYLE="" SRC="../figures/tDistribution.png"
+ ALT="tDistribution.png">
+
+<P>
+The <EM>confidence interval</EM> of the mean <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img697.svg"
+ ALT="$\mu$"></SPAN> is defined as the 
+interval between two limiting values such that the probability for 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img697.svg"
+ ALT="$\mu$"></SPAN> to fall inside the range is <!-- MATH
+ $(1-\alpha)100\%$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img711.svg"
+ ALT="$(1-\alpha)100\%$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+P(L \le \mu \le U)=(1-\alpha)100\%
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img712.svg"
+ ALT="$\displaystyle P(L \le \mu \le U)=(1-\alpha)100\%$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">243</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img570.svg"
+ ALT="$\alpha$"></SPAN> is the <EM>significant level</EM>. For example, if
+<!-- MATH
+ $\alpha=0.05$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img713.svg"
+ ALT="$\alpha=0.05$"></SPAN>, then <!-- MATH
+ $P(L\le\mu\le U)=95\%$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img714.svg"
+ ALT="$P(L\le\mu\le U)=95\%$"></SPAN>. 
+
+<P>
+To find the limits of such a confidence interval corresponding to a
+given <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img570.svg"
+ ALT="$\alpha$"></SPAN>, we first consider the interval <!-- MATH
+ $[-z_{\alpha/2},\;z_{\alpha/2}]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.94ex; " SRC="img715.svg"
+ ALT="$[-z_{\alpha/2},\;z_{\alpha/2}]$"></SPAN> 
+so that 
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+P(-z_{\alpha/2} \le z \le z_{\alpha/2})
+  =\int_{z_{-\alpha/2}}^{z_{\alpha/2}} {\cal N}(z,0,1)\;dz=1-\alpha,
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.27ex; vertical-align: -2.83ex; " SRC="img716.svg"
+ ALT="$\displaystyle P(-z_{\alpha/2} \le z \le z_{\alpha/2})
+=\int_{z_{-\alpha/2}}^{z_{\alpha/2}} {\cal N}(z,0,1)\;dz=1-\alpha,$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">244</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+i.e.,
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\int_{-\infty}^{z_{-\alpha/2}} {\cal N}(z,0,1)\;dz
+  =\int_{z_{\alpha/2}}^{\infty}{\cal N}(z,0,1)\;dz=\alpha/2
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.27ex; vertical-align: -2.83ex; " SRC="img717.svg"
+ ALT="$\displaystyle \int_{-\infty}^{z_{-\alpha/2}} {\cal N}(z,0,1)\;dz
+=\int_{z_{\alpha/2}}^{\infty}{\cal N}(z,0,1)\;dz=\alpha/2$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">245</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+For example, if <!-- MATH
+ $\alpha=0.05$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img713.svg"
+ ALT="$\alpha=0.05$"></SPAN>, we can find <!-- MATH
+ $z_{\alpha/2}=1.96$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.94ex; " SRC="img718.svg"
+ ALT="$z_{\alpha/2}=1.96$"></SPAN> from the 
+<A ID="tex2html12"
+  HREF="https://math.arizona.edu/~rsims/ma464/standardnormaltable.pdf">z-Table</A>.
+
+<P>
+Now we can further find the lower and upper limits of the confidence
+interval for <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img697.svg"
+ ALT="$\mu$"></SPAN> by noting that the following events are equivalent:
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+P(-z_{\alpha/2} \le z \le z_{\alpha/2})
+  &=&P\left(-z_{\alpha/2} \le \frac{\bar{x}-\mu}{\sigma/\sqrt{N}}\le z_{\alpha/2}\right)
+  \nonumber\\
+  &=&P\left(\bar{x}-z_{\alpha/2}\frac{\sigma}{\sqrt{N}} \le \mu 
+  \le \bar{x}+z_{\alpha/2}\frac{\sigma}{\sqrt{N}}\right)=1-\alpha
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 3.02ex; vertical-align: -0.94ex; " SRC="img719.svg"
+ ALT="$\displaystyle P(-z_{\alpha/2} \le z \le z_{\alpha/2})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.27ex; vertical-align: -2.59ex; " SRC="img720.svg"
+ ALT="$\displaystyle P\left(-z_{\alpha/2} \le \frac{\bar{x}-\mu}{\sigma/\sqrt{N}}\le z_{\alpha/2}\right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img721.svg"
+ ALT="$\displaystyle P\left(\bar{x}-z_{\alpha/2}\frac{\sigma}{\sqrt{N}} \le \mu
+\le \bar{x}+z_{\alpha/2}\frac{\sigma}{\sqrt{N}}\right)=1-\alpha$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">246</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+i.e., the lower and upper limits of the confidence 
+interval for <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img697.svg"
+ ALT="$\mu$"></SPAN> corresponding to <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img722.svg"
+ ALT="$1-\alpha$"></SPAN> is:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+L=\bar{x}-z_{\alpha/2}\frac{\sigma}{\sqrt{N}},\;\;\;\;\;
+  U=\bar{x}+z_{\alpha/2}\frac{\sigma}{\sqrt{N}}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.11ex; vertical-align: -2.28ex; " SRC="img723.svg"
+ ALT="$\displaystyle L=\bar{x}-z_{\alpha/2}\frac{\sigma}{\sqrt{N}},\;\;\;\;\;
+U=\bar{x}+z_{\alpha/2}\frac{\sigma}{\sqrt{N}}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">247</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+so that
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+P(L \le \mu \le U)=1-\alpha
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img724.svg"
+ ALT="$\displaystyle P(L \le \mu \le U)=1-\alpha$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">248</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The <EM>standard error</EM> of the estimated mean is defined as
+<!-- MATH
+ $\sigma/\sqrt{N}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img725.svg"
+ ALT="$\sigma/\sqrt{N}$"></SPAN>, and the upper and lower limits of the confidence 
+interval given above can be expressed as:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\bar{x}\pm z_{\alpha/2}\frac{\sigma}{\sqrt{N}}=\bar{x}\pm z_{\alpha/2} SE
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.11ex; vertical-align: -2.28ex; " SRC="img726.svg"
+ ALT="$\displaystyle \bar{x}\pm z_{\alpha/2}\frac{\sigma}{\sqrt{N}}=\bar{x}\pm z_{\alpha/2} SE$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">249</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+When <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img702.svg"
+ ALT="$\sigma$"></SPAN> is not known, it can be approximated by the <EM>estimated 
+standard error</EM> <!-- MATH
+ $ESE=S/\sqrt{N}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img727.svg"
+ ALT="$ESE=S/\sqrt{N}$"></SPAN> based on the estimated sample standard
+deviation <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1.svg"
+ ALT="$S$"></SPAN>. We can follow the same derivation above, but replacing <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img700.svg"
+ ALT="$z$"></SPAN> 
+with standard normal distribution by <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img728.svg"
+ ALT="$t$"></SPAN> with t-distribution, and find 
+the limits of the confidence interval as:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\bar{x}\pm t_{\alpha/2}\frac{S}{\sqrt{N}}=\bar{x}\pm t_{\alpha/2} ESE
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.57ex; vertical-align: -2.28ex; " SRC="img729.svg"
+ ALT="$\displaystyle \bar{x}\pm t_{\alpha/2}\frac{S}{\sqrt{N}}=\bar{x}\pm t_{\alpha/2} ESE$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">250</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <!-- MATH
+ $t_{\alpha/2}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.94ex; " SRC="img730.svg"
+ ALT="$t_{\alpha/2}$"></SPAN> are the limits satisfying the following:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+P(-t_{\alpha/2}\le t\le t_{\alpha/2})=\int_{t_{-\alpha/2}}^{t_{\alpha/2}} T_\nu(t) dt
+  =1-\alpha
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.74ex; vertical-align: -2.83ex; " SRC="img731.svg"
+ ALT="$\displaystyle P(-t_{\alpha/2}\le t\le t_{\alpha/2})=\int_{t_{-\alpha/2}}^{t_{\alpha/2}} T_\nu(t) dt
+=1-\alpha$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">251</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+which can be found by the <A ID="tex2html13"
+  HREF="http://www.sjsu.edu/faculty/gerstman/StatPrimer/t-table.pdf">t-Table</A>, given
+a significant level <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img570.svg"
+ ALT="$\alpha$"></SPAN> and the degrees of freedom <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img732.svg"
+ ALT="$\nu$"></SPAN>.
+
+<P>
+For example, assume <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.12ex; " SRC="img696.svg"
+ ALT="$\bar{x}$"></SPAN> is obtained based on <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img733.svg"
+ ALT="$N=11$"></SPAN> samples:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\bar{x}=\frac{1}{11}\sum_{i=1}^{11}x_i
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img734.svg"
+ ALT="$\displaystyle \bar{x}=\frac{1}{11}\sum_{i=1}^{11}x_i$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">252</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+then the degrees of freedom is <!-- MATH
+ $\nu=N-1=10$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img735.svg"
+ ALT="$\nu=N-1=10$"></SPAN>. For a significant level
+<!-- MATH
+ $\alpha=0.05$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img713.svg"
+ ALT="$\alpha=0.05$"></SPAN>, we can find <!-- MATH
+ $t_{0.05/2}=2.228$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.94ex; " SRC="img736.svg"
+ ALT="$t_{0.05/2}=2.228$"></SPAN> from the t-Table. Note
+that this value is different from <!-- MATH
+ $t_{0.05/2}=1.96$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.94ex; " SRC="img737.svg"
+ ALT="$t_{0.05/2}=1.96$"></SPAN>. However, when the 
+sample size <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img26.svg"
+ ALT="$N$"></SPAN> becomes larger, <!-- MATH
+ $T_{\nu}(t)=T_{N-1}(t)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img738.svg"
+ ALT="$T_{\nu}(t)=T_{N-1}(t)$"></SPAN> will approach
+to the standard normal distribution <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img739.svg"
+ ALT="$N(z,0,1)$"></SPAN>, and 
+<!-- MATH
+ $t_{\alpha/2}\longrightarrow z_{\alpha/2}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.94ex; " SRC="img740.svg"
+ ALT="$t_{\alpha/2}\longrightarrow z_{\alpha/2}$"></SPAN>.
+
+<P>
+Confidence interval for linear regression....
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node12.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="probability.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node10.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node12.html">About this document ...</A>
+<B> Up:</B> <A
+ HREF="probability.html">probability</A>
+<B> Previous:</B> <A
+ HREF="node10.html">Convexity and Jensen's Inequality</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

@@ -1,0 +1,538 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Bayesian Inference</TITLE>
+<META NAME="description" CONTENT="Bayesian Inference">
+<META NAME="keywords" CONTENT="probability">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="probability.css">
+
+<LINK REL="next" HREF="node8.html">
+<LINK REL="previous" HREF="node6.html">
+<LINK REL="next" HREF="node8.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node8.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="probability.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node6.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node8.html">Maximum Likelihood Estimation of</A>
+<B> Up:</B> <A
+ HREF="probability.html">probability</A>
+<B> Previous:</B> <A
+ HREF="node6.html">Mutual Information and Kullback-Leibler</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00070000000000000000">
+Bayesian Inference</A>
+</H1>
+
+<P>
+Bayes' theorem states:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+P(A,B)=P(A|B)\,P(B)=P(B|A)\,P(A),\;\;\;\;\;\;\;
+  p(A|B)=\frac{p(B|A)\,p(A)}{p(B)}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.29ex; " SRC="img552.svg"
+ ALT="$\displaystyle P(A,B)=P(A\vert B)\,P(B)=P(B\vert A)\,P(A),\;\;\;\;\;\;\;
+p(A\vert B)=\frac{p(B\vert A)\,p(A)}{p(B)}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">189</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+If <!-- MATH
+ $\{A_1,\cdots,A_n\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img52.svg"
+ ALT="$\{A_1,\cdots,A_n\}$"></SPAN> is a partition of sample space <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img7.svg"
+ ALT="$A$"></SPAN>, then
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+P(B)=\sum_{i=1}^n P(B|A_i)\,P(A_i),\;\;\;\;\;\;\;
+  P(A_i|B)=\frac{P(B|A_i)\,P(A_i)}{P(B)}
+  =\frac{P(B|A_i)\,P(A_i)}{\sum_{i=1}^n P(B|A_i)\,P(A_i)}\;\;\;\;(i=1,\cdots,n)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.20ex; vertical-align: -3.09ex; " SRC="img553.svg"
+ ALT="$\displaystyle P(B)=\sum_{i=1}^n P(B\vert A_i)\,P(A_i),\;\;\;\;\;\;\;
+P(A_i\vert...
+...(B\vert A_i)\,P(A_i)}{\sum_{i=1}^n P(B\vert A_i)\,P(A_i)}\;\;\;\;(i=1,\cdots,n)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">190</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+For example, students take one of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img53.svg"
+ ALT="$n$"></SPAN> elective courses <!-- MATH
+ $\{A_1,\cdots,A_n\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img52.svg"
+ ALT="$\{A_1,\cdots,A_n\}$"></SPAN> 
+each with probability <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img554.svg"
+ ALT="$P(A_i)$"></SPAN>. The probability to get a B grade in course 
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img555.svg"
+ ALT="$A_i$"></SPAN> is known to be <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img556.svg"
+ ALT="$P(B\vert A_i)$"></SPAN>. Given that a student gets a B, the 
+probability for him/her to have taken course <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img555.svg"
+ ALT="$A_i$"></SPAN> is <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img557.svg"
+ ALT="$P(A_i\vert B)$"></SPAN>.
+
+<P>
+The method of <A ID="tex2html6"
+  HREF="https://www.youtube.com/watch?v=5NMxiOGL39M"><EM>Bayesian inference</EM></A>
+deduces a hypothesis <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img424.svg"
+ ALT="$H$"></SPAN>, a model of 
+the probability distribution of an observed dataset <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img558.svg"
+ ALT="$D$"></SPAN>, in terms of 
+the form and/or parameters of the distribution. The method of Bayesian 
+inference can be an iterative process, that updates the model parameters
+as more data becomes available. Based on Bayes' theorem, the Bayesian
+inference can be formulated in words:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\mbox{posterior}=\frac{\mbox{likelihood}\times \mbox{prior}}{evidence}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH">posterior<IMG STYLE="height: 5.11ex; vertical-align: -1.71ex; " SRC="img559.svg"
+ ALT="$\displaystyle =\frac{\mbox{likelihood}\times \mbox{prior}}{evidence}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">191</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+or in mathematics:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p(H|D)=\frac{p(D|H)\,p(H)}{p(D)} \propto p(D|H)\,p(H)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.29ex; " SRC="img560.svg"
+ ALT="$\displaystyle p(H\vert D)=\frac{p(D\vert H)\,p(H)}{p(D)} \propto p(D\vert H)\,p(H)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">192</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img561.svg"
+ ALT="$p(H)$"></SPAN> is the <EM>proior probability</EM> of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img424.svg"
+ ALT="$H$"></SPAN> based on some 
+prior knowledge without observation of any data, <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img562.svg"
+ ALT="$p(H\vert D)$"></SPAN> is the
+<EM>posterior probability</EM> of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img424.svg"
+ ALT="$H$"></SPAN> based on the observation of some
+data <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img558.svg"
+ ALT="$D$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img563.svg"
+ ALT="$p(D\vert H)$"></SPAN> is the <EM>likelihood</EM> of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img424.svg"
+ ALT="$H$"></SPAN>, proportional to
+the probability of observing <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img558.svg"
+ ALT="$D$"></SPAN> given <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img424.svg"
+ ALT="$H$"></SPAN>, and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img564.svg"
+ ALT="$p(D)$"></SPAN> is the probability
+of observing data <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img558.svg"
+ ALT="$D$"></SPAN>, which is independent of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img424.svg"
+ ALT="$H$"></SPAN> in question, and 
+typically ignored.
+
+<P>
+Bayesian inference is widely used in various machine learning algorithms.
+Specifically, 
+
+<UL>
+<LI>Hypothesis <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img424.svg"
+ ALT="$H$"></SPAN>: a specific probabilistic model, containing a set
+  of parameters <!-- MATH
+ $\theta_1,\cdots,\theta_M$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img565.svg"
+ ALT="$\theta_1,\cdots,\theta_M$"></SPAN> represented as a vector 
+  <!-- MATH
+ ${\bf\theta}=[\theta_1,\cdots,\theta_M]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img566.svg"
+ ALT="${\bf\theta}=[\theta_1,\cdots,\theta_M]^T$"></SPAN> and treated as random 
+  variables, to be estimated based on the observed data.
+
+<P>
+</LI>
+<LI>Data <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img558.svg"
+ ALT="$D$"></SPAN>: a collection of data points, typcially a set of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img26.svg"
+ ALT="$N$"></SPAN> 
+  vectors in <!-- MATH
+ ${\bf X}=[{\bf x}_1,\cdots,{\bf x}_N]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img567.svg"
+ ALT="${\bf X}=[{\bf x}_1,\cdots,{\bf x}_N]$"></SPAN> in d-dimensional
+  <EM>feature space</EM>, each containing <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img568.svg"
+ ALT="$d$"></SPAN> variables  
+  <!-- MATH
+ ${\bf x}_n=[x_1,\cdots,x_d]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img569.svg"
+ ALT="${\bf x}_n=[x_1,\cdots,x_d]^T$"></SPAN>.
+
+<P>
+</LI>
+<LI>Hyperparameter: <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img570.svg"
+ ALT="$\alpha$"></SPAN> is the parameters of the parameters, 
+  such as the number of parameters, which may or may not be needed.
+</LI>
+</UL>
+
+<P>
+Now we have
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p({\bf\theta}|{\bf X})=\frac{p({\bf X}|{\bf\theta})\,p({\bf\theta})}{p({\bf X})}
+  =\frac{p({\bf X}|{\bf\theta})\,p({\bf\theta})}
+  {\sum_{\theta} p({\bf X}|{\bf\theta})\,p({\bf\theta})}
+  \propto p({\bf X}|{\bf\theta})\,p({\bf\theta})
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.41ex; " SRC="img571.svg"
+ ALT="$\displaystyle p({\bf\theta}\vert{\bf X})=\frac{p({\bf X}\vert{\bf\theta})\,p({\...
+...\bf\theta})\,p({\bf\theta})}
+\propto p({\bf X}\vert{\bf\theta})\,p({\bf\theta})$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">193</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where
+
+<UL>
+<LI><!-- MATH
+ $p({\bf\theta})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img572.svg"
+ ALT="$p({\bf\theta})$"></SPAN>: the <EM>a priori</EM> probability, or the
+  simply <EM>prior</EM>, of parameter <!-- MATH
+ ${\bf\theta}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img573.svg"
+ ALT="${\bf\theta}$"></SPAN> based on some 
+  prior knowledge before any data <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img189.svg"
+ ALT="${\bf X}$"></SPAN> are observed.
+
+<P>
+</LI>
+<LI><!-- MATH
+ $L({\bf\theta}|{\bf X})=p({\bf X}|{\bf\theta})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img574.svg"
+ ALT="$L({\bf\theta}\vert{\bf X})=p({\bf X}\vert{\bf\theta})$"></SPAN>: the 
+  <EM>likelihood</EM> of the statistical model parameters in 
+  <!-- MATH
+ ${\bf\theta}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img573.svg"
+ ALT="${\bf\theta}$"></SPAN> (hypothesis), given the observed data <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img189.svg"
+ ALT="${\bf X}$"></SPAN>,
+  representing how probable <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img189.svg"
+ ALT="${\bf X}$"></SPAN> is for different values
+  of <!-- MATH
+ ${\bf\theta}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img573.svg"
+ ALT="${\bf\theta}$"></SPAN>. If the data samples in 
+  <!-- MATH
+ ${\bf X}=[{\bf x}_1,\cdots,{\bf x}_N]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img567.svg"
+ ALT="${\bf X}=[{\bf x}_1,\cdots,{\bf x}_N]$"></SPAN> are independently drawn 
+  from the same probability density function, i.e., they are 
+  <EM>independent and identically distributed (i.i.d.)</EM>, then 
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p({\bf X}|{\bf\theta})=\prod_{n=1}^N p({\bf x}_n|{\bf\theta})
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img575.svg"
+ ALT="$\displaystyle p({\bf X}\vert{\bf\theta})=\prod_{n=1}^N p({\bf x}_n\vert{\bf\theta})$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">194</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+</LI>
+<LI><!-- MATH
+ $p({\bf X})=\sum_{\theta} p({\bf X|\theta}) p(\theta)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.81ex; " SRC="img576.svg"
+ ALT="$p({\bf X})=\sum_{\theta} p({\bf X\vert\theta}) p(\theta)$"></SPAN>: 
+  the distribution of the data while the paraeter <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img577.svg"
+ ALT="$\theta$"></SPAN> is 
+  marginalized. As <!-- MATH
+ $p({\bf X})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img578.svg"
+ ALT="$p({\bf X})$"></SPAN> is a constant independent of the 
+  parameter <!-- MATH
+ ${\bf\theta}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img573.svg"
+ ALT="${\bf\theta}$"></SPAN> in question, and it is needed only for 
+  normalizing <!-- MATH
+ $p({\bf X}|{\bf\theta})\,p({\bf\theta})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img579.svg"
+ ALT="$p({\bf X}\vert{\bf\theta})\,p({\bf\theta})$"></SPAN>, it is 
+  often dropped in the process of maximization for convenience.
+
+<P>
+</LI>
+<LI><!-- MATH
+ $p(\theta|{\bf X})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img580.svg"
+ ALT="$p(\theta\vert{\bf X})$"></SPAN>: the <EM>a posteriori</EM> probability, 
+  or simply the <EM>posterior</EM> of the parameter <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img577.svg"
+ ALT="$\theta$"></SPAN>, after 
+  data <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img189.svg"
+ ALT="${\bf X}$"></SPAN> are observed.
+</LI>
+</UL>
+
+<P>
+There are two methods typically used for the estimation of the 
+parameters in <!-- MATH
+ ${\bf\theta}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img573.svg"
+ ALT="${\bf\theta}$"></SPAN> based on the observed data <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img189.svg"
+ ALT="${\bf X}$"></SPAN>:
+
+<UL>
+<LI><EM>Maximum Likelihood Estimation (MLE)</EM> seeks to find <!-- MATH
+ ${\bf\theta}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img573.svg"
+ ALT="${\bf\theta}$"></SPAN>
+  that maximizes the likelihood:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf\theta}_{MLE}=\argmax_\theta \;p({\bf X}|{\bf\theta})
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 4.18ex; vertical-align: -2.32ex; " SRC="img581.svg"
+ ALT="$\displaystyle {\bf\theta}_{MLE}=\argmax_\theta \;p({\bf X}\vert{\bf\theta})$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">195</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+</LI>
+<LI><EM>Maximum A Posteriori (MAP)</EM> seeks to find <!-- MATH
+ ${\bf\theta}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img573.svg"
+ ALT="${\bf\theta}$"></SPAN>
+  that maximizes the posterior:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf\theta}_{MAP}=\argmax_\theta \;p({\bf\theta}|{\bf X})
+    \propto p({\bf X}|{\bf\theta})\,p({\bf\theta})
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 4.18ex; vertical-align: -2.32ex; " SRC="img582.svg"
+ ALT="$\displaystyle {\bf\theta}_{MAP}=\argmax_\theta \;p({\bf\theta}\vert{\bf X})
+\propto p({\bf X}\vert{\bf\theta})\,p({\bf\theta})$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">196</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+</LI>
+</UL>
+The difference between the two methods is whether certain prior knowledge
+is available regarding the distribution <!-- MATH
+ $p({\bf\theta})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img572.svg"
+ ALT="$p({\bf\theta})$"></SPAN> of the parameters
+before observing any data. If no such prior knowledge is available, i.e., 
+all possible values of the parameters are equally likely with 
+<!-- MATH
+ $p({\bf\theta})=costant$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img583.svg"
+ ALT="$p({\bf\theta})=costant$"></SPAN> (uniform distribution), then the two methods will 
+produce the same result. On the other hand, if we have some prior knowledge 
+that the parameters obey certain distribution <!-- MATH
+ $p({\bf\theta})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img572.svg"
+ ALT="$p({\bf\theta})$"></SPAN>, e.g., they
+are normally distributed with certain mean and covariance, then the MAP 
+method may produce more accurate estimation.
+
+<P>
+When we maximize either the likelihood or the posterior as a function of
+<!-- MATH
+ ${\bf\theta}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img573.svg"
+ ALT="${\bf\theta}$"></SPAN>, we can equivalently maximize the logarithm (a monotonic
+function) of the function for mathematical convenience, the two methods 
+above can therefore be expressed as
+
+<UL>
+<LI>MLE:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf\theta}_{MLE}=\argmax_\theta \log\;p({\bf X}|{\bf\theta})
+    =\argmax_\theta \log\left(\prod_{n=1}^N p({\bf x}_n|{\bf\theta})\right)
+    =\argmax_\theta \left( \sum_{n=1}^N \log\,p({\bf x}_n|{\bf\theta})\right)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img584.svg"
+ ALT="$\displaystyle {\bf\theta}_{MLE}=\argmax_\theta \log\;p({\bf X}\vert{\bf\theta})...
+...)
+=\argmax_\theta \left( \sum_{n=1}^N \log\,p({\bf x}_n\vert{\bf\theta})\right)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">197</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+</LI>
+<LI>MAP:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf\theta}_{MAP}=\argmax_\theta
+    \log\;\left(p({\bf X}|{\bf\theta})\,p({\bf\theta})\right)
+    =\argmax_\theta \left(\sum_{n=1}^N \log\;p({\bf x}_n|{\bf\theta})
+    +\log\,p({\bf\theta})\right)
+  
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.06ex; " SRC="img585.svg"
+ ALT="$\displaystyle {\bf\theta}_{MAP}=\argmax_\theta
+\log\;\left(p({\bf X}\vert{\bf\t...
+...ft(\sum_{n=1}^N \log\;p({\bf x}_n\vert{\bf\theta})
++\log\,p({\bf\theta})\right)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">198</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+</LI>
+</UL>
+
+<P>
+Both MLE and MAP seek to find some specific values for the parameters 
+in <!-- MATH
+ ${\bf\theta}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img573.svg"
+ ALT="${\bf\theta}$"></SPAN> that maximize certain function of the parameters, such 
+as the likelihood or the posterior of <!-- MATH
+ ${\bf\theta}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img573.svg"
+ ALT="${\bf\theta}$"></SPAN>, or their logarithm. 
+In certain situations, we can instead find the values of such parameters 
+in <!-- MATH
+ ${\bf\theta}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img573.svg"
+ ALT="${\bf\theta}$"></SPAN> that maximizes the expectation of the function to be 
+maximized, now denoted by <!-- MATH
+ $Q({\bf\theta})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img586.svg"
+ ALT="$Q({\bf\theta})$"></SPAN>, by the method called
+<EM>expectation-maximization (EM)</EM>, in an iteration of two steps:
+
+<UL>
+<LI>The E-step: find the expectation <!-- MATH
+ $Q({\bf\theta})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img586.svg"
+ ALT="$Q({\bf\theta})$"></SPAN> based on the
+  previous parameter values <!-- MATH
+ ${\bf\theta}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img587.svg"
+ ALT="${\bf\theta}_n$"></SPAN>;
+</LI>
+<LI>The M-step: find the updated parameter values <!-- MATH
+ ${\bf\theta}_{n+1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img588.svg"
+ ALT="${\bf\theta}_{n+1}$"></SPAN>
+  that maximize the expectation <!-- MATH
+ $Q({\bf\theta})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img586.svg"
+ ALT="$Q({\bf\theta})$"></SPAN>. 
+</LI>
+</UL>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node8.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="probability.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node6.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node8.html">Maximum Likelihood Estimation of</A>
+<B> Up:</B> <A
+ HREF="probability.html">probability</A>
+<B> Previous:</B> <A
+ HREF="node6.html">Mutual Information and Kullback-Leibler</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

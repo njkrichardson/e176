@@ -1,0 +1,2536 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>The Fundamental Theorem of Linear Algebra</TITLE>
+<META NAME="description" CONTENT="The Fundamental Theorem of Linear Algebra">
+<META NAME="keywords" CONTENT="algebra">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="algebra.css">
+
+<LINK REL="next" HREF="node20.html">
+<LINK REL="previous" HREF="node18.html">
+<LINK REL="next" HREF="node20.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node20.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="algebra.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node18.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node20.html">Pseudo-Inverse Solutions Based on</A>
+<B> Up:</B> <A
+ HREF="algebra.html">algebra</A>
+<B> Previous:</B> <A
+ HREF="node18.html">Vector and Matrix Differentiation</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION000190000000000000000">
+The Fundamental Theorem of Linear Algebra</A>
+</H1>
+
+<P>
+When solving a linear equation system <!-- MATH
+ ${\bf Ax}={\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img269.svg"
+ ALT="${\bf Ax}={\bf b}$"></SPAN>, with an 
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img968.svg"
+ ALT="$M\times N$"></SPAN> coefficient matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>, we need to answer some 
+questions such as the following:
+
+<UL>
+<LI>Does the solution exist, i.e., can we find an <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img969.svg"
+ ALT="${\bf x}^*$"></SPAN> so that 
+  <!-- MATH
+ ${\bf Ax}^*={\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.12ex; " SRC="img970.svg"
+ ALT="${\bf Ax}^*={\bf b}$"></SPAN> holds? 
+</LI>
+<LI>If a solution exists, is it unique? If it is not unique, how can 
+  we find all of the solutions?
+</LI>
+<LI>If no solution exists, can we still find the optimal approximate 
+  solution <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.12ex; " SRC="img971.svg"
+ ALT="$\hat{\bf x}$"></SPAN> so that the error 
+  <!-- MATH
+ $||{\bf e}||=||{\bf A}\hat{\bf x}-{\bf b}||$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img972.svg"
+ ALT="$\vert\vert{\bf e}\vert\vert=\vert\vert{\bf A}\hat{\bf x}-{\bf b}\vert\vert$"></SPAN> is minimized?
+</LI>
+<LI>If the system has fewer equations than unknowns (<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img973.svg"
+ ALT="$M&lt;N$"></SPAN>), are there
+  infinite solutions?
+</LI>
+<LI>If the system has more equations than unknowns (<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img974.svg"
+ ALT="$M&gt;N$"></SPAN>), is there
+  no solution?
+</LI>
+</UL>
+The <EM>fundamental theorem of linear algebra</EM> can reveal the structure 
+of the solutions of a given linear system <!-- MATH
+ ${\bf Ax}={\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img269.svg"
+ ALT="${\bf Ax}={\bf b}$"></SPAN>, and thereby 
+answer all such questions.
+
+<P>
+The <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img968.svg"
+ ALT="$M\times N$"></SPAN> coefficient matrix <!-- MATH
+ ${\bf A}\in R^{M\times N}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.21ex; " SRC="img975.svg"
+ ALT="${\bf A}\in R^{M\times N}$"></SPAN> can be expressed
+in terms of either its <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img976.svg"
+ ALT="$N$"></SPAN> M-D column vectors <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img977.svg"
+ ALT="${\bf c}_j$"></SPAN> or its <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img978.svg"
+ ALT="$M$"></SPAN> N-D row
+vectors <SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.72ex; " SRC="img979.svg"
+ ALT="${\bf r}_i^T$"></SPAN>:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}=\left[\begin{array}{ccc}a_{11}&\cdots&a_{1N}\\
+      \vdots&\ddots&\vdots\\a_{M1}&\cdots&a_{MN}\end{array}\right]
+  =[{\bf c_1},\cdots,{\bf c}_N]
+  =\left[\begin{array}{c}{\bf r}^T_1\\\vdots\\{\bf r}^T_M\end{array}\right],
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 10.22ex; vertical-align: -4.49ex; " SRC="img980.svg"
+ ALT="$\displaystyle {\bf A}=\left[\begin{array}{ccc}a_{11}&amp;\cdots&amp;a_{1N}\\
+\vdots&amp;\...
+...
+=\left[\begin{array}{c}{\bf r}^T_1\\ \vdots\\ {\bf r}^T_M\end{array}\right],
+$"> 
+
+(<SPAN CLASS="arabic">300</SPAN>)
+</DIV>
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}^T=\left[\begin{array}{ccc}a_{11}&\cdots&a_{M1}\\
+      \vdots&\ddots&\vdots\\a_{1N}&\cdots&a_{MN}\end{array}\right]
+  =[{\bf r_1},\cdots,{\bf r}_M]
+  =\left[\begin{array}{c}{\bf c}^T_1\\\vdots\\{\bf c}^T_N\end{array}\right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 10.22ex; vertical-align: -4.49ex; " SRC="img981.svg"
+ ALT="$\displaystyle {\bf A}^T=\left[\begin{array}{ccc}a_{11}&amp;\cdots&amp;a_{M1}\\
+\vdots...
+...
+=\left[\begin{array}{c}{\bf c}^T_1\\ \vdots\\ {\bf c}^T_N\end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">301</SPAN>)
+</DIV>
+where <!-- MATH
+ ${\bf r}_i,\;(i=1,\cdots,M)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img982.svg"
+ ALT="${\bf r}_i,\;(i=1,\cdots,M)$"></SPAN> and <!-- MATH
+ ${\bf c}_j,\;(j=1,\cdots,N)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img983.svg"
+ ALT="${\bf c}_j,\;(j=1,\cdots,N)$"></SPAN> 
+are respectively the ith row vector and jth column vector (all vectors 
+are assumed to be vertical):
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf c}_j=\left[\begin{array}{c}a_{1j}\\\vdots\\a_{Mj}\end{array}\right],
+  \;\;\;\;\;\;\;\;\;
+  {\bf r}_i=\left[\begin{array}{c}a_{i1}\\\vdots\\a_{iN}\end{array}\right]
+  \;\;\;\;\;\mbox{i.e.}\;\;\;  {\bf r}_i^T=[a_{i1},\cdots,a_{iN}]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 10.22ex; vertical-align: -4.49ex; " SRC="img984.svg"
+ ALT="$\displaystyle {\bf c}_j=\left[\begin{array}{c}a_{1j}\\ \vdots\\ a_{Mj}\end{arra...
+...{array}\right]
+\;\;\;\;\;\mbox{i.e.}\;\;\; {\bf r}_i^T=[a_{i1},\cdots,a_{iN}]
+$"> 
+
+(<SPAN CLASS="arabic">302</SPAN>)
+</DIV>
+
+<P>
+In general a function <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img985.svg"
+ ALT="$y=f(x)$"></SPAN> can be represented by 
+<!-- MATH
+ $f:\;X\rightarrow Y$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img986.svg"
+ ALT="$f:\;X\rightarrow Y$"></SPAN>, where
+
+<UL>
+<LI><SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img987.svg"
+ ALT="$X$"></SPAN> is the
+  <A ID="tex2html13"
+  HREF="http://en.wikipedia.org/wiki/Domain_(mathematics)"><EM>domain</EM></A>
+of the function, the set of all input or argument values;
+</LI>
+<LI><SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img988.svg"
+ ALT="$Y$"></SPAN> the <A ID="tex2html14"
+  HREF="http://en.wikipedia.org/wiki/Codomain"><EM>codomain</EM></A>
+of the function, the set into which all outputs of the function 
+  are constrained to fall;
+</LI>
+<LI>the function value <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img745.svg"
+ ALT="$f(x)$"></SPAN> of any <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img989.svg"
+ ALT="$x\in X$"></SPAN> is called the 
+  <A ID="tex2html15"
+  HREF="https://en.wikipedia.org/wiki/Image_(mathematics)"><EM>image</EM></A>
+of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img93.svg"
+ ALT="$x$"></SPAN>;
+</LI>
+<LI>the set of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img745.svg"
+ ALT="$f(x)$"></SPAN> for all <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img989.svg"
+ ALT="$x\in X$"></SPAN> is the image of the function,
+  a subset of the codomain.
+</LI>
+</UL>
+
+<P>
+<IMG STYLE=""
+ SRC="../figures/DomainCodomain.png"
+ ALT="DomainCodomain.png">
+
+<P>
+The matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> can be considered as a function, a linear 
+transformation <!-- MATH
+ ${\bf f}({\bf x})={\bf Ax}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img990.svg"
+ ALT="${\bf f}({\bf x})={\bf Ax}$"></SPAN>, which maps an N-D 
+vector <!-- MATH
+ ${\bf x}\in \mathbb{R}^N$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.21ex; " SRC="img991.svg"
+ ALT="${\bf x}\in \mathbb{R}^N$"></SPAN> in the domain of the function 
+into an M-D vector <!-- MATH
+ ${\bf Ax}\in R^M$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.21ex; " SRC="img992.svg"
+ ALT="${\bf Ax}\in R^M$"></SPAN> in the codomain of the function.
+The <A ID="tex2html16"
+  HREF="http://en.wikipedia.org/wiki/Fundamental_theorem_of_linear_algebra"><EM>fundamental theorem of linear algebra</EM></A>
+concerns the following four subspaces associated with any <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img968.svg"
+ ALT="$M\times N$"></SPAN>
+matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> with rank <!-- MATH
+ $R=rank({\bf A})\le \min(M,\,N)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img993.svg"
+ ALT="$R=rank({\bf A})\le \min(M,\,N)$"></SPAN> (i.e., 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> has <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img694.svg"
+ ALT="$R$"></SPAN> independent columns and rows).
+
+<P>
+
+<UL>
+<LI>The <A ID="tex2html17"
+  HREF="http://en.wikipedia.org/wiki/Column_space"><EM>column space</EM></A>
+of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> is a space spanned by its <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img976.svg"
+ ALT="$N$"></SPAN> M-D column vectors (of 
+  which <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.43ex; " SRC="img994.svg"
+ ALT="$R\le N$"></SPAN> are independent):
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+C({\bf A})=span({\bf c}_1,\cdots,{\bf c}_N) \subseteq R^M
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img995.svg"
+ ALT="$\displaystyle C({\bf A})=span({\bf c}_1,\cdots,{\bf c}_N) \subseteq R^M
+$"> 
+
+(<SPAN CLASS="arabic">303</SPAN>)
+</DIV>
+which is an R-D subspace of <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img996.svg"
+ ALT="$R^M$"></SPAN> composed of all possible linear 
+  combinations of its <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img976.svg"
+ ALT="$N$"></SPAN> column vectors:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+x_1{\bf c}_1+\cdots+x_N{\bf c}_N=[{\bf c_1},\cdots,{\bf c}_N]
+    \left[\begin{array}{c}x_1\\\vdots\\x_N\end{array}\right]
+    ={\bf A}{\bf x}\;\;\;\;\;\;\mbox{(for any ${\bf x}\in\mathbb{R}^N$)}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 10.22ex; vertical-align: -4.49ex; " SRC="img997.svg"
+ ALT="$\displaystyle x_1{\bf c}_1+\cdots+x_N{\bf c}_N=[{\bf c_1},\cdots,{\bf c}_N]
+\l...
+...\right]
+={\bf A}{\bf x}\;\;\;\;\;\;\mbox{(for any ${\bf x}\in\mathbb{R}^N$)}
+$"> 
+
+(<SPAN CLASS="arabic">304</SPAN>)
+</DIV>
+The column space <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img998.svg"
+ ALT="$C({\bf A})$"></SPAN> is the <EM>image</EM> of the linear 
+  transformation <!-- MATH
+ ${\bf f}({\bf x})={\bf Ax}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img990.svg"
+ ALT="${\bf f}({\bf x})={\bf Ax}$"></SPAN>, and the equation 
+  <!-- MATH
+ ${\bf Ax}={\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img269.svg"
+ ALT="${\bf Ax}={\bf b}$"></SPAN> is solvable if and only if <!-- MATH
+ ${\bf b}\in C({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img999.svg"
+ ALT="${\bf b}\in C({\bf A})$"></SPAN>.
+  The dimension of the column space is the rank of 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>, <!-- MATH
+ $dim\,C({\bf A})=rank({\bf A})=R$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1000.svg"
+ ALT="$dim\,C({\bf A})=rank({\bf A})=R$"></SPAN>.
+
+<P>
+</LI>
+<LI>The <A ID="tex2html18"
+  HREF="http://en.wikipedia.org/wiki/row_space"><EM>row space</EM></A>
+of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> is a space spanned by its <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img978.svg"
+ ALT="$M$"></SPAN> N-D row vectors 
+  (of which <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.43ex; " SRC="img1001.svg"
+ ALT="$R\le M$"></SPAN> are independent):
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+R({\bf A})=span({\bf r}_1,\cdots,{\bf r}_M) \subseteq \mathbb{R}^N
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img1002.svg"
+ ALT="$\displaystyle R({\bf A})=span({\bf r}_1,\cdots,{\bf r}_M) \subseteq \mathbb{R}^N
+$"> 
+
+(<SPAN CLASS="arabic">305</SPAN>)
+</DIV>
+which is an R-D subspace of <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img1003.svg"
+ ALT="$\mathbb{R}^N$"></SPAN> composed of all possible 
+  linear combinations of its <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img978.svg"
+ ALT="$M$"></SPAN> row vectors:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+y_1{\bf r}_1+\cdots+y_M{\bf r}_N=[{\bf r_1},\cdots,{\bf r}_M]
+    \left[\begin{array}{c}y_1\\\vdots\\y_M\end{array}\right]
+    ={\bf A}^T{\bf y}\;\;\;\;\;\;\mbox{(for any ${\bf y}\in \mathbb{R}^M)$}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 10.22ex; vertical-align: -4.49ex; " SRC="img1004.svg"
+ ALT="$\displaystyle y_1{\bf r}_1+\cdots+y_M{\bf r}_N=[{\bf r_1},\cdots,{\bf r}_M]
+\l...
+...ht]
+={\bf A}^T{\bf y}\;\;\;\;\;\;\mbox{(for any ${\bf y}\in \mathbb{R}^M)$}
+$"> 
+
+(<SPAN CLASS="arabic">306</SPAN>)
+</DIV>
+The row space <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img560.svg"
+ ALT="$R({\bf A})$"></SPAN> is the <EM>image</EM> of the linear 
+  transformation <!-- MATH
+ ${\bf f}({\bf y})={\bf A}^T{\bf y}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1005.svg"
+ ALT="${\bf f}({\bf y})={\bf A}^T{\bf y}$"></SPAN>, and the 
+  equation <!-- MATH
+ ${\bf A}^T{\bf y}={\bf c}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.57ex; " SRC="img1006.svg"
+ ALT="${\bf A}^T{\bf y}={\bf c}$"></SPAN> is solvable if and only if 
+  <!-- MATH
+ ${\bf c}\in R({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1007.svg"
+ ALT="${\bf c}\in R({\bf A})$"></SPAN>. 
+  As the rows and columns in <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> are respectively the columns 
+  and rows in <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img219.svg"
+ ALT="${\bf A}^T$"></SPAN>, the row space of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> is the column 
+  space of <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img219.svg"
+ ALT="${\bf A}^T$"></SPAN>, and the column space of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> is the row 
+  space of <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img219.svg"
+ ALT="${\bf A}^T$"></SPAN>:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+R({\bf A})=C({\bf A}^T),\;\;\;\;\;\;\;\;\;\;C({\bf A})=R({\bf A}^T)
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img1008.svg"
+ ALT="$\displaystyle R({\bf A})=C({\bf A}^T),\;\;\;\;\;\;\;\;\;\;C({\bf A})=R({\bf A}^T)
+$"> 
+
+(<SPAN CLASS="arabic">307</SPAN>)
+</DIV>
+The rank <!-- MATH
+ $R=rank({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1009.svg"
+ ALT="$R=rank({\bf A})$"></SPAN> is the number of linearly independent 
+  rows and columns of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>, i.e., the row space and the column 
+  space have the same dimension, both equal to the rank of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+dim\,C({\bf A})=dim\,R({\bf A})=rank({\bf A})=R
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1010.svg"
+ ALT="$\displaystyle dim\,C({\bf A})=dim\,R({\bf A})=rank({\bf A})=R
+$"> 
+
+(<SPAN CLASS="arabic">308</SPAN>)
+</DIV>
+
+<P>
+</LI>
+<LI>The <A ID="tex2html19"
+  HREF="http://en.wikipedia.org/wiki/Null_space"><EM>null space (kernel)</EM></A>
+of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>, denoted by <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1011.svg"
+ ALT="$N({\bf A})$"></SPAN>, is the set of all N-D 
+  vectors <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img52.svg"
+ ALT="${\bf x}$"></SPAN> that satisfy the homogeneous equation
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}{\bf x}=\left[\begin{array}{c}{\bf r}^T_1\\\vdots\\{\bf r}^T_M\end{array}\right]
+    {\bf x}={\bf0},\;\;\;\;\;\;\mbox{or}\;\;\;\;\;\;
+    {\bf r}^T_i{\bf x}=0\;\;\;(i=1,\cdots,M)
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 10.22ex; vertical-align: -4.49ex; " SRC="img1012.svg"
+ ALT="$\displaystyle {\bf A}{\bf x}=\left[\begin{array}{c}{\bf r}^T_1\\ \vdots\\ {\bf ...
+...,\;\;\;\;\;\;\mbox{or}\;\;\;\;\;\;
+{\bf r}^T_i{\bf x}=0\;\;\;(i=1,\cdots,M)
+$"> 
+
+(<SPAN CLASS="arabic">309</SPAN>)
+</DIV>
+i.e.,
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+N({\bf A})=\{ {\bf x}\in\mathbb{R}^N | {\bf A}{\bf x}
+    ={\bf0} \}\subseteq \mathbb{R}^N
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img1013.svg"
+ ALT="$\displaystyle N({\bf A})=\{ {\bf x}\in\mathbb{R}^N \vert {\bf A}{\bf x}
+={\bf0} \}\subseteq \mathbb{R}^N
+$"> 
+
+(<SPAN CLASS="arabic">310</SPAN>)
+</DIV>
+In particular, when <!-- MATH
+ ${\bf x}={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img100.svg"
+ ALT="${\bf x}={\bf0}$"></SPAN>, we get <!-- MATH
+ ${\bf A}{\bf x}={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1014.svg"
+ ALT="${\bf A}{\bf x}={\bf0}$"></SPAN>, 
+  i.e., the origin <!-- MATH
+ ${\bf0}\in N({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1015.svg"
+ ALT="${\bf0}\in N({\bf A})$"></SPAN> is in the null space. 
+
+<P>
+As <!-- MATH
+ ${\bf r}^T_i{\bf x}=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.72ex; " SRC="img1016.svg"
+ ALT="${\bf r}^T_i{\bf x}=0$"></SPAN> for any <!-- MATH
+ ${\bf x}\in N({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1017.svg"
+ ALT="${\bf x}\in N({\bf A})$"></SPAN> and
+  <!-- MATH
+ ${\bf r}_i\in R({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1018.svg"
+ ALT="${\bf r}_i\in R({\bf A})$"></SPAN>, we see that the null space <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1011.svg"
+ ALT="$N({\bf A})$"></SPAN>
+  and the row space <!-- MATH
+ $R({\bf A})=C({\bf A}^T)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1019.svg"
+ ALT="$R({\bf A})=C({\bf A}^T)$"></SPAN> are orthogonal to each
+  other, <!-- MATH
+ $N({\bf A}) \perp R({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1020.svg"
+ ALT="$N({\bf A}) \perp R({\bf A})$"></SPAN>. 
+
+<P>
+The dimension of the null space is called the <EM>nullity</EM> of 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>:  <!-- MATH
+ $dim\;N({\bf A})=nullity({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1021.svg"
+ ALT="$dim\;N({\bf A})=nullity({\bf A})$"></SPAN>. The 
+  <A ID="tex2html20"
+  HREF="../algebra/node18.html">rank-nullity theorem</A>
+states the sum of the rank and the nullity of an <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img968.svg"
+ ALT="$M\times N$"></SPAN> matrix
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> is equal to <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img976.svg"
+ ALT="$N$"></SPAN>:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\mbox{rank}({\bf A})+nullity({\bf A})=dim\;R({\bf A})+dim\;N({\bf A})=N
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1022.svg"
+ ALT="$\displaystyle \mbox{rank}({\bf A})+nullity({\bf A})=dim\;R({\bf A})+dim\;N({\bf A})=N
+$"> 
+
+(<SPAN CLASS="arabic">311</SPAN>)
+</DIV>
+We therefore see that <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img560.svg"
+ ALT="$R({\bf A})$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1011.svg"
+ ALT="$N({\bf A})$"></SPAN> are two mutually 
+  exclusive and complementary subspaces of <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img1003.svg"
+ ALT="$\mathbb{R}^N$"></SPAN>:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+R({\bf A}) \perp N({\bf A}),\;\;\;\;
+    R({\bf A}) \cap N({\bf A})=\emptyset,\;\;\;\;\;
+    R({\bf A}) \oplus N({\bf A})=\mathbb{R}^N
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img1023.svg"
+ ALT="$\displaystyle R({\bf A}) \perp N({\bf A}),\;\;\;\;
+R({\bf A}) \cap N({\bf A})=\emptyset,\;\;\;\;\;
+R({\bf A}) \oplus N({\bf A})=\mathbb{R}^N
+$"> 
+
+(<SPAN CLASS="arabic">312</SPAN>)
+</DIV>
+i.e., they are 
+  <A ID="tex2html21"
+  HREF="http://en.wikipedia.org/wiki/Orthogonal_complement"><EM>orthogonal complement</EM></A>
+of each other, denoted by
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+N({\bf A})=R({\bf A})^\perp,\;\;\;\;R({\bf A})=N({\bf A})^\perp
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img1024.svg"
+ ALT="$\displaystyle N({\bf A})=R({\bf A})^\perp,\;\;\;\;R({\bf A})=N({\bf A})^\perp
+$"> 
+
+(<SPAN CLASS="arabic">313</SPAN>)
+</DIV>
+Any N-D vector <!-- MATH
+ ${\bf x}\in \mathbb{R}^N$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.21ex; " SRC="img991.svg"
+ ALT="${\bf x}\in \mathbb{R}^N$"></SPAN> is in either of the two 
+  subspaces <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img560.svg"
+ ALT="$R({\bf A})$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1011.svg"
+ ALT="$N({\bf A})$"></SPAN>.
+
+<P>
+</LI>
+<LI>The null space of <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img219.svg"
+ ALT="${\bf A}^T$"></SPAN> (left null space of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1025.svg"
+ ALT="${\bf A})$"></SPAN>,
+  denoted by <SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1026.svg"
+ ALT="$N({\bf A}^T)$"></SPAN>, is the set of all M-D vectors <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img86.svg"
+ ALT="${\bf y}$"></SPAN> 
+  that satisfy the homogeneous equation
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}^T{\bf y}=[{\bf c}_1,\cdots,{\bf c}_N]^T{\bf y}
+    =\left[\begin{array}{c}{\bf c}^T_1\\\vdots\\{\bf c}^T_N\end{array}\right]
+    {\bf y}={\bf0},\;\;\;\;\;\;\mbox{or}\;\;\;\;\;\;
+    {\bf c}^T_j{\bf y}=0,\;\;\;(j=1,\cdots,N)
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 10.22ex; vertical-align: -4.49ex; " SRC="img1027.svg"
+ ALT="$\displaystyle {\bf A}^T{\bf y}=[{\bf c}_1,\cdots,{\bf c}_N]^T{\bf y}
+=\left[\b...
+...\;\;\;\;\;\;\mbox{or}\;\;\;\;\;\;
+{\bf c}^T_j{\bf y}=0,\;\;\;(j=1,\cdots,N)
+$"> 
+
+(<SPAN CLASS="arabic">314</SPAN>)
+</DIV>
+i.e., 
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+N({\bf A}^T)=\{ {\bf y}\in\mathbb{R}^M | {\bf A}^T{\bf y}
+  ={\bf0} \}\subseteq \mathbb{R}^M
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img1028.svg"
+ ALT="$\displaystyle N({\bf A}^T)=\{ {\bf y}\in\mathbb{R}^M \vert {\bf A}^T{\bf y}
+={\bf0} \}\subseteq \mathbb{R}^M
+$"> 
+
+(<SPAN CLASS="arabic">315</SPAN>)
+</DIV>
+As all <!-- MATH
+ ${\bf y}\in N({\bf A}^T)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1029.svg"
+ ALT="${\bf y}\in N({\bf A}^T)$"></SPAN> are orthogonal to <!-- MATH
+ ${\bf c}_i\in C({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1030.svg"
+ ALT="${\bf c}_i\in C({\bf A})$"></SPAN>,
+  <SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1026.svg"
+ ALT="$N({\bf A}^T)$"></SPAN> is orthogonal to the column space <!-- MATH
+ $C({\bf A})=R({\bf A}^T)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1031.svg"
+ ALT="$C({\bf A})=R({\bf A}^T)$"></SPAN>: 
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+N({\bf A}^T) \perp C({\bf A}),\;\;\;\;\;\;\;N({\bf A}^T) \perp R({\bf A}^T)
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img1032.svg"
+ ALT="$\displaystyle N({\bf A}^T) \perp C({\bf A}),\;\;\;\;\;\;\;N({\bf A}^T) \perp R({\bf A}^T)
+$"> 
+
+(<SPAN CLASS="arabic">316</SPAN>)
+</DIV>
+We see that <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img998.svg"
+ ALT="$C({\bf A})$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1026.svg"
+ ALT="$N({\bf A}^T)$"></SPAN> are two mutually exclusive and 
+  complementary subspaces of <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img1033.svg"
+ ALT="$\mathbb{R}^M$"></SPAN>: 
+  <BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+&&C({\bf A}) \perp N({\bf A}^T),\;\;\;\;\;
+    C({\bf A}) \cap N({\bf A}^T)=\emptyset,\;\;\;\;\;
+    C({\bf A}) \oplus N({\bf A}^T)=R^M,
+    \nonumber\\
+    &\mbox{i.e.}&N({\bf A}^T)=C({\bf A})^\perp,\;\;\;\;C({\bf A})=N({\bf A}^T)^\perp
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img1034.svg"
+ ALT="$\displaystyle C({\bf A}) \perp N({\bf A}^T),\;\;\;\;\;
+C({\bf A}) \cap N({\bf A}^T)=\emptyset,\;\;\;\;\;
+C({\bf A}) \oplus N({\bf A}^T)=R^M,$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1035.svg"
+ ALT="$\textstyle \mbox{i.e.}$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img1036.svg"
+ ALT="$\displaystyle N({\bf A}^T)=C({\bf A})^\perp,\;\;\;\;C({\bf A})=N({\bf A}^T)^\perp$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">317</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Any M-D vector <!-- MATH
+ ${\bf y}\in \mathbb{R}^M$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.57ex; " SRC="img1037.svg"
+ ALT="${\bf y}\in \mathbb{R}^M$"></SPAN> is in either of the two subspaces
+  <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img998.svg"
+ ALT="$C({\bf A})$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1026.svg"
+ ALT="$N({\bf A}^T)$"></SPAN>.
+
+<P>
+</LI>
+</UL>
+
+<P>
+The four subspaces are summarized in the figure below, showing the 
+domain <!-- MATH
+ $\mathbb{R}^N=R({\bf A})\oplus N({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1038.svg"
+ ALT="$\mathbb{R}^N=R({\bf A})\oplus N({\bf A})$"></SPAN> (left) and the 
+codomain <!-- MATH
+ $\mathbb{R}^M=C({\bf A})\oplus N({\bf A}^T)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1039.svg"
+ ALT="$\mathbb{R}^M=C({\bf A})\oplus N({\bf A}^T)$"></SPAN> (right) of 
+the linear mapping <!-- MATH
+ ${\bf Ax}={\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img269.svg"
+ ALT="${\bf Ax}={\bf b}$"></SPAN>, where
+
+<UL>
+<LI><!-- MATH
+ ${\bf x}_p\in R({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img1040.svg"
+ ALT="${\bf x}_p\in R({\bf A})$"></SPAN> is the particular solution that is
+  mapped to <!-- MATH
+ ${\bf Ax}_p={\bf b}\in C({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img1041.svg"
+ ALT="${\bf Ax}_p={\bf b}\in C({\bf A})$"></SPAN>, the image of 
+  <!-- MATH
+ $f({\bf x})={\bf Ax}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1042.svg"
+ ALT="$f({\bf x})={\bf Ax}$"></SPAN>;
+</LI>
+<LI><!-- MATH
+ ${\bf x}_h\in N({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1043.svg"
+ ALT="${\bf x}_h\in N({\bf A})$"></SPAN> is a homogeneous solution that is 
+  mapped to <!-- MATH
+ ${\bf Ax}_h={\bf0}\in \mathbb{R}^M$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.46ex; " SRC="img1044.svg"
+ ALT="${\bf Ax}_h={\bf0}\in \mathbb{R}^M$"></SPAN>;
+</LI>
+<LI><!-- MATH
+ ${\bf x}_c={\bf x}_p+{\bf x}_h$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.78ex; " SRC="img1045.svg"
+ ALT="${\bf x}_c={\bf x}_p+{\bf x}_h$"></SPAN> is the complete solution that is
+  mapped to <!-- MATH
+ ${\bf Ax}_c={\bf b}\in C({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1046.svg"
+ ALT="${\bf Ax}_c={\bf b}\in C({\bf A})$"></SPAN>.
+</LI>
+</UL>
+On the other hand, <!-- MATH
+ ${\bf y}_p\in C({\bf A})=R({\bf A}^T)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img1047.svg"
+ ALT="${\bf y}_p\in C({\bf A})=R({\bf A}^T)$"></SPAN>,  
+<!-- MATH
+ ${\bf y}_h\in N({\bf A}^T)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1048.svg"
+ ALT="${\bf y}_h\in N({\bf A}^T)$"></SPAN>, and <!-- MATH
+ ${\bf y}_c={\bf y}_p+{\bf y}_h$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.78ex; " SRC="img1049.svg"
+ ALT="${\bf y}_c={\bf y}_p+{\bf y}_h$"></SPAN> are
+respectively the particular, homogeneous and complete solutions of
+<!-- MATH
+ ${\bf A}^T{\bf y}={\bf c}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.57ex; " SRC="img1006.svg"
+ ALT="${\bf A}^T{\bf y}={\bf c}$"></SPAN>.
+Here we have assumed <!-- MATH
+ ${\bf b}\in C({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img999.svg"
+ ALT="${\bf b}\in C({\bf A})$"></SPAN> and 
+<!-- MATH
+ ${\bf c}\in R({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1007.svg"
+ ALT="${\bf c}\in R({\bf A})$"></SPAN>, i.e., both <!-- MATH
+ ${\bf Ax}={\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img269.svg"
+ ALT="${\bf Ax}={\bf b}$"></SPAN> and 
+<!-- MATH
+ ${\bf A}^T{\bf y}={\bf c}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.57ex; " SRC="img1006.svg"
+ ALT="${\bf A}^T{\bf y}={\bf c}$"></SPAN> are solvable. We will also consider 
+the case where <!-- MATH
+ ${\bf b}\notin C({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1050.svg"
+ ALT="${\bf b}\notin C({\bf A})$"></SPAN> later.
+
+<P>
+<IMG STYLE=""
+ SRC="../figures/FourSpaces.png"
+ ALT="FourSpaces.png">
+
+<P>
+We now consider specifically how to find the solutions of the system 
+<!-- MATH
+ ${\bf Ax}={\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img269.svg"
+ ALT="${\bf Ax}={\bf b}$"></SPAN> in light of the four subspaces of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> defined
+above, through the examples below.
+
+<P>
+<B>Example 1:</B>
+
+<P>
+Solve the homogeneous equation system:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}{\bf x}=\left[\begin{array}{ccc}1&2&5\\2&3&8\\3&1&5\end{array}\right]
+  \left[\begin{array}{c}x_1\\x_2\\x_3\end{array}\right]
+  =\left[\begin{array}{c}0\\0\\0\end{array}\right] 
+  ={\bf0} 
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img1051.svg"
+ ALT="$\displaystyle {\bf A}{\bf x}=\left[\begin{array}{ccc}1&amp;2&amp;5\\ 2&amp;3&amp;8\\ 3&amp;1&amp;5\end{...
+...{array}\right]
+=\left[\begin{array}{c}0\\ 0\\ 0\end{array}\right]
+={\bf0}
+$"> 
+
+(<SPAN CLASS="arabic">318</SPAN>)
+</DIV>
+We first convert <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> into the rref:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\left[\begin{array}{ccc}1&2&5\\2&3&8\\3&1&5\end{array}\right]
+\left[\begin{array}{c}x_1\\x_2\\x_3\end{array}\right]
+\rightarrow 
+\left[\begin{array}{ccc}1&2&5\\0&-1&-2\\0&-5&-10\end{array}\right]
+\left[\begin{array}{c}x_1\\x_2\\x_3\end{array}\right] 
+\rightarrow 
+\left[\begin{array}{ccc}1&2&5\\0&1&2\\0&0&0\end{array}\right] 
+\left[\begin{array}{c}x_1\\x_2\\x_3\end{array}\right] 
+\rightarrow 
+\left[\begin{array}{ccc}1&0&1\\0&1&2\\0&0&0\end{array}\right] 
+\left[\begin{array}{c}x_1\\x_2\\x_3\end{array}\right] 
+=\left[\begin{array}{c}0\\0\\0\end{array}\right] 
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img1052.svg"
+ ALT="$\displaystyle \left[\begin{array}{ccc}1&amp;2&amp;5\\ 2&amp;3&amp;8\\ 3&amp;1&amp;5\end{array}\right]
+\...
+...2\\ x_3\end{array}\right]
+=\left[\begin{array}{c}0\\ 0\\ 0\end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">319</SPAN>)
+</DIV>
+The <!-- MATH
+ $R=rank({\bf A})=2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1053.svg"
+ ALT="$R=rank({\bf A})=2$"></SPAN> columns in the rref containing a single 1,
+called a <EM>pivot</EM>, are called the <EM>pivot columns</EM>, and the
+rows containing a pivot are called the <EM>pivot rows</EM>. Here,
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img1054.svg"
+ ALT="$R=2&lt;M=N=3$"></SPAN>, i.e., <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> is a singular matrix. The two pivot 
+rows <!-- MATH
+ ${\bf r}_1^T=[1,\;0,\;1]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1055.svg"
+ ALT="${\bf r}_1^T=[1,\;0,\;1]$"></SPAN> and <!-- MATH
+ ${\bf r}_2^T=[0,\;1,\;2]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1056.svg"
+ ALT="${\bf r}_2^T=[0,\;1,\;2]$"></SPAN> can
+be used as the basis vectors that span the row space <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img560.svg"
+ ALT="$R({\bf A})$"></SPAN>:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+R({\bf A})=c_1{\bf r}_1+c_2{\bf r}_2
+=c_1\left[\begin{array}{r}1\\0\\1\end{array}\right]
++c_2\left[\begin{array}{r}0\\1\\2\end{array}\right] 
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img1057.svg"
+ ALT="$\displaystyle R({\bf A})=c_1{\bf r}_1+c_2{\bf r}_2
+=c_1\left[\begin{array}{r}1\\ 0\\ 1\end{array}\right]
++c_2\left[\begin{array}{r}0\\ 1\\ 2\end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">320</SPAN>)
+</DIV>
+Note that the pivot columns of the rref do not span the column space 
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img998.svg"
+ ALT="$C({\bf A})$"></SPAN>, as the row reduction operations do not reserve the 
+columns of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>. But they indicate the corresponding columns 
+<!-- MATH
+ ${\bf c}_1=[1\;2\;3]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1058.svg"
+ ALT="${\bf c}_1=[1\;2\;3]^T$"></SPAN> and <!-- MATH
+ ${\bf c}_2=[2\;3\;1]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1059.svg"
+ ALT="${\bf c}_2=[2\;3\;1]^T$"></SPAN> in the original
+matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> can be used as the basis that spans <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img998.svg"
+ ALT="$C({\bf A})$"></SPAN>.
+In general the bases of the row and column spaces so obtained are
+not orthogonal.
+
+<P>
+The <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img694.svg"
+ ALT="$R$"></SPAN> pivot rows are the independent equations in the system of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img978.svg"
+ ALT="$M$"></SPAN> 
+equations, and the variables corresponding to the pivot columns 
+(here <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1060.svg"
+ ALT="$x_1$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1061.svg"
+ ALT="$x_2$"></SPAN>) are the <EM>pivot variables</EM>. The remaining
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img1062.svg"
+ ALT="$M-R$"></SPAN> non-pivot rows containing all zeros are not independent, and the
+variables corresponding to the non-pivot rows are <EM>free variables</EM> 
+(here <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1063.svg"
+ ALT="$x_3$"></SPAN>), which can take any values. 
+
+<P>
+From the rref form of the equation, we get
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+x_1+x_3=0,\;\;\;x_2+2x_3=0
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img1064.svg"
+ ALT="$\displaystyle x_1+x_3=0,\;\;\;x_2+2x_3=0
+$"> 
+
+(<SPAN CLASS="arabic">321</SPAN>)
+</DIV>
+If we let the free variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1063.svg"
+ ALT="$x_3$"></SPAN> take the value 1, then we can get
+the two pivot variables <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img1065.svg"
+ ALT="$x_1=-1$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img1066.svg"
+ ALT="$x_2=-2$"></SPAN>, and a special homogeneous 
+solution <!-- MATH
+ ${\bf x}_h=[-1\;-2\;1]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1067.svg"
+ ALT="${\bf x}_h=[-1\;-2\;1]^T$"></SPAN> as a basis vector that spans the 1-D 
+null space <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1011.svg"
+ ALT="$N({\bf A})$"></SPAN>. However, as the free variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1063.svg"
+ ALT="$x_3$"></SPAN> can take 
+any value <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img443.svg"
+ ALT="$c$"></SPAN>, the complete solution is the entire 1-D null space:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+N({\bf A})=c {\bf x}_h=c\left[\begin{array}{r}-1\\-2\\1\end{array}\right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img1068.svg"
+ ALT="$\displaystyle N({\bf A})=c {\bf x}_h=c\left[\begin{array}{r}-1\\ -2\\ 1\end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">322</SPAN>)
+</DIV>
+
+<P>
+<B>Example 2:</B>  
+
+<P>
+Solve the non-homogeneous equation with the same coefficient
+matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> used in the previous example:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}{\bf x}=
+  \left[\begin{array}{ccc}1&2&5\\2&3&8\\3&1&5\end{array}\right]
+  \left[\begin{array}{c}x_1\\x_2\\x_3\end{array}\right]
+  =\left[\begin{array}{c}19\\31\\22\end{array}\right]={\bf b}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img1069.svg"
+ ALT="$\displaystyle {\bf A}{\bf x}=
+\left[\begin{array}{ccc}1&amp;2&amp;5\\ 2&amp;3&amp;8\\ 3&amp;1&amp;5\en...
+...d{array}\right]
+=\left[\begin{array}{c}19\\ 31\\ 22\end{array}\right]={\bf b}
+$"> 
+
+(<SPAN CLASS="arabic">323</SPAN>)
+</DIV>
+We use Gauss-Jordan elimination to solve this system:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+[\begin{array}{cc}{\bf A}&{\bf b}\end{array}]
+  =\left[\begin{array}{rrr|r}1&2&5&19\\2&3&8&31\\3&1&5&22\end{array}\right]
+  \rightarrow
+  \left[\begin{array}{rrr|r}1&2&5&19\\0&-1&-2&-7\\0&-5&-10&-35\end{array}\right]
+  \rightarrow 
+  \left[\begin{array}{rrr|r}1&2&5&19\\0&1&2&7\\0&0&0&0\end{array}\right]
+  \rightarrow 
+  \left[\begin{array}{rrr|r}1&0&1&5\\0&1&2&7\\0&0&0&0\end{array}\right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img1070.svg"
+ ALT="$\displaystyle [\begin{array}{cc}{\bf A}&amp;{\bf b}\end{array}]
+=\left[\begin{arra...
+...
+\left[\begin{array}{rrr\vert r}1&amp;0&amp;1&amp;5\\ 0&amp;1&amp;2&amp;7\\ 0&amp;0&amp;0&amp;0\end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">324</SPAN>)
+</DIV>
+The <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1071.svg"
+ ALT="$R=2$"></SPAN> pivot rows correspond to the independent equations in the 
+system, i.e., <!-- MATH
+ $rand({\bf A})=2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1072.svg"
+ ALT="$rand({\bf A})=2$"></SPAN>, while the remaining <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img1073.svg"
+ ALT="$M-R=1$"></SPAN> non-pivot
+row does not play any role as they map any <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img52.svg"
+ ALT="${\bf x}$"></SPAN> to <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="${\bf0}$"></SPAN>. As 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> is singular, <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img262.svg"
+ ALT="${\bf A}^{-1}$"></SPAN> does not exist. However, we can 
+find the solution based on the rref of the system, which can also be 
+expressed in block matrix form:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\left[\begin{array}{rrr}1&0&1\\0&1&2\\0&0&0\end{array}\right]
+\left[\begin{array}{c}x_1\\x_2\\x_3\end{array}\right]=
+\left[\begin{array}{c}5\\7\\0\end{array}\right]
+\;\;\;\;\;\;\;\;\mbox{or}\;\;\;\;\;\;\;\;
+\left[\begin{array}{rr}{\bf I}&{\bf F}\\{\bf0}&{\bf0}\end{array}\right]
+\left[\begin{array}{r}{\bf x}_{pivot}\\{\bf x}_{free}\end{array}\right]
+=\left[\begin{array}{c}{\bf b}_1\\{\bf0}\end{array}\right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img1074.svg"
+ ALT="$\displaystyle \left[\begin{array}{rrr}1&amp;0&amp;1\\ 0&amp;1&amp;2\\ 0&amp;0&amp;0\end{array}\right]
+\...
+...\end{array}\right]
+=\left[\begin{array}{c}{\bf b}_1\\ {\bf0}\end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">325</SPAN>)
+</DIV>
+where
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf I}=\left[\begin{array}{cc}1&0\\0&1\end{array}\right],\;\;\;\;\;\;
+  {\bf F}=\left[\begin{array}{c}1\\2\end{array}\right],\;\;\;\;\;\;
+  {\bf x}_{pivot}=\left[\begin{array}{c}x_1\\x_2\end{array}\right],\;\;\;\;\;\;
+  {\bf x}_{free}=x_3,\;\;\;\;\;\;
+  {\bf b}_1=\left[\begin{array}{c}5\\7\end{array}\right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img1075.svg"
+ ALT="$\displaystyle {\bf I}=\left[\begin{array}{cc}1&amp;0\\ 0&amp;1\end{array}\right],\;\;\;...
+...ree}=x_3,\;\;\;\;\;\;
+{\bf b}_1=\left[\begin{array}{c}5\\ 7\end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">326</SPAN>)
+</DIV>
+Solving the matrix equation above for <!-- MATH
+ ${\bf x}_{pivot}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img1076.svg"
+ ALT="${\bf x}_{pivot}$"></SPAN>, we get
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf I}{\bf x}_{pivot}+{\bf F}{\bf x}_{free}={\bf b}_1,\;\;\;\;\;\;\;\;\;
+  {\bf x}_{pivot}=\left[\begin{array}{c}x_1\\x_2\end{array}\right]
+  ={\bf b}_1-{\bf F}{\bf x}_{free}
+  =\left[\begin{array}{c}5\\7\end{array}\right]
+  +x_3\left[\begin{array}{c}-1\\-2\end{array}\right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img1077.svg"
+ ALT="$\displaystyle {\bf I}{\bf x}_{pivot}+{\bf F}{\bf x}_{free}={\bf b}_1,\;\;\;\;\;...
+...c}5\\ 7\end{array}\right]
++x_3\left[\begin{array}{c}-1\\ -2\end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">327</SPAN>)
+</DIV>
+If we let <!-- MATH
+ ${\bf x}_{free}=x_3=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img1078.svg"
+ ALT="${\bf x}_{free}=x_3=0$"></SPAN>, we get a particular solution
+<!-- MATH
+ ${\bf x}_p=[5\;7\;0]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img1079.svg"
+ ALT="${\bf x}_p=[5\;7\;0]^T$"></SPAN>, which can be expressed as a linear
+combination of <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1080.svg"
+ ALT="${\bf r}_1$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1081.svg"
+ ALT="${\bf r}_2$"></SPAN> that span <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img560.svg"
+ ALT="$R({\bf A})$"></SPAN>,
+and <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1082.svg"
+ ALT="${\bf x}_h$"></SPAN> that span <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1011.svg"
+ ALT="$N({\bf A})$"></SPAN>:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf x}_p=\left[\begin{array}{c}5\\7\\0\end{array}\right]
+  =\frac{11}{6}{\bf r}_1+\frac{2}{3}{\bf r}_2-\frac{19}{6}{\bf x}_h
+  =\frac{11}{6}\left[\begin{array}{c}1\\0\\1\end{array}\right]
+  +\frac{2}{3}\left[\begin{array}{c}0\\1\\2\end{array}\right]
+  -\frac{19}{6}\left[\begin{array}{r}-1\\-2\\1\end{array}\right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img1083.svg"
+ ALT="$\displaystyle {\bf x}_p=\left[\begin{array}{c}5\\ 7\\ 0\end{array}\right]
+=\fr...
+...rray}\right]
+-\frac{19}{6}\left[\begin{array}{r}-1\\ -2\\ 1\end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">328</SPAN>)
+</DIV>
+We see that this solution is not entirely in the row space <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img560.svg"
+ ALT="$R({\bf A})$"></SPAN>.
+In general, this is the case for all particular solutions so obtained.
+
+<P>
+Having found both the particular solution <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img1084.svg"
+ ALT="${\bf x}_p$"></SPAN> and the 
+homogeneous solution <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1082.svg"
+ ALT="${\bf x}_h$"></SPAN>, we can further find the complete
+solution <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1085.svg"
+ ALT="${\bf x}_c$"></SPAN> as the sum of <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img1084.svg"
+ ALT="${\bf x}_p$"></SPAN> and the entire 
+null space spanned by <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1082.svg"
+ ALT="${\bf x}_h$"></SPAN>:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf x}_c=\left[\begin{array}{c}5\\7\\0\end{array}\right]
+  +c \left[\begin{array}{r}-1\\-2\\1\end{array}\right]
+  ={\bf x}_p+c {\bf x}_h={\bf x}_p+N({\bf A})
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img1086.svg"
+ ALT="$\displaystyle {\bf x}_c=\left[\begin{array}{c}5\\ 7\\ 0\end{array}\right]
++c \...
+...}{r}-1\\ -2\\ 1\end{array}\right]
+={\bf x}_p+c {\bf x}_h={\bf x}_p+N({\bf A})
+$"> 
+
+(<SPAN CLASS="arabic">329</SPAN>)
+</DIV>
+Based on different constant <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img443.svg"
+ ALT="$c$"></SPAN>, we get a set of equally valid 
+solutions. For example, if <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img1087.svg"
+ ALT="$c=0,1,2$"></SPAN>, then we get
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf x}_0=\left[\begin{array}{c}5\\7\\0\end{array}\right],\;\;\;\;
+  {\bf x}_1=\left[\begin{array}{c}4\\5\\1\end{array}\right],\;\;\;\;
+  {\bf x}_2=\left[\begin{array}{c}3\\3\\2\end{array}\right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img1088.svg"
+ ALT="$\displaystyle {\bf x}_0=\left[\begin{array}{c}5\\ 7\\ 0\end{array}\right],\;\;\...
+...}\right],\;\;\;\;
+{\bf x}_2=\left[\begin{array}{c}3\\ 3\\ 2\end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">330</SPAN>)
+</DIV>
+These solutions have the same projection onto the row space
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img560.svg"
+ ALT="$R({\bf A})$"></SPAN>, i.e., they have the same projections onto the two 
+basis vectors <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1080.svg"
+ ALT="${\bf r}_1$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1081.svg"
+ ALT="${\bf r}_2$"></SPAN> that span <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img560.svg"
+ ALT="$R({\bf A})$"></SPAN>:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf x}_0^T{\bf r}_1={\bf x}_1^T{\bf r}_1={\bf x}_2^T{\bf r}_1=5,
+\;\;\;\;\;\;\;\;
+{\bf x}_0^T{\bf r}_2={\bf x}_1^T{\bf r}_2={\bf x}_2^T{\bf r}_2=7
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.69ex; " SRC="img1089.svg"
+ ALT="$\displaystyle {\bf x}_0^T{\bf r}_1={\bf x}_1^T{\bf r}_1={\bf x}_2^T{\bf r}_1=5,...
+...;\;\;\;\;\;\;
+{\bf x}_0^T{\bf r}_2={\bf x}_1^T{\bf r}_2={\bf x}_2^T{\bf r}_2=7
+$"> 
+
+(<SPAN CLASS="arabic">331</SPAN>)
+</DIV>
+
+<P>
+The figure below shows how the complete solution <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1085.svg"
+ ALT="${\bf x}_c$"></SPAN> can 
+be obtained as the sum of a particular solution <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img1084.svg"
+ ALT="${\bf x}_p$"></SPAN> in 
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img560.svg"
+ ALT="$R({\bf A})$"></SPAN> and the entire null space <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1011.svg"
+ ALT="$N({\bf A})$"></SPAN>. Here <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1090.svg"
+ ALT="$N=3$"></SPAN> 
+and space <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img1091.svg"
+ ALT="$\mathbb{R}^3$"></SPAN> is composed of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img560.svg"
+ ALT="$R({\bf A})$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1011.svg"
+ ALT="$N({\bf A})$"></SPAN>,
+respectively 2-D and 1-D on the left, but 1-D and 2-D on the right.
+In either case, the complete solution is any particular solution
+plus the entire null space, the vertical dashed line on the left,
+the top dashed plane on the right. All points on the vertical line
+or top satisfy the equation system, as they are have the same 
+projection onto the row space <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img560.svg"
+ ALT="$R({\bf A})$"></SPAN>.
+
+<P>
+<IMG STYLE=""
+ SRC="../figures/CompleteSolutionExa.png"
+ ALT="CompleteSolutionExa.png">
+
+<P>
+If the right hand side is <!-- MATH
+ ${\bf b}'=[19,\,31,\,20]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1092.svg"
+ ALT="${\bf b}'=[19,\,31,\,20]^T$"></SPAN>, then the
+rref of the equation becomes:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\left[\begin{array}{rrr}1&0&1\\0&1&2\\0&0&0\end{array}\right]
+\left[\begin{array}{c}x_1\\x_2\\x_3\end{array}\right]=
+\left[\begin{array}{c}5\\7\\2\end{array}\right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img1093.svg"
+ ALT="$\displaystyle \left[\begin{array}{rrr}1&amp;0&amp;1\\ 0&amp;1&amp;2\\ 0&amp;0&amp;0\end{array}\right]
+\...
+...x_2\\ x_3\end{array}\right]=
+\left[\begin{array}{c}5\\ 7\\ 2\end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">332</SPAN>)
+</DIV>
+The non-pivot row is an impossible equation <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1094.svg"
+ ALT="$0=2$"></SPAN>, indicating that 
+no solution exists, as <!-- MATH
+ ${\bf b}'\notin C({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1095.svg"
+ ALT="${\bf b}'\notin C({\bf A})$"></SPAN> is not in the 
+column space spanned by <!-- MATH
+ ${\bf r}_1=[1\;0\;1]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1096.svg"
+ ALT="${\bf r}_1=[1\;0\;1]^T$"></SPAN> and 
+<!-- MATH
+ ${\bf r}_2=[0\;1\;2]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1097.svg"
+ ALT="${\bf r}_2=[0\;1\;2]^T$"></SPAN>.
+
+<P>
+<B>Example 3:</B> 
+Find the complete solution of the following linear equation system: 
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}{\bf x}=\left[\begin{array}{rccc}1&2&3&4\\4&3&2&1\\-2&1&4&7\end{array}\right]
+  \left[\begin{array}{c}x_1\\x_2\\x_3\\x_4\end{array}\right]
+  =\left[\begin{array}{r}3\\2\\4\end{array}\right] ={\bf b}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 11.38ex; vertical-align: -5.11ex; " SRC="img1098.svg"
+ ALT="$\displaystyle {\bf A}{\bf x}=\left[\begin{array}{rccc}1&amp;2&amp;3&amp;4\\ 4&amp;3&amp;2&amp;1\\ -2&amp;1&amp;...
+...end{array}\right]
+=\left[\begin{array}{r}3\\ 2\\ 4\end{array}\right] ={\bf b}
+$"> 
+
+(<SPAN CLASS="arabic">333</SPAN>)
+</DIV>
+This equation can be solved in the following steps:
+
+<UL>
+<LI>Construct the augmented matrix and then convert it to the 
+  rref form:
+  <BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+\left[\begin{array}{rrrr|r}1&2&3&4&3\\4&3&2&1&2\\-2&1&4&7&4\end{array}\right]
+    &\rightarrow&
+    \left[\begin{array}{rrrr|r}1&2&3&4&3\\0&-5&-10&-15&-10\\0&5&10&15&10\end{array}\right]
+    \rightarrow
+    \left[\begin{array}{rrrr|r}1&2&3&4&3\\0&1&2&3&2\\0&0&0&0&0\end{array}\right]
+    \nonumber \\
+    &\rightarrow&
+    \left[\begin{array}{rrrr|r}1&0&-1&-2&-1\\0&1&2&3&2\\0&0&0&0&0\end{array}\right]
+    =\left[\begin{array}{rr|r}{\bf I}&{\bf F}&{\bf b_1}\\{\bf0}&{\bf0}&{\bf0}\end{array}\right]
+    \nonumber
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img1099.svg"
+ ALT="$\displaystyle \left[\begin{array}{rrrr\vert r}1&amp;2&amp;3&amp;4&amp;3\\  4&amp;3&amp;2&amp;1&amp;2\\  -2&amp;1&amp;4&amp;7&amp;4\end{array}\right]$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img1100.svg"
+ ALT="$\textstyle \rightarrow$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img1101.svg"
+ ALT="$\displaystyle \left[\begin{array}{rrrr\vert r}1&amp;2&amp;3&amp;4&amp;3\\  0&amp;-5&amp;-10&amp;-15&amp;-10\\  ...
+...\begin{array}{rrrr\vert r}1&amp;2&amp;3&amp;4&amp;3\\  0&amp;1&amp;2&amp;3&amp;2\\  0&amp;0&amp;0&amp;0&amp;0\end{array}\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img1100.svg"
+ ALT="$\textstyle \rightarrow$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img1102.svg"
+ ALT="$\displaystyle \left[\begin{array}{rrrr\vert r}1&amp;0&amp;-1&amp;-2&amp;-1\\  0&amp;1&amp;2&amp;3&amp;2\\  0&amp;0&amp;...
+...}{rr\vert r}{\bf I}&amp;{\bf F}&amp;{\bf b_1}\\  {\bf0}&amp;{\bf0}&amp;{\bf0}\end{array}\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+The two pivot rows <!-- MATH
+ ${\bf r}_1^T=[1\;0\;-1\;-2]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1103.svg"
+ ALT="${\bf r}_1^T=[1\;0\;-1\;-2]$"></SPAN> and 
+  <!-- MATH
+ ${\bf r}_2^T=[0\;1\;2\;3]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1104.svg"
+ ALT="${\bf r}_2^T=[0\;1\;2\;3]$"></SPAN> in the rref span <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img560.svg"
+ ALT="$R({\bf A})$"></SPAN>, and the
+  two columns in the <EM>original</EM> matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> corresponding to 
+  the pivot columns in the rref, <SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1105.svg"
+ ALT="$[1\;4\;-2]^T$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1106.svg"
+ ALT="$[2\;3\;1]^T$"></SPAN> could 
+  be used as the basis vectors that span <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img998.svg"
+ ALT="$C({\bf A})$"></SPAN>.
+
+<P>
+The equation system can be represented in block matrix form:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\left[\begin{array}{rr}{\bf I}&{\bf F}\\{\bf0}&{\bf0}\end{array}\right]
+  \left[\begin{array}{c}{\bf x}_p\\{\bf x}_f\end{array}\right]=
+  \left[\begin{array}{c}{\bf b_1}\\{\bf0}\end{array}\right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img1107.svg"
+ ALT="$\displaystyle \left[\begin{array}{rr}{\bf I}&amp;{\bf F}\\ {\bf0}&amp;{\bf0}\end{array}...
+...nd{array}\right]=
+\left[\begin{array}{c}{\bf b_1}\\ {\bf0}\end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">334</SPAN>)
+</DIV>
+where 
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf I}=\left[\begin{array}{cc}1&0\\0&1\end{array}\right],\;\;\;\;\;
+    {\bf F}=\left[\begin{array}{rr}-1&-2\\2&3\end{array}\right],\;\;\;\;\;
+    {\bf x}_p=\left[\begin{array}{c}x_1\\x_2\end{array}\right],\;\;\;\;\;
+    {\bf x}_f=\left[\begin{array}{c}x_3\\x_4\end{array}\right],\;\;\;\;\;
+    {\bf b}_1=\left[\begin{array}{r}-1\\2\end{array}\right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img1108.svg"
+ ALT="$\displaystyle {\bf I}=\left[\begin{array}{cc}1&amp;0\\ 0&amp;1\end{array}\right],\;\;\;...
+...}\right],\;\;\;\;\;
+{\bf b}_1=\left[\begin{array}{r}-1\\ 2\end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">335</SPAN>)
+</DIV>
+Multiplying out we get
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf x}_p+{\bf F}{\bf x}_f={\bf b}_1
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img1109.svg"
+ ALT="$\displaystyle {\bf x}_p+{\bf F}{\bf x}_f={\bf b}_1
+$"> 
+
+(<SPAN CLASS="arabic">336</SPAN>)
+</DIV>
+</LI>
+<LI>Find the homogeneous solution for equation <!-- MATH
+ ${\bf A}{\bf x}={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1014.svg"
+ ALT="${\bf A}{\bf x}={\bf0}$"></SPAN>
+  by setting <!-- MATH
+ ${\bf b}_1={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img1110.svg"
+ ALT="${\bf b}_1={\bf0}$"></SPAN>:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf I}{\bf x}_p+{\bf F}{\bf x}_f={\bf0},
+    \;\;\;\;\mbox{i.e.}\;\;\;\;\;
+    {\bf x}_p=\left[\begin{array}{c}x_1\\x_2\end{array}\right]
+    =-{\bf F}{\bf x}_f
+    =\left[\begin{array}{rr}1&2\\-2&-3\end{array}\right]
+    \left[\begin{array}{r}x_3\\x_4\end{array}\right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img1111.svg"
+ ALT="$\displaystyle {\bf I}{\bf x}_p+{\bf F}{\bf x}_f={\bf0},
+\;\;\;\;\mbox{i.e.}\;\...
+...\\ -2&amp;-3\end{array}\right]
+\left[\begin{array}{r}x_3\\ x_4\end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">337</SPAN>)
+</DIV>
+We let <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img1112.svg"
+ ALT="${\bf x}_f$"></SPAN> be either of the two standard basis vectors
+  <!-- MATH
+ ${\bf x}_f=[x_3,\;x_4]^T=[1\;0]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img1113.svg"
+ ALT="${\bf x}_f=[x_3,\;x_4]^T=[1\;0]^T$"></SPAN> and <!-- MATH
+ ${\bf x}_f=[x_3,\;x_4]^T=[0\;1]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img1114.svg"
+ ALT="${\bf x}_f=[x_3,\;x_4]^T=[0\;1]^T$"></SPAN>
+  of the null space <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1011.svg"
+ ALT="$N({\bf A})$"></SPAN>, and get 
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf x}_p=\left[\begin{array}{c}x_1\\x_2\end{array}\right]
+    =\left[\begin{array}{r}1\\-2\end{array}\right]
+    \;\;\;\;\;\mbox{or}\;\;\;\;\;
+    \left[\begin{array}{r}2\\-3\end{array}\right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img1115.svg"
+ ALT="$\displaystyle {\bf x}_p=\left[\begin{array}{c}x_1\\ x_2\end{array}\right]
+=\le...
+...\;\;\;\;\;\mbox{or}\;\;\;\;\;
+\left[\begin{array}{r}2\\ -3\end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">338</SPAN>)
+</DIV>
+and the two corresponding homogeneous solutions:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf x}_{h1}=\left[\begin{array}{c}x_1\\x_2\\x_3\\x_4\end{array}\right]
+    =\left[\begin{array}{r}1\\-2\\1\\0\end{array}\right],
+    \;\;\;\;\;\;\;\;\;\;
+    {\bf x}_{h2}=\left[\begin{array}{c}x_1\\x_2\\x_3\\x_4\end{array}\right]
+    =\left[\begin{array}{r}2\\-3\\0\\1\end{array}\right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 11.38ex; vertical-align: -5.11ex; " SRC="img1116.svg"
+ ALT="$\displaystyle {\bf x}_{h1}=\left[\begin{array}{c}x_1\\ x_2\\ x_3\\ x_4\end{arra...
+..._4\end{array}\right]
+=\left[\begin{array}{r}2\\ -3\\ 0\\ 1\end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">339</SPAN>)
+</DIV>
+</LI>
+<LI>Find the particular solution of the non-homogeneous equation 
+  <!-- MATH
+ ${\bf A}{\bf x}={\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1117.svg"
+ ALT="${\bf A}{\bf x}={\bf b}$"></SPAN> by setting <!-- MATH
+ ${\bf x}_f={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img1118.svg"
+ ALT="${\bf x}_f={\bf0}$"></SPAN>
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf I}{\bf x}_p+{\bf F}{\bf x}_f={\bf x}_p={\bf b}_1,
+    \;\;\;\;\mbox{i.e.}\;\;\;\;\;
+    \left[\begin{array}{c}x_1\\x_2\end{array}\right]
+    =\left[\begin{array}{r}-1\\2\end{array}\right]
+    \;\;\;\;\;\mbox{i.e.}\;\;\;\;\;\;\;
+    {\bf x}_p=\left[\begin{array}{r}-1\\2\\0\\0\end{array}\right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 11.38ex; vertical-align: -5.11ex; " SRC="img1119.svg"
+ ALT="$\displaystyle {\bf I}{\bf x}_p+{\bf F}{\bf x}_f={\bf x}_p={\bf b}_1,
+\;\;\;\;\...
+...;\;\;\;\;\;
+{\bf x}_p=\left[\begin{array}{r}-1\\ 2\\ 0\\ 0\end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">340</SPAN>)
+</DIV>
+</LI>
+<LI>Find the complete solution:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf x}_c={\bf x}_p+N({\bf A})
+    ={\bf x}_p+c_1{\bf x}_{h1}+c_2{\bf x}_{h2}
+    =\left[\begin{array}{r}-1\\2\\0\\0\end{array}\right]
+    +c_1\left[\begin{array}{r}1\\-2\\1\\0\end{array}\right]
+    +c_2\left[\begin{array}{r}2\\-3\\0\\1\end{array}\right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 11.38ex; vertical-align: -5.11ex; " SRC="img1120.svg"
+ ALT="$\displaystyle {\bf x}_c={\bf x}_p+N({\bf A})
+={\bf x}_p+c_1{\bf x}_{h1}+c_2{\b...
+...end{array}\right]
++c_2\left[\begin{array}{r}2\\ -3\\ 0\\ 1\end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">341</SPAN>)
+</DIV>
+</LI>
+</UL>
+
+<P>
+If the right-hand side is <!-- MATH
+ ${\bf b}'=[1,\;3,\;5]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1121.svg"
+ ALT="${\bf b}'=[1,\;3,\;5]^T$"></SPAN>, then the row reduction
+of the augmented matrix yields: 
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\left[\begin{array}{rrrr|r}1&2&3&4&1\\4&3&2&1&3\\-2&1&4&7&5\end{array}\right]
+\rightarrow
+\left[\begin{array}{rrrr|r}1&2&3&4&3\\0&-5&-10&-15&-1\\0&5&10&15&7\end{array}\right]
+\rightarrow
+\left[\begin{array}{rrrr|r}1&2&3&4&1\\0&1&2&3&0.2\\0&0&0&0&1.2\end{array}\right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img1122.svg"
+ ALT="$\displaystyle \left[\begin{array}{rrrr\vert r}1&amp;2&amp;3&amp;4&amp;1\\ 4&amp;3&amp;2&amp;1&amp;3\\ -2&amp;1&amp;4&amp;7&amp;...
+...gin{array}{rrrr\vert r}1&amp;2&amp;3&amp;4&amp;1\\ 0&amp;1&amp;2&amp;3&amp;0.2\\ 0&amp;0&amp;0&amp;0&amp;1.2\end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">342</SPAN>)
+</DIV>
+The equation corresponding to the last non-pivot row is <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1123.svg"
+ ALT="$0=1.2$"></SPAN>, indicating 
+the system is not solvable (even though the coefficient matrix does not 
+have full rank), because <!-- MATH
+ ${\bf b}'\notin C({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1095.svg"
+ ALT="${\bf b}'\notin C({\bf A})$"></SPAN> is not in the column 
+space.
+
+<P>
+<B>Example 4:</B> Consider the linear equation system with a
+coefficient matrix <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img219.svg"
+ ALT="${\bf A}^T$"></SPAN>, the transpose of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> used in the 
+previous example:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}^T{\bf y}=\left[\begin{array}{rrr}1&4&-2\\2&3&1\\3&2&4\\4&1&7\end{array}\right]
+  \left[\begin{array}{c}y_1\\y_2\\y_3\end{array}\right]
+  =\left[\begin{array}{c}3\\11\\19\\27\end{array}\right]={\bf c}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 11.38ex; vertical-align: -5.11ex; " SRC="img1124.svg"
+ ALT="$\displaystyle {\bf A}^T{\bf y}=\left[\begin{array}{rrr}1&amp;4&amp;-2\\ 2&amp;3&amp;1\\ 3&amp;2&amp;4\\...
+...ray}\right]
+=\left[\begin{array}{c}3\\ 11\\ 19\\ 27\end{array}\right]={\bf c}
+$"> 
+
+(<SPAN CLASS="arabic">343</SPAN>)
+</DIV>
+
+<UL>
+<LI>Convert the augmented matrix into the rref form:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\left[\begin{array}{rrr|r}1&4&-2&3\\2&3&1&11\\3&2&4&19\\4&1&7&27\end{array}\right]
+  \rightarrow
+  \left[\begin{array}{rrr|r}1&4&-2&3\\0&-5&5&5\\0&-10&10&10\\0&-15&15&15\end{array}\right]
+  \rightarrow
+  \left[\begin{array}{rrr|r}1&4&-2&3\\0&1&-1&-1\\0&0&0&0\\0&0&0&0\end{array}\right]
+  \rightarrow
+  \left[\begin{array}{rrr|r}1&0&2&7\\0&1&-1&-1\\0&0&0&0\\0&0&0&0\end{array}\right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 11.38ex; vertical-align: -5.11ex; " SRC="img1125.svg"
+ ALT="$\displaystyle \left[\begin{array}{rrr\vert r}1&amp;4&amp;-2&amp;3\\ 2&amp;3&amp;1&amp;11\\ 3&amp;2&amp;4&amp;19\\ 4...
+...n{array}{rrr\vert r}1&amp;0&amp;2&amp;7\\ 0&amp;1&amp;-1&amp;-1\\ 0&amp;0&amp;0&amp;0\\ 0&amp;0&amp;0&amp;0\end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">344</SPAN>)
+</DIV>
+The two pivot rows <!-- MATH
+ ${\bf r}^T_1=[1\;0\;2]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1126.svg"
+ ALT="${\bf r}^T_1=[1\;0\;2]$"></SPAN> and <!-- MATH
+ ${\bf r}^T_2=[0\;1\;-1]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1127.svg"
+ ALT="${\bf r}^T_2=[0\;1\;-1]$"></SPAN>
+  are the basis vectors that span <!-- MATH
+ $R({\bf A}^T)=C({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1128.svg"
+ ALT="$R({\bf A}^T)=C({\bf A})$"></SPAN>. The two
+  vectors that span <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img998.svg"
+ ALT="$C({\bf A})$"></SPAN> found in Example 3 can be expressed as
+  linear combinations of <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1080.svg"
+ ALT="${\bf r}_1$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1081.svg"
+ ALT="${\bf r}_2$"></SPAN>, 
+  <!-- MATH
+ $[1\;4\;-2]^T={\bf r}_1+4{\bf r}_2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1129.svg"
+ ALT="$[1\;4\;-2]^T={\bf r}_1+4{\bf r}_2$"></SPAN> and 
+  <!-- MATH
+ $[2\;3\;1]^T=2{\bf r}_1+3{\bf r}_2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1130.svg"
+ ALT="$[2\;3\;1]^T=2{\bf r}_1+3{\bf r}_2$"></SPAN>, i.e., either of the two pairs can 
+  be used as the basis that span <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img998.svg"
+ ALT="$C({\bf A})$"></SPAN>.
+
+<P>
+Based on the rref above, the equation system can now be written as
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\left[\begin{array}{cc}{\bf I}&{\bf F}\\{\bf0}&{\bf0}\end{array}\right]
+  \left[\begin{array}{c}{\bf y}_p\\{\bf y}_f\end{array}\right]=
+  \left[\begin{array}{r}{\bf c}_1\\{\bf0}\end{array}\right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img1131.svg"
+ ALT="$\displaystyle \left[\begin{array}{cc}{\bf I}&amp;{\bf F}\\ {\bf0}&amp;{\bf0}\end{array}...
+...nd{array}\right]=
+\left[\begin{array}{r}{\bf c}_1\\ {\bf0}\end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">345</SPAN>)
+</DIV>
+where
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf I}=\left[\begin{array}{cc}1&0\\0&1\end{array}\right],\;\;\;\;\;
+    {\bf F}=\left[\begin{array}{r}2\\-1\end{array}\right],\;\;\;\;\;
+    {\bf y}_p=\left[\begin{array}{c}y_1\\y_2\end{array}\right],\;\;\;\;\;
+    {\bf y}_f=y_3,\;\;\;\;\;
+    {\bf c}_1=\left[\begin{array}{r}7\\-1\end{array}\right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img1132.svg"
+ ALT="$\displaystyle {\bf I}=\left[\begin{array}{cc}1&amp;0\\ 0&amp;1\end{array}\right],\;\;\;...
+...y}_f=y_3,\;\;\;\;\;
+{\bf c}_1=\left[\begin{array}{r}7\\ -1\end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">346</SPAN>)
+</DIV>
+Multiplying out we get
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf I}{\bf y}_p+{\bf F}{\bf y}_f={\bf c}_1
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img1133.svg"
+ ALT="$\displaystyle {\bf I}{\bf y}_p+{\bf F}{\bf y}_f={\bf c}_1
+$"> 
+
+(<SPAN CLASS="arabic">347</SPAN>)
+</DIV>
+</LI>
+<LI>Find the homogeneous solution for <!-- MATH
+ ${\bf A}^T{\bf y}={\bf c}={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.57ex; " SRC="img1134.svg"
+ ALT="${\bf A}^T{\bf y}={\bf c}={\bf0}$"></SPAN> 
+  by setting <!-- MATH
+ ${\bf c}={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img58.svg"
+ ALT="${\bf c}={\bf0}$"></SPAN> and thereby <!-- MATH
+ ${\bf c}_1={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img1135.svg"
+ ALT="${\bf c}_1={\bf0}$"></SPAN>. We let
+  the free variable <!-- MATH
+ ${\bf y}_f=y_3=1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img1136.svg"
+ ALT="${\bf y}_f=y_3=1$"></SPAN> and get
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf I}{\bf y}_p+{\bf F}{\bf y}_f={\bf0},
+    \;\;\;\;\;\mbox{i.e.}\;\;\;\;\;
+    {\bf y}_p=-{\bf F}{\bf y}_f
+    =\left[\begin{array}{c}y_1\\y_2\end{array}\right]
+    =-\left[\begin{array}{r}2\\-1\end{array}\right]y_3
+    =\left[\begin{array}{r}-2\\1\end{array}\right],
+    \;\;\;\;\;\mbox{i.e.}\;\;\;\;\;
+    {\bf y}_h=\left[\begin{array}{r}-2\\1\\1\end{array}\right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img1137.svg"
+ ALT="$\displaystyle {\bf I}{\bf y}_p+{\bf F}{\bf y}_f={\bf0},
+\;\;\;\;\;\mbox{i.e.}\...
+...i.e.}\;\;\;\;\;
+{\bf y}_h=\left[\begin{array}{r}-2\\ 1\\ 1\end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">348</SPAN>)
+</DIV>
+</LI>
+<LI>Find the particular solution of the non-homogeneous equation
+  <!-- MATH
+ ${\bf A}^T{\bf y}={\bf c}\ne {\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.57ex; " SRC="img1138.svg"
+ ALT="${\bf A}^T{\bf y}={\bf c}\ne {\bf0}$"></SPAN> by setting <!-- MATH
+ ${\bf y}_f=y_3=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img1139.svg"
+ ALT="${\bf y}_f=y_3=0$"></SPAN>:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf I}{\bf y}_p+{\bf F}{\bf y}_f={\bf y}_p
+    ={\bf c}_1=\left[\begin{array}{r}7\\-1\end{array}\right],
+    \;\;\;\;\;\mbox{i.e.}\;\;\;\;\;
+    {\bf y}_p=\left[\begin{array}{r}7\\-1\\0\end{array}\right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img1140.svg"
+ ALT="$\displaystyle {\bf I}{\bf y}_p+{\bf F}{\bf y}_f={\bf y}_p
+={\bf c}_1=\left[\be...
+...i.e.}\;\;\;\;\;
+{\bf y}_p=\left[\begin{array}{r}7\\ -1\\ 0\end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">349</SPAN>)
+</DIV>
+</LI>
+<LI>Find the complete solution:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf y}_c={\bf y}_p+N({\bf A}^T)={\bf y}_p+c y_3
+    =\left[\begin{array}{r}7\\-1\\0\end{array}\right]+c
+    \left[\begin{array}{r}-2\\1\\1\end{array}\right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img1141.svg"
+ ALT="$\displaystyle {\bf y}_c={\bf y}_p+N({\bf A}^T)={\bf y}_p+c y_3
+=\left[\begin{a...
+...1\\ 0\end{array}\right]+c
+\left[\begin{array}{r}-2\\ 1\\ 1\end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">350</SPAN>)
+</DIV>
+</LI>
+</UL>
+
+<P>
+If the right-hand side is <!-- MATH
+ ${\bf c}'=[1,\;1,\;2,\;3]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1142.svg"
+ ALT="${\bf c}'=[1,\;1,\;2,\;3]^T$"></SPAN>, 
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\left[\begin{array}{rrr|r}1&4&-2&1\\2&3&1&1\\3&2&4&2\\4&1&7&3\end{array}\right]
+  \rightarrow
+  \left[\begin{array}{rrr|r}1&4&-2&1\\0&-5&5&-1\\0&-10&10&-1\\0&-15&15&-1\end{array}\right]
+  \rightarrow
+  \left[\begin{array}{rrr|r}1&4&-2&1\\0&1&-1&1/5\\0&0&0&1\\0&0&0&2\end{array}\right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 11.38ex; vertical-align: -5.11ex; " SRC="img1143.svg"
+ ALT="$\displaystyle \left[\begin{array}{rrr\vert r}1&amp;4&amp;-2&amp;1\\ 2&amp;3&amp;1&amp;1\\ 3&amp;2&amp;4&amp;2\\ 4&amp;1...
+...{array}{rrr\vert r}1&amp;4&amp;-2&amp;1\\ 0&amp;1&amp;-1&amp;1/5\\ 0&amp;0&amp;0&amp;1\\ 0&amp;0&amp;0&amp;2\end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">351</SPAN>)
+</DIV>
+indicating the system is not solvable, as this 
+<!-- MATH
+ ${\bf c}'\notin C({\bf A}^T)=R({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1144.svg"
+ ALT="${\bf c}'\notin C({\bf A}^T)=R({\bf A})$"></SPAN>, i.e., it is not in the column
+space of <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img219.svg"
+ ALT="${\bf A}^T$"></SPAN> or row space of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>.
+
+<P>
+In the two examples above, we have obtained all four subspaces associated
+with this matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> with <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1145.svg"
+ ALT="$M=3$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1146.svg"
+ ALT="$N=4$"></SPAN>, and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1071.svg"
+ ALT="$R=2$"></SPAN>, in terms of the
+bases that span the subspaces:
+
+<P>
+
+<OL>
+<LI>The row space <!-- MATH
+ $R({\bf A})=C({\bf A}^T)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1019.svg"
+ ALT="$R({\bf A})=C({\bf A}^T)$"></SPAN> is an R-D subspace of 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img1147.svg"
+ ALT="$\mathbb{R}^4$"></SPAN>, spanned by the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1071.svg"
+ ALT="$R=2$"></SPAN> pivot rows of the rref of 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+R({\bf A})=C({\bf A}^T)=
+  span\left(\left[\begin{array}{r}1\\0\\-1\\-2\end{array}\right],
+  \left[\begin{array}{c}0\\1\\2\\3\end{array}\right]\right) 
+  
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 11.38ex; vertical-align: -5.11ex; " SRC="img1148.svg"
+ ALT="$\displaystyle R({\bf A})=C({\bf A}^T)=
+span\left(\left[\begin{array}{r}1\\ 0\\...
+...rray}\right],
+\left[\begin{array}{c}0\\ 1\\ 2\\ 3\end{array}\right]\right)
+$"> 
+
+(<SPAN CLASS="arabic">352</SPAN>)
+</DIV>
+</LI>
+<LI>The null space <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1011.svg"
+ ALT="$N({\bf A})$"></SPAN> is an (N-R)-D subspace of <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img1147.svg"
+ ALT="$\mathbb{R}^4$"></SPAN> 
+  spanned by the <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img1149.svg"
+ ALT="$N-R$"></SPAN> independent homogeneous solutions:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+N({\bf A})=span\left(\left[\begin{array}{r}1\\-2\\1\\0\end{array}\right],
+  \left[\begin{array}{r}2\\-3\\0\\1\end{array}\right] \right)
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 11.38ex; vertical-align: -5.11ex; " SRC="img1150.svg"
+ ALT="$\displaystyle N({\bf A})=span\left(\left[\begin{array}{r}1\\ -2\\ 1\\ 0\end{array}\right],
+\left[\begin{array}{r}2\\ -3\\ 0\\ 1\end{array}\right] \right)
+$"> 
+
+(<SPAN CLASS="arabic">353</SPAN>)
+</DIV>
+Note that the basis vectors of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1011.svg"
+ ALT="$N({\bf A})$"></SPAN> are indeed orthogonal to those
+  of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img560.svg"
+ ALT="$R({\bf A})$"></SPAN>.
+</LI>
+<LI>The column space of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> is the same as the row space of <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img219.svg"
+ ALT="${\bf A}^T$"></SPAN>,
+  which is the R-D subspace of <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img1151.svg"
+ ALT="$R^3$"></SPAN> spanned by the two pivot rows of the 
+  rref of <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img219.svg"
+ ALT="${\bf A}^T$"></SPAN>. 
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+C({\bf A})=R({\bf A}^T)=span\left(\left[\begin{array}{c}1\\0\\2\end{array}\right],
+  \left[\begin{array}{r}0\\1\\-1\end{array}\right]\right) 
+  
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img1152.svg"
+ ALT="$\displaystyle C({\bf A})=R({\bf A}^T)=span\left(\left[\begin{array}{c}1\\ 0\\ 2\end{array}\right],
+\left[\begin{array}{r}0\\ 1\\ -1\end{array}\right]\right)
+$"> 
+
+(<SPAN CLASS="arabic">354</SPAN>)
+</DIV>
+</LI>
+<LI>The left null space <SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1026.svg"
+ ALT="$N({\bf A}^T)$"></SPAN> is a (M-R)-D subspace of <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img1091.svg"
+ ALT="$\mathbb{R}^3$"></SPAN>
+  spanned by the homogeneous solutions (here one <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img1153.svg"
+ ALT="$3-2=1$"></SPAN> solution):
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+N({\bf A}^T)=span\left(\left[\begin{array}{r}-2\\1\\1\end{array}\right] \right)
+  =c\;\left[\begin{array}{r}-2\\1\\1\end{array}\right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img1154.svg"
+ ALT="$\displaystyle N({\bf A}^T)=span\left(\left[\begin{array}{r}-2\\ 1\\ 1\end{array}\right] \right)
+=c\;\left[\begin{array}{r}-2\\ 1\\ 1\end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">355</SPAN>)
+</DIV>
+Again note that the basis vectors of <SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1026.svg"
+ ALT="$N({\bf A}^T)$"></SPAN> are orthogonal to those
+  of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img998.svg"
+ ALT="$C({\bf A})$"></SPAN>.
+</LI>
+</OL>
+
+<P>
+In general, here are the ways to find the bases of the four subspaces:
+
+<UL>
+<LI>The basis vectors of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img560.svg"
+ ALT="$R({\bf A})$"></SPAN> are the pivot rows of the rref 
+  of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>.
+</LI>
+<LI>The basis vectors of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img998.svg"
+ ALT="$C({\bf A})$"></SPAN> are the pivot rows of the rref 
+  of <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img219.svg"
+ ALT="${\bf A}^T$"></SPAN>.
+</LI>
+<LI>The basis vectors of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1011.svg"
+ ALT="$N({\bf A})$"></SPAN> are the independent homogeneous
+  solutions of <!-- MATH
+ ${\bf Ax}={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1155.svg"
+ ALT="${\bf Ax}={\bf0}$"></SPAN>. To find them, reduce <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> to the
+  rref, identify all free variables <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img1112.svg"
+ ALT="${\bf x}_f$"></SPAN> corresponding to non-pivot 
+  columns, set one of them to 1 and the rest to 0, solve homogeneous 
+  system <!-- MATH
+ ${\bf A}{\bf x}={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1014.svg"
+ ALT="${\bf A}{\bf x}={\bf0}$"></SPAN> to find the pivot variables <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img1084.svg"
+ ALT="${\bf x}_p$"></SPAN> 
+  to get one basis vector. Repeat the process for each of the free 
+  variables to get all basis vectors.
+</LI>
+<LI>The basis vectors of <SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1156.svg"
+ ALT="$R({\bf A}^T)$"></SPAN> can be obtained by doing the
+  same as above for <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img219.svg"
+ ALT="${\bf A}^T$"></SPAN>.
+</LI>
+</UL>
+
+<P>
+Note that while the basis of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img560.svg"
+ ALT="$R({\bf A})$"></SPAN> are the pivot rows of the 
+rref of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>, as its rows are equivalent to those of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>, 
+the pivot columns of the rref basis of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img998.svg"
+ ALT="$C({\bf A})$"></SPAN> are not the basis
+of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img998.svg"
+ ALT="$C({\bf A})$"></SPAN>, as the columns of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> have been changed by the
+row deduction operations and are therefore not equivalent to the 
+columns of the resulting rref. The columns in <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> corresponding
+to the pivot columns in the rref could be used as the basis of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img998.svg"
+ ALT="$C({\bf A})$"></SPAN>.
+Alternatively, the basis of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img998.svg"
+ ALT="$C({\bf A})$"></SPAN> can be obtained from the rref 
+of <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img219.svg"
+ ALT="${\bf A}^T$"></SPAN>, as its rows are equivalent to those of <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img219.svg"
+ ALT="${\bf A}^T$"></SPAN>, which 
+are the columns of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>.
+
+<P>
+We further make the following observations:
+
+<UL>
+<LI>The basis vectors of each of the four subspaces are independent, 
+  the basis vectors of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img560.svg"
+ ALT="$R({\bf A})$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1011.svg"
+ ALT="$N({\bf A})$"></SPAN> are orthogonal, 
+  and <!-- MATH
+ $dim\;R({\bf A})+dim\;N({\bf A})=M$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1157.svg"
+ ALT="$dim\;R({\bf A})+dim\;N({\bf A})=M$"></SPAN>. Similarly, the basis vectors 
+  of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img998.svg"
+ ALT="$C({\bf A})$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1026.svg"
+ ALT="$N({\bf A}^T)$"></SPAN> are orthogonal, and 
+  <!-- MATH
+ $dim\;C({\bf A})+dim\;N({\bf A}^T)=N$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1158.svg"
+ ALT="$dim\;C({\bf A})+dim\;N({\bf A}^T)=N$"></SPAN>.
+  In other words, the four subspaces indeed satisfy the following orthogonal 
+  and complementary properties:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+C({\bf A})\perp N({\bf A}^T),\;\;\;\;R({\bf A})\perp N({\bf A}),
+  \;\;\;\;\;C({\bf A})\oplus N({\bf A}^T)=R^3,\;\;\;\;R({\bf A})\oplus N({\bf A})=R^4
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img1159.svg"
+ ALT="$\displaystyle C({\bf A})\perp N({\bf A}^T),\;\;\;\;R({\bf A})\perp N({\bf A}),
+...
+...\;\;C({\bf A})\oplus N({\bf A}^T)=R^3,\;\;\;\;R({\bf A})\oplus N({\bf A})=R^4
+$"> 
+
+(<SPAN CLASS="arabic">356</SPAN>)
+</DIV>
+i.e., they are orthogonal complements:
+  <!-- MATH
+ $C({\bf A})=N({\bf A})^\perp,\;\;\;\;R({\bf A})=N({\bf A})^\perp$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1160.svg"
+ ALT="$C({\bf A})=N({\bf A})^\perp,\;\;\;\;R({\bf A})=N({\bf A})^\perp$"></SPAN>.
+
+<P>
+</LI>
+<LI>For <!-- MATH
+ ${\bf Ax}={\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img269.svg"
+ ALT="${\bf Ax}={\bf b}$"></SPAN> to be solvable, the constant vector 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1161.svg"
+ ALT="${\bf b}$"></SPAN> on the right-hand side must be in the column space, 
+  <!-- MATH
+ ${\bf b}\in C({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img999.svg"
+ ALT="${\bf b}\in C({\bf A})$"></SPAN>. Otherwise the equation is not solvable, 
+  even if <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img1162.svg"
+ ALT="$R&lt;M&lt;N$"></SPAN>. Similarly, for <!-- MATH
+ ${\bf A}^T{\bf x}={\bf c}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img1163.svg"
+ ALT="${\bf A}^T{\bf x}={\bf c}$"></SPAN> to be 
+  solvable, <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img67.svg"
+ ALT="${\bf c}$"></SPAN> must be in the row space <!-- MATH
+ ${\bf c}\in R({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1007.svg"
+ ALT="${\bf c}\in R({\bf A})$"></SPAN>.
+  In the examples above, both <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1161.svg"
+ ALT="${\bf b}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img67.svg"
+ ALT="${\bf c}$"></SPAN> are indeed in 
+  their corresponding column spaces:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf b}=\left[\begin{array}{r}3\\2\\4\end{array}\right]
+    =3\left[\begin{array}{r}1\\0\\2\end{array}\right]
+    +2\left[\begin{array}{r}0\\1\\-1\end{array}\right]
+    \in C({\bf A}),\;\;\;\;\;\;\;
+    {\bf c}=\left[\begin{array}{r}3\\11\\19\\27\end{array}\right]
+    =3\left[\begin{array}{r}1\\0\\-1\\-2\end{array}\right]
+    +11\left[\begin{array}{r}0\\1\\2\\3\end{array}\right]\in R({\bf A})
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 11.38ex; vertical-align: -5.11ex; " SRC="img1164.svg"
+ ALT="$\displaystyle {\bf b}=\left[\begin{array}{r}3\\ 2\\ 4\end{array}\right]
+=3\lef...
+...ight]
++11\left[\begin{array}{r}0\\ 1\\ 2\\ 3\end{array}\right]\in R({\bf A})
+$"> 
+
+(<SPAN CLASS="arabic">357</SPAN>)
+</DIV>
+But as <!-- MATH
+ ${\bf b}=[1,\;3,\;5]^T\notin C({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1165.svg"
+ ALT="${\bf b}=[1,\;3,\;5]^T\notin C({\bf A})$"></SPAN> and
+  <!-- MATH
+ ${\bf c}=[1,\;1,\;2,\;3]^T\notin R({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1166.svg"
+ ALT="${\bf c}=[1,\;1,\;2,\;3]^T\notin R({\bf A})$"></SPAN>, the corresponding 
+  systems have no solutions.
+
+<P>
+</LI>
+<LI>All homogeneous solutions of <!-- MATH
+ ${\bf A}{\bf x}={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1014.svg"
+ ALT="${\bf A}{\bf x}={\bf0}$"></SPAN> are in 
+  the null space <!-- MATH
+ ${\bf x}_h\in N({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1043.svg"
+ ALT="${\bf x}_h\in N({\bf A})$"></SPAN>, but in general the 
+  particular solutions <!-- MATH
+ ${\bf x}_p\in R^N=R({\bf A)}\oplus N({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img1167.svg"
+ ALT="${\bf x}_p\in R^N=R({\bf A)}\oplus N({\bf A})$"></SPAN>
+  are not necessarily in the row space <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img560.svg"
+ ALT="$R({\bf A})$"></SPAN>. In the example 
+  above, <!-- MATH
+ ${\bf x}_p\in R^N$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img1168.svg"
+ ALT="${\bf x}_p\in R^N$"></SPAN> is a linear combination of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1071.svg"
+ ALT="$R=2$"></SPAN> 
+  basis vectors of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img560.svg"
+ ALT="$R({\bf A})$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img1169.svg"
+ ALT="$N-R=2$"></SPAN> basis vectors of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1011.svg"
+ ALT="$N({\bf A})$"></SPAN>:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf x}_p=\left[\begin{array}{r}-1\\2\\0\\0\end{array}\right]
+    =\left(0.1\left[\begin{array}{r}1\\0\\-1\\-2\end{array}\right]
+    +0.2\left[\begin{array}{r}0\\1\\2\\3\end{array}\right]\right)
+    +\left(-0.3\left[\begin{array}{r}1\\-2\\1\\0\end{array}\right]
+    -0.4\left[\begin{array}{r}2\\-3\\0\\1\end{array}\right]\right)
+    ={\bf x}'_p+{\bf x}''_p
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 11.38ex; vertical-align: -5.11ex; " SRC="img1170.svg"
+ ALT="$\displaystyle {\bf x}_p=\left[\begin{array}{r}-1\\ 2\\ 0\\ 0\end{array}\right]
+...
+...gin{array}{r}2\\ -3\\ 0\\ 1\end{array}\right]\right)
+={\bf x}'_p+{\bf x}''_p
+$"> 
+
+(<SPAN CLASS="arabic">358</SPAN>)
+</DIV>
+where
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf x}'_p=\left[\begin{array}{c}0.1\\0.2\\0.3\\0.4\end{array}\right]
+  \in R({\bf A}),\;\;\;\;\;\;
+  {\bf x}''_p=\left[\begin{array}{c}-1.1\\1.8\\-0.3\\-0.4\end{array}\right]
+  \in N({\bf A})
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 11.38ex; vertical-align: -5.11ex; " SRC="img1171.svg"
+ ALT="$\displaystyle {\bf x}'_p=\left[\begin{array}{c}0.1\\ 0.2\\ 0.3\\ 0.4\end{array}...
+...ft[\begin{array}{c}-1.1\\ 1.8\\ -0.3\\ -0.4\end{array}\right]
+\in N({\bf A})
+$"> 
+
+(<SPAN CLASS="arabic">359</SPAN>)
+</DIV>
+are the projections of <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img1084.svg"
+ ALT="${\bf x}_p$"></SPAN> onto <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img560.svg"
+ ALT="$R({\bf A})$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1011.svg"
+ ALT="$N({\bf A})$"></SPAN>, 
+  respectively, and <SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -1.01ex; " SRC="img1172.svg"
+ ALT="${\bf x}'_p$"></SPAN> is another particular solution without
+  any homogeneous component that satisfies <!-- MATH
+ ${\bf Ax}={\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img269.svg"
+ ALT="${\bf Ax}={\bf b}$"></SPAN>, while 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -1.01ex; " SRC="img1173.svg"
+ ALT="${\bf x}''_p$"></SPAN> is a homogeneous solution satisfying <!-- MATH
+ ${\bf Ax}={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1155.svg"
+ ALT="${\bf Ax}={\bf0}$"></SPAN>.
+
+<P>
+</LI>
+<LI>All homogeneous solutions of <!-- MATH
+ ${\bf A}^T{\bf y}={\bf c}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.57ex; " SRC="img1006.svg"
+ ALT="${\bf A}^T{\bf y}={\bf c}$"></SPAN> are in 
+  the left null space <!-- MATH
+ ${\bf y}_h\in N({\bf A}^T)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1048.svg"
+ ALT="${\bf y}_h\in N({\bf A}^T)$"></SPAN>, but in general the
+  particular solutions <!-- MATH
+ ${\bf y}_p\in C({\bf A})\oplus N({\bf A}^T)=R^M$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img1174.svg"
+ ALT="${\bf y}_p\in C({\bf A})\oplus N({\bf A}^T)=R^M$"></SPAN>
+  are not necessarily in the column space. In the example above, 
+  <!-- MATH
+ ${\bf y}_p\in R^M$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img1175.svg"
+ ALT="${\bf y}_p\in R^M$"></SPAN> is a linear combination of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1071.svg"
+ ALT="$R=2$"></SPAN> basis vectors 
+  of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img998.svg"
+ ALT="$C({\bf A})$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img1073.svg"
+ ALT="$M-R=1$"></SPAN> basis vector of <SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1026.svg"
+ ALT="$N({\bf A}^T)$"></SPAN>:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf y}_p=\left[\begin{array}{r}7\\-1\\0\end{array}\right]
+    =\left(2\left[\begin{array}{r}1\\0\\2\end{array}\right]
+    +1.5\left[\begin{array}{r}0\\1\\-1\end{array}\right]\right)
+    -2.5\left[\begin{array}{r}-2\\1\\1\end{array}\right]
+    =\left[\begin{array}{r}2\\1.5\\2.5\end{array}\right]
+    -2.5\left[\begin{array}{r}-2\\1\\1\end{array}\right]
+    ={\bf y}'_p+{\bf y}''_p
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img1176.svg"
+ ALT="$\displaystyle {\bf y}_p=\left[\begin{array}{r}7\\ -1\\ 0\end{array}\right]
+=\l...
+....5\left[\begin{array}{r}-2\\ 1\\ 1\end{array}\right]
+={\bf y}'_p+{\bf y}''_p
+$"> 
+
+(<SPAN CLASS="arabic">360</SPAN>)
+</DIV>
+where <!-- MATH
+ ${\bf y}'_p=[2,\;1.5,\;2.5]^T\in C({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -1.01ex; " SRC="img1177.svg"
+ ALT="${\bf y}'_p=[2,\;1.5,\;2.5]^T\in C({\bf A})$"></SPAN> is a particular
+  solution (without any homogeneous component) that satisfies
+  <!-- MATH
+ ${\bf A}^T{\bf y}={\bf c}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.57ex; " SRC="img1006.svg"
+ ALT="${\bf A}^T{\bf y}={\bf c}$"></SPAN>.
+</LI>
+</UL>
+
+<P>
+Here is a summary of the four subspaces associated with an <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img978.svg"
+ ALT="$M$"></SPAN> by <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img976.svg"
+ ALT="$N$"></SPAN> matrix 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> of rank <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img694.svg"
+ ALT="$R$"></SPAN>.
+
+<P>
+<TABLE class="PAD  BORDER" style="">
+<TR><TD CLASS="LEFT"><SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img978.svg"
+ ALT="$M$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img976.svg"
+ ALT="$N$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img694.svg"
+ ALT="$R$"></SPAN></TD>
+<TD CLASS="CENTER">dim <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img560.svg"
+ ALT="$R({\bf A})$"></SPAN></TD>
+<TD CLASS="CENTER">dim <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1011.svg"
+ ALT="$N({\bf A})$"></SPAN></TD>
+<TD CLASS="CENTER">dim <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img998.svg"
+ ALT="$C({\bf A})$"></SPAN></TD>
+<TD CLASS="CENTER">dim <SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1156.svg"
+ ALT="$R({\bf A}^T)$"></SPAN></TD>
+<TD CLASS="LEFT">solvability of <!-- MATH
+ ${\bf A}{\bf x}={\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1117.svg"
+ ALT="${\bf A}{\bf x}={\bf b}$"></SPAN></TD>
+</TR>
+<TR><TD CLASS="LEFT"><SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1178.svg"
+ ALT="$M=N=R$"></SPAN></TD>
+<TD CLASS="CENTER"><SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img694.svg"
+ ALT="$R$"></SPAN></TD>
+<TD CLASS="CENTER">0</TD>
+<TD CLASS="CENTER"><SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img694.svg"
+ ALT="$R$"></SPAN></TD>
+<TD CLASS="CENTER">0</TD>
+<TD CLASS="LEFT">solvable, <!-- MATH
+ ${\bf x}={\bf A}^{-1}{\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img271.svg"
+ ALT="${\bf x}={\bf A}^{-1}{\bf b}$"></SPAN>
+  is unique solution</TD>
+</TR>
+<TR><TD CLASS="LEFT"><SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img1179.svg"
+ ALT="$M&gt;N=R$"></SPAN></TD>
+<TD CLASS="CENTER"><SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img694.svg"
+ ALT="$R$"></SPAN></TD>
+<TD CLASS="CENTER">0</TD>
+<TD CLASS="CENTER"><SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img694.svg"
+ ALT="$R$"></SPAN></TD>
+<TD CLASS="CENTER"><SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img1062.svg"
+ ALT="$M-R$"></SPAN></TD>
+<TD CLASS="LEFT">over-constrained, solvable if 
+  <!-- MATH
+ ${\bf b}\in C({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img999.svg"
+ ALT="${\bf b}\in C({\bf A})$"></SPAN></TD>
+</TR>
+<TR><TD CLASS="LEFT"><SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img1180.svg"
+ ALT="$N&gt;M=R$"></SPAN></TD>
+<TD CLASS="CENTER"><SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img694.svg"
+ ALT="$R$"></SPAN></TD>
+<TD CLASS="CENTER"><SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img1149.svg"
+ ALT="$N-R$"></SPAN></TD>
+<TD CLASS="CENTER"><SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img694.svg"
+ ALT="$R$"></SPAN></TD>
+<TD CLASS="CENTER">0</TD>
+<TD CLASS="LEFT">under-constrained, solvable, 
+  infinite solutions <!-- MATH
+ ${\bf x}={\bf x}_p+N({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img1181.svg"
+ ALT="${\bf x}={\bf x}_p+N({\bf A})$"></SPAN></TD>
+</TR>
+<TR><TD CLASS="LEFT"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1182.svg"
+ ALT="$R&lt;min(M,N)$"></SPAN></TD>
+<TD CLASS="CENTER"><SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img694.svg"
+ ALT="$R$"></SPAN></TD>
+<TD CLASS="CENTER"><SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img1149.svg"
+ ALT="$N-R$"></SPAN></TD>
+<TD CLASS="CENTER"><SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img694.svg"
+ ALT="$R$"></SPAN></TD>
+<TD CLASS="CENTER"><SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img1062.svg"
+ ALT="$M-R$"></SPAN></TD>
+<TD CLASS="LEFT">solvable only if 
+  <!-- MATH
+ ${\bf b}\in C({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img999.svg"
+ ALT="${\bf b}\in C({\bf A})$"></SPAN>, infinite solutions</TD>
+</TR>
+</TABLE>
+
+<P>
+The figure below illustrates a specific case with <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1183.svg"
+ ALT="$M=N=3$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1071.svg"
+ ALT="$R=2$"></SPAN>. 
+As <!-- MATH
+ ${\bf b}\notin C({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1050.svg"
+ ALT="${\bf b}\notin C({\bf A})$"></SPAN>, the system can only be approximately 
+solved to find <!-- MATH
+ ${\bf Ax}={\bf p}\in C({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1184.svg"
+ ALT="${\bf Ax}={\bf p}\in C({\bf A})$"></SPAN>, which is the projection 
+of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1161.svg"
+ ALT="${\bf b}$"></SPAN> onto the column space <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img998.svg"
+ ALT="$C({\bf A})$"></SPAN>. The error 
+<!-- MATH
+ $||{\bf e}||=||{\bf p}-{\bf b}||=||{\bf Ax}_p-{\bf b}||$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img1185.svg"
+ ALT="$\vert\vert{\bf e}\vert\vert=\vert\vert{\bf p}-{\bf b}\vert\vert=\vert\vert{\bf Ax}_p-{\bf b}\vert\vert$"></SPAN> is minimized, 
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img1084.svg"
+ ALT="${\bf x}_p$"></SPAN> is the optimal approximation. We will consider ways to obtain
+this optimal approximation in the following sections.
+
+<P>
+<IMG STYLE=""
+ SRC="../figures/FourSpaces1.png"
+ ALT="FourSpaces1.png">
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node20.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="algebra.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node18.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node20.html">Pseudo-Inverse Solutions Based on</A>
+<B> Up:</B> <A
+ HREF="algebra.html">algebra</A>
+<B> Previous:</B> <A
+ HREF="node18.html">Vector and Matrix Differentiation</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

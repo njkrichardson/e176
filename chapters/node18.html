@@ -1,0 +1,378 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Vector and Matrix Differentiation</TITLE>
+<META NAME="description" CONTENT="Vector and Matrix Differentiation">
+<META NAME="keywords" CONTENT="algebra">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="algebra.css">
+
+<LINK REL="next" HREF="node19.html">
+<LINK REL="previous" HREF="node17.html">
+<LINK REL="next" HREF="node19.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node19.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="algebra.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node17.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node19.html">The Fundamental Theorem of</A>
+<B> Up:</B> <A
+ HREF="algebra.html">algebra</A>
+<B> Previous:</B> <A
+ HREF="node17.html">Matrix Norms</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION000180000000000000000">
+Vector and Matrix Differentiation</A>
+</H1>
+
+<P>
+A multivariate function <!-- MATH
+ $f({\bf x})=f(x_1,\cdots,x_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img943.svg"
+ ALT="$f({\bf x})=f(x_1,\cdots,x_n)$"></SPAN> can be considered
+as a hypersurface in an <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img944.svg"
+ ALT="$n+1$"></SPAN> dimensional space defined over an n-D space,
+i.e., corresponding to every point <!-- MATH
+ ${\bf x}=[x_1,\cdots,x_n]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img314.svg"
+ ALT="${\bf x}=[x_1,\cdots,x_n]^T$"></SPAN> in the
+n-D space, there exists a unique value <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img945.svg"
+ ALT="$f({\bf x})$"></SPAN> (real or complex). 
+
+<P>
+A <EM>vector differentiation operator</EM> is defined as 
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\frac{d}{d{\bf x}}\stackrel{\triangle}{=}
+\left[ \frac{\partial}{\partial x_1},\cdots, \frac{\partial}{\partial x_n} \right]^T
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 6.50ex; vertical-align: -2.32ex; " SRC="img946.svg"
+ ALT="$\displaystyle \frac{d}{d{\bf x}}\stackrel{\triangle}{=}
+\left[ \frac{\partial}{\partial x_1},\cdots, \frac{\partial}{\partial x_n} \right]^T
+$"> 
+
+(<SPAN CLASS="arabic">288</SPAN>)
+</DIV>
+which, when applied to any scalar function <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img945.svg"
+ ALT="$f({\bf x})$"></SPAN>, produces
+its derivative with respect to <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img52.svg"
+ ALT="${\bf x}$"></SPAN>, the <EM>gradient</EM> vector
+of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img945.svg"
+ ALT="$f({\bf x})$"></SPAN>:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf g}_f({\bf x})=\bigtriangledown f({\bf x})=\frac{d}{d{\bf x}} f({\bf x})
+=\left[ \frac{\partial f}{\partial x_1},\cdots, \frac{\partial f}{\partial x_n} 
+\right]^T
+=[f_{x_1},\cdots,f_{x_n}]^T
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 6.50ex; vertical-align: -2.32ex; " SRC="img947.svg"
+ ALT="$\displaystyle {\bf g}_f({\bf x})=\bigtriangledown f({\bf x})=\frac{d}{d{\bf x}}...
+...\cdots, \frac{\partial f}{\partial x_n}
+\right]^T
+=[f_{x_1},\cdots,f_{x_n}]^T
+$"> 
+
+(<SPAN CLASS="arabic">289</SPAN>)
+</DIV>
+The <EM>Directional derivative</EM> of a function <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img945.svg"
+ ALT="$f({\bf x})$"></SPAN> is defined
+as the rate of change of the function value along a unit direction 
+<!-- MATH
+ ${\bf r}=[r_1,\cdots,r_n]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img948.svg"
+ ALT="${\bf r}=[r_1,\cdots,r_n]^T$"></SPAN> (with <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img949.svg"
+ ALT="$\vert\vert{\bf r}\vert\vert=1$"></SPAN>):
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+D_rf({\bf x})=\bigtriangledown_r f({\bf x})
+=\frac{d}{dh}f({\bf x}+h{\bf r})\bigg|_{h=0}
+=\lim_{h\rightarrow 0}\frac{f({\bf x}+h{\bf r})-f({\bf x})}{h}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 6.04ex; vertical-align: -2.44ex; " SRC="img950.svg"
+ ALT="$\displaystyle D_rf({\bf x})=\bigtriangledown_r f({\bf x})
+=\frac{d}{dh}f({\bf x...
+...igg\vert _{h=0}
+=\lim_{h\rightarrow 0}\frac{f({\bf x}+h{\bf r})-f({\bf x})}{h}
+$"> 
+
+(<SPAN CLASS="arabic">290</SPAN>)
+</DIV>
+Introducing <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img29.svg"
+ ALT="$n$"></SPAN> intermediate functions <!-- MATH
+ $x_i+hr_i\;\;(i=1,\cdots,n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img951.svg"
+ ALT="$x_i+hr_i\;\;(i=1,\cdots,n)$"></SPAN> of
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img952.svg"
+ ALT="$h$"></SPAN>, we can rewrite the above as the following by chain rule:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+D_rf({\bf x})=\frac{d}{dh}f({\bf x}+h{\bf r})\bigg|_{h=0}
+  =\sum_{i=1}^n \frac{\partial f({\bf x}+h{\bf r})}{\partial(x_i+hr_i)}\;
+  \frac{d(x_i+hr_i)}{dh} \bigg|_{h=0}
+  =\sum_{i=1}^n f_{x_i}\; r_i={\bf g}_f^T {\bf r}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 7.20ex; vertical-align: -3.09ex; " SRC="img953.svg"
+ ALT="$\displaystyle D_rf({\bf x})=\frac{d}{dh}f({\bf x}+h{\bf r})\bigg\vert _{h=0}
+=...
+...+hr_i)}{dh} \bigg\vert _{h=0}
+=\sum_{i=1}^n f_{x_i}\; r_i={\bf g}_f^T {\bf r}
+$"> 
+
+(<SPAN CLASS="arabic">291</SPAN>)
+</DIV>
+We see that the directional derivative is the projection of the
+gradient vector onto the unit direction <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img954.svg"
+ ALT="${\bf r}$"></SPAN>, which is maximized
+when the gradient vector <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img955.svg"
+ ALT="${\bf g}_f$"></SPAN> is in the same direction as 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img954.svg"
+ ALT="${\bf r}$"></SPAN>. In other words, the function value increases mot rapidly
+along the direction of its gradient.
+
+<P>
+Vector differentiation has the following properties:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\frac{d}{d{\bf x}}({\bf a}^T{\bf x})
+=\frac{d}{d{\bf x}}({\bf x}^T{\bf a})={\bf a},
+\;\;\;\;\;\;\;
+\frac{d}{d{\bf x}}({\bf x}^T{\bf x})=2{\bf x},
+\;\;\;\;\;\;\;
+\frac{d}{d{\bf x}}({\bf x}^T{\bf A}{\bf x})=({\bf A}^T+{\bf A}){\bf x}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 5.11ex; vertical-align: -1.71ex; " SRC="img956.svg"
+ ALT="$\displaystyle \frac{d}{d{\bf x}}({\bf a}^T{\bf x})
+=\frac{d}{d{\bf x}}({\bf x}^...
+...;\;\;\;
+\frac{d}{d{\bf x}}({\bf x}^T{\bf A}{\bf x})=({\bf A}^T+{\bf A}){\bf x}
+$"> 
+
+(<SPAN CLASS="arabic">292</SPAN>)
+</DIV>
+To prove the third one, consider the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img462.svg"
+ ALT="$k$"></SPAN>th element of the vector:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\frac{\partial}{\partial x_k} ({\bf x}^{T}{\bf A}{\bf x})
+ = \frac{\partial}{\partial x_k} \sum_{i=1}^n \sum_{j=1}^n a_{ij}x_ix_j
+ = \sum_{i=1}^n a_{ik}x_i+\sum_{j=1}^n a_{kj}x_j
+ \;\;\;\;\;\;\;\;(k=1, \cdots, n)
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 7.43ex; vertical-align: -3.40ex; " SRC="img957.svg"
+ ALT="$\displaystyle \frac{\partial}{\partial x_k} ({\bf x}^{T}{\bf A}{\bf x})
+= \fra...
+...sum_{i=1}^n a_{ik}x_i+\sum_{j=1}^n a_{kj}x_j
+\;\;\;\;\;\;\;\;(k=1, \cdots, n)
+$"> 
+
+(<SPAN CLASS="arabic">293</SPAN>)
+</DIV>
+Putting all <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img29.svg"
+ ALT="$n$"></SPAN> elements in vector form, we have the above. If <!-- MATH
+ ${\bf A}^T={\bf A}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img653.svg"
+ ALT="${\bf A}^T={\bf A}$"></SPAN> 
+is symmetric, then we have
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\frac{d}{d{\bf x}}({\bf x}^T{\bf A}{\bf x})=2{\bf A}{\bf x}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 5.11ex; vertical-align: -1.71ex; " SRC="img958.svg"
+ ALT="$\displaystyle \frac{d}{d{\bf x}}({\bf x}^T{\bf A}{\bf x})=2{\bf A}{\bf x}
+$"> 
+
+(<SPAN CLASS="arabic">294</SPAN>)
+</DIV>
+In particular, when <!-- MATH
+ ${\bf A}={\bf I}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img198.svg"
+ ALT="${\bf A}={\bf I}$"></SPAN>, we have
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\frac{d}{d{\bf x}} ({\bf x}^T{\bf x})=2{\bf x}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 5.11ex; vertical-align: -1.71ex; " SRC="img959.svg"
+ ALT="$\displaystyle \frac{d}{d{\bf x}} ({\bf x}^T{\bf x})=2{\bf x} $"> 
+
+(<SPAN CLASS="arabic">295</SPAN>)
+</DIV>
+One can compare these results with the familiar derivatives in 
+scalar case:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\frac{d}{dx}(ax^2)=2ax
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 5.11ex; vertical-align: -1.71ex; " SRC="img960.svg"
+ ALT="$\displaystyle \frac{d}{dx}(ax^2)=2ax
+$"> 
+
+(<SPAN CLASS="arabic">296</SPAN>)
+</DIV>
+
+<P>
+A <EM>matrix differentiation operator</EM> is defined as
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\frac{d}{d{\bf A}}\stackrel{\triangle}{=}\left[ \begin{array}{ccc}
+    \frac{\partial}{\partial a_{11}} & \cdots & \frac{\partial}{\partial a_{1n}}\\
+    \vdots & \ddots & \vdots\\
+    \frac{\partial}{\partial a_{m1}} & \cdots & \frac{\partial}{\partial a_{mn}}
+  \end{array} \right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 10.68ex; vertical-align: -4.78ex; " SRC="img961.svg"
+ ALT="$\displaystyle \frac{d}{d{\bf A}}\stackrel{\triangle}{=}\left[ \begin{array}{ccc...
+...tial a_{m1}} &amp; \cdots &amp; \frac{\partial}{\partial a_{mn}}
+\end{array} \right]
+$"> 
+
+(<SPAN CLASS="arabic">297</SPAN>)
+</DIV>
+which can be applied to any scalar function <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img962.svg"
+ ALT="$f({\bf A})$"></SPAN>:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\frac{d}{d{\bf A}}f({\bf A})=\left[ \begin{array}{ccc}
+    \frac{\partial f({\bf A})}{\partial a_{11}} & \cdots & \frac{\partial f({\bf A})}
+         {\partial a_{1n}}\\\vdots & \ddots & \vdots \\
+         \frac{\partial f({\bf A})}{\partial a_{m1}} & \cdots & \frac{\partial f({\bf A})}{\partial a_{mn}}
+  \end{array} \right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 11.38ex; vertical-align: -5.11ex; " SRC="img963.svg"
+ ALT="$\displaystyle \frac{d}{d{\bf A}}f({\bf A})=\left[ \begin{array}{ccc}
+\frac{\pa...
+...} &amp; \cdots &amp; \frac{\partial f({\bf A})}{\partial a_{mn}}
+\end{array} \right]
+$"> 
+
+(<SPAN CLASS="arabic">298</SPAN>)
+</DIV>
+
+<P>
+Specifically, consider <!-- MATH
+ $f({\bf A})={\bf u}^T {\bf A} {\bf v}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img964.svg"
+ ALT="$f({\bf A})={\bf u}^T {\bf A} {\bf v}$"></SPAN>, where 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img200.svg"
+ ALT="${\bf u}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img199.svg"
+ ALT="${\bf v}$"></SPAN> are <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img965.svg"
+ ALT="$m\times 1$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img966.svg"
+ ALT="$n\times 1$"></SPAN> constant 
+vectors, respectively, and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> is an <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.31ex; " SRC="img38.svg"
+ ALT="$m\times n$"></SPAN> matrix. Then 
+we have:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\frac{d}{d{\bf A}} ({\bf u}^T {\bf A} {\bf v}) = {\bf u} {\bf v}^T
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 5.11ex; vertical-align: -1.71ex; " SRC="img967.svg"
+ ALT="$\displaystyle \frac{d}{d{\bf A}} ({\bf u}^T {\bf A} {\bf v}) = {\bf u} {\bf v}^T
+$"> 
+
+(<SPAN CLASS="arabic">299</SPAN>)
+</DIV>
+For more details see <A ID="tex2html12"
+  HREF="https://www.math.uwaterloo.ca/~hwolkowi/matrixcookbook.pdf">Matrix Cookbook</A>.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node19.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="algebra.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node17.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node19.html">The Fundamental Theorem of</A>
+<B> Up:</B> <A
+ HREF="algebra.html">algebra</A>
+<B> Previous:</B> <A
+ HREF="node17.html">Matrix Norms</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

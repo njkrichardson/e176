@@ -1,0 +1,1239 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Probability of univariate random variables</TITLE>
+<META NAME="description" CONTENT="Probability of univariate random variables">
+<META NAME="keywords" CONTENT="probability">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="probability.css">
+
+<LINK REL="next" HREF="node2.html">
+<LINK REL="previous" HREF="probability.html">
+<LINK REL="next" HREF="node2.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node2.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="probability.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="probability.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node2.html">Probability of multivariate random</A>
+<B> Up:</B> <A
+ HREF="probability.html">probability</A>
+<B> Previous:</B> <A
+ HREF="probability.html">probability</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00010000000000000000">
+Probability of univariate random variables</A>
+</H1>
+
+<P>
+
+<UL>
+<LI><B>Random Experiment and its Sample Space</B>
+
+<P>
+A <EM>random experiment</EM> is a procedure that can be repeated an infinite 
+number of times and has a set of possible outcomes. 
+The <EM>sample space S</EM> of a certain random experiment is the totality 
+of all its possible outcomes. <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1.svg"
+ ALT="$S$"></SPAN> may be either countable (discrete) or 
+uncountable (continuous).
+
+<P>
+For example, &ldquo;Randomly pick a card from a deck of 10 cards labeled 
+<!-- MATH
+ $0, 1, \cdots, 9$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img2.svg"
+ ALT="$0, 1, \cdots, 9$"></SPAN>&rdquo; is a random experiment. The sample space is a set of
+the 10 possible outcomes: <!-- MATH
+ $S=\{0, 1, \cdots, 9\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img3.svg"
+ ALT="$S=\{0, 1, \cdots, 9\}$"></SPAN>.
+
+<P>
+</LI>
+<LI><B>Random Event and its Probability</B>
+
+<P>
+An <EM>random event</EM> <!-- MATH
+ $A\subset S$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img4.svg"
+ ALT="$A\subset S$"></SPAN> is a subset of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1.svg"
+ ALT="$S$"></SPAN>, which can be a null 
+set (empty set) <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.25ex; " SRC="img5.svg"
+ ALT="$\emptyset$"></SPAN>, a proper subset, e.g., <!-- MATH
+ $A=\{0,\,2,\,4,\,6,\,8\}
+\subset S=\{0,\,1, \cdots, 9\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img6.svg"
+ ALT="$A=\{0,\,2,\,4,\,6,\,8\}
+\subset S=\{0,\,1, \cdots, 9\}$"></SPAN>, or the entire <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1.svg"
+ ALT="$S$"></SPAN>. 
+
+<P>
+Event <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img7.svg"
+ ALT="$A$"></SPAN> occurs if the outcome <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img8.svg"
+ ALT="$s \in A$"></SPAN> is a member of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img7.svg"
+ ALT="$A$"></SPAN>. The
+probability <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img9.svg"
+ ALT="$P(A)$"></SPAN> of an event <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img7.svg"
+ ALT="$A$"></SPAN> is a real-valued function that maps 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img7.svg"
+ ALT="$A$"></SPAN> to a real number <!-- MATH
+ $0 \leq P(A) \leq 1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img10.svg"
+ ALT="$0 \leq P(A) \leq 1$"></SPAN>. In particular, <!-- MATH
+ $P(\emptyset)=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img11.svg"
+ ALT="$P(\emptyset)=0$"></SPAN>, 
+and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img12.svg"
+ ALT="$P(S)=1$"></SPAN>.
+
+<P>
+For example, &ldquo;The randomly chosen card has a number smaller than 4&rdquo; is
+a random event, which is represented by a subset <!-- MATH
+ $A=\{0, 1, 2, 3\} \subset S$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img13.svg"
+ ALT="$A=\{0, 1, 2, 3\} \subset S$"></SPAN>.
+The probability of this event <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img7.svg"
+ ALT="$A$"></SPAN> is <!-- MATH
+ $P(A)=4/10=0.4$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img14.svg"
+ ALT="$P(A)=4/10=0.4$"></SPAN>.  Event <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img7.svg"
+ ALT="$A$"></SPAN> occurs if the
+outcome is one of the member of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img7.svg"
+ ALT="$A$"></SPAN> (e.g., 2).
+
+<P>
+</LI>
+<LI><B>Probability Space</B>
+
+<P>
+The triple <!-- MATH
+ $(S,\,A,\,P)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img15.svg"
+ ALT="$(S,\,A,\,P)$"></SPAN> of sample space <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1.svg"
+ ALT="$S$"></SPAN>, events <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img7.svg"
+ ALT="$A$"></SPAN> and probability <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img16.svg"
+ ALT="$P$"></SPAN> 
+is called the probability space.
+
+<P>
+</LI>
+<LI><B>Random Variables</B>
+
+<P>
+A random variable <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img17.svg"
+ ALT="$x=x(s)$"></SPAN> is a real-valued function that maps any outcome 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img18.svg"
+ ALT="$s \in S$"></SPAN> into a real number <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN>, which can be either continuous or discrete.
+
+<P>
+</LI>
+<LI><B>Joint Distribution Function and Density Function</B>
+
+<P>
+The <EM>joint distribution function</EM> of a random vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}$"></SPAN> is 
+  defined as
+  <BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+F_X(u_1, \cdots, u_N) & = & P(x_1<u_1,\cdots, x_N<u_N) \nonumber\\
+    & = & \int_{-\infty}^{u_1} \cdots \int_{-\infty}^{u_N} p(\xi_1,\cdots,\xi_N)
+    d\xi_1 \cdots d\xi_N
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img21.svg"
+ ALT="$\displaystyle F_X(u_1, \cdots, u_N)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img23.svg"
+ ALT="$\displaystyle P(x_1&lt;u_1,\cdots, x_N&lt;u_N)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.04ex; vertical-align: -2.43ex; " SRC="img24.svg"
+ ALT="$\displaystyle \int_{-\infty}^{u_1} \cdots \int_{-\infty}^{u_N} p(\xi_1,\cdots,\xi_N)
+d\xi_1 \cdots d\xi_N$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">1</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+  where <!-- MATH
+ $p(\xi_1,\cdots,\xi_N)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img25.svg"
+ ALT="$p(\xi_1,\cdots,\xi_N)$"></SPAN> is the <EM>joint density function</EM> of 
+  the random vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}$"></SPAN> in the N-dimensional vector space.
+
+<P>
+</LI>
+<LI><B>Independent Variables</B>
+
+<P>
+For convenience, let us first consider two of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img26.svg"
+ ALT="$N$"></SPAN> variables and 
+  rename them as <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img27.svg"
+ ALT="$y$"></SPAN>. These two variables are <EM>independent</EM> 
+  if and only if
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+P(A\cap B)=P(x<u, y<v)=P(x<u) P(y<v)=P(A)P(B)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img28.svg"
+ ALT="$\displaystyle P(A\cap B)=P(x&lt;u, y&lt;v)=P(x&lt;u) P(y&lt;v)=P(A)P(B)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">2</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where events <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img7.svg"
+ ALT="$A$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img29.svg"
+ ALT="$B$"></SPAN> are defined as &ldquo;<SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.21ex; " SRC="img30.svg"
+ ALT="$x&lt;u$"></SPAN>&rdquo; and &ldquo;<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.57ex; " SRC="img31.svg"
+ ALT="$y&lt;v$"></SPAN>&rdquo;, 
+  respectively. This definition is equivalent to
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p(x,y)=p(x)p(y)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img32.svg"
+ ALT="$\displaystyle p(x,y)=p(x)p(y)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">3</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+as this will lead to
+  <BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+P(x<u,y<v) & = & \int_{-\infty}^u\int_{-\infty}^v p(\xi,\eta)d\xi d\eta
+    = \int_{-\infty}^u\int_{-\infty}^v p(\xi)p(\eta)d\xi d\eta \nonumber \\
+    & = & \int_{-\infty}^u p(\xi)d\xi \int_{-\infty}^v p(\eta)d\eta = P(x<u)P(y<v)
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img33.svg"
+ ALT="$\displaystyle P(x&lt;u,y&lt;v)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.04ex; vertical-align: -2.43ex; " SRC="img34.svg"
+ ALT="$\displaystyle \int_{-\infty}^u\int_{-\infty}^v p(\xi,\eta)d\xi d\eta
+= \int_{-\infty}^u\int_{-\infty}^v p(\xi)p(\eta)d\xi d\eta$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.04ex; vertical-align: -2.43ex; " SRC="img35.svg"
+ ALT="$\displaystyle \int_{-\infty}^u p(\xi)d\xi \int_{-\infty}^v p(\eta)d\eta = P(x&lt;u)P(y&lt;v)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">4</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+Similarly, a set of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img26.svg"
+ ALT="$N$"></SPAN> variables are independent iff
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p(x_1,\cdots,x_N)=p(x_1)\,p(x_2)\cdots p(x_N)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img36.svg"
+ ALT="$\displaystyle p(x_1,\cdots,x_N)=p(x_1)\,p(x_2)\cdots p(x_N)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">5</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+</LI>
+<LI><B>Conditional Probability</B>
+
+<P>
+The <EM>conditional probability</EM> <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img37.svg"
+ ALT="$P(A\vert B)$"></SPAN> is the probability of event <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img7.svg"
+ ALT="$A$"></SPAN> 
+  given that event <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img29.svg"
+ ALT="$B$"></SPAN> has already occurred. If event <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img7.svg"
+ ALT="$A$"></SPAN> is <EM>independent</EM> 
+  of event <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img29.svg"
+ ALT="$B$"></SPAN>, then <!-- MATH
+ $P(A|B)=P(A)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img38.svg"
+ ALT="$P(A\vert B)=P(A)$"></SPAN>.
+
+<P>
+</LI>
+<LI><B>Intersection and Union of Events</B>
+
+<P>
+Let <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img7.svg"
+ ALT="$A$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img29.svg"
+ ALT="$B$"></SPAN> be two events defined over <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1.svg"
+ ALT="$S$"></SPAN>. 
+
+<UL>
+<LI>The <EM>Union</EM> of events A and B is an event whose outcomes belong 
+  to either <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img7.svg"
+ ALT="$A$"></SPAN> or <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img29.svg"
+ ALT="$B$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img39.svg"
+ ALT="$A\cup B$"></SPAN>.
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+P(A\cup B)=P(A)+P(B)-P(A\cap B)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img40.svg"
+ ALT="$\displaystyle P(A\cup B)=P(A)+P(B)-P(A\cap B)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">6</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+In particular, if A and B are <EM>mutually exclusive</EM>, i.e., 
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+A\cap B=\emptyset
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.25ex; " SRC="img41.svg"
+ ALT="$\displaystyle A\cap B=\emptyset$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">7</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+then
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+P(A\cup B)=P(A)+P(B)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img42.svg"
+ ALT="$\displaystyle P(A\cup B)=P(A)+P(B)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">8</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+</LI>
+<LI>The <EM>Intersection</EM> of events A and B is an event whose outcomes 
+  belong to both <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img7.svg"
+ ALT="$A$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img29.svg"
+ ALT="$B$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img43.svg"
+ ALT="$A\cap B$"></SPAN>. 
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+P(A,B)=P(A\cap B)=P(B|A)P(A)=P(A|B)P(B)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img44.svg"
+ ALT="$\displaystyle P(A,B)=P(A\cap B)=P(B\vert A)P(A)=P(A\vert B)P(B)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">9</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+P(A|B)=\frac{P(A, B)}{P(B)},\;\;\;\mbox{and}\;\;\;
+  P(B|A)=\frac{P(A, B)}{P(B)}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.29ex; " SRC="img45.svg"
+ ALT="$\displaystyle P(A\vert B)=\frac{P(A, B)}{P(B)},\;\;\;$">and<IMG STYLE="height: 5.81ex; vertical-align: -2.29ex; " SRC="img46.svg"
+ ALT="$\displaystyle \;\;\;
+P(B\vert A)=\frac{P(A, B)}{P(B)}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">10</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+We further have
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left.\begin{array}{l}
+  P(A|B)\,P(B|C)=P(B|A)\,P(A|C)\\
+  P(A|B,C)\,P(B|C)=P(B|A,C)\,P(A|C)\end{array}\right\}=  P(A,B|C)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img47.svg"
+ ALT="$\displaystyle \left.\begin{array}{l}
+P(A\vert B)\,P(B\vert C)=P(B\vert A)\,P(A\...
+... B,C)\,P(B\vert C)=P(B\vert A,C)\,P(A\vert C)\end{array}\right\}= P(A,B\vert C)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">11</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+In particular, if A and B are <EM>independent</EM>, i.e., 
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+P(A|B)=P(A),\;\;\;\mbox{and}\;\;\;P(B|A)=P(B)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img48.svg"
+ ALT="$\displaystyle P(A\vert B)=P(A),\;\;\;$">and<IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img49.svg"
+ ALT="$\displaystyle \;\;\;P(B\vert A)=P(B)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">12</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+then
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+P(A, B)=P(A)P(B)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img50.svg"
+ ALT="$\displaystyle P(A, B)=P(A)P(B)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">13</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+</LI>
+</UL>
+
+<P>
+</LI>
+<LI><B>Marginal Probability</B> of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img7.svg"
+ ALT="$A$"></SPAN> is the probability of event <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img7.svg"
+ ALT="$A$"></SPAN> 
+  averaging over information about <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img29.svg"
+ ALT="$B$"></SPAN> (the value of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img29.svg"
+ ALT="$B$"></SPAN> is unknown):
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+P(A=a)=\int P(A=a,\,B=b)\, db=\int P(a|b) P(b)\, db
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.57ex; vertical-align: -2.12ex; " SRC="img51.svg"
+ ALT="$\displaystyle P(A=a)=\int P(A=a,\,B=b)\, db=\int P(a\vert b) P(b)\, db$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">14</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+</LI>
+<LI><B>Bayes' Theorem</B>
+
+<P>
+Let <!-- MATH
+ $\{A_1,\cdots,A_n\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img52.svg"
+ ALT="$\{A_1,\cdots,A_n\}$"></SPAN> be a set of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img53.svg"
+ ALT="$n$"></SPAN> events that partition the 
+  sample space <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1.svg"
+ ALT="$S$"></SPAN>, i.e., 
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\bigcup_{i=1}^n A_i=S,\;\;\;\;\;\mbox{and}\;\;\;\;\;
+  A_i \cap A_j = \emptyset \;\;\; (i\neq j)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.20ex; vertical-align: -3.09ex; " SRC="img54.svg"
+ ALT="$\displaystyle \bigcup_{i=1}^n A_i=S,\;\;\;\;\;$">and<IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img55.svg"
+ ALT="$\displaystyle \;\;\;\;\;
+A_i \cap A_j = \emptyset \;\;\; (i\neq j)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">15</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+then for any event <!-- MATH
+ $B \subset S$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img56.svg"
+ ALT="$B \subset S$"></SPAN>, we have
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+P(A_i|B)=\frac{P(B|A_i)P(A_i)}{\sum_{i=1}^n P(B|A_i)P(A_i)}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.43ex; " SRC="img57.svg"
+ ALT="$\displaystyle P(A_i\vert B)=\frac{P(B\vert A_i)P(A_i)}{\sum_{i=1}^n P(B\vert A_i)P(A_i)}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">16</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+<B>Proof:</B>
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+P(A_i|B)=\frac{P(A_i \cap B)}{P(B)}=\frac{P(B|A_i)P(A_i)}{P(B)}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.29ex; " SRC="img58.svg"
+ ALT="$\displaystyle P(A_i\vert B)=\frac{P(A_i \cap B)}{P(B)}=\frac{P(B\vert A_i)P(A_i)}{P(B)}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">17</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+but
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+P(B)=P(B \cap S)=P(B \cap (\bigcup_{i=1}^n A_i) )
+    =P(\bigcup_{i=1}^n(B \cap A_i))=\sum_{i=1}^n P(B \cap A_i)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.20ex; vertical-align: -3.09ex; " SRC="img59.svg"
+ ALT="$\displaystyle P(B)=P(B \cap S)=P(B \cap (\bigcup_{i=1}^n A_i) )
+=P(\bigcup_{i=1}^n(B \cap A_i))=\sum_{i=1}^n P(B \cap A_i)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">18</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Substituting this expression of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img60.svg"
+ ALT="$P(B)$"></SPAN> into the previous equation, we get
+  the Bayes' theorem.
+
+<P>
+</LI>
+<LI><B>Cumulative Distribution Function</B>
+
+<P>
+The <EM>cumulative distribution function</EM> of a random variable 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN> is defined as
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+F_x(\xi)=P(x < \xi)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img61.svg"
+ ALT="$\displaystyle F_x(\xi)=P(x &lt; \xi)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">19</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and we have
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+P(a \leq x < b)=F_x(b)-F_x(a)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img62.svg"
+ ALT="$\displaystyle P(a \leq x &lt; b)=F_x(b)-F_x(a)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">20</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+</LI>
+<LI><B>Density Function</B>
+
+<P>
+The density function <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img63.svg"
+ ALT="$p(x)$"></SPAN> of a random variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN> is defined by
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+F_x(\xi)=\int_{-\infty}^\xi p(x) dx
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.27ex; vertical-align: -2.43ex; " SRC="img64.svg"
+ ALT="$\displaystyle F_x(\xi)=\int_{-\infty}^\xi p(x) dx$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">21</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+i.e.,
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p(x)=\frac{d}{d\xi}F_x(\xi)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.57ex; vertical-align: -2.16ex; " SRC="img65.svg"
+ ALT="$\displaystyle p(x)=\frac{d}{d\xi}F_x(\xi)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">22</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and we have
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+P(a \leq x < b)=F_x(b)-F_x(a)=\int_a^b p(x) dx
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.27ex; vertical-align: -2.23ex; " SRC="img66.svg"
+ ALT="$\displaystyle P(a \leq x &lt; b)=F_x(b)-F_x(a)=\int_a^b p(x) dx$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">23</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\int_{-\infty}^{\infty} p(x) dx = 1
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.43ex; " SRC="img67.svg"
+ ALT="$\displaystyle \int_{-\infty}^{\infty} p(x) dx = 1$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">24</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+</LI>
+<LI><B>Discrete Random Variables</B>
+
+<P>
+If a random variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN> can only take one of a set of finite 
+  number of discrete values <!-- MATH
+ $\{x_i\;\;\;i=1, \cdots, n\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img68.svg"
+ ALT="$\{x_i\;\;\;i=1, \cdots, n\}$"></SPAN>, then its 
+  <EM>probability distribution</EM> is 
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+P(x=x_i)=P(x_i)=P_i \;\;\;(i=1,\cdots,n)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img69.svg"
+ ALT="$\displaystyle P(x=x_i)=P(x_i)=P_i \;\;\;(i=1,\cdots,n)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">25</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and we have
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+0 \leq P_i \leq 1,\;\;\;\;\;\;\;\sum_{i=1}^n P_i=1
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.20ex; vertical-align: -3.09ex; " SRC="img70.svg"
+ ALT="$\displaystyle 0 \leq P_i \leq 1,\;\;\;\;\;\;\;\sum_{i=1}^n P_i=1$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">26</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The cumulative distribution function is 
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+F_x(\xi)=P(x<\xi)=\sum_{x_i<\xi} P(x_i)=\sum_{i=1}^k P_i
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.90ex; vertical-align: -3.46ex; " SRC="img71.svg"
+ ALT="$\displaystyle F_x(\xi)=P(x&lt;\xi)=\sum_{x_i&lt;\xi} P(x_i)=\sum_{i=1}^k P_i$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">27</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where the last equation assumes <!-- MATH
+ $x_1 < \cdots < x_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.46ex; " SRC="img72.svg"
+ ALT="$x_1 &lt; \cdots &lt; x_n$"></SPAN> and <!-- MATH
+ $\xi=x_{k+1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img73.svg"
+ ALT="$\xi=x_{k+1}$"></SPAN>.
+
+<P>
+</LI>
+<LI><B>Expectation</B>
+
+<P>
+The <EM>expectation</EM> (or <EM>mean value</EM>, <EM>average</EM>) of a 
+  random variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN> is defined as the average of all possible values 
+  of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN> weighted by their corresponding probabilities, or alternatively, 
+  the average of the probabilities of all possible values weighted by 
+  these values. If <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN> is discrete, 
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\mu_x=E(x)=\sum_{i=1}^n x_i P(x_i) =\sum_{i=1}^n x_i P_i
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.20ex; vertical-align: -3.09ex; " SRC="img74.svg"
+ ALT="$\displaystyle \mu_x=E(x)=\sum_{i=1}^n x_i P(x_i) =\sum_{i=1}^n x_i P_i$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">28</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+If <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN> is continuous,
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\mu_x=E(x)=\int_{-\infty}^{\infty} x \;p(x) dx
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.43ex; " SRC="img75.svg"
+ ALT="$\displaystyle \mu_x=E(x)=\int_{-\infty}^{\infty} x \;p(x) dx$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">29</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+Given a set of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img53.svg"
+ ALT="$n$"></SPAN> samples <!-- MATH
+ $\{x_1,\cdots,x_n\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img76.svg"
+ ALT="$\{x_1,\cdots,x_n\}$"></SPAN> of a discrete random 
+  variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN>, but without any knowledge about their probability <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img16.svg"
+ ALT="$P$"></SPAN>, we
+  can find the maximum likelihood estimation of the expectation <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img77.svg"
+ ALT="$E(x)$"></SPAN> by
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\hat{\mu}_x=\bar{x}=\frac{1}{n} \sum_{i=1}^n x_i
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.20ex; vertical-align: -3.09ex; " SRC="img78.svg"
+ ALT="$\displaystyle \hat{\mu}_x=\bar{x}=\frac{1}{n} \sum_{i=1}^n x_i$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">30</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+</LI>
+<LI><A ID="tex2html1"
+  HREF="https://en.wikipedia.org/wiki/Median"><B>The Median and Mode</B></A>
+<P>
+The median of a random variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN> is defined as the midle value
+  of its distribution. If <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN> is discrete, then its median <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img79.svg"
+ ALT="$\tilde{x}$"></SPAN>
+  is defined as
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\tilde{x}=\left\{ \begin{array}{ll}
+      x_{(n+1)/2} & \mbox{if $n$\  is odd}\\
+      \frac{x_{n/2}+x_{n/2+1}}{2} & \mbox{if $n$\  is odd}
+    \end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.27ex; vertical-align: -2.51ex; " SRC="img80.svg"
+ ALT="$\displaystyle \tilde{x}=\left\{ \begin{array}{ll}
+x_{(n+1)/2} &amp; \mbox{if $n$\ is odd}\\
+\frac{x_{n/2}+x_{n/2+1}}{2} &amp; \mbox{if $n$\ is odd}
+\end{array}\right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">31</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+If <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN> is continuous, then the median <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img79.svg"
+ ALT="$\tilde{x}$"></SPAN> is defined such that
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\int_{-\infty}^{\tilde{x}} p(x) dx=\int_{\tilde{x}}^{\infty} p(x) dx=0.5
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.27ex; vertical-align: -2.43ex; " SRC="img81.svg"
+ ALT="$\displaystyle \int_{-\infty}^{\tilde{x}} p(x) dx=\int_{\tilde{x}}^{\infty} p(x) dx=0.5$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">32</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+The <EM>mode</EM>: the value that appears most frequetnly among 
+    <!-- MATH
+ $\{ x_1,\cdots,x_n \}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img76.svg"
+ ALT="$\{x_1,\cdots,x_n\}$"></SPAN>.    
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\tilde{x}=\argmax_x p(x),\;\;\;\;\;\;\mbox{i.e.,}\;\;\;\;\;
+    p(\tilde{x})=\max_x p(x)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 4.18ex; vertical-align: -2.19ex; " SRC="img82.svg"
+ ALT="$\displaystyle \tilde{x}=\argmax_x p(x),\;\;\;\;\;\;$">i.e.,<IMG STYLE="height: 3.72ex; vertical-align: -1.74ex; " SRC="img83.svg"
+ ALT="$\displaystyle \;\;\;\;\;
+p(\tilde{x})=\max_x p(x)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">33</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+The mean, median, and mode are the same if <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img63.svg"
+ ALT="$p(x)$"></SPAN> is unimodal (e.g.,
+  a normal distribution), but they are all different from each other if 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img63.svg"
+ ALT="$p(x)$"></SPAN> is asymmetric.
+
+<P>
+<IMG STYLE=""
+ SRC="../figures/mmm.png"
+ ALT="mmm.png">
+
+<P>
+For example, given <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img84.svg"
+ ALT="$n=8$"></SPAN> values in <!-- MATH
+ $\{ 1,\,2,\,3,\,3,\,4,\,4,\,4,\,5\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img85.svg"
+ ALT="$\{ 1,\,2,\,3,\,3,\,4,\,4,\,4,\,5\}$"></SPAN>,
+  we can find their mean as
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\bar{x}=\frac{1}{8}(1+2+3+3+4+4+4+5)
+    =1\times \frac{1}{8}+2\times \frac{1}{8}+3\times\frac{2}{8}
+    +4\times\frac{3}{8}+5\times\frac{1}{8}=\frac{26}{8}=3.25
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img86.svg"
+ ALT="$\displaystyle \bar{x}=\frac{1}{8}(1+2+3+3+4+4+4+5)
+=1\times \frac{1}{8}+2\times...
+...{8}+3\times\frac{2}{8}
++4\times\frac{3}{8}+5\times\frac{1}{8}=\frac{26}{8}=3.25$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">34</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The median and mode are respectively <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="$3.5$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img88.svg"
+ ALT="$4$"></SPAN>.
+
+<P>
+</LI>
+<LI><B>Variance</B>
+
+<P>
+The <EM>variance</EM> of a random variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img89.svg"
+ ALT="$X$"></SPAN> is defined as
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\sigma^2=Var(x)\stackrel{\triangle}{=}E[(x-\mu)^2]
+    =\int_{-\infty}^{\infty} (x-\mu)^2 p(x) dx
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.43ex; " SRC="img90.svg"
+ ALT="$\displaystyle \sigma^2=Var(x)\stackrel{\triangle}{=}E[(x-\mu)^2]
+=\int_{-\infty}^{\infty} (x-\mu)^2 p(x) dx$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">35</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+if <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN> is continuous, or
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\sigma^2=Var(x)=E[(x-\mu)^2]=\sum_{i=1}^n (x_i-\mu)^2 P_i
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.20ex; vertical-align: -3.09ex; " SRC="img91.svg"
+ ALT="$\displaystyle \sigma^2=Var(x)=E[(x-\mu)^2]=\sum_{i=1}^n (x_i-\mu)^2 P_i$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">36</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+if <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN> is discrete.
+
+<P>
+The <EM>standard deviation</EM> of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img89.svg"
+ ALT="$X$"></SPAN> is defined as
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\sigma=\sqrt{Var(x)}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.71ex; " SRC="img92.svg"
+ ALT="$\displaystyle \sigma=\sqrt{Var(x)}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">37</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+We have
+  <BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+\sigma^2=Var(x) & = & E[(x-\mu)^2]=E(x^2-2\mu x +\mu^2) \nonumber \\
+    & = & E(x^2)-2\mu E(x)+\mu^2 = E(x^2)-\mu^2
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img93.svg"
+ ALT="$\displaystyle \sigma^2=Var(x)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img94.svg"
+ ALT="$\displaystyle E[(x-\mu)^2]=E(x^2-2\mu x +\mu^2)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img95.svg"
+ ALT="$\displaystyle E(x^2)-2\mu E(x)+\mu^2 = E(x^2)-\mu^2$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">38</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+</LI>
+<LI><B>Normal (Gaussian) Distribution</B>
+
+<P>
+Random variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img89.svg"
+ ALT="$X$"></SPAN> has a <EM>normal distribution</EM> if its density 
+  function is
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\cal N}(x,\mu,\sigma)=\frac{1}{\sqrt{2\pi \sigma^2}}
+    \exp\left( -\frac{(x-\mu)^2}{2\sigma^2} \right)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.32ex; " SRC="img96.svg"
+ ALT="$\displaystyle {\cal N}(x,\mu,\sigma)=\frac{1}{\sqrt{2\pi \sigma^2}}
+\exp\left( -\frac{(x-\mu)^2}{2\sigma^2} \right)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">39</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+It can be shown that
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\int_{-\infty}^{\infty} {\cal N}(x,\mu,\sigma) dx = 1
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.43ex; " SRC="img97.svg"
+ ALT="$\displaystyle \int_{-\infty}^{\infty} {\cal N}(x,\mu,\sigma) dx = 1$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">40</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+E(x)=\int_{-\infty}^{\infty} x {\cal N}(x,\mu,\sigma) dx = \mu
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.43ex; " SRC="img98.svg"
+ ALT="$\displaystyle E(x)=\int_{-\infty}^{\infty} x {\cal N}(x,\mu,\sigma) dx = \mu$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">41</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and 
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+Var(x)=\int_{-\infty}^{\infty} (x-\mu)^2 {\cal N}(x,\mu,\sigma) dx = \sigma^2
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.43ex; " SRC="img99.svg"
+ ALT="$\displaystyle Var(x)=\int_{-\infty}^{\infty} (x-\mu)^2 {\cal N}(x,\mu,\sigma) dx = \sigma^2$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">42</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+</LI>
+<LI><B>Function of a Random Variable</B>
+
+<P>
+A function <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img100.svg"
+ ALT="$y=f(x)$"></SPAN> of a random variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN> is also a random variable. 
+  If the density function of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN> is <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img101.svg"
+ ALT="$p_x(x)$"></SPAN>, the density function of 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img27.svg"
+ ALT="$y$"></SPAN> can be found by considering the cumulative distribution function 
+  of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img27.svg"
+ ALT="$y$"></SPAN>:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+F_y(\psi)=P(y<\psi)=P(f(x)<\psi)=P(x<f^{-1}(\psi))
+  =\int_{-\infty}^x p_X(x) dx
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.43ex; " SRC="img102.svg"
+ ALT="$\displaystyle F_y(\psi)=P(y&lt;\psi)=P(f(x)&lt;\psi)=P(x&lt;f^{-1}(\psi))
+=\int_{-\infty}^x p_X(x) dx$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">43</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <!-- MATH
+ $x\stackrel{\triangle}{=}f^{-1}(y)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.72ex; vertical-align: -0.70ex; " SRC="img103.svg"
+ ALT="$x\stackrel{\triangle}{=}f^{-1}(y)$"></SPAN> can be considered as a dummy 
+  variable. Then we can obtain the density function of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img104.svg"
+ ALT="$Y$"></SPAN> as:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p_Y(y)=\frac{d}{dy}F_Y(y)
+  =\frac{d}{dy}\int_{-\infty}^x p_X(\xi)d\xi
+  =\left[ p_X(x)\frac{dx}{dy}\right]_{x=f^{-1}(y)}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.50ex; vertical-align: -2.85ex; " SRC="img105.svg"
+ ALT="$\displaystyle p_Y(y)=\frac{d}{dy}F_Y(y)
+=\frac{d}{dy}\int_{-\infty}^x p_X(\xi)d\xi
+=\left[ p_X(x)\frac{dx}{dy}\right]_{x=f^{-1}(y)}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">44</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The equation marked by * is based on the assumption that <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img106.svg"
+ ALT="$Y=f(X)$"></SPAN> is a
+  monotonically increasing function (<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img107.svg"
+ ALT="$dy/dx&gt;0$"></SPAN>). If it is monotonically 
+  decreasing (<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img108.svg"
+ ALT="$dy/dx&lt;0$"></SPAN>), we have
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+F_Y(y)=P(Y<y)=P(f(X)<y)=P(X>f^{-1}(y))
+  =\int_x^{\infty} p_X(\xi) d\xi
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.23ex; " SRC="img109.svg"
+ ALT="$\displaystyle F_Y(y)=P(Y&lt;y)=P(f(X)&lt;y)=P(X&gt;f^{-1}(y))
+=\int_x^{\infty} p_X(\xi) d\xi$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">45</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p_Y(y)=\frac{d}{dy}F_Y(y)
+  =\frac{d}{dy}\int_x^{\infty} p_X(\xi)d\xi
+  =\left[ -p_X(x)\frac{dx}{dy}\right]_{x=f^{-1}(y)}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.50ex; vertical-align: -2.85ex; " SRC="img110.svg"
+ ALT="$\displaystyle p_Y(y)=\frac{d}{dy}F_Y(y)
+=\frac{d}{dy}\int_x^{\infty} p_X(\xi)d\xi
+=\left[ -p_X(x)\frac{dx}{dy}\right]_{x=f^{-1}(y)}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">46</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Considering both cases, if <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img106.svg"
+ ALT="$Y=f(X)$"></SPAN> is monotonic, we have
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p_Y(y)=\left[\; p_X(x) \left| \frac{dx}{dy} \right| \;\right]_{x=f^{-1}(y)}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.50ex; vertical-align: -2.85ex; " SRC="img111.svg"
+ ALT="$\displaystyle p_Y(y)=\left[\; p_X(x) \left\vert \frac{dx}{dy} \right\vert \;\right]_{x=f^{-1}(y)}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">47</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+</LI>
+</UL>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node2.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="probability.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="probability.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node2.html">Probability of multivariate random</A>
+<B> Up:</B> <A
+ HREF="probability.html">probability</A>
+<B> Previous:</B> <A
+ HREF="probability.html">probability</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

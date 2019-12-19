@@ -1,0 +1,877 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Entropy</TITLE>
+<META NAME="description" CONTENT="Entropy">
+<META NAME="keywords" CONTENT="probability">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="probability.css">
+
+<LINK REL="next" HREF="node6.html">
+<LINK REL="previous" HREF="node4.html">
+<LINK REL="next" HREF="node6.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node6.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="probability.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node4.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node6.html">Mutual Information and Kullback-Leibler</A>
+<B> Up:</B> <A
+ HREF="probability.html">probability</A>
+<B> Previous:</B> <A
+ HREF="node4.html">The Normal Distribution</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00050000000000000000">
+Entropy</A>
+</H1>
+
+<P>
+Entropy is a measurement of the uncertainty of the outcome of 
+a random event, which also measures the amount of information 
+obtained in terms of the reduction of uncertainty (due to certain 
+communication or xperiment). If the uncertainty is reduced to 
+zero by a communication, then the amount of information obtained 
+is exactly the same as the uncertainty before the communication.
+
+<P>
+Consider a random event represented by a random variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN> with 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img26.svg"
+ ALT="$N$"></SPAN> possible outcomes <!-- MATH
+ $\{x_1,\cdots,x_N\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img113.svg"
+ ALT="$\{x_1, \cdots, x_N \}$"></SPAN> and the corresponding 
+probabilities <!-- MATH
+ $P_i=P(x_i)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img416.svg"
+ ALT="$P_i=P(x_i)$"></SPAN> satisfying <!-- MATH
+ $\sum_{i=1}^N P_i=1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.81ex; " SRC="img417.svg"
+ ALT="$\sum_{i=1}^N P_i=1$"></SPAN>. For example,
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img418.svg"
+ ALT="$N=26$"></SPAN> letters in the English alphabet, with different probabilities
+to be used (e.g., <!-- MATH
+ $P(x='a') > P(x='z')$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img419.svg"
+ ALT="$P(x='a') &gt; P(x='z')$"></SPAN>). 
+
+<P>
+We desire to binary encode the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img26.svg"
+ ALT="$N$"></SPAN> outcomes so that each outcome 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img117.svg"
+ ALT="$x_i$"></SPAN> is represented by a sequence of 0's and 1's. To minimizes the
+total number of bits needed to encode the variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN>, we assign 
+fewer bits to encode a more probable outcome <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img117.svg"
+ ALT="$x_i$"></SPAN> (with greater <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img420.svg"
+ ALT="$P_i$"></SPAN>). 
+Specifically, we encode <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img117.svg"
+ ALT="$x_i$"></SPAN> with <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img421.svg"
+ ALT="$p_i$"></SPAN> by <!-- MATH
+ $\log_2 (1/P_i)=-\log_2 P_i$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img422.svg"
+ ALT="$\log_2 (1/P_i)=-\log_2 P_i$"></SPAN> 
+bits. The expectation (average) of the total number of bits needed is 
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+H(P)=E\left(\log \frac{1}{P_i}\right)
+  =\sum_i P_i \left( \log \frac{1}{P_i} \right)=-\sum_i P_i \log_2 P_i
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.74ex; vertical-align: -3.09ex; " SRC="img423.svg"
+ ALT="$\displaystyle H(P)=E\left(\log \frac{1}{P_i}\right)
+=\sum_i P_i \left( \log \frac{1}{P_i} \right)=-\sum_i P_i \log_2 P_i$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">139</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+This is the <EM>entropy</EM> of the random variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN>, representing
+the minimum number of bits needed to optimally binary encode <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN>.
+The entropy can also be interpreted as the amount of uncertainty in
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN>, or the amount of information gained once the value of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN> is 
+known and the uncertainty is reduce from <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img424.svg"
+ ALT="$H$"></SPAN> to zero.
+
+<P>
+We can show that a uniform distribution of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img425.svg"
+ ALT="$N=2^n$"></SPAN> equalily likely
+outcomes with <!-- MATH
+ $p_i=1/N\;(i=1,\cdots,N)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img426.svg"
+ ALT="$p_i=1/N\;(i=1,\cdots,N)$"></SPAN> has the maximum entropy. 
+This is a constrained maximization problem which can be solved by 
+Lagrange multiplier method:
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+& & \frac{\partial}{\partial P_j}\left[-\sum_{i=1}^N P_i log \;P_i
+    +\lambda\left(1-\sum_{i=0}^NP_i\right)\right]=0 \nonumber \\
+  & = & -\frac{\partial}{\partial P_j}  P_j \;log\; P_j -\lambda 
+  = -(log\; P_j +1)-\lambda=0	
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img427.svg"
+ ALT="$\displaystyle \frac{\partial}{\partial P_j}\left[-\sum_{i=1}^N P_i log \;P_i
++\lambda\left(1-\sum_{i=0}^NP_i\right)\right]=0$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.81ex; vertical-align: -2.37ex; " SRC="img428.svg"
+ ALT="$\displaystyle -\frac{\partial}{\partial P_j} P_j \;log\; P_j -\lambda
+= -(log\; P_j +1)-\lambda=0$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">140</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+Solving this we get
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+P_j=2^{-\lambda-1}	\;\;\;\;\;(j=1,\cdots,N)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img429.svg"
+ ALT="$\displaystyle P_j=2^{-\lambda-1} \;\;\;\;\;(j=1,\cdots,N)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">141</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+which must satisfy
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\sum_{j=1}^N P_j=\sum_{j=1}^N 2^{-\lambda-1}=2^{-\lambda-1} N =1
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.90ex; vertical-align: -3.40ex; " SRC="img430.svg"
+ ALT="$\displaystyle \sum_{j=1}^N P_j=\sum_{j=1}^N 2^{-\lambda-1}=2^{-\lambda-1} N =1$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">142</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Solving for <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img431.svg"
+ ALT="$\lambda$"></SPAN> we get
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\lambda=\log N -1
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img432.svg"
+ ALT="$\displaystyle \lambda=\log N -1$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">143</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Substituting back into <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img433.svg"
+ ALT="$P_j$"></SPAN> we get
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+P_j=2^{-\lambda-1}=2^{-\log N}=\frac{1}{N},\;\;\;\;\;\;(j=1,\cdots,N)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img434.svg"
+ ALT="$\displaystyle P_j=2^{-\lambda-1}=2^{-\log N}=\frac{1}{N},\;\;\;\;\;\;(j=1,\cdots,N)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">144</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The corresponding maximum entropy can be obtained as
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+H_{max}(E_1,\cdots,E_N)=-\sum_{i=1}^N \frac{1}{N} log_2 \frac{1}{N}
+  =log_2 N=n
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img435.svg"
+ ALT="$\displaystyle H_{max}(E_1,\cdots,E_N)=-\sum_{i=1}^N \frac{1}{N} log_2 \frac{1}{N}
+=log_2 N=n$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">145</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+In this case, each outcome <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img117.svg"
+ ALT="$x_i$"></SPAN> is encoded by
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\log_2 \frac{1}{P_i}=\log_2\left(\frac{1}{1/2^n}\right)=\log_2 2^n=n
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img436.svg"
+ ALT="$\displaystyle \log_2 \frac{1}{P_i}=\log_2\left(\frac{1}{1/2^n}\right)=\log_2 2^n=n$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">146</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+bits, and the total number of bits needed to encode this random event 
+is
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+-\sum_{i=1}^N P_i \log_2 P=-\sum_{i=1}^N \frac{1}{N} \log_2 \frac{1}{2^n}
+  =\sum_{i=1}^N \frac{1}{N} \log_2 2^n = n
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img437.svg"
+ ALT="$\displaystyle -\sum_{i=1}^N P_i \log_2 P=-\sum_{i=1}^N \frac{1}{N} \log_2 \frac{1}{2^n}
+=\sum_{i=1}^N \frac{1}{N} \log_2 2^n = n$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">147</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+If <!-- MATH
+ $N=2^n=2^3=8$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img438.svg"
+ ALT="$N=2^n=2^3=8$"></SPAN>, <!-- MATH
+ $P_i=1/2^3=1/8$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img439.svg"
+ ALT="$P_i=1/2^3=1/8$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img276.svg"
+ ALT="$n=3$"></SPAN> bits are needed to encode the
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img440.svg"
+ ALT="$N=3$"></SPAN> possible outcomes. 
+
+<P>
+Also <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img441.svg"
+ ALT="$N=2$"></SPAN> outcomes with unequal probabilities:
+
+<UL>
+<LI>If <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img442.svg"
+ ALT="$P_1=1$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img443.svg"
+ ALT="$P_2=0$"></SPAN>, we have the minimum uncertainty zero
+  (<!-- MATH
+ $x\log_2x\vert_{x=0}=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img444.svg"
+ ALT="$x\log_2x\vert_{x=0}=0$"></SPAN>), i.e., 0 bit is needed to encode a sure
+  event:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+H = -1\; log_2 \;1-0\; log_2 \;0=0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img445.svg"
+ ALT="$\displaystyle H = -1\; log_2 \;1-0\; log_2 \;0=0$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">148</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P> 
+</LI>
+<LI>If <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img446.svg"
+ ALT="$P_1=0.1$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img447.svg"
+ ALT="$P_2=0.9$"></SPAN>, the uncertainty is:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+H = -(0.1\; log_2 \;0.1+0.9\; log_2 \;0.9)=0.47
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img448.svg"
+ ALT="$\displaystyle H = -(0.1\; log_2 \;0.1+0.9\; log_2 \;0.9)=0.47$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">149</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P> 
+</LI>
+<LI>If <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img449.svg"
+ ALT="$P_1=0.2$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img450.svg"
+ ALT="$P_2=0.8$"></SPAN>, the uncertainty is:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+H = -(0.2\; log_2 \;0.2+0.8\; log_2 \;0.8)=0.72
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img451.svg"
+ ALT="$\displaystyle H = -(0.2\; log_2 \;0.2+0.8\; log_2 \;0.8)=0.72$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">150</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P> 
+</LI>
+<LI>If <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img452.svg"
+ ALT="$P_1=0.3$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img453.svg"
+ ALT="$P_2=0.7$"></SPAN>, the uncertainty is:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+H = -(0.3\; log_2 \;0.3+0.7\; log_2 \;0.7)=0.88
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img454.svg"
+ ALT="$\displaystyle H = -(0.3\; log_2 \;0.3+0.7\; log_2 \;0.7)=0.88$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">151</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P> 
+</LI>
+<LI>If <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img455.svg"
+ ALT="$P_1=0.4$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img456.svg"
+ ALT="$P_2=0.6$"></SPAN>, the uncertainty is:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+H = -(0.4\; log_2 \;0.4+0.6\; log_2 \;0.6)=0.97
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img457.svg"
+ ALT="$\displaystyle H = -(0.4\; log_2 \;0.4+0.6\; log_2 \;0.6)=0.97$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">152</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P> 
+</LI>
+<LI>If <!-- MATH
+ $P_1=P_2=0.5=1/2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img458.svg"
+ ALT="$P_1=P_2=0.5=1/2$"></SPAN>, we have the maximum uncertainty
+   <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img459.svg"
+ ALT="$H=1$"></SPAN>, i.e., 1 bit (0 or 1) is needed to encode the event:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+H = -\frac{1}{2}\; log_2 \;\frac{1}{2}-\frac{1}{2}\;
+  log_2 \;\frac{1}{2}=\frac{1}{2}+\frac{1}{2}=1	
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img460.svg"
+ ALT="$\displaystyle H = -\frac{1}{2}\; log_2 \;\frac{1}{2}-\frac{1}{2}\;
+log_2 \;\frac{1}{2}=\frac{1}{2}+\frac{1}{2}=1$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">153</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+</LI>
+</UL>
+
+<P>
+For a continuous random variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN> with probability density
+function (<EM>pdf</EM>) <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img63.svg"
+ ALT="$p(x)$"></SPAN>, the <EM>differential</EM> or 
+<EM>continuous entropy</EM> is 
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+H(p)=-\int p(x)\log p(x) \;dx
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.57ex; vertical-align: -2.12ex; " SRC="img461.svg"
+ ALT="$\displaystyle H(p)=-\int p(x)\log p(x) \;dx$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">154</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The <EM>perplexity</EM> of a discrete probability distribution
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img16.svg"
+ ALT="$P$"></SPAN> is simply defined as <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img462.svg"
+ ALT="$2^{H(p)}$"></SPAN>.
+
+<P>
+We are interested in the pdf <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img63.svg"
+ ALT="$p(x)$"></SPAN> that maximizes the entropy
+under various conditions:
+
+<UL>
+<LI>The random variable is non-zero only inside a closed
+  region <!-- MATH
+ $x\in [a,\;b]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img463.svg"
+ ALT="$x\in [a,\;b]$"></SPAN>. 
+
+<P>
+To find the pdf <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img63.svg"
+ ALT="$p(x)$"></SPAN> of which <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img464.svg"
+ ALT="$H(p)$"></SPAN> is maximized, we consider 
+  the following Lagrangian function
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+L(p)=H(p)+\lambda\left(1-\int_a^b p(x)\,dx\right)
+    =\int_a^b \left[ -p(x)\,\log p(x) -\lambda p(x) \right]\;dx+\lambda
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.20ex; vertical-align: -3.02ex; " SRC="img465.svg"
+ ALT="$\displaystyle L(p)=H(p)+\lambda\left(1-\int_a^b p(x)\,dx\right)
+=\int_a^b \left[ -p(x)\,\log p(x) -\lambda p(x) \right]\;dx+\lambda$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">155</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and set its derivative with respect to <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img63.svg"
+ ALT="$p(x)$"></SPAN> (with a specific value 
+  of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN>) to zero:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\frac{d \,L(p)}{d\,p(x)}=- (\log\,p(x)+1) -\lambda=0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.29ex; " SRC="img466.svg"
+ ALT="$\displaystyle \frac{d \,L(p)}{d\,p(x)}=- (\log\,p(x)+1) -\lambda=0$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">156</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Solving for <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img63.svg"
+ ALT="$p(x)$"></SPAN> we get
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p(x)=e^{-\lambda-1}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img467.svg"
+ ALT="$\displaystyle p(x)=e^{-\lambda-1}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">157</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+which must satisfy
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\int_{-\infty}^\infty p(x)\,dx
+    = \int_a^b e^{-\lambda-1}\,dx=e^{-\lambda-1}(b-a)=1
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.27ex; vertical-align: -2.43ex; " SRC="img468.svg"
+ ALT="$\displaystyle \int_{-\infty}^\infty p(x)\,dx
+= \int_a^b e^{-\lambda-1}\,dx=e^{-\lambda-1}(b-a)=1$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">158</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+i.e.,
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p(x)=e^{-\lambda-1}=\frac{1}{b-a}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.11ex; vertical-align: -1.90ex; " SRC="img469.svg"
+ ALT="$\displaystyle p(x)=e^{-\lambda-1}=\frac{1}{b-a}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">159</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+This is a uniform distribution over <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img470.svg"
+ ALT="$[a,\;b]$"></SPAN>. The corresponding 
+  maximum entropy is
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+H(p)=-\int_a^b \frac{1}{b-a}\log \left(\frac{1}{b-a}\right)
+    =\log (b-a)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.27ex; vertical-align: -2.32ex; " SRC="img471.svg"
+ ALT="$\displaystyle H(p)=-\int_a^b \frac{1}{b-a}\log \left(\frac{1}{b-a}\right)
+=\log (b-a)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">160</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+</LI>
+<LI>The random variable <!-- MATH
+ $x\in (-\infty,\;\infty)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img472.svg"
+ ALT="$x\in (-\infty,\;\infty)$"></SPAN> with a known
+  vairance     
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\sigma^2=\int^\infty_{-\infty} (x-\mu)^2p(x)\,dx
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.43ex; " SRC="img473.svg"
+ ALT="$\displaystyle \sigma^2=\int^\infty_{-\infty} (x-\mu)^2p(x)\,dx$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">161</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+To find the pdf <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img63.svg"
+ ALT="$p(x)$"></SPAN> with <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img474.svg"
+ ALT="$\sigma^2$"></SPAN> that maximizes <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img464.svg"
+ ALT="$H(p)$"></SPAN>, we 
+  consider the following Lagrangian function
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+L(p)=-\int^\infty_{-\infty} p(x)\,\log p(x)\,dx
+    +\lambda_1\left(1-\int^\infty_{-\infty} p(x)\,dx\right)
+    +\lambda_2\left(\sigma^2 -\int^\infty_{-\infty} (x-\mu)^2\,p(x)\,dx\right)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.43ex; " SRC="img475.svg"
+ ALT="$\displaystyle L(p)=-\int^\infty_{-\infty} p(x)\,\log p(x)\,dx
++\lambda_1\left(1...
+...ght)
++\lambda_2\left(\sigma^2 -\int^\infty_{-\infty} (x-\mu)^2\,p(x)\,dx\right)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">162</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and set its derivative with respect to <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img63.svg"
+ ALT="$p(x)$"></SPAN> (with a specific value
+  of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN>) to zero:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\frac{d\, L(p)}{d\,p(x)}=- (log\,p(x)+1)-\lambda_1-\lambda_2(x-\mu)^2=0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.29ex; " SRC="img476.svg"
+ ALT="$\displaystyle \frac{d\, L(p)}{d\,p(x)}=- (log\,p(x)+1)-\lambda_1-\lambda_2(x-\mu)^2=0$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">163</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Solving for <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img63.svg"
+ ALT="$p(x)$"></SPAN> we get
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p(x)=e^{-(\lambda_1+\lambda_2(x-\mu)^2+1)}
+    =e^{-(\lambda_1+1)} e^{-\lambda_2(x-\mu)^2}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.70ex; " SRC="img477.svg"
+ ALT="$\displaystyle p(x)=e^{-(\lambda_1+\lambda_2(x-\mu)^2+1)}
+=e^{-(\lambda_1+1)} e^{-\lambda_2(x-\mu)^2}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">164</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+which must satisfy the two constraints:
+  <P></P>
+<DIV CLASS="mathdisplay"><A ID="eq1"></A><!-- MATH
+ \begin{equation}
+1 = \int^\infty_{-\infty} p(x)\,dx=e^{-\lambda_1-1}\int^\infty_{-\infty} e^{-\lambda_2(x-\mu)^2}dx
+    =e^{-(\lambda_1+1)}\sqrt{\frac{\pi}{\lambda_2}}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.43ex; " SRC="img478.svg"
+ ALT="$\displaystyle 1 = \int^\infty_{-\infty} p(x)\,dx=e^{-\lambda_1-1}\int^\infty_{-\infty} e^{-\lambda_2(x-\mu)^2}dx
+=e^{-(\lambda_1+1)}\sqrt{\frac{\pi}{\lambda_2}}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">165</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and
+  <BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+\sigma^2&=&\int^\infty_{-\infty} (x-\mu)^2p(x)\,dx
+    =e^{-\lambda_1-1}\int^\infty_{-\infty} e^{-\lambda_2(x-\mu)^2}(x-\mu)^2\,dx
+    \nonumber\\
+    &=&e^{-\lambda_1-1}\frac{1}{2}\sqrt{\frac{\pi}{\lambda_2^3}}
+    =e^{-\lambda_1-1}\frac{1}{2\lambda_2}\sqrt{\frac{\pi}{\lambda_2}}
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img479.svg"
+ ALT="$\displaystyle \sigma^2$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.04ex; vertical-align: -2.43ex; " SRC="img480.svg"
+ ALT="$\displaystyle \int^\infty_{-\infty} (x-\mu)^2p(x)\,dx
+=e^{-\lambda_1-1}\int^\infty_{-\infty} e^{-\lambda_2(x-\mu)^2}(x-\mu)^2\,dx$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.04ex; vertical-align: -2.51ex; " SRC="img481.svg"
+ ALT="$\displaystyle e^{-\lambda_1-1}\frac{1}{2}\sqrt{\frac{\pi}{\lambda_2^3}}
+=e^{-\lambda_1-1}\frac{1}{2\lambda_2}\sqrt{\frac{\pi}{\lambda_2}}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">166</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+  Comparing the two equations above, we get
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\lambda_2=\frac{1}{2\sigma^2}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img482.svg"
+ ALT="$\displaystyle \lambda_2=\frac{1}{2\sigma^2}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">167</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Substituting this into Eq. (<A HREF="#eq1">165</A>), we get
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+e^{-(\lambda_1+1)}\sqrt{2\pi\sigma^2}=1,\;\;\;\;\;\;\;\;\mbox{i.e.}\;\;\;\;\;\;\;\;
+    e^{-(\lambda_1+1)}=\frac{1}{\sqrt{2\pi\sigma^2}}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.57ex; " SRC="img483.svg"
+ ALT="$\displaystyle e^{-(\lambda_1+1)}\sqrt{2\pi\sigma^2}=1,\;\;\;\;\;\;\;\;$">i.e.<IMG STYLE="height: 5.57ex; vertical-align: -2.28ex; " SRC="img484.svg"
+ ALT="$\displaystyle \;\;\;\;\;\;\;\;
+e^{-(\lambda_1+1)}=\frac{1}{\sqrt{2\pi\sigma^2}}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">168</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Substituting this together with <!-- MATH
+ $\lambda_2=1/2\sigma^2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img485.svg"
+ ALT="$\lambda_2=1/2\sigma^2$"></SPAN> into <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img63.svg"
+ ALT="$p(x)$"></SPAN> we get
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p(x)=e^{-(\lambda_1+1)} e^{-\lambda_2(x-\mu)^2}
+    =\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+    ={\cal N}(x,\mu,\sigma^2)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.57ex; vertical-align: -2.28ex; " SRC="img486.svg"
+ ALT="$\displaystyle p(x)=e^{-(\lambda_1+1)} e^{-\lambda_2(x-\mu)^2}
+=\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+={\cal N}(x,\mu,\sigma^2)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">169</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+This is the normal or Gaussian distribution and the corresponding 
+  maximum entropy is
+  <BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+H(g)&=&-\int^\infty_{-\infty} g(x)\log g(x)\,dx
+    =-\int^\infty_{-\infty} g(x)\log \left(\frac{1}{\sqrt{2\pi\sigma^2}}e^{-(x-\mu)^2/2\sigma^2} \right) \;dx
+    \nonumber\\
+    &=&-\int^\infty_{-\infty} g(x)\left(log\frac{1}{\sqrt{2\pi\sigma^2}}-\frac{(x-\mu)^2}{2\sigma^2}\right)dx
+    \nonumber\\
+    &=&\frac{1}{2}\log(2\pi\sigma^2)+\frac{1}{2\sigma^2}\int^\infty_{-\infty}(x-\mu)^2 g(x)\,dx
+    \nonumber\\
+    &=&\frac{1}{2}\log(2\pi\sigma^2)+\frac{1}{2\sigma^2}\sigma^2
+    =\frac{1}{2}\log(2\pi\sigma^2)+\frac{1}{2}\log(e)
+    \nonumber\\
+    &=&\frac{1}{2}\log(2\pi e\sigma^2)=\frac{1}{2}\log(2\pi e)+\log\sigma
+  
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img487.svg"
+ ALT="$\displaystyle H(g)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.04ex; vertical-align: -2.43ex; " SRC="img488.svg"
+ ALT="$\displaystyle -\int^\infty_{-\infty} g(x)\log g(x)\,dx
+=-\int^\infty_{-\infty} g(x)\log \left(\frac{1}{\sqrt{2\pi\sigma^2}}e^{-(x-\mu)^2/2\sigma^2} \right) \;dx$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.04ex; vertical-align: -2.43ex; " SRC="img489.svg"
+ ALT="$\displaystyle -\int^\infty_{-\infty} g(x)\left(log\frac{1}{\sqrt{2\pi\sigma^2}}-\frac{(x-\mu)^2}{2\sigma^2}\right)dx$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.04ex; vertical-align: -2.43ex; " SRC="img490.svg"
+ ALT="$\displaystyle \frac{1}{2}\log(2\pi\sigma^2)+\frac{1}{2\sigma^2}\int^\infty_{-\infty}(x-\mu)^2 g(x)\,dx$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img491.svg"
+ ALT="$\displaystyle \frac{1}{2}\log(2\pi\sigma^2)+\frac{1}{2\sigma^2}\sigma^2
+=\frac{1}{2}\log(2\pi\sigma^2)+\frac{1}{2}\log(e)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img492.svg"
+ ALT="$\displaystyle \frac{1}{2}\log(2\pi e\sigma^2)=\frac{1}{2}\log(2\pi e)+\log\sigma$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">170</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+</LI>
+</UL>
+
+<P>
+The uncertainty of a distribution <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img63.svg"
+ ALT="$p(x)$"></SPAN> can be measured by both 
+its variance <!-- MATH
+ $\sigma^2=\int (x-\mu)^2 p(x)\;dx$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.83ex; " SRC="img493.svg"
+ ALT="$\sigma^2=\int (x-\mu)^2 p(x)\;dx$"></SPAN> and its entropy
+<!-- MATH
+ $H=-\int p(x)\,\log\,p(x)\;dx$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.83ex; " SRC="img494.svg"
+ ALT="$H=-\int p(x)\,\log\,p(x)\;dx$"></SPAN>. However, they are also different
+in that <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img474.svg"
+ ALT="$\sigma^2$"></SPAN> represents the spread of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img63.svg"
+ ALT="$p(x)$"></SPAN> while <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img424.svg"
+ ALT="$H$"></SPAN> 
+captures the shape of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img63.svg"
+ ALT="$p(x)$"></SPAN>. In multimodal distribution (with
+two or more modes), <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img424.svg"
+ ALT="$H$"></SPAN> is a better measurement as it increases
+due to the multimodes while <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img474.svg"
+ ALT="$\sigma^2$"></SPAN> is not sensitive to them.
+
+<P>
+In data analysis and modeling, if no additional knowledge is 
+available regarding the data of interest other than their mean and 
+variance (or covariance for multivariate data), a pdf with maximum 
+entropy is often used as a preferred probabilistic model for the 
+data, as such a model will allow maximum flexibility and impose 
+the minimum amount of unsupported constraint and thereby causing
+minimum bias error.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node6.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="probability.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node4.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node6.html">Mutual Information and Kullback-Leibler</A>
+<B> Up:</B> <A
+ HREF="probability.html">probability</A>
+<B> Previous:</B> <A
+ HREF="node4.html">The Normal Distribution</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

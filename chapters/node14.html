@@ -1,0 +1,893 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Singular Value Decomposition</TITLE>
+<META NAME="description" CONTENT="Singular Value Decomposition">
+<META NAME="keywords" CONTENT="algebra">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="algebra.css">
+
+<LINK REL="next" HREF="node15.html">
+<LINK REL="previous" HREF="node13.html">
+<LINK REL="next" HREF="node15.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node15.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="algebra.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node13.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node15.html">Pseudo-Inverse</A>
+<B> Up:</B> <A
+ HREF="algebra.html">algebra</A>
+<B> Previous:</B> <A
+ HREF="node13.html">Centering Matrix</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION000140000000000000000">
+Singular Value Decomposition</A>
+</H1>
+
+<P>
+The eigenvalue decomposition of a square matrix 
+<!-- MATH
+ ${\bf A}={\bf V\Lambda V}^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img619.svg"
+ ALT="${\bf A}={\bf V\Lambda V}^{-1}$"></SPAN> is of great importance and widely 
+used. However, for an <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.31ex; " SRC="img38.svg"
+ ALT="$m\times n$"></SPAN> non-square matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>, 
+no eigenvalues and eigenvector exist. In this case, we can still
+find its <EM>singular values</EM> and the corresponding left and 
+right <EM>singular vectors</EM>, and then carry out 
+<EM>singular value decomposition (SVD)</EM>.
+
+<P>
+<B>Theorem: </B> An <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.31ex; " SRC="img38.svg"
+ ALT="$m\times n$"></SPAN> matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> of rank <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img620.svg"
+ ALT="$r\le\min(m,n)$"></SPAN>
+can be diagonalized by two orthogonal matrices <!-- MATH
+ ${\bf U}_{m\times m}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img621.svg"
+ ALT="${\bf U}_{m\times m}$"></SPAN> and <!-- MATH
+ ${\bf V}_{n\times n}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img622.svg"
+ ALT="${\bf V}_{n\times n}$"></SPAN>:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf U}^T{\bf AV}={\bf\Sigma}\;\;\;\;\;\;\;\;\mbox{or}\;\;\;\;\;\;
+  {\bf A}={\bf U}{\bf\Sigma}{\bf V}^T
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img623.svg"
+ ALT="$\displaystyle {\bf U}^T{\bf AV}={\bf\Sigma}\;\;\;\;\;\;\;\;\mbox{or}\;\;\;\;\;\;
+{\bf A}={\bf U}{\bf\Sigma}{\bf V}^T
+$"> 
+
+(<SPAN CLASS="arabic">173</SPAN>)
+</DIV>
+Here 
+
+<UL>
+<LI><!-- MATH
+ ${\bf U}=[{\bf u}_1,\ldots,{\bf u}_m]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img624.svg"
+ ALT="${\bf U}=[{\bf u}_1,\ldots,{\bf u}_m]$"></SPAN> is an <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.31ex; " SRC="img625.svg"
+ ALT="$m\times m$"></SPAN> matrix
+  composed of the orthogonal eigenvectors of the symmetric matrix 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.12ex; " SRC="img626.svg"
+ ALT="${\bf AA}^T$"></SPAN>, also called the <EM>left singular vectors</EM> of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>:  
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf U}^T({\bf AA}^T){\bf U}={\bf\Lambda}
+  \;\;\;\;\;\;\;\;\mbox{or}\;\;\;\;\;\;
+  {\bf AA}^T={\bf U\Lambda U}^T
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img627.svg"
+ ALT="$\displaystyle {\bf U}^T({\bf AA}^T){\bf U}={\bf\Lambda}
+\;\;\;\;\;\;\;\;\mbox{or}\;\;\;\;\;\;
+{\bf AA}^T={\bf U\Lambda U}^T
+$"> 
+
+(<SPAN CLASS="arabic">174</SPAN>)
+</DIV>
+where <!-- MATH
+ ${\bf\Lambda}=diag(\lambda_1,\cdots,\lambda_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img473.svg"
+ ALT="${\bf\Lambda}=diag(\lambda_1,\cdots,\lambda_n)$"></SPAN> is the e
+  igenvalue matrix of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.12ex; " SRC="img626.svg"
+ ALT="${\bf AA}^T$"></SPAN>. 
+
+<P>
+</LI>
+<LI><!-- MATH
+ ${\bf V}=[{\bf v}_1,\ldots,{\bf v}_n]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img628.svg"
+ ALT="${\bf V}=[{\bf v}_1,\ldots,{\bf v}_n]$"></SPAN> is an <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.31ex; " SRC="img153.svg"
+ ALT="$n\times n$"></SPAN> matrix
+  composed of the orthogonal eigenvectors of the symmetric matrix 
+  <!-- MATH
+ ${\bf A}^T{\bf A}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img457.svg"
+ ALT="${\bf A}^T{\bf A}$"></SPAN>, also called the <EM>right singular vectors</EM> of
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>:  
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf V}^T({\bf A}^T{\bf A}){\bf V}={\bf\Lambda}
+    \;\;\;\;\;\;\;\;\mbox{or}\;\;\;\;\;\;
+    {\bf A}^T{\bf A}={\bf V\Lambda V}^T
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img629.svg"
+ ALT="$\displaystyle {\bf V}^T({\bf A}^T{\bf A}){\bf V}={\bf\Lambda}
+\;\;\;\;\;\;\;\;\mbox{or}\;\;\;\;\;\;
+{\bf A}^T{\bf A}={\bf V\Lambda V}^T
+$"> 
+
+(<SPAN CLASS="arabic">175</SPAN>)
+</DIV>
+Note that <!-- MATH
+ ${\bf A}^T{\bf A}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img457.svg"
+ ALT="${\bf A}^T{\bf A}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.12ex; " SRC="img626.svg"
+ ALT="${\bf AA}^T$"></SPAN> have the same
+  eigenvalue matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img290.svg"
+ ALT="${\bf\Lambda}$"></SPAN> (see proof below).
+
+<P>
+</LI>
+<LI><!-- MATH
+ ${\bf\Sigma}={\bf\Lambda}^{1/2}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img630.svg"
+ ALT="${\bf\Sigma}={\bf\Lambda}^{1/2}$"></SPAN> is an <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.31ex; " SRC="img38.svg"
+ ALT="$m\times n$"></SPAN> diagonal
+  matrix of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img631.svg"
+ ALT="$r$"></SPAN> non-zero values <!-- MATH
+ $\sigma_i=\sqrt{\lambda_i}\;
+  (i=1,\ldots,r)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img632.svg"
+ ALT="$\sigma_i=\sqrt{\lambda_i}\;
+(i=1,\ldots,r)$"></SPAN>, the square roots of the eigenvalues of 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.12ex; " SRC="img626.svg"
+ ALT="${\bf AA}^T$"></SPAN> or <!-- MATH
+ ${\bf A}^T{\bf A}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img457.svg"
+ ALT="${\bf A}^T{\bf A}$"></SPAN>, defined as the 
+  <EM>singular values</EM> of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf\Lambda}^{1/2}
+  =\left[\begin{array}{ccccc}\sqrt{\lambda_1}& & & & \\
+      & \ddots & & &\\& &\sqrt{\lambda_r} & &\\& & & &
+    \end{array}\right]
+  =\left[\begin{array}{ccccc}{\sigma_1}& & & & \\
+      & \ddots & & &\\& &\sigma_r & &\\& & & & 
+    \end{array}\right]={\bf\Sigma}
+  
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 13.01ex; vertical-align: -5.92ex; " SRC="img633.svg"
+ ALT="$\displaystyle {\bf\Lambda}^{1/2}
+=\left[\begin{array}{ccccc}\sqrt{\lambda_1}&amp; ...
+...
+&amp; \ddots &amp; &amp; &amp;\\ &amp; &amp;\sigma_r &amp; &amp;\\ &amp; &amp; &amp; &amp;
+\end{array}\right]={\bf\Sigma}
+$"> 
+
+(<SPAN CLASS="arabic">176</SPAN>)
+</DIV>
+</LI>
+</UL>
+
+<P>
+<B>Proof:</B> 
+
+<P>
+Pre-multiplying <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> on both sides of the eigenequation of 
+<!-- MATH
+ ${\bf A}^T{\bf A}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img457.svg"
+ ALT="${\bf A}^T{\bf A}$"></SPAN>:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+({\bf A}^T{\bf A}){\bf V}={\bf V\Lambda}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img634.svg"
+ ALT="$\displaystyle ({\bf A}^T{\bf A}){\bf V}={\bf V\Lambda}
+$"> 
+
+(<SPAN CLASS="arabic">177</SPAN>)
+</DIV>
+we get
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+({\bf A}{\bf A}^T){\bf A}{\bf V}={\bf A}{\bf V\Lambda},
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img635.svg"
+ ALT="$\displaystyle ({\bf A}{\bf A}^T){\bf A}{\bf V}={\bf A}{\bf V\Lambda},
+$"> 
+
+(<SPAN CLASS="arabic">178</SPAN>)
+</DIV>
+Note that <!-- MATH
+ ${\bf A}^T{\bf A}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img457.svg"
+ ALT="${\bf A}^T{\bf A}$"></SPAN> and <!-- MATH
+ ${\bf A}{\bf A}^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img636.svg"
+ ALT="${\bf A}{\bf A}^T$"></SPAN> have the same 
+eigenvalue matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img290.svg"
+ ALT="${\bf\Lambda}$"></SPAN>, and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img637.svg"
+ ALT="${\bf AV}$"></SPAN> is the eigenvector
+matrix of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.12ex; " SRC="img626.svg"
+ ALT="${\bf AA}^T$"></SPAN>. As the columns (or rows) of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img637.svg"
+ ALT="${\bf AV}$"></SPAN> are
+not normalized, <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img637.svg"
+ ALT="${\bf AV}$"></SPAN> is not orthogonal:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+({\bf AV})^T({\bf AV})={\bf V}^T{\bf A}^T{\bf AV}
+={\bf V}^T{\bf V\Lambda}={\bf\Lambda}\ne{\bf I}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img638.svg"
+ ALT="$\displaystyle ({\bf AV})^T({\bf AV})={\bf V}^T{\bf A}^T{\bf AV}
+={\bf V}^T{\bf V\Lambda}={\bf\Lambda}\ne{\bf I}
+$"> 
+
+(<SPAN CLASS="arabic">179</SPAN>)
+</DIV>
+If we post-multiply <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img637.svg"
+ ALT="${\bf AV}$"></SPAN> by <!-- MATH
+ ${\bf\Lambda}^{-1/2}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img538.svg"
+ ALT="${\bf\Lambda}^{-1/2}$"></SPAN>, its ith 
+column is scaled by <!-- MATH
+ $1/\sqrt{\lambda_i}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img639.svg"
+ ALT="$1/\sqrt{\lambda_i}$"></SPAN> (<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img640.svg"
+ ALT="$i=1,\cdots,n$"></SPAN>) and
+thereby normalized, the resulting matrix becomes orthogonal:
+<BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+&& \left({\bf A}{\bf V}{\bf\Lambda}^{-1/2}\right)^T
+  \left({\bf A}{\bf V}{\bf\Lambda}^{-1/2}\right)
+  ={\bf\Lambda}^{-1/2}{\bf V}^T{\bf A}^T{\bf A}{\bf V}{\bf\Lambda}^{-1/2}
+  \nonumber \\
+  &=&{\bf\Lambda}^{-1/2}{\bf V}^T{\bf V}{\bf\Lambda}{\bf\Lambda}^{-1/2}
+  ={\bf\Lambda}^{-1/2}{\bf\Lambda}{\bf\Lambda}^{-1/2}={\bf I}
+  \nonumber
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 5.11ex; vertical-align: -1.63ex; " SRC="img641.svg"
+ ALT="$\displaystyle \left({\bf A}{\bf V}{\bf\Lambda}^{-1/2}\right)^T
+\left({\bf A}{\b...
+...\right)
+={\bf\Lambda}^{-1/2}{\bf V}^T{\bf A}^T{\bf A}{\bf V}{\bf\Lambda}^{-1/2}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img161.svg"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 2.55ex; vertical-align: -0.12ex; " SRC="img642.svg"
+ ALT="$\displaystyle {\bf\Lambda}^{-1/2}{\bf V}^T{\bf V}{\bf\Lambda}{\bf\Lambda}^{-1/2}
+={\bf\Lambda}^{-1/2}{\bf\Lambda}{\bf\Lambda}^{-1/2}={\bf I}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+We denote this matrix composed of normalized orthogonal eigenvectors 
+of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.12ex; " SRC="img626.svg"
+ ALT="${\bf AA}^T$"></SPAN> by
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf AV\Lambda}^{-1/2}={\bf U}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.55ex; vertical-align: -0.12ex; " SRC="img643.svg"
+ ALT="$\displaystyle {\bf AV\Lambda}^{-1/2}={\bf U}
+$"> 
+
+(<SPAN CLASS="arabic">180</SPAN>)
+</DIV>
+Post-multiplying <!-- MATH
+ $({\bf V\Lambda}^{-1/2})^{-1}={\Lambda}^{1/2}{\bf V}^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.70ex; " SRC="img644.svg"
+ ALT="$({\bf V\Lambda}^{-1/2})^{-1}={\Lambda}^{1/2}{\bf V}^{-1}$"></SPAN>
+on both sides, we get the SVD of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}={\bf U}{\bf\Lambda}^{1/2}{\bf V}^{-1}
+={\bf U}{\bf\Lambda}^{1/2}{\bf V}^T={\bf U}{\bf\Sigma V}^T
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.55ex; vertical-align: -0.12ex; " SRC="img645.svg"
+ ALT="$\displaystyle {\bf A}={\bf U}{\bf\Lambda}^{1/2}{\bf V}^{-1}
+={\bf U}{\bf\Lambda}^{1/2}{\bf V}^T={\bf U}{\bf\Sigma V}^T
+$"> 
+
+(<SPAN CLASS="arabic">181</SPAN>)
+</DIV>
+Q.E.D.
+
+<P>
+The SVD is illustrated graphically below for 
+the two cases of <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.21ex; " SRC="img37.svg"
+ ALT="$m&lt;n$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.21ex; " SRC="img646.svg"
+ ALT="$m&gt;n$"></SPAN>:
+
+<P>
+<IMG STYLE=""
+ SRC="../figures/SVDMN.png"
+ ALT="SVDMN.png">
+
+<P>
+The component form of <!-- MATH
+ ${\bf A}{\bf V}{\bf\Lambda}^{-1/2}={\bf U}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img647.svg"
+ ALT="${\bf A}{\bf V}{\bf\Lambda}^{-1/2}={\bf U}$"></SPAN> 
+above is
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}{\bf v}_i\frac{1}{\sqrt{\lambda_i}}={\bf u}_i
+  \;\;\;\;\;(i=1,\cdots,n)
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 5.57ex; vertical-align: -2.28ex; " SRC="img648.svg"
+ ALT="$\displaystyle {\bf A}{\bf v}_i\frac{1}{\sqrt{\lambda_i}}={\bf u}_i
+\;\;\;\;\;(i=1,\cdots,n)
+$"> 
+
+(<SPAN CLASS="arabic">182</SPAN>)
+</DIV>
+relating the eigenvectors <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img449.svg"
+ ALT="${\bf v}_i$"></SPAN> of <!-- MATH
+ ${\bf A}^T{\bf A}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img457.svg"
+ ALT="${\bf A}^T{\bf A}$"></SPAN> to the 
+eigenvectors <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img172.svg"
+ ALT="${\bf u}_i$"></SPAN> of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.12ex; " SRC="img626.svg"
+ ALT="${\bf AA}^T$"></SPAN>.
+
+<P>
+We further consider some special cases:
+
+<UL>
+<LI>If <!-- MATH
+ ${\bf A}^T={\bf A}^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img649.svg"
+ ALT="${\bf A}^T={\bf A}^{-1}$"></SPAN> is unitary, i.e., 
+  <!-- MATH
+ ${\bf A}^T{\bf A}={\bf A}{\bf A}^T={\bf I}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img650.svg"
+ ALT="${\bf A}^T{\bf A}={\bf A}{\bf A}^T={\bf I}$"></SPAN>, its eigenvalue matrix is
+  <!-- MATH
+ ${\bf\Lambda}={\bf I}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img651.svg"
+ ALT="${\bf\Lambda}={\bf I}$"></SPAN>, and all singular values are unity <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img652.svg"
+ ALT="$\sigma_i=1$"></SPAN>
+  for all <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img640.svg"
+ ALT="$i=1,\cdots,n$"></SPAN>.
+
+<P>
+</LI>
+<LI>If <!-- MATH
+ ${\bf A}^T={\bf A}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img653.svg"
+ ALT="${\bf A}^T={\bf A}$"></SPAN> is symmetric, i.e.,
+  <!-- MATH
+ ${\bf A}{\bf A}^T={\bf A}^T{\bf A}={\bf A}^2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img654.svg"
+ ALT="${\bf A}{\bf A}^T={\bf A}^T{\bf A}={\bf A}^2$"></SPAN>, and its
+  singular value decompositon is <!-- MATH
+ ${\bf A}={\bf U\Sigma V}^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.12ex; " SRC="img655.svg"
+ ALT="${\bf A}={\bf U\Sigma V}^T$"></SPAN>,
+  i.e.,
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf AA}^T={\bf U\Sigma}^2{\bf U}^T,\;\;\;\;\;\;
+    {\bf A}^T{\bf A}={\bf V\Sigma}^2{\bf V}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.57ex; " SRC="img656.svg"
+ ALT="$\displaystyle {\bf AA}^T={\bf U\Sigma}^2{\bf U}^T,\;\;\;\;\;\;
+{\bf A}^T{\bf A}={\bf V\Sigma}^2{\bf V}
+$"> 
+
+(<SPAN CLASS="arabic">183</SPAN>)
+</DIV>
+On the other hand, the eigenvalue decomposition of 
+  <!-- MATH
+ ${\bf A}^2={\bf A}^T{\bf A}={\bf AA}^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.12ex; " SRC="img657.svg"
+ ALT="${\bf A}^2={\bf A}^T{\bf A}={\bf AA}^T$"></SPAN> can be written as:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}^2={\bf W\Lambda}^2{\bf W}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img658.svg"
+ ALT="$\displaystyle {\bf A}^2={\bf W\Lambda}^2{\bf W}
+$"> 
+
+(<SPAN CLASS="arabic">184</SPAN>)
+</DIV>
+where <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img290.svg"
+ ALT="${\bf\Lambda}$"></SPAN> is the eigenvalue matrix of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>. We 
+  see that <!-- MATH
+ ${\bf\Lambda}^2={\bf\Sigma}^2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img659.svg"
+ ALT="${\bf\Lambda}^2={\bf\Sigma}^2$"></SPAN>, i.e., the singular values 
+  are the absolute values of its eigenvalues 
+  <!-- MATH
+ $\sigma_i=\sqrt{\lambda_i^2}=|\lambda_i|\;(i=1,\cdots,n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.81ex; " SRC="img660.svg"
+ ALT="$\sigma_i=\sqrt{\lambda_i^2}=\vert\lambda_i\vert\;(i=1,\cdots,n)$"></SPAN>,
+  and the left and right eigenvectors are the same as the eigenvectors
+  <!-- MATH
+ ${\bf U}={\bf V}={\bf W}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img661.svg"
+ ALT="${\bf U}={\bf V}={\bf W}$"></SPAN>.
+
+<P>
+</LI>
+<LI>If <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> is normal satisfying <!-- MATH
+ ${\bf A}^T{\bf A}={\bf A}{\bf A}^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img275.svg"
+ ALT="${\bf A}^T{\bf A}={\bf A}{\bf A}^T$"></SPAN>
+  (e.g., symmetric, Hermitian, unitary, etc.), both <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img219.svg"
+ ALT="${\bf A}^T$"></SPAN> 
+  can be simultaneously diagonalized by their unitary eigenvector matrix 
+  <!-- MATH
+ ${\bf U}={\bf V}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img662.svg"
+ ALT="${\bf U}={\bf V}$"></SPAN>, i.e.,
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}{\bf u}_i=\lambda_i{\bf u}_i,\;\;\;\;\;\;
+    {\bf A}{\bf u}_i=\overline{\lambda_i}{\bf u}_i,\;\;\;\;\;\;(i=1,\cdots,n)
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img663.svg"
+ ALT="$\displaystyle {\bf A}{\bf u}_i=\lambda_i{\bf u}_i,\;\;\;\;\;\;
+{\bf A}{\bf u}_i=\overline{\lambda_i}{\bf u}_i,\;\;\;\;\;\;(i=1,\cdots,n)
+$"> 
+
+(<SPAN CLASS="arabic">185</SPAN>)
+</DIV>
+or in matrix form
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}={\bf U}{\bf\Lambda}{\bf U}^T,\;\;\;\;\;\;
+    {\bf A}^T={\bf U}\overline{\bf\Lambda}{\bf U}^T
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.79ex; vertical-align: -0.57ex; " SRC="img664.svg"
+ ALT="$\displaystyle {\bf A}={\bf U}{\bf\Lambda}{\bf U}^T,\;\;\;\;\;\;
+{\bf A}^T={\bf U}\overline{\bf\Lambda}{\bf U}^T
+$"> 
+
+(<SPAN CLASS="arabic">186</SPAN>)
+</DIV>
+we have
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}{\bf A}^T=({\bf U}{\bf\Lambda}{\bf U}^T)({\bf U}\overline{\bf\Lambda}{\bf U}^T)
+    ={\bf U}{\bf\Lambda}\overline{\bf\Lambda}{\bf U}^T={\bf U}|{\bf\Lambda}|^2{\bf U}^T
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img665.svg"
+ ALT="$\displaystyle {\bf A}{\bf A}^T=({\bf U}{\bf\Lambda}{\bf U}^T)({\bf U}\overline{...
+...ambda}\overline{\bf\Lambda}{\bf U}^T={\bf U}\vert{\bf\Lambda}\vert^2{\bf U}^T
+$"> 
+
+(<SPAN CLASS="arabic">187</SPAN>)
+</DIV>
+i.e., the singular values of any norm matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> are simply the modulus 
+  of its eigenvalues <!-- MATH
+ $\sigma_i({\bf A})=|\lambda_i({\bf A})|$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img666.svg"
+ ALT="$\sigma_i({\bf A})=\vert\lambda_i({\bf A})\vert$"></SPAN> (<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img640.svg"
+ ALT="$i=1,\cdots,n$"></SPAN>).
+
+<P>
+</LI>
+</UL>
+
+<P>
+The <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.31ex; " SRC="img38.svg"
+ ALT="$m\times n$"></SPAN> matrix <!-- MATH
+ ${\bf A}={\bf U}{\bf\Sigma}{\bf V}^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img667.svg"
+ ALT="${\bf A}={\bf U}{\bf\Sigma}{\bf V}^T$"></SPAN> can be 
+considered as a linear  transformation that converts a vector 
+<!-- MATH
+ ${\bf x}\in \mathbb{C}^n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img668.svg"
+ ALT="${\bf x}\in \mathbb{C}^n$"></SPAN> to another vector <!-- MATH
+ ${\bf y}\in\mathbb{C}^m$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img669.svg"
+ ALT="${\bf y}\in\mathbb{C}^m$"></SPAN>
+in three steps:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf y}={\bf A}{\bf x}={\bf U} {\bf\Sigma} {\bf V}^T\;{\bf x}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.79ex; vertical-align: -0.57ex; " SRC="img670.svg"
+ ALT="$\displaystyle {\bf y}={\bf A}{\bf x}={\bf U} {\bf\Sigma} {\bf V}^T\;{\bf x}
+$"> 
+
+(<SPAN CLASS="arabic">188</SPAN>)
+</DIV>
+
+<OL>
+<LI>Rotate vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img52.svg"
+ ALT="${\bf x}$"></SPAN> by the orthogonal matrix <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img671.svg"
+ ALT="${\bf V}^T$"></SPAN>:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf y}_1={\bf V}^T\; {\bf x}.
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.79ex; vertical-align: -0.57ex; " SRC="img672.svg"
+ ALT="$\displaystyle {\bf y}_1={\bf V}^T\; {\bf x}.
+$"> 
+
+(<SPAN CLASS="arabic">189</SPAN>)
+</DIV>
+</LI>
+<LI>Scale each dimension <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img673.svg"
+ ALT="$Y_k$"></SPAN> of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img674.svg"
+ ALT="${\bf y}_1$"></SPAN> by a factor of <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img675.svg"
+ ALT="$\sigma_k$"></SPAN> 
+  (<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img676.svg"
+ ALT="$k=1,\ldots,r$"></SPAN>):
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf y}_2={\bf\Sigma}\;{\bf y}_1={\bf\Sigma} {\bf V}^T\;{\bf x}.
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.79ex; vertical-align: -0.57ex; " SRC="img677.svg"
+ ALT="$\displaystyle {\bf y}_2={\bf\Sigma}\;{\bf y}_1={\bf\Sigma} {\bf V}^T\;{\bf x}.
+$"> 
+
+(<SPAN CLASS="arabic">190</SPAN>)
+</DIV>
+</LI>
+<LI>Rotate vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img678.svg"
+ ALT="${\bf y}_2$"></SPAN> by the orthogonal matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img285.svg"
+ ALT="${\bf U}$"></SPAN>:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf y}={\bf U} {\bf y}_2={\bf U}{\bf\Sigma} {\bf V}^T\;{\bf x}
+    ={\bf A}{\bf x}.
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.79ex; vertical-align: -0.57ex; " SRC="img679.svg"
+ ALT="$\displaystyle {\bf y}={\bf U} {\bf y}_2={\bf U}{\bf\Sigma} {\bf V}^T\;{\bf x}
+={\bf A}{\bf x}.
+$"> 
+
+(<SPAN CLASS="arabic">191</SPAN>)
+</DIV>
+</LI>
+</OL>
+
+<P>
+<IMG STYLE=""
+ SRC="../figures/SVDtransform.png"
+ ALT="SVDtransform.png">
+
+<P>
+The figure below illustrates the transformation of the three vertices of 
+a triangle in 2-D space by a matrix <!-- MATH
+ ${\bf A}={\bf U}{\bf\Sigma}{\bf V}^*$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img680.svg"
+ ALT="${\bf A}={\bf U}{\bf\Sigma}{\bf V}^*$"></SPAN>, 
+which first rotates the vertices by 45 degrees CCW, scale horizontally and
+vertically by a factor of 3 and 2, respectively, and then rotate CW by 30
+degrees.
+
+<P>
+<IMG STYLE=""
+ SRC="../figures/SVDtransformation.gif"
+ ALT="SVDtransformation.gif">
+
+<P>
+The SVD has many applications, two of which are considered below. 
+
+<P>
+The SVD equation 
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf U}^T{\bf A}{\bf V}={\bf\Lambda}^{1/2}={\bf\Sigma}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.55ex; vertical-align: -0.12ex; " SRC="img681.svg"
+ ALT="$\displaystyle {\bf U}^T{\bf A}{\bf V}={\bf\Lambda}^{1/2}={\bf\Sigma}
+$"> 
+
+(<SPAN CLASS="arabic">192</SPAN>)
+</DIV>
+can be considered as the forward SVD transform. Pre-multiplying <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img285.svg"
+ ALT="${\bf U}$"></SPAN> and
+post-multiplying <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img671.svg"
+ ALT="${\bf V}^T$"></SPAN> on both sides, we get the inverse transform:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}={\bf U}{\bf\Sigma}{\bf V}^T
+  =[{\bf u}_1,\cdots\cdots\cdots,{\bf u}_m]\left[\begin{array}{cccccc}
+      \sigma_1&&&&&\\&\ddots&&&&\\&&\sigma_r&&&\\&&&0&&\\&&&&\ddots&\\&&&&&0
+    \end{array}\right]
+  \left[\begin{array}{c}{\bf v}_1^T\\\vdots\\\vdots\\\vdots\\{\bf v}_n^T\end{array}\right]
+  =\sum_{i=1}^r \sigma_i[{\bf u}_i{\bf v}_i^T]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 19.97ex; vertical-align: -9.44ex; " SRC="img682.svg"
+ ALT="$\displaystyle {\bf A}={\bf U}{\bf\Sigma}{\bf V}^T
+=[{\bf u}_1,\cdots\cdots\cdo...
+...\\ {\bf v}_n^T\end{array}\right]
+=\sum_{i=1}^r \sigma_i[{\bf u}_i{\bf v}_i^T]
+$"> 
+
+(<SPAN CLASS="arabic">193</SPAN>)
+</DIV>
+by which the original matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> is represented as a linear combination 
+of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img631.svg"
+ ALT="$r$"></SPAN> matrices <!-- MATH
+ $[{\bf u}_i{\bf v}_i^T]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.72ex; " SRC="img683.svg"
+ ALT="$[{\bf u}_i{\bf v}_i^T]$"></SPAN> weighted by the singular values 
+<!-- MATH
+ $\sqrt{\lambda_i}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.54ex; " SRC="img684.svg"
+ ALT="$\sqrt{\lambda_i}$"></SPAN> (<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img685.svg"
+ ALT="$i=1,\ldots,r$"></SPAN>). We can rewrite both the forward and 
+inverse SVD transform as a pair of forward and inverse transforms:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\left\{ \begin{array}{l}
+  {\bf\Sigma}={\bf\Lambda}^{1/2}={\bf U}^T{\bf A}{\bf V} \\
+  {\bf A}={\bf U}{\bf\Lambda}^{1/2}{\bf V}^T={\bf U}{\bf\Sigma}{\bf V}^T.
+\end{array} \right.
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 6.04ex; vertical-align: -2.43ex; " SRC="img686.svg"
+ ALT="$\displaystyle \left\{ \begin{array}{l}
+{\bf\Sigma}={\bf\Lambda}^{1/2}={\bf U}...
+...U}{\bf\Lambda}^{1/2}{\bf V}^T={\bf U}{\bf\Sigma}{\bf V}^T.
+\end{array} \right.
+$"> 
+
+(<SPAN CLASS="arabic">194</SPAN>)
+</DIV>
+This result indicate that the SVD can be used for data compression, if
+the 2-D data stored in an <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.31ex; " SRC="img38.svg"
+ ALT="$m\times n$"></SPAN> matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> can be approximated 
+by keeping in the summation above only <!-- MATH
+ $k\ll r\le min(m,n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img687.svg"
+ ALT="$k\ll r\le min(m,n)$"></SPAN> terms 
+corresponding to the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img462.svg"
+ ALT="$k$"></SPAN> greatest singular values. The amount of data 
+can be significantly reduced from <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.31ex; " SRC="img38.svg"
+ ALT="$m\times n$"></SPAN> to no more than <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img688.svg"
+ ALT="$k(m+n+1)$"></SPAN>.
+
+<P>
+Also, the pseudo-inverse of any matrix (non-square, not full-rank) can be 
+found given its SVD
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}={\bf U}{\bf\Lambda}^{1/2}{\bf V}^T={\bf U}{\bf\Sigma}{\bf V}^T
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.55ex; vertical-align: -0.12ex; " SRC="img689.svg"
+ ALT="$\displaystyle {\bf A}={\bf U}{\bf\Lambda}^{1/2}{\bf V}^T={\bf U}{\bf\Sigma}{\bf V}^T
+$"> 
+
+(<SPAN CLASS="arabic">195</SPAN>)
+</DIV>
+as
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}^-=({\bf V}^T)^{-1}{\bf\Sigma}^{-}{\bf U}^{-1}
+  ={\bf V}{\bf\Sigma}^{-}{\bf U}^T
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img690.svg"
+ ALT="$\displaystyle {\bf A}^-=({\bf V}^T)^{-1}{\bf\Sigma}^{-}{\bf U}^{-1}
+={\bf V}{\bf\Sigma}^{-}{\bf U}^T
+$"> 
+
+(<SPAN CLASS="arabic">196</SPAN>)
+</DIV>
+where <!-- MATH
+ ${\bf\Sigma}^{-}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.12ex; " SRC="img691.svg"
+ ALT="${\bf\Sigma}^{-}$"></SPAN> is pseudo-inverse of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img692.svg"
+ ALT="${\bf\Sigma}$"></SPAN>, composed 
+of the reciprocals <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img693.svg"
+ ALT="$1/\sigma_k$"></SPAN> of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img694.svg"
+ ALT="$R$"></SPAN> singular values along the 
+diagonal. The pseudo-inverse matrix is needed to find optimal solution 
+of an inconsistent linear equation system.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node15.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="algebra.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node13.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node15.html">Pseudo-Inverse</A>
+<B> Up:</B> <A
+ HREF="algebra.html">algebra</A>
+<B> Previous:</B> <A
+ HREF="node13.html">Centering Matrix</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

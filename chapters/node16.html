@@ -1,0 +1,897 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Vector Norms</TITLE>
+<META NAME="description" CONTENT="Vector Norms">
+<META NAME="keywords" CONTENT="algebra">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="algebra.css">
+
+<LINK REL="next" HREF="node17.html">
+<LINK REL="previous" HREF="node15.html">
+<LINK REL="next" HREF="node17.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node17.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="algebra.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node15.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node17.html">Matrix Norms</A>
+<B> Up:</B> <A
+ HREF="algebra.html">algebra</A>
+<B> Previous:</B> <A
+ HREF="node15.html">Pseudo-Inverse</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION000160000000000000000">
+Vector Norms</A>
+</H1>
+
+<P>
+The norm of a vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img52.svg"
+ ALT="${\bf x}$"></SPAN>, denoted by <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img98.svg"
+ ALT="$\vert\vert{\bf x}\vert\vert$"></SPAN>, can be
+intuititvely interpretated as its &ldquo;size&rdquo;. For example, the norm 
+of a real number <!-- MATH
+ $x\in \mathbb{R}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img732.svg"
+ ALT="$x\in \mathbb{R}$"></SPAN> in the 1-D real space is its 
+absolute value <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img733.svg"
+ ALT="$\vert x\vert$"></SPAN>, or its distance to the origin, and the norm of 
+a complex number <!-- MATH
+ $z=x+jy\in\mathbb{C}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img734.svg"
+ ALT="$z=x+jy\in\mathbb{C}$"></SPAN> is its modulus <!-- MATH
+ $|z|=\sqrt{x^2+y^2}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.77ex; " SRC="img484.svg"
+ ALT="$\vert z\vert=\sqrt{x^2+y^2}$"></SPAN>, 
+its Euclidean distance to the origin. Here is the most general definition
+of a vector norm:
+
+<P>
+<B>Definition:</B> The norm of a vector <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img9.svg"
+ ALT="${\bf x} \in V$"></SPAN> in vector space
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img2.svg"
+ ALT="$V$"></SPAN> is a real non-negative value representing the length or magnitude
+of the vector. Specifically, the norm of <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img9.svg"
+ ALT="${\bf x} \in V$"></SPAN> satisfy the 
+following three conditions:
+
+<UL>
+<LI>Positivity:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf x}||\ge 0,\;\;\;\;\;\;||{\bf x}||=0
+  \;\;\;\mbox{iff}\;\;\;{\bf x}={\bf0}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img735.svg"
+ ALT="$\displaystyle \vert\vert{\bf x}\vert\vert\ge 0,\;\;\;\;\;\;\vert\vert{\bf x}\vert\vert=0
+\;\;\;\mbox{iff}\;\;\;{\bf x}={\bf0}
+$"> 
+
+(<SPAN CLASS="arabic">205</SPAN>)
+</DIV>
+</LI>
+<LI>Homogeneity:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||a{\bf x}||=|a|\;||{\bf x}||,\;\;\;\;\;\;a\in\mathbb{R}
+  \;\;\;\mbox{or}\;\;\;\mathbb{C}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img736.svg"
+ ALT="$\displaystyle \vert\vert a{\bf x}\vert\vert=\vert a\vert\;\vert\vert{\bf x}\vert\vert,\;\;\;\;\;\;a\in\mathbb{R}
+\;\;\;\mbox{or}\;\;\;\mathbb{C}
+$"> 
+
+(<SPAN CLASS="arabic">206</SPAN>)
+</DIV>
+
+<P>
+</LI>
+<LI>Triangle inequality:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf x}+{\bf y}||\le ||{\bf x}||+||{\bf y}||
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img737.svg"
+ ALT="$\displaystyle \vert\vert{\bf x}+{\bf y}\vert\vert\le \vert\vert{\bf x}\vert\vert+\vert\vert{\bf y}\vert\vert
+$"> 
+
+(<SPAN CLASS="arabic">207</SPAN>)
+</DIV>
+</LI>
+</UL>
+
+<P>
+The triangle inequality can also be expressed in alternative forms.
+If we define <!-- MATH
+ ${\bf z}=-{\bf y}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.57ex; " SRC="img738.svg"
+ ALT="${\bf z}=-{\bf y}$"></SPAN>, the triangle inequality becomes
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf x}-{\bf z}||\le ||{\bf x}||+||{\bf z}||
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img739.svg"
+ ALT="$\displaystyle \vert\vert{\bf x}-{\bf z}\vert\vert\le \vert\vert{\bf x}\vert\vert+\vert\vert{\bf z}\vert\vert
+$"> 
+
+(<SPAN CLASS="arabic">208</SPAN>)
+</DIV>
+If we further define <!-- MATH
+ ${\bf u}={\bf x}-{\bf z}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.31ex; " SRC="img740.svg"
+ ALT="${\bf u}={\bf x}-{\bf z}$"></SPAN>, i.e., 
+<!-- MATH
+ ${\bf z}={\bf x}-{\bf u}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.31ex; " SRC="img741.svg"
+ ALT="${\bf z}={\bf x}-{\bf u}$"></SPAN>, then the above becomes
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf u}||\le ||{\bf x}||+||{\bf x}-{\bf u}||,
+\;\;\;\;\;\;\mbox{i.e.}\;\;\;\;\;\;
+||{\bf u}||-||{\bf x}||\le ||{\bf x}-{\bf u}||
+=||{\bf u}-{\bf x}||
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img742.svg"
+ ALT="$\displaystyle \vert\vert{\bf u}\vert\vert\le \vert\vert{\bf x}\vert\vert+\vert\...
+...rt\le \vert\vert{\bf x}-{\bf u}\vert\vert
+=\vert\vert{\bf u}-{\bf x}\vert\vert
+$"> 
+
+(<SPAN CLASS="arabic">209</SPAN>)
+</DIV>
+Combining the two results above, we get
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf x}||-||{\bf y}||\le||{\bf x}-{\bf y}||\le ||{\bf x}||+||{\bf y}||
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img743.svg"
+ ALT="$\displaystyle \vert\vert{\bf x}\vert\vert-\vert\vert{\bf y}\vert\vert\le\vert\v...
+...}-{\bf y}\vert\vert\le \vert\vert{\bf x}\vert\vert+\vert\vert{\bf y}\vert\vert
+$"> 
+
+(<SPAN CLASS="arabic">210</SPAN>)
+</DIV>
+The first equality holds if <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img52.svg"
+ ALT="${\bf x}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img86.svg"
+ ALT="${\bf y}$"></SPAN> are in the same
+direction, the second equality holds if they are in opposite direction.
+More specially when <!-- MATH
+ ${\bf y}={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img744.svg"
+ ALT="${\bf y}={\bf0}$"></SPAN>, both equalities hold.
+
+<P>
+<IMG STYLE=""
+ SRC="../figures/TriangleInequality1.png"
+ ALT="TriangleInequality1.png">
+
+<P>
+The p-norms of an n-D vector <!-- MATH
+ ${\bf x}=[x_1,\cdots,x_n]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img314.svg"
+ ALT="${\bf x}=[x_1,\cdots,x_n]^T$"></SPAN> and a function
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img745.svg"
+ ALT="$f(x)$"></SPAN> are defined as:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf x}||_p=\left( \sum_{i=1}^n |x_i|^p \right)^{1/p},
+\;\;\;\;\;\;\;\;
+||f(x)||_p=\left( \int |f(x)|^p\,dx \right)^{1/p}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 7.90ex; vertical-align: -3.09ex; " SRC="img746.svg"
+ ALT="$\displaystyle \vert\vert{\bf x}\vert\vert _p=\left( \sum_{i=1}^n \vert x_i\vert...
+...;
+\vert\vert f(x)\vert\vert _p=\left( \int \vert f(x)\vert^p\,dx \right)^{1/p}
+$"> 
+
+(<SPAN CLASS="arabic">211</SPAN>)
+</DIV>
+The p-norm satisfies the three requirements in the definition of vector 
+norm. The first two are trivially obvious, while the third one happens 
+to be Minkowski's inequality (see appendix):
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf x}+{\bf y}||_p\le ||{\bf x}||_p+||{\bf y}||_p
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img747.svg"
+ ALT="$\displaystyle \vert\vert{\bf x}+{\bf y}\vert\vert _p\le \vert\vert{\bf x}\vert\vert _p+\vert\vert{\bf y}\vert\vert _p
+$"> 
+
+(<SPAN CLASS="arabic">212</SPAN>)
+</DIV>
+The p-norms corresponding to <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img748.svg"
+ ALT="$p=1$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img749.svg"
+ ALT="$p=2$"></SPAN>, and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img750.svg"
+ ALT="$p=\infty$"></SPAN> are most
+commonly used:
+
+<UL>
+<LI><SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img748.svg"
+ ALT="$p=1$"></SPAN>, the absolute sum of all <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img29.svg"
+ ALT="$n$"></SPAN> elements:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf x}||_1=\sum_{i=1}^n |x_i|
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 7.20ex; vertical-align: -3.09ex; " SRC="img751.svg"
+ ALT="$\displaystyle \vert\vert{\bf x}\vert\vert _1=\sum_{i=1}^n \vert x_i\vert
+$"> 
+
+(<SPAN CLASS="arabic">213</SPAN>)
+</DIV>
+</LI>
+<LI><SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img749.svg"
+ ALT="$p=2$"></SPAN>, the Euclidean norm:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf x}||_2=\left({\bf x}^T{\bf x}\right)^{1/2}=\sqrt{\sum_{i=1}^n |x_i|^2}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 8.83ex; vertical-align: -3.65ex; " SRC="img752.svg"
+ ALT="$\displaystyle \vert\vert{\bf x}\vert\vert _2=\left({\bf x}^T{\bf x}\right)^{1/2}=\sqrt{\sum_{i=1}^n \vert x_i\vert^2}
+$"> 
+
+(<SPAN CLASS="arabic">214</SPAN>)
+</DIV>
+</LI>
+<LI><SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img750.svg"
+ ALT="$p=\infty$"></SPAN>, the maximum absolute value of all <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img29.svg"
+ ALT="$n$"></SPAN> elements:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf x}||_\infty=\left(\sum_{i=1}^n |x_i|^\infty\right)^{1/\infty}
+  =\max\{ |x_1|,\cdots, |x_n| \}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 7.90ex; vertical-align: -3.09ex; " SRC="img753.svg"
+ ALT="$\displaystyle \vert\vert{\bf x}\vert\vert _\infty=\left(\sum_{i=1}^n \vert x_i\vert^\infty\right)^{1/\infty}
+=\max\{ \vert x_1\vert,\cdots, \vert x_n\vert \}
+$"> 
+
+(<SPAN CLASS="arabic">215</SPAN>)
+</DIV>
+</LI>
+</UL>
+
+<P>
+Out of the three p-norms, the Euclidean 2-norm is the only one that
+is <EM>unitary invariant</EM>, i.e., it is conserved or invariant under
+any unitary transform <!-- MATH
+ ${\bf y}={\bf R}{\bf x}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img754.svg"
+ ALT="${\bf y}={\bf R}{\bf x}$"></SPAN>, where <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img436.svg"
+ ALT="${\bf R}$"></SPAN> is a 
+unitary matrix satisfying <!-- MATH
+ ${\bf R}^{-1}={\bf R}^*$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img471.svg"
+ ALT="${\bf R}^{-1}={\bf R}^*$"></SPAN>:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf y}||_2^2={\bf y}^*{\bf y}=({\bf R}{\bf x})^*({\bf R}{\bf x})
+={\bf x}^*\,({\bf R}^*{\bf R})\,{\bf x}={\bf x}^*{\bf x}=||{\bf x}||_2^2
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img755.svg"
+ ALT="$\displaystyle \vert\vert{\bf y}\vert\vert _2^2={\bf y}^*{\bf y}=({\bf R}{\bf x}...
+...,({\bf R}^*{\bf R})\,{\bf x}={\bf x}^*{\bf x}=\vert\vert{\bf x}\vert\vert _2^2
+$"> 
+
+(<SPAN CLASS="arabic">216</SPAN>)
+</DIV>
+i.e., the length of the vector is not changed by any unitary transform
+(such as rotation, when <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img436.svg"
+ ALT="${\bf R}$"></SPAN> is a rotation matrix).
+
+<P>
+<B>Definition:</B> Two norms <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img756.svg"
+ ALT="$\vert\vert{\bf x}\vert\vert _a$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img757.svg"
+ ALT="$\vert\vert{\bf x}\vert\vert _b$"></SPAN> are 
+equivalent if there exist two positive real constants <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img443.svg"
+ ALT="$c$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img758.svg"
+ ALT="$C$"></SPAN> so 
+that 
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+c\,||{\bf x}||_b\le ||{\bf x}||_a\le C\,||{\bf x}||_b
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img759.svg"
+ ALT="$\displaystyle c\,\vert\vert{\bf x}\vert\vert _b\le \vert\vert{\bf x}\vert\vert _a\le C\,\vert\vert{\bf x}\vert\vert _b
+$"> 
+
+(<SPAN CLASS="arabic">217</SPAN>)
+</DIV>
+Note that this relationship can also be written as
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\frac{1}{C}\,||{\bf x}||_a\le ||{\bf x}||_b\le \frac{1}{c}\,||{\bf x}||_a
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img760.svg"
+ ALT="$\displaystyle \frac{1}{C}\,\vert\vert{\bf x}\vert\vert _a\le \vert\vert{\bf x}\vert\vert _b\le \frac{1}{c}\,\vert\vert{\bf x}\vert\vert _a
+$"> 
+
+(<SPAN CLASS="arabic">218</SPAN>)
+</DIV>
+
+<P>
+<B>Theorem: </B> All different norms <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img52.svg"
+ ALT="${\bf x}$"></SPAN> are equivalent.
+
+<P>
+<B>Proof</B>
+
+<UL>
+<LI>We first show that equivalence is transitive, i.e., if both
+  <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img756.svg"
+ ALT="$\vert\vert{\bf x}\vert\vert _a$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img757.svg"
+ ALT="$\vert\vert{\bf x}\vert\vert _b$"></SPAN> are equivalent to <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img761.svg"
+ ALT="$\vert\vert{\bf x}\vert\vert _1$"></SPAN>:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+c\,||{\bf x}||_1\le ||{\bf x}||_a\le C\,||{\bf x}||_1,
+  \;\;\;\;\mbox{and}\;\;\;\;\;
+  d\,||{\bf x}||_1\le ||{\bf x}||_b\le D\,||{\bf x}||_1,
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img762.svg"
+ ALT="$\displaystyle c\,\vert\vert{\bf x}\vert\vert _1\le \vert\vert{\bf x}\vert\vert ...
+...rt _1\le \vert\vert{\bf x}\vert\vert _b\le D\,\vert\vert{\bf x}\vert\vert _1,
+$"> 
+
+(<SPAN CLASS="arabic">219</SPAN>)
+</DIV>
+then they are equivalent to each other. 
+
+<P>
+From the first equation we get <!-- MATH
+ $||{\bf x}||_1\le ||{\bf x}||_a/c$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img763.svg"
+ ALT="$\vert\vert{\bf x}\vert\vert _1\le \vert\vert{\bf x}\vert\vert _a/c$"></SPAN> and
+  <!-- MATH
+ $||{\bf x}||_1\ge ||{\bf x}||_a/C$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img764.svg"
+ ALT="$\vert\vert{\bf x}\vert\vert _1\ge \vert\vert{\bf x}\vert\vert _a/C$"></SPAN>. Substituting these into the right
+  and left hand sides of the second equation respectively yields:  
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\frac{d}{C}\,||{\bf x}||_a\le ||{\bf x}||_b\le \frac{D}{c}\,||{\bf x}||_a,
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 5.11ex; vertical-align: -1.71ex; " SRC="img765.svg"
+ ALT="$\displaystyle \frac{d}{C}\,\vert\vert{\bf x}\vert\vert _a\le \vert\vert{\bf x}\vert\vert _b\le \frac{D}{c}\,\vert\vert{\bf x}\vert\vert _a,
+$"> 
+
+(<SPAN CLASS="arabic">220</SPAN>)
+</DIV>
+i.e., <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img756.svg"
+ ALT="$\vert\vert{\bf x}\vert\vert _a$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img757.svg"
+ ALT="$\vert\vert{\bf x}\vert\vert _b$"></SPAN> are equivalent. 
+
+<P>
+</LI>
+<LI>If we can further show that an arbitrary norm <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img98.svg"
+ ALT="$\vert\vert{\bf x}\vert\vert$"></SPAN> is
+  equivalent to <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img761.svg"
+ ALT="$\vert\vert{\bf x}\vert\vert _1$"></SPAN>, i.e., 
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+c\,||{\bf x}||_1\le ||{\bf x}||\le C\,||{\bf x}||_1
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img766.svg"
+ ALT="$\displaystyle c\,\vert\vert{\bf x}\vert\vert _1\le \vert\vert{\bf x}\vert\vert\le C\,\vert\vert{\bf x}\vert\vert _1
+$"> 
+
+(<SPAN CLASS="arabic">221</SPAN>)
+</DIV>
+then according to the transitivity property shown above, all norms
+  are equivalent.
+
+<P>
+If <!-- MATH
+ ${\bf x}={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img100.svg"
+ ALT="${\bf x}={\bf0}$"></SPAN>, it is obvious that the equalities above hold
+  <!-- MATH
+ $||{\bf x}||=||{\bf x}||_1=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img767.svg"
+ ALT="$\vert\vert{\bf x}\vert\vert=\vert\vert{\bf x}\vert\vert _1=0$"></SPAN>. If <!-- MATH
+ ${\bf x}\ne {\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img293.svg"
+ ALT="${\bf x}\ne {\bf0}$"></SPAN>, <!-- MATH
+ $||{\bf x}||_1>0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img768.svg"
+ ALT="$\vert\vert{\bf x}\vert\vert _1&gt;0$"></SPAN>, 
+  we can define a normalized vector <!-- MATH
+ ${\bf u}={\bf x}/||{\bf x}||_1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img769.svg"
+ ALT="${\bf u}={\bf x}/\vert\vert{\bf x}\vert\vert _1$"></SPAN> with 
+  <!-- MATH
+ $||{\bf u}||_1=1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img770.svg"
+ ALT="$\vert\vert{\bf u}\vert\vert _1=1$"></SPAN>, so that the relationship for the equivalence above
+  can be written in terms of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img200.svg"
+ ALT="${\bf u}$"></SPAN> as
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+c=c||{\bf u}||_1\le ||{\bf u}||\le C||{\bf u}||_1=C
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img771.svg"
+ ALT="$\displaystyle c=c\vert\vert{\bf u}\vert\vert _1\le \vert\vert{\bf u}\vert\vert\le C\vert\vert{\bf u}\vert\vert _1=C
+$"> 
+
+(<SPAN CLASS="arabic">222</SPAN>)
+</DIV>
+i.e., to prove that all norms are equivalent all we need to show is that 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img772.svg"
+ ALT="$\vert\vert{\bf u}\vert\vert$"></SPAN> is bounded both from above and below, as we will do below.
+
+<P>
+</LI>
+<LI>We now prove that an arbitrary norm <!-- MATH
+ $f({\bf x})=||{\bf x}||$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img773.svg"
+ ALT="$f({\bf x})=\vert\vert{\bf x}\vert\vert$"></SPAN> is a
+  continuous function over <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img761.svg"
+ ALT="$\vert\vert{\bf x}\vert\vert _1$"></SPAN>, i.e., for any <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.21ex; " SRC="img146.svg"
+ ALT="$\epsilon&gt;0$"></SPAN>, 
+  there exists a <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img774.svg"
+ ALT="$\delta&gt;0$"></SPAN> so that
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\mbox{if}\;\;\;||{\bf x}-{\bf x}'||_1<\delta,
+  \;\;\;\;\;\mbox{then}\;\;\;\;\;
+  ||{\bf x}||-||{\bf x}'||\le\epsilon
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img775.svg"
+ ALT="$\displaystyle \mbox{if}\;\;\;\vert\vert{\bf x}-{\bf x}'\vert\vert _1&lt;\delta,
+\...
+...\;\;\;\;
+\vert\vert{\bf x}\vert\vert-\vert\vert{\bf x}'\vert\vert\le\epsilon
+$"> 
+
+(<SPAN CLASS="arabic">223</SPAN>)
+</DIV>
+Both <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img52.svg"
+ ALT="${\bf x}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.12ex; " SRC="img776.svg"
+ ALT="${\bf x}'$"></SPAN> can be expressed in terms of a basis 
+  <!-- MATH
+ $\{{\bf b}_1,\cdots,{\bf b}_n\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img777.svg"
+ ALT="$\{{\bf b}_1,\cdots,{\bf b}_n\}$"></SPAN> that spans the space:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf x}=\sum_{i=1}^n a_i{\bf b}_i,\;\;\;\;\;\;{\bf x}'=\sum_{i=1}^n a'_i{\bf b}_i
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 7.20ex; vertical-align: -3.09ex; " SRC="img778.svg"
+ ALT="$\displaystyle {\bf x}=\sum_{i=1}^n a_i{\bf b}_i,\;\;\;\;\;\;{\bf x}'=\sum_{i=1}^n a'_i{\bf b}_i
+$"> 
+
+(<SPAN CLASS="arabic">224</SPAN>)
+</DIV>
+then we have
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf x}-{\bf x}'||=||\sum_{i=1}^n(a_i-a'_i){\bf b}_i||
+  \le\sum_{i=1}^n|a_i-a'_i|\;||{\bf b}_i||
+  \le\sum_{i=1}^n|a_i-a'_i|\;\max_i||{\bf b}_i||
+  =||{\bf x}-{\bf x}'||_1\;\max_i||{\bf b}_i||
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 7.20ex; vertical-align: -3.09ex; " SRC="img779.svg"
+ ALT="$\displaystyle \vert\vert{\bf x}-{\bf x}'\vert\vert=\vert\vert\sum_{i=1}^n(a_i-a...
+...=\vert\vert{\bf x}-{\bf x}'\vert\vert _1\;\max_i\vert\vert{\bf b}_i\vert\vert
+$"> 
+
+(<SPAN CLASS="arabic">225</SPAN>)
+</DIV>
+Now consider the alternative form of the triangle inequality of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img98.svg"
+ ALT="$\vert\vert{\bf x}\vert\vert$"></SPAN>:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf x}||-||{\bf x}'|| \le ||{\bf x}-{\bf x}'||
+  \le||{\bf x}-{\bf x}'||_1\;\max_i||{\bf b}_i||
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.95ex; vertical-align: -1.81ex; " SRC="img780.svg"
+ ALT="$\displaystyle \vert\vert{\bf x}\vert\vert-\vert\vert{\bf x}'\vert\vert \le \ver...
+...e\vert\vert{\bf x}-{\bf x}'\vert\vert _1\;\max_i\vert\vert{\bf b}_i\vert\vert
+$"> 
+
+(<SPAN CLASS="arabic">226</SPAN>)
+</DIV>
+If we let <!-- MATH
+ $\max_i||{\bf b}_i||=\epsilon/\delta$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img781.svg"
+ ALT="$\max_i\vert\vert{\bf b}_i\vert\vert=\epsilon/\delta$"></SPAN>, the above becomes
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf x}||-||{\bf x}'|| \le||{\bf x}-{\bf x}'||_1\;\frac{\epsilon}{\delta}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 4.41ex; vertical-align: -1.71ex; " SRC="img782.svg"
+ ALT="$\displaystyle \vert\vert{\bf x}\vert\vert-\vert\vert{\bf x}'\vert\vert \le\vert\vert{\bf x}-{\bf x}'\vert\vert _1\;\frac{\epsilon}{\delta}
+$"> 
+
+(<SPAN CLASS="arabic">227</SPAN>)
+</DIV>
+indicating that for any given <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img783.svg"
+ ALT="$\epsilon$"></SPAN>, we can choose
+  <!-- MATH
+ $\delta=\epsilon/\max_i||{\bf b}_i||$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img784.svg"
+ ALT="$\delta=\epsilon/\max_i\vert\vert{\bf b}_i\vert\vert$"></SPAN> so that if <!-- MATH
+ $||{\bf x}-{\bf x}'||_1\le\delta$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img785.svg"
+ ALT="$\vert\vert{\bf x}-{\bf x}'\vert\vert _1\le\delta$"></SPAN>, 
+  then <!-- MATH
+ $||{\bf x}||-||{\bf x}'|| \le \epsilon$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img786.svg"
+ ALT="$\vert\vert{\bf x}\vert\vert-\vert\vert{\bf x}'\vert\vert \le \epsilon$"></SPAN>, i.e., the norm <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img98.svg"
+ ALT="$\vert\vert{\bf x}\vert\vert$"></SPAN> 
+  is indeed continuous over <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img761.svg"
+ ALT="$\vert\vert{\bf x}\vert\vert _1$"></SPAN>.
+
+<P>
+</LI>
+<LI>Finally, according to the
+  <A ID="tex2html10"
+  HREF="http://en.wikipedia.org/wiki/Extreme_value_theorem"><EM>extreme value theorem</EM></A>,
+
+a continuous function, such as <!-- MATH
+ $f({\bf x})=||{\bf x}||$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img773.svg"
+ ALT="$f({\bf x})=\vert\vert{\bf x}\vert\vert$"></SPAN>, defined over a 
+  compact (closed and bounded) set, such as the unit sphere <!-- MATH
+ $||{\bf u}||_1=1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img770.svg"
+ ALT="$\vert\vert{\bf u}\vert\vert _1=1$"></SPAN>
+  in the n-D space, must have its maximum and minimum values:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+c=\min_{||{\bf u}||_1=1}||{\bf u}||,\;\;\;\;C=\max_{||{\bf u}||_1=1}||{\bf u}||
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 4.41ex; vertical-align: -2.36ex; " SRC="img787.svg"
+ ALT="$\displaystyle c=\min_{\vert\vert{\bf u}\vert\vert _1=1}\vert\vert{\bf u}\vert\vert,\;\;\;\;C=\max_{\vert\vert{\bf u}\vert\vert _1=1}\vert\vert{\bf u}\vert\vert
+$"> 
+
+(<SPAN CLASS="arabic">228</SPAN>)
+</DIV>
+i.e., <!-- MATH
+ $c\le ||{\bf u}||\le C$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img788.svg"
+ ALT="$c\le \vert\vert{\bf u}\vert\vert\le C$"></SPAN>, which is what we need to prove.
+</LI>
+</UL>
+Q.E.D.
+
+<P>
+The three p-norms are equivalent:
+<BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+&&||{\bf x}||_\infty\le||{\bf x}||_1\le n ||{\bf x}||_\infty
+\nonumber \\
+&&||{\bf x}||_\infty\le||{\bf x}||_2\le \sqrt{n} ||{\bf x}||_\infty
+\nonumber \\
+&&||{\bf x}||_2\le||{\bf x}||_1\le \sqrt{n} ||{\bf x}||_2
+\nonumber
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img789.svg"
+ ALT="$\displaystyle \vert\vert{\bf x}\vert\vert _\infty\le\vert\vert{\bf x}\vert\vert _1\le n \vert\vert{\bf x}\vert\vert _\infty$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img790.svg"
+ ALT="$\displaystyle \vert\vert{\bf x}\vert\vert _\infty\le\vert\vert{\bf x}\vert\vert _2\le \sqrt{n} \vert\vert{\bf x}\vert\vert _\infty$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img791.svg"
+ ALT="$\displaystyle \vert\vert{\bf x}\vert\vert _2\le\vert\vert{\bf x}\vert\vert _1\le \sqrt{n} \vert\vert{\bf x}\vert\vert _2$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+The <EM>distance</EM> between two vectors <!-- MATH
+ ${\bf x},{\bf y}\in V$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img3.svg"
+ ALT="${\bf x}, {\bf y}\in V$"></SPAN> is 
+defined as the norm of their difference 
+<!-- MATH
+ $d({\bf x},{\bf y})=||{\bf x}-{\bf y}||$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img792.svg"
+ ALT="$d({\bf x},{\bf y})=\vert\vert{\bf x}-{\bf y}\vert\vert$"></SPAN>. In particular, when 
+<!-- MATH
+ ${\bf y}={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img744.svg"
+ ALT="${\bf y}={\bf0}$"></SPAN>, the distance <!-- MATH
+ $||{\bf x}-{\bf0}||=||{\bf x}||$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img793.svg"
+ ALT="$\vert\vert{\bf x}-{\bf0}\vert\vert=\vert\vert{\bf x}\vert\vert$"></SPAN> 
+between <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img52.svg"
+ ALT="${\bf x}$"></SPAN> and the origin <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="${\bf0}$"></SPAN> of the space is the 
+norm of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img52.svg"
+ ALT="${\bf x}$"></SPAN>. Specifically, <!-- MATH
+ $d({\bf x},{\bf y})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img119.svg"
+ ALT="$d({\bf x},{\bf y})$"></SPAN> can be defined 
+based on the p-norm:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+d_p({\bf x},{\bf y})=||{\bf x}-{\bf y}||_p
+=\left(\sum_{i=1}^n |x_i-y_i|^p\right)^{1/p},\;\;\;\;(1\le p\le \infty)
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 7.90ex; vertical-align: -3.09ex; " SRC="img794.svg"
+ ALT="$\displaystyle d_p({\bf x},{\bf y})=\vert\vert{\bf x}-{\bf y}\vert\vert _p
+=\left(\sum_{i=1}^n \vert x_i-y_i\vert^p\right)^{1/p},\;\;\;\;(1\le p\le \infty)
+$"> 
+
+(<SPAN CLASS="arabic">229</SPAN>)
+</DIV>
+Specially, when
+
+<UL>
+<LI><SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img748.svg"
+ ALT="$p=1$"></SPAN>, <!-- MATH
+ $d_1({\bf x},{\bf y})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img795.svg"
+ ALT="$d_1({\bf x},{\bf y})$"></SPAN> is the city block (Manhattan)
+  distance:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+d_1({\bf x},{\bf y})=||{\bf x}-{\bf y}||_1=\sum_{i=1}^n |x_i-y_i|
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 7.20ex; vertical-align: -3.09ex; " SRC="img796.svg"
+ ALT="$\displaystyle d_1({\bf x},{\bf y})=\vert\vert{\bf x}-{\bf y}\vert\vert _1=\sum_{i=1}^n \vert x_i-y_i\vert
+$"> 
+
+(<SPAN CLASS="arabic">230</SPAN>)
+</DIV>
+</LI>
+<LI><SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img749.svg"
+ ALT="$p=2$"></SPAN>, <!-- MATH
+ $d_2({\bf x},{\bf y})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img797.svg"
+ ALT="$d_2({\bf x},{\bf y})$"></SPAN> is the Euclidean distance:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+d_2({\bf x},{\bf y})=||{\bf x}-{\bf y}||_2=\sqrt{\sum_{i=1}^n |x_i-y_i|^2}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 8.83ex; vertical-align: -3.65ex; " SRC="img798.svg"
+ ALT="$\displaystyle d_2({\bf x},{\bf y})=\vert\vert{\bf x}-{\bf y}\vert\vert _2=\sqrt{\sum_{i=1}^n \vert x_i-y_i\vert^2}
+$"> 
+
+(<SPAN CLASS="arabic">231</SPAN>)
+</DIV>
+</LI>
+<LI><SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img750.svg"
+ ALT="$p=\infty$"></SPAN>, <!-- MATH
+ $d_\infty({\bf x},{\bf y})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img799.svg"
+ ALT="$d_\infty({\bf x},{\bf y})$"></SPAN> is the Chebyshev distance:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+d_\infty({\bf x},{\bf y})=||{\bf x}-{\bf y}||_\infty=\max_i |x_i-y_i|
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.72ex; vertical-align: -1.81ex; " SRC="img800.svg"
+ ALT="$\displaystyle d_\infty({\bf x},{\bf y})=\vert\vert{\bf x}-{\bf y}\vert\vert _\infty=\max_i \vert x_i-y_i\vert
+$"> 
+
+(<SPAN CLASS="arabic">232</SPAN>)
+</DIV>
+</LI>
+</UL>
+
+<P>
+<IMG STYLE=""
+ SRC="../figures/pdist.png"
+ ALT="pdist.png">
+
+<P>
+The three unit &ldquo;circles&rdquo; or &ldquo;spheres&rdquo;, are formed by all points 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img52.svg"
+ ALT="${\bf x}$"></SPAN> of unity norm <!-- MATH
+ $||{\bf x}||_p=1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img801.svg"
+ ALT="$\vert\vert{\bf x}\vert\vert _p=1$"></SPAN> with unity distance to the 
+origin (blue, black, and red for <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img802.svg"
+ ALT="$d_\infty$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img803.svg"
+ ALT="$d_2$"></SPAN>, and <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img804.svg"
+ ALT="$d_1$"></SPAN>, respectively).
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node17.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="algebra.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node15.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node17.html">Matrix Norms</A>
+<B> Up:</B> <A
+ HREF="algebra.html">algebra</A>
+<B> Previous:</B> <A
+ HREF="node15.html">Pseudo-Inverse</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>
