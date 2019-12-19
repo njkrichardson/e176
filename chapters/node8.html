@@ -1,0 +1,568 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Maximum Likelihood Estimation of Model Parameters</TITLE>
+<META NAME="description" CONTENT="Maximum Likelihood Estimation of Model Parameters">
+<META NAME="keywords" CONTENT="probability">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="probability.css">
+
+<LINK REL="next" HREF="node9.html">
+<LINK REL="previous" HREF="node7.html">
+<LINK REL="next" HREF="node9.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node9.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="probability.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node7.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node9.html">Principal Component Analysis (PCA)</A>
+<B> Up:</B> <A
+ HREF="probability.html">probability</A>
+<B> Previous:</B> <A
+ HREF="node7.html">Bayesian Inference</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00080000000000000000">
+Maximum Likelihood Estimation of Model Parameters</A>
+</H1>
+
+<P>
+Given observed or training data <!-- MATH
+ ${\cal D}=\{({\bf x}_i, {\bf y}_i),
+\;i=1,\cdots,N\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img589.svg"
+ ALT="${\cal D}=\{({\bf x}_i, {\bf y}_i),
+\;i=1,\cdots,N\}$"></SPAN> containing <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img26.svg"
+ ALT="$N$"></SPAN> independent and identially distributed 
+(i.i.d.) sample data points, we can model the relationship between the 
+dependent variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img159.svg"
+ ALT="${\bf y}$"></SPAN> and the independent variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}$"></SPAN> by 
+<!-- MATH
+ ${\bf y}={\bf f}({\bf x},\theta)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img590.svg"
+ ALT="${\bf y}={\bf f}({\bf x},\theta)$"></SPAN>, where <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img577.svg"
+ ALT="$\theta$"></SPAN> represents model 
+parameters, to be estimated based on the training data <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img591.svg"
+ ALT="${\cal D}$"></SPAN>. 
+
+<P>
+We first find the likelihood function of the model parameter <!-- MATH
+ ${\bf\theta}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img573.svg"
+ ALT="${\bf\theta}$"></SPAN>
+as
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+L(\theta|{\cal D})=p({\cal D}|\theta)
+  =\prod_{i=1}^N Pr({\bf y}={\bf y}_i|{\bf x}={\bf x}_i;\theta)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img592.svg"
+ ALT="$\displaystyle L(\theta\vert{\cal D})=p({\cal D}\vert\theta)
+=\prod_{i=1}^N Pr({\bf y}={\bf y}_i\vert{\bf x}={\bf x}_i;\theta)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">199</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and the log likelihood function
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+l(\theta|{\cal D})=\log L(\theta|{\cal D})
+  &=&\log\left(\prod_{i=1}^N Pr({\bf y}={\bf y}_i|{\bf x}={\bf x}_i;\theta)\right)
+  \nonumber\\
+  &=&\sum_{i=1}^N \log Pr\left({\bf y}={\bf y}_i|{\bf x}={\bf x}_i;\theta\right)
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img593.svg"
+ ALT="$\displaystyle l(\theta\vert{\cal D})=\log L(\theta\vert{\cal D})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img594.svg"
+ ALT="$\displaystyle \log\left(\prod_{i=1}^N Pr({\bf y}={\bf y}_i\vert{\bf x}={\bf x}_i;\theta)\right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img595.svg"
+ ALT="$\displaystyle \sum_{i=1}^N \log Pr\left({\bf y}={\bf y}_i\vert{\bf x}={\bf x}_i;\theta\right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">200</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+The optimal parameters in <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img577.svg"
+ ALT="$\theta$"></SPAN> can be obtained by the method of
+<EM>maximum likelihood estimation (&lt;LE)</EM> as those that maximizes the
+likelihood <!-- MATH
+ $L({\bf\theta}|{\cal D})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img596.svg"
+ ALT="$L({\bf\theta}\vert{\cal D})$"></SPAN> or equivalently the log likelihood
+<!-- MATH
+ $l({\bf\theta}|{\cal D})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img597.svg"
+ ALT="$l({\bf\theta}\vert{\cal D})$"></SPAN>. 
+
+<P>
+If we assume <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img326.svg"
+ ALT="${\bf x}_i$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img598.svg"
+ ALT="${\bf y}_i$"></SPAN> are uniform samples of the 
+discrete random variables <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img159.svg"
+ ALT="${\bf y}$"></SPAN> with distribution 
+<!-- MATH
+ $p({\bf x},{\bf y})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img599.svg"
+ ALT="$p({\bf x},{\bf y})$"></SPAN>, then when <!-- MATH
+ $N\longrightarrow\infty$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img600.svg"
+ ALT="$N\longrightarrow\infty$"></SPAN>, the average
+of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img26.svg"
+ ALT="$N$"></SPAN> log likelihoods above becomes their expectation:
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+&&\lim\limits_{N\rightarrow\infty}\frac{1}{N}\sum_{i=1}^N
+  \log Pr({\bf y}={\bf y}_i|{\bf x}={\bf x}_i;\theta)
+  =\sum_i\sum_j p({\bf x}_i,{\bf y}_j)\log p({\bf y}_j|{\bf x}_i;\theta)
+  \nonumber\\
+  &=&\sum_i\sum_j p({\bf x}_i,{\bf y}_j) \log \left[
+    \frac{p({\bf y}_j|{\bf x}_i;\theta)}{p({\bf y}_j|{\bf x}_i)}
+    p({\bf y}_j|{\bf x}_i)\right]
+  =\sum_i\sum_j p({\bf x}_i,{\bf y}_j) \left[-\log \frac{p({\bf y}_j|{\bf x}_i)}{p({\bf y}_j|{\bf x}_i;\theta)}+\log({\bf y}_j|{\bf x}_i)\right]
+  \nonumber\\
+  &=&-\sum_i\sum_j p({\bf x}_i,{\bf y}_j) \log \frac{p({\bf y}_j|{\bf x}_i)}{p({\bf y}_j|{\bf x}_i;\theta)}
+  +\sum_i\sum_j p({\bf x}_i,{\bf y}_j) \log({\bf y}_j|{\bf x}_i)
+  \nonumber\\
+  &=&-KL({\bf y}||{\bf y}_\theta)-H({\bf y}|{\bf x})
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.90ex; vertical-align: -3.40ex; " SRC="img601.svg"
+ ALT="$\displaystyle \lim\limits_{N\rightarrow\infty}\frac{1}{N}\sum_{i=1}^N
+\log Pr({...
+...eta)
+=\sum_i\sum_j p({\bf x}_i,{\bf y}_j)\log p({\bf y}_j\vert{\bf x}_i;\theta)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.97ex; vertical-align: -3.40ex; " SRC="img602.svg"
+ ALT="$\displaystyle \sum_i\sum_j p({\bf x}_i,{\bf y}_j) \log \left[
+\frac{p({\bf y}_j...
+... x}_i)}{p({\bf y}_j\vert{\bf x}_i;\theta)}+\log({\bf y}_j\vert{\bf x}_i)\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.97ex; vertical-align: -3.40ex; " SRC="img603.svg"
+ ALT="$\displaystyle -\sum_i\sum_j p({\bf x}_i,{\bf y}_j) \log \frac{p({\bf y}_j\vert{...
+...}_i;\theta)}
++\sum_i\sum_j p({\bf x}_i,{\bf y}_j) \log({\bf y}_j\vert{\bf x}_i)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img604.svg"
+ ALT="$\displaystyle -KL({\bf y}\vert\vert{\bf y}_\theta)-H({\bf y}\vert{\bf x})$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">201</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+where <!-- MATH
+ $H({\bf y}|{\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img605.svg"
+ ALT="$H({\bf y}\vert{\bf x})$"></SPAN> is the 
+<A ID="tex2html7"
+  HREF="node9.html">conditional entropy</A>
+representing the uncertainty of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img159.svg"
+ ALT="${\bf y}$"></SPAN> given <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}$"></SPAN>, 
+and <!-- MATH
+ $KL({\bf y}||{\bf y}_\theta)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img606.svg"
+ ALT="$KL({\bf y}\vert\vert{\bf y}_\theta)$"></SPAN> is the 
+<A ID="tex2html8"
+  HREF="node9.html">KL divergence</A>
+representing the error of using <!-- MATH
+ $p({\bf y}|{\bf x};\theta)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img607.svg"
+ ALT="$p({\bf y}\vert{\bf x};\theta)$"></SPAN> 
+containing the unknown parameter <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img577.svg"
+ ALT="$\theta$"></SPAN> to model the true relation 
+<!-- MATH
+ $p({\bf y}_j|{\bf x}_i)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img608.svg"
+ ALT="$p({\bf y}_j\vert{\bf x}_i)$"></SPAN>. We see that maximizing the likelihood function 
+<!-- MATH
+ $L(\theta|{\cal D})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img609.svg"
+ ALT="$L(\theta\vert{\cal D})$"></SPAN> is equivalent to minimizing the KL divergence.
+
+<P>
+Here we just consider the simple example of the maximum likelihood 
+estimation of the parameters <!-- MATH
+ ${\bf\theta}=\{{\bf m},{\bf\Sigma}\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img610.svg"
+ ALT="${\bf\theta}=\{{\bf m},{\bf\Sigma}\}$"></SPAN> of 
+the multivariate Gaussian distribution
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\cal N}({\bf x},{\bf m},{\bf\Sigma})
+  =\frac{1}{(2\pi)^{n/2} \left| {\bf\Sigma} \right|^{1/2}}\;
+  \exp\left[ -\frac{1}{2}({\bf x}-{\bf m})^T {\bf\Sigma}^{-1}({\bf x}-{\bf m})\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.50ex; vertical-align: -2.83ex; " SRC="img611.svg"
+ ALT="$\displaystyle {\cal N}({\bf x},{\bf m},{\bf\Sigma})
+=\frac{1}{(2\pi)^{n/2} \lef...
+...\left[ -\frac{1}{2}({\bf x}-{\bf m})^T {\bf\Sigma}^{-1}({\bf x}-{\bf m})\right]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">202</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Given an observed dataset containing <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img26.svg"
+ ALT="$N$"></SPAN> i.i.e. data samples 
+<!-- MATH
+ ${\bf X}=\{{\bf x}_1,\cdots,{\bf x}_N\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img612.svg"
+ ALT="${\bf X}=\{{\bf x}_1,\cdots,{\bf x}_N\}$"></SPAN>, we can get the likelihood 
+function 
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+L({\bf\theta}|{\bf X})=L({\bf m},{\bf\Sigma}|{\bf X})
+  =p({\bf X}|{\bf m},{\bf\Sigma})
+  =\prod_{i=1}^N {\cal N}({\bf x}_i|{\bf m},{\bf\Sigma})
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img613.svg"
+ ALT="$\displaystyle L({\bf\theta}\vert{\bf X})=L({\bf m},{\bf\Sigma}\vert{\bf X})
+=p(...
+...{\bf m},{\bf\Sigma})
+=\prod_{i=1}^N {\cal N}({\bf x}_i\vert{\bf m},{\bf\Sigma})$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">203</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and the log-likelihood function:
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+l({\bf m},{\bf\Sigma}|{\bf X})&=&\log\; L({\bf m},{\bf\Sigma}|{\bf X})
+  =\log\left[\prod_{i=1}^N {\cal N}({\bf x}_i|{\bf m},{\bf\Sigma})\right]
+  =\sum_{i=1}^N \log {\cal N}({\bf x}_i|{\bf m},{\bf\Sigma})
+  \nonumber\\
+  &=&\sum_{i=1}^N \left[-\frac{d}{2}\log 2\pi-\frac{1}{2}\log|{\bf\Sigma}|
+    -\frac{1}{2}({\bf x}_i-{\bf m})^T
+    {\bf\Sigma}^{-1}({\bf x}_i-{\bf m})\right]
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img614.svg"
+ ALT="$\displaystyle l({\bf m},{\bf\Sigma}\vert{\bf X})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img615.svg"
+ ALT="$\displaystyle \log\; L({\bf m},{\bf\Sigma}\vert{\bf X})
+=\log\left[\prod_{i=1}^...
+...f\Sigma})\right]
+=\sum_{i=1}^N \log {\cal N}({\bf x}_i\vert{\bf m},{\bf\Sigma})$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img616.svg"
+ ALT="$\displaystyle \sum_{i=1}^N \left[-\frac{d}{2}\log 2\pi-\frac{1}{2}\log\vert{\bf...
+...rt
+-\frac{1}{2}({\bf x}_i-{\bf m})^T
+{\bf\Sigma}^{-1}({\bf x}_i-{\bf m})\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">204</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+To find the optimal parameters <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img173.svg"
+ ALT="${\bf m}$"></SPAN> and <!-- MATH
+ ${\bf\Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img133.svg"
+ ALT="${\bf\Sigma}$"></SPAN> that maximize
+this log likelihood, we set its derivative with respect to <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img173.svg"
+ ALT="${\bf m}$"></SPAN>
+and <!-- MATH
+ ${\bf\Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img133.svg"
+ ALT="${\bf\Sigma}$"></SPAN> to zero and solve the resulting equations:
+
+<P>
+
+<UL>
+<LI>Find <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img173.svg"
+ ALT="${\bf m}$"></SPAN>
+  <BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+\frac{\partial}{\partial{\bf m}} l({\bf m},{\bf\Sigma}|{\bf X})
+    &=&-\frac{1}{2} \sum_{i=1}^N \frac{\partial}{\partial{\bf m}}
+    \left( ({\bf x}_i-{\bf m})^T {\bf\Sigma}^{-1}({\bf x}_i-{\bf m})\right)
+    \nonumber\\
+    &=&-\frac{1}{2} \sum_{i=1}^N {\bf\Sigma}^{-1}({\bf x}_i-{\bf m})={\bf0}
+  
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 5.11ex; vertical-align: -1.71ex; " SRC="img617.svg"
+ ALT="$\displaystyle \frac{\partial}{\partial{\bf m}} l({\bf m},{\bf\Sigma}\vert{\bf X})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img618.svg"
+ ALT="$\displaystyle -\frac{1}{2} \sum_{i=1}^N \frac{\partial}{\partial{\bf m}}
+\left( ({\bf x}_i-{\bf m})^T {\bf\Sigma}^{-1}({\bf x}_i-{\bf m})\right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img619.svg"
+ ALT="$\displaystyle -\frac{1}{2} \sum_{i=1}^N {\bf\Sigma}^{-1}({\bf x}_i-{\bf m})={\bf0}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">205</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+  Pre-multiplying <!-- MATH
+ $-2{\bf\Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img620.svg"
+ ALT="$-2{\bf\Sigma}$"></SPAN> on both sides, we get
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\sum_{i=1}^N ({\bf x}_i-{\bf m})={\bf0}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img621.svg"
+ ALT="$\displaystyle \sum_{i=1}^N ({\bf x}_i-{\bf m})={\bf0}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">206</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+solving which we get the optimal estimation of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img173.svg"
+ ALT="${\bf m}$"></SPAN>:
+  <P></P>
+<DIV CLASS="mathdisplay"><A ID="estimatedM"></A><!-- MATH
+ \begin{equation}
+\hat{\bf m}=\frac{1}{N} \sum_{i=1}^N {\bf x}_i
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img622.svg"
+ ALT="$\displaystyle \hat{\bf m}=\frac{1}{N} \sum_{i=1}^N {\bf x}_i$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">207</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+</LI>
+<LI>Find <!-- MATH
+ ${\bf\Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img133.svg"
+ ALT="${\bf\Sigma}$"></SPAN>
+
+<P>
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+\frac{\partial}{\partial{\bf\Sigma}} l({\bf m},{\bf\Sigma}|{\bf X})
+    &=&-\frac{N}{2}\frac{\partial}{\partial{\bf\Sigma}}\log|{\bf\Sigma}|
+    -\frac{1}{2} \sum_{i=1}^N \frac{\partial}{\partial{\bf\Sigma}}
+    \left( ({\bf x}_i-{\bf m})^T {\bf\Sigma}^{-1}({\bf x}_i-{\bf m})\right)
+    \nonumber\\
+    &=&-\frac{N}{2}{\bf\Sigma}^{-1} +\frac{1}{2} \sum_{i=1}^N 
+        {\bf\Sigma}^{-1}({\bf x}_i-{\bf m})({\bf x}_i-{\bf m})^T{\bf\Sigma}^{-1}
+        ={\bf0}
+  
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 5.11ex; vertical-align: -1.71ex; " SRC="img623.svg"
+ ALT="$\displaystyle \frac{\partial}{\partial{\bf\Sigma}} l({\bf m},{\bf\Sigma}\vert{\bf X})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img624.svg"
+ ALT="$\displaystyle -\frac{N}{2}\frac{\partial}{\partial{\bf\Sigma}}\log\vert{\bf\Sig...
+...Sigma}}
+\left( ({\bf x}_i-{\bf m})^T {\bf\Sigma}^{-1}({\bf x}_i-{\bf m})\right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img625.svg"
+ ALT="$\displaystyle -\frac{N}{2}{\bf\Sigma}^{-1} +\frac{1}{2} \sum_{i=1}^N
+{\bf\Sigma}^{-1}({\bf x}_i-{\bf m})({\bf x}_i-{\bf m})^T{\bf\Sigma}^{-1}
+={\bf0}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">208</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+  Pre and post multiplying <!-- MATH
+ ${\bf\Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img133.svg"
+ ALT="${\bf\Sigma}$"></SPAN> on both sides and solving the
+  resulting equation we get the optimal estimation of <!-- MATH
+ ${\bf\Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img133.svg"
+ ALT="${\bf\Sigma}$"></SPAN>:
+  <P></P>
+<DIV CLASS="mathdisplay"><A ID="estimatedS"></A><!-- MATH
+ \begin{equation}
+\hat{\bf\Sigma}=\frac{1}{N} \sum_{i=1}^N ({\bf x}_i-{\bf m})({\bf x}_i-{\bf m})^T
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img626.svg"
+ ALT="$\displaystyle \hat{\bf\Sigma}=\frac{1}{N} \sum_{i=1}^N ({\bf x}_i-{\bf m})({\bf x}_i-{\bf m})^T$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">209</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Here we have used the following facts:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\frac{d}{d{\bf A}}\log|{\bf A}|=({\bf A}^{-1})^T,
+    \;\;\;\;\;\;
+    \frac{d}{d{\bf A}} \left({\bf a}^T{\bf A}^{-1}{\bf b}\right)
+    =-({\bf A}^{-1})^T{\bf a}{\bf b}^T({\bf A}^{-1})^T
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.11ex; vertical-align: -1.71ex; " SRC="img627.svg"
+ ALT="$\displaystyle \frac{d}{d{\bf A}}\log\vert{\bf A}\vert=({\bf A}^{-1})^T,
+\;\;\;\...
+...^T{\bf A}^{-1}{\bf b}\right)
+=-({\bf A}^{-1})^T{\bf a}{\bf b}^T({\bf A}^{-1})^T$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">210</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Note that the rank of <!-- MATH
+ $\hat{\bf\Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.12ex; " SRC="img178.svg"
+ ALT="$\hat{\bf\Sigma}$"></SPAN> in Eq. (<A HREF="#estimatedS">209</A>) is 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img628.svg"
+ ALT="$N-1$"></SPAN>, representing its degrees of freedom due to the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img26.svg"
+ ALT="$N$"></SPAN> samples, 
+  assumed to be independent, and the extra constraint in 
+  Eq. (<A HREF="#estimatedM">207</A>). When <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img629.svg"
+ ALT="$d&gt;N-1$"></SPAN>, the matrix <!-- MATH
+ $\hat{\bf\Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.12ex; " SRC="img178.svg"
+ ALT="$\hat{\bf\Sigma}$"></SPAN> 
+  does not have a full rank and is therefore non-invertible.
+
+<P>
+For more details regarding derivatives of a scalar function 
+  with respect to vector and matrix variables, see 
+  <A ID="tex2html9"
+  HREF="https://www.math.uwaterloo.ca/~hwolkowi/matrixcookbook.pdf">Matrix Cookbook</A>.
+</LI>
+</UL>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node9.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="probability.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node7.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node9.html">Principal Component Analysis (PCA)</A>
+<B> Up:</B> <A
+ HREF="probability.html">probability</A>
+<B> Previous:</B> <A
+ HREF="node7.html">Bayesian Inference</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

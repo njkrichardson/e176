@@ -1,0 +1,1863 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>The Normal Distribution</TITLE>
+<META NAME="description" CONTENT="The Normal Distribution">
+<META NAME="keywords" CONTENT="probability">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="probability.css">
+
+<LINK REL="next" HREF="node5.html">
+<LINK REL="previous" HREF="node3.html">
+<LINK REL="next" HREF="node5.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node5.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="probability.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node3.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node5.html">Entropy</A>
+<B> Up:</B> <A
+ HREF="probability.html">probability</A>
+<B> Previous:</B> <A
+ HREF="node3.html">Function of Random Variables</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00040000000000000000">
+The Normal Distribution</A>
+</H1>
+
+<P>
+The normal or Gaussian distribution is an important probability density
+function (pdf) most commenly used to model a random variable of unknown
+distribution due to two of its properties:
+
+<UL>
+<LI>The <EM>central limit theorem</EM>
+
+<P>
+</LI>
+<LI>The maximization of entropy
+
+<P>
+</LI>
+</UL>
+
+<P>
+The proof of the second property will be given later.
+
+<P>
+The univariate normal probability distribution is
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p(x)={\cal N}(x,\mu,\sigma^2)
+  =\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.32ex; " SRC="img241.svg"
+ ALT="$\displaystyle p(x)={\cal N}(x,\mu,\sigma^2)
+=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">91</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+In multivariate case, the joint probability density function of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img53.svg"
+ ALT="$n$"></SPAN> normally 
+distributed random variables <!-- MATH
+ ${\bf x}=[x_1,\cdots, x_n]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img242.svg"
+ ALT="${\bf x}=[x_1,\cdots, x_n]^T$"></SPAN> is
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+p(x_1,\cdots, x_n)&=&p({\bf x})={\cal N}({\bf x},{\bf m},{\bf\Sigma})
+  =\frac{1}{(2\pi)^{n/2} \left| {\bf\Sigma} \right|^{1/2}}\;
+  \exp\left[ -\frac{1}{2}({\bf x}-{\bf m})^T
+    {\bf\Sigma}^{-1}({\bf x}-{\bf m})\right]
+  \nonumber\\
+  &=&\exp\left(-\frac{1}{2}(n\log(2\pi) + \log|{\bf\Sigma}|)\right)
+  \exp\left[ -\frac{1}{2}({\bf x}^T{\bf\Sigma}^{-1}{\bf x}
+    -2{\bf m}^T{\bf\Sigma}^{-1}{\bf x}+{\bf m}^T{\bf\Sigma}^{-1}{\bf m})\right]
+  \nonumber\\
+  &=&\exp\left(-\frac{1}{2} ( n\log(2\pi) + \log|{\bf\Sigma}|
+  +{\bf m}^T{\bf\Sigma}^{-1}{\bf m} ) \right)
+  \exp\left[ -\frac{1}{2}({\bf x}^T{\bf\Sigma}^{-1}{\bf x}
+    -2{\bf m}^T{\bf\Sigma}^{-1}{\bf x})\right]
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img243.svg"
+ ALT="$\displaystyle p(x_1,\cdots, x_n)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.50ex; vertical-align: -2.83ex; " SRC="img244.svg"
+ ALT="$\displaystyle p({\bf x})={\cal N}({\bf x},{\bf m},{\bf\Sigma})
+=\frac{1}{(2\pi)...
+...\left[ -\frac{1}{2}({\bf x}-{\bf m})^T
+{\bf\Sigma}^{-1}({\bf x}-{\bf m})\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img245.svg"
+ ALT="$\displaystyle \exp\left(-\frac{1}{2}(n\log(2\pi) + \log\vert{\bf\Sigma}\vert)\r...
+... x}
+-2{\bf m}^T{\bf\Sigma}^{-1}{\bf x}+{\bf m}^T{\bf\Sigma}^{-1}{\bf m})\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img246.svg"
+ ALT="$\displaystyle \exp\left(-\frac{1}{2} ( n\log(2\pi) + \log\vert{\bf\Sigma}\vert
+...
+...{2}({\bf x}^T{\bf\Sigma}^{-1}{\bf x}
+-2{\bf m}^T{\bf\Sigma}^{-1}{\bf x})\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">92</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+Here <!-- MATH
+ ${\bf m}=E({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img247.svg"
+ ALT="${\bf m}=E({\bf x})$"></SPAN> and <!-- MATH
+ ${\bf\Sigma}=Cov({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img248.svg"
+ ALT="${\bf\Sigma}=Cov({\bf x})$"></SPAN> are
+respectively the mean vector and covariance matrix of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}$"></SPAN>.
+The covariance matrix <!-- MATH
+ ${\bf\Sigma}={\bf\Sigma}^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img135.svg"
+ ALT="${\bf\Sigma}={\bf\Sigma}^T$"></SPAN> is symmetric, 
+and positive semi-definite. We further define the log-normal
+distribution as:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\psi({\bf x})=\log\,{\cal N}({\bf x},{\bf m},{\bf\Sigma})
+  =-\frac{1}{2}({\bf x}-{\bf m})^T{\bf\Sigma}^{-1}({\bf x}-{\bf m})
+  -\frac{n}{2}\log(2\pi)-\frac{1}{2}\log|{\bf\Sigma}|
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img249.svg"
+ ALT="$\displaystyle \psi({\bf x})=\log\,{\cal N}({\bf x},{\bf m},{\bf\Sigma})
+=-\frac...
+...1}({\bf x}-{\bf m})
+-\frac{n}{2}\log(2\pi)-\frac{1}{2}\log\vert{\bf\Sigma}\vert$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">93</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and get its gradient vector and Hessian matrix:
+<BR>
+<DIV CLASS="mathdisplay"><A ID="GradientPsi"></A><A ID="HessianPsi"></A><!-- MATH
+ \begin{eqnarray}
+{\bf g}_{\psi}({\bf x})&=&\frac{d}{d{\bf x}}\psi({\bf x})
+  =-{\bf\Sigma}^{-1}({\bf x}-{\bf m})
+\\
+  {\bf H}_{\psi}({\bf x})&=&\frac{d^2}{d{\bf x}^2}\psi({\bf x})
+  =-{\bf\Sigma}^{-1}
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img250.svg"
+ ALT="$\displaystyle {\bf g}_{\psi}({\bf x})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.11ex; vertical-align: -1.71ex; " SRC="img251.svg"
+ ALT="$\displaystyle \frac{d}{d{\bf x}}\psi({\bf x})
+=-{\bf\Sigma}^{-1}({\bf x}-{\bf m})$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">94</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img252.svg"
+ ALT="$\displaystyle {\bf H}_{\psi}({\bf x})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.34ex; vertical-align: -1.71ex; " SRC="img253.svg"
+ ALT="$\displaystyle \frac{d^2}{d{\bf x}^2}\psi({\bf x})
+=-{\bf\Sigma}^{-1}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">95</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+From these expressions we can find the mean <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img173.svg"
+ ALT="${\bf m}$"></SPAN> at which 
+<!-- MATH
+ ${\cal N}({\bf m},{\bf\Sigma})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img254.svg"
+ ALT="${\cal N}({\bf m},{\bf\Sigma})$"></SPAN> reaches maximum can be found by 
+solving the equation 
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf g}_\psi({\bf x})=-{\bf\Sigma}^{-1}({\bf x}-{\bf m})={\bf0}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img255.svg"
+ ALT="$\displaystyle {\bf g}_\psi({\bf x})=-{\bf\Sigma}^{-1}({\bf x}-{\bf m})={\bf0}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">96</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+to get <!-- MATH
+ ${\bf x}={\bf m}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img256.svg"
+ ALT="${\bf x}={\bf m}$"></SPAN>, and the covariance <!-- MATH
+ ${\bf\Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img133.svg"
+ ALT="${\bf\Sigma}$"></SPAN> can be 
+directly found from the second equation:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf\Sigma}=-{\bf H}_{\psi}^{-1}({\bf x})
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.48ex; vertical-align: -1.13ex; " SRC="img257.svg"
+ ALT="$\displaystyle {\bf\Sigma}=-{\bf H}_{\psi}^{-1}({\bf x})$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">97</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+The shape of this normal distribution in the n-dimensional space can be 
+represented by the iso-hypersurface in the space determined by equation
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\cal N}({\bf x},{\bf m},{\bf\Sigma})=c_0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img258.svg"
+ ALT="$\displaystyle {\cal N}({\bf x},{\bf m},{\bf\Sigma})=c_0$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">98</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img259.svg"
+ ALT="$c_0$"></SPAN> is a constant. Or, equivalently, this equation can be written as
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+({\bf x}-{\bf m})^T {\bf\Sigma}^{-1} ({\bf x}-{\bf m}) = c_1
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img260.svg"
+ ALT="$\displaystyle ({\bf x}-{\bf m})^T {\bf\Sigma}^{-1} ({\bf x}-{\bf m}) = c_1$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">99</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img261.svg"
+ ALT="$c_1$"></SPAN> is another constant related to <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img259.svg"
+ ALT="$c_0$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img173.svg"
+ ALT="${\bf m}$"></SPAN> and <!-- MATH
+ ${\bf\Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img133.svg"
+ ALT="${\bf\Sigma}$"></SPAN>.
+
+<P>
+In particular, when <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img262.svg"
+ ALT="$n=2$"></SPAN>, <!-- MATH
+ ${\bf x}=[x_1,\,x_2]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img263.svg"
+ ALT="${\bf x}=[x_1,\,x_2]^T$"></SPAN>, and we assume
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf\Sigma}^{-1}=\left[ \begin{array}{cc} A & B/2 \\B/2 & C \end{array} \right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img264.svg"
+ ALT="$\displaystyle {\bf\Sigma}^{-1}=\left[ \begin{array}{cc} A &amp; B/2 \\ B/2 &amp; C \end{array} \right]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">100</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+then the equation above becomes
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+&&({\bf x}-{\bf m})^T {\bf\Sigma}^{-1} ({\bf x}-{\bf m})
+  =[x_1-\mu_1, x_2-\mu_2]
+  \left[ \begin{array}{cc} A & B/2 \\B/2 & C \end{array} \right]
+  \left[ \begin{array}{c} x_1-\mu_1 \\x_2-\mu_2 \end{array} \right]
+  \nonumber \\
+  &=& A(x_1-\mu_1)^2+B(x_1-\mu_1)(x_2-\mu_2)+C(x_2-\mu_2)^2 \nonumber \\
+  &=& Ax^2_1+Bx_1x_2+Cx_2^2-(2A\mu_1+B\mu_2)x_1-(2C\mu_2+B\mu_1)x_2
+  +(A\mu_1^2+B\mu_1\mu_2+C\mu_2^2)=c_1
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img265.svg"
+ ALT="$\displaystyle ({\bf x}-{\bf m})^T {\bf\Sigma}^{-1} ({\bf x}-{\bf m})
+=[x_1-\mu_...
+...ray} \right]
+\left[ \begin{array}{c} x_1-\mu_1 \\ x_2-\mu_2 \end{array} \right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img266.svg"
+ ALT="$\displaystyle A(x_1-\mu_1)^2+B(x_1-\mu_1)(x_2-\mu_2)+C(x_2-\mu_2)^2$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img267.svg"
+ ALT="$\displaystyle Ax^2_1+Bx_1x_2+Cx_2^2-(2A\mu_1+B\mu_2)x_1-(2C\mu_2+B\mu_1)x_2
++(A\mu_1^2+B\mu_1\mu_2+C\mu_2^2)=c_1$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">101</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+As <!-- MATH
+ ${\bf\Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img133.svg"
+ ALT="${\bf\Sigma}$"></SPAN> is positive semi-definite, and so is <!-- MATH
+ ${\bf\Sigma} ^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img268.svg"
+ ALT="${\bf\Sigma} ^{-1}$"></SPAN>, 
+we have
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left| {\bf\Sigma}^{-1} \right| = AC-B^2/4 \ge 0,
+\;\;\;\;\;\mbox{i.e.}\;\;\;\;\;  \Delta=B^2-4AC<0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.93ex; " SRC="img269.svg"
+ ALT="$\displaystyle \left\vert {\bf\Sigma}^{-1} \right\vert = AC-B^2/4 \ge 0,
+\;\;\;\;\;$">i.e.<IMG STYLE="height: 2.55ex; vertical-align: -0.31ex; " SRC="img270.svg"
+ ALT="$\displaystyle \;\;\;\;\; \Delta=B^2-4AC&lt;0$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">102</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+i.e., the quadratic equation above represents an ellipse (instead of 
+other quadratic curves such as hyperbola and parabola) centered at 
+<!-- MATH
+ ${\bf m}=[\mu_1, \mu_2]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img271.svg"
+ ALT="${\bf m}=[\mu_1, \mu_2]^T$"></SPAN>.
+
+<P>
+Recall in general that the discriminant <!-- MATH
+ $\Delta=B^2-4AC$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.31ex; " SRC="img272.svg"
+ ALT="$\Delta=B^2-4AC$"></SPAN> of a quadratic equation 
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f(x,y)=Ax^2+Bxy+Cy^2+Dx+Ey+F=0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img273.svg"
+ ALT="$\displaystyle f(x,y)=Ax^2+Bxy+Cy^2+Dx+Ey+F=0$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">103</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+determines the shpae of the corresponding conic section in a plane:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f(x,y)\;\mbox{ is } \left\{\begin{array}{ll} \mbox{an ellipse}&\mbox{if }
+\Delta<0 \\\mbox{a parabola}&\mbox{if } \Delta=0 \\
+\mbox{a hyperbola}&\mbox{if }\Delta>0\end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img274.svg"
+ ALT="$\displaystyle f(x,y)\;$"> is <IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img275.svg"
+ ALT="$\displaystyle \left\{\begin{array}{ll} \mbox{an ellipse}&amp;\mbox{if }
+\Delta&lt;0 \\...
+...\mbox{if } \Delta=0 \\
+\mbox{a hyperbola}&amp;\mbox{if }\Delta&gt;0\end{array}\right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">104</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+When <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img276.svg"
+ ALT="$n=3$"></SPAN>, the quadratic equation represents an ellipsoid. In general 
+when <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.21ex; " SRC="img277.svg"
+ ALT="$n&gt;3$"></SPAN>, the equation <!-- MATH
+ ${\cal N}({\bf x},{\bf m}, {\bf\Sigma})=c_0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img278.svg"
+ ALT="${\cal N}({\bf x},{\bf m}, {\bf\Sigma})=c_0$"></SPAN> represents
+a hyper ellipsoid in the n-dimensional space. The center and spatial distribution 
+of this ellipsoid are determined by <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img173.svg"
+ ALT="${\bf m}$"></SPAN> and <!-- MATH
+ ${\bf\Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img133.svg"
+ ALT="${\bf\Sigma}$"></SPAN>, respectively.
+
+<P>
+Specially if <!-- MATH
+ ${\bf x}=[x_1,\cdots,x_n]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img242.svg"
+ ALT="${\bf x}=[x_1,\cdots, x_n]^T$"></SPAN> is decorrelated, i.e., <!-- MATH
+ $\sigma_{ij}=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img139.svg"
+ ALT="$\sigma_{ij}=0$"></SPAN>
+for all <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img218.svg"
+ ALT="$i\ne j$"></SPAN>, <!-- MATH
+ ${\bf\Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img133.svg"
+ ALT="${\bf\Sigma}$"></SPAN> becomes a diagonal matrix 
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf\Sigma}=diag[\sigma_1^2,\cdots,\sigma_n^2]
+  =\left[ \begin{array}{ccc}
+      \sigma_1^2 & \cdots & 0 \\
+      \vdots & \ddots & \vdots \\
+      0 & \cdots & \sigma_n^2 \end{array} \right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 10.22ex; vertical-align: -4.49ex; " SRC="img279.svg"
+ ALT="$\displaystyle {\bf\Sigma}=diag[\sigma_1^2,\cdots,\sigma_n^2]
+=\left[ \begin{arr...
+... 0 \\
+\vdots &amp; \ddots &amp; \vdots \\
+0 &amp; \cdots &amp; \sigma_n^2 \end{array} \right]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">105</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and equation <!-- MATH
+ ${\cal N}({\bf x},{\bf m},{\bf\Sigma})=c_0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img278.svg"
+ ALT="${\cal N}({\bf x},{\bf m}, {\bf\Sigma})=c_0$"></SPAN> can be written as
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+({\bf x}-{\bf m})^T{\bf\Sigma}^{-1}({\bf x}-{\bf m})
+=\sum_{i=1}^n \frac{(x_i-\mu_i)^2}{\sigma_i^2} = c_1
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.20ex; vertical-align: -3.09ex; " SRC="img280.svg"
+ ALT="$\displaystyle ({\bf x}-{\bf m})^T{\bf\Sigma}^{-1}({\bf x}-{\bf m})
+=\sum_{i=1}^n \frac{(x_i-\mu_i)^2}{\sigma_i^2} = c_1$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">106</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+which represents a standard ellipsoid with all its axes parallel to those of 
+the coordinate system.
+
+<P>
+<B>Properties of Gaussian distribution</B>
+
+<P>
+
+<UL>
+<LI>Sum of normal distributions:
+  If <!-- MATH
+ $p({\bf x}_i)={\cal N}({\bf m}_i,{\bf\Sigma}_i)\;(i=1,2)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img281.svg"
+ ALT="$p({\bf x}_i)={\cal N}({\bf m}_i,{\bf\Sigma}_i)\;(i=1,2)$"></SPAN>, then 
+  <!-- MATH
+ $p({\bf x}_1+{\bf x}_2)={\cal N}({\bf m}_1+{\bf m}_2,\,{\bf\Sigma}_1+{\bf\Sigma}_2)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img282.svg"
+ ALT="$p({\bf x}_1+{\bf x}_2)={\cal N}({\bf m}_1+{\bf m}_2,\,{\bf\Sigma}_1+{\bf\Sigma}_2)$"></SPAN>
+
+<P>
+</LI>
+<LI>Affine transformation of normal distributions:
+
+<P>
+If <!-- MATH
+ $p({\bf x})={\cal N}({\bf m}_x,{\bf\Sigma}_x)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img283.svg"
+ ALT="$p({\bf x})={\cal N}({\bf m}_x,{\bf\Sigma}_x)$"></SPAN>, then 
+  <!-- MATH
+ $p({\bf y})=p({\bf Ax}+{\bf b})={\cal N}({\bf m}_y,{\bf\Sigma}_y)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img284.svg"
+ ALT="$p({\bf y})=p({\bf Ax}+{\bf b})={\cal N}({\bf m}_y,{\bf\Sigma}_y)$"></SPAN>, where
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf m}_y={\bf Am}_x+{\bf b},\;\;\;\;\;\;
+  {\bf\Sigma}_y={\bf A\Sigma}_x{\bf A}^T
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img285.svg"
+ ALT="$\displaystyle {\bf m}_y={\bf Am}_x+{\bf b},\;\;\;\;\;\;
+{\bf\Sigma}_y={\bf A\Sigma}_x{\bf A}^T$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">107</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+<B>Proof:</B>
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf m}_y=E({\bf Ax}+{\bf b})={\bf A}\,E({\bf x})+{\bf b}={\bf Am}_x+{\bf b}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img286.svg"
+ ALT="$\displaystyle {\bf m}_y=E({\bf Ax}+{\bf b})={\bf A}\,E({\bf x})+{\bf b}={\bf Am}_x+{\bf b}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">108</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  <BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+{\bf\Sigma}_y&=&E[ ({\bf y}-{\bf m}_y)({\bf y}-{\bf m}_y)^T ]
+    \nonumber\\
+    &=&E[ [({\bf Ax}-{\bf b})-({\bf Am}_x-{\bf b})] [({\bf Ax}-{\bf b})-({\bf Am}_x+{\bf b})]^T ]
+    \nonumber\\
+    &=&E[ ({\bf Ax}-{\bf Am}_x) ({\bf Ax}-{\bf Am}_x)^T ]
+    ={\bf A}E[ ({\bf x}-{\bf m}_x) ({\bf x}-{\bf m}_x)^T ]{\bf A}^T
+    \nonumber\\
+    &=&{\bf A}{\bf\Sigma}_x{\bf A}^T
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img167.svg"
+ ALT="$\displaystyle {\bf\Sigma}_y$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img287.svg"
+ ALT="$\displaystyle E[ ({\bf y}-{\bf m}_y)({\bf y}-{\bf m}_y)^T ]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img288.svg"
+ ALT="$\displaystyle E[ [({\bf Ax}-{\bf b})-({\bf Am}_x-{\bf b})] [({\bf Ax}-{\bf b})-({\bf Am}_x+{\bf b})]^T ]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img289.svg"
+ ALT="$\displaystyle E[ ({\bf Ax}-{\bf Am}_x) ({\bf Ax}-{\bf Am}_x)^T ]
+={\bf A}E[ ({\bf x}-{\bf m}_x) ({\bf x}-{\bf m}_x)^T ]{\bf A}^T$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.79ex; vertical-align: -0.46ex; " SRC="img290.svg"
+ ALT="$\displaystyle {\bf A}{\bf\Sigma}_x{\bf A}^T$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">109</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+  Some special caess:
+  
+<UL>
+<LI>If <!-- MATH
+ ${\bf A}={\bf I}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img291.svg"
+ ALT="${\bf A}={\bf I}$"></SPAN>, then <!-- MATH
+ $p({\bf x}+{\bf b})={\cal N}({\bf m}_x+{\bf b},{\bf\Sigma}_x)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img292.svg"
+ ALT="$p({\bf x}+{\bf b})={\cal N}({\bf m}_x+{\bf b},{\bf\Sigma}_x)$"></SPAN>
+</LI>
+<LI>If <!-- MATH
+ ${\bf b}={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img293.svg"
+ ALT="${\bf b}={\bf0}$"></SPAN>, then <!-- MATH
+ $p({\bf Ax})={\cal N}({\bf m}_x,{\bf A\Sigma}_x{\bf A}^T)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img294.svg"
+ ALT="$p({\bf Ax})={\cal N}({\bf m}_x,{\bf A\Sigma}_x{\bf A}^T)$"></SPAN>
+</LI>
+<LI>If <!-- MATH
+ $p({\bf x})=N\left([\mu_1,\cdots,\mu_n]^T,\,diag[\sigma_1^2,\cdots,\sigma_n^2] \right)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.93ex; " SRC="img295.svg"
+ ALT="$p({\bf x})=N\left([\mu_1,\cdots,\mu_n]^T,\,diag[\sigma_1^2,\cdots,\sigma_n^2] \right)$"></SPAN>,
+    then <!-- MATH
+ $p(\sum_{i=1}^nx_i)={\cal N}(\sum_{i=1}^n\mu_i,\sum_{i=1}^n\sigma_i^2)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.81ex; " SRC="img296.svg"
+ ALT="$p(\sum_{i=1}^nx_i)={\cal N}(\sum_{i=1}^n\mu_i,\sum_{i=1}^n\sigma_i^2)$"></SPAN>
+</LI>
+</UL>
+
+<P>
+</LI>
+<LI>Marginal distributions:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p(x_1,x_2)=p({\bf x})=p\left(\left[\begin{array}{c}x_1\\x_2\end{array}\right]\right)
+  =N\left(\left[\begin{array}{c}\mu_1\\\mu_2\end{array}\right],
+  \left[\begin{array}{cc}\sigma^2_1&\sigma^2_{12}\\\sigma^2_{21}&\sigma^2_2\end{array}\right]\right)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img297.svg"
+ ALT="$\displaystyle p(x_1,x_2)=p({\bf x})=p\left(\left[\begin{array}{c}x_1\\ x_2\end{...
+...cc}\sigma^2_1&amp;\sigma^2_{12}\\ \sigma^2_{21}&amp;\sigma^2_2\end{array}\right]\right)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">110</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Applying <!-- MATH
+ ${\bf A}_1=[1,\,0]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img298.svg"
+ ALT="${\bf A}_1=[1,\,0]$"></SPAN> and <!-- MATH
+ ${\bf A}_2=[0,\,1]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img299.svg"
+ ALT="${\bf A}_2=[0,\,1]$"></SPAN> to <!-- MATH
+ ${\bf x}=[x_1,\,x_2]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img263.svg"
+ ALT="${\bf x}=[x_1,\,x_2]^T$"></SPAN>, 
+  we get the two marginal distributions for <!-- MATH
+ ${\bf A}_1{\bf x}=x_1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img300.svg"
+ ALT="${\bf A}_1{\bf x}=x_1$"></SPAN> and
+  <!-- MATH
+ ${\bf A}_2{\bf x}=x_2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img301.svg"
+ ALT="${\bf A}_2{\bf x}=x_2$"></SPAN>, respectively:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p(x_1)={\cal N}(\mu_1,\sigma^2_1),\;\;\;\;\;p(x_1)={\cal N}(\mu_2,\sigma^2_2)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img302.svg"
+ ALT="$\displaystyle p(x_1)={\cal N}(\mu_1,\sigma^2_1),\;\;\;\;\;p(x_1)={\cal N}(\mu_2,\sigma^2_2)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">111</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+</LI>
+<LI>Product of Gaussians:
+  Consider two Gaussians:
+  <BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+p_i({\bf x})&=&{\cal N}({\bf x},{\bf m}_i,{\bf\Sigma}_i)
+    =\frac{1}{(2\pi)^{n/2}|{\bf\Sigma}_i|^{1/2}}
+    \exp\left[-\frac{1}{2}({\bf x}-{\bf m}_i)^T{\bf\Sigma}_i^{-1}({\bf x}-{\bf m}_i)\right]
+    \nonumber\\
+    &=&\frac{1}{(2\pi)^{n/2}|{\bf\Sigma}_i|^{1/2}}
+    \exp\left[-\frac{1}{2}({\bf x}^T{\bf\Sigma}_i^{-1}{\bf x}
+      -2{\bf x}^T{\bf\Sigma}_i^{-1}{\bf m}_i+{\bf m}_i{\bf\Sigma}_i^{-1}{\bf m}_i)\right]
+    \nonumber\\
+    &=&\exp\left[-\frac{1}{2} [n\log(2\pi)+\log|{\bf\Sigma}_i|+{\bf m}_i{\bf\Sigma}_i^{-1}{\bf m}_i]\right]
+    \exp\left[-\frac{1}{2}({\bf x}^T{\bf\Sigma}_i^{-1}{\bf x}-2{\bf x}^T{\bf\Sigma}_i^{-1}{\bf m}_i)\right]
+    \nonumber\\
+    &=&\exp\left[-\frac{1}{2}[{\bf x}^T{\bf\Sigma}_i^{-1}{\bf x}-2{\bf x}^T{\bf\Sigma}_i^{-1}{\bf m}_i+c_i]\right]
+    \;\;\;\;\;(i=1,2)
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img303.svg"
+ ALT="$\displaystyle p_i({\bf x})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.81ex; vertical-align: -2.33ex; " SRC="img304.svg"
+ ALT="$\displaystyle {\cal N}({\bf x},{\bf m}_i,{\bf\Sigma}_i)
+=\frac{1}{(2\pi)^{n/2}\...
+...t[-\frac{1}{2}({\bf x}-{\bf m}_i)^T{\bf\Sigma}_i^{-1}({\bf x}-{\bf m}_i)\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.81ex; vertical-align: -2.33ex; " SRC="img305.svg"
+ ALT="$\displaystyle \frac{1}{(2\pi)^{n/2}\vert{\bf\Sigma}_i\vert^{1/2}}
+\exp\left[-\f...
+...bf x}^T{\bf\Sigma}_i^{-1}{\bf m}_i+{\bf m}_i{\bf\Sigma}_i^{-1}{\bf m}_i)\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img306.svg"
+ ALT="$\displaystyle \exp\left[-\frac{1}{2} [n\log(2\pi)+\log\vert{\bf\Sigma}_i\vert+{...
+...\bf x}^T{\bf\Sigma}_i^{-1}{\bf x}-2{\bf x}^T{\bf\Sigma}_i^{-1}{\bf m}_i)\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img307.svg"
+ ALT="$\displaystyle \exp\left[-\frac{1}{2}[{\bf x}^T{\bf\Sigma}_i^{-1}{\bf x}-2{\bf x}^T{\bf\Sigma}_i^{-1}{\bf m}_i+c_i]\right]
+\;\;\;\;\;(i=1,2)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">112</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+  where
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+c_i=n\log(2\pi)+\log|{\bf\Sigma}_i|+{\bf m}_i{\bf\Sigma}_i^{-1}{\bf m}_i
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.76ex; " SRC="img308.svg"
+ ALT="$\displaystyle c_i=n\log(2\pi)+\log\vert{\bf\Sigma}_i\vert+{\bf m}_i{\bf\Sigma}_i^{-1}{\bf m}_i$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">113</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The product of two Gaussians is
+  <BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+p_1({\bf x}) p_2({\bf x})&=&{\cal N}({\bf x},{\bf m}_1,{\bf\Sigma}_2){\cal N}({\bf x},{\bf m}_2,{\bf\Sigma}_2)
+    \nonumber\\
+    &=&\exp\left[-\frac{1}{2}
+      [ {\bf x}^T{\bf\Sigma}_1^{-1}{\bf x}-2{\bf x}^T{\bf\Sigma}_1^{-1}{\bf m}_1+c_1
+       +{\bf x}^T{\bf\Sigma}_2^{-1}{\bf x}-2{\bf x}^T{\bf\Sigma}_2^{-1}{\bf m}_2+c_2]
+      \right]
+    \nonumber\\
+    &=&\exp\left[-\frac{1}{2}
+      [{\bf x}^T({\bf\Sigma}_1^{-1}+{\bf\Sigma}_2^{-1}){\bf x}
+    -2{\bf x}^T({\bf\Sigma}_1^{-1}{\bf m}_1+{\bf\Sigma}_2^{-1}{\bf m}_2)+c_1+c_2] \right]
+    \nonumber\\
+    &=&\exp\left[-\frac{1}{2}
+      [{\bf x}^T{\bf\Sigma}^{-1}{\bf x}-2{\bf x}^T{\bf\Sigma}^{-1}{\bf m}+c
+        +(c_1+c_2-c)]\right]
+    \nonumber\\
+    &=&{\cal N}({\bf x},{\bf m},{\bf\Sigma})\;\exp(c_1+c_2-c)
+    \propto {\cal N}({\bf x},{\bf m},{\bf\Sigma})
+    
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img309.svg"
+ ALT="$\displaystyle p_1({\bf x}) p_2({\bf x})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img310.svg"
+ ALT="$\displaystyle {\cal N}({\bf x},{\bf m}_1,{\bf\Sigma}_2){\cal N}({\bf x},{\bf m}_2,{\bf\Sigma}_2)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img311.svg"
+ ALT="$\displaystyle \exp\left[-\frac{1}{2}
+[ {\bf x}^T{\bf\Sigma}_1^{-1}{\bf x}-2{\bf...
+...}^T{\bf\Sigma}_2^{-1}{\bf x}-2{\bf x}^T{\bf\Sigma}_2^{-1}{\bf m}_2+c_2]
+\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img312.svg"
+ ALT="$\displaystyle \exp\left[-\frac{1}{2}
+[{\bf x}^T({\bf\Sigma}_1^{-1}+{\bf\Sigma}_...
+... x}^T({\bf\Sigma}_1^{-1}{\bf m}_1+{\bf\Sigma}_2^{-1}{\bf m}_2)+c_1+c_2] \right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img313.svg"
+ ALT="$\displaystyle \exp\left[-\frac{1}{2}
+[{\bf x}^T{\bf\Sigma}^{-1}{\bf x}-2{\bf x}^T{\bf\Sigma}^{-1}{\bf m}+c
++(c_1+c_2-c)]\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img314.svg"
+ ALT="$\displaystyle {\cal N}({\bf x},{\bf m},{\bf\Sigma})\;\exp(c_1+c_2-c)
+\propto {\cal N}({\bf x},{\bf m},{\bf\Sigma})$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">114</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+  Here we have defined
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+c=n\log(2\pi)+\log|{\bf\Sigma}|+{\bf m}^T{\bf\Sigma}^{-1}{\bf m}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img315.svg"
+ ALT="$\displaystyle c=n\log(2\pi)+\log\vert{\bf\Sigma}\vert+{\bf m}^T{\bf\Sigma}^{-1}{\bf m}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">115</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf\Sigma}=({\bf\Sigma}_1^{-1}+{\bf\Sigma}_2^{-1})^{-1}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.74ex; " SRC="img316.svg"
+ ALT="$\displaystyle {\bf\Sigma}=({\bf\Sigma}_1^{-1}+{\bf\Sigma}_2^{-1})^{-1}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">116</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf\Sigma}^{-1}{\bf m}={\bf\Sigma}_1^{-1}{\bf m}_1+{\bf\Sigma}_2^{-1}{\bf m}_2
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.74ex; " SRC="img317.svg"
+ ALT="$\displaystyle {\bf\Sigma}^{-1}{\bf m}={\bf\Sigma}_1^{-1}{\bf m}_1+{\bf\Sigma}_2^{-1}{\bf m}_2$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">117</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+i.e.,
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf m}={\bf\Sigma}({\bf\Sigma}_1^{-1}{\bf m}_1+{\bf\Sigma}_2^{-1}{\bf m}_2)
+    =({\bf\Sigma}_1^{-1}+{\bf\Sigma}_2^{-1})^{-1}({\bf\Sigma}_1^{-1}{\bf m}_1+{\bf\Sigma}_2^{-1}{\bf m}_2)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.74ex; " SRC="img318.svg"
+ ALT="$\displaystyle {\bf m}={\bf\Sigma}({\bf\Sigma}_1^{-1}{\bf m}_1+{\bf\Sigma}_2^{-1...
+...bf\Sigma}_2^{-1})^{-1}({\bf\Sigma}_1^{-1}{\bf m}_1+{\bf\Sigma}_2^{-1}{\bf m}_2)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">118</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+We see that the product of Gaussians is also a scaled Gaussian.
+
+<P>
+<IMG STYLE=""
+ SRC="../figures/ProductofGaussians.png"
+ ALT="ProductofGaussians.png">
+
+<P>
+</LI>
+<LI><B>Marginal and conditional distributions of multivariate normal distribution</B>
+
+<P>
+A random vector <!-- MATH
+ ${\bf x}=[{\bf x}_!^T,{\bf x}_2^T]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.77ex; " SRC="img319.svg"
+ ALT="${\bf x}=[{\bf x}_!^T,{\bf x}_2^T]^T$"></SPAN> with a normal 
+  distribution <!-- MATH
+ ${\cal N}({\bf x},{\bf m},{\bf\Sigma})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img320.svg"
+ ALT="${\cal N}({\bf x},{\bf m},{\bf\Sigma})$"></SPAN> can be partitioned 
+  into two subvectors <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img321.svg"
+ ALT="${\bf x}_1$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img322.svg"
+ ALT="${\bf x}_2$"></SPAN>:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p\left( \left[\begin{array}{c}{\bf x}_1\\{\bf x}_2\end{array}\right]\right)
+    =p({\bf x})={\cal N}({\bf x},{\bf m},{\bf\Sigma})
+    =N\left(\left[\begin{array}{c}{\bf x}_1\\{\bf x}_2\end{array}\right],\;
+    \left[\begin{array}{c}{\bf m}_1 \\{\bf m}_2\end{array}\right],\;
+    \left[\begin{array}{cc}{\bf\Sigma}_{11} & {\bf\Sigma}_{12}\\
+        {\bf\Sigma}_{21}&{\bf\Sigma}_{22}\end{array}\right]\right)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img323.svg"
+ ALT="$\displaystyle p\left( \left[\begin{array}{c}{\bf x}_1\\ {\bf x}_2\end{array}\ri...
+... {\bf\Sigma}_{12}\\
+{\bf\Sigma}_{21}&amp;{\bf\Sigma}_{22}\end{array}\right]\right)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">119</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <!-- MATH
+ ${\bf\Sigma}_{ij}={\bf\Sigma}_{ji}^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -1.04ex; " SRC="img324.svg"
+ ALT="${\bf\Sigma}_{ij}={\bf\Sigma}_{ji}^T$"></SPAN>, <!-- MATH
+ ${\bf\Sigma}_{ii}={\bf\Sigma}_{ii}^T,
+  \;(i,j=1,2,\;i\ne j)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.72ex; " SRC="img325.svg"
+ ALT="${\bf\Sigma}_{ii}={\bf\Sigma}_{ii}^T,
+\;(i,j=1,2,\;i\ne j)$"></SPAN>. Given this normal joint distribution of <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img321.svg"
+ ALT="${\bf x}_1$"></SPAN> and 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img322.svg"
+ ALT="${\bf x}_2$"></SPAN>, we can find the normal conditional distribution of <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img326.svg"
+ ALT="${\bf x}_i$"></SPAN> 
+  given <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img327.svg"
+ ALT="${\bf x}_j$"></SPAN>:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p({\bf x}_i/{\bf x}_j)={\cal N}({\bf x}_i,{\bf m}_{i/j},{\bf\Sigma}_{i/j})
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.94ex; " SRC="img328.svg"
+ ALT="$\displaystyle p({\bf x}_i/{\bf x}_j)={\cal N}({\bf x}_i,{\bf m}_{i/j},{\bf\Sigma}_{i/j})$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">120</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+in terms of the mean vector and the covariance matrix:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left\{   \begin{array}{lcl}
+      {\bf m}_{i/j}&=&{\bf m}_i+{\bf\Sigma}_{ij}{\bf\Sigma}_{jj}^{-1} ({\bf x}_j-{\bf m}_j) \\
+      {\bf\Sigma}_{i/j}&=&{\bf\Sigma}_{ii}-{\bf\Sigma}_{ij}{\bf\Sigma}_{jj}^{-1}{\bf\Sigma}_{ji}
+    \end{array}\right.
+  
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.27ex; vertical-align: -2.54ex; " SRC="img329.svg"
+ ALT="$\displaystyle \left\{ \begin{array}{lcl}
+{\bf m}_{i/j}&amp;=&amp;{\bf m}_i+{\bf\Sigma}_...
+...}_{ii}-{\bf\Sigma}_{ij}{\bf\Sigma}_{jj}^{-1}{\bf\Sigma}_{ji}
+\end{array}\right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">121</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+<B>Proof:</B> The joint distribution of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}$"></SPAN> can be written as:
+  <BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+p({\bf x})&=&p({\bf x}_1,{\bf x}_2)=\frac{1}{(2\pi)^{n/2} |{\bf\Sigma}|^{1/2}}\,
+    \exp\left[-\frac{1}{2}({\bf x}-{\bf m})^T{\bf\Sigma}^{-1}({\bf x}-{\bf m}) \right]
+    \nonumber\\
+    &=&\frac{1}{(2\pi)^{n/2}|{\bf\Sigma}|^{1/2}}\,\exp\left[-\frac{1}{2}Q({\bf x}_1,{\bf x}_2) \right]
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img330.svg"
+ ALT="$\displaystyle p({\bf x})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.81ex; vertical-align: -2.33ex; " SRC="img331.svg"
+ ALT="$\displaystyle p({\bf x}_1,{\bf x}_2)=\frac{1}{(2\pi)^{n/2} \vert{\bf\Sigma}\ver...
+...p\left[-\frac{1}{2}({\bf x}-{\bf m})^T{\bf\Sigma}^{-1}({\bf x}-{\bf m}) \right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.81ex; vertical-align: -2.33ex; " SRC="img332.svg"
+ ALT="$\displaystyle \frac{1}{(2\pi)^{n/2}\vert{\bf\Sigma}\vert^{1/2}}\,\exp\left[-\frac{1}{2}Q({\bf x}_1,{\bf x}_2) \right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">122</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+  Here we have defined:
+  <BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+Q({\bf x}_1,{\bf x}_2)&=&({\bf x}-{\bf m})^T{\bf\Sigma}^{-1}({\bf x}-{\bf m})
+    \nonumber \\
+    &=&[({\bf x}_1-{\bf m}_1)^T, ({\bf x}-{\bf m}_2)^T]
+    \left[\begin{array}{cc}{\bf\Sigma}^{11} & {\bf\Sigma}^{12}\\
+        {\bf\Sigma}^{21}&{\bf\Sigma}^{22}\end{array}\right]
+    \left[\begin{array}{c}{\bf x}_1-{\bf m}_1\\{\bf x}_2-{\bf m}_2\end{array}\right]
+    \nonumber \\
+    &=&({\bf x}_1-{\bf m}_1)^T{\bf\Sigma}^{11}({\bf x}_1-{\bf m}_1)+
+    2({\bf x}_1-{\bf m}_1)^T{\bf\Sigma}^{12}({\bf x}_2-{\bf m}_2)+
+    ({\bf x}_2-{\bf m}_2)^T\Sigma^{22}({\bf x}_2-{\bf m}_2)
+  
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img333.svg"
+ ALT="$\displaystyle Q({\bf x}_1,{\bf x}_2)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img334.svg"
+ ALT="$\displaystyle ({\bf x}-{\bf m})^T{\bf\Sigma}^{-1}({\bf x}-{\bf m})$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img335.svg"
+ ALT="$\displaystyle [({\bf x}_1-{\bf m}_1)^T, ({\bf x}-{\bf m}_2)^T]
+\left[\begin{arr...
+...eft[\begin{array}{c}{\bf x}_1-{\bf m}_1\\ {\bf x}_2-{\bf m}_2\end{array}\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img336.svg"
+ ALT="$\displaystyle ({\bf x}_1-{\bf m}_1)^T{\bf\Sigma}^{11}({\bf x}_1-{\bf m}_1)+
+2({...
+...}({\bf x}_2-{\bf m}_2)+
+({\bf x}_2-{\bf m}_2)^T\Sigma^{22}({\bf x}_2-{\bf m}_2)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">123</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+  where we have assumed
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf\Sigma}^{-1}=\left[\begin{array}{cc}{\bf\Sigma}_{11} & {\bf\Sigma}_{12}\\
+        {\bf\Sigma}_{21}&{\bf\Sigma}_{22}\end{array}\right]^{-1}=
+    \left[\begin{array}{cc}{\bf\Sigma}^{11} & {\bf\Sigma}^{12}\\
+        {\bf\Sigma}^{21}&{\bf\Sigma}^{22}\end{array}\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.27ex; vertical-align: -2.32ex; " SRC="img337.svg"
+ ALT="$\displaystyle {\bf\Sigma}^{-1}=\left[\begin{array}{cc}{\bf\Sigma}_{11} &amp; {\bf\S...
+...^{11} &amp; {\bf\Sigma}^{12}\\
+{\bf\Sigma}^{21}&amp;{\bf\Sigma}^{22}\end{array}\right]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">124</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+According to theorem 2 <A ID="tex2html3"
+  HREF="../algebra/node6.html">here</A>, we have
+
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+{\bf\Sigma}^{11}&=&({\bf\Sigma}_{11}-{\bf\Sigma}_{12}{\bf\Sigma}_{22}^{-1}{\bf\Sigma}_{21})^{-1}
+    ={\bf\Sigma}_{11}^{-1}+{\bf\Sigma}_{11}^{-1}{\bf\Sigma}_{12}({\bf\Sigma}_{22}-{\bf\Sigma}_{21}{\bf\Sigma}_{11}^{-1}{\bf\Sigma}_{12})^{-1}{\bf\Sigma}_{21}{\bf\Sigma}_{11}^{-1}
+    \nonumber\\
+        {\bf\Sigma}^{22}&=&({\bf\Sigma}_{22}-{\bf\Sigma}_{21}{\bf\Sigma}_{11}^{-1}{\bf\Sigma}_{12})^{-1}=
+        {\bf\Sigma}_{22}^{-1}+{\bf\Sigma}_{22}^{-1}{\bf\Sigma}_{21}({\bf\Sigma}_{11}-{\bf\Sigma}_{12}{\bf\Sigma}_{22}^{-1}{\bf\Sigma}_{21})^{-1}{\bf\Sigma}_{12}{\bf\Sigma}_{22}^{-1} 
+        \nonumber\\
+            {\bf\Sigma}^{12}&=&-{\bf\Sigma}_{11}^{-1}{\bf\Sigma}_{12}({\bf\Sigma}_{22}-{\bf\Sigma}_{21}{\bf\Sigma}_{11}^{-1}{\bf\Sigma}_{12})^{-1}=({\bf\Sigma}^{12}) 
+  
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img338.svg"
+ ALT="$\displaystyle {\bf\Sigma}^{11}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.74ex; " SRC="img339.svg"
+ ALT="$\displaystyle ({\bf\Sigma}_{11}-{\bf\Sigma}_{12}{\bf\Sigma}_{22}^{-1}{\bf\Sigma...
+...\bf\Sigma}_{11}^{-1}{\bf\Sigma}_{12})^{-1}{\bf\Sigma}_{21}{\bf\Sigma}_{11}^{-1}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img340.svg"
+ ALT="$\displaystyle {\bf\Sigma}^{22}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.74ex; " SRC="img341.svg"
+ ALT="$\displaystyle ({\bf\Sigma}_{22}-{\bf\Sigma}_{21}{\bf\Sigma}_{11}^{-1}{\bf\Sigma...
+...\bf\Sigma}_{22}^{-1}{\bf\Sigma}_{21})^{-1}{\bf\Sigma}_{12}{\bf\Sigma}_{22}^{-1}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img342.svg"
+ ALT="$\displaystyle {\bf\Sigma}^{12}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.74ex; " SRC="img343.svg"
+ ALT="$\displaystyle -{\bf\Sigma}_{11}^{-1}{\bf\Sigma}_{12}({\bf\Sigma}_{22}-{\bf\Sigma}_{21}{\bf\Sigma}_{11}^{-1}{\bf\Sigma}_{12})^{-1}=({\bf\Sigma}^{12})$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">125</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+  Substituting the second expression for <!-- MATH
+ ${\bf\Sigma}^{11}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img344.svg"
+ ALT="${\bf\Sigma}^{11}$"></SPAN>, the first expression for 
+  <!-- MATH
+ ${\bf\Sigma}^{22}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img345.svg"
+ ALT="${\bf\Sigma}^{22}$"></SPAN>, and <!-- MATH
+ ${\bf\Sigma}^{12}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img346.svg"
+ ALT="${\bf\Sigma}^{12}$"></SPAN> into <!-- MATH
+ $Q({\bf x}_1,{\bf x}_2)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img347.svg"
+ ALT="$Q({\bf x}_1,{\bf x}_2)$"></SPAN> we get:
+  <BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+Q({\bf x}_1,{\bf x}_2)
+    &=&({\bf x}_1-{\bf m}_1)^T
+    [{\bf\Sigma}_{11}^{-1}+{\bf\Sigma}_{11}^{-1}{\bf\Sigma}_{12}({\bf\Sigma}_{22}-{\bf\Sigma}_{21}{\bf\Sigma}_{11}^{-1}{\bf\Sigma}_{12})^{-1}{\bf\Sigma}_{21}{\bf\Sigma}_{11}^{-1}]
+    ({\bf x}_1-{\bf m}_1)
+    \nonumber \\
+    &&-2({\bf x}_1-{\bf m}_1)^T [{\bf\Sigma}_{11}^{-1}{\bf\Sigma}_{12}({\bf\Sigma}_{22}-{\bf\Sigma}_{21}{\bf\Sigma}_{11}^{-1}{\bf\Sigma}_{12})^{-1}] ({\bf x}_2-{\bf m}_2)
+    \nonumber \\
+    &&+({\bf x}_2-{\bf m}_2)^T [({\bf\Sigma}_{22}-{\bf\Sigma}_{21}{\bf\Sigma}_{11}^{-1}{\bf\Sigma}_{12})^{-1}]
+    ({\bf x}_2-{\bf m}_2)
+    \nonumber \\
+    &=&({\bf x}_1-{\bf m}_1)^T {\bf\Sigma}_{11}^{-1} ({\bf x}_1-{\bf m}_1)
+    \nonumber \\
+    &&+({\bf x}_1-{\bf m}_1)^T {\bf\Sigma}_{11}^{-1}{\bf\Sigma}_{12}({\bf\Sigma}_{22}-{\bf\Sigma}_{21}{\bf\Sigma}_{11}^{-1}{\bf\Sigma}_{12})^{-1}{\bf\Sigma}_{21}{\bf\Sigma}_{11}^{-1} ({\bf x}_1-{\bf m}_1)
+    \nonumber \\
+    &&-2({\bf x}_1-{\bf m}_1)^T {\bf\Sigma}_{11}^{-1}{\bf\Sigma}_{12}({\bf\Sigma}_{22}-{\bf\Sigma}_{21}{\bf\Sigma}_{11}^{-1}{\bf\Sigma}_{12})^{-1} ({\bf x}_2-{\bf m}_2)
+    \nonumber \\
+    &&+({\bf x}_2-{\bf m}_2)^T ({\bf\Sigma}_{22}-{\bf\Sigma}_{21}{\bf\Sigma}_{11}^{-1}{\bf\Sigma}_{12})^{-1} ({\bf x}_2-{\bf m}_2)
+    \nonumber \\
+    &=&({\bf x}_1-{\bf m}_1)^T {\bf\Sigma}_{11}^{-1} ({\bf x}_1-{\bf m}_1)
+    \nonumber \\
+    &&+[({\bf x}_2-{\bf m}_2)-{\bf\Sigma}_{21}{\bf\Sigma}_{11}^{-1}({\bf x}_1-{\bf m}_1)]^T
+    ({\bf\Sigma}_{22}-{\bf\Sigma}_{21}{\bf\Sigma}_{11}^{-1}{\bf\Sigma}_{12})^{-1} [({\bf x}_2-{\bf m}_2)-{\bf\Sigma}_{21}{\bf\Sigma}_{11}^{-1}({\bf x}_1-{\bf m}_1)]
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img333.svg"
+ ALT="$\displaystyle Q({\bf x}_1,{\bf x}_2)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.74ex; " SRC="img348.svg"
+ ALT="$\displaystyle ({\bf x}_1-{\bf m}_1)^T
+[{\bf\Sigma}_{11}^{-1}+{\bf\Sigma}_{11}^{...
+...f\Sigma}_{12})^{-1}{\bf\Sigma}_{21}{\bf\Sigma}_{11}^{-1}]
+({\bf x}_1-{\bf m}_1)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.74ex; " SRC="img349.svg"
+ ALT="$\displaystyle -2({\bf x}_1-{\bf m}_1)^T [{\bf\Sigma}_{11}^{-1}{\bf\Sigma}_{12}(...
+...f\Sigma}_{21}{\bf\Sigma}_{11}^{-1}{\bf\Sigma}_{12})^{-1}] ({\bf x}_2-{\bf m}_2)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.74ex; " SRC="img350.svg"
+ ALT="$\displaystyle +({\bf x}_2-{\bf m}_2)^T [({\bf\Sigma}_{22}-{\bf\Sigma}_{21}{\bf\Sigma}_{11}^{-1}{\bf\Sigma}_{12})^{-1}]
+({\bf x}_2-{\bf m}_2)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.74ex; " SRC="img351.svg"
+ ALT="$\displaystyle ({\bf x}_1-{\bf m}_1)^T {\bf\Sigma}_{11}^{-1} ({\bf x}_1-{\bf m}_1)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.74ex; " SRC="img352.svg"
+ ALT="$\displaystyle +({\bf x}_1-{\bf m}_1)^T {\bf\Sigma}_{11}^{-1}{\bf\Sigma}_{12}({\...
+...bf\Sigma}_{12})^{-1}{\bf\Sigma}_{21}{\bf\Sigma}_{11}^{-1} ({\bf x}_1-{\bf m}_1)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.74ex; " SRC="img353.svg"
+ ALT="$\displaystyle -2({\bf x}_1-{\bf m}_1)^T {\bf\Sigma}_{11}^{-1}{\bf\Sigma}_{12}({...
+...bf\Sigma}_{21}{\bf\Sigma}_{11}^{-1}{\bf\Sigma}_{12})^{-1} ({\bf x}_2-{\bf m}_2)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.74ex; " SRC="img354.svg"
+ ALT="$\displaystyle +({\bf x}_2-{\bf m}_2)^T ({\bf\Sigma}_{22}-{\bf\Sigma}_{21}{\bf\Sigma}_{11}^{-1}{\bf\Sigma}_{12})^{-1} ({\bf x}_2-{\bf m}_2)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.74ex; " SRC="img351.svg"
+ ALT="$\displaystyle ({\bf x}_1-{\bf m}_1)^T {\bf\Sigma}_{11}^{-1} ({\bf x}_1-{\bf m}_1)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.74ex; " SRC="img355.svg"
+ ALT="$\displaystyle +[({\bf x}_2-{\bf m}_2)-{\bf\Sigma}_{21}{\bf\Sigma}_{11}^{-1}({\b...
+...\bf x}_2-{\bf m}_2)-{\bf\Sigma}_{21}{\bf\Sigma}_{11}^{-1}({\bf x}_1-{\bf m}_1)]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">126</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+  The last equal sign is due to the following equations for any vectors 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img356.svg"
+ ALT="$u$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img357.svg"
+ ALT="$v$"></SPAN> and a symmetric matrix <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img358.svg"
+ ALT="$A=A^T$"></SPAN>:
+  <BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+&&u^TAu-2u^TAv+v^TAv=u^T Au-u^TAv-u^TAv+v^TAv
+    \nonumber \\
+    &=&u^TA(u-v)-(u-v)^TAv=u^TA(u-v)-v^TA(u-v)
+    \nonumber \\
+    &=&(u-v)^TA(u-v)=(v-u)^TA(v-u)
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.55ex; vertical-align: -0.31ex; " SRC="img359.svg"
+ ALT="$\displaystyle u^TAu-2u^TAv+v^TAv=u^T Au-u^TAv-u^TAv+v^TAv$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img360.svg"
+ ALT="$\displaystyle u^TA(u-v)-(u-v)^TAv=u^TA(u-v)-v^TA(u-v)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img361.svg"
+ ALT="$\displaystyle (u-v)^TA(u-v)=(v-u)^TA(v-u)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">127</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+  We further define
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left\{   \begin{array}{l}
+      {\bf b}={\bf m}_2+{\bf\Sigma}_{21}{\bf\Sigma}_{11}^{-1}({\bf x}_1-{\bf m}_1) \\
+      {\bf A}={\bf\Sigma}_{22}-{\bf\Sigma}_{21}{\bf\Sigma}_{11}^{-1}{\bf\Sigma}_{12}
+    \end{array}  \right.
+  
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.41ex; " SRC="img362.svg"
+ ALT="$\displaystyle \left\{ \begin{array}{l}
+{\bf b}={\bf m}_2+{\bf\Sigma}_{21}{\bf\S...
+..._{22}-{\bf\Sigma}_{21}{\bf\Sigma}_{11}^{-1}{\bf\Sigma}_{12}
+\end{array} \right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">128</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left\{ \begin{array}{lcl}
+    Q_1({\bf x}_1)&=&({\bf x}_1-{\bf m}_1)^T {\bf\Sigma}_{11}^{-1} ({\bf x}_1-{\bf m}_1) \\
+    Q_2({\bf x}_1,{\bf x}_2)&=&
+    [({\bf x}_2-{\bf m}_2)-{\bf\Sigma}_{21}{\bf\Sigma}_{11}^{-1}({\bf x}_1-{\bf m}_1)]^T
+    ({\bf\Sigma}_{22}-{\bf\Sigma}_{21}{\bf\Sigma}_{11}^{-1}{\bf\Sigma}_{12})^{-1}
+    [({\bf x}_2-{\bf m}_2)-{\bf\Sigma}_{21}{\bf\Sigma}_{11}^{-1}({\bf x}_1-{\bf m}_1)] \\
+    &=&({\bf x}_2-{\bf b})^T {\bf A}^{-1}({\bf x}_2-{\bf b})
+  \end{array} \right. 
+  
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.83ex; vertical-align: -3.81ex; " SRC="img363.svg"
+ ALT="$\displaystyle \left\{ \begin{array}{lcl}
+Q_1({\bf x}_1)&amp;=&amp;({\bf x}_1-{\bf m}_1)...
+...\
+&amp;=&amp;({\bf x}_2-{\bf b})^T {\bf A}^{-1}({\bf x}_2-{\bf b})
+\end{array} \right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">129</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+then the expression above for <!-- MATH
+ $Q({\bf x}_1,{\bf x}_2)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img347.svg"
+ ALT="$Q({\bf x}_1,{\bf x}_2)$"></SPAN> can be written as:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+Q({\bf x}_1,{\bf x}_2)=Q_1({\bf x}_1)+Q_2({\bf x}_1,{\bf x}_2)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img364.svg"
+ ALT="$\displaystyle Q({\bf x}_1,{\bf x}_2)=Q_1({\bf x}_1)+Q_2({\bf x}_1,{\bf x}_2)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">130</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and the joint distribution can be written as:
+  <BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+p({\bf x})&=&p({\bf x}_1,{\bf x}_2)
+    =\frac{1}{(2\pi)^{n/2}|{\bf\Sigma}|^{1/2}}\,\exp\left[-\frac{1}{2}Q({\bf x}_1,{\bf x}_2)\right]
+    \nonumber \\
+    &=&\frac{1}{(2\pi)^{n/2}|{\bf\Sigma}_{11}|^{1/2} |{\bf\Sigma}_{22}-{\bf\Sigma}_{21}{\bf\Sigma}_{11}^{-1}{\bf\Sigma}_{12}|^{1/2}} \,
+    \exp\left[-\frac{1}{2}Q_1({\bf x}_1)\right] 
+    \exp\left[-\frac{1}{2}Q_2({\bf x}_1,{\bf x}_2)\right] 
+    \nonumber \\
+    &=&\frac{1}{(2\pi)^{p/2}|{\bf\Sigma}_{11}|^{1/2}}
+    \exp\left[-\frac{1}{2} ({\bf x}_1-{\bf m}_1)^T{\bf\Sigma}_{11}^{-1}({\bf x}_1-{\bf m}_1) \right]
+    \frac{1}{(2\pi)^{q/2}|{\bf A}|^{1/2}}\exp\left[-\frac{1}{2}({\bf x}_2-{\bf b})^T {\bf A}^{-1}({\bf x}_2-{\bf b}) \right]
+    \nonumber \\
+    &=&{\cal N}({\bf x}_1,{\bf m}_1,{\bf\Sigma}_{11})\;{\cal N}({\bf x}_2,{\bf b},{\bf A})
+  
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img330.svg"
+ ALT="$\displaystyle p({\bf x})$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.81ex; vertical-align: -2.33ex; " SRC="img365.svg"
+ ALT="$\displaystyle p({\bf x}_1,{\bf x}_2)
+=\frac{1}{(2\pi)^{n/2}\vert{\bf\Sigma}\vert^{1/2}}\,\exp\left[-\frac{1}{2}Q({\bf x}_1,{\bf x}_2)\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.04ex; vertical-align: -2.52ex; " SRC="img366.svg"
+ ALT="$\displaystyle \frac{1}{(2\pi)^{n/2}\vert{\bf\Sigma}_{11}\vert^{1/2} \vert{\bf\S...
+...}{2}Q_1({\bf x}_1)\right]
+\exp\left[-\frac{1}{2}Q_2({\bf x}_1,{\bf x}_2)\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.81ex; vertical-align: -2.33ex; " SRC="img367.svg"
+ ALT="$\displaystyle \frac{1}{(2\pi)^{p/2}\vert{\bf\Sigma}_{11}\vert^{1/2}}
+\exp\left[...
+...\left[-\frac{1}{2}({\bf x}_2-{\bf b})^T {\bf A}^{-1}({\bf x}_2-{\bf b}) \right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img368.svg"
+ ALT="$\displaystyle {\cal N}({\bf x}_1,{\bf m}_1,{\bf\Sigma}_{11})\;{\cal N}({\bf x}_2,{\bf b},{\bf A})$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">131</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+  where we have used theorem 3 <A ID="tex2html4"
+  HREF="../algebra/node6.html">here</A>:
+
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+|{\bf\Sigma}|=|{\bf\Sigma}_{11}|\; |{\bf\Sigma}_{22}-{\bf\Sigma}_{21}{\bf\Sigma}_{11}^{-1}{\bf\Sigma}_{12}|
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.74ex; " SRC="img369.svg"
+ ALT="$\displaystyle \vert{\bf\Sigma}\vert=\vert{\bf\Sigma}_{11}\vert\; \vert{\bf\Sigma}_{22}-{\bf\Sigma}_{21}{\bf\Sigma}_{11}^{-1}{\bf\Sigma}_{12}\vert$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">132</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The marginal distribution of <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img321.svg"
+ ALT="${\bf x}_1$"></SPAN> is
+  <BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+p_1({\bf x}_1)&=&\int p({\bf x}_1,{\bf x}_2) d{\bf x_2}
+    ={\cal N}({\bf x}_1,{\bf m}_1,{\bf\Sigma}_{11})\;\int {\cal N}({\bf x}_2,{\bf b},{\bf A}) d{\bf x_2}
+    \nonumber\\
+    &=&{\cal N}({\bf x}_1,{\bf m}_1,{\bf\Sigma}_{11})
+    =\frac{1}{(2\pi)^{p/2}|{\bf\Sigma}_{11}|^{1/2}}
+    \exp\left[-\frac{1}{2}({\bf x}_1-{\bf m}_1)^T{\bf\Sigma}_{11}^{-1}({\bf x}_1-{\bf m}_1)\right]
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img370.svg"
+ ALT="$\displaystyle p_1({\bf x}_1)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.57ex; vertical-align: -2.12ex; " SRC="img371.svg"
+ ALT="$\displaystyle \int p({\bf x}_1,{\bf x}_2) d{\bf x_2}
+={\cal N}({\bf x}_1,{\bf m}_1,{\bf\Sigma}_{11})\;\int {\cal N}({\bf x}_2,{\bf b},{\bf A}) d{\bf x_2}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.81ex; vertical-align: -2.33ex; " SRC="img372.svg"
+ ALT="$\displaystyle {\cal N}({\bf x}_1,{\bf m}_1,{\bf\Sigma}_{11})
+=\frac{1}{(2\pi)^{...
+...c{1}{2}({\bf x}_1-{\bf m}_1)^T{\bf\Sigma}_{11}^{-1}({\bf x}_1-{\bf m}_1)\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">133</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+  and the conditional distribution of <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img322.svg"
+ ALT="${\bf x}_2$"></SPAN> given <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img321.svg"
+ ALT="${\bf x}_1$"></SPAN> is
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p_{2|1}({\bf x}_2|{\bf x}_1)=\frac{p({\bf x}_1,{\bf x}_2)}{p_1({\bf x}_1)}
+  ={\cal N}({\bf x}_2,{\bf b},{\bf A})
+  =\frac{1}{(2\pi)^{q/2}|{\bf A}|^{1/2}}\exp\left[-\frac{1}{2}({\bf x}_2-{\bf b})^T {\bf A}^{-1}({\bf x}_2-{\bf b})\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -2.33ex; " SRC="img373.svg"
+ ALT="$\displaystyle p_{2\vert 1}({\bf x}_2\vert{\bf x}_1)=\frac{p({\bf x}_1,{\bf x}_2...
+...p\left[-\frac{1}{2}({\bf x}_2-{\bf b})^T {\bf A}^{-1}({\bf x}_2-{\bf b})\right]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">134</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+with
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left\{\begin{array}{lcl}
+    {\bf b}&=&{\bf m}_{2/1}={\bf m}_2+{\bf\Sigma}_{21}{\bf\Sigma}_{11}^{-1}({\bf x}_1-{\bf m}_1)\\
+    {\bf A}&=&{\bf\Sigma}_{2/1}={\bf\Sigma}_{22}-{\bf\Sigma}_{21}{\bf\Sigma}_{11}^{-1}{\bf\Sigma}_{12}
+  \end{array}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.41ex; " SRC="img374.svg"
+ ALT="$\displaystyle \left\{\begin{array}{lcl}
+{\bf b}&amp;=&amp;{\bf m}_{2/1}={\bf m}_2+{\bf\...
+...}_{22}-{\bf\Sigma}_{21}{\bf\Sigma}_{11}^{-1}{\bf\Sigma}_{12}
+\end{array}\right.$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">135</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+</LI>
+</UL>
+
+<P>
+<B>Drawing samples from Gaussian distributions</B>
+
+<P>
+We first consider drawing samples from a random variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN> with 
+a normal distribution <!-- MATH
+ $p(x)={\cal N}(0,1)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img375.svg"
+ ALT="$p(x)={\cal N}(0,1)$"></SPAN>, i.e., <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img376.svg"
+ ALT="$E(x)=0$"></SPAN> and
+<!-- MATH
+ $Var(x)=E(x^2)=1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img377.svg"
+ ALT="$Var(x)=E(x^2)=1$"></SPAN>. As shwon in the figure, a random variable uniformly
+distributed in the range <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img378.svg"
+ ALT="$(0,\;1)$"></SPAN> (vertical) can be mapped to another 
+random variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN> in the range <!-- MATH
+ $(-\infty,\,\infty)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img379.svg"
+ ALT="$(-\infty,\,\infty)$"></SPAN> (horizontal)
+with a Gaussian distribution <!-- MATH
+ $p(x)={\cal N}(0,\,1)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img380.svg"
+ ALT="$p(x)={\cal N}(0,\,1)$"></SPAN>, by the inverse
+function of its accumulative <!-- MATH
+ $F(x)=\int_{-\infty}^x p(u)\,du$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -1.14ex; " SRC="img381.svg"
+ ALT="$F(x)=\int_{-\infty}^x p(u)\,du$"></SPAN>. This 
+variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN> can be further converted into another variable 
+<!-- MATH
+ $x'=\mu+\sigma x$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.57ex; " SRC="img382.svg"
+ ALT="$x'=\mu+\sigma x$"></SPAN>, whose distribution is a generic Gaussian 
+<!-- MATH
+ $p(x')={\cal N}(\mu,\,\sigma^2)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img383.svg"
+ ALT="$p(x')={\cal N}(\mu,\,\sigma^2)$"></SPAN>, with the mean and variance
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+E(x')&=&E(\mu+\sigma x)=\mu+\sigma E(x)=\mu
+  \nonumber\\
+  Var(x')&=&[(x'-\mu)^2]=E(\sigma^2 x)=E(\sigma^2 x^2)
+  =\sigma^2 E(x^2)=\sigma^2
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img384.svg"
+ ALT="$\displaystyle E(x')$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img385.svg"
+ ALT="$\displaystyle E(\mu+\sigma x)=\mu+\sigma E(x)=\mu$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img386.svg"
+ ALT="$\displaystyle Var(x')$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img387.svg"
+ ALT="$\displaystyle [(x'-\mu)^2]=E(\sigma^2 x)=E(\sigma^2 x^2)
+=\sigma^2 E(x^2)=\sigma^2$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">136</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+<IMG STYLE=""
+ SRC="../figures/SamplingGaussian.png"
+ ALT="SamplingGaussian.png">
+
+<P>
+Using this method, we can generate a set of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img53.svg"
+ ALT="$n$"></SPAN> normally distributed 
+and independent random variables <!-- MATH
+ $x_1,\cdots,x_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img388.svg"
+ ALT="$x_1,\cdots,x_n$"></SPAN>, each with <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img389.svg"
+ ALT="$E(x_i)=0$"></SPAN>, 
+<!-- MATH
+ $Var(x_i)=1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img390.svg"
+ ALT="$Var(x_i)=1$"></SPAN>, and <!-- MATH
+ $Cov(x_i,x_j)=\delta_{ij}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img391.svg"
+ ALT="$Cov(x_i,x_j)=\delta_{ij}$"></SPAN>, and, based on these variables,
+we can further construct a random vector <!-- MATH
+ ${\bf x}=[x_1,\cdots,x_n]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img242.svg"
+ ALT="${\bf x}=[x_1,\cdots, x_n]^T$"></SPAN> with 
+a Gaussian joint distributed <!-- MATH
+ $p({\bf x})={\cal N}({\bf0},\,{\bf I})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img392.svg"
+ ALT="$p({\bf x})={\cal N}({\bf0},\,{\bf I})$"></SPAN>. 
+
+<P>
+Given such an <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}$"></SPAN> with <!-- MATH
+ ${\bf m}_x={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.46ex; " SRC="img393.svg"
+ ALT="${\bf m}_x={\bf0}$"></SPAN> and <!-- MATH
+ ${\bf\Sigma}_x={\bf I}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img394.svg"
+ ALT="${\bf\Sigma}_x={\bf I}$"></SPAN>,
+we can generate another random vector with a Gaussian distribution 
+<!-- MATH
+ $N({\bf m},\,{\bf\Sigma})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img395.svg"
+ ALT="$N({\bf m},\,{\bf\Sigma})$"></SPAN>. To do so, consider the affine transformation
+<!-- MATH
+ ${\bf y}={\bf Wx}+{\bf m}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img396.svg"
+ ALT="${\bf y}={\bf Wx}+{\bf m}$"></SPAN>, which also has a Gaussian distribution:
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+{\bf m}_y&=&E({\bf y})={\bf Wm}_x+{\bf m}={\bf m}
+  \nonumber\\
+  {\bf\Sigma}_y&=&{\bf W\Sigma}_x{\bf W}^T={\bf WW}^T
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img397.svg"
+ ALT="$\displaystyle {\bf m}_y$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img398.svg"
+ ALT="$\displaystyle E({\bf y})={\bf Wm}_x+{\bf m}={\bf m}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img167.svg"
+ ALT="$\displaystyle {\bf\Sigma}_y$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.79ex; vertical-align: -0.46ex; " SRC="img399.svg"
+ ALT="$\displaystyle {\bf W\Sigma}_x{\bf W}^T={\bf WW}^T$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">137</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+While <!-- MATH
+ ${\bf m}_y={\bf m}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img400.svg"
+ ALT="${\bf m}_y={\bf m}$"></SPAN> as desired, we still need to make sure that 
+<!-- MATH
+ ${\bf\Sigma}_y={\bf WW}^T={\bf\Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img401.svg"
+ ALT="${\bf\Sigma}_y={\bf WW}^T={\bf\Sigma}$"></SPAN> also as desired. Such a <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img402.svg"
+ ALT="${\bf W}$"></SPAN>
+can be found in either of the following two methods:
+
+<P>
+
+<UL>
+<LI>The Cholesky decomposition: which can find an upper trangular 
+  matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img403.svg"
+ ALT="${\bf L}$"></SPAN> that satisfies <!-- MATH
+ ${\bf\Sigma}={\bf LL}^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.12ex; " SRC="img404.svg"
+ ALT="${\bf\Sigma}={\bf LL}^T$"></SPAN> (if 
+  <!-- MATH
+ ${\bf\Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img133.svg"
+ ALT="${\bf\Sigma}$"></SPAN> is nonsingular).
+</LI>
+<LI>The singular value decomposition <!-- MATH
+ ${\bf\Sigma}={\bf USV}^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.12ex; " SRC="img405.svg"
+ ALT="${\bf\Sigma}={\bf USV}^T$"></SPAN>
+  (even if <!-- MATH
+ ${\bf\Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img133.svg"
+ ALT="${\bf\Sigma}$"></SPAN> is singular).
+  As <!-- MATH
+ ${\bf\Sigma}^T={\bf\Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img406.svg"
+ ALT="${\bf\Sigma}^T={\bf\Sigma}$"></SPAN> is symmetric, <!-- MATH
+ ${\bf U}={\bf V}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img407.svg"
+ ALT="${\bf U}={\bf V}$"></SPAN> and
+  all diagonal components in <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img408.svg"
+ ALT="${\bf S}$"></SPAN> are non-negative. Now if we 
+  let <!-- MATH
+ ${\bf W}={\bf US}^{1/2}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.12ex; " SRC="img409.svg"
+ ALT="${\bf W}={\bf US}^{1/2}$"></SPAN>, then we have
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf WW}^T=({\bf US}^{1/2})\,({\bf US}^{1/2})^T={\bf USU}^T={\bf\Sigma}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.70ex; " SRC="img410.svg"
+ ALT="$\displaystyle {\bf WW}^T=({\bf US}^{1/2})\,({\bf US}^{1/2})^T={\bf USU}^T={\bf\Sigma}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">138</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+</LI>
+</UL>
+However, we note that although <!-- MATH
+ ${\bf LL}^T={\bf WW}^T={\bf\Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.12ex; " SRC="img411.svg"
+ ALT="${\bf LL}^T={\bf WW}^T={\bf\Sigma}$"></SPAN>,
+as <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img403.svg"
+ ALT="${\bf L}$"></SPAN> found by the Cholesky decomposition method is upper trangular
+but <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img402.svg"
+ ALT="${\bf W}$"></SPAN> is not, <!-- MATH
+ ${\bf L}\ne{\bf W}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img412.svg"
+ ALT="${\bf L}\ne{\bf W}$"></SPAN>. Also note that the 
+
+<P>
+Having found either <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img413.svg"
+ ALT="$L$"></SPAN> or <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img402.svg"
+ ALT="${\bf W}$"></SPAN>, we get <!-- MATH
+ ${\bf y}={\bf Lx}+{\bf m}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img414.svg"
+ ALT="${\bf y}={\bf Lx}+{\bf m}$"></SPAN>
+or <!-- MATH
+ ${\bf y}={\bf Wx}+{\bf m}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img396.svg"
+ ALT="${\bf y}={\bf Wx}+{\bf m}$"></SPAN> with <!-- MATH
+ $p({\bf y})={\cal N}({\bf m},\,{\bf\Sigma})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img415.svg"
+ ALT="$p({\bf y})={\cal N}({\bf m},\,{\bf\Sigma})$"></SPAN>
+as desired.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node5.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="probability.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node3.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node5.html">Entropy</A>
+<B> Up:</B> <A
+ HREF="probability.html">probability</A>
+<B> Previous:</B> <A
+ HREF="node3.html">Function of Random Variables</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

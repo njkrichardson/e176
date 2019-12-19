@@ -1,0 +1,510 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Pseudo-Inverse</TITLE>
+<META NAME="description" CONTENT="Pseudo-Inverse">
+<META NAME="keywords" CONTENT="algebra">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="algebra.css">
+
+<LINK REL="next" HREF="node16.html">
+<LINK REL="previous" HREF="node14.html">
+<LINK REL="next" HREF="node16.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node16.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="algebra.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node14.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node16.html">Vector Norms</A>
+<B> Up:</B> <A
+ HREF="algebra.html">algebra</A>
+<B> Previous:</B> <A
+ HREF="node14.html">Singular Value Decomposition</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION000150000000000000000">
+Pseudo-Inverse</A>
+</H1>
+
+<P>
+The inverse of an <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.31ex; " SRC="img38.svg"
+ ALT="$m\times n$"></SPAN> matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> does not exist if it 
+is not square <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img264.svg"
+ ALT="$m\ne n$"></SPAN>. But we can still find its <EM>pseudo-inverse</EM>,
+an <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.31ex; " SRC="img695.svg"
+ ALT="$n\times m$"></SPAN> matrix denoted by <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.12ex; " SRC="img696.svg"
+ ALT="${\bf A}^-$"></SPAN>, if 
+<!-- MATH
+ $rank({\bf A})=r=\min(m,\,n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img697.svg"
+ ALT="$rank({\bf A})=r=\min(m,\,n)$"></SPAN>, in either of the following ways:
+
+<P>
+
+<UL>
+<LI>If <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.21ex; " SRC="img698.svg"
+ ALT="$m&gt;n=r$"></SPAN>, <!-- MATH
+ ${\bf A}^T{\bf A}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img457.svg"
+ ALT="${\bf A}^T{\bf A}$"></SPAN> is an <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.31ex; " SRC="img153.svg"
+ ALT="$n\times n$"></SPAN> full-rank 
+  invertible matrix, and we define the <EM>left inverse</EM>:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}^-=({\bf A}^T{\bf A})^{-1}{\bf A}^T
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img699.svg"
+ ALT="$\displaystyle {\bf A}^-=({\bf A}^T{\bf A})^{-1}{\bf A}^T
+$"> 
+
+(<SPAN CLASS="arabic">197</SPAN>)
+</DIV>
+which satisfies
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}^-{\bf A}=({\bf A}^T{\bf A})^{-1}{\bf A}^T{\bf A}={\bf I}_{n\times n}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img700.svg"
+ ALT="$\displaystyle {\bf A}^-{\bf A}=({\bf A}^T{\bf A})^{-1}{\bf A}^T{\bf A}={\bf I}_{n\times n}
+$"> 
+
+(<SPAN CLASS="arabic">198</SPAN>)
+</DIV>
+But 
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}{\bf A}^-={\bf A}({\bf A}^T{\bf A})^{-1}{\bf A}^T \ne{\bf I}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img701.svg"
+ ALT="$\displaystyle {\bf A}{\bf A}^-={\bf A}({\bf A}^T{\bf A})^{-1}{\bf A}^T \ne{\bf I}
+$"> 
+
+(<SPAN CLASS="arabic">199</SPAN>)
+</DIV>
+
+<P>
+</LI>
+<LI>If <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.21ex; " SRC="img702.svg"
+ ALT="$n&gt;m=r$"></SPAN>, <!-- MATH
+ ${\bf A}{\bf A}^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img636.svg"
+ ALT="${\bf A}{\bf A}^T$"></SPAN> is an <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.31ex; " SRC="img625.svg"
+ ALT="$m\times m$"></SPAN> full-rank 
+  invertible matrix, and we define the <EM>right inverse</EM>:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}^-={\bf A}^T({\bf A}{\bf A}^T)^{-1}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img703.svg"
+ ALT="$\displaystyle {\bf A}^-={\bf A}^T({\bf A}{\bf A}^T)^{-1}
+$"> 
+
+(<SPAN CLASS="arabic">200</SPAN>)
+</DIV>
+which satisfies 
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}{\bf A}^-={\bf A}{\bf A}^T({\bf A}{\bf A}^T)^{-1}={\bf I}_{m\times m}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img704.svg"
+ ALT="$\displaystyle {\bf A}{\bf A}^-={\bf A}{\bf A}^T({\bf A}{\bf A}^T)^{-1}={\bf I}_{m\times m}
+$"> 
+
+(<SPAN CLASS="arabic">201</SPAN>)
+</DIV>
+But 
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}^-{\bf A}={\bf A}^T({\bf A}{\bf A}^T)^{-1} {\bf A}\ne{\bf I}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img705.svg"
+ ALT="$\displaystyle {\bf A}^-{\bf A}={\bf A}^T({\bf A}{\bf A}^T)^{-1} {\bf A}\ne{\bf I}
+$"> 
+
+(<SPAN CLASS="arabic">202</SPAN>)
+</DIV>
+
+<P>
+</LI>
+</UL>
+
+<P>
+The left and right inverses defined respectively for <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.21ex; " SRC="img646.svg"
+ ALT="$m&gt;n$"></SPAN> and 
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.21ex; " SRC="img37.svg"
+ ALT="$m&lt;n$"></SPAN> are the same. If <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.21ex; " SRC="img646.svg"
+ ALT="$m&gt;n$"></SPAN>, then we have the left inverse
+<!-- MATH
+ ${\bf A}^-=({\bf A}^T{\bf A})^{-1}{\bf A}^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img706.svg"
+ ALT="${\bf A}^-=({\bf A}^T{\bf A})^{-1}{\bf A}^T$"></SPAN>. We then define 
+<!-- MATH
+ ${\bf B}={\bf A}^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img707.svg"
+ ALT="${\bf B}={\bf A}^T$"></SPAN>, and take the transpose on <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.12ex; " SRC="img696.svg"
+ ALT="${\bf A}^-$"></SPAN> to 
+get
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+({\bf A}^-)^T=[({\bf A}^T{\bf A})^{-1}{\bf A}^T]^T
+={\bf A}({\bf A}^T{\bf A})^{-1}=({\bf A}^T)^{-};
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img708.svg"
+ ALT="$\displaystyle ({\bf A}^-)^T=[({\bf A}^T{\bf A})^{-1}{\bf A}^T]^T
+={\bf A}({\bf A}^T{\bf A})^{-1}=({\bf A}^T)^{-};
+$"> 
+
+(<SPAN CLASS="arabic">203</SPAN>)
+</DIV>
+i.e., <!-- MATH
+ ${\bf B}^-={\bf B}^T({\bf B}{\bf B}^T)^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img709.svg"
+ ALT="${\bf B}^-={\bf B}^T({\bf B}{\bf B}^T)^{-1}$"></SPAN>, which is the
+second definition of the pseudo inverse of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img88.svg"
+ ALT="${\bf B}$"></SPAN>.
+
+<P>
+We can show that <!-- MATH
+ $({\bf A}^-)^-={\bf A}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img710.svg"
+ ALT="$({\bf A}^-)^-={\bf A}$"></SPAN>. If <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.21ex; " SRC="img646.svg"
+ ALT="$m&gt;n$"></SPAN>, then we have
+<BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+({\bf A}^-)^-&=&[({\bf A}^T{\bf A})^{-1}{\bf A}^T]^-
+  =[({\bf A}^T{\bf A})^{-1}{\bf A}^T]^T\left[ ({\bf A}^T{\bf A})^{-1}{\bf A}^T[({\bf A}^T{\bf A})^{-1}{\bf A}^T]^T\right]^{-1}
+  \nonumber \\
+  &=&{\bf A}({\bf A}^T{\bf A})^{-1}\left[ ({\bf A}^T{\bf A})^{-1}{\bf A}^T{\bf A}({\bf A}^T{\bf A})^{-1}\right]^{-1}
+  \nonumber \\
+  &=&{\bf A}({\bf A}^T{\bf A})^{-1}({\bf A}^T{\bf A})={\bf A}.
+  \nonumber
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img711.svg"
+ ALT="$\displaystyle ({\bf A}^-)^-$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img161.svg"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 3.72ex; vertical-align: -0.93ex; " SRC="img712.svg"
+ ALT="$\displaystyle [({\bf A}^T{\bf A})^{-1}{\bf A}^T]^-
+=[({\bf A}^T{\bf A})^{-1}{\b...
+...{\bf A}^T{\bf A})^{-1}{\bf A}^T[({\bf A}^T{\bf A})^{-1}{\bf A}^T]^T\right]^{-1}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img161.svg"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 3.72ex; vertical-align: -0.93ex; " SRC="img713.svg"
+ ALT="$\displaystyle {\bf A}({\bf A}^T{\bf A})^{-1}\left[ ({\bf A}^T{\bf A})^{-1}{\bf A}^T{\bf A}({\bf A}^T{\bf A})^{-1}\right]^{-1}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img161.svg"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img714.svg"
+ ALT="$\displaystyle {\bf A}({\bf A}^T{\bf A})^{-1}({\bf A}^T{\bf A})={\bf A}.$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Similarly we can show this is the case if <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.21ex; " SRC="img37.svg"
+ ALT="$m&lt;n$"></SPAN>.
+
+<P>
+In particular, when <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img216.svg"
+ ALT="$m=n$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> is a square invertible matrix,
+and both the left and right pseudo-inverse defined above become the 
+regular inverse 
+<BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+{\bf A}^-&=&({\bf A}^T{\bf A})^{-1}{\bf A}^T
+  ={\bf A}^{-1}({\bf A}^T)^{-1}{\bf A}^T={\bf A}^{-1}
+  \nonumber\\
+  {\bf A}^-&=&{\bf A}^T({\bf A}{\bf A}^T)^{-1}
+  ={\bf A}^T({\bf A}^T)^{-1}{\bf A}^{-1}+{\bf A}^{-1}
+  \nonumber
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img715.svg"
+ ALT="$\displaystyle {\bf A}^-$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img161.svg"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img716.svg"
+ ALT="$\displaystyle ({\bf A}^T{\bf A})^{-1}{\bf A}^T
+={\bf A}^{-1}({\bf A}^T)^{-1}{\bf A}^T={\bf A}^{-1}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img715.svg"
+ ALT="$\displaystyle {\bf A}^-$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img161.svg"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img717.svg"
+ ALT="$\displaystyle {\bf A}^T({\bf A}{\bf A}^T)^{-1}
+={\bf A}^T({\bf A}^T)^{-1}{\bf A}^{-1}+{\bf A}^{-1}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+If <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img718.svg"
+ ALT="$r&lt;\min(m,n)$"></SPAN>, then <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img262.svg"
+ ALT="${\bf A}^{-1}$"></SPAN> does not exist, and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.12ex; " SRC="img696.svg"
+ ALT="${\bf A}^-$"></SPAN> 
+is neither left nor right inverse, because <!-- MATH
+ ${\bf A}^-{\bf A}\ne {\bf I}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.57ex; " SRC="img719.svg"
+ ALT="${\bf A}^-{\bf A}\ne {\bf I}$"></SPAN> 
+and <!-- MATH
+ ${\bf A}{\bf A}^-\ne {\bf I}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.57ex; " SRC="img720.svg"
+ ALT="${\bf A}{\bf A}^-\ne {\bf I}$"></SPAN>, as they are not full rank.
+
+<P>
+The pseudo inverse of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> can also be obtained based on its SVD 
+<!-- MATH
+ ${\bf A}_{m\times n}={\bf U}_{m\times m}{\bf\Sigma}_{m\times n}{\bf V}^T_{n\times n}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.88ex; " SRC="img721.svg"
+ ALT="${\bf A}_{m\times n}={\bf U}_{m\times m}{\bf\Sigma}_{m\times n}{\bf V}^T_{n\times n}$"></SPAN>.
+Consider the following two cases:
+
+<UL>
+<LI>If <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.21ex; " SRC="img646.svg"
+ ALT="$m&gt;n$"></SPAN>, the left pseudo inverse is
+  <BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+{\bf A}^-&=&({\bf A}^T{\bf A})^{-1}{\bf A}^T
+    =[({\bf U}{\bf\Sigma}{\bf V}^T)^T({\bf U}{\bf\Sigma}{\bf V}^T)]^{-1}
+    ({\bf U}{\bf\Sigma}{\bf V}^T)^T
+    \nonumber\\
+    &=&({\bf V}{\bf\Sigma}^T{\bf U}^T{\bf U}{\bf\Sigma}{\bf V}^T)^{-1}
+    ({\bf V}{\bf\Sigma}^T{\bf U}^T)
+    ={\bf V}({\bf\Sigma}^T{\bf\Sigma})^{-1}{\bf V}^T
+    {\bf V}{\bf\Sigma}^T{\bf U}^T
+    \nonumber\\
+    &=&{\bf V}[({\bf\Sigma}^T{\bf\Sigma})^{-1}{\bf\Sigma}^T]{\bf U}^T
+    ={\bf V}{\bf\Sigma}^-{\bf U}^T
+    \nonumber
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img715.svg"
+ ALT="$\displaystyle {\bf A}^-$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img161.svg"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img722.svg"
+ ALT="$\displaystyle ({\bf A}^T{\bf A})^{-1}{\bf A}^T
+=[({\bf U}{\bf\Sigma}{\bf V}^T)^T({\bf U}{\bf\Sigma}{\bf V}^T)]^{-1}
+({\bf U}{\bf\Sigma}{\bf V}^T)^T$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img161.svg"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img723.svg"
+ ALT="$\displaystyle ({\bf V}{\bf\Sigma}^T{\bf U}^T{\bf U}{\bf\Sigma}{\bf V}^T)^{-1}
+(...
+...
+={\bf V}({\bf\Sigma}^T{\bf\Sigma})^{-1}{\bf V}^T
+{\bf V}{\bf\Sigma}^T{\bf U}^T$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img161.svg"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img724.svg"
+ ALT="$\displaystyle {\bf V}[({\bf\Sigma}^T{\bf\Sigma})^{-1}{\bf\Sigma}^T]{\bf U}^T
+={\bf V}{\bf\Sigma}^-{\bf U}^T$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+</LI>
+<LI>If <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.21ex; " SRC="img37.svg"
+ ALT="$m&lt;n$"></SPAN>, the right pseudo inverse is
+  <BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+{\bf A}^-&=&{\bf A}^T({\bf A}{\bf A}^T)^{-1}
+    =({\bf U}{\bf\Sigma}{\bf V}^T)^T
+    [({\bf U}{\bf\Sigma}{\bf V}^T)({\bf U}{\bf\Sigma}{\bf V}^T)^T]^{-1}
+    \nonumber\\
+    &=&({\bf V}{\bf\Sigma}^T{\bf U}^T)
+       ({\bf U}{\bf\Sigma}{\bf V}^T{\bf V}{\bf\Sigma}^T{\bf U}^T)^{-1}
+    ={\bf V}{\bf\Sigma}^T{\bf U}^T
+    ({\bf U}{\bf\Sigma}{\bf\Sigma}^T{\bf U}^T)^{-1}
+    \nonumber\\
+    &=&{\bf V}{\bf\Sigma}^T{\bf U}^T
+    {\bf U}({\bf\Sigma}{\bf\Sigma}^T)^{-1}{\bf U}^T
+    ={\bf V}[{\bf\Sigma}^T({\bf\Sigma}{\bf\Sigma}^T)^{-1}]{\bf U}^T
+    ={\bf V}{\bf\Sigma}^-{\bf U}^T
+    \nonumber
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img715.svg"
+ ALT="$\displaystyle {\bf A}^-$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img161.svg"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img725.svg"
+ ALT="$\displaystyle {\bf A}^T({\bf A}{\bf A}^T)^{-1}
+=({\bf U}{\bf\Sigma}{\bf V}^T)^T
+[({\bf U}{\bf\Sigma}{\bf V}^T)({\bf U}{\bf\Sigma}{\bf V}^T)^T]^{-1}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img161.svg"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img726.svg"
+ ALT="$\displaystyle ({\bf V}{\bf\Sigma}^T{\bf U}^T)
+({\bf U}{\bf\Sigma}{\bf V}^T{\bf ...
+...
+={\bf V}{\bf\Sigma}^T{\bf U}^T
+({\bf U}{\bf\Sigma}{\bf\Sigma}^T{\bf U}^T)^{-1}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img161.svg"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img727.svg"
+ ALT="$\displaystyle {\bf V}{\bf\Sigma}^T{\bf U}^T
+{\bf U}({\bf\Sigma}{\bf\Sigma}^T)^{...
+...igma}^T({\bf\Sigma}{\bf\Sigma}^T)^{-1}]{\bf U}^T
+={\bf V}{\bf\Sigma}^-{\bf U}^T$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+</LI>
+</UL>
+In either case, we have
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}^-_{n\times m}=({\bf U}_{m\times m}{\bf\Sigma}_{m\times m}{\bf V}^T_{n\times n})^-
+  ={\bf V}_{n\times n}{\bf\Sigma}^-_{n\times m}{\bf U}^T_{m\times m}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.25ex; vertical-align: -0.89ex; " SRC="img728.svg"
+ ALT="$\displaystyle {\bf A}^-_{n\times m}=({\bf U}_{m\times m}{\bf\Sigma}_{m\times m}...
+...imes n})^-
+={\bf V}_{n\times n}{\bf\Sigma}^-_{n\times m}{\bf U}^T_{m\times m}
+$"> 
+
+(<SPAN CLASS="arabic">204</SPAN>)
+</DIV>
+where <!-- MATH
+ ${\bf\Sigma}^-_{n\times m}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.89ex; " SRC="img729.svg"
+ ALT="${\bf\Sigma}^-_{n\times m}$"></SPAN> is the pseudo inverse of <!-- MATH
+ ${\bf\Sigma}_{m\times n}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.66ex; " SRC="img730.svg"
+ ALT="${\bf\Sigma}_{m\times n}$"></SPAN>
+with <!-- MATH
+ $1/\sigma_1,\cdots,1/\sigma_r$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img731.svg"
+ ALT="$1/\sigma_1,\cdots,1/\sigma_r$"></SPAN> on its diagonal.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node16.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="algebra.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node14.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node16.html">Vector Norms</A>
+<B> Up:</B> <A
+ HREF="algebra.html">algebra</A>
+<B> Previous:</B> <A
+ HREF="node14.html">Singular Value Decomposition</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

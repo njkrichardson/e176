@@ -1,0 +1,706 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Mutual Information and Kullback-Leibler (KL) Divergence</TITLE>
+<META NAME="description" CONTENT="Mutual Information and Kullback-Leibler (KL) Divergence">
+<META NAME="keywords" CONTENT="probability">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="probability.css">
+
+<LINK REL="next" HREF="node7.html">
+<LINK REL="previous" HREF="node5.html">
+<LINK REL="next" HREF="node7.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node7.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="probability.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node5.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node7.html">Bayesian Inference</A>
+<B> Up:</B> <A
+ HREF="probability.html">probability</A>
+<B> Previous:</B> <A
+ HREF="node5.html">Entropy</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00060000000000000000">
+Mutual Information and Kullback-Leibler (KL) Divergence</A>
+</H1>
+
+<P>
+<B>Joint Entropy</B>
+
+<P>
+The joint entropy of two discrete random variables <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img27.svg"
+ ALT="$y$"></SPAN> is
+defined as:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+H(x,y)=-\sum_i\sum_j P(x_i,y_j)\log P(x_i,y_j)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -3.40ex; " SRC="img495.svg"
+ ALT="$\displaystyle H(x,y)=-\sum_i\sum_j P(x_i,y_j)\log P(x_i,y_j)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">171</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+More generally, 
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+H(x_1,\cdots,x_n)=-\sum_{x_1}\cdots\sum_{x_n} P(x_1,\cdots,x_n)\log P(x_1,\cdots,x_n)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -3.25ex; " SRC="img496.svg"
+ ALT="$\displaystyle H(x_1,\cdots,x_n)=-\sum_{x_1}\cdots\sum_{x_n} P(x_1,\cdots,x_n)\log P(x_1,\cdots,x_n)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">172</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+<B>Conditional Entropy</B>
+
+<P>
+The <EM>conditional entropy (equivocation)</EM> <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img497.svg"
+ ALT="$H(y\vert x)$"></SPAN> measures
+the uncertainty of a random variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img27.svg"
+ ALT="$y$"></SPAN> given the value of 
+another random variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN>, or the amount of information gained 
+once the outcome of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img27.svg"
+ ALT="$y$"></SPAN> is known, given the outcome of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN>.
+
+<P>
+Let <!-- MATH
+ $H(y|x=x_i)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img498.svg"
+ ALT="$H(y\vert x=x_i)$"></SPAN> be the entropy of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img27.svg"
+ ALT="$y$"></SPAN> conditioned on <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img499.svg"
+ ALT="$x=x_i$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+H(y|x=x_i)=-\sum_j P(y_j|x_i) \log P(y_j|x_i)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -3.40ex; " SRC="img500.svg"
+ ALT="$\displaystyle H(y\vert x=x_i)=-\sum_j P(y_j\vert x_i) \log P(y_j\vert x_i)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">173</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Then the conditional entropy <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img497.svg"
+ ALT="$H(y\vert x)$"></SPAN> is defined as the average of
+<!-- MATH
+ $H(y|x=x_i)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img498.svg"
+ ALT="$H(y\vert x=x_i)$"></SPAN> over all outcomes of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN>:
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+H(y|x)&=& E_x\left( H(y|x=x_i) \right)
+  =\sum_i P(x_i) H(y|x=x_i)
+  \nonumber\\
+  &=&-\sum_i P(x_i) \sum_j P(y_j|x_i) \log P(y_j|x_i)
+  =-\sum_i \sum_j P(x_i) P(y_j|x_i) \log P(y_j|x_i)
+  \nonumber\\
+  &=&-\sum_i \sum_j P(x_i,y_j) \log P(y_j|x_i)
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img501.svg"
+ ALT="$\displaystyle H(y\vert x)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.81ex; vertical-align: -3.09ex; " SRC="img502.svg"
+ ALT="$\displaystyle E_x\left( H(y\vert x=x_i) \right)
+=\sum_i P(x_i) H(y\vert x=x_i)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.04ex; vertical-align: -3.40ex; " SRC="img503.svg"
+ ALT="$\displaystyle -\sum_i P(x_i) \sum_j P(y_j\vert x_i) \log P(y_j\vert x_i)
+=-\sum_i \sum_j P(x_i) P(y_j\vert x_i) \log P(y_j\vert x_i)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.04ex; vertical-align: -3.40ex; " SRC="img504.svg"
+ ALT="$\displaystyle -\sum_i \sum_j P(x_i,y_j) \log P(y_j\vert x_i)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">174</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+The last equality is due to <!-- MATH
+ $P(x,y)=P(y|x) P(x)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img505.svg"
+ ALT="$P(x,y)=P(y\vert x) P(x)$"></SPAN>.
+
+<P>
+<B>Theorem:</B>
+
+<P>
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+H(y|x)&=&-\sum_i \sum_j P(x_i,y_j) \log P(y_j|x_i)
+  =\sum_i \sum_j P(x_i,y_j) \log \frac{P(x_i)}{P(x_i,y_j)}
+  \nonumber\\
+  &=&-\sum_i\sum_j P(x_i,y_j)\log P(x_i,y_j)+\sum_i\sum_j P(x_i,y_j) \log P(x_i)
+  \nonumber\\
+  &=&H(x,y)+\sum_iP(x_i) \log P(x_i)=H(x,y)-H(x)
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img501.svg"
+ ALT="$\displaystyle H(y\vert x)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.97ex; vertical-align: -3.40ex; " SRC="img506.svg"
+ ALT="$\displaystyle -\sum_i \sum_j P(x_i,y_j) \log P(y_j\vert x_i)
+=\sum_i \sum_j P(x_i,y_j) \log \frac{P(x_i)}{P(x_i,y_j)}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.04ex; vertical-align: -3.40ex; " SRC="img507.svg"
+ ALT="$\displaystyle -\sum_i\sum_j P(x_i,y_j)\log P(x_i,y_j)+\sum_i\sum_j P(x_i,y_j) \log P(x_i)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.81ex; vertical-align: -3.09ex; " SRC="img508.svg"
+ ALT="$\displaystyle H(x,y)+\sum_iP(x_i) \log P(x_i)=H(x,y)-H(x)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">175</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+Similarly, we also have <!-- MATH
+ $H(x|y)=H(x,y)-H(y)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img509.svg"
+ ALT="$H(x\vert y)=H(x,y)-H(y)$"></SPAN>. We therefore have 
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+H(x,y)=H(y|x)+H(x)=H(x|y)+H(y)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img510.svg"
+ ALT="$\displaystyle H(x,y)=H(y\vert x)+H(x)=H(x\vert y)+H(y)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">176</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and <EM>Baye's rule</EM> for conditioinal entropy:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+H(y|x)=H(x|y)+H(y)-H(x)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img511.svg"
+ ALT="$\displaystyle H(y\vert x)=H(x\vert y)+H(y)-H(x)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">177</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+<B>Mutual Information</B>
+
+<P>
+Mutual information <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img512.svg"
+ ALT="$I(x,y)$"></SPAN> measures the information shared by random 
+variables <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img27.svg"
+ ALT="$y$"></SPAN>, it measures how much knowing one of the two variables 
+reduces uncertainty of the other. 
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+I(x,y)&=&\sum_i\sum_j P(x_i,y_j)\log\frac{P(x_i,y_j)}{P(x_i)P(y_j)}
+  \nonumber\\
+  &=&\sum_i\sum_j P(x_i,y_j)\log\frac{P(x_i,y_j)}{P(x_i)}
+  -\sum_i\sum_j P(x_i,y_j)\log P(y_j)
+  \nonumber\\
+  &=&\sum_i\sum_j P(y_j|x_i)P(x_i)\log P(y_j|x_i)
+  -\sum_j \log P(y_j)\left( \sum_i P(x_i,y_j) \right)
+  \nonumber\\
+  &=&\sum_iP(x_i) \sum_j P(y_j|x_i)\log P(y_j|x_i)-\sum_j P(y_j) \log P(y_j)
+  \nonumber\\
+  &=&-H(y|x)+H(y)=H(y)-H(y|x)
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img513.svg"
+ ALT="$\displaystyle I(x,y)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.97ex; vertical-align: -3.40ex; " SRC="img514.svg"
+ ALT="$\displaystyle \sum_i\sum_j P(x_i,y_j)\log\frac{P(x_i,y_j)}{P(x_i)P(y_j)}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.97ex; vertical-align: -3.40ex; " SRC="img515.svg"
+ ALT="$\displaystyle \sum_i\sum_j P(x_i,y_j)\log\frac{P(x_i,y_j)}{P(x_i)}
+-\sum_i\sum_j P(x_i,y_j)\log P(y_j)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.66ex; vertical-align: -3.40ex; " SRC="img516.svg"
+ ALT="$\displaystyle \sum_i\sum_j P(y_j\vert x_i)P(x_i)\log P(y_j\vert x_i)
+-\sum_j \log P(y_j)\left( \sum_i P(x_i,y_j) \right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.04ex; vertical-align: -3.40ex; " SRC="img517.svg"
+ ALT="$\displaystyle \sum_iP(x_i) \sum_j P(y_j\vert x_i)\log P(y_j\vert x_i)-\sum_j P(y_j) \log P(y_j)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img518.svg"
+ ALT="$\displaystyle -H(y\vert x)+H(y)=H(y)-H(y\vert x)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">178</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+Similarly, we also have <!-- MATH
+ $I(x,y)=H(x)-H(x|y)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img519.svg"
+ ALT="$I(x,y)=H(x)-H(x\vert y)$"></SPAN>.
+Combining the last two equatioins, we have
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+I(x,y)&=&H(x)-H(x|y)=H(y)-H(y|x)
+  \nonumber\\
+  &=&H(x,y)-H(y|x)-H(x|y)
+  \nonumber\\
+  &=&H(x)+H(y)-H(x,y)
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img513.svg"
+ ALT="$\displaystyle I(x,y)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img520.svg"
+ ALT="$\displaystyle H(x)-H(x\vert y)=H(y)-H(y\vert x)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img521.svg"
+ ALT="$\displaystyle H(x,y)-H(y\vert x)-H(x\vert y)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img522.svg"
+ ALT="$\displaystyle H(x)+H(y)-H(x,y)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">179</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+These relationships can be summarized in the following diagram:
+
+<P>
+<IMG STYLE=""
+ SRC="../figures/mutual_info.gif"
+ ALT="mutual_info.gif">
+
+<P>
+The mutual information of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img26.svg"
+ ALT="$N$"></SPAN> random variables is defined as
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+I(x_1,\cdots,x_N)=\sum_{i=1}^N H(x_i)-H(x_1,\cdots,x_N)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img523.svg"
+ ALT="$\displaystyle I(x_1,\cdots,x_N)=\sum_{i=1}^N H(x_i)-H(x_1,\cdots,x_N)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">180</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+<B>Cross Entropy</B>
+
+<P>
+When the true distribution <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img16.svg"
+ ALT="$P$"></SPAN> is unknown, the encoding of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN> can
+be based on another distribution <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img524.svg"
+ ALT="$Q$"></SPAN> as a model that approximates
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img16.svg"
+ ALT="$P$"></SPAN>. Then the average of the total number of bits needed is called 
+the <EM>cross-entropy</EM>. 
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+H(P,Q)=\sum_iP_i\log_2\frac{1}{Q_i}=-\sum_iP_i\log Q_i
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.27ex; vertical-align: -3.09ex; " SRC="img525.svg"
+ ALT="$\displaystyle H(P,Q)=\sum_iP_i\log_2\frac{1}{Q_i}=-\sum_iP_i\log Q_i$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">181</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+We can prove 
+<A ID="tex2html5"
+  HREF="https://en.wikipedia.org/wiki/Gibbs%27_inequality">Gibbs' inequality</A>.
+stating that the entropy <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img526.svg"
+ ALT="$H(P)$"></SPAN> is no greater than the cross entropy
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img527.svg"
+ ALT="$H(P,Q)$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+H(P)=-\sum_i P_i \log P_i\le H(P,Q)=-\sum_iP_i\log Q_i
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.81ex; vertical-align: -3.09ex; " SRC="img528.svg"
+ ALT="$\displaystyle H(P)=-\sum_i P_i \log P_i\le H(P,Q)=-\sum_iP_i\log Q_i$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">182</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+with the equality holds <!-- MATH
+ $H(P,Q)=H(P)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img529.svg"
+ ALT="$H(P,Q)=H(P)$"></SPAN> if and only if <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img530.svg"
+ ALT="$Q=P$"></SPAN>. 
+
+<P>
+<B>Proof:</B> Based on inequality <!-- MATH
+ $\log x\le x-1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img531.svg"
+ ALT="$\log x\le x-1$"></SPAN>, we have
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\sum_i P_i\log \left(\frac{Q_i}{P_i}\right) \le
+  \sum_i P_i \left( \frac{Q_i}{P_i}-1\right)
+  =\sum_i Q_i -\sum_i P_i =0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.74ex; vertical-align: -3.09ex; " SRC="img532.svg"
+ ALT="$\displaystyle \sum_i P_i\log \left(\frac{Q_i}{P_i}\right) \le
+\sum_i P_i \left( \frac{Q_i}{P_i}-1\right)
+=\sum_i Q_i -\sum_i P_i =0$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">183</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+i.e.,
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\sum_i P_i\log \left(\frac{Q_i}{P_i}\right)
+  =\sum_i P_i \log \left(\frac{1}{P_i}\right) +\sum_i P_i \log Q_i
+  =H(P)-H(P,Q)\le 0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.74ex; vertical-align: -3.09ex; " SRC="img533.svg"
+ ALT="$\displaystyle \sum_i P_i\log \left(\frac{Q_i}{P_i}\right)
+=\sum_i P_i \log \left(\frac{1}{P_i}\right) +\sum_i P_i \log Q_i
+=H(P)-H(P,Q)\le 0$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">184</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+We see that the encoding of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN> based on model distribution <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img524.svg"
+ ALT="$Q$"></SPAN> 
+always requires more bits than that based on the true distribution <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img16.svg"
+ ALT="$P$"></SPAN>.
+
+<P>
+<B>Kullback-Leibler (KL) Divergence (Relative Entropy)</B>
+
+<P>
+The Kullback-Leibler (KL) divergence or relative entropy is defined as
+the difference between the cross entropy <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img527.svg"
+ ALT="$H(P,Q)$"></SPAN> and the entropy <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img526.svg"
+ ALT="$H(P)$"></SPAN>:
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+KL(P||Q) &=& H(P,Q)-H(P)
+  =-\sum_i P_i \log Q_i-(-\sum_i P_i \log P_i)
+  \nonumber\\
+  &=&\sum_i P_i (\log P_i-\log Q_i)=\sum_i P_i \log \left(\frac{P_i}{Q_i}\right)
+  \ge 0
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img534.svg"
+ ALT="$\displaystyle KL(P\vert\vert Q)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.81ex; vertical-align: -3.09ex; " SRC="img535.svg"
+ ALT="$\displaystyle H(P,Q)-H(P)
+=-\sum_i P_i \log Q_i-(-\sum_i P_i \log P_i)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.74ex; vertical-align: -3.09ex; " SRC="img536.svg"
+ ALT="$\displaystyle \sum_i P_i (\log P_i-\log Q_i)=\sum_i P_i \log \left(\frac{P_i}{Q_i}\right)
+\ge 0$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">185</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+The KL divergence represents the number of extra bits needed to encode
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN> based on <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img524.svg"
+ ALT="$Q$"></SPAN> instead of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img16.svg"
+ ALT="$P$"></SPAN>, or a measure of the error of using <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img524.svg"
+ ALT="$Q$"></SPAN> 
+to approximate <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img16.svg"
+ ALT="$P$"></SPAN>, in terms of the amount of information lost, due to
+the inaccuracy of the model. In order to obtain the best model <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img524.svg"
+ ALT="$Q$"></SPAN> that 
+optimally approximates <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img16.svg"
+ ALT="$P$"></SPAN>, we need to minimize <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img537.svg"
+ ALT="$KL(P\vert\vert Q)$"></SPAN>. 
+
+<P>
+In general, <!-- MATH
+ $KL(P\vert\vert Q) \ne KL(Q\vert\vert P)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img538.svg"
+ ALT="$KL(P\vert\vert Q) \ne KL(Q\vert\vert P)$"></SPAN>, the KL divergence 
+is not a distance metric as it is not symmetric (hence the name divergence 
+rather than distance).
+
+<P>
+The mutual information defined above can be expressed as the following
+KL divergence:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+I(x,y)=\sum_i\sum_j P(x_i,y_j)\log\frac{P(x_i,y_j)}{P(x_i)P(y_j)}
+  =KL(P(x,y)||P(x)\,P(y))
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.97ex; vertical-align: -3.40ex; " SRC="img539.svg"
+ ALT="$\displaystyle I(x,y)=\sum_i\sum_j P(x_i,y_j)\log\frac{P(x_i,y_j)}{P(x_i)P(y_j)}
+=KL(P(x,y)\vert\vert P(x)\,P(y))$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">186</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+i.e., the mutual information is the error of using <!-- MATH
+ $P(x)\,P(y)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img540.svg"
+ ALT="$P(x)\,P(y)$"></SPAN> to 
+model the joint probability <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img541.svg"
+ ALT="$P(x,y)$"></SPAN>. When <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img27.svg"
+ ALT="$y$"></SPAN> are independent
+of each other, i.e., 
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+P(x,y)=P(x)\,P(y),\;\;\;\;\;\;P(x|y)=P(x),\;\;\;\;\;\;P(y|x)=P(y)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img542.svg"
+ ALT="$\displaystyle P(x,y)=P(x)\,P(y),\;\;\;\;\;\;P(x\vert y)=P(x),\;\;\;\;\;\;P(y\vert x)=P(y)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">187</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+their mutual information is equal to zero.
+
+<P>
+Consider the cross-entropy of a Gaussian <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img543.svg"
+ ALT="$g(x)$"></SPAN> and an arbitrary pdf 
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img63.svg"
+ ALT="$p(x)$"></SPAN> both with the same variance <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img474.svg"
+ ALT="$\sigma^2$"></SPAN>:
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+H(p,g)&=&-\int p(x)\log g(x)\,dx
+  =-\int p(x)\left(log\frac{1}{\sqrt{2\pi\sigma^2}}-\frac{(x-\mu)^2}{2\sigma^2}\right)dx
+  \nonumber\\
+  &=&\frac{1}{2}\log(2\pi\sigma^2)+\frac{1}{2\sigma^2}\int(x-\mu)^2 p(x)\,dx
+  =\frac{1}{2}\log(2\pi\sigma^2)+\frac{1}{2\sigma^2}\sigma^2
+  \nonumber\\
+  &=&\frac{1}{2}\log(2\pi\sigma^2)+\frac{1}{2}
+  =\frac{1}{2}\log(2\pi\sigma^2)+\frac{1}{2}\log e
+  =\frac{1}{2}\log(2\pi e\sigma^2)=H(g)
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img544.svg"
+ ALT="$\displaystyle H(p,g)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.04ex; vertical-align: -2.32ex; " SRC="img545.svg"
+ ALT="$\displaystyle -\int p(x)\log g(x)\,dx
+=-\int p(x)\left(log\frac{1}{\sqrt{2\pi\sigma^2}}-\frac{(x-\mu)^2}{2\sigma^2}\right)dx$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.57ex; vertical-align: -2.12ex; " SRC="img546.svg"
+ ALT="$\displaystyle \frac{1}{2}\log(2\pi\sigma^2)+\frac{1}{2\sigma^2}\int(x-\mu)^2 p(x)\,dx
+=\frac{1}{2}\log(2\pi\sigma^2)+\frac{1}{2\sigma^2}\sigma^2$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img547.svg"
+ ALT="$\displaystyle \frac{1}{2}\log(2\pi\sigma^2)+\frac{1}{2}
+=\frac{1}{2}\log(2\pi\sigma^2)+\frac{1}{2}\log e
+=\frac{1}{2}\log(2\pi e\sigma^2)=H(g)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">188</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+We see that the cross-entropy <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img548.svg"
+ ALT="$H(p,g)$"></SPAN> of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img543.svg"
+ ALT="$g(x)$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img63.svg"
+ ALT="$p(x)$"></SPAN> is the same 
+as the entropy of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img543.svg"
+ ALT="$g(x)$"></SPAN>. But as we also know <!-- MATH
+ $H(p,g)\ge H(p)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img549.svg"
+ ALT="$H(p,g)\ge H(p)$"></SPAN>, we have
+<!-- MATH
+ $H(g)=H(p,g)\ge H(p)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img550.svg"
+ ALT="$H(g)=H(p,g)\ge H(p)$"></SPAN>. We therefore conclude that among all probability 
+density functions <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img63.svg"
+ ALT="$p(x)$"></SPAN> with the same variance <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img474.svg"
+ ALT="$\sigma^2$"></SPAN>, the Gaussian 
+<!-- MATH
+ $N(x,\mu,\sigma^2)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img551.svg"
+ ALT="$N(x,\mu,\sigma^2)$"></SPAN> has the maximal entropy.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node7.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="probability.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node5.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node7.html">Bayesian Inference</A>
+<B> Up:</B> <A
+ HREF="probability.html">probability</A>
+<B> Previous:</B> <A
+ HREF="node5.html">Entropy</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

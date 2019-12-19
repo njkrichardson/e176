@@ -1,0 +1,469 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Function of Random Variables</TITLE>
+<META NAME="description" CONTENT="Function of Random Variables">
+<META NAME="keywords" CONTENT="probability">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="probability.css">
+
+<LINK REL="next" HREF="node4.html">
+<LINK REL="previous" HREF="node2.html">
+<LINK REL="next" HREF="node4.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node4.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="probability.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node2.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node4.html">The Normal Distribution</A>
+<B> Up:</B> <A
+ HREF="probability.html">probability</A>
+<B> Previous:</B> <A
+ HREF="node2.html">Probability of multivariate random</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00030000000000000000">
+Function of Random Variables</A>
+</H1>
+
+<P>
+We first find the mean and variance of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img206.svg"
+ ALT="$y=cx$"></SPAN> where <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN> is a random 
+variable and <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img207.svg"
+ ALT="$c$"></SPAN> is the constant:
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+\mu_y&=&E(y)=E(cx)=c\,E(x)=c\,\mu_x
+  \nonumber\\
+  \sigma_y&=&E(y^2)-\mu_y^2=E[(cx)^2]-(c\mu_x)^2=c^2\,E(x^2)-c^2 \mu_x^2
+  =c^2 (E(x^2)-\mu_x^2)=\sigma_x^2
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img208.svg"
+ ALT="$\displaystyle \mu_y$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img209.svg"
+ ALT="$\displaystyle E(y)=E(cx)=c\,E(x)=c\,\mu_x$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img210.svg"
+ ALT="$\displaystyle \sigma_y$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.25ex; vertical-align: -1.01ex; " SRC="img211.svg"
+ ALT="$\displaystyle E(y^2)-\mu_y^2=E[(cx)^2]-(c\mu_x)^2=c^2\,E(x^2)-c^2 \mu_x^2
+=c^2 (E(x^2)-\mu_x^2)=\sigma_x^2$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">76</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+We next consider the mean and variance of <!-- MATH
+ $y=x_1+\cdots+x_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.57ex; " SRC="img212.svg"
+ ALT="$y=x_1+\cdots+x_n$"></SPAN> as the 
+sum of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img53.svg"
+ ALT="$n$"></SPAN> random variables:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\mu_y=E(y)=E\left( \sum_{i=1}^n x_i \right)=\sum_{i=1}^n E(x_i)=\sum_{i=1}^n \mu_{x_i}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img213.svg"
+ ALT="$\displaystyle \mu_y=E(y)=E\left( \sum_{i=1}^n x_i \right)=\sum_{i=1}^n E(x_i)=\sum_{i=1}^n \mu_{x_i}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">77</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+We also have
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+E(y^2)=E\left( \sum_{i=1}^n x_i \right)^2
+  =E\left( \sum_{i=1}^n\sum_{j=1}^n x_ix_j \right)
+  =\sum_{i=1}^n\sum_{j=1}^n E(x_ix_j)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img214.svg"
+ ALT="$\displaystyle E(y^2)=E\left( \sum_{i=1}^n x_i \right)^2
+=E\left( \sum_{i=1}^n\sum_{j=1}^n x_ix_j \right)
+=\sum_{i=1}^n\sum_{j=1}^n E(x_ix_j)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">78</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+(E(y))^2=\left( \sum_{i=1}^n E(x_i) \right)^2=\sum_{i=1}^n\sum_{j=1}^n E(x_i)E(x_j)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.13ex; vertical-align: -3.40ex; " SRC="img215.svg"
+ ALT="$\displaystyle (E(y))^2=\left( \sum_{i=1}^n E(x_i) \right)^2=\sum_{i=1}^n\sum_{j=1}^n E(x_i)E(x_j)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">79</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+then we get
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+Var(y)=E(y^2)-(E(y))^2=\sum_{i=1}^n\sum_{j=1}^n E(x_ix_j)-\sum_{i=1}^n\sum_{j=1}^n E(x_i)E(x_j)
+  =\sum_{i=1}^n\sum_{j=1}^n Cov(x_i,x_j)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.40ex; " SRC="img216.svg"
+ ALT="$\displaystyle Var(y)=E(y^2)-(E(y))^2=\sum_{i=1}^n\sum_{j=1}^n E(x_ix_j)-\sum_{i=1}^n\sum_{j=1}^n E(x_i)E(x_j)
+=\sum_{i=1}^n\sum_{j=1}^n Cov(x_i,x_j)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">80</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Only if all <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img117.svg"
+ ALT="$x_i$"></SPAN> are uncorrelated (or more specially independent), i.e., 
+<!-- MATH
+ $Cov(x_i,x_j)=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img217.svg"
+ ALT="$Cov(x_i,x_j)=0$"></SPAN> for <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img218.svg"
+ ALT="$i\ne j$"></SPAN>, do we have
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\sigma_y^2=Var(y)=\sum_{i=1}^n \sum_{j=1}^n Cov(x_i,x_j)=\sum_{i=1}^n Cov(x_i,x_i)
+  =\sum_{i=1}^n Var(x_i)=\sum_{i=1}^n \sigma_{x_i}^2
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.40ex; " SRC="img219.svg"
+ ALT="$\displaystyle \sigma_y^2=Var(y)=\sum_{i=1}^n \sum_{j=1}^n Cov(x_i,x_j)=\sum_{i=1}^n Cov(x_i,x_i)
+=\sum_{i=1}^n Var(x_i)=\sum_{i=1}^n \sigma_{x_i}^2$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">81</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+We further consider in general <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img100.svg"
+ ALT="$y=f(x)$"></SPAN> as a nonlinear function of a random 
+variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN> is also a random variable, which can be approximated based on 
+its Taylor expansion near the mean <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img220.svg"
+ ALT="$\mu_x$"></SPAN> of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img19.svg"
+ ALT="$x$"></SPAN>:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+y=f(x)=f(\mu_x)+f'(\mu_x)(x-\mu_x)+\frac{f''(\mu_x)}{2}(x-\mu_x)^2+\cdots
+  \approx f(\mu_x)+f'(\mu_x)(x-\mu_x)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.34ex; vertical-align: -1.71ex; " SRC="img221.svg"
+ ALT="$\displaystyle y=f(x)=f(\mu_x)+f'(\mu_x)(x-\mu_x)+\frac{f''(\mu_x)}{2}(x-\mu_x)^2+\cdots
+\approx f(\mu_x)+f'(\mu_x)(x-\mu_x)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">82</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The approximation is due to the assumption that <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img222.svg"
+ ALT="$\vert x-\mu_x\vert$"></SPAN> is small.
+Taking the mean on both side we get
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\mu_y=E(y)\approx E[ f(\mu_x)+f'(\mu_x)(x-\mu_x)]=f(\mu_x)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img223.svg"
+ ALT="$\displaystyle \mu_y=E(y)\approx E[ f(\mu_x)+f'(\mu_x)(x-\mu_x)]=f(\mu_x)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">83</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Taking the variance on both sides we get
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+Var(y)\approx Var[ f(\mu_x)+f'(\mu_x)(x-\mu_x) ]=Var[f'(\mu_x)(x-\mu_x)]
+  =f'^2(\mu_x) Var(x)=f'^2(\mu_x) \sigma^2_x
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img224.svg"
+ ALT="$\displaystyle Var(y)\approx Var[ f(\mu_x)+f'(\mu_x)(x-\mu_x) ]=Var[f'(\mu_x)(x-\mu_x)]
+=f'^2(\mu_x) Var(x)=f'^2(\mu_x) \sigma^2_x$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">84</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+Finally to find the mean and variance of <!-- MATH
+ $y=f(x_1,\cdots,x_n)=f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img225.svg"
+ ALT="$y=f(x_1,\cdots,x_n)=f({\bf x})$"></SPAN> 
+as a nonlinear function of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img53.svg"
+ ALT="$n$"></SPAN> random variables represented as an n-D
+vector <!-- MATH
+ ${\bf x}=[x_1,\cdots,x_n]^2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img226.svg"
+ ALT="${\bf x}=[x_1,\cdots,x_n]^2$"></SPAN>, consider its 
+<A ID="tex2html2"
+  HREF="../algebra/node23.html">Taylor expansion</A>
+in the
+neighborhood of the mean vector <!-- MATH
+ ${\bf m}_x=[\mu_{x_1},\cdots,\mu_{x_n}]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img227.svg"
+ ALT="${\bf m}_x=[\mu_{x_1},\cdots,\mu_{x_n}]^T$"></SPAN>:
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+f(x_1,\cdots,x_n)
+  &=&f(\mu_{x_1},\cdots,\mu_{x_n})+\sum_{i=1}^n \frac{\partial f}{\partial x_i} (x_i-\mu_{x_i})
+  +\sum_{i=1}^n\sum_{j=1}^n \frac{\partial f^2}{\partial x_i \partial x_j}
+  (x_i-\mu_{x_i})(x_j-\mu_{x_j})+\cdots
+  \nonumber\\
+  &\approx & f(\mu_{x_1},\cdots,\mu_{x_n})
+  +\sum_{i=1}^n \frac{\partial f}{\partial x_i} (x_i-\mu_{x_i})
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img228.svg"
+ ALT="$\displaystyle f(x_1,\cdots,x_n)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.40ex; " SRC="img229.svg"
+ ALT="$\displaystyle f(\mu_{x_1},\cdots,\mu_{x_n})+\sum_{i=1}^n \frac{\partial f}{\par...
+...{\partial f^2}{\partial x_i \partial x_j}
+(x_i-\mu_{x_i})(x_j-\mu_{x_j})+\cdots$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img230.svg"
+ ALT="$\displaystyle \approx$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.20ex; vertical-align: -3.09ex; " SRC="img231.svg"
+ ALT="$\displaystyle f(\mu_{x_1},\cdots,\mu_{x_n})
++\sum_{i=1}^n \frac{\partial f}{\partial x_i} (x_i-\mu_{x_i})$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">85</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+or in matrix form:
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+f({\bf x})=f({\bf m}_x)+{\bf g({\bf m}_x)}^T({\bf x}-{\bf m}_x)
+  +\frac{1}{2}({\bf x}-{\bf m}_x)^T{\bf H}({\bf m}_x)({\bf x}-{\bf m}_x)+\cdots
+  \approx f({\bf m}_x)+{\bf g({\bf m}_x)}^T({\bf x}-{\bf m}_x)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img232.svg"
+ ALT="$\displaystyle f({\bf x})=f({\bf m}_x)+{\bf g({\bf m}_x)}^T({\bf x}-{\bf m}_x)
++...
+...-{\bf m}_x)+\cdots
+\approx f({\bf m}_x)+{\bf g({\bf m}_x)}^T({\bf x}-{\bf m}_x)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">86</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf g}({\bf m}_x)
+  =\left[\begin{array}{c}\frac{\partial f{\bf x})}{\partial x_1}\\
+      \vdots\\\frac{\partial f{\bf x})}{\partial x_n}\end{array}\right]_{{\bf m}_x},
+  \;\;\;\;\;
+  {\bf H}({\bf m}_x)
+  =\left[ \begin{array}{ccc}
+      \frac{\partial^2 f({\bf x})}{\partial x_1^2} & \cdots &
+      \frac{\partial^2 f({\bf x})}{\partial x_1\partial x_n} \\
+      \vdots & \ddots & \vdots \\
+      \frac{\partial^2 f({\bf x})}{\partial x_n\partial x_1} & \cdots & 
+      \frac{\partial^2 f({\bf x})}{\partial x_n^2}
+    \end{array} \right]_{{\bf m}_x}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 12.77ex; vertical-align: -5.94ex; " SRC="img233.svg"
+ ALT="$\displaystyle {\bf g}({\bf m}_x)
+=\left[\begin{array}{c}\frac{\partial f{\bf x}...
+... &amp;
+\frac{\partial^2 f({\bf x})}{\partial x_n^2}
+\end{array} \right]_{{\bf m}_x}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">87</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+are the gradient vector and Hessian matrix of <!-- MATH
+ $f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img234.svg"
+ ALT="$f({\bf x})$"></SPAN> evaluated at
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img164.svg"
+ ALT="${\bf m}_x$"></SPAN>.
+Taking the mean of the expression above
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+\mu_y&=&E f({\bf x})\approx E\left[
+    f(\mu_{x_1},\cdots,\mu_{x_n})+\sum_{i=1}^n \frac{\partial f}{\partial x_i} (x_i-\mu_{x_i})
+    \right]
+  \nonumber\\
+  &=&f(\mu_{x_1},\cdots,\mu_{x_n})+\sum_{i=1}^n \frac{\partial f}{\partial x_i}E (x_i-\mu_{x_i})
+  =f(\mu_{x_1},\cdots,\mu_{x_n})
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img208.svg"
+ ALT="$\displaystyle \mu_y$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img235.svg"
+ ALT="$\displaystyle E f({\bf x})\approx E\left[
+f(\mu_{x_1},\cdots,\mu_{x_n})+\sum_{i=1}^n \frac{\partial f}{\partial x_i} (x_i-\mu_{x_i})
+\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.20ex; vertical-align: -3.09ex; " SRC="img236.svg"
+ ALT="$\displaystyle f(\mu_{x_1},\cdots,\mu_{x_n})+\sum_{i=1}^n \frac{\partial f}{\partial x_i}E (x_i-\mu_{x_i})
+=f(\mu_{x_1},\cdots,\mu_{x_n})$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">88</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+Taking the variance we get
+<BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+\sigma_y^2&=&Var\,[f((x_1,\cdots,x_n)]
+  \approx Var \left[
+    f(\mu_{x_1},\cdots,\mu_{x_n})+\sum_{i=1}^n \frac{\partial f}{\partial x_i} (x_i-\mu_{x_i})
+    \right]
+  \nonumber\\
+  &=&Var\left[ \sum_{i=1}^n \frac{\partial f}{\partial x_i} (x_i-\mu_{x_i}) \right]
+  =\sum_{i=1}^n \left(\frac{\partial f}{\partial x_i}\right)^2 \sigma_{x_i}^2
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 3.25ex; vertical-align: -1.01ex; " SRC="img237.svg"
+ ALT="$\displaystyle \sigma_y^2$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img238.svg"
+ ALT="$\displaystyle Var\,[f((x_1,\cdots,x_n)]
+\approx Var \left[
+f(\mu_{x_1},\cdots,\mu_{x_n})+\sum_{i=1}^n \frac{\partial f}{\partial x_i} (x_i-\mu_{x_i})
+\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img239.svg"
+ ALT="$\displaystyle Var\left[ \sum_{i=1}^n \frac{\partial f}{\partial x_i} (x_i-\mu_{...
+...ht]
+=\sum_{i=1}^n \left(\frac{\partial f}{\partial x_i}\right)^2 \sigma_{x_i}^2$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">89</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+or 
+<P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\sigma_y=\sqrt{\sum_{i=1}^n \left(\frac{\partial f}{\partial x_i}\right)^2 \sigma_{x_i}^2 }
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.83ex; vertical-align: -3.64ex; " SRC="img240.svg"
+ ALT="$\displaystyle \sigma_y=\sqrt{\sum_{i=1}^n \left(\frac{\partial f}{\partial x_i}\right)^2 \sigma_{x_i}^2 }$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">90</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node4.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="probability.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node2.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node4.html">The Normal Distribution</A>
+<B> Up:</B> <A
+ HREF="probability.html">probability</A>
+<B> Previous:</B> <A
+ HREF="node2.html">Probability of multivariate random</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

@@ -1,0 +1,406 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Solving Over-Determined Linear Equations</TITLE>
+<META NAME="description" CONTENT="Solving Over-Determined Linear Equations">
+<META NAME="keywords" CONTENT="algebra">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="algebra.css">
+
+<LINK REL="next" HREF="node22.html">
+<LINK REL="previous" HREF="node20.html">
+<LINK REL="next" HREF="node22.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node22.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="algebra.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node20.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node22.html">Rank-Nullity Theorem</A>
+<B> Up:</B> <A
+ HREF="algebra.html">algebra</A>
+<B> Previous:</B> <A
+ HREF="node20.html">Pseudo-Inverse Solutions Based on</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION000210000000000000000">
+Solving Over-Determined Linear Equations</A>
+</H1>
+
+<P>
+Consider in general a linear equation system of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img29.svg"
+ ALT="$n$"></SPAN> unknowns and <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img39.svg"
+ ALT="$m$"></SPAN> 
+equations 
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\sum_{j=1}^n a_{ij} x_j=b_i,\;\;\;\;\;\;\;(i=1,\cdots,m>n)
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 7.43ex; vertical-align: -3.40ex; " SRC="img1304.svg"
+ ALT="$\displaystyle \sum_{j=1}^n a_{ij} x_j=b_i,\;\;\;\;\;\;\;(i=1,\cdots,m&gt;n)
+$"> 
+
+(<SPAN CLASS="arabic">389</SPAN>)
+</DIV>
+which can also be represented in matrix form as
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}{\bf x}={\bf b}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1305.svg"
+ ALT="$\displaystyle {\bf A}{\bf x}={\bf b}
+$"> 
+
+(<SPAN CLASS="arabic">390</SPAN>)
+</DIV>
+where
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}=\left[\begin{array}{ccc} a_{11} & \cdots & a_{1n}\\
+      \vdots & \ddots & \vdots\\a_{m1} & \cdots & a_{mn} \end{array}\right]_{m\times n},
+  \;\;\;\;\;{\bf x}=\left[\begin{array}{c}x_1\\\vdots\\x_n\end{array}\right]_{n\times 1},
+  \;\;\;\;\;{\bf b}=\left[\begin{array}{c}b_1\\\vdots\\b_m\end{array}\right]_{m\times 1}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 10.45ex; vertical-align: -4.80ex; " SRC="img1306.svg"
+ ALT="$\displaystyle {\bf A}=\left[\begin{array}{ccc} a_{11} &amp; \cdots &amp; a_{1n}\\
+\vd...
+...{\bf b}=\left[\begin{array}{c}b_1\\ \vdots\\ b_m\end{array}\right]_{m\times 1}
+$"> 
+
+(<SPAN CLASS="arabic">391</SPAN>)
+</DIV>
+If <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img216.svg"
+ ALT="$m=n$"></SPAN>, i.e., the number of unknowns is equal to the number of equations,
+then <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> is a square matrix. If <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> has full rank and therefore
+invertible, then <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img262.svg"
+ ALT="${\bf A}^{-1}$"></SPAN> exists and the equation system can be solved
+to get the solution <!-- MATH
+ ${\bf x}={\bf A}^{-1}{\bf b}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img271.svg"
+ ALT="${\bf x}={\bf A}^{-1}{\bf b}$"></SPAN>. Given <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img262.svg"
+ ALT="${\bf A}^{-1}$"></SPAN>, we
+can further solve a set of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1307.svg"
+ ALT="$K$"></SPAN> equation systems:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf Ax}_k={\bf b}_k,\;\;\;\;\;{\bf x}_k={\bf A}^{-1}{\bf b}_k,\;\;\;\;\;
+(k=1,\cdots,K)
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img1308.svg"
+ ALT="$\displaystyle {\bf Ax}_k={\bf b}_k,\;\;\;\;\;{\bf x}_k={\bf A}^{-1}{\bf b}_k,\;\;\;\;\;
+(k=1,\cdots,K)
+$"> 
+
+(<SPAN CLASS="arabic">392</SPAN>)
+</DIV>
+We define <!-- MATH
+ ${\bf X}=[{\bf x}_1,\cdots,{\bf x}_K]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1309.svg"
+ ALT="${\bf X}=[{\bf x}_1,\cdots,{\bf x}_K]$"></SPAN> and
+<!-- MATH
+ ${\bf B}=[{\bf b}_1,\cdots,{\bf b}_K]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1310.svg"
+ ALT="${\bf B}=[{\bf b}_1,\cdots,{\bf b}_K]$"></SPAN>, so the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1307.svg"
+ ALT="$K$"></SPAN> equation systems
+can be written as
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf AX}={\bf B},\;\;\;\;\;\;\;\;{\bf X}={\bf A}^{-1}{\bf B}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.79ex; vertical-align: -0.57ex; " SRC="img1311.svg"
+ ALT="$\displaystyle {\bf AX}={\bf B},\;\;\;\;\;\;\;\;{\bf X}={\bf A}^{-1}{\bf B}
+$"> 
+
+(<SPAN CLASS="arabic">393</SPAN>)
+</DIV>
+
+<P>
+If <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.21ex; " SRC="img646.svg"
+ ALT="$m&gt;n$"></SPAN>, there are more equations than unknowns, i.e., the equation 
+system is over-determined and may have no solution. But we can still
+find the optimal approximation in the least squares sense, so that 
+the squared error is minimized. 
+
+<P>
+Specifically, as in general no <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img52.svg"
+ ALT="${\bf x}$"></SPAN> can satisfy the equation system, 
+there is always some residual for each of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img39.svg"
+ ALT="$m$"></SPAN> equations:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+r_i=b_i-\sum_{j=1}^n a_{ij} x_j,\;\;\;\;\;\;\;(i=1,\cdots,m)
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 7.43ex; vertical-align: -3.40ex; " SRC="img1312.svg"
+ ALT="$\displaystyle r_i=b_i-\sum_{j=1}^n a_{ij} x_j,\;\;\;\;\;\;\;(i=1,\cdots,m)
+$"> 
+
+(<SPAN CLASS="arabic">394</SPAN>)
+</DIV>
+or in matrix form <!-- MATH
+ ${\bf r}={\bf b}-{\bf A}{\bf x}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img1313.svg"
+ ALT="${\bf r}={\bf b}-{\bf A}{\bf x}$"></SPAN>, where 
+<!-- MATH
+ ${\bf r}=[r_1,\cdots,r_m]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1314.svg"
+ ALT="${\bf r}=[r_1,\cdots,r_m]^T$"></SPAN>. The total least square error is
+defined as
+<BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+\varepsilon({\bf x})&=&\frac{1}{2}||{\bf r}||^2
+  =\frac{1}{2}{\bf r}^T{\bf r}
+  =\frac{1}{2} ({\bf b}-{\bf A}{\bf x})^T({\bf b}-{\bf A}{\bf x})
+  \nonumber \\
+  &=&\frac{1}{2}\left( {\bf b}^T{\bf b}-{\bf x}^T{\bf A}^T{\bf b}-{\bf b}^T{\bf A}{\bf x}+{\bf x}^T{\bf A}^T{\bf A}{\bf x}\right)
+  \nonumber
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1315.svg"
+ ALT="$\displaystyle \varepsilon({\bf x})$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img161.svg"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img1316.svg"
+ ALT="$\displaystyle \frac{1}{2}\vert\vert{\bf r}\vert\vert^2
+=\frac{1}{2}{\bf r}^T{\bf r}
+=\frac{1}{2} ({\bf b}-{\bf A}{\bf x})^T({\bf b}-{\bf A}{\bf x})$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img161.svg"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img1317.svg"
+ ALT="$\displaystyle \frac{1}{2}\left( {\bf b}^T{\bf b}-{\bf x}^T{\bf A}^T{\bf b}-{\bf b}^T{\bf A}{\bf x}+{\bf x}^T{\bf A}^T{\bf A}{\bf x}\right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+To find the optimal <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img52.svg"
+ ALT="${\bf x}$"></SPAN> that minimizes <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img1318.svg"
+ ALT="$\varepsilon$"></SPAN>, we set its 
+derivative with respect to <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img52.svg"
+ ALT="${\bf x}$"></SPAN> to zero (see <A ID="tex2html24"
+  HREF="node18.html">here</A>):
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\frac{d}{d{\bf x}}\varepsilon({\bf x})=\frac{1}{2}\frac{d}{d{\bf x}}||{\bf r}||^2
+=\frac{1}{2}\frac{d}{d{\bf x}}
+\left({\bf b}^T{\bf b}-{\bf x}^T{\bf A}^T{\bf b}-{\bf b}^T{\bf A}{\bf x}+{\bf x}^T{\bf A}^T{\bf A}{\bf x}\right)
+    =-{\bf A}^T{\bf b}+{\bf A}^T{\bf A}{\bf x}=0
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 5.11ex; vertical-align: -1.71ex; " SRC="img1319.svg"
+ ALT="$\displaystyle \frac{d}{d{\bf x}}\varepsilon({\bf x})=\frac{1}{2}\frac{d}{d{\bf ...
+...T{\bf A}^T{\bf A}{\bf x}\right)
+=-{\bf A}^T{\bf b}+{\bf A}^T{\bf A}{\bf x}=0
+$"> 
+
+(<SPAN CLASS="arabic">395</SPAN>)
+</DIV>
+Solving this matrix equation we get
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf x}=\left({\bf A}^T{\bf A}\right)^{-1}{\bf A}^T{\bf b}={\bf A}^-{\bf b}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.72ex; vertical-align: -0.93ex; " SRC="img1320.svg"
+ ALT="$\displaystyle {\bf x}=\left({\bf A}^T{\bf A}\right)^{-1}{\bf A}^T{\bf b}={\bf A}^-{\bf b}
+$"> 
+
+(<SPAN CLASS="arabic">396</SPAN>)
+</DIV>
+where <!-- MATH
+ ${\bf A}^-=\left({\bf A}^T{\bf A}\right)^{-1}{\bf A}^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.48ex; vertical-align: -0.93ex; " SRC="img1321.svg"
+ ALT="${\bf A}^-=\left({\bf A}^T{\bf A}\right)^{-1}{\bf A}^T $"></SPAN>
+is the <A ID="tex2html25"
+  HREF="node15.html"><EM>pseudo-inverse</EM></A>
+of the non-square matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>.
+
+<P>
+<IMG STYLE=""
+ SRC="../figures/PseudoInverse.png"
+ ALT="PseudoInverse.png">
+
+<P>
+Sometime it is desired for the unknown <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img1322.svg"
+ ALT="$x_j$"></SPAN> to be as small as possible,
+then a cost function can be constructed as
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+c({\bf x})=e({\bf x})+\sum_{j=1}^n \lambda_jx^2_j
+=\sum_{i=1}^m\left(b_i-\sum_{j=1}^na_{ij}x_j\right)^2+\sum_{j=1}^n \lambda_jx^2_j 
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 9.06ex; vertical-align: -3.72ex; " SRC="img1323.svg"
+ ALT="$\displaystyle c({\bf x})=e({\bf x})+\sum_{j=1}^n \lambda_jx^2_j
+=\sum_{i=1}^m\left(b_i-\sum_{j=1}^na_{ij}x_j\right)^2+\sum_{j=1}^n \lambda_jx^2_j
+$"> 
+
+(<SPAN CLASS="arabic">397</SPAN>)
+</DIV>
+where a greater <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img1324.svg"
+ ALT="$\lambda_j$"></SPAN> means the size of the corresponding <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img1322.svg"
+ ALT="$x_j$"></SPAN> is more
+tightly controlled. Then repeating the process above we get:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\frac{\partial c({\bf x})}{\partial x_k}
+=2\sum_{i=1}^m \left(b_i-\sum_{j=1}^na_{ij}x_j\right)(-a_{ik})+2\lambda_kx_k=0,
+\;\;\;\;(k=1,\cdots,n)
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img1325.svg"
+ ALT="$\displaystyle \frac{\partial c({\bf x})}{\partial x_k}
+=2\sum_{i=1}^m \left(b_i-\sum_{j=1}^na_{ij}x_j\right)(-a_{ik})+2\lambda_kx_k=0,
+\;\;\;\;(k=1,\cdots,n)
+$"> 
+
+(<SPAN CLASS="arabic">398</SPAN>)
+</DIV>
+which yields
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\sum_{j=1}^n \left(\sum_{i=1}^ma_{ij} a_{ik}+\lambda_j\right) x_j
+=\sum_{i=1}^m b_i a_{ik},\;\;\;\;(k=1,\cdots,n)
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 7.66ex; vertical-align: -3.40ex; " SRC="img1326.svg"
+ ALT="$\displaystyle \sum_{j=1}^n \left(\sum_{i=1}^ma_{ij} a_{ik}+\lambda_j\right) x_j
+=\sum_{i=1}^m b_i a_{ik},\;\;\;\;(k=1,\cdots,n)
+$"> 
+
+(<SPAN CLASS="arabic">399</SPAN>)
+</DIV>
+or in matrix form
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+({\bf A}^T{\bf A}+{\bf\Lambda}){\bf x}={\bf A}^T{\bf b}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img1327.svg"
+ ALT="$\displaystyle ({\bf A}^T{\bf A}+{\bf\Lambda}){\bf x}={\bf A}^T{\bf b}
+$"> 
+
+(<SPAN CLASS="arabic">400</SPAN>)
+</DIV>
+where <!-- MATH
+ ${\bf\Lambda}=diag(\lambda_1,\cdots,\lambda_n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img473.svg"
+ ALT="${\bf\Lambda}=diag(\lambda_1,\cdots,\lambda_n)$"></SPAN>.
+Solving this for <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img52.svg"
+ ALT="${\bf x}$"></SPAN> we get:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf x}=({\bf A}^T{\bf A}+{\bf\Lambda})^{-1}{\bf A}^T{\bf b}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img1328.svg"
+ ALT="$\displaystyle {\bf x}=({\bf A}^T{\bf A}+{\bf\Lambda})^{-1}{\bf A}^T{\bf b}
+$"> 
+
+(<SPAN CLASS="arabic">401</SPAN>)
+</DIV>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node22.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="algebra.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node20.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node22.html">Rank-Nullity Theorem</A>
+<B> Up:</B> <A
+ HREF="algebra.html">algebra</A>
+<B> Previous:</B> <A
+ HREF="node20.html">Pseudo-Inverse Solutions Based on</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

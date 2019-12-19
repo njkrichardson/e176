@@ -1,0 +1,437 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Taylor Series Expansion</TITLE>
+<META NAME="description" CONTENT="Taylor Series Expansion">
+<META NAME="keywords" CONTENT="algebra">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="algebra.css">
+
+<LINK REL="next" HREF="node24.html">
+<LINK REL="previous" HREF="node22.html">
+<LINK REL="next" HREF="node24.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node24.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="algebra.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node22.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node24.html">Normal Direction of a</A>
+<B> Up:</B> <A
+ HREF="algebra.html">algebra</A>
+<B> Previous:</B> <A
+ HREF="node22.html">Rank-Nullity Theorem</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION000230000000000000000">
+Taylor Series Expansion</A>
+</H1>
+
+<P>
+
+<UL>
+<LI><B>Single-variable functions:</B>
+
+<P>
+A single-variable function <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img745.svg"
+ ALT="$f(x)$"></SPAN> can be expanded around a given point <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img93.svg"
+ ALT="$x$"></SPAN> by 
+  the Taylor series:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+f(x+\delta x)=f(x)+f'(x) \delta x+\frac{1}{2!}f''(x)\delta x^2
+  +\frac{1}{3!}f'''(x)\delta x^3+\cdots
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img1365.svg"
+ ALT="$\displaystyle f(x+\delta x)=f(x)+f'(x) \delta x+\frac{1}{2!}f''(x)\delta x^2
++\frac{1}{3!}f'''(x)\delta x^3+\cdots
+$"> 
+
+(<SPAN CLASS="arabic">416</SPAN>)
+</DIV>
+When <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1366.svg"
+ ALT="$\delta x$"></SPAN> is small, the higher order terms can be neglected so that 
+  the function can be approximated as a quadratic function
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+f(x+\delta x)=f(x)+f'(x) \delta x+\frac{1}{2!}f''(x)\delta x^2+\varepsilon(\delta x^3)
+  \approx f(x)+f'(x) \delta x+\frac{1}{2!}f''(x)\delta x^2
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img1367.svg"
+ ALT="$\displaystyle f(x+\delta x)=f(x)+f'(x) \delta x+\frac{1}{2!}f''(x)\delta x^2+\varepsilon(\delta x^3)
+\approx f(x)+f'(x) \delta x+\frac{1}{2!}f''(x)\delta x^2
+$"> 
+
+(<SPAN CLASS="arabic">417</SPAN>)
+</DIV>
+or even a linear function
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+f(x+\delta x)=f(x)+f'(x)\delta x+\varepsilon(\delta x^2)\approx f(x)+f'(x)\delta x
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img1368.svg"
+ ALT="$\displaystyle f(x+\delta x)=f(x)+f'(x)\delta x+\varepsilon(\delta x^2)\approx f(x)+f'(x)\delta x
+$"> 
+
+(<SPAN CLASS="arabic">418</SPAN>)
+</DIV>
+
+<P>
+</LI>
+<LI><B>Multi-variable scalar-valued functions:</B>
+
+<P>
+A multi-variable function <!-- MATH
+ $f(x_1,\cdots,x_n)=f({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1369.svg"
+ ALT="$f(x_1,\cdots,x_n)=f({\bf x})$"></SPAN> can also be expanded
+  by the Taylor series:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+f({\bf x}+\delta{\bf x})=f({\bf x})+\sum_{j=1}^n\frac{\partial f({\bf x})}{\partial x_j}\delta x_j
+    +\frac{1}{2}\sum_{i=1}^n\sum_{j=1}^n \frac{\partial^2f({\bf x})}{\partial x_i\partial x_j}
+    \delta x_i \delta x_j
+    +\frac{1}{3!}\sum_{i=1}^n\sum_{j=1}^n \sum_{k=1}^n
+    \frac{\partial^3f({\bf x})}{\partial x_i\partial x_j\partial x_k}
+    \delta x_i \delta x_j \delta x_k+\cdots  
+  
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 7.43ex; vertical-align: -3.40ex; " SRC="img1370.svg"
+ ALT="$\displaystyle f({\bf x}+\delta{\bf x})=f({\bf x})+\sum_{j=1}^n\frac{\partial f(...
+...artial x_i\partial x_j\partial x_k}
+\delta x_i \delta x_j \delta x_k+\cdots
+$"> 
+
+(<SPAN CLASS="arabic">419</SPAN>)
+</DIV>
+which can be expressed in vector form as:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+f({\bf x}+\delta{\bf x})=f({\bf x})+{\bf g}^T_f\,\delta{\bf x}
+    +\frac{1}{2}{\delta\bf x}^T{\bf H}_f\,{\delta\bf x}+\cdots
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img1371.svg"
+ ALT="$\displaystyle f({\bf x}+\delta{\bf x})=f({\bf x})+{\bf g}^T_f\,\delta{\bf x}
++\frac{1}{2}{\delta\bf x}^T{\bf H}_f\,{\delta\bf x}+\cdots
+$"> 
+
+(<SPAN CLASS="arabic">420</SPAN>)
+</DIV>
+where <!-- MATH
+ $\delta{\bf x}=[\delta x_1,\cdots,\delta x_n]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1372.svg"
+ ALT="$\delta{\bf x}=[\delta x_1,\cdots,\delta x_n]^T$"></SPAN>, while <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img955.svg"
+ ALT="${\bf g}_f$"></SPAN>
+  and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img1373.svg"
+ ALT="${\bf H}_f$"></SPAN> are the gradient vector and the <EM>Hessian</EM> matrix for
+  the first and second order derivatives of the function, respectively:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf g}_f({\bf x})=\bigtriangledown f({\bf x})
+    =\frac{d}{d{\bf x}}f({\bf x})
+    =\left[\begin{array}{c}\frac{\partial f{\bf x})}{\partial x_1}\\
+    \vdots\\\frac{\partial f{\bf x})}{\partial x_n}\end{array}\right]_{n\times 1},
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 11.85ex; vertical-align: -5.42ex; " SRC="img1374.svg"
+ ALT="$\displaystyle {\bf g}_f({\bf x})=\bigtriangledown f({\bf x})
+=\frac{d}{d{\bf x...
+...dots\\ \frac{\partial f{\bf x})}{\partial x_n}\end{array}\right]_{n\times 1},
+$"> 
+
+(<SPAN CLASS="arabic">421</SPAN>)
+</DIV>
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf H}_f({\bf x})=\frac{d}{d{\bf x}}{\bf g}_f({\bf x})
+    =\frac{d^2}{d{\bf x}^2} f({\bf x})
+    =\left[ \begin{array}{ccc}
+        \frac{\partial^2 f({\bf x})}{\partial x_1^2} & \cdots & 
+        \frac{\partial^2 f({\bf x})}{\partial x_1\partial x_n} \\
+        \vdots & \ddots & \vdots \\
+        \frac{\partial^2 f({\bf x})}{\partial x_n\partial x_1} & \cdots & 
+        \frac{\partial^2 f({\bf x})}{\partial x_n^2}
+      \end{array} \right]_{n\times n}={\bf H}_f^T
+  
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 12.77ex; vertical-align: -5.91ex; " SRC="img1375.svg"
+ ALT="$\displaystyle {\bf H}_f({\bf x})=\frac{d}{d{\bf x}}{\bf g}_f({\bf x})
+=\frac{d...
+...al^2 f({\bf x})}{\partial x_n^2}
+\end{array} \right]_{n\times n}={\bf H}_f^T
+$"> 
+
+(<SPAN CLASS="arabic">422</SPAN>)
+</DIV>
+Note that <SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -1.09ex; " SRC="img1376.svg"
+ ALT="${\bf H}_f^T$"></SPAN> is symmetric as
+  <!-- MATH
+ $\partial^2f({\bf x})/\partial x_i\partial x_j=\partial^2f({\bf x})/\partial x_j\partial x_i$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img1377.svg"
+ ALT="$\partial^2f({\bf x})/\partial x_i\partial x_j=\partial^2f({\bf x})/\partial x_j\partial x_i$"></SPAN>.
+
+<P>
+When <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1378.svg"
+ ALT="$\delta{\bf x}$"></SPAN> is small (i.e., <!-- MATH
+ $||\delta{\bf x}||$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1379.svg"
+ ALT="$\vert\vert\delta{\bf x}\vert\vert$"></SPAN> is small), then
+  <!-- MATH
+ $f({\bf x}+\delta{\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1380.svg"
+ ALT="$f({\bf x}+\delta{\bf x})$"></SPAN> can be approximated by a quadratic function with 
+  a third order error term
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+f({\bf x}+\delta{\bf x})=f({\bf x})+{\bf g}_f^T\,\delta{\bf x}
+    +\frac{1}{2}\delta{\bf x}^T{\bf H}_f\,\delta{\bf x}+\varepsilon(||\delta{\bf x}||^3)
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img1381.svg"
+ ALT="$\displaystyle f({\bf x}+\delta{\bf x})=f({\bf x})+{\bf g}_f^T\,\delta{\bf x}
++...
+...}^T{\bf H}_f\,\delta{\bf x}+\varepsilon(\vert\vert\delta{\bf x}\vert\vert^3)
+$"> 
+
+(<SPAN CLASS="arabic">423</SPAN>)
+</DIV>
+or even a linear function with a second order error term
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+f({\bf x}+\delta{\bf x})
+    =f({\bf x})+{\bf g}_f^T\,\delta{\bf x}+\varepsilon(||\delta{\bf x}||^2)
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.25ex; vertical-align: -1.01ex; " SRC="img1382.svg"
+ ALT="$\displaystyle f({\bf x}+\delta{\bf x})
+=f({\bf x})+{\bf g}_f^T\,\delta{\bf x}+\varepsilon(\vert\vert\delta{\bf x}\vert\vert^2)
+$"> 
+
+(<SPAN CLASS="arabic">424</SPAN>)
+</DIV>
+
+<P>
+</LI>
+<LI><B>Multi-variable vector-valued functions:</B>
+
+<P>
+A set of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img39.svg"
+ ALT="$m$"></SPAN> multi-variable functions <!-- MATH
+ $f_1({\bf x}),\cdots,f_m({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1383.svg"
+ ALT="$f_1({\bf x}),\cdots,f_m({\bf x})$"></SPAN>
+  can be expressed as a vector function
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf f}({\bf x})=[f_1({\bf x}),\cdots,f_m({\bf x})]^T
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img1384.svg"
+ ALT="$\displaystyle {\bf f}({\bf x})=[f_1({\bf x}),\cdots,f_m({\bf x})]^T
+$"> 
+
+(<SPAN CLASS="arabic">425</SPAN>)
+</DIV>
+The Taylor expansion of the ith component is:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+f_i({\bf x}+\delta{\bf x})=f_i({\bf x})+{\bf g}^T_i\,\delta{\bf x}
+    +\frac{1}{2}\delta{\bf x}^T{\bf H}_i\,\delta{\bf x}+\varepsilon(||\delta{\bf x}||^3)
+    \;\;\;\;\;\;\;\;\;\;(i=1,\cdots,m)
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img1385.svg"
+ ALT="$\displaystyle f_i({\bf x}+\delta{\bf x})=f_i({\bf x})+{\bf g}^T_i\,\delta{\bf x...
+...lon(\vert\vert\delta{\bf x}\vert\vert^3)
+\;\;\;\;\;\;\;\;\;\;(i=1,\cdots,m)
+$"> 
+
+(<SPAN CLASS="arabic">426</SPAN>)
+</DIV>
+The first two terms of these <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img39.svg"
+ ALT="$m$"></SPAN> components can be written in vector form:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf f}({\bf x}+\delta{\bf x})\approx \left[\begin{array}{c}f_1({\bf x})\\\vdots\\f_m({\bf x})\end{array}\right]+\left[ \begin{array}{ccc}
+        \frac{\partial f_1}{\partial x_1}&\cdots&\frac{\partial f_1}{\partial x_n}\\
+        \vdots & \ddots & \vdots \\
+        \frac{\partial f_m}{\partial x_1}&\cdots&\frac{\partial f_m}{\partial x_n}
+      \end{array} \right]
+    \left[\begin{array}{c}\delta x_1\\\vdots\\\delta x_n\end{array}\right]
+    ={\bf f}({\bf x})+{\bf J}_{\bf f}({\bf x})\;\delta{\bf x}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 11.15ex; vertical-align: -4.90ex; " SRC="img1386.svg"
+ ALT="$\displaystyle {\bf f}({\bf x}+\delta{\bf x})\approx \left[\begin{array}{c}f_1({...
+...end{array}\right]
+={\bf f}({\bf x})+{\bf J}_{\bf f}({\bf x})\;\delta{\bf x}
+$"> 
+
+(<SPAN CLASS="arabic">427</SPAN>)
+</DIV>
+where <!-- MATH
+ ${\bf J}_{\bf f}({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1387.svg"
+ ALT="${\bf J}_{\bf f}({\bf x})$"></SPAN> is the <EM>Jacobian matrix</EM> defined over the
+  vector function <!-- MATH
+ ${\bf f}({\bf x})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1388.svg"
+ ALT="${\bf f}({\bf x})$"></SPAN>:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf J}_{\bf f}({\bf x})=\frac{d}{d{\bf x}}{\bf f}({\bf x})
+    =\left[ \frac{\partial{\bf f}}{\partial x_1},\cdots,
+      \frac{\partial{\bf f}}{\partial x_n} \right]
+    =\left[ \begin{array}{ccc}
+        \frac{\partial f_1}{\partial x_1}&\cdots&\frac{\partial f_1}{\partial x_n}\\
+        \vdots & \ddots & \vdots \\
+        \frac{\partial f_m}{\partial x_1}&\cdots&\frac{\partial f_m}{\partial x_n}
+      \end{array} \right]_{m\times n}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 11.38ex; vertical-align: -5.21ex; " SRC="img1389.svg"
+ ALT="$\displaystyle {\bf J}_{\bf f}({\bf x})=\frac{d}{d{\bf x}}{\bf f}({\bf x})
+=\le...
+..._1}&amp;\cdots&amp;\frac{\partial f_m}{\partial x_n}
+\end{array} \right]_{m\times n}
+$"> 
+
+(<SPAN CLASS="arabic">428</SPAN>)
+</DIV>
+Note that the Jacobian matrix is not necessarily square as <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img39.svg"
+ ALT="$m$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img29.svg"
+ ALT="$n$"></SPAN> 
+  may not be the same. The 2nd and higher order terms can no longer
+  expressed in matrix.
+
+<P>
+Note that the Hessian matrix of a function <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img945.svg"
+ ALT="$f({\bf x})$"></SPAN> can be obtained
+  as the Jacobian matrix of the gradient vector of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img945.svg"
+ ALT="$f({\bf x})$"></SPAN>:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf g}_f({\bf x})=
+    \left[\begin{array}{c}\frac{\partial f}{\partial x_1}\\\vdots\\\frac{\partial f}{\partial x_n}
+      \end{array}\right],\;\;\;\;\;\;
+         {\bf J}_{\bf g}({\bf x})=\frac{d}{d{\bf x}}{\bf g}_f({\bf x})
+         =\left[\begin{array}{ccc}\frac{\partial^2 f}{\partial x_1^2}&\cdots&
+             \frac{\partial^2 f}{\partial x_1\partial x_n}\\
+             \vdots & \ddots & \vdots \\
+             \frac{\partial^2 f}{\partial x_n\partial x_1}&\cdots&
+             \frac{\partial^2 f}{\partial x_n^2}\end{array}\right]={\bf H}_{\bf f}({\bf x})
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 12.31ex; vertical-align: -5.51ex; " SRC="img1390.svg"
+ ALT="$\displaystyle {\bf g}_f({\bf x})=
+\left[\begin{array}{c}\frac{\partial f}{\par...
+...frac{\partial^2 f}{\partial x_n^2}\end{array}\right]={\bf H}_{\bf f}({\bf x})
+$"> 
+
+(<SPAN CLASS="arabic">429</SPAN>)
+</DIV>
+
+<P>
+</LI>
+</UL>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node24.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="algebra.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node22.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node24.html">Normal Direction of a</A>
+<B> Up:</B> <A
+ HREF="algebra.html">algebra</A>
+<B> Previous:</B> <A
+ HREF="node22.html">Rank-Nullity Theorem</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

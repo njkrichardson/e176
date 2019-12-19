@@ -1,0 +1,1022 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Probability of multivariate random vectors</TITLE>
+<META NAME="description" CONTENT="Probability of multivariate random vectors">
+<META NAME="keywords" CONTENT="probability">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="probability.css">
+
+<LINK REL="next" HREF="node3.html">
+<LINK REL="previous" HREF="node1.html">
+<LINK REL="next" HREF="node3.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node3.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="probability.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node1.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node3.html">Function of Random Variables</A>
+<B> Up:</B> <A
+ HREF="probability.html">probability</A>
+<B> Previous:</B> <A
+ HREF="node1.html">Probability of univariate random</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00020000000000000000">
+Probability of multivariate random vectors</A>
+</H1>
+
+<P>
+
+<UL>
+<LI><B>Multiple Random Variables</B>
+
+<P>
+Each outcome of a random experiment may need to be described by a set 
+  of <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img112.svg"
+ ALT="$N&gt;1$"></SPAN> random variables <!-- MATH
+ $\{x_1, \cdots, x_N \}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img113.svg"
+ ALT="$\{x_1, \cdots, x_N \}$"></SPAN>, or in the form of 
+  a <EM>random vector</EM> <!-- MATH
+ ${\bf x}=[x_1,\; \cdots \;,x_N]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img114.svg"
+ ALT="${\bf x}=[x_1,\; \cdots \;,x_N]^T $"></SPAN>. In signal 
+  processing <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}$"></SPAN> is often used to represent a set of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img26.svg"
+ ALT="$N$"></SPAN> samples
+  <!-- MATH
+ $x_i=x(t_i)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img115.svg"
+ ALT="$x_i=x(t_i)$"></SPAN> of a random signal <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img116.svg"
+ ALT="$x(t)$"></SPAN> (a random process).
+
+<P>
+</LI>
+<LI><B>Mean Vector</B>
+
+<P>
+The <EM>expectation</EM> or <EM>mean</EM> of a random variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img117.svg"
+ ALT="$x_i$"></SPAN> is 
+  defined as
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\mu_i=E(x_i)=\int_{-\infty}^{\infty} \cdots \int_{-\infty}^{\infty}
+  \xi_i\,p(\xi_1,\cdots,\xi_N)\,d\xi_1\cdots d\xi_N
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.04ex; vertical-align: -2.43ex; " SRC="img118.svg"
+ ALT="$\displaystyle \mu_i=E(x_i)=\int_{-\infty}^{\infty} \cdots \int_{-\infty}^{\infty}
+\xi_i\,p(\xi_1,\cdots,\xi_N)\,d\xi_1\cdots d\xi_N$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">48</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+The <EM>mean vector</EM> of a random vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}$"></SPAN> is defined as
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf m}=E({\bf x})=[ E(x_1), \cdots, E(x_N) ]^T=[\mu_1, \cdots, \mu_N]^T
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img119.svg"
+ ALT="$\displaystyle {\bf m}=E({\bf x})=[ E(x_1), \cdots, E(x_N) ]^T=[\mu_1, \cdots, \mu_N]^T$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">49</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+which can be interpreted as the center of gravity of an N-dimensional
+  object with <!-- MATH
+ $p(x_1,\cdots,x_N)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img120.svg"
+ ALT="$p(x_1,\cdots,x_N)$"></SPAN> being the density function.
+
+<P>
+</LI>
+<LI><B>Covariance Matrix</B>
+
+<P>
+The <EM>covariance</EM> of random variables <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img117.svg"
+ ALT="$x_i$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img121.svg"
+ ALT="$x_j$"></SPAN> is defined as
+  <BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+\sigma_{ij}^2&=&Cov(x_i,x_j)=E[(x_i-\mu_i)(x_j-\mu_j)]
+    =E(x_ix_j)-E(x_i)\mu_j-\mu_i E(x_j)+\mu_i\mu_j
+    \nonumber \\
+    &=&E(x_ix_j)-\mu_i\mu_j
+    =\int_{-\infty}^{\infty} \cdots \int_{-\infty}^{\infty}
+    \xi_i\xi_j\,p(\xi_1,\cdots,\xi_N)\,d\xi_1\cdots d\xi_N 
+    -\mu_i\mu_j
+  
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 3.25ex; vertical-align: -1.01ex; " SRC="img122.svg"
+ ALT="$\displaystyle \sigma_{ij}^2$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img123.svg"
+ ALT="$\displaystyle Cov(x_i,x_j)=E[(x_i-\mu_i)(x_j-\mu_j)]
+=E(x_ix_j)-E(x_i)\mu_j-\mu_i E(x_j)+\mu_i\mu_j$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.04ex; vertical-align: -2.43ex; " SRC="img124.svg"
+ ALT="$\displaystyle E(x_ix_j)-\mu_i\mu_j
+=\int_{-\infty}^{\infty} \cdots \int_{-\infty}^{\infty}
+\xi_i\xi_j\,p(\xi_1,\cdots,\xi_N)\,d\xi_1\cdots d\xi_N
+-\mu_i\mu_j$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">50</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+  When <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img125.svg"
+ ALT="$i=j$"></SPAN>, <!-- MATH
+ $\sigma_{ii}^2=E[(x_i-\mu_i)^2]=E(x_i^2)-\mu_i^2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.72ex; " SRC="img126.svg"
+ ALT="$\sigma_{ii}^2=E[(x_i-\mu_i)^2]=E(x_i^2)-\mu_i^2$"></SPAN> is the 
+  variance of variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img117.svg"
+ ALT="$x_i$"></SPAN>, which can be interpreted as the amount 
+  of dynamic energy (or information) contained in <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img117.svg"
+ ALT="$x_i$"></SPAN>. If an 
+  off-diagonal component <!-- MATH
+ $\sigma_{ij}^2=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -1.04ex; " SRC="img127.svg"
+ ALT="$\sigma_{ij}^2=0$"></SPAN> is zero, the two variables 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img117.svg"
+ ALT="$x_i$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img121.svg"
+ ALT="$x_j$"></SPAN> are <EM>uncorrelated</EM> or <EM>decorrelated</EM>, and
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+E(x_ix_j)=E(x_i)E(x_j)=\mu_i\mu_j
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img128.svg"
+ ALT="$\displaystyle E(x_ix_j)=E(x_i)E(x_j)=\mu_i\mu_j$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">51</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The <EM>covariance matrix</EM> of a random vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}$"></SPAN> is defined 
+  as
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf\Sigma}_x = E[({\bf x}-{\bf m})\,({\bf x}-{\bf m})^T]
+    =E({\bf x}{\bf x}^T)-{\bf m}{\bf m}^T
+    =\left[\begin{array}{ccc}
+        \sigma_{11}^2 & \cdots & \sigma_{1N}^2\\
+        \vdots & \ddots & \vdots \\
+        \sigma_{N1}^2 & \cdots & \sigma_{NN}^2\end{array}\right],
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 10.22ex; vertical-align: -4.49ex; " SRC="img129.svg"
+ ALT="$\displaystyle {\bf\Sigma}_x = E[({\bf x}-{\bf m})\,({\bf x}-{\bf m})^T]
+=E({\bf...
+...&amp; \ddots &amp; \vdots \\
+\sigma_{N1}^2 &amp; \cdots &amp; \sigma_{NN}^2\end{array}\right],$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">52</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The ith diagonal component <!-- MATH
+ $\sigma_{ii}^2=E(x_i-\mu_i)^2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.72ex; " SRC="img130.svg"
+ ALT="$\sigma_{ii}^2=E(x_i-\mu_i)^2$"></SPAN> is the
+  variance of <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img117.svg"
+ ALT="$x_i$"></SPAN>, and the trace can be interpreted as the total 
+  energy or information contained in <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}$"></SPAN>:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+tr\;{\bf\Sigma}=\sum_{i=1}^N \sigma_i^2=\sum_{i=1}^N\lambda_i
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img131.svg"
+ ALT="$\displaystyle tr\;{\bf\Sigma}=\sum_{i=1}^N \sigma_i^2=\sum_{i=1}^N\lambda_i$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">53</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where <!-- MATH
+ $\lambda_1,\cdots,\lambda_N$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img132.svg"
+ ALT="$\lambda_1,\cdots,\lambda_N$"></SPAN> are the eigenvalues of <!-- MATH
+ ${\bf\Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img133.svg"
+ ALT="${\bf\Sigma}$"></SPAN>.
+  As <!-- MATH
+ $\sigma_{ij}^2=\sigma_{ji}^2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -1.04ex; " SRC="img134.svg"
+ ALT="$\sigma_{ij}^2=\sigma_{ji}^2$"></SPAN>, <!-- MATH
+ ${\bf\Sigma}={\bf\Sigma}^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img135.svg"
+ ALT="${\bf\Sigma}={\bf\Sigma}^T$"></SPAN> is 
+  symmetric. Also, <!-- MATH
+ ${\bf\Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img133.svg"
+ ALT="${\bf\Sigma}$"></SPAN> is positive semi-definite:
+  <BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+{\bf z}^T{\bf\Sigma}{\bf z}
+    &=&{\bf z}^TE[({\bf x}-{\bf m})\,({\bf x}-{\bf m})^T]{\bf z}
+    =E[{\bf z}^T({\bf x}-{\bf m})\,({\bf x}-{\bf m})^T{\bf z}]
+    \nonumber\\
+    &=&E[ ({\bf z}^T({\bf x}-{\bf m}))^2 ]\ge 0
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img136.svg"
+ ALT="$\displaystyle {\bf z}^T{\bf\Sigma}{\bf z}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img137.svg"
+ ALT="$\displaystyle {\bf z}^TE[({\bf x}-{\bf m})\,({\bf x}-{\bf m})^T]{\bf z}
+=E[{\bf z}^T({\bf x}-{\bf m})\,({\bf x}-{\bf m})^T{\bf z}]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img138.svg"
+ ALT="$\displaystyle E[ ({\bf z}^T({\bf x}-{\bf m}))^2 ]\ge 0$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">54</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+  If all off-diagonal components <!-- MATH
+ $\sigma_{ij}=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img139.svg"
+ ALT="$\sigma_{ij}=0$"></SPAN> are zero, 
+  then <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}$"></SPAN> is <EM>uncorrelated</EM>. If <!-- MATH
+ $x_i\;\;(i=1,\cdots,N)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img140.svg"
+ ALT="$x_i\;\;(i=1,\cdots,N)$"></SPAN> are
+  independent (<!-- MATH
+ $p(x_1,\cdots,x_N)=p(x_1)\cdots p(x_N)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img141.svg"
+ ALT="$p(x_1,\cdots,x_N)=p(x_1)\cdots p(x_N)$"></SPAN>), then they are 
+  also uncorrelated. But uncorrelated variables are not necessarily 
+  independent. If <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}$"></SPAN> is normally distributed, then its components
+  are independent if and only they are uncorrelated.
+
+<P>
+If the covariance <!-- MATH
+ $\sigma_{ij}^2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -1.04ex; " SRC="img142.svg"
+ ALT="$\sigma_{ij}^2$"></SPAN> between <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img117.svg"
+ ALT="$x_i$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img121.svg"
+ ALT="$x_j$"></SPAN> is divided
+  by the standard deviations <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img143.svg"
+ ALT="$\sigma_i$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img144.svg"
+ ALT="$\sigma_j$"></SPAN>, it is normalized
+  to become the <EM>Pearson correlation coefficient</EM>:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\rho_{ij}=\frac{\sigma^2_{ij}}{\sigma_i \sigma_j}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.27ex; vertical-align: -2.37ex; " SRC="img145.svg"
+ ALT="$\displaystyle \rho_{ij}=\frac{\sigma^2_{ij}}{\sigma_i \sigma_j}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">55</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+As the covariance can be considered as an inner product of 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img117.svg"
+ ALT="$x_i$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img121.svg"
+ ALT="$x_j$"></SPAN>, <!-- MATH
+ $\sigma^2_{ij}=\langle x_i,\,x_j\rangle$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -1.04ex; " SRC="img146.svg"
+ ALT="$\sigma^2_{ij}=\langle x_i,\,x_j\rangle$"></SPAN>, the
+  Cauchy-Schwarz inequality applies:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+| \langle x_i,\; x_j\rangle |^2 =\sigma_{ij}^4
+  \le \langle x_i,\,x_i\rangle\langle x_j,\,x_j\rangle
+  =\sigma_i^2\sigma_j^2,\;\;\;\;\;\;\mbox{or}\;\;\;\;\;\;
+  \left( \frac{ \sigma_{ij}^2}{\sigma_i\sigma_j} \right)^2
+  =\rho^2 \le 1
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -1.01ex; " SRC="img147.svg"
+ ALT="$\displaystyle \vert \langle x_i,\; x_j\rangle \vert^2 =\sigma_{ij}^4
+\le \langle x_i,\,x_i\rangle\langle x_j,\,x_j\rangle
+=\sigma_i^2\sigma_j^2,\;\;\;\;\;\;$">or<IMG STYLE="height: 7.66ex; vertical-align: -3.02ex; " SRC="img148.svg"
+ ALT="$\displaystyle \;\;\;\;\;\;
+\left( \frac{ \sigma_{ij}^2}{\sigma_i\sigma_j} \right)^2
+=\rho^2 \le 1$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">56</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+i.e., 
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+-1\le \rho \le 1
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img149.svg"
+ ALT="$\displaystyle -1\le \rho \le 1$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">57</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+</LI>
+<LI><B>Correlation Matrix</B>
+
+<P>
+The <EM>correlation</EM> matrix of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}$"></SPAN> is defined as
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf R}_x=E({\bf xx}^T)={\bf\Sigma}_x+{\bf mm}^T
+    =\left[ \begin{array}{ccc}
+        r_{11}^2 & \cdots & r_{1N}^2\\
+        \vdots & \ddots & \vdots \\
+        r_{N1}^2 & \cdots & r_{NN}^2
+      \end{array}\right]
+  
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 10.22ex; vertical-align: -4.49ex; " SRC="img150.svg"
+ ALT="$\displaystyle {\bf R}_x=E({\bf xx}^T)={\bf\Sigma}_x+{\bf mm}^T
+=\left[ \begin{a...
+...\
+\vdots &amp; \ddots &amp; \vdots \\
+r_{N1}^2 &amp; \cdots &amp; r_{NN}^2
+\end{array}\right]$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">58</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+r_{ij}=E(x_ix_j)=\sigma_{ij}^2+\mu_i \mu_j\;\;\;\;\;(i,j=1,\cdots,N)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -1.01ex; " SRC="img151.svg"
+ ALT="$\displaystyle r_{ij}=E(x_ix_j)=\sigma_{ij}^2+\mu_i \mu_j\;\;\;\;\;(i,j=1,\cdots,N)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">59</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+If <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img152.svg"
+ ALT="${\bf m}=0$"></SPAN>, then <!-- MATH
+ ${\bf\Sigma}={\bf R}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img153.svg"
+ ALT="${\bf\Sigma}={\bf R}$"></SPAN>.
+
+<P>
+</LI>
+<LI><B>Mean and Covariance under Orthogonal Transforms</B>
+
+<P>
+Given an orthogonal matrix <!-- MATH
+ ${\bf A}=[{\bf a}_1,\cdots,{\bf a}_N]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img154.svg"
+ ALT="${\bf A}=[{\bf a}_1,\cdots,{\bf a}_N]$"></SPAN> 
+  composed of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img26.svg"
+ ALT="$N$"></SPAN> orthogonal column vectors satisfying
+  <!-- MATH
+ ${\bf a}_i^T{\bf a}_j=\delta_{ij}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img155.svg"
+ ALT="${\bf a}_i^T{\bf a}_j=\delta_{ij}$"></SPAN>, i.e., <!-- MATH
+ ${\bf A}^T={\bf A}^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img156.svg"
+ ALT="${\bf A}^T={\bf A}^{-1}$"></SPAN>, 
+  an orthogonal transform of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}$"></SPAN> can be defined as
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf y}=\left[ \begin{array}{c} y_1\\\vdots\\y_{N}\end{array} \right]
+    ={\bf A}^{T}{\bf x}=\left[ \begin{array}{c} {\bf a}_1^{T} \\\vdots\\
+        {\bf a}_{N}^{T} \end{array} \right]{\bf x},
+    \;\;\;\;\;\;\;\;\mbox{i.e.}\;\;\;\;\;
+    y_i={\bf a}_i^{T}\;{\bf x},\;\;\;\;\;(i=1,\cdots,N)
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 10.22ex; vertical-align: -4.49ex; " SRC="img157.svg"
+ ALT="$\displaystyle {\bf y}=\left[ \begin{array}{c} y_1\\ \vdots\\ y_{N}\end{array} \...
+...1^{T} \\ \vdots\\
+{\bf a}_{N}^{T} \end{array} \right]{\bf x},
+\;\;\;\;\;\;\;\;$">i.e.<IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img158.svg"
+ ALT="$\displaystyle \;\;\;\;\;
+y_i={\bf a}_i^{T}\;{\bf x},\;\;\;\;\;(i=1,\cdots,N)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">60</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The resulting <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img159.svg"
+ ALT="${\bf y}$"></SPAN> is also a random vector. The inverse transform is:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf x}={\bf A}{\bf y}=[{\bf a}_1, \cdots, {\bf a}_{N}]
+    \left[ \begin{array}{c} y_1 \\\vdots \\y_{N} \end{array}\right]
+    =\sum_{i=1}^{N} y_i {\bf a}_i
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 10.22ex; vertical-align: -4.49ex; " SRC="img160.svg"
+ ALT="$\displaystyle {\bf x}={\bf A}{\bf y}=[{\bf a}_1, \cdots, {\bf a}_{N}]
+\left[ \b...
+...ray}{c} y_1 \\ \vdots \\ y_{N} \end{array}\right]
+=\sum_{i=1}^{N} y_i {\bf a}_i$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">61</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Consider the squared norm of vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}$"></SPAN>, the total amount of energy
+  contained in <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}$"></SPAN>:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+||{\bf x}||^2={\bf x}^T{\bf x}=\left(\sum_{i=1}^{N} y_i {\bf a}_i\right)^T
+  \left(\sum_{j=1}^{N} y_j {\bf a}_j \right)
+  =\sum_{i=1}^N \sum_{j=1}^N y_iy_j \;{\bf a}_i^T{\bf a}_j
+  =\sum_{i=1}^Ny_i^2=||{\bf y}||^2
+  
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img161.svg"
+ ALT="$\displaystyle \vert\vert{\bf x}\vert\vert^2={\bf x}^T{\bf x}=\left(\sum_{i=1}^{...
+... y_iy_j \;{\bf a}_i^T{\bf a}_j
+=\sum_{i=1}^Ny_i^2=\vert\vert{\bf y}\vert\vert^2$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">62</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+This is Parseval's theorem, indicating that the total energy is 
+  conserved under any orthogonal transform.
+
+<P>
+The mean vector <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.78ex; " SRC="img162.svg"
+ ALT="${\bf m}_y$"></SPAN> and the covariance matrix <!-- MATH
+ ${\bf\Sigma}_y$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img163.svg"
+ ALT="${\bf\Sigma}_y$"></SPAN> of 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img159.svg"
+ ALT="${\bf y}$"></SPAN> are related to the <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img164.svg"
+ ALT="${\bf m}_x$"></SPAN> and <!-- MATH
+ ${\bf\Sigma}_x$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img165.svg"
+ ALT="${\bf\Sigma}_x$"></SPAN> of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}$"></SPAN>
+  by:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf m}_y=E({\bf y})=E({\bf A}^T{\bf x})={\bf A}^TE({\bf x})
+    ={\bf A}^T{\bf m}_x
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img166.svg"
+ ALT="$\displaystyle {\bf m}_y=E({\bf y})=E({\bf A}^T{\bf x})={\bf A}^TE({\bf x})
+={\bf A}^T{\bf m}_x$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">63</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and
+  <BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+{\bf\Sigma}_y & = & E({\bf yy}^T)-{\bf m}_y{\bf m}_y^T
+    =E({\bf A}^T{\bf xx}^T{\bf A})-{\bf A}^T{\bf m}_x{\bf m}_x^T{\bf A}
+    \nonumber \\
+    &=& {\bf A}^TE({\bf xx}^T){\bf A}-{\bf A}^T{\bf m}_x{\bf m}_x^T{\bf A}
+    ={\bf A}^T[E({\bf xx}^T)-{\bf m}_x{\bf m}_x^T]{\bf A}
+    ={\bf A}^T{\bf\Sigma}_x{\bf A}
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img167.svg"
+ ALT="$\displaystyle {\bf\Sigma}_y$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.25ex; vertical-align: -1.01ex; " SRC="img168.svg"
+ ALT="$\displaystyle E({\bf yy}^T)-{\bf m}_y{\bf m}_y^T
+=E({\bf A}^T{\bf xx}^T{\bf A})-{\bf A}^T{\bf m}_x{\bf m}_x^T{\bf A}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img169.svg"
+ ALT="$\displaystyle {\bf A}^TE({\bf xx}^T){\bf A}-{\bf A}^T{\bf m}_x{\bf m}_x^T{\bf A...
+... A}^T[E({\bf xx}^T)-{\bf m}_x{\bf m}_x^T]{\bf A}
+={\bf A}^T{\bf\Sigma}_x{\bf A}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">64</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+The orthogonal transform does not change the trace of <!-- MATH
+ ${\bf\Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img133.svg"
+ ALT="${\bf\Sigma}$"></SPAN>:
+  Due to the commutativity of trace: <!-- MATH
+ $tr({\bf AB})=tr({\bf BA})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img170.svg"
+ ALT="$tr({\bf AB})=tr({\bf BA})$"></SPAN>, we have:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+tr {\bf\Sigma_y}=tr ({\bf A}^T{\bf\Sigma}_x{\bf A})
+    =tr ({\bf A}^T{\bf A}{\bf\Sigma}_x)=tr {\bf\Sigma}_x
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.78ex; " SRC="img171.svg"
+ ALT="$\displaystyle tr {\bf\Sigma_y}=tr ({\bf A}^T{\bf\Sigma}_x{\bf A})
+=tr ({\bf A}^T{\bf A}{\bf\Sigma}_x)=tr {\bf\Sigma}_x$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">65</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+i.e., the total amount of dynamic energy or information contained in 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img20.svg"
+ ALT="${\bf x}$"></SPAN> is conserved by the orthogonal transform 
+  <!-- MATH
+ ${\bf y}={\bf A}^T{\bf x}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.57ex; " SRC="img172.svg"
+ ALT="${\bf y}={\bf A}^T{\bf x}$"></SPAN>.
+
+<P>
+</LI>
+<LI><B>Estimation of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img173.svg"
+ ALT="${\bf m}$"></SPAN> and <!-- MATH
+ ${\bf\Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img133.svg"
+ ALT="${\bf\Sigma}$"></SPAN></B>
+
+<P>
+When <!-- MATH
+ $p({\bf x})=p(x_1,\cdots, x_N)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img174.svg"
+ ALT="$p({\bf x})=p(x_1,\cdots, x_N)$"></SPAN> is not known, <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img173.svg"
+ ALT="${\bf m}$"></SPAN> and <!-- MATH
+ ${\bf\Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img133.svg"
+ ALT="${\bf\Sigma}$"></SPAN>
+  cannot be found based on their definitions. However, they can be estimated if 
+  a set of outcomes (samples) <!-- MATH
+ ${\bf x}_k,\;\;(k=1,\cdots,K)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img175.svg"
+ ALT="${\bf x}_k,\;\;(k=1,\cdots,K)$"></SPAN> of the random 
+  experiment in question can be observed.
+
+<P>
+The <EM>sample mean</EM> <!-- MATH
+ $\hat{\bf m}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.12ex; " SRC="img176.svg"
+ ALT="$\hat{\bf m}$"></SPAN> can be obtained as
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\hat{{\bf m}}=\frac{1}{K}\sum_{k=1}^K {\bf x}_k
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img177.svg"
+ ALT="$\displaystyle \hat{{\bf m}}=\frac{1}{K}\sum_{k=1}^K {\bf x}_k$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">66</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+The unbiased <EM>sample covariance</EM> <!-- MATH
+ $\hat{\bf\Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.12ex; " SRC="img178.svg"
+ ALT="$\hat{\bf\Sigma}$"></SPAN> can be obtained 
+  as
+  <BR>
+<DIV CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+\hat{{\bf\Sigma}}&=&
+    \frac{1}{K-1}\sum_{k=1}^K ({\bf x}_k-\hat{\bf m})({\bf x}_k-\hat{\bf m})^T
+    =\frac{1}{K-1}\sum_{k=1}^K \left( {\bf x}_k{\bf x}_k^T
+    -{\bf x}_k\hat{\bf m}^T-\hat{\bf m}{\bf x}^T_k+\hat{\bf m}\hat{\bf m}^T\right)
+    \nonumber\\
+    &=&\frac{1}{K-1}\left( \sum_{k=1}^K {\bf x}{\bf x}^T
+    -K\hat{\bf m}\hat{\bf m}^T \right)
+    =\hat{\bf R}-\frac{K}{K-1}\hat{\bf m}\hat{\bf m}^T
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.12ex; " SRC="img179.svg"
+ ALT="$\displaystyle \hat{{\bf\Sigma}}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img180.svg"
+ ALT="$\displaystyle \frac{1}{K-1}\sum_{k=1}^K ({\bf x}_k-\hat{\bf m})({\bf x}_k-\hat{...
+...
+-{\bf x}_k\hat{\bf m}^T-\hat{\bf m}{\bf x}^T_k+\hat{\bf m}\hat{\bf m}^T\right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img22.svg"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img181.svg"
+ ALT="$\displaystyle \frac{1}{K-1}\left( \sum_{k=1}^K {\bf x}{\bf x}^T
+-K\hat{\bf m}\hat{\bf m}^T \right)
+=\hat{\bf R}-\frac{K}{K-1}\hat{\bf m}\hat{\bf m}^T$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">67</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+  where
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\hat{\bf R}=\frac{1}{K-1}\sum_{k=1}^K {\bf x}_k{\bf x}^T_k
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img182.svg"
+ ALT="$\displaystyle \hat{\bf R}=\frac{1}{K-1}\sum_{k=1}^K {\bf x}_k{\bf x}^T_k$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">68</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+If <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img183.svg"
+ ALT="$K\gg 1$"></SPAN>, then <!-- MATH
+ $K-1\approx K$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img184.svg"
+ ALT="$K-1\approx K$"></SPAN> and the above can be approximated as
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\hat{{\bf\Sigma}}\approx \frac{1}{K}\sum_{k=1}^K {\bf x}_k{\bf x}^T_k
+    -\hat{\bf m}\hat{\bf m}^T,\;\;\;\;\;\;\;\;
+    \hat{\bf R}\approx\frac{1}{K}\sum_{k=1}^K {\bf x}_k{\bf x}^T_k
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img185.svg"
+ ALT="$\displaystyle \hat{{\bf\Sigma}}\approx \frac{1}{K}\sum_{k=1}^K {\bf x}_k{\bf x}...
+...\;\;\;\;\;\;\;\;
+\hat{\bf R}\approx\frac{1}{K}\sum_{k=1}^K {\bf x}_k{\bf x}^T_k$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">69</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Note that the rank of the <!-- MATH
+ $d \times d$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img186.svg"
+ ALT="$d \times d$"></SPAN> estimated covariance matrix 
+  <!-- MATH
+ $\hat{\bf\Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.12ex; " SRC="img178.svg"
+ ALT="$\hat{\bf\Sigma}$"></SPAN> is at most <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img187.svg"
+ ALT="$K-1$"></SPAN> (if all <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img188.svg"
+ ALT="$K$"></SPAN> samples in the dataset
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img189.svg"
+ ALT="${\bf X}$"></SPAN> are independent), due to the constraining equation:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\sum_{k=1}^K({\bf x}_k-\hat{\bf m})
+    =\sum_{k=1}^K{\bf x}_k-K\hat{\bf m}={\bf0}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img190.svg"
+ ALT="$\displaystyle \sum_{k=1}^K({\bf x}_k-\hat{\bf m})
+=\sum_{k=1}^K{\bf x}_k-K\hat{\bf m}={\bf0}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">70</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+If <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img191.svg"
+ ALT="$K-1&lt;N$"></SPAN>, then <!-- MATH
+ $\hat{\bf\Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.12ex; " SRC="img178.svg"
+ ALT="$\hat{\bf\Sigma}$"></SPAN> does not have a full rank and is
+  therefore noninvertible.
+
+<P>
+</LI>
+<LI><B>Positive definiteness of sample covariance matrix</B>
+
+<P>
+The sample covariance matrix <!-- MATH
+ $\hat{\bf\Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.12ex; " SRC="img178.svg"
+ ALT="$\hat{\bf\Sigma}$"></SPAN> is positive semi-definite.
+  To see this, we first assume <!-- MATH
+ ${\bf m}={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img192.svg"
+ ALT="${\bf m}={\bf0}$"></SPAN> without loss of 
+  generality, and consider the following quadratic form with any 
+  vector <!-- MATH
+ ${\bf y}\ne {\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img193.svg"
+ ALT="${\bf y}\ne {\bf0}$"></SPAN>:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf y}^T\hat{\bf\Sigma}{\bf y}
+    ={\bf y}^T\left( \frac{1}{K}\sum_{k=1}^K{\bf x}_k{\bf x}_k^T\right) {\bf y}
+    =\frac{1}{K}\sum_{k=1}^K{\bf y}^T{\bf x}_k{\bf x}_k^T{\bf y}
+    =\frac{1}{K}\sum_{k=1}^K({\bf x}_k^T{\bf y})^2\ge 0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img194.svg"
+ ALT="$\displaystyle {\bf y}^T\hat{\bf\Sigma}{\bf y}
+={\bf y}^T\left( \frac{1}{K}\sum_...
+...{\bf x}_k{\bf x}_k^T{\bf y}
+=\frac{1}{K}\sum_{k=1}^K({\bf x}_k^T{\bf y})^2\ge 0$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">71</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+i.e., <!-- MATH
+ $\hat{\bf\Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.12ex; " SRC="img178.svg"
+ ALT="$\hat{\bf\Sigma}$"></SPAN> is positive semi-definte. This quadratic
+  form is zero only if <!-- MATH
+ ${\bf x}_1^T{\bf y}=\cdots={\bf x}_K^T{\bf y}=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.76ex; " SRC="img195.svg"
+ ALT="${\bf x}_1^T{\bf y}=\cdots={\bf x}_K^T{\bf y}=0$"></SPAN>.
+
+<P>
+Moreover, <!-- MATH
+ $\hat{\bf\Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.12ex; " SRC="img178.svg"
+ ALT="$\hat{\bf\Sigma}$"></SPAN> is positive definite if the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img188.svg"
+ ALT="$K$"></SPAN> samples 
+  <!-- MATH
+ ${\bf x}_1,\cdots,{\bf x}_K$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img196.svg"
+ ALT="${\bf x}_1,\cdots,{\bf x}_K$"></SPAN> span the N-D vector space, i.e., <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img26.svg"
+ ALT="$N$"></SPAN> or
+  more of the <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.43ex; " SRC="img197.svg"
+ ALT="$K\ge N$"></SPAN> sample vectors are independent of each other. 
+  To see this, we first assme the quadratic form above is zero:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf y}^T\hat{\bf\Sigma}{\bf y}
+  =\frac{1}{K}\sum_{k=1}^K({\bf x}_k^T{\bf y})^2=0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.66ex; vertical-align: -3.14ex; " SRC="img198.svg"
+ ALT="$\displaystyle {\bf y}^T\hat{\bf\Sigma}{\bf y}
+=\frac{1}{K}\sum_{k=1}^K({\bf x}_k^T{\bf y})^2=0$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">72</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+i.e., <!-- MATH
+ ${\bf x}_1^T{\bf y}=\cdots={\bf x}_K^T{\bf y}=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.76ex; " SRC="img195.svg"
+ ALT="${\bf x}_1^T{\bf y}=\cdots={\bf x}_K^T{\bf y}=0$"></SPAN>. Further,
+  we represent <!-- MATH
+ ${\bf y}\ne{\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img193.svg"
+ ALT="${\bf y}\ne {\bf0}$"></SPAN> as a linear combination of 
+  <!-- MATH
+ ${\bf x}_1,\cdots,{\bf x}_K$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img196.svg"
+ ALT="${\bf x}_1,\cdots,{\bf x}_K$"></SPAN> that span the N-D space:
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf y}=\sum_{i=1}^K a_i{\bf x}_i
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img199.svg"
+ ALT="$\displaystyle {\bf y}=\sum_{i=1}^K a_i{\bf x}_i$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">73</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+we therefore have
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf y}^T{\bf y}=\sum_{i=1}^K a_i{\bf x}_i^T{\bf y}=0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img200.svg"
+ ALT="$\displaystyle {\bf y}^T{\bf y}=\sum_{i=1}^K a_i{\bf x}_i^T{\bf y}=0$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">74</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+Now we have proven that if <!-- MATH
+ ${\bf y}^T\hat{\bf\Sigma}{\bf y}=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.57ex; " SRC="img201.svg"
+ ALT="${\bf y}^T\hat{\bf\Sigma}{\bf y}=0$"></SPAN>, then
+  <!-- MATH
+ ${\bf y}={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img202.svg"
+ ALT="${\bf y}={\bf0}$"></SPAN>, or equivalently, if <!-- MATH
+ ${\bf y}\ne{\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img193.svg"
+ ALT="${\bf y}\ne {\bf0}$"></SPAN>, then
+  <!-- MATH
+ ${\bf y}^T\hat{\bf\Sigma}{\bf y}\ne 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.57ex; " SRC="img203.svg"
+ ALT="${\bf y}^T\hat{\bf\Sigma}{\bf y}\ne 0$"></SPAN>, i.e., <!-- MATH
+ ${\bf\Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img133.svg"
+ ALT="${\bf\Sigma}$"></SPAN> is
+  positive definite. Consequently, all of its eigenvalues <!-- MATH
+ $\lambda_i>0\;
+  (i=1,\cdots,N)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img204.svg"
+ ALT="$\lambda_i&gt;0\;
+(i=1,\cdots,N)$"></SPAN> are positive, and
+  <P></P>
+<DIV CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+tr\; {\bf\Sigma}=\sum_{i=1}^N \lambda_i > 0,\;\;\;\;\;
+  \det\; {\bf\Sigma}=\prod_{i=1}^N \lambda_i > 0
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img205.svg"
+ ALT="$\displaystyle tr\; {\bf\Sigma}=\sum_{i=1}^N \lambda_i &gt; 0,\;\;\;\;\;
+\det\; {\bf\Sigma}=\prod_{i=1}^N \lambda_i &gt; 0$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">75</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+</LI>
+</UL>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node3.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="probability.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node1.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node3.html">Function of Random Variables</A>
+<B> Up:</B> <A
+ HREF="probability.html">probability</A>
+<B> Previous:</B> <A
+ HREF="node1.html">Probability of univariate random</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

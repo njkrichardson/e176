@@ -1,0 +1,1818 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Matrix Norms</TITLE>
+<META NAME="description" CONTENT="Matrix Norms">
+<META NAME="keywords" CONTENT="algebra">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="algebra.css">
+
+<LINK REL="next" HREF="node18.html">
+<LINK REL="previous" HREF="node16.html">
+<LINK REL="next" HREF="node18.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node18.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="algebra.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node16.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node18.html">Vector and Matrix Differentiation</A>
+<B> Up:</B> <A
+ HREF="algebra.html">algebra</A>
+<B> Previous:</B> <A
+ HREF="node16.html">Vector Norms</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION000170000000000000000">
+Matrix Norms</A>
+</H1>
+
+<P>
+The norm of an <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.31ex; " SRC="img38.svg"
+ ALT="$m\times n$"></SPAN> matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> is any function that maps
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> to a real number <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img805.svg"
+ ALT="$\vert\vert{\bf A}\vert\vert$"></SPAN> that satisfies the following 
+required properties:
+
+<P>
+
+<UL>
+<LI>Positivity:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf A}||\ge 0,\;\;\;\;\;\;
+  ||{\bf A}||=0\;\;\;\mbox{iff}\;\;\;{\bf A}={\bf0}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img806.svg"
+ ALT="$\displaystyle \vert\vert{\bf A}\vert\vert\ge 0,\;\;\;\;\;\;
+\vert\vert{\bf A}\vert\vert=0\;\;\;\mbox{iff}\;\;\;{\bf A}={\bf0}
+$"> 
+
+(<SPAN CLASS="arabic">233</SPAN>)
+</DIV>
+</LI>
+<LI>Homogeneity:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||a{\bf A}||=|a|\;||{\bf A}||
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img807.svg"
+ ALT="$\displaystyle \vert\vert a{\bf A}\vert\vert=\vert a\vert\;\vert\vert{\bf A}\vert\vert
+$"> 
+
+(<SPAN CLASS="arabic">234</SPAN>)
+</DIV>
+</LI>
+<LI>Triangle inequality:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf A}+{\bf B}||\le ||{\bf A}||+||{\bf B}||,
+  \;\;\;\;\;\;\mbox{or}\;\;\;\;\;
+  ||{\bf A}||-||{\bf B}||\le ||{\bf A}-{\bf B}||
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img808.svg"
+ ALT="$\displaystyle \vert\vert{\bf A}+{\bf B}\vert\vert\le \vert\vert{\bf A}\vert\ver...
+...\vert\vert-\vert\vert{\bf B}\vert\vert\le \vert\vert{\bf A}-{\bf B}\vert\vert
+$"> 
+
+(<SPAN CLASS="arabic">235</SPAN>)
+</DIV>
+The second expression can be obtained by replacing <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> by
+  <!-- MATH
+ ${\bf A}-{\bf B}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img809.svg"
+ ALT="${\bf A}-{\bf B}$"></SPAN> in the first expression.
+</LI>
+</UL>
+
+<P>
+In addition to the three required properties for matrix norms, some of
+them also satisfy these additional properties (not necessarily satisfied 
+by other matrix norms):
+
+<UL>
+<LI>Subordinance: 
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf A}{\bf x}||\le ||{\bf A}|| \cdot ||{\bf x}||
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img810.svg"
+ ALT="$\displaystyle \vert\vert{\bf A}{\bf x}\vert\vert\le \vert\vert{\bf A}\vert\vert \cdot \vert\vert{\bf x}\vert\vert
+$"> 
+
+(<SPAN CLASS="arabic">236</SPAN>)
+</DIV>
+</LI>
+<LI>submultiplicativity:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf A}{\bf B}||\le ||{\bf A}|| \cdot ||{\bf B}||
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img811.svg"
+ ALT="$\displaystyle \vert\vert{\bf A}{\bf B}\vert\vert\le \vert\vert{\bf A}\vert\vert \cdot \vert\vert{\bf B}\vert\vert
+$"> 
+
+(<SPAN CLASS="arabic">237</SPAN>)
+</DIV>
+</LI>
+</UL>
+
+<P>
+We now consider some commonly used matrix norms. 
+
+<P>
+
+<UL>
+<LI><B>The element-wise norms</B>
+
+<P>
+If we treat the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.31ex; " SRC="img38.svg"
+ ALT="$m\times n$"></SPAN> elements of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> are the elements of 
+  an <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img43.svg"
+ ALT="$mn$"></SPAN>-dimensional vector, then the p-norm of this vector can be used as 
+  the p-norm of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf A}||_p=\left\{ \sum_{i=1}^m\sum_{j=1}^n |a_{ij}|^p\right\}^{1/p}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 9.29ex; vertical-align: -3.72ex; " SRC="img812.svg"
+ ALT="$\displaystyle \vert\vert{\bf A}\vert\vert _p=\left\{ \sum_{i=1}^m\sum_{j=1}^n \vert a_{ij}\vert^p\right\}^{1/p}
+$"> 
+
+(<SPAN CLASS="arabic">238</SPAN>)
+</DIV>
+Specially, we consider the following three cases for <!-- MATH
+ $p=1,\;2,\;\infty$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img813.svg"
+ ALT="$p=1,\;2,\;\infty$"></SPAN>.
+  
+<UL>
+<LI><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img814.svg"
+ ALT="$\vert\vert{\bf A}\vert\vert _1$"></SPAN> is the absolute sum of all elements of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>:
+    
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf A}||_1=\sum_{i=1}^m\sum_{j=1}^n |a_{ij}|
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 7.43ex; vertical-align: -3.40ex; " SRC="img815.svg"
+ ALT="$\displaystyle \vert\vert{\bf A}\vert\vert _1=\sum_{i=1}^m\sum_{j=1}^n \vert a_{ij}\vert
+$"> 
+
+(<SPAN CLASS="arabic">239</SPAN>)
+</DIV>
+</LI>
+<LI><!-- MATH
+ $||{\bf A}||_\infty$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img816.svg"
+ ALT="$\vert\vert{\bf A}\vert\vert _\infty$"></SPAN> is the <EM>maximum norm</EM>, the maximum absolute
+    value among all <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img43.svg"
+ ALT="$mn$"></SPAN> elements of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>:
+    
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf A}||_\infty=\max\{ |a_{ij}|,\;\; 1\le i\le m,\;1\le j\le n \}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img817.svg"
+ ALT="$\displaystyle \vert\vert{\bf A}\vert\vert _\infty=\max\{ \vert a_{ij}\vert,\;\; 1\le i\le m,\;1\le j\le n \}
+$"> 
+
+(<SPAN CLASS="arabic">240</SPAN>)
+</DIV>
+</LI>
+<LI><SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img818.svg"
+ ALT="$\vert\vert{\bf A}\vert\vert _2$"></SPAN> is the <EM>Frobenius norm</EM> 
+    
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf A}||_2=||{\bf A}||_F=\sqrt{\sum_{i=1}^m\sum_{j=1}^n |a_{ij}|^2}
+    =\sqrt{ tr({\bf A}^*{\bf A}) }=\sqrt{\sum_{i=1}^R \lambda_i}
+    =\sqrt{\sum_{i=1}^R \sigma_i^2}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 9.06ex; vertical-align: -3.81ex; " SRC="img819.svg"
+ ALT="$\displaystyle \vert\vert{\bf A}\vert\vert _2=\vert\vert{\bf A}\vert\vert _F=\sq...
+...A}^*{\bf A}) }=\sqrt{\sum_{i=1}^R \lambda_i}
+=\sqrt{\sum_{i=1}^R \sigma_i^2}
+$"> 
+
+(<SPAN CLASS="arabic">241</SPAN>)
+</DIV>
+where <!-- MATH
+ $r\le \min(m,n)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img620.svg"
+ ALT="$r\le\min(m,n)$"></SPAN> is the rank of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>, <!-- MATH
+ $\lambda_i=\sigma_2^2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img820.svg"
+ ALT="$\lambda_i=\sigma_2^2$"></SPAN> 
+    is the ith non-zero eigenvalues of the positive, semi-definite matrix
+    <!-- MATH
+ ${\bf A}^*{\bf A}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img821.svg"
+ ALT="${\bf A}^*{\bf A}$"></SPAN>, and <!-- MATH
+ $\sigma_i=\sqrt{\lambda_i}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.54ex; " SRC="img822.svg"
+ ALT="$\sigma_i=\sqrt{\lambda_i}$"></SPAN> the ith singular 
+    value of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> (<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img823.svg"
+ ALT="$i=1,\cdots,r$"></SPAN>). (This Frobenius norm <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img818.svg"
+ ALT="$\vert\vert{\bf A}\vert\vert _2$"></SPAN>
+    is implemented in Matlab by the function <code>norm(A,'fro')</code>.)
+
+<P>
+</LI>
+</UL>
+  The Frobenius norm of a unitary (orthogonal if real) matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img436.svg"
+ ALT="${\bf R}$"></SPAN>
+  satisfying 
+  <!-- MATH
+ ${\bf R}^*={\bf R}^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img824.svg"
+ ALT="${\bf R}^*={\bf R}^{-1}$"></SPAN> or <!-- MATH
+ ${\bf R}^*{\bf R}={\bf R}^{-1}{\bf R}={\bf I}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img825.svg"
+ ALT="${\bf R}^*{\bf R}={\bf R}^{-1}{\bf R}={\bf I}$"></SPAN>
+  is:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf R}||_F^2= tr({\bf R}^*{\bf R})=tr {\bf I}=n
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img826.svg"
+ ALT="$\displaystyle \vert\vert{\bf R}\vert\vert _F^2= tr({\bf R}^*{\bf R})=tr {\bf I}=n
+$"> 
+
+(<SPAN CLASS="arabic">242</SPAN>)
+</DIV>
+The Frobenius norm is the only one out of the above three matrix norms
+  that is <EM>unitary invariant</EM>, i.e., it is conserved or invariant 
+  under a unitary transformation (such as a rotation) 
+  <!-- MATH
+ ${\bf B}={\bf R}^*{\bf A}{\bf R}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img470.svg"
+ ALT="${\bf B}={\bf R}^*{\bf A}{\bf R}$"></SPAN>:
+  <BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+||{\bf B}||_F^2&=&tr\left({\bf B}^*{\bf B}\right)
+  =tr\left[\left({\bf R}^*{\bf A}{\bf R}\right)^*
+    \left({\bf R}^*{\bf A}{\bf R}\right)\right]
+  =tr \left( {\bf R}^*{\bf A}^*{\bf R}{\bf R}^*{\bf A}{\bf R}\right)
+  \nonumber \\
+  &=&tr \left( {\bf R}^*{\bf A}^*{\bf A}{\bf R}\right)
+  =tr \left( {\bf A}^*{\bf A}\right)=||{\bf A}||_F^2
+  =||{\bf A}||_F^2
+  \nonumber
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img827.svg"
+ ALT="$\displaystyle \vert\vert{\bf B}\vert\vert _F^2$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img161.svg"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 3.02ex; vertical-align: -0.93ex; " SRC="img828.svg"
+ ALT="$\displaystyle tr\left({\bf B}^*{\bf B}\right)
+=tr\left[\left({\bf R}^*{\bf A}{\...
+...ight)\right]
+=tr \left( {\bf R}^*{\bf A}^*{\bf R}{\bf R}^*{\bf A}{\bf R}\right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img161.svg"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img829.svg"
+ ALT="$\displaystyle tr \left( {\bf R}^*{\bf A}^*{\bf A}{\bf R}\right)
+=tr \left( {\bf...
+...bf A}\right)=\vert\vert{\bf A}\vert\vert _F^2
+=\vert\vert{\bf A}\vert\vert _F^2$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where we have used the property of the trace 
+  <!-- MATH
+ $tr\left({\bf A}{\bf B}\right)=tr\left({\bf B}{\bf A}\right)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img830.svg"
+ ALT="$tr\left({\bf A}{\bf B}\right)=tr\left({\bf B}{\bf A}\right)$"></SPAN>.
+
+<P>
+</LI>
+<LI><B>The natural matrix norms</B>
+
+<P>
+The natural norm <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img805.svg"
+ ALT="$\vert\vert{\bf A}\vert\vert$"></SPAN> of matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> induced by
+  (subordinate to) the vector norm <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img98.svg"
+ ALT="$\vert\vert{\bf x}\vert\vert$"></SPAN> is defined as
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf A}||=\sup_{||{\bf x}||=1} \{ ||{\bf A}{\bf x}|| \}
+  =\sup_{{\bf x}\ne {\bf0}} \{ ||{\bf A}{\bf x}|| / ||{\bf x}|| \}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 4.88ex; vertical-align: -2.81ex; " SRC="img831.svg"
+ ALT="$\displaystyle \vert\vert{\bf A}\vert\vert=\sup_{\vert\vert{\bf x}\vert\vert=1} ...
+...\bf0}} \{ \vert\vert{\bf A}{\bf x}\vert\vert / \vert\vert{\bf x}\vert\vert \}
+$"> 
+
+(<SPAN CLASS="arabic">243</SPAN>)
+</DIV>
+Specially the norm of the identity matrix <!-- MATH
+ ${\bf A}={\bf I}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img198.svg"
+ ALT="${\bf A}={\bf I}$"></SPAN> is
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf I}||=\sup_{||{\bf x}||=1} \{ ||{\bf I}{\bf x}|| \}
+  =\sup_{||{\bf x}||=1} \{ ||{\bf x}|| \}=1
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 4.88ex; vertical-align: -2.81ex; " SRC="img832.svg"
+ ALT="$\displaystyle \vert\vert{\bf I}\vert\vert=\sup_{\vert\vert{\bf x}\vert\vert=1} ...
+...\}
+=\sup_{\vert\vert{\bf x}\vert\vert=1} \{ \vert\vert{\bf x}\vert\vert \}=1
+$"> 
+
+(<SPAN CLASS="arabic">244</SPAN>)
+</DIV>
+We now prove that the induced matrix norm satisfies all five properties 
+  given above. (Recall <!-- MATH
+ $|a+b|\le |a|+|b|$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img833.svg"
+ ALT="$\vert a+b\vert\le \vert a\vert+\vert b\vert$"></SPAN>, <!-- MATH
+ $|ab|\le |a|\;|b|$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img834.svg"
+ ALT="$\vert ab\vert\le \vert a\vert\;\vert b\vert$"></SPAN>.)
+  
+<OL>
+<LI>Positivity: <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img835.svg"
+ ALT="$\vert\vert{\bf A}\vert\vert&gt;0$"></SPAN> if <!-- MATH
+ ${\bf A}\ne {\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img836.svg"
+ ALT="${\bf A}\ne {\bf0}$"></SPAN>, this is 
+    trivially obvious.
+</LI>
+<LI>Homogeneity: <!-- MATH
+ $||a{\bf A}|| = |a|\,||{\bf A}||$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img837.svg"
+ ALT="$\vert\vert a{\bf A}\vert\vert = \vert a\vert\,\vert\vert{\bf A}\vert\vert$"></SPAN>
+    
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||a{\bf A}||=\sup_{||{\bf x}||=1} \{ ||a{\bf A}{\bf x}|| \}
+    =\sup_{||{\bf x}||=1} \{ |a|\;||{\bf A}{\bf x}|| \}
+    =|a|\;\sup_{||{\bf x}||=1} \{ ||{\bf A}{\bf x}|| \}
+    =|a|\;||{\bf A}||
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 4.88ex; vertical-align: -2.81ex; " SRC="img838.svg"
+ ALT="$\displaystyle \vert\vert a{\bf A}\vert\vert=\sup_{\vert\vert{\bf x}\vert\vert=1...
+...t\vert{\bf A}{\bf x}\vert\vert \}
+=\vert a\vert\;\vert\vert{\bf A}\vert\vert
+$"> 
+
+(<SPAN CLASS="arabic">245</SPAN>)
+</DIV>
+</LI>
+<LI>Triangle inequality: <!-- MATH
+ $||{\bf A}+{\bf B}||\le ||{\bf A}||+||{\bf B}||$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img839.svg"
+ ALT="$\vert\vert{\bf A}+{\bf B}\vert\vert\le \vert\vert{\bf A}\vert\vert+\vert\vert{\bf B}\vert\vert$"></SPAN>
+    <BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+||{\bf A}+{\bf B}||&=&\sup_{||{\bf x}||=1} \{ ||({\bf A}+{\bf B}){\bf x}|| \}
+      =\sup_{||{\bf x}||=1} \{ ||{\bf A}{\bf x}+{\bf B}{\bf x}|| \}
+      \le \sup_{||{\bf x}||=1} \{ ||{\bf A}{\bf x}||+||{\bf B}{\bf x}|| \}
+      \nonumber \\
+      &\le& \sup_{||{\bf x}||=1} \{ ||{\bf A}{\bf x}|| \}
+      +\sup_{||{\bf x}||=1} \{ ||{\bf B}{\bf x}|| \}
+      =||{\bf A}||+||{\bf B}||
+      \nonumber
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img840.svg"
+ ALT="$\displaystyle \vert\vert{\bf A}+{\bf B}\vert\vert$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img161.svg"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 4.88ex; vertical-align: -2.81ex; " SRC="img841.svg"
+ ALT="$\displaystyle \sup_{\vert\vert{\bf x}\vert\vert=1} \{ \vert\vert({\bf A}+{\bf B...
+...=1} \{ \vert\vert{\bf A}{\bf x}\vert\vert+\vert\vert{\bf B}{\bf x}\vert\vert \}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 2.09ex; vertical-align: -0.43ex; " SRC="img842.svg"
+ ALT="$\textstyle \le$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 4.88ex; vertical-align: -2.81ex; " SRC="img843.svg"
+ ALT="$\displaystyle \sup_{\vert\vert{\bf x}\vert\vert=1} \{ \vert\vert{\bf A}{\bf x}\...
+...B}{\bf x}\vert\vert \}
+=\vert\vert{\bf A}\vert\vert+\vert\vert{\bf B}\vert\vert$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+</LI>
+<LI>Subordinance: <!-- MATH
+ $||{\bf A}{\bf x}||\le||{\bf A}||\;||{\bf x}||$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img844.svg"
+ ALT="$\vert\vert{\bf A}{\bf x}\vert\vert\le\vert\vert{\bf A}\vert\vert\;\vert\vert{\bf x}\vert\vert$"></SPAN>
+    
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf A}||\;||{\bf x}||=||{\bf x}||\;\sup_{\bf y}\{||{\bf Ay}||/||{\bf y}||\}
+    \ge ||{\bf x}||\;||{\bf Ay}|| / ||{\bf y}||
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 4.41ex; vertical-align: -2.51ex; " SRC="img845.svg"
+ ALT="$\displaystyle \vert\vert{\bf A}\vert\vert\;\vert\vert{\bf x}\vert\vert=\vert\ve...
+...{\bf x}\vert\vert\;\vert\vert{\bf Ay}\vert\vert / \vert\vert{\bf y}\vert\vert
+$"> 
+
+(<SPAN CLASS="arabic">246</SPAN>)
+</DIV>
+As <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img86.svg"
+ ALT="${\bf y}$"></SPAN> is arbitrary, we let <!-- MATH
+ ${\bf y}={\bf x}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img846.svg"
+ ALT="${\bf y}={\bf x}$"></SPAN> and get
+    
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf A}||\;||{\bf x}||\ge ||{\bf Ax}||
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img847.svg"
+ ALT="$\displaystyle \vert\vert{\bf A}\vert\vert\;\vert\vert{\bf x}\vert\vert\ge \vert\vert{\bf Ax}\vert\vert
+$"> 
+
+(<SPAN CLASS="arabic">247</SPAN>)
+</DIV>
+In particular, if vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img52.svg"
+ ALT="${\bf x}$"></SPAN> is the eigenvector corresponding 
+    to the greatest eigenvalue <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img848.svg"
+ ALT="$\lambda_{max}$"></SPAN> of <!-- MATH
+ ${\bf A}^*{\bf A}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img821.svg"
+ ALT="${\bf A}^*{\bf A}$"></SPAN>:
+    
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+({\bf A}^*{\bf A})\,{\bf x}=\lambda_{max}\;{\bf x}
+    =||{\bf A}||^2\; {\bf x}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img849.svg"
+ ALT="$\displaystyle ({\bf A}^*{\bf A})\,{\bf x}=\lambda_{max}\;{\bf x}
+=\vert\vert{\bf A}\vert\vert^2\; {\bf x}
+$"> 
+
+(<SPAN CLASS="arabic">248</SPAN>)
+</DIV>
+then the equality of the subordinance property holds. To see this,
+    consider
+    
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf A}{\bf x}||^2=\langle({\bf Ax})^*,\,({\bf Ax})\rangle
+    ={\bf x}^* ({\bf A}^*{\bf A}) {\bf x}={\bf x}^*||{\bf A}||^2{\bf x}
+    =||{\bf A}||^2 ||{\bf x}||^2
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img850.svg"
+ ALT="$\displaystyle \vert\vert{\bf A}{\bf x}\vert\vert^2=\langle({\bf Ax})^*,\,({\bf ...
+...t\vert^2{\bf x}
+=\vert\vert{\bf A}\vert\vert^2 \vert\vert{\bf x}\vert\vert^2
+$"> 
+
+(<SPAN CLASS="arabic">249</SPAN>)
+</DIV>
+taking square root on both sides we get 
+    <!-- MATH
+ $||{\bf A}{\bf x}||=||{\bf A}||\,||{\bf x}||$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img851.svg"
+ ALT="$\vert\vert{\bf A}{\bf x}\vert\vert=\vert\vert{\bf A}\vert\vert\,\vert\vert{\bf x}\vert\vert$"></SPAN>.
+
+<P>
+</LI>
+<LI>Submultiplicativity: <!-- MATH
+ $||{\bf AB}||\le||{\bf A}||\;||{\bf B}||$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img852.svg"
+ ALT="$\vert\vert{\bf AB}\vert\vert\le\vert\vert{\bf A}\vert\vert\;\vert\vert{\bf B}\vert\vert$"></SPAN>
+    
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf A}{\bf B}||=\sup_{||{\bf x}||=1}\{||{\bf ABx}||\}
+    \le \sup_{||{\bf x}||=1}\{||{\bf A}||\;||{\bf Bx}||\}
+    = ||{\bf A}||\;\sup_{||{\bf x}||=1}\{||{\bf Bx}||\}
+    = ||{\bf A}||\;||{\bf B}||
+    
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 4.88ex; vertical-align: -2.81ex; " SRC="img853.svg"
+ ALT="$\displaystyle \vert\vert{\bf A}{\bf B}\vert\vert=\sup_{\vert\vert{\bf x}\vert\v...
+...f Bx}\vert\vert\}
+= \vert\vert{\bf A}\vert\vert\;\vert\vert{\bf B}\vert\vert
+$"> 
+
+(<SPAN CLASS="arabic">250</SPAN>)
+</DIV>
+In particular, if <!-- MATH
+ ${\bf A}=c{\bf B}^*$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img854.svg"
+ ALT="${\bf A}=c{\bf B}^*$"></SPAN> (i.e., <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> and
+    <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img88.svg"
+ ALT="${\bf B}$"></SPAN> are linearly dependent), then the equality of the 
+    submultiplicativity property holds. To see this, consider
+    
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf B}||=\sqrt{\lambda_{max}({\bf B}^*{\bf B})},\;\;\;\;
+    ||{\bf A}||=|c|\sqrt{\lambda_{max}({\bf B}{\bf B}^*)}
+    =|c| \sqrt{\lambda_{max}({\bf B}^*{\bf B})}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.25ex; vertical-align: -0.71ex; " SRC="img855.svg"
+ ALT="$\displaystyle \vert\vert{\bf B}\vert\vert=\sqrt{\lambda_{max}({\bf B}^*{\bf B})...
+...max}({\bf B}{\bf B}^*)}
+=\vert c\vert \sqrt{\lambda_{max}({\bf B}^*{\bf B})}
+$"> 
+
+(<SPAN CLASS="arabic">251</SPAN>)
+</DIV>
+and
+    
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf AB}||=|c|\,||{\bf B}^*{\bf B}||
+    =|c|\,\sqrt{\lambda_{max}(({\bf B}^*{\bf B})({\bf B}^*{\bf B}))}
+    =|c|\,\sqrt{\lambda_{max}({\bf B}^*{\bf B})^2}
+    =|c|\,\lambda_{max}({\bf B}^*{\bf B})
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.25ex; vertical-align: -0.71ex; " SRC="img856.svg"
+ ALT="$\displaystyle \vert\vert{\bf AB}\vert\vert=\vert c\vert\,\vert\vert{\bf B}^*{\b...
+...da_{max}({\bf B}^*{\bf B})^2}
+=\vert c\vert\,\lambda_{max}({\bf B}^*{\bf B})
+$"> 
+
+(<SPAN CLASS="arabic">252</SPAN>)
+</DIV>
+i.e., <!-- MATH
+ $||{\bf A}{\bf B}||=||{\bf A}||\;||{\bf B}||$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img857.svg"
+ ALT="$\vert\vert{\bf A}{\bf B}\vert\vert=\vert\vert{\bf A}\vert\vert\;\vert\vert{\bf B}\vert\vert$"></SPAN>.
+
+<P>
+</LI>
+</OL>
+
+<P>
+Consider in particular the three natural matrix norms <SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img858.svg"
+ ALT="$\vert\vert{\bf A}\vert\vert _p$"></SPAN> 
+  corresponding to the three vector p-norms <!-- MATH
+ $||{\bf x}||_p\;(p=1,\,2,\infty)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img859.svg"
+ ALT="$\vert\vert{\bf x}\vert\vert _p\;(p=1,\,2,\infty)$"></SPAN>:
+  
+<UL>
+<LI>When <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img748.svg"
+ ALT="$p=1$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img814.svg"
+ ALT="$\vert\vert{\bf A}\vert\vert _1$"></SPAN> is the maximum absolute column sum:
+    
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf A}||_1=\max_{1\le j\le n} \sum_{i=1}^m |a_{ij}|
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 7.20ex; vertical-align: -3.09ex; " SRC="img860.svg"
+ ALT="$\displaystyle \vert\vert{\bf A}\vert\vert _1=\max_{1\le j\le n} \sum_{i=1}^m \vert a_{ij}\vert
+$"> 
+
+(<SPAN CLASS="arabic">253</SPAN>)
+</DIV>
+In Matlab this norm is implemented by the function <code>norm(A,1)</code>.
+
+<P>
+<B>Proof:</B> The 1-norm of vector <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img52.svg"
+ ALT="${\bf x}$"></SPAN> is 
+    <!-- MATH
+ $||{\bf x}||_1=\sum_{j=1}^n |x_j|$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -1.13ex; " SRC="img861.svg"
+ ALT="$\vert\vert{\bf x}\vert\vert _1=\sum_{j=1}^n \vert x_j\vert$"></SPAN>, we have
+    <BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+||{\bf A}{\bf x}||_1&=&\sum_{i=1}^m\bigg|\sum_{j=1}^na_{ij}x_j\bigg|
+      \le \sum_{i=1}^m \sum_{j=1}^n \left( |a_{ij}|\,|x_j| \right)
+      =\sum_{j=1}^n \left( |x_j|\;\sum_{i=1}^m |a_{ij}| \right)
+      \nonumber \\
+      &\le& \left(\max_{1\le j\le n} \sum_{i=1}^m|a_{ij}|\right)\,
+      \left(\sum_{j=1}^n |x_j|\right)=||{\bf A}||_1\;||{\bf x}||_1
+      \nonumber
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img862.svg"
+ ALT="$\displaystyle \vert\vert{\bf A}{\bf x}\vert\vert _1$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img161.svg"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 7.66ex; vertical-align: -3.40ex; " SRC="img863.svg"
+ ALT="$\displaystyle \sum_{i=1}^m\bigg\vert\sum_{j=1}^na_{ij}x_j\bigg\vert
+\le \sum_{i...
+...ht)
+=\sum_{j=1}^n \left( \vert x_j\vert\;\sum_{i=1}^m \vert a_{ij}\vert \right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 2.09ex; vertical-align: -0.43ex; " SRC="img842.svg"
+ ALT="$\textstyle \le$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img864.svg"
+ ALT="$\displaystyle \left(\max_{1\le j\le n} \sum_{i=1}^m\vert a_{ij}\vert\right)\,
+\...
+... x_j\vert\right)=\vert\vert{\bf A}\vert\vert _1\;\vert\vert{\bf x}\vert\vert _1$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Assuming the kth column of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> has the maximum absolute sum
+    and <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img52.svg"
+ ALT="${\bf x}$"></SPAN> is normalized (as required in the definition) with
+    <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img101.svg"
+ ALT="$\vert\vert{\bf x}\vert\vert=1$"></SPAN>, we have
+    
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf A}||_1=\max_{1\le j\le n} \sum_{i=1}^m|a_{ij}|=\sum_{i=1}^m|a_{ik}|
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 7.20ex; vertical-align: -3.09ex; " SRC="img865.svg"
+ ALT="$\displaystyle \vert\vert{\bf A}\vert\vert _1=\max_{1\le j\le n} \sum_{i=1}^m\vert a_{ij}\vert=\sum_{i=1}^m\vert a_{ik}\vert
+$"> 
+
+(<SPAN CLASS="arabic">254</SPAN>)
+</DIV>
+and
+    
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf A}{\bf x}||_1\le ||{\bf A}||_1\;||{\bf x}||_1=\sum_{i=1}^m|a_{ik}|
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 7.20ex; vertical-align: -3.09ex; " SRC="img866.svg"
+ ALT="$\displaystyle \vert\vert{\bf A}{\bf x}\vert\vert _1\le \vert\vert{\bf A}\vert\vert _1\;\vert\vert{\bf x}\vert\vert _1=\sum_{i=1}^m\vert a_{ik}\vert
+$"> 
+
+(<SPAN CLASS="arabic">255</SPAN>)
+</DIV>
+Now we show that the equality of the above can be achieved, i.e.,
+    <!-- MATH
+ $||{\bf Ax}||_1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img867.svg"
+ ALT="$\vert\vert{\bf Ax}\vert\vert _1$"></SPAN> is maximized, if we choose 
+    <!-- MATH
+ ${\bf x}={\bf e}_k=[0,\cdots,1,\cdots,0]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img868.svg"
+ ALT="${\bf x}={\bf e}_k=[0,\cdots,1,\cdots,0]^T$"></SPAN>, the kth unit 
+    vector (normalized):    
+    
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf A}{\bf x}||_1=\sum_{i=1}^m\bigg|\sum_{j=1}^n a_{ij}x_j\bigg|
+    =\sum_{i=1}^m|a_{ik}|=\max_{1\le j\le n} \sum_{i=1}^m|a_{ij}|
+    
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 7.43ex; vertical-align: -3.40ex; " SRC="img869.svg"
+ ALT="$\displaystyle \vert\vert{\bf A}{\bf x}\vert\vert _1=\sum_{i=1}^m\bigg\vert\sum_...
+...sum_{i=1}^m\vert a_{ik}\vert=\max_{1\le j\le n} \sum_{i=1}^m\vert a_{ij}\vert
+$"> 
+
+(<SPAN CLASS="arabic">256</SPAN>)
+</DIV>
+i.e., <!-- MATH
+ ${\bf x}={\bf e}_k$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img870.svg"
+ ALT="${\bf x}={\bf e}_k$"></SPAN> is the vector among all other normalized 
+    vectors that maximizes <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img871.svg"
+ ALT="$\vert\vert{\bf Ax}\vert\vert$"></SPAN> as required in the definition,
+    and the resulting maximum <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img814.svg"
+ ALT="$\vert\vert{\bf A}\vert\vert _1$"></SPAN> is indeed 
+    <!-- MATH
+ $\max_{1\le j\le n} \sum_{i=1}^m|a_{ij}|$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.81ex; " SRC="img872.svg"
+ ALT="$\max_{1\le j\le n} \sum_{i=1}^m\vert a_{ij}\vert$"></SPAN>. We therefore have
+    
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf A}||_1=\sup_{||{\bf x}||_1=1}\{||{\bf Ax}||_1\}
+    =\max_{1\le j\le n} \sum_{i=1}^m|a_{ij}|
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 7.20ex; vertical-align: -3.09ex; " SRC="img873.svg"
+ ALT="$\displaystyle \vert\vert{\bf A}\vert\vert _1=\sup_{\vert\vert{\bf x}\vert\vert ...
+...ert{\bf Ax}\vert\vert _1\}
+=\max_{1\le j\le n} \sum_{i=1}^m\vert a_{ij}\vert
+$"> 
+
+(<SPAN CLASS="arabic">257</SPAN>)
+</DIV>  
+
+<P>
+</LI>
+<LI>When <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img750.svg"
+ ALT="$p=\infty$"></SPAN>, <!-- MATH
+ $||{\bf A}||_\infty$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img816.svg"
+ ALT="$\vert\vert{\bf A}\vert\vert _\infty$"></SPAN> is the maximum absolute 
+    row sum:
+    
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf A}||_\infty=\max_{1\le i\le m} \sum_{j=1}^n|a_{ij}|
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 7.43ex; vertical-align: -3.40ex; " SRC="img874.svg"
+ ALT="$\displaystyle \vert\vert{\bf A}\vert\vert _\infty=\max_{1\le i\le m} \sum_{j=1}^n\vert a_{ij}\vert
+$"> 
+
+(<SPAN CLASS="arabic">258</SPAN>)
+</DIV>
+In Matlab this norm is implemented by the function <code>norm(A,inf)</code>.
+
+<P>
+<B>Proof:</B> When <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img750.svg"
+ ALT="$p=\infty$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img52.svg"
+ ALT="${\bf x}$"></SPAN> is normalized if 
+    <!-- MATH
+ $||{\bf x}||_\infty=\max \{x_1,\cdots,x_n\}=1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img875.svg"
+ ALT="$\vert\vert{\bf x}\vert\vert _\infty=\max \{x_1,\cdots,x_n\}=1$"></SPAN>. The norm of vector 
+    <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img876.svg"
+ ALT="${\bf Ax}$"></SPAN> is:
+    
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf Ax}||_\infty=\max\left\{ \sum_{j=1}^n|a_{ij}x_j|,\cdots,
+    \sum_{j=1}^n|a_{mj}x_j|\right\}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img877.svg"
+ ALT="$\displaystyle \vert\vert{\bf Ax}\vert\vert _\infty=\max\left\{ \sum_{j=1}^n\vert a_{ij}x_j\vert,\cdots,
+\sum_{j=1}^n\vert a_{mj}x_j\vert\right\}
+$"> 
+
+(<SPAN CLASS="arabic">259</SPAN>)
+</DIV>
+which can be maximized by any normalized vector with <!-- MATH
+ $||{\bf x}||_\infty
+    =\max\{ x_1,\cdots,x_n\}=1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img875.svg"
+ ALT="$\vert\vert{\bf x}\vert\vert _\infty=\max \{x_1,\cdots,x_n\}=1$"></SPAN> to become
+    
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf Ax}||_\infty=\max\left\{ \sum_{j=1}^n|a_{ij}|,\cdots,
+    \sum_{j=1}^n|a_{mj}|\right\}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img878.svg"
+ ALT="$\displaystyle \vert\vert{\bf Ax}\vert\vert _\infty=\max\left\{ \sum_{j=1}^n\vert a_{ij}\vert,\cdots,
+\sum_{j=1}^n\vert a_{mj}\vert\right\}
+$"> 
+
+(<SPAN CLASS="arabic">260</SPAN>)
+</DIV>
+We therefore have
+    
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf A}||_\infty=\sup_{||{\bf x}||_\infty=1}\{||{\bf Ax}||_\infty\}
+    =\max_i\sum_{j=1}^n|a_{ij}|
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 7.43ex; vertical-align: -3.40ex; " SRC="img879.svg"
+ ALT="$\displaystyle \vert\vert{\bf A}\vert\vert _\infty=\sup_{\vert\vert{\bf x}\vert\...
+...{\vert\vert{\bf Ax}\vert\vert _\infty\}
+=\max_i\sum_{j=1}^n\vert a_{ij}\vert
+$"> 
+
+(<SPAN CLASS="arabic">261</SPAN>)
+</DIV>
+
+<P>
+</LI>
+<LI>When <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img749.svg"
+ ALT="$p=2$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img818.svg"
+ ALT="$\vert\vert{\bf A}\vert\vert _2$"></SPAN>, called the <EM>spectral norm</EM>, 
+    is the greatest singular value of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>, square root of the 
+    greatest eigenvalue of <!-- MATH
+ ${\bf A}^*{\bf A}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img821.svg"
+ ALT="${\bf A}^*{\bf A}$"></SPAN>, i.e., its spectral 
+    radius <!-- MATH
+ $\rho({\bf A}^*{\bf A})=\lambda_{max}({\bf A}^*{\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img880.svg"
+ ALT="$\rho({\bf A}^*{\bf A})=\lambda_{max}({\bf A}^*{\bf A})$"></SPAN>:
+    
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf A}||_2=\sigma_{max}({\bf A})=\sqrt{\lambda_{max}({\bf A}^*{\bf A})}
+    =\sqrt{\rho({\bf A}^*{\bf A})}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.25ex; vertical-align: -0.71ex; " SRC="img881.svg"
+ ALT="$\displaystyle \vert\vert{\bf A}\vert\vert _2=\sigma_{max}({\bf A})=\sqrt{\lambda_{max}({\bf A}^*{\bf A})}
+=\sqrt{\rho({\bf A}^*{\bf A})}
+$"> 
+
+(<SPAN CLASS="arabic">262</SPAN>)
+</DIV>
+where <!-- MATH
+ $\lambda_{max}({\bf A}^*{\bf A})=\sigma_{max}^2({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img882.svg"
+ ALT="$\lambda_{max}({\bf A}^*{\bf A})=\sigma_{max}^2({\bf A})$"></SPAN> is 
+    the maximal eigenvalue of <!-- MATH
+ ${\bf A}^*{\bf A}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img821.svg"
+ ALT="${\bf A}^*{\bf A}$"></SPAN>. In Matlab the spectral
+    norm is implemented by the function <code>norm(A,2)</code> or simply
+    <code>norm(A)</code>.
+
+<P>
+<B>Proof:</B> 
+
+<P>
+First we consider the eigenequation of <!-- MATH
+ ${\bf A}^*{\bf A}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img821.svg"
+ ALT="${\bf A}^*{\bf A}$"></SPAN>:
+    
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}^*{\bf A}{\bf v}=\lambda_i{\bf v}_i,\;\;\;(i=1,\cdots,n)
+      \;\;\;\;\;\;\mbox{or}\;\;\;\;\;\;\;
+      {\bf A}^*{\bf A}{\bf V}={\bf V}{\bf\Lambda},
+      \;\;\;\;\;\;\mbox{or}\;\;\;\;\;\;\;
+      {\bf A}^*{\bf A}={\bf V}{\bf\Lambda}{\bf V}^*
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img883.svg"
+ ALT="$\displaystyle {\bf A}^*{\bf A}{\bf v}=\lambda_i{\bf v}_i,\;\;\;(i=1,\cdots,n)
+...
+...;\;\;\;\mbox{or}\;\;\;\;\;\;\;
+{\bf A}^*{\bf A}={\bf V}{\bf\Lambda}{\bf V}^*
+$"> 
+
+(<SPAN CLASS="arabic">263</SPAN>)
+</DIV>
+where  
+    
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf\Lambda}=diag(\lambda_1,\cdots,\lambda_n),
+      \;\;\;\;\mbox{and}\;\;\;\;\;\;
+      {\bf V}=[{\bf v}_1,\cdots,{\bf v}_n]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img884.svg"
+ ALT="$\displaystyle {\bf\Lambda}=diag(\lambda_1,\cdots,\lambda_n),
+\;\;\;\;\mbox{and}\;\;\;\;\;\;
+{\bf V}=[{\bf v}_1,\cdots,{\bf v}_n]
+$"> 
+
+(<SPAN CLASS="arabic">264</SPAN>)
+</DIV>
+are the eigenvector and eigenvalue matrices of <!-- MATH
+ ${\bf A}^*{\bf A}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img821.svg"
+ ALT="${\bf A}^*{\bf A}$"></SPAN>.
+    As <!-- MATH
+ ${\bf A}^*{\bf A}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img821.svg"
+ ALT="${\bf A}^*{\bf A}$"></SPAN> is symmetric and positive definite, all of 
+    its eigenvalues are real and positive, and assumed to be sorted
+    
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\lambda_1=\lambda_{max}\ge \lambda_2\ge \cdots \ge
+    \lambda_n=\lambda_{min} \ge 0
+    
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img885.svg"
+ ALT="$\displaystyle \lambda_1=\lambda_{max}\ge \lambda_2\ge \cdots \ge
+\lambda_n=\lambda_{min} \ge 0
+$"> 
+
+(<SPAN CLASS="arabic">265</SPAN>)
+</DIV>
+and all corresponding eigenvectors are orthogonal and assumed to 
+    be normalized, i.e., <!-- MATH
+ ${\bf v}_i^*{\bf v}_j=\delta_{ij}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.78ex; " SRC="img886.svg"
+ ALT="${\bf v}_i^*{\bf v}_j=\delta_{ij}$"></SPAN>, or
+    <!-- MATH
+ ${\bf V}^*={\bf V}^{-1}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img512.svg"
+ ALT="${\bf V}^*={\bf V}^{-1}$"></SPAN> is a unitary (orthogonal if real) 
+    matrix. 
+
+<P>
+Next, consider the <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img749.svg"
+ ALT="$p=2$"></SPAN> norm of <!-- MATH
+ ${\bf A}{\bf x}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img887.svg"
+ ALT="${\bf A}{\bf x}$"></SPAN>:
+    <BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+||{\bf Ax}||_2&=&\left[ ({\bf Ax})^*({\bf Ax})\right]^{1/2}
+      =\left( {\bf x}^*{\bf A}^*{\bf A}{\bf x}\right)^{1/2}
+      =\left({\bf x}^*{\bf V}{\bf\Lambda}{\bf V}^*{\bf x}\right)^{1/2}
+      \nonumber \\
+      &=&\left({\bf y}^*{\bf\Lambda}{\bf y}\right)^{1/2}
+      =\sqrt{ \sum_{i=1}^n y_i^2\lambda_i }
+      \nonumber
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img888.svg"
+ ALT="$\displaystyle \vert\vert{\bf Ax}\vert\vert _2$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img161.svg"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 3.25ex; vertical-align: -0.70ex; " SRC="img889.svg"
+ ALT="$\displaystyle \left[ ({\bf Ax})^*({\bf Ax})\right]^{1/2}
+=\left( {\bf x}^*{\bf ...
+...}\right)^{1/2}
+=\left({\bf x}^*{\bf V}{\bf\Lambda}{\bf V}^*{\bf x}\right)^{1/2}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img161.svg"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 8.83ex; vertical-align: -3.65ex; " SRC="img890.svg"
+ ALT="$\displaystyle \left({\bf y}^*{\bf\Lambda}{\bf y}\right)^{1/2}
+=\sqrt{ \sum_{i=1}^n y_i^2\lambda_i }$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Here <!-- MATH
+ ${\bf y}={\bf V}^*{\bf x}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img313.svg"
+ ALT="${\bf y}={\bf V}^*{\bf x}$"></SPAN> is a unitary transform of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img52.svg"
+ ALT="${\bf x}$"></SPAN>
+    with the 2-norm <!-- MATH
+ $||{\bf y}||_2=||{\bf x}||_2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img891.svg"
+ ALT="$\vert\vert{\bf y}\vert\vert _2=\vert\vert{\bf x}\vert\vert _2$"></SPAN> conserved.
+
+<P>
+The right-hand side of the equation above is a weighted average of 
+    the <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img29.svg"
+ ALT="$n$"></SPAN> eigenvalues <!-- MATH
+ $\lambda_1,\cdots,\lambda_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img310.svg"
+ ALT="$\lambda_1,\cdots,\lambda_n$"></SPAN>, which is maximized 
+    if they are weighted by a normalized vector <!-- MATH
+ ${\bf y}=[1,0,\cdots,0]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img892.svg"
+ ALT="${\bf y}=[1,0,\cdots,0]^T$"></SPAN> 
+    with <!-- MATH
+ $||{\bf y}||_2=1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img893.svg"
+ ALT="$\vert\vert{\bf y}\vert\vert _2=1$"></SPAN>, by which the greatest eigenvalue <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img848.svg"
+ ALT="$\lambda_{max}$"></SPAN> 
+    is maximally weighted while all others are weighted by 0:
+    
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf Ax}||_2\le\sqrt{\lambda_{max}}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.25ex; vertical-align: -0.70ex; " SRC="img894.svg"
+ ALT="$\displaystyle \vert\vert{\bf Ax}\vert\vert _2\le\sqrt{\lambda_{max}}
+$"> 
+
+(<SPAN CLASS="arabic">266</SPAN>)
+</DIV>
+As <!-- MATH
+ $||{\bf x}||_2=||{\bf y}||_2=1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img895.svg"
+ ALT="$\vert\vert{\bf x}\vert\vert _2=\vert\vert{\bf y}\vert\vert _2=1$"></SPAN>, we have
+    
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf A}||_2=\sup_{||{\bf x}||_2=1}\{||{\bf Ax}||_2\}=\sqrt{\lambda_{max}}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 5.34ex; vertical-align: -2.81ex; " SRC="img896.svg"
+ ALT="$\displaystyle \vert\vert{\bf A}\vert\vert _2=\sup_{\vert\vert{\bf x}\vert\vert _2=1}\{\vert\vert{\bf Ax}\vert\vert _2\}=\sqrt{\lambda_{max}}
+$"> 
+
+(<SPAN CLASS="arabic">267</SPAN>)
+</DIV>
+
+<P>
+Out of the three matrix norms defined above, the spectral norm is the
+    only one that is <EM>unitary invariant</EM>, i.e., it is conserved or 
+    invariant under any unitary transform <!-- MATH
+ ${\bf B}={\bf R}^*{\bf A}{\bf R}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img470.svg"
+ ALT="${\bf B}={\bf R}^*{\bf A}{\bf R}$"></SPAN>:
+    <BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+||{\bf B}||_2^2&=&\lambda_{max}\left({\bf B}^*{\bf B}\right)
+      =\lambda_{max}\left[\left({\bf R}^*{\bf A}{\bf R}\right)^*
+        \left({\bf R}^*{\bf A}{\bf R}\right)\right]
+      =\lambda_{max}\left({\bf R}^*{\bf A}^*{\bf R}{\bf R}^*{\bf A}{\bf R}\right)
+      \nonumber \\
+      &=&\lambda_{max}\left( {\bf R}^*{\bf A}^*{\bf A}{\bf R} \right)
+      =\lambda_{max}\left( {\bf A}^*{\bf A} \right)=||{\bf A}||_2^2
+      \nonumber
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img897.svg"
+ ALT="$\displaystyle \vert\vert{\bf B}\vert\vert _2^2$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img161.svg"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 3.02ex; vertical-align: -0.93ex; " SRC="img898.svg"
+ ALT="$\displaystyle \lambda_{max}\left({\bf B}^*{\bf B}\right)
+=\lambda_{max}\left[\l...
+...ht]
+=\lambda_{max}\left({\bf R}^*{\bf A}^*{\bf R}{\bf R}^*{\bf A}{\bf R}\right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img161.svg"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img899.svg"
+ ALT="$\displaystyle \lambda_{max}\left( {\bf R}^*{\bf A}^*{\bf A}{\bf R} \right)
+=\lambda_{max}\left( {\bf A}^*{\bf A} \right)=\vert\vert{\bf A}\vert\vert _2^2$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Here we have used the fact that the eigenvalues and eigenvectors are
+    invariant under the unitary transform.
+
+<P>
+</LI>
+</UL>
+
+<P>
+<B>Example</B>
+
+<P>
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}=\left[\begin{array}{rrr}3&-6&2\\2&5&1\\-3&2&2\end{array}\right],
+    \;\;\;\;\;\;\;
+        {\bf B}=\left[\begin{array}{rrr}3&2&1\\2&-3&0\\1&0&-1\end{array}\right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 8.59ex; vertical-align: -3.72ex; " SRC="img900.svg"
+ ALT="$\displaystyle {\bf A}=\left[\begin{array}{rrr}3&amp;-6&amp;2\\ 2&amp;5&amp;1\\ -3&amp;2&amp;2\end{array...
+...\;
+{\bf B}=\left[\begin{array}{rrr}3&amp;2&amp;1\\ 2&amp;-3&amp;0\\ 1&amp;0&amp;-1\end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">268</SPAN>)
+</DIV>
+
+<P>
+<BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+||{\bf A}||_1&=&\max\{|3|+|2|+|-3|,\;|-6|+|5|+|2|,\;|2|+|1|+|2|\}
+    =\max\{8,\;13,\;5\}=13
+    \nonumber \\
+    ||{\bf A}||_\infty&=&\max\{|3|+|-6|+|2|,\;|2|+|5|+|1|,\;|-3|+|2|+|2|\}
+    =\max\{11,\;8,\;7\}=11
+    \nonumber
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img901.svg"
+ ALT="$\displaystyle \vert\vert{\bf A}\vert\vert _1$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img161.svg"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img902.svg"
+ ALT="$\displaystyle \max\{\vert 3\vert+\vert 2\vert+\vert-3\vert,\;\vert-6\vert+\vert...
+...+\vert 2\vert,\;\vert 2\vert+\vert 1\vert+\vert 2\vert\}
+=\max\{8,\;13,\;5\}=13$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img903.svg"
+ ALT="$\displaystyle \vert\vert{\bf A}\vert\vert _\infty$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG STYLE="height: 1.16ex; vertical-align: -0.12ex; " SRC="img161.svg"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img904.svg"
+ ALT="$\displaystyle \max\{\vert 3\vert+\vert-6\vert+\vert 2\vert,\;\vert 2\vert+\vert...
+...+\vert 1\vert,\;\vert-3\vert+\vert 2\vert+\vert 2\vert\}
+=\max\{11,\;8,\;7\}=11$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+The eigenvalues of <!-- MATH
+ ${\bf A}^*{\bf A}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img821.svg"
+ ALT="${\bf A}^*{\bf A}$"></SPAN> are
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\lambda_1=69.353,\;\;\;\lambda_2=17.967,\;\;\;\lambda_3=8.680
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img905.svg"
+ ALT="$\displaystyle \lambda_1=69.353,\;\;\;\lambda_2=17.967,\;\;\;\lambda_3=8.680
+$"> 
+
+(<SPAN CLASS="arabic">269</SPAN>)
+</DIV>
+The singular values of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> are
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\sigma_1=\sqrt{\lambda_1}=8.328,\;\;\;\sigma_2=\sqrt{\lambda_2}=4.239,
+  \;\;\;\sigma_3=\sqrt{\lambda_3}=2.946
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.25ex; vertical-align: -0.66ex; " SRC="img906.svg"
+ ALT="$\displaystyle \sigma_1=\sqrt{\lambda_1}=8.328,\;\;\;\sigma_2=\sqrt{\lambda_2}=4.239,
+\;\;\;\sigma_3=\sqrt{\lambda_3}=2.946
+$"> 
+
+(<SPAN CLASS="arabic">270</SPAN>)
+</DIV>
+The spectral norm of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> is
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf A}||_2=\sigma_{max}=\sqrt{\lambda_{max}}=8.328
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.25ex; vertical-align: -0.70ex; " SRC="img907.svg"
+ ALT="$\displaystyle \vert\vert{\bf A}\vert\vert _2=\sigma_{max}=\sqrt{\lambda_{max}}=8.328
+$"> 
+
+(<SPAN CLASS="arabic">271</SPAN>)
+</DIV>
+The eigenvector corresponding to greatest eigenvalue <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img908.svg"
+ ALT="$\lambda_1$"></SPAN> is
+  <!-- MATH
+ ${\bf x}=[0.285,\;-0.957,\,0.057]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img909.svg"
+ ALT="${\bf x}=[0.285,\;-0.957,\,0.057]^T$"></SPAN>, which satisfies the equality
+  <!-- MATH
+ $||{\bf Ax}||=||{\bf A}||\;||{\bf x}||$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img910.svg"
+ ALT="$\vert\vert{\bf Ax}\vert\vert=\vert\vert{\bf A}\vert\vert\;\vert\vert{\bf x}\vert\vert$"></SPAN>.
+
+<P>
+</LI>
+<LI><B>The <EM>Schatten norms</EM></B>
+
+<P>
+The Shatten norm is defined based on the singular values <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img911.svg"
+ ALT="$\sigma_i$"></SPAN> of 
+  <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> or the eigenvalues <!-- MATH
+ $\lambda_i=\sigma^2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.46ex; " SRC="img912.svg"
+ ALT="$\lambda_i=\sigma^2$"></SPAN> of <!-- MATH
+ ${\bf A}^*{\bf A}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img821.svg"
+ ALT="${\bf A}^*{\bf A}$"></SPAN>:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf A}||_p=\left(\sum_{i=1}^R \sigma_i^p\right)^{1/p}
+  =\left(\sum_{i=1}^R \left(\sqrt{\lambda_i}\right)^p\right)^{1/p}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 8.13ex; vertical-align: -3.09ex; " SRC="img913.svg"
+ ALT="$\displaystyle \vert\vert{\bf A}\vert\vert _p=\left(\sum_{i=1}^R \sigma_i^p\right)^{1/p}
+=\left(\sum_{i=1}^R \left(\sqrt{\lambda_i}\right)^p\right)^{1/p}
+$"> 
+
+(<SPAN CLASS="arabic">272</SPAN>)
+</DIV>
+In particular, consider three common <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img914.svg"
+ ALT="$p$"></SPAN> values:
+  
+<UL>
+<LI><SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img748.svg"
+ ALT="$p=1$"></SPAN> is the <EM>nuclear or trace</EM> norm:
+    
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf A}||_1=\sum_{i=1}^R \sigma_i=\sum_{i=1}^R \sqrt{\lambda_i}
+    =tr\left( \sqrt{{\bf A}^*{\bf A} } \right)
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 7.43ex; vertical-align: -3.09ex; " SRC="img915.svg"
+ ALT="$\displaystyle \vert\vert{\bf A}\vert\vert _1=\sum_{i=1}^R \sigma_i=\sum_{i=1}^R \sqrt{\lambda_i}
+=tr\left( \sqrt{{\bf A}^*{\bf A} } \right)
+$"> 
+
+(<SPAN CLASS="arabic">273</SPAN>)
+</DIV>
+</LI>
+<LI><SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img749.svg"
+ ALT="$p=2$"></SPAN> same as the Frobenius norm:
+    
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf A}||_2=\sqrt{\sum_{i=1}^R \sigma_i^2}
+    =\sqrt{\sum_{i=1}^R \lambda_i}=||{\bf A}||_F
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 8.83ex; vertical-align: -3.44ex; " SRC="img916.svg"
+ ALT="$\displaystyle \vert\vert{\bf A}\vert\vert _2=\sqrt{\sum_{i=1}^R \sigma_i^2}
+=\sqrt{\sum_{i=1}^R \lambda_i}=\vert\vert{\bf A}\vert\vert _F
+$"> 
+
+(<SPAN CLASS="arabic">274</SPAN>)
+</DIV>
+</LI>
+<LI><SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img750.svg"
+ ALT="$p=\infty$"></SPAN> same as the spectral norm (the induced 2-norm), 
+    the spectral radius of <!-- MATH
+ ${\bf A}^*{\bf A}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img821.svg"
+ ALT="${\bf A}^*{\bf A}$"></SPAN>.
+    
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf A}||_\infty=\max\{\sigma_1,\cdots,\sigma_n\}=\sigma_{max}
+    =\sqrt{\lambda_{max}}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.25ex; vertical-align: -0.70ex; " SRC="img917.svg"
+ ALT="$\displaystyle \vert\vert{\bf A}\vert\vert _\infty=\max\{\sigma_1,\cdots,\sigma_n\}=\sigma_{max}
+=\sqrt{\lambda_{max}}
+$"> 
+
+(<SPAN CLASS="arabic">275</SPAN>)
+</DIV>
+</LI>
+</UL>
+  As the eigenvalues and eigenvectors of <!-- MATH
+ ${\bf A}^*{\bf A}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img821.svg"
+ ALT="${\bf A}^*{\bf A}$"></SPAN> are invariant
+  under unitary transform, the Schatten norms are unitary invariant as well.
+
+<P>
+</LI>
+</UL>
+
+<P>
+All matrix norms defined above are equivalent according to the theorem 
+previously discussed.
+
+<P>
+
+<UL>
+<LI>The Frobenius norm <!-- MATH
+ $||{\bf A}||_F=\sqrt{\sum_{i=1}^R \lambda_i}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 4.65ex; vertical-align: -1.31ex; " SRC="img918.svg"
+ ALT="$\vert\vert{\bf A}\vert\vert _F=\sqrt{\sum_{i=1}^R \lambda_i}$"></SPAN>
+  and the induced 2-norm <!-- MATH
+ $||{\bf A}||_2=\sqrt{\lambda_{max}}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img919.svg"
+ ALT="$\vert\vert{\bf A}\vert\vert _2=\sqrt{\lambda_{max}}$"></SPAN> are
+  equivalent:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf A}||_2\le||{\bf A}||_F\le\sqrt{R}\;||{\bf A}||_2
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.25ex; vertical-align: -0.70ex; " SRC="img920.svg"
+ ALT="$\displaystyle \vert\vert{\bf A}\vert\vert _2\le\vert\vert{\bf A}\vert\vert _F\le\sqrt{R}\;\vert\vert{\bf A}\vert\vert _2
+$"> 
+
+(<SPAN CLASS="arabic">276</SPAN>)
+</DIV>
+The equality on the left holds when all eigenvalues <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img448.svg"
+ ALT="$\lambda_i$"></SPAN> but one
+  are zero, and the equality on the right holds when all <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img448.svg"
+ ALT="$\lambda_i$"></SPAN> are 
+  the same.
+</LI>
+<LI>The Frobenius norm <!-- MATH
+ $||{\bf A}||_F=\sqrt{\sum_{i=1}^R \lambda_i}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 4.65ex; vertical-align: -1.31ex; " SRC="img918.svg"
+ ALT="$\vert\vert{\bf A}\vert\vert _F=\sqrt{\sum_{i=1}^R \lambda_i}$"></SPAN>
+  and the Schatten 1-norm <!-- MATH
+ $||{\bf A}||_1=\sum_{i=1}^R \sqrt{\lambda_i}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.81ex; " SRC="img921.svg"
+ ALT="$\vert\vert{\bf A}\vert\vert _1=\sum_{i=1}^R \sqrt{\lambda_i}$"></SPAN>
+  are equivalent:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf A}||_F\le||{\bf A}||_1\le\sqrt{R}\;||{\bf A}||_F
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.25ex; vertical-align: -0.70ex; " SRC="img922.svg"
+ ALT="$\displaystyle \vert\vert{\bf A}\vert\vert _F\le\vert\vert{\bf A}\vert\vert _1\le\sqrt{R}\;\vert\vert{\bf A}\vert\vert _F
+$"> 
+
+(<SPAN CLASS="arabic">277</SPAN>)
+</DIV>
+The equality on the left holds when all eigenvalues <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img448.svg"
+ ALT="$\lambda_i$"></SPAN> but 
+  one are zero, and the equality on the right holds when all <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img448.svg"
+ ALT="$\lambda_i$"></SPAN>
+  are the same.
+</LI>
+<LI>The element-wise maximum norm <!-- MATH
+ $||{\bf A}||_{max}=\max_{i,j}\{|a_{ij}|\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.78ex; " SRC="img923.svg"
+ ALT="$\vert\vert{\bf A}\vert\vert _{max}=\max_{i,j}\{\vert a_{ij}\vert\}$"></SPAN>
+  and the Frobenius norm <!-- MATH
+ $||{\bf A}||_F=\sqrt{\sum_{i=1}^m\sum_{j=1}^n|a_{ij}|^2}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 4.65ex; vertical-align: -1.67ex; " SRC="img924.svg"
+ ALT="$\vert\vert{\bf A}\vert\vert _F=\sqrt{\sum_{i=1}^m\sum_{j=1}^n\vert a_{ij}\vert^2}$"></SPAN>
+  are equivalent:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf A}||_{max}\le ||{\bf A}||_F\le \sqrt{mn}\;||{\bf A}||_{max}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img925.svg"
+ ALT="$\displaystyle \vert\vert{\bf A}\vert\vert _{max}\le \vert\vert{\bf A}\vert\vert _F\le \sqrt{mn}\;\vert\vert{\bf A}\vert\vert _{max}
+$"> 
+
+(<SPAN CLASS="arabic">278</SPAN>)
+</DIV>
+The equality on the left holds when all elements <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img448.svg"
+ ALT="$\lambda_i$"></SPAN> but one 
+  are zero, and the equality on the right holds when all elements are 
+  the same.
+</LI>
+<LI>
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\frac{1}{\sqrt{n}}||{\bf A}||_\infty\le||{\bf A}||_2\le\sqrt{m}||{\bf A}||_\infty
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 5.57ex; vertical-align: -2.28ex; " SRC="img926.svg"
+ ALT="$\displaystyle \frac{1}{\sqrt{n}}\vert\vert{\bf A}\vert\vert _\infty\le\vert\vert{\bf A}\vert\vert _2\le\sqrt{m}\vert\vert{\bf A}\vert\vert _\infty
+$"> 
+
+(<SPAN CLASS="arabic">279</SPAN>)
+</DIV>
+  <B>Proof:</B> Define an n-D vector <!-- MATH
+ ${\bf e}=[1,\cdots,1]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img927.svg"
+ ALT="${\bf e}=[1,\cdots,1]^T$"></SPAN>, then the
+  greatest absolute row sum of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> is
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf A}||_\infty=\max_i\sum_{j=1}^n|a_{ij}|=||{\bf A}{\bf e}||_\infty
+  \le ||{\bf A}{\bf e}||_2\le||{\bf A}||_2\;||{\bf e}||_2=\sqrt{n}||{\bf A}||_2
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 7.43ex; vertical-align: -3.40ex; " SRC="img928.svg"
+ ALT="$\displaystyle \vert\vert{\bf A}\vert\vert _\infty=\max_i\sum_{j=1}^n\vert a_{ij...
+...ert _2\;\vert\vert{\bf e}\vert\vert _2=\sqrt{n}\vert\vert{\bf A}\vert\vert _2
+$"> 
+
+(<SPAN CLASS="arabic">280</SPAN>)
+</DIV>
+i.e.,
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\frac{1}{\sqrt{n}}||{\bf A}||_\infty\le||{\bf A}||_2
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 5.57ex; vertical-align: -2.28ex; " SRC="img929.svg"
+ ALT="$\displaystyle \frac{1}{\sqrt{n}}\vert\vert{\bf A}\vert\vert _\infty\le\vert\vert{\bf A}\vert\vert _2
+$"> 
+
+(<SPAN CLASS="arabic">281</SPAN>)
+</DIV>
+</LI>
+<LI>
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\frac{1}{\sqrt{m}}||{\bf A}||_1\le||{\bf A}||_2\le\sqrt{n}||{\bf A}||_1
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 5.57ex; vertical-align: -2.28ex; " SRC="img930.svg"
+ ALT="$\displaystyle \frac{1}{\sqrt{m}}\vert\vert{\bf A}\vert\vert _1\le\vert\vert{\bf A}\vert\vert _2\le\sqrt{n}\vert\vert{\bf A}\vert\vert _1
+$"> 
+
+(<SPAN CLASS="arabic">282</SPAN>)
+</DIV>
+
+<P>
+</LI>
+</UL>
+
+<P>
+<B>Theorem:</B> The spectral radius of a matrix is bounded by its 
+matrix norm: <!-- MATH
+ $\rho({\bf A})\le||{\bf A}||$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img931.svg"
+ ALT="$\rho({\bf A})\le\vert\vert{\bf A}\vert\vert$"></SPAN> 
+
+<P>
+<B>Proof:</B> Let <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img284.svg"
+ ALT="$\lambda$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img200.svg"
+ ALT="${\bf u}$"></SPAN> be an eigenvalue and the
+corresponding normalized eigenvector of a square matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>, 
+i.e., <!-- MATH
+ ${\bf A}{\bf u}=\lambda{\bf u}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img574.svg"
+ ALT="${\bf A}{\bf u}=\lambda{\bf u}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img932.svg"
+ ALT="$\vert\vert{\bf u}\vert\vert=1$"></SPAN>. 
+As the induced norm, <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img805.svg"
+ ALT="$\vert\vert{\bf A}\vert\vert$"></SPAN> satisfies
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||{\bf A}||=\sup_{||{\bf x}||=1} \{ ||{\bf A}{\bf x}| \}\ge||{\bf Au}||
+=||\lambda{\bf u}||=|\lambda|\;||{\bf u}||=|\lambda|
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 4.88ex; vertical-align: -2.81ex; " SRC="img933.svg"
+ ALT="$\displaystyle \vert\vert{\bf A}\vert\vert=\sup_{\vert\vert{\bf x}\vert\vert=1} ...
+... u}\vert\vert=\vert\lambda\vert\;\vert\vert{\bf u}\vert\vert=\vert\lambda\vert
+$"> 
+
+(<SPAN CLASS="arabic">283</SPAN>)
+</DIV>
+But <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img284.svg"
+ ALT="$\lambda$"></SPAN> is an arbitrary eigenvalue, it can be the one with the
+maximum absolute value <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img934.svg"
+ ALT="$\vert\lambda\vert$"></SPAN>, i.e., the spectral radius <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img482.svg"
+ ALT="$\rho({\bf A})$"></SPAN>.
+We therefore have <!-- MATH
+ $||{\bf A}||\ge \rho({\bf A})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img935.svg"
+ ALT="$\vert\vert{\bf A}\vert\vert\ge \rho({\bf A})$"></SPAN>. 
+
+<P>
+<B>Theorem:</B> 
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\rho({\bf A})\le ||{\bf A}^k||^{1/k}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img936.svg"
+ ALT="$\displaystyle \rho({\bf A})\le \vert\vert{\bf A}^k\vert\vert^{1/k}
+$"> 
+
+(<SPAN CLASS="arabic">284</SPAN>)
+</DIV>
+<B>Proof:</B> Let <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img284.svg"
+ ALT="$\lambda$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img199.svg"
+ ALT="${\bf v}$"></SPAN> by the eigenvalue and the
+corresponding eigenvector of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> respectively, i.e.,
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}{\bf v}=\lambda{\bf v},\;\;\;\;\mbox{and}\;\;\;\;\;
+{\bf A}^k{\bf v}=\lambda^k{\bf v}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.79ex; vertical-align: -0.57ex; " SRC="img937.svg"
+ ALT="$\displaystyle {\bf A}{\bf v}=\lambda{\bf v},\;\;\;\;\mbox{and}\;\;\;\;\;
+{\bf A}^k{\bf v}=\lambda^k{\bf v}
+$"> 
+
+(<SPAN CLASS="arabic">285</SPAN>)
+</DIV>
+Taking norm on both sides we get
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+||\lambda^k{\bf v}||=|\lambda|^k||{\bf v}||
+=||{\bf A}^k{\bf v}||\le||{\bf A}^k||\;||{\bf v}||
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img938.svg"
+ ALT="$\displaystyle \vert\vert\lambda^k{\bf v}\vert\vert=\vert\lambda\vert^k\vert\ver...
+...{\bf v}\vert\vert\le\vert\vert{\bf A}^k\vert\vert\;\vert\vert{\bf v}\vert\vert
+$"> 
+
+(<SPAN CLASS="arabic">286</SPAN>)
+</DIV>
+Dividing both sides by <!-- MATH
+ $||{\bf v}||\ne 0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img939.svg"
+ ALT="$\vert\vert{\bf v}\vert\vert\ne 0$"></SPAN> we get
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\lambda^k\le ||{\bf A}^k||,\;\;\;\;\;\mbox{i.e.}\;\;\;\;\;
+\lambda\le ||{\bf A}^k||^{1/k}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img940.svg"
+ ALT="$\displaystyle \lambda^k\le \vert\vert{\bf A}^k\vert\vert,\;\;\;\;\;\mbox{i.e.}\;\;\;\;\;
+\lambda\le \vert\vert{\bf A}^k\vert\vert^{1/k}
+$"> 
+
+(<SPAN CLASS="arabic">287</SPAN>)
+</DIV>
+
+<P>
+<B>Theorem: </B> A square matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> is convergent, i.e., 
+<!-- MATH
+ $\lim_{n\rightarrow\infty}{\bf A}^n=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img941.svg"
+ ALT="$\lim_{n\rightarrow\infty}{\bf A}^n=0$"></SPAN>, if and only if <!-- MATH
+ $\rho({\bf A})<1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img942.svg"
+ ALT="$\rho({\bf A})&lt;1$"></SPAN>.
+
+<P>
+The proof of this theorem can be found
+<A ID="tex2html11"
+  HREF="http://en.wikipedia.org/wiki/Spectral_radius">here</A>.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node18.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="algebra.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node16.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node18.html">Vector and Matrix Differentiation</A>
+<B> Up:</B> <A
+ HREF="algebra.html">algebra</A>
+<B> Previous:</B> <A
+ HREF="node16.html">Vector Norms</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

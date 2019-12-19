@@ -1,0 +1,343 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Normal Direction of a Plane</TITLE>
+<META NAME="description" CONTENT="Normal Direction of a Plane">
+<META NAME="keywords" CONTENT="algebra">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="algebra.css">
+
+<LINK REL="next" HREF="node25.html">
+<LINK REL="previous" HREF="node23.html">
+<LINK REL="next" HREF="node25.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node25.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="algebra.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node23.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node25.html">Appendix</A>
+<B> Up:</B> <A
+ HREF="algebra.html">algebra</A>
+<B> Previous:</B> <A
+ HREF="node23.html">Taylor Series Expansion</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION000240000000000000000">
+Normal Direction of a Plane</A>
+</H1>
+
+<P>
+In a d-dimensional space, 
+
+<P>
+
+<UL>
+<LI>A point is represented as a column vector <!-- MATH
+ ${\bf x}=[x_1,\cdots,x_d]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1391.svg"
+ ALT="${\bf x}=[x_1,\cdots,x_d]^T$"></SPAN>
+  containing its <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1392.svg"
+ ALT="$d$"></SPAN> coordinates;
+
+<P>
+</LI>
+<LI>A surface (or supersurface if <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img1393.svg"
+ ALT="$d&gt;3$"></SPAN>) is represented by an equation
+  <!-- MATH
+ $f(x_1,\cdots,x_d)=f({\bf x})=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1394.svg"
+ ALT="$f(x_1,\cdots,x_d)=f({\bf x})=0$"></SPAN>. Alternatively, by solving the equation
+  above for one of the variables, we get <!-- MATH
+ $x_d=g(x_1,\cdots,x_{d-1})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1395.svg"
+ ALT="$x_d=g(x_1,\cdots,x_{d-1})$"></SPAN>, 
+  representing the height along the direction of <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1396.svg"
+ ALT="$x_d$"></SPAN> of a surface 
+  defined over a <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img1397.svg"
+ ALT="$d-1$"></SPAN> dimensional space.
+
+<P>
+</LI>
+<LI>A plane (or superplane if <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.21ex; " SRC="img1393.svg"
+ ALT="$d&gt;3$"></SPAN>) is a special surface described
+  by a linear equation:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+f({\bf x})={\bf w}^T{\bf x}+b=\sum_{i=1}^dw_ix_i+b=0
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 7.66ex; vertical-align: -3.09ex; " SRC="img1398.svg"
+ ALT="$\displaystyle f({\bf x})={\bf w}^T{\bf x}+b=\sum_{i=1}^dw_ix_i+b=0
+$"> 
+
+(<SPAN CLASS="arabic">430</SPAN>)
+</DIV>
+Without loss of generality, we can assume <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img562.svg"
+ ALT="${\bf w}$"></SPAN> is normalized with
+  length <!-- MATH
+ $||{\bf w}||=\sqrt{{\bf w}^T{\bf w}}=1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.70ex; " SRC="img1399.svg"
+ ALT="$\vert\vert{\bf w}\vert\vert=\sqrt{{\bf w}^T{\bf w}}=1$"></SPAN> (as otherwise we can divide 
+  the equation above by <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1400.svg"
+ ALT="$\vert\vert{\bf w}\vert\vert$"></SPAN>).
+
+<P>
+</LI>
+<LI>The d-dimensional space is divided by the plane into two regions:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+R_+=\{{\bf x}\;|\; {\bf w}^T{\bf x}+b>0\},\;\;\;\;\;\mbox{and}\;\;\;\;\;\;
+  R_-=\{{\bf x}\;|\; {\bf w}^T{\bf x}+b<0\}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img1401.svg"
+ ALT="$\displaystyle R_+=\{{\bf x}\;\vert\; {\bf w}^T{\bf x}+b&gt;0\},\;\;\;\;\;\mbox{and}\;\;\;\;\;\;
+R_-=\{{\bf x}\;\vert\; {\bf w}^T{\bf x}+b&lt;0\}
+$"> 
+
+(<SPAN CLASS="arabic">431</SPAN>)
+</DIV>
+
+<P>
+</LI>
+<LI>The <EM>noamal direction</EM> of a plane <!-- MATH
+ $f({\bf x})={\bf w}^T{\bf x}+b=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1402.svg"
+ ALT="$f({\bf x})={\bf w}^T{\bf x}+b=0$"></SPAN>
+  is <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img562.svg"
+ ALT="${\bf w}$"></SPAN>, i.e., the projection of any point <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img52.svg"
+ ALT="${\bf x}$"></SPAN> on the plane onto 
+  normal direction <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img562.svg"
+ ALT="${\bf w}$"></SPAN> is constant: 
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf p}_{\bf w}({\bf x})={\bf w}^T{\bf x}=-b
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img1403.svg"
+ ALT="$\displaystyle {\bf p}_{\bf w}({\bf x})={\bf w}^T{\bf x}=-b
+$"> 
+
+(<SPAN CLASS="arabic">432</SPAN>)
+</DIV>
+
+<P>
+</LI>
+<LI>Solving the linear equation <!-- MATH
+ ${\bf w}^{\bf x}+b=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img1404.svg"
+ ALT="${\bf w}^{\bf x}+b=0$"></SPAN> for any of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1392.svg"
+ ALT="$d$"></SPAN>
+  variables, e.g., <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1396.svg"
+ ALT="$x_d$"></SPAN>, we get an alternative representation for the plane,
+  as a function defined over the d-1 dimensional space spanned by the 
+  remaining <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img1397.svg"
+ ALT="$d-1$"></SPAN> variables <!-- MATH
+ $\{x_1,\cdots,x_{d-1}\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1405.svg"
+ ALT="$\{x_1,\cdots,x_{d-1}\}$"></SPAN>:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+x_d=g(x_1,\cdots,x_{d-1})=-\frac{1}{w_d}\left(\sum_{i=1}^{d-1}w_ix_i+b\right)
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 7.66ex; vertical-align: -3.09ex; " SRC="img1406.svg"
+ ALT="$\displaystyle x_d=g(x_1,\cdots,x_{d-1})=-\frac{1}{w_d}\left(\sum_{i=1}^{d-1}w_ix_i+b\right)
+$"> 
+
+(<SPAN CLASS="arabic">433</SPAN>)
+</DIV>
+In particular, when <!-- MATH
+ $x_1=\cdots=x_{d-1}=0$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.66ex; " SRC="img1407.svg"
+ ALT="$x_1=\cdots=x_{d-1}=0$"></SPAN>, we get <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1408.svg"
+ ALT="$x_d=-b/w_d$"></SPAN>, the intercept
+  of the plane on the axis of <SPAN CLASS="MATH"><IMG STYLE="height: 1.63ex; vertical-align: -0.46ex; " SRC="img1396.svg"
+ ALT="$x_d$"></SPAN>.
+
+<P>
+</LI>
+<LI>When the plane is represented in the form of
+  <!-- MATH
+ $x_d=g(x_1,\cdots,x_{d-1})=-(\sum_{i=1}^{d-1}w_ix_i+b)/w_d$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 3.25ex; vertical-align: -0.81ex; " SRC="img1409.svg"
+ ALT="$x_d=g(x_1,\cdots,x_{d-1})=-(\sum_{i=1}^{d-1}w_ix_i+b)/w_d$"></SPAN>, the normal 
+  direction is represented the following, a scaled version of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img562.svg"
+ ALT="${\bf w}$"></SPAN>:
+  
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\left[-\frac{w_1}{w_d},\cdots,-\frac{w_{d-1}}{w_d},-1\right]^T
+  =-\frac{1}{w_d}[w_1,\cdots,w_d]^T=-\frac{1}{w_d}{\bf w}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 6.50ex; vertical-align: -2.32ex; " SRC="img1410.svg"
+ ALT="$\displaystyle \left[-\frac{w_1}{w_d},\cdots,-\frac{w_{d-1}}{w_d},-1\right]^T
+=-\frac{1}{w_d}[w_1,\cdots,w_d]^T=-\frac{1}{w_d}{\bf w}
+$"> 
+
+(<SPAN CLASS="arabic">434</SPAN>)
+</DIV>
+</LI>
+</UL>
+
+<P>
+<B>Example:</B> The following equation defines a plane in 3-D space 
+spanned by <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img93.svg"
+ ALT="$x$"></SPAN>,  <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img94.svg"
+ ALT="$y$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img1411.svg"
+ ALT="$z$"></SPAN>:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+f(x,y,z)=ax+by+cz+d=x+2y+3z+4=0
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1412.svg"
+ ALT="$\displaystyle f(x,y,z)=ax+by+cz+d=x+2y+3z+4=0
+\nonumber
+$"> 
+
+&nbsp;
+</DIV>
+where <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1413.svg"
+ ALT="$a=1$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1414.svg"
+ ALT="$b=2$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1415.svg"
+ ALT="$c=3$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1416.svg"
+ ALT="$d=4$"></SPAN>. Solving for <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img1411.svg"
+ ALT="$z$"></SPAN> we get
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+z=g(x,y)=-\frac{1}{c} ( ax+by+d )
+  =-\frac{1}{3}(x+2y+4)
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 4.88ex; vertical-align: -1.71ex; " SRC="img1417.svg"
+ ALT="$\displaystyle z=g(x,y)=-\frac{1}{c} ( ax+by+d )
+=-\frac{1}{3}(x+2y+4)
+\nonumber
+$"> 
+
+&nbsp;
+</DIV>
+
+<P>
+When <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img1418.svg"
+ ALT="$x=y=0$"></SPAN>, we get <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1419.svg"
+ ALT="$z=-c/d=-4/3$"></SPAN>, the intercept of the plane on z-axis. 
+The normal direction of the plane is composed of the coefficients of the
+three variable <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img93.svg"
+ ALT="$x$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img94.svg"
+ ALT="$y$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img1411.svg"
+ ALT="$z$"></SPAN> in <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1420.svg"
+ ALT="$f(x,y,z)$"></SPAN>:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf n}=[a,\,b,\,c]^T=[1,\;2,\;3]^T
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.70ex; " SRC="img1421.svg"
+ ALT="$\displaystyle {\bf n}=[a,\,b,\,c]^T=[1,\;2,\;3]^T
+$"> 
+
+(<SPAN CLASS="arabic">435</SPAN>)
+</DIV>
+or the coefficients of the two variables <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img93.svg"
+ ALT="$x$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img94.svg"
+ ALT="$y$"></SPAN> of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1422.svg"
+ ALT="$g(x,y)$"></SPAN>, with
+the last component <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.31ex; " SRC="img1423.svg"
+ ALT="$-1$"></SPAN>:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf n}=\left[-\frac{a}{c},\,-\frac{b}{c},\,-1\right]^T
+=-\frac{1}{c}[a,\,b,\,c]^T=-\frac{1}{3}[1,\;2,\;3]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 6.50ex; vertical-align: -2.32ex; " SRC="img1424.svg"
+ ALT="$\displaystyle {\bf n}=\left[-\frac{a}{c},\,-\frac{b}{c},\,-1\right]^T
+=-\frac{1}{c}[a,\,b,\,c]^T=-\frac{1}{3}[1,\;2,\;3]
+$"> 
+
+(<SPAN CLASS="arabic">436</SPAN>)
+</DIV>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node25.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="algebra.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node23.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node25.html">Appendix</A>
+<B> Up:</B> <A
+ HREF="algebra.html">algebra</A>
+<B> Previous:</B> <A
+ HREF="node23.html">Taylor Series Expansion</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

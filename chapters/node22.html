@@ -1,0 +1,533 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2019 (Released January 1, 2019) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Rank-Nullity Theorem</TITLE>
+<META NAME="description" CONTENT="Rank-Nullity Theorem">
+<META NAME="keywords" CONTENT="algebra">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2019">
+
+<LINK REL="STYLESHEET" HREF="algebra.css">
+
+<LINK REL="next" HREF="node23.html">
+<LINK REL="previous" HREF="node21.html">
+<LINK REL="next" HREF="node23.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node23.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="algebra.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node21.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node23.html">Taylor Series Expansion</A>
+<B> Up:</B> <A
+ HREF="algebra.html">algebra</A>
+<B> Previous:</B> <A
+ HREF="node21.html">Solving Over-Determined Linear Equations</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION000220000000000000000">
+Rank-Nullity Theorem</A>
+</H1>
+
+<P>
+<B>Definition: </B>
+The number of independent rows in a matrix is called the row rank, 
+the number of independent columns in a matrix is called the column rank.
+
+<P>
+<B>Theorem: </B>
+The row rank and column rank of any matrix are the same.
+
+<P>
+<B>Proof: </B>
+Let the column rank of the following <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.31ex; " SRC="img38.svg"
+ ALT="$m\times n$"></SPAN> matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>
+be <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img631.svg"
+ ALT="$r$"></SPAN>
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}=[{\bf a}_1,\cdots,{\bf a}_r,{\bf a}_{r+1},\cdots,{\bf a}_n]
+=[{\bf A}_1,\;{\bf A}_0]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1329.svg"
+ ALT="$\displaystyle {\bf A}=[{\bf a}_1,\cdots,{\bf a}_r,{\bf a}_{r+1},\cdots,{\bf a}_n]
+=[{\bf A}_1,\;{\bf A}_0]
+$"> 
+
+(<SPAN CLASS="arabic">402</SPAN>)
+</DIV>
+where <!-- MATH
+ ${\bf A}_1=[{\bf a}_1,\cdots,{\bf a}_r]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1330.svg"
+ ALT="${\bf A}_1=[{\bf a}_1,\cdots,{\bf a}_r]$"></SPAN> is an <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.31ex; " SRC="img1331.svg"
+ ALT="$m\times r$"></SPAN>
+sub-matrix formed by the <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img631.svg"
+ ALT="$r$"></SPAN> linearly independent columns in <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>,
+assumed to be the first <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img631.svg"
+ ALT="$r$"></SPAN> columns (without loss of generality).
+Now consider the linear combination of another set of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img631.svg"
+ ALT="$r$"></SPAN> n-D vectors 
+<!-- MATH
+ $\{{\bf A}_1^T{\bf a}_1,\cdots,{\bf A}_1^T{\bf a}_r\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1332.svg"
+ ALT="$\{{\bf A}_1^T{\bf a}_1,\cdots,{\bf A}_1^T{\bf a}_r\}$"></SPAN>:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+\sum_{i=1}^r c_i{\bf A}_1^T{\bf a}_i={\bf A}_1^T\sum_{i=1}^r c_i{\bf a}_i
+={\bf A}_1^T{\bf A}_1{\bf c}={\bf0}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 7.20ex; vertical-align: -3.09ex; " SRC="img1333.svg"
+ ALT="$\displaystyle \sum_{i=1}^r c_i{\bf A}_1^T{\bf a}_i={\bf A}_1^T\sum_{i=1}^r c_i{\bf a}_i
+={\bf A}_1^T{\bf A}_1{\bf c}={\bf0}
+$"> 
+
+(<SPAN CLASS="arabic">403</SPAN>)
+</DIV>
+which is assumed to be zero. As the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.31ex; " SRC="img1334.svg"
+ ALT="$r\times r$"></SPAN> coefficient matrix 
+<!-- MATH
+ ${\bf A}_1^T{\bf A}_1$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img1335.svg"
+ ALT="${\bf A}_1^T{\bf A}_1$"></SPAN> has full rank <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img631.svg"
+ ALT="$r$"></SPAN> (<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img1336.svg"
+ ALT="${\bf A}_1$"></SPAN> is formed by <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img631.svg"
+ ALT="$r$"></SPAN>
+independent vectors), we must have <!-- MATH
+ ${\bf c}=[c_1,\cdots,c_r]^T={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1337.svg"
+ ALT="${\bf c}=[c_1,\cdots,c_r]^T={\bf0}$"></SPAN>, 
+indicating <!-- MATH
+ $\{{\bf A}_1^T{\bf a}_1,\cdots,{\bf A}_1^T{\bf a}_r\}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1332.svg"
+ ALT="$\{{\bf A}_1^T{\bf a}_1,\cdots,{\bf A}_1^T{\bf a}_r\}$"></SPAN> are
+independent. However, as the linear combinations of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img631.svg"
+ ALT="$r$"></SPAN> of the rows
+of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>, these <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img631.svg"
+ ALT="$r$"></SPAN> independent vector <!-- MATH
+ ${\bf A}_1^T{\bf a}_i$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.69ex; " SRC="img1338.svg"
+ ALT="${\bf A}_1^T{\bf a}_i$"></SPAN> 
+(<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img823.svg"
+ ALT="$i=1,\cdots,r$"></SPAN>) are in the row space of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>. We therefore know
+that the row rank of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> is no smaller than its column rank. 
+
+<P>
+As the same argument can also be made for <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.12ex; " SRC="img219.svg"
+ ALT="${\bf A}^T$"></SPAN>, i.e., the 
+column rank of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> is no smaller than its row rank, we conclude
+that the column and row ranks of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> must be the same.  QED
+
+<P>
+<B>Rank-nullity theorem: </B> 
+The sum of the rank of an <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.31ex; " SRC="img38.svg"
+ ALT="$m\times n$"></SPAN> matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> and the dimension
+of its nullspace <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1011.svg"
+ ALT="$N({\bf A})$"></SPAN>, the nullity of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>, is <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img29.svg"
+ ALT="$n$"></SPAN>:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+rank({\bf A})+dim(N({\bf A}))=rank({\bf A})+Nullity({\bf A})=n
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1339.svg"
+ ALT="$\displaystyle rank({\bf A})+dim(N({\bf A}))=rank({\bf A})+Nullity({\bf A})=n
+$"> 
+
+(<SPAN CLASS="arabic">404</SPAN>)
+</DIV>
+
+<P>
+<B>Proof:</B>
+
+<P>
+Let <!-- MATH
+ ${\bf A}=[{\bf a}_1,\cdots,{\bf a}_r,{\bf a}_{r+1},\cdots,{\bf a}_n]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1340.svg"
+ ALT="${\bf A}=[{\bf a}_1,\cdots,{\bf a}_r,{\bf a}_{r+1},\cdots,{\bf a}_n]$"></SPAN>
+be an <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.31ex; " SRC="img38.svg"
+ ALT="$m\times n$"></SPAN> matrix of rank <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img631.svg"
+ ALT="$r$"></SPAN>. We assume, without loss of 
+generality, the first <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img631.svg"
+ ALT="$r$"></SPAN> columns are independent, and the last <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.31ex; " SRC="img1341.svg"
+ ALT="$n-r$"></SPAN>
+columns are dependent, and write it as <!-- MATH
+ ${\bf A}=[{\bf A}_1,\;{\bf A}_0]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1342.svg"
+ ALT="${\bf A}=[{\bf A}_1,\;{\bf A}_0]$"></SPAN>.
+Here
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}_1=[{\bf a}_1,\cdots,{\bf a}_r]_{m\times r}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1343.svg"
+ ALT="$\displaystyle {\bf A}_1=[{\bf a}_1,\cdots,{\bf a}_r]_{m\times r}
+$"> 
+
+(<SPAN CLASS="arabic">405</SPAN>)
+</DIV>
+is formed by the <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img631.svg"
+ ALT="$r$"></SPAN> independent columns of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>, i.e., if
+<!-- MATH
+ ${\bf A}_1{\bf x}={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img1344.svg"
+ ALT="${\bf A}_1{\bf x}={\bf0}$"></SPAN>, then <!-- MATH
+ ${\bf x}={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img100.svg"
+ ALT="${\bf x}={\bf0}$"></SPAN>; and
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}_0=[{\bf a}_{r+1},\cdots,{\bf a}_n]_{m\times (n-r)}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 3.02ex; vertical-align: -0.94ex; " SRC="img1345.svg"
+ ALT="$\displaystyle {\bf A}_0=[{\bf a}_{r+1},\cdots,{\bf a}_n]_{m\times (n-r)}
+$"> 
+
+(<SPAN CLASS="arabic">406</SPAN>)
+</DIV>
+is formed by the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.31ex; " SRC="img1341.svg"
+ ALT="$n-r$"></SPAN> dependent columns of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN>, i.e., any of
+them can be written as a linear combination of those independent 
+columns <!-- MATH
+ ${\bf a}_1,\cdots,{\bf a}_r$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img1346.svg"
+ ALT="${\bf a}_1,\cdots,{\bf a}_r$"></SPAN> in <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.46ex; " SRC="img1336.svg"
+ ALT="${\bf A}_1$"></SPAN>:
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf a}_{r+k}=\sum_{i=1}^r c_{ik}{\bf a}_i
+=[{\bf a}_1,\cdots,{\bf a}_r]\left[\begin{array}{c}c_{1k}\\\vdots\\c_{rk}\end{array}\right]
+={\bf A}_1{\bf c}_k,\;\;\;\;\;
+(k=1,\cdots,n-r)
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 10.22ex; vertical-align: -4.49ex; " SRC="img1347.svg"
+ ALT="$\displaystyle {\bf a}_{r+k}=\sum_{i=1}^r c_{ik}{\bf a}_i
+=[{\bf a}_1,\cdots,{\b...
+...ots\\ c_{rk}\end{array}\right]
+={\bf A}_1{\bf c}_k,\;\;\;\;\;
+(k=1,\cdots,n-r)
+$"> 
+
+(<SPAN CLASS="arabic">407</SPAN>)
+</DIV>
+where <!-- MATH
+ ${\bf c}_k=[c_{1k},\cdots,c_{rk}]^T$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.79ex; vertical-align: -0.70ex; " SRC="img1348.svg"
+ ALT="${\bf c}_k=[c_{1k},\cdots,c_{rk}]^T$"></SPAN> is a coefficient vector. We 
+can put all these <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.31ex; " SRC="img1341.svg"
+ ALT="$n-r$"></SPAN> equations together to write them in matrix form 
+as
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}_0=[{\bf a}_{r+1},\cdots,{\bf a}_n]={\bf A}_1[{\bf c}_1,\cdots,{\bf c}_{n-r}]
+={\bf A}_1{\bf C}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1349.svg"
+ ALT="$\displaystyle {\bf A}_0=[{\bf a}_{r+1},\cdots,{\bf a}_n]={\bf A}_1[{\bf c}_1,\cdots,{\bf c}_{n-r}]
+={\bf A}_1{\bf C}
+$"> 
+
+(<SPAN CLASS="arabic">408</SPAN>)
+</DIV>
+where <!-- MATH
+ ${\bf C}=[{\bf c}_1,\cdots,{\bf c}_{n-r}]$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1350.svg"
+ ALT="${\bf C}=[{\bf c}_1,\cdots,{\bf c}_{n-r}]$"></SPAN> is an <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1351.svg"
+ ALT="$r\times(n-r)$"></SPAN>
+matrix composed of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.31ex; " SRC="img1341.svg"
+ ALT="$n-r$"></SPAN> coefficient vectors. The matrix <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> 
+can now be written as
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}=[{\bf A}_1,\;{\bf A}_0]=[{\bf A}_1,\;{\bf A}_1{\bf C}]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1352.svg"
+ ALT="$\displaystyle {\bf A}=[{\bf A}_1,\;{\bf A}_0]=[{\bf A}_1,\;{\bf A}_1{\bf C}]
+$"> 
+
+(<SPAN CLASS="arabic">409</SPAN>)
+</DIV>
+Define an <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1353.svg"
+ ALT="$n\times(n-r)$"></SPAN> matrix
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf X}=\left[\begin{array}{c}-{\bf C}\\{\bf I}\end{array}\right]
+=\left[\begin{array}{ccc}-{\bf c}_1&\cdots&-{\bf c}_{n-r}\\
+{\bf e}_1 & \cdots & {\bf e}_n\end{array}\right]
+=\left[\begin{array}{ccc}-{\bf c}_1&\cdots&-{\bf c}_{n-r}\\
+1 & \cdots & 0\\0 & \cdots & 0\\\vdots & \ddots & \vdots\\
+0 & \cdots & 0\\0&\cdots & 1\end{array}\right]
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 18.58ex; vertical-align: -8.67ex; " SRC="img1354.svg"
+ ALT="$\displaystyle {\bf X}=\left[\begin{array}{c}-{\bf C}\\ {\bf I}\end{array}\right...
+...\\ \vdots &amp; \ddots &amp; \vdots\\
+0 &amp; \cdots &amp; 0\\ 0&amp;\cdots &amp; 1\end{array}\right]
+$"> 
+
+(<SPAN CLASS="arabic">410</SPAN>)
+</DIV>
+where <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img339.svg"
+ ALT="${\bf I}$"></SPAN> is an <!-- MATH
+ $(n-r)\times(n-r)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1355.svg"
+ ALT="$(n-r)\times(n-r)$"></SPAN> identity matrix composed
+of <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img29.svg"
+ ALT="$n$"></SPAN> standard basis vectors <!-- MATH
+ ${\bf e}_1,\cdots,{\bf e}_n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.57ex; " SRC="img1356.svg"
+ ALT="${\bf e}_1,\cdots,{\bf e}_n$"></SPAN>. Now 
+we have
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}{\bf X}=[{\bf A}_1,\;{\bf A}_1{\bf C}]
+\left[\begin{array}{c}-{\bf C}\\{\bf I}\end{array}\right]
+=-{\bf A}_1{\bf C}+{\bf A}_1{\bf C}={\bf O}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img1357.svg"
+ ALT="$\displaystyle {\bf A}{\bf X}=[{\bf A}_1,\;{\bf A}_1{\bf C}]
+\left[\begin{array}...
+...\bf C}\\ {\bf I}\end{array}\right]
+=-{\bf A}_1{\bf C}+{\bf A}_1{\bf C}={\bf O}
+$"> 
+
+(<SPAN CLASS="arabic">411</SPAN>)
+</DIV>
+indicating any column <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img52.svg"
+ ALT="${\bf x}$"></SPAN> in <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img426.svg"
+ ALT="${\bf X}$"></SPAN> is a solution of the
+homogeneous equation <!-- MATH
+ ${\bf A}{\bf x}={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1014.svg"
+ ALT="${\bf A}{\bf x}={\bf0}$"></SPAN>, i.e., <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img52.svg"
+ ALT="${\bf x}$"></SPAN> is in 
+the nullspace <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1011.svg"
+ ALT="$N({\bf A})$"></SPAN>. Also, if we let <!-- MATH
+ ${\bf X}{\bf u}={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1358.svg"
+ ALT="${\bf X}{\bf u}={\bf0}$"></SPAN>, 
+we get
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf X}{\bf u}=\left[\begin{array}{c}-{\bf C}\\{\bf I}\end{array}\right]
+{\bf u}=\left[\begin{array}{c}-{\bf C}{\bf u}\\{\bf u}\end{array}\right]
+=\left[\begin{array}{c}{\bf0}\\{\bf0}\end{array}\right]={\bf0}
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img1359.svg"
+ ALT="$\displaystyle {\bf X}{\bf u}=\left[\begin{array}{c}-{\bf C}\\ {\bf I}\end{array...
+...{array}\right]
+=\left[\begin{array}{c}{\bf0}\\ {\bf0}\end{array}\right]={\bf0}
+$"> 
+
+(<SPAN CLASS="arabic">412</SPAN>)
+</DIV>
+i.e., <!-- MATH
+ ${\bf u}={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1360.svg"
+ ALT="${\bf u}={\bf0}$"></SPAN>, indicating all columns in <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img426.svg"
+ ALT="${\bf X}$"></SPAN> are
+independent. 
+
+<P>
+On the other hand, we can also show that any solution of the 
+homogeneous equation <!-- MATH
+ ${\bf A}{\bf x}={\bf0}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img1014.svg"
+ ALT="${\bf A}{\bf x}={\bf0}$"></SPAN> must be a linear 
+combination of the columns of <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img426.svg"
+ ALT="${\bf X}$"></SPAN>. Assuming <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img52.svg"
+ ALT="${\bf x}$"></SPAN> is
+such a solution, i.e., 
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf A}{\bf x}={\bf0}
+  =[{\bf A}_1,\;{\bf A}_1{\bf C}]\left[\begin{array}{c}
+      {\bf x}_1\\{\bf x}_2\end{array}\right]
+  ={\bf A}_1({\bf x}_1+{\bf C}{\bf x}_2)
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img1361.svg"
+ ALT="$\displaystyle {\bf A}{\bf x}={\bf0}
+=[{\bf A}_1,\;{\bf A}_1{\bf C}]\left[\begi...
+...\bf x}_1\\ {\bf x}_2\end{array}\right]
+={\bf A}_1({\bf x}_1+{\bf C}{\bf x}_2)
+$"> 
+
+(<SPAN CLASS="arabic">413</SPAN>)
+</DIV>
+As all columns in <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img87.svg"
+ ALT="${\bf A}$"></SPAN> are independent, we must have
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf x}_1+{\bf C}{\bf x}_2={\bf0},\;\;\;\;\mbox{or}\;\;\;\;\;
+{\bf x}_1=-{\bf C}{\bf x}_2
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 2.32ex; vertical-align: -0.57ex; " SRC="img1362.svg"
+ ALT="$\displaystyle {\bf x}_1+{\bf C}{\bf x}_2={\bf0},\;\;\;\;\mbox{or}\;\;\;\;\;
+{\bf x}_1=-{\bf C}{\bf x}_2
+$"> 
+
+(<SPAN CLASS="arabic">414</SPAN>)
+</DIV>
+and we get
+
+<DIV class="equation">
+
+<!-- MATH
+ \begin{equation}
+{\bf x}=\left[\begin{array}{c}{\bf x}_1\\{\bf x}_2\end{array}\right]
+=\left[\begin{array}{c}-{\bf C}{\bf x}_2\\{\bf x}_2\end{array}\right]
+=\left[\begin{array}{c}-{\bf C}\\{\bf I}\end{array}\right]{\bf x}_2
+={\bf X}{\bf x}_2
+\end{equation}
+ -->
+ &nbsp;  <IMG STYLE="height: 5.81ex; vertical-align: -2.32ex; " SRC="img1363.svg"
+ ALT="$\displaystyle {\bf x}=\left[\begin{array}{c}{\bf x}_1\\ {\bf x}_2\end{array}\ri...
+...begin{array}{c}-{\bf C}\\ {\bf I}\end{array}\right]{\bf x}_2
+={\bf X}{\bf x}_2
+$"> 
+
+(<SPAN CLASS="arabic">415</SPAN>)
+</DIV>
+indicating <SPAN CLASS="MATH"><IMG STYLE="height: 1.39ex; vertical-align: -0.12ex; " SRC="img52.svg"
+ ALT="${\bf x}$"></SPAN> is a linear combination of the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.31ex; " SRC="img1341.svg"
+ ALT="$n-r$"></SPAN> columns in
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img426.svg"
+ ALT="${\bf X}$"></SPAN>.
+
+<P>
+Based on the two results obtained above, we can now conclude that the
+nullspace <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1011.svg"
+ ALT="$N({\bf A})$"></SPAN> is spanned by the <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.31ex; " SRC="img1341.svg"
+ ALT="$n-r$"></SPAN> independent column vectors 
+in <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.12ex; " SRC="img426.svg"
+ ALT="${\bf X}$"></SPAN>, i.e., the dimension of <SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1011.svg"
+ ALT="$N({\bf A})$"></SPAN> is <SPAN CLASS="MATH"><IMG STYLE="height: 1.86ex; vertical-align: -0.31ex; " SRC="img1341.svg"
+ ALT="$n-r$"></SPAN>, and
+<!-- MATH
+ $rank({\bf A})+dim({\bf A})=n$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.55ex; vertical-align: -0.70ex; " SRC="img1364.svg"
+ ALT="$rank({\bf A})+dim({\bf A})=n$"></SPAN>.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node23.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="algebra.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node21.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node23.html">Taylor Series Expansion</A>
+<B> Up:</B> <A
+ HREF="algebra.html">algebra</A>
+<B> Previous:</B> <A
+ HREF="node21.html">Solving Over-Determined Linear Equations</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>
